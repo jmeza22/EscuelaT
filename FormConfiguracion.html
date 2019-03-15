@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Configuracion</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Configuracion de Escuela"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Configuracion.js"></script>
+    </head>
+    <body>
+        <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/ConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
+
+            <div class="panel panel-primary" style="width: 80% !important;">
+                <div class="panel-heading">Datos Escuela</div>
+                <div class="panel-body" >
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Datos Basicos</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Codigo</label>
+                                    <input type="text" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" readonly="readonly" class="form-control" title="Código de Escuela" list="lista_id_escuela">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Nombre Escuela</label>
+                                    <input type="text" name="nombre_escuela" id="nombre_escuela" value="" maxlength="100" disabled="disabled" class="form-control" title="Nombre de Escuela" getname="true" idname="id_escuela" model="EscuelasApp" >
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Documento</label>
+                                    <select name="tipodocumento_configuracion" id="tipodocumento_configuracion" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
+                                        <option id="NN" value="NN" disabled="disabled">Desconocido</option>
+                                        <option id="DANE" value="DANE" >DANE</option>
+                                        <option id="NIT" value="TI" >NIT</option>
+                                        <option id="RUT" value="RC" >RUT</option>
+                                        <option id="Resolucion" value="Resolucion" >Resolucion</option>
+                                        <option id="Decreto" value="Decreto" >Decreto</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>No.Documento</label>
+                                    <input type="text" name="numdocumento_configuracion" id="numdocumento_configuracion" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Eslogan</label>
+                                    <textarea id="eslogan_configuracion" name="eslogan_configuracion" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Datos del Rector</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <label>Nombre Completo</label>
+                                    <input type="text" name="nombrerector_configuracion" id="nombrerector_configuracion" value="" maxlength="100" required="required" class="form-control" title="Nombre del Rector">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Documento</label>
+                                    <input type="text" name="documentorector_configuracion" id="documentorector_configuracion" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary" style="width: 80% !important;">
+                <div class="panel-heading">Configuracion</div>
+                <div class="panel-body" >
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label title="Numero de Periodos por Año">Periodos</label>
+                            <input type="number" id="numperiodos_configuracion" name="numperiodos_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                        </div>
+                        <div class="col-sm-3">
+                            <label title="Numero de Cortes por Periodo">Cortes</label>
+                            <input type="number" id="numcortes_configuracion" name="numcortes_configuracion" value="" class="form-control" maxlength="2" min="1" max="5" />                                 
+                        </div>
+                        <div class="col-sm-3">
+                            <label title="Numero de Semanas por Periodo">Semanas</label>
+                            <input type="number" id="numsemanas_configuracion" name="numsemanas_configuracion" value="" class="form-control" maxlength="2" min="1" max="50" />                                 
+                        </div>
+                        <div class="col-sm-3">
+                            <label title="Numero de Horas por Semana">Horas</label>
+                            <input type="number" id="horassemanales_configuracion" name="horassemanales_configuracion" value="" class="form-control" maxlength="2" min="1" max="48" />                                 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary" style="width: 80% !important;">
+                <div class="panel-heading">Valoracion Academica</div>
+                <div class="panel-body" >
+                    <div class="row">
+                        <div class="col-sm-12 panel panel-default">
+                            <label class="panel-heading">Rangos Valoracion</label>
+                            <div class="row panel-body">
+                                <div class="col-sm-4">
+                                    <label title="Valor Calificacion Minima Permitida">Valor Minimo</label>
+                                    <input type="number" id="valmin_configuracion" name="valmin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                                <div class="col-sm-4">
+                                    <label title="Valor Calificacion Maxima Permitida">Valor Maximo</label>
+                                    <input type="number" id="valmax_configuracion" name="valmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                                <div class="col-sm-4">
+                                    <label title="Valor Calificacion Minima para Aprobar">Valor Aprueba</label>
+                                    <input type="number" id="valaprueba_configuracion" name="valaprueba_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 panel panel-default">
+                            <label class="panel-heading">Desempeño Superior</label>
+                            <div class="row panel-body">
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Minima Desempeño Superior">Val.Min.Sup</label>
+                                    <input type="number" id="valsupmin_configuracion" name="valsupmin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Maxima Desempeño Superior">Val.Max.Sup</label>
+                                    <input type="number" id="valsupmax_configuracion" name="valsupmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 panel panel-default">
+                            <label class="panel-heading">Desempeño Alto</label>
+                            <div class="row panel-body">
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Minima Desempeño Alto">Val.Min.Alto</label>
+                                    <input type="number" id="valaltomin_configuracion" name="valaltomin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Maxima Desempeño Alto">Val.Max.Alto</label>
+                                    <input type="number" id="valaltomax_configuracion" name="valaltomax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 panel panel-default">
+                            <label class="panel-heading">Desempeño Basico</label>
+                            <div class="row panel-body">
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Minima Desempeño Basico">Val.Min.Bas</label>
+                                    <input type="number" id="valbasmin_configuracion" name="valbasmin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Maxima Desempeño Basico">Val.Max.Bas</label>
+                                    <input type="number" id="valbasmax_configuracion" name="valbasmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 panel panel-default">
+                            <label class="panel-heading">Desempeño Bajo</label>
+                            <div class="row panel-body">
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Minima Desempeño Bajo">Val.Min.Bajo</label>
+                                    <input type="number" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                                <div class="col-sm-6">
+                                    <label title="Valor Calificacion Maxima Desempeño Bajo">Val.Max.Bajo</label>
+                                    <input type="number" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <center>
+                        <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-lg btn-primary" >Grabar</button>        
+                    </center>
+                </div>
+                <div class="col-sm-6">
+                    <center>
+                        <button type="reset" id="reset" name="reset" class="btn btn-lg btn-success">Nuevo</button> 
+                    </center>
+                </div>
+            </div>
+
+            <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php">
+                <option value="">Ninguno</option>
+            </datalist>
+        </form>
+    </body>
+</html>

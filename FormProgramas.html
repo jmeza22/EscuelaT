@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Programas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Programas"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Programas.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Programas</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/ProgramasController.php" model="ProgramasApp" findBy="id_programa" mainform="true" >
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Codigo</label>
+                            <input type="number" id="id_programa" name="id_programa" value="" class="form-control" maxlength="22" required="required" min="0" /> 
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Nombre de Programa</label>
+                            <input type="text" name="nombre_programa" id="nombre_programa" value="" editable="true" required="required" maxlength="100" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>CodEsc</label>
+                            <input type="text" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" readonly="readonly" class="form-control" title="Código de Escuela" list="lista_id_escuela">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Nombre Escuela</label>
+                            <input type="text" name="nombre_escuela" id="nombre_escuela" value="" maxlength="100" disabled="disabled" class="form-control" title="Nombre de Escuela" getname="true" idname="id_escuela" model="EscuelasApp" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Descripcion</label>
+                            <textarea id="descripcion_programa" name="descripcion_programa" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Num. Grados</label>
+                            <input type="number" name="ngrados_programa" id="ngrados_programa" value="" editable="true" required="required" maxlength="2" min="1" max="48" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Tiempo</label>
+                            <select name="periodicidadgrado_programa" id="periodicidadgrado_programa" selected="NN" required="required" class="form-control" style="width: 100%; min-width: 100%;" >
+                                <option id="NN" value="NN" disabled="disabled">Ninguna</option>
+                                <option value="Anual" >Años</option>
+                                <option value="Semestral" >Semestres</option>
+                                <option value="Trimestral" >Trimestres</option>
+                                <option value="Bimestral" >Bimestres</option>
+                                <option value="Mensual" >Meses</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Nivel Educativo</label>
+                            <select name="nivel_programa" id="nivel_programa" selected="NN" required="required" class="form-control" style="width: 100%; min-width: 100%;" >
+                                <option id="NN" value="NN" >Ninguno</option>
+                                <option value="Preescolar" >Preescolar</option>
+                                <option value="Basica-Primaria" >Basica Primaria</option>
+                                <option value="Basica-Secundaria" >Basica Secundaria</option>
+                                <option value="Media-Vocacional" >Media Vocacional</option>
+                                <option value="Bachiller" >Bachiller</option>
+                                <option value="Tecnico" >Tecnico</option>
+                                <option value="Tecnologo" >Tecnologo</option>
+                                <option value="Profesional" >Profesional</option>
+                                <option value="Especializacion" >Especializacion</option>
+                                <option value="Doctorado" >Doctorado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                    <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php">
+                        <option value="">Ninguno</option>
+                    </datalist>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Programas</div>
+            <div class="panel-body">
+                <div class="table-responsive" >
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="ProgramasApp" findby="id_asignatura" findbyvalue="id_asignatura" url="Base/Controllers/GetDataTableProgramas.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 10%;" title="Codigo">#</th>
+                                <th style="width: 60%;">Nombre</th>
+                                <th style="width: 8%;">Num. Grados</th>
+                                <th style="width: 6%;">Tiempo</th>
+                                <th style="width: 8%;">Nivel</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <label>{{id_programa}}</label> </td>
+                                <td> <label>{{nombre_programa}}</label> </td>
+                                <td> <label>{{ngrados_programa}}</label> </td>
+                                <td> <label>{{periodicidadgrado_programa}}</label> </td>
+                                <td> <label>{{nivel_programa}}</label> </td>
+                                <td>
+                                    <form id="Programa{{id_programa}}" name="Programa{{id_programa}}" method="POST" autocomplete="off" url="Base/Controllers/ProgramasController.php"  model="ProgramasApp" findBy="id_programa" statusfield="status_programa">
+                                        <input type="hidden"  editable="false" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden"  editable="false" name="id_escuela" id="id_escuela" value="{{id_escuela}}" >
+                                        <input type="hidden"  editable="false" name="status_programa" id="status_programa" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>  
+            </div>
+        </div>
+
+    </body>
+</html>

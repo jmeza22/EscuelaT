@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Matricula de Asignaturas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Asignaturas Matriculadas"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/MatriculaAsignaturas.js"></script>
+    </head>
+    <body>
+
+        <div class="modal fade" id="modal_automatica">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Matricula de Asignaturas - Automatica</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formAuto" method="POST" autocomplete="off" url="Base/Controllers/MatriculaAsignaturasController.php" model="MatriculaAsignaturasApp" findBy="id_matasig" mainform="true" >
+                            <input type="hidden" id="id_matasig" name="id_matasig" value="0" maxlength="30" /> 
+                            <input type="hidden" id="id_matricula" name="id_matricula" value="0" maxlength="30" /> 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <button type="button" id="guardar" name="guardar" action="insertorupdate" class="btn btn-primary" onclick="MatriculaAutomatica(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Generar Automaticamente </button>
+                                    </center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_manual">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Matricula de Asignatura - Manual</h4>
+                    </div>
+                    <div class="modal-body">
+                        No disponible por el momento.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Matricula de Asignaturas</div>
+            <div class="panel-body table-responsive" >
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos de Matricula</div>
+                    <div class="panel-body" >
+                        <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php"  model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" mainform="true" > 
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label title="Codigo del Matricula">Matricula</label>
+                                    <input type="text" id="id_matricula" name="id_matricula" value="0" class="form-control" maxlength="24" onfocus="getMatricula();" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Escuela</label>
+                                    <input type="text" id="id_escuela" name="id_escuela" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Sede</label>
+                                    <input type="text" id="id_sede" name="id_sede" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Jornada</label>
+                                    <input type="text" id="id_jornada" name="id_jornada" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Codigo</label>
+                                    <input type="text" name="id_estudiante" id="id_estudiante" readonly="readonly" value="" maxlength="24" required="required" class="form-control" >
+                                </div>
+                                <div class="col-sm-9">
+                                    <label>Nombre Completo</label>
+                                    <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" readonly="readonly" value="" maxlength="200" class="form-control" title="Nombre del Estudiante" >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Programa</label>
+                                    <input type="text" id="id_programa" name="id_programa" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Plan Estudios</label>
+                                    <input type="text" id="id_planestudio" name="id_planestudio" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Periodo</label>
+                                    <input type="text" id="id_periodo" name="id_periodo" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Grado</label>
+                                            <input type="text" id="numgrado_programa" name="numgrado_programa" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Grupo</label>
+                                            <input type="text" id="id_grupo" name="id_grupo" readonly="readonly" value="" class="form-control" maxlength="24" /> 
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Matricula de Asignatuas</div>
+                    <div class="panel-body table-responsive" >
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <center>
+                                    <a id="NewItem" href="#modal_manual" class="btn btn-default" data-toggle="modal" onclick="" style="min-width: 200px !important;">Matricula Manual</a>
+                                </center>
+                            </div>
+                            <div class="col-sm-6">
+                                <center>
+                                    <a id="NewItem" href="#modal_automatica" class="btn btn-default" data-toggle="modal" onclick="" style="min-width: 200px !important;">Matricula Automatica</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Listado de Asigaturas Matriculadas</div>
+                    <div class="panel-body" >
+                        <div class="table-responsive" >
+                            <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="MatriculaAsignaturasApp" url="Base/Controllers/GetDataTableMatriculaAsignaturas.php" >
+                                <thead id="thead_dataTable0">
+                                    <tr rowhead="true">
+                                        <th style="width: 10%;" title="Codigo de Asignatura">Asi.</th>
+                                        <th style="width: 35%;" title="Nombre de Asignatura">Asignatura</th>
+                                        <th style="width: 5%;" title="Codigo de Matricula">Mat.</th>
+                                        <th style="width: 5%;" title="Escuela">Esc.</th>
+                                        <th style="width: 5%;" title="Programa">Pro.</th>
+                                        <th style="width: 5%;" title="Plan de Estudios">P.E.</th>
+                                        <th style="width: 5%;" title="Grado">Gra.</th>
+                                        <th style="width: 5%;" title="Grupo">Gru.</th>
+                                        <th style="width: 5%;" title="Periodo">Per.</th>
+                                        <th style="width: 5%; min-width: 98px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_dataTable0">
+                                    <tr id="rowsample" rowsample="true" style="display: none;">
+                                        <td> <label>{{id_asignatura}}</label> </td>
+                                        <td> <label>{{nombre_asignatura}}</label> </td>
+                                        <td> <label>{{id_matricula}}</label> </td>
+                                        <td> <label>{{id_escuela}}</label> </td>
+                                        <td> <label>{{id_programa}}</label> </td>
+                                        <td> <label>{{id_planestudio}}</label> </td>
+                                        <td> <label>{{numgrado_programa}}</label> </td>
+                                        <td> <label>{{id_grupo}}</label> </td>
+                                        <td> <label>{{id_periodo}}</label> </td>
+                                        <td>
+                                            <form id="MatriculaAsignatura{{id_matricula}}" name="MatriculaAsignatura{{id_matricula}}" method="POST" autocomplete="off" url="Base/Controllers/MatriculaAsignaturasController.php"  model="MatriculaAsignaturasApp" findBy="id_matasig" >
+                                                <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
+                                                <input type="hidden"  editable="false" name="id_matasig" id="id_matasig" value="{{id_matasig}}" >
+                                                <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger  icon-button" onclick="EliminarMatasig(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+    </body>
+</html>

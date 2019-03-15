@@ -1,0 +1,5 @@
+<?xml version="1.0" standalone="yes"?>
+<settings>
+<setting><code state=""/><text/><enterprise/><welcome/><local/><remote/><lastdate/><hostdb/><portdb/><userdb/><passworddb/><namedb/></setting>
+<setting><code state="1">1</code><text>Configuracion</text><enterprise>1</enterprise><welcome>Bienvenido</welcome><local>http://localhost/EscuelaT/</local><remote></remote><lastdate>13-02-2017 1:28:08</lastdate><hostdb>localhost</hostdb><portdb>3306</portdb><userdb>root</userdb><passworddb></passworddb><namedb>EscuelaT</namedb></setting>
+</settings>

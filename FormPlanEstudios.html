@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Plan de Estudios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Plan de Estudios"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/PlanEstudios.js"></script>
+    </head>
+    <body>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Plan de Estudios</div>
+            <div class="panel-body table-responsive" >
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Seleccionar</div>
+                    <div class="panel-body table-responsive" >
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form id="form_select">
+                                    <label>Seleccione el Plan de Estudios</label>
+                                    <select id="select_id_planestudio" name="select_id_planestudio" selected="NN" required="required" model="PlanEstudiosApp" colname="descripcion_planestudio" colvalue="id_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="RefreshFormAndTable(this);">
+                                        <option selected="selected" value="-1">Ninguna</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos de Plan de Estudios</div>
+                    <div class="panel-body table-responsive" >
+                        <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/PlanEstudiosController.php" model="PlanEstudiosApp" findBy="id_planestudio" mainform="true" >
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Codigo</label>
+                                    <input type="number" id="id_planestudio" name="id_planestudio" value="" class="form-control" required="required" maxlength="22" min="1" /> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <label>Descripcion</label>
+                                    <input type="text" name="descripcion_planestudio" id="descripcion_planestudio" value="" required="required" maxlength="500" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Escuela</label>
+                                    <input type="text" id="id_escuela" name="id_escuela" value="" maxlength="24" required="required" readonly="readonly" class="form-control" title="Código de Escuela" list="lista_id_escuela">
+                                </div>
+                                <div class="col-sm-10">
+                                    <label>Programa</label>
+                                    <select id="id_programa" name="id_programa" selected="NN" required="required" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" >
+                                        <option selected="selected" value="-1">Ninguna</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar Plan Estudio</button>        
+                                    </center>
+                                </div>
+                            </div>
+
+                            <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php">
+                                <option value="">Ninguno</option>
+                            </datalist>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Detalle Asignatura</div>
+                    <div class="panel-body">
+                        <form id="form1" method="POST" autocomplete="off" url="Base/Controllers/PlanEstudioDetalleController.php" model="PlanEstudioDetalleApp" findBy="id_planestudiodetalle" >
+                            <input type="hidden" id="id_escuela" name="id_escuela" value="" required="required" maxlength="22" min="1" /> 
+                            <input type="hidden" id="id_programa" name="id_programa" value="" required="required" maxlength="22" min="1" /> 
+                            <input type="hidden" id="id_planestudio" name="id_planestudio" value="" required="required" maxlength="22" min="1" /> 
+
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label>Asignatura</label>
+                                    <select id="id_asignatura" name="id_asignatura" model="AsignaturasApp" colname="nombre_asignatura" colvalue="id_asignatura" url="Base/Controllers/GetComboboxAsignaturas.php" style="min-width: 100% !important;" onchange="setIds();">
+                                        <option value="">Ninguno</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <label>H.T.</label>
+                                    <input type="number" id="hteoricas_asignatura" name="hteoricas_asignatura" value="" class="form-control" maxlength="2" min="0" max="30" /> 
+                                </div>
+                                <div class="col-sm-1">
+                                    <label>H.P.</label>
+                                    <input type="number" id="hpracticas_asignatura" name="hpracticas_asignatura" value="" class="form-control" maxlength="2" min="0" max="30" /> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Grado</label>
+                                    <input type="number" id="numgrado_programa" name="numgrado_programa" value="" class="form-control" maxlength="2" min="0" max="16" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Codigo</label>
+                                    <input type="text" id="id_planestudiodetalle" name="id_planestudiodetalle" value="" class="form-control" required="required" maxlength="22" min="1" readonly="readonly" /> 
+                                </div>
+                            </div>
+
+                            <div>
+                                <center>
+                                    <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="GrabarDetalle(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar Asignatura </button>
+                                </center>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Asignaturas Relacionadas al Plan de Estudio</div>
+                    <div class="panel-body">
+                        <div class="table-responsive" >
+                            <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="PlanEstudioDetalleApp" findby="id_planestudio" findbyvalue="" url="Base/Controllers/GetDataTablePlanEstudioDetalle.php" >
+                                <thead id="thead_dataTable0">
+                                    <tr rowhead="true">
+                                        <th style="width: 28%;" title="Codigo Asignatura">Nombre Asignatura</th>
+                                        <th style="width: 4%;" title="Horas Teoricas Semanales">H.T.</th>
+                                        <th style="width: 4%;" title="Horas Practicas Semanales">H.P.</th>
+                                        <th style="width: 8%;" title="Numero de Grado">Gra.</th>
+                                        <th style="width: 8%;" title="Codigo Escuela">Esc.</th>
+                                        <th style="width: 8%;" title="Codigo Programa">Pro.</th>
+                                        <th style="width: 8%;" title="Codigo Plan Estudio">Plan</th>
+                                        <th style="width: 16%;" title="Codigo de Detalle Plan Estudio">Codigo</th>
+                                        <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_dataTable0">
+                                    <tr id="rowsample" rowsample="true" style="display: none;">
+                                        <td> {{id_asignatura}} {{nombre_asignatura}}</td>
+                                        <td> {{hteoricas_asignatura}}</td>
+                                        <td> {{hpracticas_asignatura}}</td>
+                                        <td> {{numgrado_programa}}</td>
+                                        <td> {{id_escuela}}</td>
+                                        <td> {{id_programa}}</td>
+                                        <td> {{id_planestudio}}</td>
+                                        <td> {{id_planestudiodetalle}}</td>
+                                        <td>
+                                            <form id="PED{{id_planestudiodetalle}}" name="PED{{id_planestudiodetalle}}" method="POST" autocomplete="off" url="Base/Controllers/PlanEstudioDetalleController.php"  model="PlanEstudioDetalleApp" findBy="id_planestudiodetalle" statusfield="status_planestudiodetalle">
+                                                <input type="hidden" editable="true" disabled="disabled" required="required" name="id_planestudiodetalle[]" id="id_planestudiodetalle" value="{{id_planestudiodetalle}}" readonly="readonly">
+                                                <input type="hidden"  editable="false" disabled="disabled" name="status_planestudiodetalle[]" id="status_planestudiodetalle" value="1" >
+                                                <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

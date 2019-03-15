@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Observador del Estudiante</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Estudiantes"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Estudiantes.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Datos Basicos del Observador del Estudiante</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php" model="ObservadorEstudianteApp" findBy="id_estudiante" mainform="true" >
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Estudiante</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Codigo</label>
+                                    <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Nombre del Estudiante</label>
+                                    <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" required="required" readonly="readonly" class="form-control" title="Nombre del Estudiante" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Buscar</label>
+                                    <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="BuscarEstudiante();" style="width: 100% !important;">Buscar</button> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Listado</label>
+                                    <button type="button" id="listado" name="listado" href="#modal_listado" data-toggle="modal" class="btn btn-default" onclick="LoadTableEstudiantes(this);" style="width: 100% !important;">Listado</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Acudiente 1</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Codigo Acudiente</label>
+                                    <input type="text" name="idacudiente1_estudiante" id="idacudiente1_estudiante" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Acudiente 1" list="lista_id_persona">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Nombre de Acudiente</label>
+                                    <input type="text" name="nombreacudiente1_estudiante" id="nombreacudiente1_estudiante" value="" maxlength="100" required="required" class="form-control" title="Nombre del Acudiente 1" readonly="readonly">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Parentesco</label>
+                                    <input type="text" name="parentescoacudiente1_estudiante" id="parentescoacudiente1_estudiante" value="" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Acudiente 2</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Codigo Acudiente</label>
+                                    <input type="text" name="idacudiente2_estudiante" id="idacudiente2_estudiante" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Acudiente 2" list="lista_id_persona">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Nombre de Acudiente</label>
+                                    <input type="text" name="nombreacudiente2_estudiante" id="nombreacudiente2_estudiante" value="" maxlength="100" required="required" class="form-control" title="Nombre del Acudiente 2" readonly="readonly">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Parentesco</label>
+                                    <input type="text" name="parentescoacudiente2_estudiante" id="parentescoacudiente2_estudiante" value="" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Salud y Crecimiento</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Peso</label>
+                                    <input type="number" name="pesokg_estudiante" id="pesokg_estudiante" value="" maxlength="6" min="10" max="200" required="required" class="form-control" title="Peso en Kilogramos">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Estatura</label>
+                                    <input type="number" name="estaturam_estudiante" id="estaturam_estudiante" value="" maxlength="6" min="0" max="2" required="required" class="form-control" title="Estatura en Metros">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Grupo Sanguineo</label>
+                                    <select id="grupotiposangre_estudiante" name="grupotiposangre_estudiante" class="form-control" style="width: 100%;">
+                                        <option value=" ">Desconocido</option>
+                                        <option value="O">Grupo O</option>
+                                        <option value="A">Grupo A</option>
+                                        <option value="B">Grupo B</option>
+                                        <option value="AB">Grupo AB</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Factor RH</label>
+                                    <select id="rhtiposangre_estudiante" name="rhtiposangre_estudiante" class="form-control" style="width: 100%;">
+                                        <option value=" ">Desconocido</option>
+                                        <option value="+">Positivo (+)</option>
+                                        <option value="-">Negativo (-)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Def. Visual</label>
+                                    <select id="deficienciavisual_estudiante" name="deficienciavisual_estudiante" class="form-control" style="width: 100%;">
+                                        <option value="0">NO</option>
+                                        <option value="1">SI</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Def. Auditiva</label>
+                                    <select id="deficienciaauditiva_estudiante" name="deficienciaauditiva_estudiante" class="form-control" style="width: 100%;">
+                                        <option value="0">NO</option>
+                                        <option value="1">SI</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Alergias</label>
+                                    <input type="text" name="alergias_estudiante" id="alergias_estudiante" value="" maxlength="100" required="required" class="form-control" title="Alergias del Estudiante">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Enf. Cronica</label>
+                                    <input type="text" name="enfermedadcronica_estudiante" id="enfermedadcronica_estudiante" value="" maxlength="100" required="required" class="form-control" title="Enfermedad Cronica del Estudiante">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendEstudiante(this);" class="btn btn-primary" >Grabar Estudiante</button>        
+                            </center>
+                        </div>
+                    </div>
+
+                    <datalist id="lista_parentesco" name="lista_parentesco" >
+                        <option value="Ninguno">Ninguno</option>
+                        <option value="Madre">Madre</option>
+                        <option value="Padre">Padre</option>
+                        <option value="Hermano">Hermano</option>
+                        <option value="Hermana">Hermana</option>
+                        <option value="Abuela Materna">Abuela Materna</option>
+                        <option value="Abuela Paterna">Abuela Paterna</option>
+                        <option value="Abuelo Materno">Abuelo Materno</option>
+                        <option value="Abuelo Paterno">Abuelo Paterno</option>
+                        <option value="Tia Materna">Tia Materna</option>
+                        <option value="Tio Materno">Tio Materno</option>
+                        <option value="Tia Paterna">Tia Paterna</option>
+                        <option value="Tio Paterno">Tio Paterno</option>
+                        <option value="Primo Materno">Primo Materno</option>
+                        <option value="Prima Materna">Prima Materna</option>
+                        <option value="Primo Paterno">Primo Paterno</option>
+                        <option value="Prima Paterna">Prima Paterna</option>
+                        <option value="Otro">Otro</option>
+                    </datalist>
+
+                    <datalist id="lista_id_persona" name="lista_id_persona" model="PersonasApp" colname="nombre_persona" colvalue="id_persona" url="Base/Controllers/GetComboboxPersonas.php">
+                        <option value="">Ninguno</option>
+                    </datalist>
+
+
+                </form>
+            </div>
+        </div>
+
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Anotaciones al Observador</div>
+            <div class="panel-body table-responsive" >
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Listado de Anotaciones</div>
+                    <div class="panel-body">
+                        <center>
+                            <button type="button" id="btAnotacion" name="btAnotacion" href="#modal_anotacion" data-toggle="modal" class="btn btn-default" onclick="" >Nueva Anotacion</button> 
+                        </center>
+                        <div class="table-responsive">
+                            <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="AnotacionesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableAnotaciones.php" >
+                                <thead id="thead_dataTable0">
+                                    <tr rowhead="true">
+                                        <th style="width: 10%;" title="Codigo de Anotacion">#</th>
+                                        <th style="width: 10%;" title="Codigo de Estudiante">Estudiante</th>
+                                        <th style="width: 10%;">Tipo</th>
+                                        <th style="width: 52%;">Descripcion</th>
+                                        <th style="width: 10%;">Fecha</th>
+                                        <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_dataTable0">
+                                    <tr id="rowsample" rowsample="true" style="display: none;">
+                                        <td> <label>{{id_anotacion}}</label> </td>
+                                        <td> <label>{{id_estudiante}}</label> </td>
+                                        <td> <label>{{tipo_anotacion}}</label> </td>
+                                        <td> <label>{{descripcion_anotacion}}</label> </td>
+                                        <td> <label>{{fecha_anotacion}}</label> </td>
+                                        <td>
+                                            <form id="Anotacion{{id_anotacion}}" name="Anotacion{{id_anotacion}}" method="POST" autocomplete="off" url="Base/Controllers/AnotacionesController.php"  model="AnotacionesApp" findBy="id_anotacion" statusfield="status_anotacion">
+                                                <input type="hidden"  editable="false" name="id_anotacion" id="id_anotacion" value="{{id_anotacion}}" >
+                                                <input type="hidden"  editable="false" name="status_anotacion" id="status_anotacion" value="1" >
+                                                <button type="button" name="EditarFila" id="EditarFila" href="#modal_anotacion" data-toggle="modal" class="btn btn-xs btn-warning icon-button" onclick="EditAnotacion(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_listado">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Listado de Estudiantes</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table style="width: 100% !Important;" name="dataTableE" id="dataTableE" border="1" class="table table-form" model="ObservadorEstudiantesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableEstudiantes.php" >
+                                <thead id="thead_dataTable0">
+                                    <tr rowhead="true">
+                                        <th style="width: 20% !important;" title="Codigo de Estudiante">Codigo</th>
+                                        <th style="width: 70% !important;" title="Nombre de Estudiante">Nombre Estudiante</th>
+                                        <th style="width: 10% !important; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_dataTable0">
+                                    <tr id="rowsample" rowsample="true" style="display: none;">
+                                        <td> <label>{{id_estudiante}}</label> </td>
+                                        <td> <label>{{nombrecompleto_estudiante}}</label> </td>
+                                        <td>
+                                            <form id="Estudiante{{id_estudiante}}" name="Estudiante{{id_estudiante}}" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php"  model="EstudiantesApp" findBy="id_estudiante" statusfield="status_estudiante">
+                                                <input type="hidden"  editable="false" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
+                                                <input type="hidden"  editable="false" name="status_estudiante" id="status_estudiante" value="1" >
+                                                <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" data-dismiss="modal" aria-hidden="true" onclick="EditEstudiante(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <center>
+                                    <button type="button" tyle="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Volver</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_anotacion">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Agregar Anotacion</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form1" method="POST" autocomplete="off" url="Base/Controllers/AnotacionesController.php" model="AnotacionesObservadorApp" findBy="id_anotacion" mainform="true" >
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Codigo</label>
+                                    <input type="text" name="id_anotacion" id="id_anotacion" value="" maxlength="24" required="required" class="form-control" title="Codigo de Anotacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFecha();">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Tipo</label>
+                                    <select id="tipo_anotacion" name="tipo_anotacion" required="required" class="form-control" style="width: 100%;">
+                                        <option value="Recomendacion">Recomendacion</option>
+                                        <option value="Felicitacion">Felicitacion</option>
+                                        <option value="Falta Leve">Falta Leve</option>
+                                        <option value="Falta Moderada">Falta Moderada</option>
+                                        <option value="Falta Grave">Falta Grave</option>
+                                        <option value="Dificultad">Dificultad</option>
+                                        <option value="Bajo Rendimiento">Bajo Rendimiento</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Estudiante</label>
+                                    <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" readonly="readonly">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Fecha</label>
+                                    <input type="date" name="fecha_anotacion" id="fecha_anotacion" value="" maxlength="12" required="required" class="form-control" title="Fecha" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Descripcion</label>
+                                    <textarea id="descripcion_anotacion" name="descripcion_anotacion" maxlength="5000" required="required" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Estrategias Adopadas</label>
+                                    <textarea id="estrategias_anotacion" name="estrategias_anotacion" maxlength="5000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Compromisos del Estudiante</label>
+                                    <textarea id="compromisosestudiante_anotacion" name="compromisosestudiante_anotacion" maxlength="5000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Compromisos del Acudiente</label>
+                                    <textarea id="compromisosacudiente_anotacion" name="compromisosacudiente_anotacion" maxlength="5000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="button" id="saveA" name="save"  action="insertorupdate" save="true" onclick="SendAnotacion(this);" class="btn btn-primary" >Grabar Anotacion</button>        
+                                    </center>
+                                </div>
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="reset" id="resetA" name="reset" class="btn btn-success">Nuevo Anotacion</button> 
+                                    </center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

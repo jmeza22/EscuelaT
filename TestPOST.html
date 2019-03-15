@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>POST Pruebas con Local Storage</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="POST Pruebas con Local Storage">
+        <meta name="author" content="Jose Meza">
+
+        <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
+        <link href="css/styles.css" rel="stylesheet">
+
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+    </head>
+    <body>
+        <div class="panel panel-default" style="width: 50% !important;">
+            <div class="panel-heading">POST</div>
+            <form class="panel-body" method="POST" autocomplete="off" onsubmit="" >
+                <input type="hidden" integer="true" name="id_usuario" id="id_usuario" value="1" required="required" maxlength="30" min="0" class="form-control">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>JSON</label>
+                        <textarea name="contenido" id="contenido" required="required" class="form-control" title="Nombre Completo" readonly="readonly" ></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Variable</label>
+                        <input type="text" name="variable" id="variable" value="name" required="required" maxlength="100" class="form-control" title="Nombre Completo">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>Valor</label>
+                        <input type="text" name="valor" id="valor" value="value" required="required" maxlength="1000" class="form-control" >
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <center>
+                            <button id="btConsultar" name="btConsultar" type="button" onclick="Consultar(this);" class="btn btn-success" >Buscar</button>        
+                        </center>
+                    </div>
+                    <div class="col-sm-3">
+                        <center>
+                            <button id="btGuardar" name="btGuardar" type="button" onclick="Grabar(this);" class="btn btn-primary" >Guardar</button>        
+                        </center>
+                    </div>
+                    <div class="col-sm-3">
+                        <center>
+                            <button id="btBorrar" name="btBorrar" type="button" onclick="Borrar(this);" class="btn btn-danger" >Eliminar</button>        
+                        </center>
+                    </div>
+                    <div class="col-sm-3">
+                        <center>
+                            <button type="reset" class="btn btn-default" value="Cancelar" onclick="BorrarTodo(this);" >Borrar</button> 
+                        </center>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                document.getElementById("variable").value = 'name';
+                document.getElementById("valor").value = 'value';
+                getLocalPOST();
+                getMyJSON();
+            });
+
+            function getMyJSON() {
+                document.getElementById("contenido").innerHTML = getLocalPOST();
+            }
+
+            function Consultar(item) {
+                document.getElementById("valor").value = getPOST(document.getElementById("variable").value);
+                getMyJSON();
+            }
+
+            function Grabar(item) {
+                setPOST(document.getElementById("variable").value, document.getElementById("valor").value);
+                getMyJSON();
+            }
+
+            function Borrar(item) {
+                unsetPOST(document.getElementById("variable").value);
+                document.forms[0].reset();
+                getMyJSON();
+            }
+
+            function BorrarTodo(item) {
+                resetLocalPOST();
+                document.forms[0].reset();
+                getMyJSON();
+            }
+
+
+        </script>
+
+
+    </body>
+</html>

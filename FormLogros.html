@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Logros</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Logros"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Logros.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Logros</div>
+            <div class="panel-body">
+                <div class="">
+                    <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/LogrosController.php"  model="LogrosAsignaturasApp" findBy="id_logro" statusfield="status_logro" mainform="true" > 
+
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Codigo</label>
+                                    <input type="number" id="id_logro" name="id_logro" readonly="readonly" value="" class="form-control" maxlength="22" /> 
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Asignatura</label>
+                                    <select id="id_asignatura" name="id_asignatura" selected="1" oninput="RefreshTable(this);" model="AsignaturasApp" colname="nombre_asignatura" colvalue="id_asignatura" url="Base/Controllers/GetComboboxAsignaturas.php" class="form-control" style="width: 100%;">
+                                        <option selected="selected" value="">Ninguna</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Tipo</label>
+                                    <select id="tipo_logro" name="tipo_logro" class="form-control" style="width: 100%;">
+                                        <option disabled="disabled" selected="selected" value=" ">Ninguno</option>
+                                        <option value="R">Recomendacion</option>
+                                        <option value="F">Fortaleza</option>
+                                        <option value="D">Debilidad</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Grado</label>
+                                    <select id="numgrado_logro" name="numgrado_logro" class="form-control" style="width: 100%;">
+                                        <option disabled="disabled" selected="selected" value="-1">Ninguno</option>
+                                        <option value="1">Primero</option>
+                                        <option value="2">Segundo</option>
+                                        <option value="3">Tercero</option>
+                                        <option value="4">Cuarto</option>
+                                        <option value="5">Quinto</option>
+                                        <option value="6">Sexto</option>
+                                        <option value="7">Septimo</option>
+                                        <option value="8">Octavo</option>
+                                        <option value="9">Noveno</option>
+                                        <option value="10">Decimo</option>
+                                        <option value="11">Undecimo</option>
+                                        <option value="12">Duodecimo</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label title="">Corte</label>
+                                    <select id="numcorte_logro" name="numcorte_logro" class="form-control" style="width: 100%;">
+                                        <option disabled="disabled" selected="selected" value=" ">Ninguno</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>CalificacionMinima</label>
+                                    <input type="number" id="min_logro" name="min_logro" value="" class="form-control" maxlength="2" min="0" max="10" /> 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>CalificacionMaxima</label>
+                                    <input type="number" id="max_logro" name="max_logro" value="" class="form-control" maxlength="2" min="0" max="10" /> 
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Descripcion</label>
+                                    <textarea id="descripcion_logro" name="descripcion_logro" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <center>
+                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                            </center>
+                        </div>
+                    </form>
+                </div>    
+            </div>
+        </div>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Logros</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="LogrosApp" findby="id_asignatura" findbyvalue="" url="Base/Controllers/GetDataTableLogros.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 10%;" title="Codigo">#</th>
+                                <th style="width: 60%;">Descripcion</th>
+                                <th style="width: 6%;">Tipo</th>
+                                <th style="width: 8%;">Grado</th>
+                                <th style="width: 8%;">Periodo</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <label>{{id_logro}}</label> </td>
+                                <td> <label>{{descripcion_logro}}</label> </td>
+                                <td> <label>{{tipo_logro}}</label> </td>
+                                <td> <label>{{numgrado_logro}}</label> </td>
+                                <td> <label>{{numcorte_logro}}</label> </td>
+                                <td>
+                                    <form id="Logro{{id_logro}}" name="Logro{{id_logro}}" method="POST" autocomplete="off" url="Base/Controllers/LogrosController.php"  model="LogrosApp" findBy="id_logro" statusfield="status_logro">
+                                        <input type="hidden"  editable="false" name="id_logro" id="id_logro" value="{{id_logro}}" >
+                                        <input type="hidden"  editable="false" name="status_logro" id="status_logro" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

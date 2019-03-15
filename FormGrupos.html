@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Grupos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Grupos"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Grupos.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Grupos</div>
+            <div class="panel-body">
+                <div class="">
+                    <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/GruposController.php"  model="GruposApp" findBy="id_grupo" statusfield="status_grupo" mainform="true" > 
+
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Escuela</label>
+                                    <select id="id_escuela" name="id_escuela" selected="NULL"  class="form-control" style="width: 100%;" onchange="GenerarCodigo();">
+                                        <option selected="selected" value="NULL">Ninguna</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Programa</label>
+                                    <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="GenerarCodigo();">
+                                        <option selected="selected" value="NULL">Ninguna</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Grado</label>
+                                    <select id="numgrado_programa" name="numgrado_programa" required="required" class="form-control" style="width: 100%;" onchange="GenerarCodigo();">
+                                        <option disabled="disabled" selected="selected" value="0">Ninguno</option>
+                                        <option value="1">Primero</option>
+                                        <option value="2">Segundo</option>
+                                        <option value="3">Tercero</option>
+                                        <option value="4">Cuarto</option>
+                                        <option value="5">Quinto</option>
+                                        <option value="6">Sexto</option>
+                                        <option value="7">Septimo</option>
+                                        <option value="8">Octavo</option>
+                                        <option value="9">Noveno</option>
+                                        <option value="10">Decimo</option>
+                                        <option value="11">Undecimo</option>
+                                        <option value="12">Duodecimo</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Numero</label>
+                                    <input type="text" id="num_grupo" name="num_grupo" required="required" value="" class="form-control" maxlength="2" oninput="GenerarCodigo();"/> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <label title="Codigo del Grupo">Codigo</label>
+                                    <input type="text" id="id_grupo" name="id_grupo" required="required" readonly="readonly" value="" class="form-control" maxlength="22" /> 
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <center>
+                                    <button type="button" id="guardar" name="guardar" action="insert" class="btn btn-primary" onclick="GrabarGrupo(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                                </center>
+                            </div>
+                        </div>
+                    </form>
+                </div>    
+            </div>
+        </div>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Grupos</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="GruposApp" url="Base/Controllers/GetDataTableGrupos.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 15%;" title="Codigo de Grupo">Codigo</th>
+                                <th style="width: 15%;" title="Codigo Escuela">Esc.</th>
+                                <th style="width: 40%;" title="Nombre del Programa">Programa</th>
+                                <th style="width: 10%;" title="Numero de Grado">Grado</th>
+                                <th style="width: 10%;" title="Diferenciador">Cod.Dif.</th>
+                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <label>{{id_grupo}}</label> </td>
+                                <td> <label>{{id_escuela}}</label> </td>
+                                <td> <label>{{nombre_programa}}</label> </td>
+                                <td> <label>{{numgrado_programa}}</label> </td>
+                                <td> <label>{{num_grupo}}</label> </td>
+                                <td>
+                                    <form id="Grupo{{id_grupo}}" name="Grupo{{id_grupo}}" method="POST" autocomplete="off" url="Base/Controllers/GruposController.php"  model="GruposApp" findBy="id_grupo" statusfield="status_grupo">
+                                        <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
+                                        <input type="hidden"  editable="false" name="status_grupo" id="status_grupo" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> 
+            </div>
+        </div>
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

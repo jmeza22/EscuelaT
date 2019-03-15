@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Docentes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Docentes"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Docentes.js"></script>
+    </head>
+    <body>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Docentes</div>
+            <div class="panel-body table-responsive" >
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos Basicos</div>
+                    <div class="panel-body" >
+                        <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/DocentesController.php" model="DocentesApp" findBy="id_docente" mainform="true" >
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Codigo</label>
+                                    <input type="text" name="id_docente" id="id_docente" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_docente">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Nombre del Estudiante</label>
+                                    <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" class="form-control" title="Nombre del Docente" readonly="readonly" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Buscar</label>
+                                    <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="Buscar();" style="width: 100% !important;">Buscar</button> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Titulo Obtenido</label>
+                                    <input type="text" name="ultimotitulo_docente" id="ultimotitulo_docente" value="" maxlength="200" required="required" class="form-control" title="Ultimo Titulo Obtenido (Educacion)" list="lista_titulos" >
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Institucion</label>
+                                    <input type="text" name="instituciontitulo_docente" id="instituciontitulo_docente" value="" maxlength="200" required="required" class="form-control" title="Nombre de la Institucion donde obtuvo el Titulo." >
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Año Grado</label>
+                                    <input type="number" name="anogradotitulo_docente" id="anogradotitulo_docente" value="" maxlength="4" required="required" class="form-control" title="Año en que obtuvo el Titulo." >
+                                </div>
+                            </div>
+
+                            <datalist id="lista_titulos" name="lista_titulos" >
+                                <option value="LICENCIADO">LICENCIADO</option>
+                                <option value="LICENCIADO CON ENFASIS EN TECNOLOGIA E INFORMATICA">LICENCIADO TECNOLOGIA E INFORMATICA</option>
+                                <option value="LICENCIADO CON ENFASIS EN LENGUA CASTELLANA">LICENCIADO LENGUA CASTELLANA</option>
+                                <option value="LICENCIADO CON ENFASIS EN BIOLOGIA Y QUIMICA">LICENCIADO BIOLOGIA Y QUIMICA</option>
+                                <option value="LICENCIADO CON ENFASIS EN EDUCACION FISICA">LICENCIADO EDUCACION FISICA</option>
+                                <option value="LICENCIADO CON ENFASIS EN MATEMATICAS">LICENCIADO MATEMATICAS</option>
+                                <option value="LICENCIADO CON ENFASIS EN FILOSOFIA">LICENCIADO FILOSOFIA</option>
+                                <option value="LICENCIADO CON ENFASIS EN CIENCIAS NATURALES">LICENCIADO CIENCIAS NATURALES</option>
+                                <option value="LICENCIADO CON ENFASIS EN CIENCIAS SOCIALES">LICENCIADO CIENCIAS SOCIALES</option>
+                                <option value="LICENCIADO CON ENFASIS EN ARTISTICA">LICENCIADO ARTISTICA</option>
+                                <option value="LICENCIADO EN PEDAGOGIA INFANTIL">LICENCIADO PEDAGOGIA INFANTIL</option>
+                                <option value="LICENCIADO EN EDUCACION PREESCOLAR">LICENCIADO PREESCOLAR</option>
+                                <option value="LICENCIADO EN MUSICA">LICENCIADO MUSICA</option>
+                                <option value="LICENCIADO CON ENFASIS EN INGLES">LICENCIADO INGLES</option>
+                                <option value="INGENIERO DE SISTEMAS">INGENIERO DE SISTEMAS</option>
+                                <option value="INGENIERO INDUSTIAL">INGENIERO INDUSTRIAL</option>
+                                <option value="INGENIERO EN TELEMATICA">INGENIERO EN TELEMATICA</option>
+                                <option value="ABOGADO">ABOGADO</option>
+                                <option value="CONTADOR PUBLICO">CONTADOR PUBLICO</option>
+                                <option value="ADMINISTRADOR DE EMPRESAS">ADMINISTRADOR DE EMPRESAS</option>
+                            </datalist>
+
+                            <datalist id="lista_id_docente" name="lista_id_docente" model="PersonasApp" colname="nombrecompleto_docente" colvalue="id_docente" url="Base/Controllers/GetComboboxPersonas.php">
+                                <option value="">Ninguno</option>
+                            </datalist>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar Docente</button>        
+                                    </center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Lista de Docentes</div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="DocentesApp" findby="id_docente" findbyvalue="" url="Base/Controllers/GetDataTableDocentes.php" >
+                                <thead id="thead_dataTable0">
+                                    <tr rowhead="true">
+                                        <th style="width: 10%;" title="Codigo del Docente">Codigo</th>
+                                        <th style="width: 30%;" title="Nombre Completo del Docente">Nombre Completo</th>
+                                        <th style="width: 50%;">Titulo</th>
+                                        <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_dataTable0">
+                                    <tr id="rowsample" rowsample="true" style="display: none;">
+                                        <td> <label>{{id_docente}}</label> </td>
+                                        <td> <label>{{nombrecompleto_docente}}</label> </td>
+                                        <td> <label>{{ultimotitulo_docente}}</label> </td>
+                                        <td>
+                                            <form id="Anotacion{{id_docente}}" name="Anotacion{{id_docente}}" method="POST" autocomplete="off" url="Base/Controllers/DocentesController.php"  model="DocentesApp" findBy="id_docente" statusfield="status_docente">
+                                                <input type="hidden"  editable="false" name="id_docente" id="id_docente" value="{{id_docente}}" >
+                                                <input type="hidden"  editable="false" name="status_docente" id="status_docente" value="1" >
+                                                <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </body>
+</html>

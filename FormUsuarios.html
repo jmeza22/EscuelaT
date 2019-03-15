@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Usuarios"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Usuarios.js"></script>
+    </head>
+    <body>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Usuario</div>
+            <div class="panel-body" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/UsuariosController.php" model="UsuariosApp" findBy="username_usuario" mainform="true" >
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Username</label>
+                            <input type="text" name="username_usuario" id="username_usuario" value="" maxlength="50" required="required" class="form-control" title="Nombre de Usuario">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Password</label>
+                            <input type="password" name="password_usuario" id="password_usuario" value="" maxlength="50" class="form-control" title="Contraseña de Usuario">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>CodEsc</label>
+                            <input type="text" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" readonly="readonly" class="form-control" title="Código de Escuela" list="lista_id_escuela">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Nombre Escuela</label>
+                            <input type="text" name="nombre_escuela" id="nombre_escuela" value="" maxlength="100" disabled="disabled" class="form-control" title="Nombre de Escuela" getname="true" idname="id_escuela" model="EscuelasApp" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label>CodRol</label>
+                            <input type="text" name="id_tipousuario" id="id_tipousuario" value="" maxlength="24" required="required" class="form-control" title="Código de Rol (Tipo Usuario)"  list="lista_id_tipousuario">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Nombre Rol</label>
+                            <input type="text" name="nombre_tipousuario" id="nombre_tipousuario" value="" maxlength="100" disabled="disabled" class="form-control" title="Nombre de Rol (Tipo Usuario)">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>CodPer</label>
+                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Código de Persona" url="Base/Controllers/DefaultController.php" model="PersonasApp">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Documento</label>
+                            <input type="text" name="documento_persona" id="documento_persona" value="" maxlength="24" disabled="disabled" class="form-control" title="Documento de Persona" getname="true" idname="id_persona" model="PersonasApp" >
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Nombre Completo</label>
+                            <input type="text" name="nombre1_persona" id="nombre1_persona" value="" maxlength="100" disabled="disabled" class="form-control" title="Nombre de Persona"  getname="true" idname="id_persona" model="PersonasApp" >
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                    <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php">
+                        <option value="">Ninguno</option>
+                    </datalist>
+                    <datalist id="lista_id_tipousuario" name="lista_id_tipousuario" model="TiposUsuariosApp" colname="nombre_tipoususario" colvalue="id_tipousuario" url="Base/Controllers/GetComboboxTiposUsuarios.php">
+                        <option value="">Ninguno</option>
+                    </datalist>
+
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

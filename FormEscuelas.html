@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <title>Escuelas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Registro de Escuelas"/>
+    <meta name="author" content="Jose Meza"/>
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/Validator.js"></script>
+    <script type="text/javascript" src="js/localStorageData.js"></script>
+    <script type="text/javascript" src="js/SimplexFramework.js"></script>
+    <script type="text/javascript" src="js-forms/Escuelas.js"></script>
+</head>
+<body>
+
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Escuelas</div>
+        <div class="panel-body">
+
+            <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/EscuelasController.php" action="Base/Controllers/EscuelasController.php" model="EscuelasApp" findBy="id_escuela" statusfield="status_escuela" mainform="true" > 
+                <div>
+                    <center>
+                        <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewRowInTable('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
+                    </center>
+                </div>
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="EscuelasApp" url="Base/Controllers/GetDataTableEscuelas.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 8%;" title="Codigo">#</th>
+                                <th style="width: 25%;">Nombre</th>
+                                <th style="width: 25%;">Direccion</th>
+                                <th style="width: 14%;">Telefono</th>
+                                <th style="width: 20%;">Email</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="id_escuela[]" id="id_escuela" maxlength="2" value="{{id_escuela}}"></td>
+                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="nombre_escuela[]" id="nombre_escuela" maxlength="100" value="{{nombre_escuela}}"> </td>
+                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="direccion_escuela[]" id="direccion_escuela" maxlength="100" value="{{direccion_escuela}}"> </td>
+                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="telefono_escuela[]" id="telefono_escuela" maxlength="10" value="{{telefono_escuela}}"> </td>
+                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="email_escuela[]" id="email_escuela" maxlength="100" value="{{email_escuela}}"> </td>
+                                <td>
+                                    <input type="hidden"  editable="false" disabled="disabled" name="status_escuela[]" id="status_escuela" value="1" >
+                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="editRowInTable(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <center>
+                        <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                    </center>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+</body>
+</html>

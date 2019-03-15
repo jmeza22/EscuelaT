@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <title>Jornadas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Registro de Jornadas"/>
+    <meta name="author" content="Jose Meza"/>
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/Validator.js"></script>
+    <script type="text/javascript" src="js/localStorageData.js"></script>
+    <script type="text/javascript" src="js/SimplexFramework.js"></script>
+    <script type="text/javascript" src="js-forms/Jornadas.js"></script>
+</head>
+<body>
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading"> Jornada </div>
+        <div class="panel-body">
+            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/JornadasController.php" model="JornadasApp" findBy="id_jornada" >
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Codigo</label>
+                        <input type="text" id="id_jornada" name="id_jornada" value="" class="form-control" required="required" maxlength="10" readonly="readonly"/> 
+                    </div>
+                    <div class="col-sm-9">
+                        <label>Nombre</label>
+                        <select id="nombre_jornada" name="nombre_jornada" class="form-control" required="required" style="width: 100%;" onchange="setIdJornada();">
+                            <option value="Manana">Mañana</option>
+                            <option value="Tarde">Tarde</option>
+                            <option value="Noche">Noche</option>
+                            <option value="Mixta">Mixta</option>
+                            <option value="Unica">Unica</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Hora.Inicio</label>
+                        <input type="time" id="horainicio_jornada" name="horainicio_jornada" value="" class="form-control" required="required" >
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Hora.Fin</label>
+                        <input type="time" id="horafin_jornada" name="horafin_jornada" value="" class="form-control" required="required" >
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Escuela</label>
+                        <select id="id_escuela" name="id_escuela" selected="NN" required="required" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" class="form-control" style="width: 100%;" onchange="RefreshSede(this); setIdJornada();">
+                            <option selected="selected" value="-1">Ninguna</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Sede</label>
+                        <select id="id_sede" name="id_sede" selected="NN" required="required" model="SedesApp" colname="nombre_sede" colvalue="id_sede" findby="id_escuela" findbyvalue="-1" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setIdJornada();">
+                            <option disabled="disabled" selected="selected" value="-1">Ninguna</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <center>
+                        <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="GrabarJornada();" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar Jornada </button>
+                    </center>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Listado de Jornadas </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="JornadasApp" url="Base/Controllers/GetDataTableJornadas.php" >
+                    <thead id="thead_dataTable0">
+                        <tr rowhead="true">
+                            <th style="width: 10%;" title="Codigo de Jornada">Cod.</th>
+                            <th style="width: 34%;">Nombre</th>
+                            <th style="width: 18%;">H. Inicio</th>
+                            <th style="width: 18%;">H. Final</th>
+                            <th style="width: 10%;">Cod.Esc</th>
+                            <th style="width: 10%;">Cod.Sede</th>
+                            <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_dataTable0">
+                        <tr id="rowsample" rowsample="true" style="display: none;">
+                            <td> {{id_jornada}} </td>
+                            <td> {{nombre_jornada}} </td>
+                            <td> {{horainicio_jornada}} </td>
+                            <td> {{horafin_jornada}} </td>
+                            <td> {{id_escuela}} </td>
+                            <td> {{id_sede}} </td>
+                            <td>
+                                <form id="Jornada{{id_jornada}}" name="Jornada{{id_jornada}}" method="POST" autocomplete="off" url="Base/Controllers/JornadasController.php"  model="JornadasApp" findBy="id_jornada" statusfield="status_jornada">
+                                    <input type="hidden" editable="true" disabled="disabled" required="required" name="id_jornada[]" id="id_jornada" value="{{id_jornada}}" readonly="readonly">
+                                    <input type="hidden"  editable="false" disabled="disabled" name="status_jornada[]" id="status_jornada" value="1" >
+                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+    </div>
+
+    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+</body>
+</html>

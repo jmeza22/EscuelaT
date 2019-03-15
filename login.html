@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Iniciar Sesion"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/login.js"></script>
+    </head>
+    <body>
+        <div class="panel panel-primary" style="width: 80% !important; max-width: 430px !important;">
+            <div class="panel-heading">Iniciar Sesion</div>
+            <div class="panel-body" >
+                <form id="FormLogin" method="POST" autocomplete="off" url="Base/Controllers/LoginController.php" model="UsuariosApp" findBy="id_persona" mainform="true" >
+                    <input type="hidden" name="token" id="token" value="92a04b22c02d12e8" required="required" >
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Usuario</label>
+                            <input type="text" name="mynickname" id="mynickname" value="" required="required" maxlength="50" class="form-control" title="Usuario">
+                        </div>
+                        <div class="col-sm-12">
+                            <label>Contraseña</label>
+                            <input type="password" name="mypassword" id="mypassword" value="" required="required" maxlength="32" class="form-control" title="Contraseña">
+                        </div>
+                        <div class="col-sm-12">
+                            <label>Tipo de Usuario</label>
+                            <select id="id_tipousuario" name="id_tipousuario" selected="NN" required="required" model="TiposUsuariosApp" colname="nombre_tipousuario" colvalue="id_tipousuario" url="Base/Controllers/GetComboboxTiposUsuarios.php" class="form-control" style="width: 100%;">
+                                <option disabled="disabled" selected="selected" value="NN">Ninguno</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <label>Escuela o Empresa</label>
+                            <select id="id_escuela" name="id_escuela" selected="NN" required="required" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" class="form-control" style="width: 100%;" onchange="RefreshSede(this);">
+                                <option selected="selected" value="-1">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <label>Sedes o Sucursal</label>
+                            <select id="id_sede" name="id_sede" selected="NN" required="required" model="SedesApp" colname="nombre_sede" colvalue="id_sede" findby="id_escuela" findbyvalue="-1" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;">
+                                <option disabled="disabled" selected="selected" value="NN">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <center>
+                                <button type="button" id="save" name="save" action="find" onclick="Send(this);" class="btn btn-block btn-primary" >Iniciar Sesion</button>        
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

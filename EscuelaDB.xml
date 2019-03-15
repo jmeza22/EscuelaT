@@ -1,0 +1,2093 @@
+<?xml version="1.0" encoding="UTF-8"?><Db flnm="EscuelaDB" nm="EscuelaDB" ver="1.3.4">
+  <VerLbl/>
+  <VerNotes/>
+  <DefTblOpts/>
+  <DocFolder>C:\Users\LISANDRO\Documents</DocFolder>
+  <Sch Cm="" nm="EscuelaDB">
+    <Tbl UsSo="1" nm="AnotacionesObservadorApp">
+      <Cm>Anotaciones del Observador</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_anotacion" nm="pkAnotacionesObservadorApp"/>
+      <Cl au="0" df="" nm="id_anotacion" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Anotacion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="tipo_anotacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Tipo Anotacion (Felicitacion, Recomendacion, Falta, Dificultades)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_anotacion" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="5000" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion de la Anotacion</Cm>
+      </Cl>
+      <Cl au="0" df="Citacion a Acuediente" nm="estrategias_anotacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="5000" sc="null" sg="1" un="0"/>
+        <Cm>Estrategias Adoptadas</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="compromisosestudiante_anotacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="5000" sc="null" sg="1" un="0"/>
+        <Cm>Compromisos del Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="compromisosacudiente_anotacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="5000" sc="null" sg="1" un="0"/>
+        <Cm>Compromisos del Acudiente</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fecha_anotacion" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha Anotacion</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_anotacion" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado de la Anotacion</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_AnotacionesObservador_ObservadorEstudianteApp" prLkCl="id_estudiante" upAc="3">
+        <PrTb mn="0" nm="ObservadorEstudianteApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="AnotacionesObservadorApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="AnotacionesObservadorApp_id_anotacion_Idx" spa="0" unq="1">
+        <ClNs>id_anotacion</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="AreasApp">
+      <Cm>Areas de Enseñanza</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_area" nm="pkAreasApp"/>
+      <Cl au="0" df="" nm="id_area" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>pk</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_area" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de Area</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_area" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_AreasApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="AreasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="AsignaturasApp">
+      <Cm>Asignaturas</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_asignatura, id_escuela" nm="pkAsignaturasApp"/>
+      <Cl au="0" df="" nm="id_asignatura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_asignatura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_asignatura" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="hteoricas_asignatura" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Horas Teoricas Semanales </Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="hpracticas_asignatura" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Horas Practicas Semanales</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numcreditos_asignatura" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Creditos (Peso Academico)</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_asignatura" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_Asignaturas_Escuelas" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="AsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="AsignaturasApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_asignatura</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="CalificacionesApp">
+      <Cm>Planilla de Calificaciones por Periodo</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_calificacion" nm="pkCalificacionesApp"/>
+      <Cl au="1" df="" nm="id_calificacion" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Calificacion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_matricula" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Matricula</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_planestudio" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Plan de Estudios</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numgrado_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado que Cursara el Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_grupo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_corte" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="16" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Corte</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="numero_corte" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Corte</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_docente" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Docente</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="nc_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Calificacion Componente Cognositivo</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="np_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Calificacion Componente Procedimental</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="na_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Calificacion Componente Actitudinal</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="nd_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Nota Definitiva</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nn_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Nota Nivelacion de Final de Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="logroc_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Logro Cognositivo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="logrop_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Logro Procedimental</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="logroa_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Logro Actitudinal</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="numausencias_calificacion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Ausencias durante el Corte</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuariocrea_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Usuario que Crea el Registro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechacrea_calificacion" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha Creacion del Registro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuariomod_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Usuario que Actualiza el Registro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechamod_calificacion" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Actualizacion del Registro</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_calificacion" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="id_matasig" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="120" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura Matriculada</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_CalificacionesApp_CortesApp" prLkCl="id_corte" upAc="3">
+        <PrTb mn="0" nm="CortesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_corte" prCl="id_corte"/>
+        <ClPr cdCl="numero_corte" prCl="numero_corte"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_CalificacionesApp_MatriculaAsignaturasApp" prLkCl="id_matasig" upAc="3">
+        <PrTb mn="0" nm="MatriculaAsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_matasig" prCl="id_matasig"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="CalificacionesApp_id_calificacion_Idx" spa="0" unq="1">
+        <ClNs>id_calificacion</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="CalificacionesApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_estudiante, id_programa, id_planestudio, id_periodo, id_asignatura, numgrado_programa, id_grupo, id_corte</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="CargasDocentesApp">
+      <Cm>Cargas Academicas de los Docentes</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_carga" nm="pkCargasDocentesApp"/>
+      <Cl au="1" df="" nm="id_carga" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Carga Academica</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_docente" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Docente</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_planestudio" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Plan de Estudios</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numgrado_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_grupo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="numhoras_carga" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de horas asignadas al Docente por Asignatura y Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_carga" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_CargasDocentesApp_DocentesApp" prLkCl="id_docente" upAc="3">
+        <PrTb mn="0" nm="DocentesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CargasDocentesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_docente" prCl="id_docente"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_CargasDocentesApp_GruposApp" prLkCl="id_grupo" upAc="3">
+        <PrTb mn="0" nm="GruposApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CargasDocentesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_grupo" prCl="id_grupo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_CargasDocentesApp_PeriodosApp" prLkCl="id_periodo" upAc="3">
+        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CargasDocentesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_periodo" prCl="id_periodo"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_CargasDocentesApp_PlanEstudioDetalleApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="PlanEstudioDetalleApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CargasDocentesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+        <ClPr cdCl="numgrado_programa" prCl="numgrado_programa"/>
+        <ClPr cdCl="id_planestudio" prCl="id_planestudio"/>
+        <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="CargasDocentesApp_id_carga_Idx" spa="0" unq="1">
+        <ClNs>id_carga</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="CargasDocentesApp_id_docente_Idx" spa="0" unq="0">
+        <ClNs>id_docente, id_escuela, id_programa, id_planestudio, id_grupo, id_periodo, id_asignatura, numgrado_programa</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="CitacionesObservadorApp">
+      <Cm>Citaciones a Acudientes</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_citacion" nm="pkCitacionesObservadorApp"/>
+      <Cl au="0" df="" nm="id_citacion" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Citacion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_anotacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Anotacion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="motivo_citacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Motivo de la Citacion</Cm>
+      </Cl>
+      <Cl au="0" df="Padre, Madre, Acudiente" nm="nombreacudiente_citacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Acudiente Citado</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechacita_citacion" nu="0">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de la Reunion (Citacion)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fecha_citacion" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Creacion de la Citacion</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_citacion" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado de la Citacion</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_CitacionesObservadorApp_AnotacionesObservadorApp" prLkCl="id_anotacion" upAc="3">
+        <PrTb mn="0" nm="AnotacionesObservadorApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CitacionesObservadorApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_anotacion" prCl="id_anotacion"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_CitacionesObservadorApp_ObservadorEstudianteApp" prLkCl="id_estudiante" upAc="3">
+        <PrTb mn="0" nm="ObservadorEstudianteApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CitacionesObservadorApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="ConfiguracionApp">
+      <Cm>Configuracion de Parametros del Sistema</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_escuela" nm="pkConfiguracionApp"/>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="tipodocumento_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Documento de Identificacion </Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numdocumento_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Documento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="eslogan_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Eslogan de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="numperiodos_configuracion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Periodos por Año (Escuela=1)</Cm>
+      </Cl>
+      <Cl au="0" df="5" nm="numcortes_configuracion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Cortes por Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="40" nm="numsemanas_configuracion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Semanas por Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="30" nm="horassemanales_configuracion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Cantidad de Horas Semanales para Jornada Completa (Mañana, Tarde)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombrerector_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Rector de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="documentorector_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="25" sc="null" sg="1" un="0"/>
+        <Cm>Documento de Identidad del Rector</Cm>
+      </Cl>
+      <Cl au="0" df="10" nm="valmax_configuracion" nu="0">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Maxima</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="valmin_configuracion" nu="0">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Minima</Cm>
+      </Cl>
+      <Cl au="0" df="6" nm="valaprueba_configuracion" nu="0">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Nota Minima Aprovatoria</Cm>
+      </Cl>
+      <Cl au="0" df="10" nm="valsupmax_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Maxima Desempeño Superior</Cm>
+      </Cl>
+      <Cl au="0" df="9" nm="valsupmin_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Minima Desempeño Superior</Cm>
+      </Cl>
+      <Cl au="0" df="8.99" nm="valaltomax_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Maxima Desempeño Alto</Cm>
+      </Cl>
+      <Cl au="0" df="8" nm="valaltomin_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Minima Desempeño Alto</Cm>
+      </Cl>
+      <Cl au="0" df="7.99" nm="valbasmax_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Maxima Desempeño Basico</Cm>
+      </Cl>
+      <Cl au="0" df="6" nm="valbasmin_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Minima Desempeño Basico</Cm>
+      </Cl>
+      <Cl au="0" df="5.99" nm="valbajomax_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Maxima Desempeño Bajo</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="valbajomin_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor Nota Minima Desempeño Bajo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="status_configuracion" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_ConfiguracionApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="ConfiguracionApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="CortesApp">
+      <Cm>Cortes</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_corte, numero_corte" nm="pkCortesApp"/>
+      <Cl au="0" df="" nm="id_corte" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="16" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Corte</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="numero_corte" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Corte</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="A" nm="estado_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Corte (A= Activo, I = Inactivo, V = Visualizacion)</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="eshabilitacion_corte" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Indica si es Corte de Habilitacion</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="esfinal_corte" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Indica si es el Corte Final (Consolidado)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="finicio_corte" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Inicio del Corte</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="ffinal_corte" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha Final del Corte</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_corte" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_CortesApp_PeriodosApp" prLkCl="id_periodo" upAc="3">
+        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="CortesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_periodo" prCl="id_periodo"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="CortesApp_id_corte_Idx" spa="0" unq="1">
+        <ClNs>id_corte</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="CortesApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_periodo, numero_corte</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="DirectoresGruposApp">
+      <Cm>Directores de Grupo</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_director" nm="pkDirectoresGruposApp"/>
+      <Cl au="1" df="" nm="id_director" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Direccion de Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_grupo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_docente" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Docente</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_director" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Registro</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_DirectoresGrupo_DocentesApp" prLkCl="id_docente" upAc="3">
+        <PrTb mn="0" nm="DocentesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="DirectoresGruposApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_docente" prCl="id_docente"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_DirectoresGrupo_GruposApp" prLkCl="id_grupo" upAc="3">
+        <PrTb mn="0" nm="GruposApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="DirectoresGruposApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_grupo" prCl="id_grupo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_DirectoresGrupo_PeriodosApp" prLkCl="id_periodo" upAc="3">
+        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="DirectoresGruposApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_periodo" prCl="id_periodo"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="DirectoresGrupo_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_grupo, id_escuela, id_periodo</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="DirectoresGruposApp_Idx2" spa="0" unq="1">
+        <ClNs>id_escuela, id_periodo, id_docente</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="DocentesApp">
+      <Cm>Hoja de Vida del Docente</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_docente" nm="pkDocentesApp"/>
+      <Cl au="0" df="" nm="id_docente" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombrecompleto_docente" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Completo del Docente</Cm>
+      </Cl>
+      <Cl au="0" df="Licenciado" nm="ultimotitulo_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Ultimo titulo obtenido (Educacion)</Cm>
+      </Cl>
+      <Cl au="0" df="Universidad" nm="instituciontitulo_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de la Institucion donde obtuvo el utltimo Titulo</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="anogradotitulo_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="4" sc="null" sg="1" un="0"/>
+        <Cm>Año en que obtuvo el ultimo titulo</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_docente" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Registro</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_DocentesApp_PersonasApp" prLkCl="id_persona" upAc="3">
+        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="DocentesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_docente" prCl="id_persona"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="EscuelasApp">
+      <Cm>Datos de la Escuela</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_escuela" nm="pkEscuelasApp"/>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="Mi Escuela" nm="nombre_escuela" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="direccion_escuela" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Direccion Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="telefono_escuela" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Telefono Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="email_escuela" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Email Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_escuela" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="GruposApp">
+      <Cm>Grupos de Estudiantes</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_grupo" nm="pkGruposApp"/>
+      <Cl au="0" df="" nm="id_grupo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="numgrado_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado</Cm>
+      </Cl>
+      <Cl au="0" df="A" nm="num_grupo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="4" sc="null" sg="1" un="0"/>
+        <Cm>Numero del Grupo (1, 2, 3,... o A, B, C,...)</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_grupo" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Grupo</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_GruposApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="GruposApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_GruposApp_ProgramasApp" prLkCl="id_programa" upAc="3">
+        <PrTb mn="0" nm="ProgramasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="GruposApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="GruposApp_id_grupo_Idx" spa="0" unq="1">
+        <ClNs>id_grupo</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="GruposApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_programa, numgrado_programa, num_grupo</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="JornadasApp">
+      <Cm>Jornadas de la Escuela</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_jornada" nm="pkJornadasApp"/>
+      <Cl au="0" df="" nm="id_jornada" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="14" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Jornada</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_sede" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Sede</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_jornada" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Jornada</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="horainicio_jornada" nu="1">
+        <DT arr="0" ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Hora Inicio Jornada</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="horafin_jornada" nu="1">
+        <DT arr="0" ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Hora Fin Jornada</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_jornada" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_JornadasApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="JornadasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_JornadasApp_SedesApp" prLkCl="id_sede" upAc="3">
+        <PrTb mn="0" nm="SedesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="JornadasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_sede" prCl="id_sede"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="JornadasApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_sede, nombre_jornada</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="LogrosAsignaturasApp">
+      <TblOpts/>
+      <Pk ClNs="id_logro, id_asignatura" nm="pkLogrosAsignaturasApp"/>
+      <Cl au="1" df="" nm="id_logro" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero del Logo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="R" nm="tipo_logro" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Tipo Logro (Fortaleza F, Debilidad D, Recomendacion R)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_logro" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion del Logro</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="min_logro" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Calificacion Minima para el logro</Cm>
+      </Cl>
+      <Cl au="0" df="10" nm="max_logro" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Calificacion Maxima para el logro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numgrado_logro" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="numcorte_logro" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Corte Sugerido para Ingresar dicho Logro</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_logro" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_LogrosAsignaturasApp_AsignaturasApp" prLkCl="id_asignatura" upAc="3">
+        <PrTb mn="0" nm="AsignaturasApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="LogrosAsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="LogrosAsignaturasApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_logro</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="MatriculaAsignaturasApp">
+      <Cm>Asignaturas Matriculadas por Estudiante</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_matasig" nm="pkMatriculaAsignaturasApp"/>
+      <Cl au="0" df="" nm="id_matasig" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="120" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura Matriculada</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_matricula" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Matricula</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_planestudio" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Plan de Estudios</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numgrado_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado que Cursara el Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_grupo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_carga" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Carga Academica</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Docente</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_AsignaturasMatriculadasApp_MatriculasApp" prLkCl="id_matricula" upAc="3">
+        <PrTb mn="0" nm="MatriculasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculaAsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_matricula" prCl="id_matricula"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_AsignaturasMatriculadasApp_PlanEstudioDetalleApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="PlanEstudioDetalleApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculaAsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+        <ClPr cdCl="numgrado_programa" prCl="numgrado_programa"/>
+        <ClPr cdCl="id_planestudio" prCl="id_planestudio"/>
+        <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculaAsignaturasApp_CargasDocentesApp" prLkCl="id_carga" upAc="3">
+        <PrTb mn="0" nm="CargasDocentesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculaAsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_carga" prCl="id_carga"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculaAsignaturasApp_DocentesApp" prLkCl="id_docente" upAc="3">
+        <PrTb mn="0" nm="DocentesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculaAsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_docente" prCl="id_docente"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="Asignaturas_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_estudiante, id_escuela, id_programa, id_periodo, id_planestudio, numgrado_programa, id_asignatura, id_matricula, id_grupo</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="Matriculadas_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_matasig</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="MatriculasApp">
+      <Cm>Datos de Matriculas</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_matricula" nm="pkMatriculasApp"/>
+      <Cl au="0" df="" nm="id_matricula" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Matricula</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_planestudio" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Plan de Estudios</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_sede" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Sede</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_jornada" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="14" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Jornada</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numgrado_programa" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado que Cursara el Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_grupo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="Estudiante" nm="nombrecompleto_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Completo del Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fecha_matricula" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Matricula</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_matricula" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Registro</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_MatriculasApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_GruposApp" prLkCl="id_grupo" upAc="3">
+        <PrTb mn="0" nm="GruposApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_grupo" prCl="id_grupo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_JornadasApp" prLkCl="id_jornada" upAc="3">
+        <PrTb mn="0" nm="JornadasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_jornada" prCl="id_jornada"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_ObservadorEstudianteApp" prLkCl="id_estudiante" upAc="3">
+        <PrTb mn="0" nm="ObservadorEstudianteApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_PeriodosApp" prLkCl="id_periodo" upAc="3">
+        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_periodo" prCl="id_periodo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_PersonasApp" prLkCl="id_persona" upAc="3">
+        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_estudiante" prCl="id_persona"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_PlanEstudiosApp" prLkCl="id_planestudio" upAc="3">
+        <PrTb mn="0" nm="PlanEstudiosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_planestudio" prCl="id_planestudio"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_ProgramasApp" prLkCl="id_programa" upAc="3">
+        <PrTb mn="0" nm="ProgramasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_MatriculasApp_SedesApp" prLkCl="id_sede" upAc="3">
+        <PrTb mn="0" nm="SedesApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_sede" prCl="id_sede"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="id_matricula_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_matricula</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="MatriculasApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_programa, id_periodo, id_estudiante</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="ObservadorEstudianteApp">
+      <Cm>Observador del Estudiante</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_estudiante" nm="pkObservadorEstudianteApp"/>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombrecompleto_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="idacudiente1_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Acudiente 1</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="idacudiente2_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Acudiente 2</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombreacudiente1_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Acudiente 1</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombreacudiente2_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Acudiente 2</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="parentescoacudiente1_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="40" sc="null" sg="1" un="0"/>
+        <Cm>Parentesco con Acuediente 1</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="parentescoacudiente2_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="40" sc="null" sg="1" un="0"/>
+        <Cm>Parentesco con Acudiente 2</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="grupotiposangre_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grupo Tipo Sangre</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="rhtiposangre_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Factor RH Tipo de Sangre</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="deficienciaauditiva_estudiante" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Deficiencia Auditiva</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="deficienciavisual_estudiante" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Deficiencia Visual</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="pesokg_estudiante" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Peso en Kg</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="estaturam_estudiante" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estatura en Metros</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="alergias_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Alergias del Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="enfermedadcronica_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Enfermedad Cronica del Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_estudiante" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Registro</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_ObservadorEstudianteApp_PersonasApp" prLkCl="id_persona" upAc="3">
+        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="ObservadorEstudianteApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_estudiante" prCl="id_persona"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="PeriodosApp">
+      <Cm>Periodos Academicos</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_periodo, id_escuela" nm="pkPeriodosApp"/>
+      <Cl au="0" df="" nm="id_periodo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="anualidad_periodo" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Año del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="num_periodo" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="finicio_periodo" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha Inicio Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="ffinal_periodo" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha Final Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="cerrado_periodo" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Indica si el periodo esta cerrado</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_periodo" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_PeriodosApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="PeriodosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="PeriodosApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_periodo</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="PersonasApp">
+      <Cm>Datos Personales</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_persona" nm="pkPersonasApp"/>
+      <Cl au="0" df="" nm="id_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="documento_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Numero Documento Identidad</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="tipodoc_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="3" sc="null" sg="1" un="0"/>
+        <Cm>Tipo Documento Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre1_persona" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Primer Nombre</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre2_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Segundo Nombre</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="apellido1_persona" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Primer Apellido</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="apellido2_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Segundp Apellido</Cm>
+      </Cl>
+      <Cl au="0" df="I" nm="sexo_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1" sc="null" sg="1" un="0"/>
+        <Cm>Sexo de la Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="telefono_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Telefono</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="departamento_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Departamento donde vive</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="ciudad_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Ciudad o Municipio donde Vive</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="barrio_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Barrio donde vive</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="direccion_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Direccion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="email_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Email</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechanacimiento_persona" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Nacimiento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="lugarnacimiento_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Lugar de Nacimiento</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_persona" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Idx clu="0" ftx="0" nm="PersonasApp_documento_Idx" spa="0" unq="1">
+        <ClNs>documento_persona, tipodoc_persona</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="PlanEstudioDetalleApp">
+      <Cm>Plan de estudios de la Carrera</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_escuela, id_programa, numgrado_programa, id_planestudio, id_asignatura" nm="pkPlanEstudioDetalleApp"/>
+      <Cl au="0" df="" nm="id_planestudiodetalle" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Detalle Plan Estudio</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_planestudio" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Plan de Estudios</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="numgrado_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="hteoricas_asignatura" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Horas Teoricas Semanales</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="hpracticas_asignatura" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Horas Practicas Semanales</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_planestudiodetalle" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Detalle Plan Estudio</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_PlanEstudioDetalleApp_AsignaturasApp" prLkCl="id_asignatura" upAc="3">
+        <PrTb mn="0" nm="AsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PlanEstudioDetalleApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_PlanEstudioDetalleApp_PlanEstudiosApp" prLkCl="id_planestudio" upAc="3">
+        <PrTb mn="0" nm="PlanEstudiosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PlanEstudioDetalleApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_planestudio" prCl="id_planestudio"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="PlanEstudioDetalleApp_id_planestudiodetalle_Idx" spa="0" unq="1">
+        <ClNs>id_planestudiodetalle</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="PlanEstudioDetalleApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_programa, id_asignatura, numgrado_programa</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="PlanEstudiosApp">
+      <Cm>Plan de Estudios del Programa</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_planestudio, id_escuela, id_programa" nm="pkPlanEstudiosApp"/>
+      <Cl au="0" df="" nm="id_planestudio" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Plan de Estudios</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_planestudio" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion del Plan de Estudios</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fcreacion_planestudio" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Creacion Plan</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="vigente_planestudio" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Si esta vigente el plan de estudios</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_planestudio" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_PlanEstudiosApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PlanEstudiosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_PlanEstudiosApp_ProgramasApp" prLkCl="id_programa" upAc="3">
+        <PrTb mn="0" nm="ProgramasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PlanEstudiosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="PlanEstudiosApp_id_planestudio_Idx" spa="0" unq="1">
+        <ClNs>id_planestudio</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="PlanEstudiosApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_programa, id_planestudio</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="ProgramasApp">
+      <Cm>Programas que ofrece la Escuela</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_programa" nm="pkProgramasApp"/>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="Educacion Basica" nm="nombre_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_programa" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2000" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion de Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nivel_programa" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Nivel Educativo al que pertenece el Programa</Cm>
+      </Cl>
+      <Cl au="0" df="Anual" nm="periodicidadgrado_programa" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Periodicidad del Grado (Anual, Semestral, Trimestral, Bimestral, Mensual)</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="ngrados_programa" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Grados o Niveles (Semestres o Años) en que se divide el programa</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_programa" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_Programa_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="ProgramasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="ProgramasApp_id_programa_Idx" spa="0" unq="1">
+        <ClNs>id_programa</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="ProgramasApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_programa</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="SedesApp">
+      <Cm>Sedes de la Escuela</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_sede" nm="pkSedesApp"/>
+      <Cl au="0" df="" nm="id_sede" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Sede</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_sede" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Sede</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="direccion_sede" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Direccion de Sede</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="telefono_sede" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Telefono Sede</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="email_sede" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Email Sede</Cm>
+      </Cl>
+      <Cl au="0" df="No Definido" nm="cordinador_sede" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Cordinador </Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_sede" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_SedesApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="SedesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TiposUsuariosApp">
+      <Cm>Tipos de Usuario</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_tipousuario" nm="pkTiposUsuariosApp"/>
+      <Cl au="0" df="" nm="id_tipousuario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Tipo Usuario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_tipousuario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de Tipo de Usuario</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="superadmin_tipousuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Indica si es SuperAdministrador</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="admin_tipousuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Administrador (Rector)</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="management_tipousuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Administracion (Secretaria, Supervisor, Cordinador)</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="standard_tipousuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Usuario Estandar (Docentes)</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="limited_tipousuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Usuario Limitado (Estudiantes)</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="external_tipousuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Externo (Acudiente, Padre Familia)</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_tipousuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="UsuariosApp">
+      <Cm>Cuentas de Usuario</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_escuela, id_tipousuario, username_usuario, id_persona" nm="pkUsuariosApp"/>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_tipousuario" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Tipo Usuario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Llave Primaria Personas</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="username_usuario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de Usuario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="password_usuario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+        <Cm>Clave de Usuario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fcreacion_usuario" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="fmodificacion_usuario" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="1" nm="status_usuario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_UsuariosApp_PersonasApp" prLkCl="id_persona" upAc="3">
+        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="UsuariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_persona" prCl="id_persona"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_UsuariosApp_TiposUsuariosApp" prLkCl="id_tipousuario" upAc="3">
+        <PrTb mn="0" nm="TiposUsuariosApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="UsuariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_tipousuario" prCl="id_tipousuario"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="UsuariosApp_username_usuario_Idx" spa="0" unq="1">
+        <ClNs>username_usuario</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <CustomTypes/>
+  </Sch>
+  <Dgm nm="EscuelaDB">
+    <RnCf ClkAct="true" FtSz="11" lkStgy="RightAngleStrategy" zm="1.0">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="1"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" FkNms="1" PkCols="1"/>
+      <ErNotation>DbwErNotation</ErNotation>
+      <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
+      <svg path=""/>
+    </DiaProps>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PersonasApp" x="0" y="56"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="UsuariosApp" x="292" y="331"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="EscuelasApp" x="699" y="58"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SedesApp" x="837" y="648"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="JornadasApp" x="316" y="650"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TiposUsuariosApp" x="338" y="55"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AreasApp" x="1798" y="549"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsignaturasApp" x="2089" y="554"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PeriodosApp" x="1105" y="637"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="LogrosAsignaturasApp" x="2294" y="1102"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ProgramasApp" x="1390" y="426"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PlanEstudioDetalleApp" x="1844" y="1105"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PlanEstudiosApp" x="1534" y="884"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MatriculasApp" x="67" y="966"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ConfiguracionApp" x="877" y="290"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ObservadorEstudianteApp" x="58" y="1247"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AnotacionesObservadorApp" x="21" y="1679"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CitacionesObservadorApp" x="78" y="1986"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CortesApp" x="1017" y="1181"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="GruposApp" x="486" y="925"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MatriculaAsignaturasApp" x="695" y="1681"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CalificacionesApp" x="674" y="1983"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DirectoresGruposApp" x="497" y="1131"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CargasDocentesApp" x="678" y="1420"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DocentesApp" x="224" y="480"/>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="203" x2="203" y1="1518" y2="1656"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AreasApp.fk_AreasApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="1915" y1="74" y2="74"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1919" x2="1919" y1="526" y2="78"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AsignaturasApp.fk_Asignaturas_Escuelas" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="2239" y1="97" y2="97"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2243" x2="2243" y1="531" y2="101"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_CortesApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1152" x2="1152" y1="1361" y2="2064"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1061" x2="1148" y1="2068" y2="2068"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculaAsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1887" y2="1960"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_DocentesApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="560" x2="740" y1="569" y2="569"/>
+        <positionableLine lineRole="CHILD_LINE" x1="744" x2="744" y1="1397" y2="573"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_GruposApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="788" x2="766" y1="1025" y2="1025"/>
+        <positionableLine lineRole="CHILD_LINE" x1="770" x2="770" y1="1397" y2="1029"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_PeriodosApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1082" x2="866" y1="702" y2="702"/>
+        <positionableLine lineRole="CHILD_LINE" x1="862" x2="862" y1="1397" y2="706"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_PlanEstudioDetalleApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1821" x2="942" y1="1192" y2="1192"/>
+        <positionableLine lineRole="CHILD_LINE" x1="938" x2="938" y1="1397" y2="1196"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CitacionesObservadorApp.fk_CitacionesObservadorApp_AnotacionesObservadorApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="202" x2="202" y1="1846" y2="1963"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CitacionesObservadorApp.fk_CitacionesObservadorApp_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="275" x2="275" y1="1518" y2="1963"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ConfiguracionApp.fk_ConfiguracionApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="947" x2="947" y1="186" y2="267"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CortesApp.fk_CortesApp_PeriodosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1287" x2="1287" y1="791" y2="1158"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_DocentesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="532" x2="532" y1="608" y2="1108"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_GruposApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="514" x2="514" y1="1053" y2="1108"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_PeriodosApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1236" x2="1236" y1="791" y2="1166"/>
+        <positionableLine lineRole="CHILD_LINE" x1="819" x2="1232" y1="1170" y2="1170"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DocentesApp.fk_DocentesApp_PersonasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="227" x2="227" y1="327" y2="457"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.GruposApp.fk_GruposApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="710" x2="710" y1="186" y2="902"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.GruposApp.fk_GruposApp_ProgramasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1558" x2="1558" y1="580" y2="973"/>
+        <positionableLine lineRole="CHILD_LINE" x1="788" x2="1554" y1="977" y2="977"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.JornadasApp.fk_JornadasApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="707" x2="707" y1="186" y2="657"/>
+        <positionableLine lineRole="CHILD_LINE" x1="603" x2="703" y1="661" y2="661"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.JornadasApp.fk_JornadasApp_SedesApp" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="814" x2="603" y1="722" y2="722"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.LogrosAsignaturasApp.fk_LogrosAsignaturasApp_AsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2361" x2="2361" y1="708" y2="1079"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MatriculaAsignaturasApp.fk_AsignaturasMatriculadasApp_MatriculasApp" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="417" x2="482" y1="1157" y2="1157"/>
+        <positionableLine lineRole="CHILD_LINE" x1="672" x2="490" y1="1779" y2="1779"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="486" x2="486" y1="1775" y2="1161"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculaAsignaturasApp.fk_AsignaturasMatriculadasApp_PlanEstudioDetalleApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1995" x2="1995" y1="1272" y2="1755"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1004" x2="1991" y1="1759" y2="1759"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculaAsignaturasApp.fk_MatriculaAsignaturasApp_CargasDocentesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1613" y2="1658"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculaAsignaturasApp.fk_MatriculaAsignaturasApp_DocentesApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="560" x2="834" y1="532" y2="532"/>
+        <positionableLine lineRole="CHILD_LINE" x1="838" x2="838" y1="1658" y2="536"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_EscuelasApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="704" x2="704" y1="186" y2="314"/>
+        <positionableLine lineRole="CHILD_LINE" x1="148" x2="148" y1="943" y2="322"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="152" x2="700" y1="318" y2="318"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_GruposApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="491" x2="491" y1="1053" y2="1048"/>
+        <positionableLine lineRole="CHILD_LINE" x1="417" x2="487" y1="1052" y2="1052"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_JornadasApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="293" x2="187" y1="763" y2="763"/>
+        <positionableLine lineRole="CHILD_LINE" x1="183" x2="183" y1="943" y2="767"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ObservadorEstudianteApp" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="210" x2="210" y1="1224" y2="1185"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PeriodosApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1224" x2="1224" y1="791" y2="811"/>
+        <positionableLine lineRole="CHILD_LINE" x1="268" x2="268" y1="943" y2="819"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="272" x2="1220" y1="815" y2="815"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PersonasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="72" x2="72" y1="327" y2="943"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PlanEstudiosApp" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1511" x2="417" y1="984" y2="984"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ProgramasApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1558" x2="1558" y1="580" y2="861"/>
+        <positionableLine lineRole="CHILD_LINE" x1="314" x2="314" y1="943" y2="869"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="318" x2="1554" y1="865" y2="865"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_SedesApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="842" x2="842" y1="802" y2="782"/>
+        <positionableLine lineRole="CHILD_LINE" x1="224" x2="224" y1="943" y2="790"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="228" x2="838" y1="786" y2="786"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.ObservadorEstudianteApp.fk_ObservadorEstudianteApp_PersonasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="16" x2="16" y1="327" y2="1248"/>
+        <positionableLine lineRole="CHILD_LINE" x1="35" x2="20" y1="1252" y2="1252"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PeriodosApp.fk_PeriodosApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="1215" y1="144" y2="144"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1219" x2="1219" y1="614" y2="148"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PlanEstudioDetalleApp.fk_PlanEstudioDetalleApp_AsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2117" x2="2117" y1="708" y2="1082"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PlanEstudioDetalleApp.fk_PlanEstudioDetalleApp_PlanEstudiosApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1858" x2="1901" y1="943" y2="943"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1905" x2="1905" y1="1082" y2="947"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.PlanEstudiosApp.fk_PlanEstudiosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="797" x2="797" y1="186" y2="945"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1511" x2="801" y1="949" y2="949"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PlanEstudiosApp.fk_PlanEstudiosApp_ProgramasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1629" x2="1629" y1="580" y2="861"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ProgramasApp.fk_Programa_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="1535" y1="122" y2="122"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1539" x2="1539" y1="403" y2="126"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.SedesApp.fk_SedesApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="853" x2="853" y1="186" y2="625"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_PersonasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="248" x2="248" y1="327" y2="332"/>
+        <positionableLine lineRole="CHILD_LINE" x1="269" x2="252" y1="336" y2="336"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_TiposUsuariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="348" x2="348" y1="222" y2="308"/>
+      </positionableLines>
+    </FkGl>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <RnmMgr NxRnmId="82">
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PersonasApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="2" nNm="id_persona" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="UsuariosApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="4" nNm="username_usuario" oNm="nombre_usuario"/>
+      <Rnm id="3" nNm="nombre_usuario" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TiposUsuariosApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="5" nNm="id_tipousuario" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="6" nNm="TiposUsuariosApp" oNm="TipoUsuario"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="EscuelasApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="7" nNm="id_escuela" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="JornadasApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="8" nNm="id_jornada" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="SedesApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="9" nNm="id_sede" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="AreasApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="10" nNm="id_area" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="AsignaturasApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="11" nNm="id_asignatura" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="NivelesApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="12" nNm="id_nivel" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PeriodosApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="13" nNm="id_periodo" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="LogrosAsignaturasApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="14" nNm="id_logro" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ProgramasApp" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="15" nNm="id_programa" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Schema" ParCls="Database" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="16" nNm="EscuelaDB" oNm="schemaA"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="17" nNm="ProgramasApp" oNm="Programa"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PlanEstudioDetalleApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="18" nNm="id_planestudio" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="19" nNm="PlanEstudioDetalleApp" oNm="PlanEstudiosApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PlanEstudiosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="20" nNm="id_planestudio" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="MatriculasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="21" nNm="id_matricula" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ProgramasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="22" nNm="duracion_programa" oNm="numtiempo_programa"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ProgramasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="53" nNm="ngrados_programa" oNm="numgrados_programa"/>
+      <Rnm id="29" nNm="numgrados_programa" oNm="numperiodos_programa"/>
+      <Rnm id="23" nNm="numperiodos_programa" oNm="NUM"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TiposUsuariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="24" nNm="admin_tipousuario" oNm="admin"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TiposUsuariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="25" nNm="external_tipousuario" oNm="external_tiposusuario"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PeriodosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="26" nNm="anualidad_periodo" oNm="tiempo_periodo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ConfiguracionApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="27" nNm="tipodocumento_configuracion" oNm="documento_configuracion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ConfiguracionApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="28" nNm="valbajomax_configuracion" oNm="valbajomax"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ConfiguracionApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="30" nNm="eslogan_configuracion" oNm="slogan_configuracion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="64" nNm="idacudiente1_estudiante" oNm="idacudiente1_persona"/>
+      <Rnm id="31" nNm="idacudiente1_persona" oNm="id_acudiente1"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="65" nNm="idacudiente2_estudiante" oNm="idacudiente2_persona"/>
+      <Rnm id="32" nNm="idacudiente2_persona" oNm="id_acudiente2"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="33" nNm="AnotacionesObservadorApp" oNm="AnotacionesObservador"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="AnotacionesObservadorApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="34" nNm="id_anotacion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CitacionesObservadorApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="35" nNm="id_citacion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="36" nNm="id_corte" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="37" nNm="eshabilitacion_corte" oNm="habilitacion_corte"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="38" nNm="finicio_corte" oNm="fincio_corte"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="39" nNm="ffinal_corte" oNm="ffin_corte"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="MatriculasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="40" nNm="numgrado_programa" oNm="grado_programa"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="GruposApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="41" nNm="id_grupo" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="63" nNm="nombrecompleto_estudiante" oNm="nombre_persona"/>
+      <Rnm id="42" nNm="nombre_persona" oNm="nombrecompleto_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="MatriculasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="78" nNm="nombrecompleto_estudiante" oNm="nombre_persona"/>
+      <Rnm id="43" nNm="nombre_persona" oNm="nombrecompleto_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PlanEstudioDetalleApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="44" nNm="numgrado_programa" oNm="numgrado_asignatura"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="45" nNm="id_calificacion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="LogrosAsignaturasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="46" nNm="id_logro" oNm="num_logro"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="DirectoresGruposApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="47" nNm="id_docente" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CargasDocentesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="48" nNm="id_carga" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CargasDocentesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="49" nNm="id_docente" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="52" nNm="CargasDocentesApp" oNm="CargasAcademicasDocentesApp"/>
+      <Rnm id="50" nNm="CargasAcademicasDocentesApp" oNm="CargasAcademicasDocentes"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="MatriculasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="54" nNm="id_estudiante" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="55" nNm="id_estudiante" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="AnotacionesObservadorApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="56" nNm="id_estudiante" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CitacionesObservadorApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="57" nNm="id_estudiante" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="MatriculaAsignaturasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="58" nNm="id_estudiante" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="59" nNm="id_estudiante" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="DocentesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="60" nNm="id_docente" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="61" nNm="DirectoresGruposApp" oNm="DirectoresGrupo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PersonasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="62" nNm="ciudad_persona" oNm="municipio_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="66" nNm="nombreacudiente1_estudiante" oNm="nombreacudiente1_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="67" nNm="nombreacudiente2_estudiante" oNm="nombreacudiente2_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="68" nNm="parentescoacudiente1_estudiante" oNm="parentescoacudiente1_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="69" nNm="parentescoacudiente2_estudiante" oNm="parentescoacudiente2_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="70" nNm="grupotiposangre_estudiante" oNm="grupotiposangre_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="71" nNm="deficienciaauditiva_estudiante" oNm="deficienciaauditiva_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="72" nNm="deficienciavisual_estudiante" oNm="deficienciavisual_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="73" nNm="pesokg_estudiante" oNm="pesokg_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="74" nNm="estaturam_estudiante" oNm="estaturam_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="75" nNm="alergias_estudiante" oNm="alergias_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="76" nNm="enfermedadcronica_estudiante" oNm="enfermedadcronica_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ObservadorEstudianteApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="77" nNm="rhtiposangre_estudiante" oNm="rhtiposangre_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="79" nNm="MatriculaAsignaturasApp" oNm="AsignaturasMatriculadasApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="MatriculaAsignaturasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="81" nNm="id_matasig" oNm="id_asigmat"/>
+      <Rnm id="80" nNm="id_asigmat" oNm="id_matriculada"/>
+    </RnmCh>
+  </RnmMgr>
+  <DbDocOptionMgr>
+    <BasicOptionMgr>
+      <Name>db.doc.option.mgr</Name>
+      <BoolOpt lbl="Diagrams" nm="doc.diagrams" on="1" spl="0"/>
+      <BoolOpt lbl="Foreign Keys" nm="doc.fks" on="1" spl="0"/>
+      <BoolOpt lbl="Indexes" nm="doc.indexes" on="1" spl="0"/>
+      <BoolOpt lbl="Overwrite CSS File" nm="doc.overwrite.css" on="1" spl="0"/>
+      <BoolOpt lbl="Procedures" nm="doc.procs" on="1" spl="0"/>
+      <BoolOpt lbl="Schemas" nm="doc.schemas" on="1" spl="0"/>
+      <BoolOpt lbl="Sequences" nm="doc.sequences" on="1" spl="0"/>
+      <BoolOpt lbl="Tables" nm="doc.tables" on="1" spl="0"/>
+      <BoolOpt lbl="Triggers" nm="doc.triggers" on="1" spl="0"/>
+      <BoolOpt lbl="Views" nm="doc.views" on="1" spl="0"/>
+    </BasicOptionMgr>
+  </DbDocOptionMgr>
+  <OpenEditors>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+  </OpenEditors>
+  <TreePaths>
+    <TreePath/>
+    <TreePath>/Schemas (1)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (25)</TreePath>
+    <TreePath>/Diagrams (1)</TreePath>
+  </TreePaths>
+</Db>
