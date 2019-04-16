@@ -28,54 +28,91 @@ and open the template in the editor.
 <body>
 
     <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Asignaturas</div>
-        <div class="panel-body">
+        <div class="panel-heading">Asignatura</div>
+        <div class="panel-body table-responsive" >
+            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php" model="AsignaturasApp" findBy="id_asignatura" mainform="true" >
+                <input type="hidden" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" title="Codigo de Escuela">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Codigo</label>
+                        <input type="text" name="id_asignatura" id="id_asignatura" value="" maxlength="24" required="required" class="form-control" title="Codigo de Asignatura">
+                    </div>
+                    <div class="col-sm-8">
+                        <label>Nombre Asignatura</label>
+                        <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="100" required="required" class="form-control" title="Nombre de Asignatura">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Descripcion</label>
+                        <textarea id="descripcion_asignatura" name="descripcion_asignatura" maxlength="200" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Horas Teoricas</label>
+                        <input type="number" double="true" name="hteoricas_asignatura" id="hteoricas_asignatura" value="" maxlength="2" required="required" class="form-control" title="">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Horas Practicas</label>
+                        <input type="number" double="true" name="hpracticas_asignatura" id="hpracticas_asignatura" value="" maxlength="2" required="required" class="form-control" title="">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Creditos</label>
+                        <input type="number" double="true" name="numcreditos_asignatura" id="numcreditos_asignatura" value="" maxlength="2" required="required" class="form-control" title="Numero de Creditos Academicos">
+                    </div>
+                </div> 
 
-            <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php" action="Base/Controllers/AsignaturasController.php" model="AsignaturasApp" findBy="id_asignatura" statusfield="status_asignatura" mainform="true" > 
-                <div>
-                    <center>
-                        <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewRowInTable('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
-                    </center>
-                </div>
-                <div class="table-responsive">
-                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="AsignaturasApp" url="Base/Controllers/GetDataTableAsignaturas.php" >
-                        <thead id="thead_dataTable0">
-                            <tr rowhead="true">
-                                <th style="width: 8%;" title="Codigo">Código</th>
-                                <th style="width: 25%;">Nombre Asignatura</th>
-                                <th style="width: 25%;">Descripcion Asignatura</th>
-                                <th style="width: 8%;" title="Horas Teoricas Semanales">H.T.</th>
-                                <th style="width: 8%;" title="Horas Practicas Semanales">H.P.</th>
-                                <th style="width: 8%;" title="Creditos Academicos">Creditos</th>
-                                <th style="width: 8%;" title="Codigo Escuela">Esc</th>
-                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody_dataTable0">
-                            <tr id="rowsample" rowsample="true" style="display: none;">
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" maxlength="20" name="id_asignatura[]" id="id_asignatura" value="{{id_asignatura}}"></td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" maxlength="100" name="nombre_asignatura[]" id="nombre_asignatura" value="{{nombre_asignatura}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" maxlength="200" name="descripcion_asignatura[]" id="descripcion_asignatura" value="{{descripcion_asignatura}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" maxlength="2" name="hteoricas_asignatura[]" id="hteoricas_asignatura" value="{{hteoricas_asignatura}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" maxlength="2" name="hpracticas_asignatura[]" id="hpracticas_asignatura" value="{{hpracticas_asignatura}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" maxlength="2" name="numcreditos_asignatura[]" id="numcreditos_asignatura" value="{{numcreditos_asignatura}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" maxlength="2" name="id_escuela[]" id="id_escuela" value="{{id_escuela}}" onfocus="setIdEscuela(this);"> </td>
-                                <td>
-                                    <input type="hidden"  editable="false" disabled="disabled" name="status_asignatura[]" id="status_asignatura" value="1" >
-                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="editRowInTable(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <center>
-                        <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
-                    </center>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <center>
+                            <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                        </center>
+                    </div>
+                    <div class="col-sm-6">
+                        <center>
+                            <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                        </center>
+                    </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Listado de Asignaturas</div>
+        <div class="panel-body">
 
+            <div class="table-responsive">
+                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="AsignaturasApp" url="Base/Controllers/GetDataTableAsignaturas.php" >
+                    <thead id="thead_dataTable0">
+                        <tr rowhead="true">
+                            <th style="width: 10%;" title="Codigo">Codigo</th>
+                            <th style="width: 52%;">Nombre.Asignatura</th>
+                            <th style="width: 10%;">H.T.</th>
+                            <th style="width: 10%;">H.P.</th>
+                            <th style="width: 10%;">Cred.</th>
+                            <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_dataTable0">
+                        <tr id="rowsample" rowsample="true" style="display: none;">
+                            <td> {{id_asignatura}}</td>
+                            <td> {{nombre_asignatura}} </td>
+                            <td> {{hteoricas_asignatura}} </td>
+                            <td> {{hpracticas_asignatura}} </td>
+                            <td> {{numcreditos_asignatura}} </td>
+                            <td>
+                                <form id="Asignatura{{id_asignatura}}" name="Asignatura{{id_asignatura}}" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php"  model="AsignaturasApp" findBy="id_asignatura" statusfield="status_asignatura">
+                                    <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
+                                    <input type="hidden"  editable="false" disabled="disabled" name="status_asignatura[]" id="status_asignatura" value="1" >
+                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

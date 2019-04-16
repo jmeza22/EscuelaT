@@ -10,17 +10,17 @@ jQuery(document).ready(function () {
     }
 });
 
-function LoadEscuela(){
+function LoadEscuela() {
     var escuela = null;
     escuela = document.getElementById("id_escuela");
-    escuela.innerHTML='<option value="">Ninguna</option>';
+    escuela.innerHTML = '<option value="">Ninguna</option>';
     loadComboboxData(escuela);
 }
 
-function LoadSede(){
+function LoadSede() {
     var sede = null;
     sede = document.getElementById("id_sede");
-    sede.innerHTML='<option disabled="disabled" value="">Ninguna</option>';
+    sede.innerHTML = '<option disabled="disabled" value="">Ninguna</option>';
     loadComboboxData(sede);
 }
 
@@ -51,6 +51,24 @@ function RefreshSede(item) {
     }
 }
 
+function goHome() {
+    var role = null;
+    role = getUserRoleLogin();
+    showNotification('Bienvenido a EscuelaT!', 'Bienvenido ' + getUsernameLogin());
+    if (role !== null && (role === "SuperAdmin" || role === "Admin" || role === "Management")) {
+        window.location.href = 'home.html';
+    }
+    if (role !== null && role === "Teacher") {
+        window.location.href = 'homeDocentes.html';
+    }
+    if (role !== null && role === "Student") {
+        window.location.href = 'homeEstudiantes.html';
+    }
+    if (role !== null && role === "Visitor") {
+        window.location.href = 'homeAcudientes.html';
+    }
+}
+
 function Send(item) {
     var form = document.getElementById("FormLogin");
     var enterprise = document.getElementById("id_escuela");
@@ -67,7 +85,7 @@ function Send(item) {
                     setNameEnterprise(enterprise.getAttribute('text'));
                 }
                 if (getUserIdLogin() !== null) {
-                    window.location.href = 'home.html';
+                    window.setTimeout(goHome(), 5000);
                 }
             }, 0);
         });

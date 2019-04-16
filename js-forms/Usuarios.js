@@ -14,26 +14,84 @@ jQuery(document).ready(function () {
         autoNameFromDataList('id_tipousuario', 'nombre_tipousuario', null);
     });
 
-    autoLoadNameFromId('id_persona', 'documento_persona', 'nombre1_persona', null);
-    
+    autoLoadNameFromId('id_persona', 'nombre1_persona', 'apellido1_persona', null);
+
     setIdEscuela();
+    LoadTable();
 
 });
 
+function LoadTable() {
+    var mytable = document.getElementById("dataTable0");
+    loadTableData(mytable, false);
+    return mytable;
+}
 
 function Send(item) {
+    var myform = null;
+    myform = getForm(item);
+    if (validateForm(myform)) {
+        submitForm(myform, false).done(function () {
+            setTimeout(function () {
+                LoadTable();
+                resetForm(myform);
+            }, 100);
+        });
+    }
+}
+
+function SendUsuario(item) {
     var username = document.getElementById('username_usuario');
     var password = document.getElementById('password_usuario');
-    if (validateForm(item)) {
+    var myform = null;
+    myform = getForm(item);
+    if (validateForm(myform)) {
         if (username.value === '0' || username.value === '') {
             nuevoUsername();
         }
         if (password.value === ' ' || password.value === '') {
             nuevoPassword();
         }
-        submitForm(item, false);
+        document.getElementById("nombrecompleto_persona").value = document.getElementById("nombre1_persona").value + ' ' + document.getElementById("apellido1_persona").value;
+        Send(myform);
     }
 }
+
+function Edit(item) {
+    var myform = null;
+    myform = document.getElementById('form0');
+    resetForm(myform);
+    sendValue(item, null, myform, null);
+    getData(myform).done(function () {
+        setTimeout(function () {
+            myform.focus();
+        }, 100);
+    });
+}
+
+function DeleteItem(item) {
+    if (confirm('Desea eliminar este Registro?')) {
+        var form = getForm(item);
+        var tr = getParentTR(item);
+        var mytable = getParentTable(item);
+        var id = null;
+        var status = null;
+        if (tr !== null && tr !== undefined) {
+            id = getElement(tr, getFindBy(form));
+            status = getElement(tr, getStatusFieldName(form));
+        }
+        console.log(id + ':' + status);
+        if (id !== null && status !== null && mytable !== null) {
+            console.log('Tratando de Eliminar id: ' + id);
+            addAttributeDisabled(mytable);
+            removeAttributeDisabled(tr);
+            status.value = '0';
+            Send(item);
+            deleteRowInTable(mytable);
+        }
+    }
+}
+
 
 function nuevoUsername() {
     var idpersona = document.getElementById('id_persona');

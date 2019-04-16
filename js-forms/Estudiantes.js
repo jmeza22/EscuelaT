@@ -26,8 +26,9 @@ function CargarNombres() {
 }
 
 function Send(item) {
-    if (validateForm(item)) {
-        submitForm(item, false);
+    var form = getForm(item);
+    if (validateForm(form)) {
+        submitForm(form, false);
     }
 }
 

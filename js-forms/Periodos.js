@@ -4,15 +4,44 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
+    LoadTable();
+    setIdEscuela();
+});
+
+function setIdEscuela() {
+    var item = null;
+    item = document.getElementById('id_escuela');
+    if (item !== null && item !== undefined && item.value === '') {
+        console.log('Seteando Id Escuela.');
+        if (getIdEnterprise() !== null) {
+            item.value = getIdEnterprise();
+        }
+    }
+}
+
+function LoadTable() {
     var mytable = document.getElementById("dataTable0");
     loadTableData(mytable, false);
-});
+}
 
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
-        submitForm(item, false);
+        submitForm(item, false).done(function () {
+            LoadTable();
+        });
     }
+}
+
+function Edit(item) {
+    var myform = null;
+    myform = document.getElementById('form0');
+    resetForm(myform);
+    sendValue(item, null, myform, null);
+    getData(myform).done(function () {
+        setTimeout(function () {
+        }, 1);
+    });
 }
 
 function DeleteItem(item) {
@@ -34,12 +63,5 @@ function DeleteItem(item) {
             Send(item);
             deleteRowInTable(mytable);
         }
-    }
-}
-
-function setAnualidad(item){
-    if(item!==null && item!==undefined && item.value===''){
-        console.log('Seteando Año.');
-        item.value=new Date().getFullYear();
     }
 }

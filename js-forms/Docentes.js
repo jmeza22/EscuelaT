@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    loadComboboxData(document.getElementById("lista_id_docente")).done(function () {
+    loadComboboxData(document.getElementById("lista_id_persona")).done(function () {
         autoNameFromDataList('id_docente', 'nombrecompleto_docente', null);
     });
     Buscar();
 });
 
 function Send(item) {
-    if (validateForm(item)) {
-        submitForm(item, false).done(function () {
+    var form= document.getElementById('form0');
+    if (validateForm(form)) {
+        submitForm(form, false).done(function () {
             LoadTable();
         });
     }

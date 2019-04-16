@@ -38,10 +38,10 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label>Codigo</label>
-                                    <input type="text" name="id_docente" id="id_docente" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_docente">
+                                    <input type="text" name="id_docente" id="id_docente" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Docente" list="lista_id_persona">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Nombre del Estudiante</label>
+                                    <label>Nombre de Docente</label>
                                     <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" class="form-control" title="Nombre del Docente" readonly="readonly" >
                                 </div>
                                 <div class="col-sm-2">
@@ -87,7 +87,7 @@ and open the template in the editor.
                                 <option value="ADMINISTRADOR DE EMPRESAS">ADMINISTRADOR DE EMPRESAS</option>
                             </datalist>
 
-                            <datalist id="lista_id_docente" name="lista_id_docente" model="PersonasApp" colname="nombrecompleto_docente" colvalue="id_docente" url="Base/Controllers/GetComboboxPersonas.php">
+                            <datalist id="lista_id_persona" name="lista_id_persona" model="PersonasApp" colname="nombrecompleto_persona" colvalue="id_persona" url="Base/Controllers/GetComboboxPersonas.php">
                                 <option value="">Ninguno</option>
                             </datalist>
 

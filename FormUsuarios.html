@@ -28,16 +28,17 @@ and open the template in the editor.
     </head>
     <body>
         <div class="panel panel-primary" style="width: 80% !important;">
-            <div class="panel-heading">Usuario</div>
+            <div class="panel-heading">Cuenta de Usuario</div>
             <div class="panel-body" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/UsuariosController.php" model="UsuariosApp" findBy="username_usuario" mainform="true" >
+                    <input type="hidden" name="nombrecompleto_persona" id="nombrecompleto_persona" value="" maxlength="100"title="Nombre de Persona" >
                     <div class="row">
                         <div class="col-sm-6">
-                            <label>Username</label>
+                            <label>Usuario</label>
                             <input type="text" name="username_usuario" id="username_usuario" value="" maxlength="50" required="required" class="form-control" title="Nombre de Usuario">
                         </div>
                         <div class="col-sm-6">
-                            <label>Password</label>
+                            <label>Contraseña</label>
                             <input type="password" name="password_usuario" id="password_usuario" value="" maxlength="50" class="form-control" title="Contraseña de Usuario">
                         </div>
                     </div>
@@ -62,22 +63,22 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-2">
                             <label>CodPer</label>
-                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Código de Persona" url="Base/Controllers/DefaultController.php" model="PersonasApp">
+                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Código de Persona" url="Base/Controllers/PersonasController.php" model="PersonasApp">
                         </div>
-                        <div class="col-sm-4">
-                            <label>Documento</label>
-                            <input type="text" name="documento_persona" id="documento_persona" value="" maxlength="24" disabled="disabled" class="form-control" title="Documento de Persona" getname="true" idname="id_persona" model="PersonasApp" >
+                        <div class="col-sm-5">
+                            <label>Primer Nombre</label>
+                            <input type="text" disabled="disabled" name="nombre1_persona" id="nombre1_persona" value="" maxlength="50"  class="form-control" >
                         </div>
-                        <div class="col-sm-6">
-                            <label>Nombre Completo</label>
-                            <input type="text" name="nombre1_persona" id="nombre1_persona" value="" maxlength="100" disabled="disabled" class="form-control" title="Nombre de Persona"  getname="true" idname="id_persona" model="PersonasApp" >
+                        <div class="col-sm-5">
+                            <label>Primer Apellido</label>
+                            <input type="text" disabled="disabled" name="apellido1_persona" id="apellido1_persona" value="" maxlength="50"  class="form-control" >
                         </div>
                     </div>
 
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
                             <center>
-                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="SendUsuario(this);" class="btn btn-primary" >Grabar</button>        
                             </center>
                         </div>
                         <div class="col-sm-6">
@@ -94,6 +95,44 @@ and open the template in the editor.
                     </datalist>
 
                 </form>
+            </div>
+        </div>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Usuarios</div>
+            <div class="panel-body">
+                <div class="table-responsive" >
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="UsuariosApp" findby="username_usuario" findbyvalue="" url="Base/Controllers/GetDataTableUsuarios.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 10%;">Escuela</th>
+                                <th style="width: 15%;" title="Usuario">Usuario</th>
+                                <th style="width: 10%;" title="Codigo de Persona">Codigo</th>
+                                <th style="width: 45%;">Nombre Completo</th>
+                                <th style="width: 10%;">TipoUsuario</th>
+                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <label>{{id_escuela}}</label> </td>
+                                <td> <label>{{username_usuario}}</label> </td>
+                                <td> <label>{{id_persona}}</label> </td>
+                                <td> <label>{{nombrecompleto_persona}}</label> </td>
+                                <td> <label>{{id_tipousuario}}</label> </td>
+                                <td>
+                                    <form id="Usuario{{username_usuario}}" name="Usuario{{username_usuario}}" method="POST" autocomplete="off" url="Base/Controllers/UsuariosController.php"  model="UsuariosApp" findBy="username_usuario" statusfield="status_usuario">
+                                        <input type="hidden"  editable="false" name="username_usuario" id="username_usuario" value="{{username_usuario}}" >
+                                        <input type="hidden"  editable="false" name="id_escuela" id="id_escuela" value="{{id_escuela}}" >
+                                        <input type="hidden"  editable="false" name="status_usuario" id="status_usuario" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>  
             </div>
         </div>
 

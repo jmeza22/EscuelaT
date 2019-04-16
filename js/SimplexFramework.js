@@ -1526,6 +1526,7 @@ function loadNameFromId(field, namefield1, namefield2, namefield3) {
         }
         );
     }
+    return promise;
 }
 
 function autoLoadNameFromId(idfield, namefield1, namefield2, namefield3) {
@@ -1534,9 +1535,10 @@ function autoLoadNameFromId(idfield, namefield1, namefield2, namefield3) {
         field = document.getElementById(idfield);
         field.onchange = function () {
             console.log('Getting Data from Id: ' + field.id);
-            loadNameFromId(field, namefield1, namefield2, namefield3);
+            return loadNameFromId(field, namefield1, namefield2, namefield3);
         };
     }
+    return null;
 }
 
 function setLogin(data) {

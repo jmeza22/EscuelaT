@@ -284,6 +284,8 @@ function validateForm(form) {
                 }
             }
         }
+    }else{
+        return false;
     }
 
     return next;

@@ -213,7 +213,7 @@ class BaseController {
         }
         return false;
     }
-    
+
     public function insertOrUpdate() {
         if (isset($this->db) && isset($this->postData)) {
             if ($this->db->insertOrUpdateStmt($this->model, $this->postData)) {
@@ -385,6 +385,14 @@ class BaseController {
                     $result = $this->parseResults($result, "Consulta Fallida!", 0);
                 }
             }
+            if (strcmp($this->action, 'findavalue') == 0) {
+                $result = $this->getValue();
+                if (is_array($result)) {
+                    $result = $this->parseResults($result, "Consulta Exitosa!", 1);
+                } else {
+                    $result = $this->parseResults($result, "Consulta Fallida!", 0);
+                }
+            }
             if (strcmp($this->action, 'updatestate') == 0) {
                 $result = $this->updateState();
                 if ($result == true) {
@@ -411,9 +419,17 @@ class BaseController {
         return null;
     }
 
-    public function getValue($column = 'column', $idname = 'id', $idvalue = '0') {
+    public function getValue($column = '*', $idname = null, $idvalue = null) {
         $result = null;
         $where = null;
+        if ($idname === null) {
+            $idname = $this->findBy;
+        }
+        if ($idvalue === null) {
+            if (isset($this->postData[$idname]) && $this->postData[$idname] !== null) {
+                $idvalue = $this->postData[$idname];
+            }
+        }
         if (isset($this->db) && isset($this->model) && isset($idname) && isset($idvalue)) {
             $where = '' . $idname . '=' . $this->parseWhereParam($idvalue);
             $result = $this->db->selectJSON($this->model, $column, $where);

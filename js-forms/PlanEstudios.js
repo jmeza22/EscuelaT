@@ -27,7 +27,7 @@ function setIdEscuela() {
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
-        submitForm(item, false);
+        submitForm(form, false);
     }
 }
 

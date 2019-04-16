@@ -28,50 +28,83 @@ and open the template in the editor.
 <body>
 
     <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Escuelas</div>
-        <div class="panel-body">
-
-            <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/EscuelasController.php" action="Base/Controllers/EscuelasController.php" model="EscuelasApp" findBy="id_escuela" statusfield="status_escuela" mainform="true" > 
-                <div>
-                    <center>
-                        <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewRowInTable('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
-                    </center>
+        <div class="panel-heading">Escuela</div>
+        <div class="panel-body table-responsive" >
+            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EscuelasController.php" model="EscuelasApp" findBy="id_escuela" mainform="true" >
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Codigo</label>
+                        <input type="text" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" class="form-control" title="Codigo de Escuela">
+                    </div>
+                    <div class="col-sm-8">
+                        <label>Nombre Escuela</label>
+                        <input type="text" name="nombre_escuela" id="nombre_escuela" value="" maxlength="100" required="required" class="form-control" title="Nombre de Escuela">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Telefono</label>
+                        <input type="tel" name="telefono_escuela" id="telefono_escuela" value="" maxlength="13" required="required" class="form-control" title="Telefono de Escuela">
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="EscuelasApp" url="Base/Controllers/GetDataTableEscuelas.php" >
-                        <thead id="thead_dataTable0">
-                            <tr rowhead="true">
-                                <th style="width: 8%;" title="Codigo">#</th>
-                                <th style="width: 25%;">Nombre</th>
-                                <th style="width: 25%;">Direccion</th>
-                                <th style="width: 14%;">Telefono</th>
-                                <th style="width: 20%;">Email</th>
-                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody_dataTable0">
-                            <tr id="rowsample" rowsample="true" style="display: none;">
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="id_escuela[]" id="id_escuela" maxlength="2" value="{{id_escuela}}"></td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="nombre_escuela[]" id="nombre_escuela" maxlength="100" value="{{nombre_escuela}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="direccion_escuela[]" id="direccion_escuela" maxlength="100" value="{{direccion_escuela}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="telefono_escuela[]" id="telefono_escuela" maxlength="10" value="{{telefono_escuela}}"> </td>
-                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="email_escuela[]" id="email_escuela" maxlength="100" value="{{email_escuela}}"> </td>
-                                <td>
-                                    <input type="hidden"  editable="false" disabled="disabled" name="status_escuela[]" id="status_escuela" value="1" >
-                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="editRowInTable(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <label>Direccion</label>
+                        <input type="text" name="direccion_escuela" id="direccion_escuela" value="" maxlength="100" required="required" class="form-control" title="Nombre de Escuela">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Correo Electronico</label>
+                        <input type="email" email="true" name="email_escuela" id="email_escuela" value="" maxlength="100" required="required" class="form-control" title="Nombre de Escuela">
+                    </div>
                 </div>
-                <div>
-                    <center>
-                        <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
-                    </center>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <center>
+                            <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                        </center>
+                    </div>
+                    <div class="col-sm-6">
+                        <center>
+                            <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                        </center>
+                    </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Listado de Escuelas</div>
+        <div class="panel-body">
 
+            <div class="table-responsive">
+                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="EscuelasApp" url="Base/Controllers/GetDataTableEscuelas.php" >
+                    <thead id="thead_dataTable0">
+                        <tr rowhead="true">
+                            <th style="width: 8%;" title="Codigo">#</th>
+                            <th style="width: 25%;">Nombre</th>
+                            <th style="width: 25%;">Direccion</th>
+                            <th style="width: 14%;">Telefono</th>
+                            <th style="width: 20%;">Email</th>
+                            <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_dataTable0">
+                        <tr id="rowsample" rowsample="true" style="display: none;">
+                            <td> {{id_escuela}}</td>
+                            <td> {{nombre_escuela}} </td>
+                            <td> {{direccion_escuela}} </td>
+                            <td> {{telefono_escuela}} </td>
+                            <td> {{email_escuela}} </td>
+                            <td>
+                                <form id="Escuela{{id_escuela}}" name="Escuela{{id_escuela}}" method="POST" autocomplete="off" url="Base/Controllers/EscuelasController.php"  model="EscuelasApp" findBy="id_escuela" statusfield="status_escuela">
+                                    <input type="hidden"  editable="false" name="id_escuela" id="id_escuela" value="{{id_escuela}}" >
+                                    <input type="hidden"  editable="false" disabled="disabled" name="status_escuela[]" id="status_escuela" value="1" >
+                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

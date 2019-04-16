@@ -1,18 +1,12 @@
 <?php
-
 ob_start();
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = "EscuelasApp";
-$findBy = "id_escuela";
-$action = "insertorupdate";
-$rowcount = 0;
-$data = null;
-$postdata = null;
-$count = 0;
-$i = 0;
+$model = 'EscuelasApp';
+$findBy = 'id_escuela';
+$action = 'insertorupdate';
 if ($session->hasLogin() && $session->getSuperAdmin() == 1) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
@@ -21,33 +15,10 @@ if ($session->hasLogin() && $session->getSuperAdmin() == 1) {
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction($action);
-        $bc->beginTransaction();
-        if (isset($_POST[$findBy])) {
-
-            $data = array();
-            $postdata = $bc->getPostData();
-            $count = count($_POST[$findBy]);
-
-            if ($count >= 1) {
-                $postdata = $bc->parseMultiRows($postdata);
-                $count = count($postdata);
-                for ($i = 0; $i < $count; $i++) {
-                    $bc->setPostData($postdata[$i]);
-                    $result = $bc->execute(false);
-                    if ($bc->getRowCount() > 0) {
-                        $rowcount++;
-                    } else {
-                        break;
-                    }
-                }
-            }
+        if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'find') === 0) {
+            $bc->setAction('find');
         }
-        if ($rowcount == $count) {
-            $bc->commit();
-        } else {
-            $bc->rollback();
-        }
-        echo $result;
+        $result = $bc->execute(true);
         $result = null;
         $bc->disconnect();
     }
