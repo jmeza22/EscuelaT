@@ -11,29 +11,75 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Portal de Administracion"/>
         <meta name="author" content="Jose Meza"/>
-        
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/menu.css" rel="stylesheet" />
+
     </head>
     <body>
-        <div></div>
-        <a href="FormEscuelas.html">Escuelas</a><br>
-        <a href="FormConfiguracion.html">Configuracion</a><br>
-        <a href="FormSedes.html">Sedes</a><br>
-        <a href="FormJornadas.html">Jornadas</a><br>
-        <a href="FormPeriodos.html">Periodos</a><br>
-        <a href="FormCortes.html">Cortes</a><br>
-        <a href="FormPersonas.html">Personas</a><br>
-        <a href="FormUsuarios.html">Usuarios</a><br>
-        <a href="FormTiposUsuarios.html">Tipos Usuarios</a><br>
-        <a href="FormProgramas.html">Programas</a><br>
-        <a href="FormAsignaturas.html">Asignaturas</a><br>
-        <a href="FormLogros.html">Logros</a><br>
-        <a href="FormPlanEstudios.html">Planes de Estudios</a><br>
-        <a href="FormEstudiantes.html">Estudiantes (Observador)</a><br>
-        <a href="FormDocentes.html">Docentes</a><br>
-        <a href="FormGrupos.html">Grupos</a><br>
-        <a href="FormDirectoresGrupos.html">Directores de Grupos</a><br>
-        <a href="FormMatriculas.html">Matriculas</a><br>
-        <a href="FormMatriculaAsignaturas.html">Asignaturas Matriculadas</a><br>
-        
+        <header>
+            <div class="container">
+                <div class="menucss">
+                    <ul>
+                        <li>Inicio</li>
+                        <li>Registro <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormPersonas.html">Personas</a></li>
+                                <li><a target="myframe" href="FormUsuarios.html">Cuentas de Usuario</a></li>
+                            </ul>
+                        </li>
+                        <li>Escuela <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormConfiguracion.html">Escuela</a></li>
+                                <li><a target="myframe" href="FormSedes.html">Sedes</a></li>
+                                <li><a target="myframe" href="FormJornadas.html">Jornadas</a></li>
+                            </ul>
+                        </li>
+                        <li>Estudiante <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormEstudiantes.html">Observador</a></li>
+                                <li><a target="myframe" href="FormMatriculas.html">Matriculas</a></li>
+                            </ul>
+                        </li>
+                        <li>Docente <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormDocentes.html">Docente</a></li>
+                                <li><a target="myframe" href="FormDirectoresGrupos.html">Directores de Grupo</a></li>
+                                <li><a target="myframe" href="FormCargasDocentes.html">Carga Academica</a></li>
+                            </ul>
+                        </li>
+                        <li>Academico <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormPeriodos.html">Periodos</a></li>
+                                <li><a target="myframe" href="FormCortes.html">Cortes</a></li>
+                                <li><a target="myframe" href="FormAsignaturas.html">Asignaturas</a></li>
+                                <li><a target="myframe" href="FormLogros.html">Logros</a></li>
+                                <li><a target="myframe" href="FormProgramas.html">Programas</a></li>
+                                <li><a target="myframe" href="FormPlanEstudios.html">Planes de Estudios</a></li>
+                                <li><a target="myframe" href="FormGrupos.html">Grupos</a></li>
+                            </ul>
+                        </li>
+                        <li>Global <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormEscuelas.html">Escuelas</a></li>
+                                <li><a target="myframe" href="FormTiposUsuarios.html">Tipos de Usuario</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="logout.html">Salir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="contentframe">
+            <iframe name="myframe" id="myframe" src=""></iframe> 
+        </div>
+        <footer class="information">
+            <p>
+                Sistema Integral de Gestion Academica - EscuelaT
+            </p>
+        </footer>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
     </body>
 </html>

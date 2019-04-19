@@ -792,47 +792,48 @@ function getToken(element) {
     return null;
 }
 
-function setFindBy(element, findby) {
+function setFindBy(element, findby, num="") {
     if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        element.setAttribute('findby', findby);
+        element.setAttribute('findby'+num, findby);
     }
     return null;
 }
 
-function setFindByValue(element, findbyvalue) {
+function setFindByValue(element, findbyvalue, num="") {
     if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        element.setAttribute('findbyvalue', findbyvalue);
+        element.setAttribute('findbyvalue'+num, findbyvalue);
     }
     return null;
 }
 
+function getFindBy(element, num="") {
+    if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
+        if (element.getAttribute("findby"+num) !== null && element.getAttribute("findby"+num) !== '') {
+            return element.getAttribute("findby"+num);
+        }
+    }
+    return null;
+}
 
-function setFindbyField(fieldname, findby, findbyvalue) {
+function getFindByValue(element, num="") {
+    if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
+        if (element.getAttribute("findbyvalue"+num) !== null && element.getAttribute("findbyvalue"+num) !== '') {
+            return element.getAttribute("findbyvalue"+num);
+        }
+    }
+    return null;
+}
+
+function setFindbyField(fieldname, findby, findbyvalue, num="") {
     if (fieldname !== null && fieldname !== '' && findby !== null && findby !== '' && findbyvalue !== null && findbyvalue !== '') {
         var field = document.getElementById(fieldname);
         if (field !== null && field !== undefined) {
-            setFindBy(field, findby);
-            setFindByValue(field, findbyvalue);
+            if (field !== null && (field.tagName === "INPUT" || field.tagName === "SELECT" || field.tagName === "DATALIST" || field.tagName === "TABLE" || field.tagName === "FORM")) {
+                field.setAttribute('findby'+num, findby);
+                field.setAttribute('findbyvalue'+num, findbyvalue);
+            }
         }
     }
-}
-
-function getFindBy(element) {
-    if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        if (element.getAttribute("findby") !== null && element.getAttribute("findby") !== '') {
-            return element.getAttribute("findby");
-        }
-    }
-    return null;
-}
-
-function getFindByValue(element) {
-    if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        if (element.getAttribute("findbyvalue") !== null && element.getAttribute("findbyvalue") !== '') {
-            return element.getAttribute("findbyvalue");
-        }
-    }
-    return null;
 }
 
 function getStatusFieldName(element) {
@@ -1036,11 +1037,11 @@ function getData(element) {
     return promise;
 }
 
-function setFindbyCombobox(fieldname, findby, findbyvalue) {
+function setFindbyCombobox(fieldname, findby, findbyvalue, num="") {
     var myfield = null;
     myfield = document.getElementById(fieldname);
     if (myfield !== null && myfield.tagName === 'SELECT') {
-        setFindbyField(fieldname, findby, findbyvalue);
+        setFindbyField(fieldname, findby, findbyvalue, num);
         myfield.innerHTML = '<option value="">Ninguna</option>';
         loadComboboxData(myfield);
     }
@@ -1101,6 +1102,10 @@ function loadComboboxData(element) {
     var othervalue = null;
     var findby = null;
     var findbyvalue = null;
+    var findby2 = null;
+    var findbyvalue2 = null;
+    var findby3 = null;
+    var findbyvalue3 = null;
     var object = null;
     var vals = null;
 
@@ -1111,6 +1116,10 @@ function loadComboboxData(element) {
     othervalue = getOtherValueCombobox(element);
     findby = getFindBy(element);
     findbyvalue = getFindByValue(element);
+    findby2 = getFindBy(element,2);
+    findbyvalue2 = getFindByValue(element,2);
+    findby3 = getFindBy(element,3);
+    findbyvalue3 = getFindByValue(element,3);
     vals = {
         "model": model,
         "action": 'findAll',
@@ -1118,7 +1127,11 @@ function loadComboboxData(element) {
         "colvalue": colvalue,
         "othervalue": othervalue,
         "findby": findby,
-        "findbyvalue": findbyvalue
+        "findbyvalue": findbyvalue,
+        "findby2": findby2,
+        "findbyvalue2": findbyvalue2,
+        "findby3": findby3,
+        "findbyvalue3": findbyvalue3
     };
     console.log('Getting Data for SELECT: ' + element.id);
     if (element !== null &&
@@ -1835,8 +1848,8 @@ function setNameFromDataList(idfield, idfieldname, idothervalue) {
 
         if (idfield.tagName === undefined && document.getElementById(idfield) !== undefined) {
             field = document.getElementById(idfield);
-        }else{
-            field =idfield;
+        } else {
+            field = idfield;
         }
         if (field.getAttribute('list') !== null && field.getAttribute('list') !== '') {
             datalist = field.getAttribute('list');
@@ -1877,7 +1890,7 @@ function autoNameFromDataList(idfield, idfieldname, idothervalue) {
     if (idfield !== null) {
         if (idfield.tagName === undefined || idfield.tagName === null) {
             field = document.getElementById(idfield);
-        }else{
+        } else {
             field = idfield;
         }
         field.oninput = function () {

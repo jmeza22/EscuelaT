@@ -4,8 +4,8 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'SedesApp';
-$findBy = 'id_sede';
+$model = 'CargasDocentesApp';
+$findBy = 'id_carga';
 $action = 'insertorupdate';
 $postdata = null;
 if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1)) {
