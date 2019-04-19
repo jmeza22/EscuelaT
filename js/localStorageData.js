@@ -69,6 +69,16 @@ function setUsernameLogin(username) {
     return false;
 }
 
+function setFullnameLogin(fullname) {
+    if (LocalStorageStatus()) {
+        if (fullname !== null && fullname !== '') {
+            localStorage.setItem("FullnameLogin", "" + fullname);
+            return true;
+        }
+    }
+    return false;
+}
+
 function setPasswordLogin(password) {
     if (LocalStorageStatus()) {
         if (password !== null && password !== '') {
@@ -114,6 +124,15 @@ function getUsernameLogin() {
         var username = null;
         username = localStorage.getItem("UsernameLogin");
         return username;
+    }
+    return null;
+}
+
+function getFullnameLogin() {
+    if (LocalStorageStatus()) {
+        var fullname = null;
+        fullname = localStorage.getItem("FullnameLogin");
+        return fullname;
     }
     return null;
 }
@@ -237,23 +256,23 @@ function getCode() {
     return null;
 }
 
-function setIdEnterprise(enterprise) {
+function setEnterpriseID(enterprise) {
     if (LocalStorageStatus()) {
         if (enterprise !== null) {
-            localStorage.removeItem("IdEnterprise");
-            localStorage.setItem("IdEnterprise", enterprise);
+            localStorage.removeItem("EnterpriseID");
+            localStorage.setItem("EnterpriseID", enterprise);
             return true;
         }
     }
     return false;
 }
 
-function getIdEnterprise() {
+function getEnterpriseID() {
     if (LocalStorageStatus()) {
         var enterprise = null;
-        enterprise = localStorage.getItem("IdEnterprise");
+        enterprise = localStorage.getItem("EnterpriseID");
         if (enterprise === null) {
-            console.log("Enterprise is null");
+            console.log("EnterpriseID is null");
         } else {
             return enterprise;
         }
@@ -261,23 +280,23 @@ function getIdEnterprise() {
     return null;
 }
 
-function setNameEnterprise(enterprise) {
+function setEnterpriseName(enterprise) {
     if (LocalStorageStatus()) {
         if (enterprise !== null) {
-            localStorage.removeItem("NameEnterprise");
-            localStorage.setItem("NameEnterprise", enterprise);
+            localStorage.removeItem("EnterpriseName");
+            localStorage.setItem("EnterpriseName", enterprise);
             return true;
         }
     }
     return false;
 }
 
-function getNameEnterprise() {
+function getEnterpriseName() {
     if (LocalStorageStatus()) {
         var enterprise = null;
-        enterprise = localStorage.getItem("NameEnterprise");
+        enterprise = localStorage.getItem("EnterpriseName");
         if (enterprise === null) {
-            console.log("Enterprise is null");
+            console.log("EnterpriseName is null");
         } else {
             return enterprise;
         }

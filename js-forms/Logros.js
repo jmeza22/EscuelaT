@@ -95,8 +95,8 @@ function DeleteItem(item) {
 function setIdEscuela(item) {
     if (item !== null && item !== undefined && item.value === '') {
         console.log('Seteando Id Escuela.');
-        if (getIdEnterprise() !== null) {
-            item.value = getIdEnterprise();
+        if (getEnterpriseID() !== null) {
+            item.value = getEnterpriseID();
         }
     }
 }

@@ -4,9 +4,9 @@ ob_start();
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $model = 'PersonasApp';
-$where = " status_persona=1 ";
 $bc = null;
 if ($_POST !== null && isset($_POST)) {
+    $where = " status_persona=1 ";
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');

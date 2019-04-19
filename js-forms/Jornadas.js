@@ -117,10 +117,10 @@ function setIdEscuela() {
         escuela.removeAttribute('selected');
         newoption = document.createElement('option');
         newoption.setAttribute('id', 'id_escuela');
-        newoption.setAttribute('value', getIdEnterprise());
+        newoption.setAttribute('value', getEnterpriseID());
         newoption.setAttribute('selected', 'selected');
-        newoption.innerHTML = '' + getNameEnterprise();
-        if (getNameEnterprise() === null) {
+        newoption.innerHTML = '' + getEnterpriseName();
+        if (getEnterpriseName() === null) {
             newoption.innerHTML = 'Escuela Actual';
         }
         escuela.appendChild(newoption);

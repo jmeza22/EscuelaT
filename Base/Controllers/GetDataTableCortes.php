@@ -6,7 +6,6 @@ $session = new SessionManager();
 $model = 'CortesApp';
 $bc = null;
 if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
-    
     $where = " status_corte=1 and id_escuela='".$session->getEnterpriseID()."'";
     $bc = new BaseController();
     $bc->connect();

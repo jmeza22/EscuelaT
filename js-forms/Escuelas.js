@@ -19,8 +19,8 @@ function setIdEscuela() {
     item = document.getElementById('id_escuela');
     if (item !== null && item !== undefined && item.value === '') {
         console.log('Seteando Id Escuela.');
-        if (getIdEnterprise() !== null) {
-            item.value = getIdEnterprise();
+        if (getEnterpriseID() !== null) {
+            item.value = getEnterpriseID();
         }
         item.focus();
 

@@ -54,7 +54,7 @@ function RefreshSede(item) {
 function goHome() {
     var role = null;
     role = getUserRoleLogin();
-    showNotification('Bienvenido a EscuelaT!', 'Bienvenido ' + getUsernameLogin());
+    showNotification('Bienvenido a EscuelaT de '+getEnterpriseName()+'!', 'Bienvenido ' + getFullnameLogin());
     if (role !== null && (role === "SuperAdmin" || role === "Admin" || role === "Management")) {
         window.location.href = 'home.html';
     }
@@ -78,11 +78,11 @@ function Send(item) {
                 console.log(getErrorMessage());
                 setUsernameLogin(document.getElementById("mynickname").value);
                 if (enterprise.selected !== undefined && enterprise.selected !== null) {
-                    setIdEnterprise(enterprise.selected);
-                    setNameEnterprise(enterprise.getAttribute('text'));
+                    setEnterpriseID(enterprise.selected);
+                    setEnterpriseName(enterprise.getAttribute('text'));
                 } else {
-                    setIdEnterprise(enterprise.value);
-                    setNameEnterprise(enterprise.getAttribute('text'));
+                    setEnterpriseID(enterprise.value);
+                    setEnterpriseName(enterprise.getAttribute('text'));
                 }
                 if (getUserIdLogin() !== null) {
                     window.setTimeout(goHome(), 5000);

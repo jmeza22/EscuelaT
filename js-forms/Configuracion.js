@@ -30,10 +30,15 @@ function Send(item) {
 function setIdEscuela() {
     var item = null;
     item = document.getElementById('id_escuela');
+    var item2 = null;
+    item2 = document.getElementById('nombre_escuela');
     if (item !== null && item !== undefined && item.value === '') {
         console.log('Seteando Id Escuela.');
-        if (getIdEnterprise() !== null) {
-            item.value = getIdEnterprise();
+        if (getEnterpriseID() !== null) {
+            item.value = getEnterpriseID();
+        }
+        if (getEnterpriseName() !== null) {
+            item2.value = getEnterpriseName();
         }
         item.focus();
     }

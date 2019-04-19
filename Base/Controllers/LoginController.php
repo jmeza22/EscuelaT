@@ -36,7 +36,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
     $pw = $_POST['mypassword'];
     $password = $crypt->crypt($pw);
     $idtipousuario = $_POST['id_tipousuario'];
-    $sql = "SELECT Us.id_persona as userid, Us.username_usuario as user, Us.id_tipousuario as userrole, concat(Pe.nombre1_persona,' ',Pe.apellido1_persona) as fullname "
+    $sql = "SELECT Us.id_persona as userid, Us.username_usuario as user, Us.id_tipousuario as userrole, concat(Pe.nombre1_persona,' ',Pe.apellido1_persona) as fullname, Es.nombre_escuela as enterprisename "
             . "FROM UsuariosApp Us INNER JOIN PersonasApp Pe ON Us.id_persona=Pe.id_persona INNER JOIN EscuelasApp Es ON Us.id_escuela=Es.id_escuela "
             . "WHERE Us.username_usuario='$user' and Us.password_usuario='$password' and Us.id_tipousuario='$idtipousuario' and Us.id_escuela=$enterprise and Us.status_usuario=1 and Pe.status_persona=1 and Es.status_escuela=1";
     //print_r($_POST);
@@ -57,6 +57,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
         $login = $login[0];
         if (!$session->hasLogin()) {
             $session->setLogin($login['userid'], $login['user'], $login['userrole'], $login['fullname'], $enterprise);
+            $session->setEnterpriseNameForm($login['enterprisename']);
             $array['token'] = $session->getToken();
             $array['data'] = json_encode($login);
         } else {

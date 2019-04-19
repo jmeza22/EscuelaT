@@ -6,7 +6,6 @@ $session = new SessionManager();
 $model = 'UsuariosApp';
 $bc = null;
 if ($_POST !== null && isset($_POST)) {
-    
     $where = " status_usuario=1 and id_escuela='".$session->getEnterpriseID()."'";
     $bc = new BaseController();
     $bc->connect();

@@ -1575,6 +1575,18 @@ function setLogin(data) {
             } else {
                 localStorage.removeItem("UserIdLogin");
             }
+            if (data['fullname'] !== null) {
+                localStorage.setItem("FullnameLogin", "" + data['fullname']);
+                console.log('FullnameLogin Stored!');
+            } else {
+                localStorage.removeItem("FullnameLogin");
+            }
+            if (data['enterprisename'] !== null) {
+                localStorage.setItem("EnterpriseName", "" + data['enterprisename']);
+                console.log('EnterpriseName Stored!');
+            } else {
+                localStorage.removeItem("EnterpriseName");
+            }
             return true;
         } catch (e) {
             console.error('Error. Could not Start Session Variables!.');

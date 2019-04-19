@@ -18,6 +18,7 @@ class SessionManager {
     private $index_nickname = 'nickname';
     private $index_fullname = 'fullname';
     private $index_enterpriseid = 'enterpriseid';
+    private $index_enterprisename = 'enterprisename';
     private $index_superadmin = 'superadmin';
     private $index_admin = 'admin';
     private $index_management = 'management';
@@ -85,6 +86,12 @@ class SessionManager {
     function setEnterpriseIdForm($id) {
         if ($id != null) {
             $_SESSION[$this->index_enterpriseid] = $id;
+        }
+    }
+    
+    function setEnterpriseNameForm($name) {
+        if ($name != null) {
+            $_SESSION[$this->index_enterprisename] = $name;
         }
     }
 
@@ -242,6 +249,13 @@ class SessionManager {
         }
         return null;
     }
+    
+    function getEnterpriseName() {
+        if (isset($_SESSION[$this->index_enterprisename])) {
+            return $_SESSION[$this->index_enterprisename];
+        }
+        return null;
+    }
 
     function getSuperAdmin() {
         if (isset($_SESSION[$this->index_superadmin])) {
@@ -301,6 +315,8 @@ class SessionManager {
             $data['user'] = $this->getNickname();
             $data['userrole'] = $this->getUserType();
             $data['fullname'] = $this->getFullname();
+            $data['enterpriseid'] = $this->getEnterpriseID();
+            $data['enterprisename'] = $this->getEnterpriseName();
             $array['message'] = 'You have a Active Session.';
             $array['status'] = 1;
         }

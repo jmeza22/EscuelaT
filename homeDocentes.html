@@ -6,15 +6,54 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Portal Docente</title>
+        <title>Portal de Docentes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Portal Docente"/>
+        <meta name="description" content="Portal de Docentes"/>
         <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
         <link href="css/menu.css" rel="stylesheet" />
+
     </head>
     <body>
-       
+        <header>
+            <div class="container">
+                <div class="menucss">
+                    <ul>
+                        <li><a target="myframe" href="FormHomeDocentes.html">Inicio</a></li>
+                        <li>Estudiante <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormEstudiantes.html">Observador</a></li>
+                                <li><a target="myframe" href="FormMatriculas.html">Matriculas</a></li>
+                            </ul>
+                        </li>
+                        <li>Docente <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormDocentes.html">Docente</a></li>
+                                <li><a target="myframe" href="FormDirectoresGrupos.html">Directores de Grupo</a></li>
+                                <li><a target="myframe" href="FormCargasDocentes.html">Carga Academica</a></li>
+                            </ul>
+                        </li>
+                        <li>Academico <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormLogros.html">Logros</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="logout.html">Salir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="contentframe">
+            <iframe name="myframe" id="myframe" src="FormHomeDocentes.html"></iframe> 
+        </div>
+        <footer class="information">
+            <p>
+                Sistema Integral de Gestion Academica - EscuelaT
+            </p>
+        </footer>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 
     </body>
