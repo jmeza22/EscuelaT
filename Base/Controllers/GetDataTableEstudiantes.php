@@ -6,7 +6,7 @@ $session = new SessionManager();
 $model = 'ObservadorEstudianteApp';
 $bc = null;
 if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
-    $where = " status_estudiante=1 ";
+    $where = " status_estudiante=1 ORDER BY id_estudiante desc ";
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');

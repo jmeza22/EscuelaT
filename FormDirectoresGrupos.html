@@ -49,9 +49,9 @@ and open the template in the editor.
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <label>Periodo</label>
-                                <select id="id_periodo" name="id_periodo" selected="NN" required="required" model="PeriodosApp" colname="num_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;" onchange="setIdDirector();">
-                                    <option selected="selected" value="-1">Ninguna</option>
+                                <label>Año</label>
+                                <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;">
+                                    <option selected="selected" value="">Ninguna</option>
                                 </select>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ and open the template in the editor.
                                 <th style="width: 60%;">Docente</th>
                                 <th style="width: 6%;">Grupo</th>
                                 <th style="width: 8%;">Escuela</th>
-                                <th style="width: 8%;">Periodo</th>
+                                <th style="width: 8%;">Año</th>
                                 <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>

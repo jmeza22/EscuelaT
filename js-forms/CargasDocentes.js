@@ -34,7 +34,7 @@ function LoadTable() {
 function LoadPeriodo() {
     var periodo = null;
     periodo = document.getElementById("id_periodo");
-    periodo.innerHTML = '<option value="">Ninguna</option>';
+    periodo.innerHTML = '<option disabled="disabled" value="">Ninguna</option>';
     loadComboboxData(periodo);
 }
 
@@ -115,3 +115,4 @@ function DeleteItem(item) {
         }
     }
 }
+

@@ -3,10 +3,10 @@
 ob_start();
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
-$model = 'CortesApp';
+$model = 'CortesPeriodosApp';
 $bc = null;
 if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
-    $where = " status_corte=1 and id_escuela='".$session->getEnterpriseID()."'";
+    $where = " status_corte=1 and id_escuela=".$session->getEnterpriseID()." ORDER BY id_corte desc ";
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');

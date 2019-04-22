@@ -4,7 +4,7 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'PeriodosApp';
+$model = 'PeriodosAnualesApp';
 $findBy = 'id_periodo';
 $action = 'insertorupdate';
 if ($session->hasLogin() && $session->getSuperAdmin() == 1) {

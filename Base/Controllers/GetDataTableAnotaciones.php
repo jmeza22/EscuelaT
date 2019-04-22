@@ -12,8 +12,9 @@ if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
     $bc->setAction('findAll');
     $bc->setModel($model);
     if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
-        $where = $where . " and " . $_POST['findby'] . " = " . $_POST['findbyvalue'] . "";
+        $where = $where . " and " . $_POST['findby'] . " = " . $_POST['findbyvalue'] . " ";
     }
+    $where = $where . " ORDER BY fecha_anotacion ";
     echo $bc->selectWithoutModel($model, '*', $where);
     $bc->disconnect();
     $bc = null;

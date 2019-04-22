@@ -273,7 +273,7 @@ function validateForm(form) {
                             break;
                         }
                     }
-                    if (item.getAttribute("decimal") === 'true') {
+                    if (item.getAttribute("float") === 'true') {
                         if (!validateNumber(item.value)) {
                             item.focus();
                             next = false;

@@ -16,7 +16,7 @@ if ($session->hasLogin() && $_REQUEST != null && isset($_REQUEST)) {
     $othervalue = null;
     $colvalue = 'id_asignatura';
     $colname = 'nombre_asignatura';
-    $othervalue = 'id_escuela';
+    $othervalue = '(hteoricas_asignatura + hpracticas_asignatura)';
     $where = 'status_asignatura=1 and id_escuela=' . $session->getEnterpriseID() . ' ';
     if (
             isset($_REQUEST['findby']) && strcmp($_REQUEST['findby'], 'id_planestudio') === 0 

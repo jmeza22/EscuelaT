@@ -28,18 +28,20 @@ and open the template in the editor.
 <body>
     
     <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Carga Academica de: <p id="nombrecompleto_docente"><b>Docente</b></p> </div>
-        <div class="panel-body">
+        <div class="panel-heading">Carga Academica de: <h3 id="nombrecompleto_docente"><b>Docente</b></h3> </div>
+        <div class="panel-body table-responsive">
 
             <div class="table-responsive">
                 <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="CargasDocentesApp" url="Base/Controllers/GetDataTableHomeDocentes.php" >
                     <thead id="thead_dataTable0">
                         <tr rowhead="true">
-                            <th style="width: 8%;" title="Codigo de Grupo">Grupo</th>
-                            <th style="width: 25%;" title="Nombre de la Asignatura">Asignatura</th>
-                            <th style="width: 8%;" title="Numero de Horas">Hrs.</th>
-                            <th style="width: 7%;" title="Codigo de Periodo">Per.</th>
-                            <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            <th style="width: 5%;" title="Codigo de Grupo">Grupo</th>
+                            <th style="width: 65%;" title="Nombre de la Asignatura">Asignatura</th>
+                            <th style="width: 5%;" title="Numero de Horas">Hrs.</th>
+                            <th style="width: 5%;" title="Año">Año</th>
+                            <th style="width: 8%; min-width: 32px !important;">Planilla</th>
+                            <th style="width: 8%; min-width: 32px !important;">Boletines</th>
+                            <th style="width: 8%; min-width: 32px !important;">Listas</th>
                         </tr>
                     </thead>
                     <tbody id="tbody_dataTable0">
@@ -51,10 +53,11 @@ and open the template in the editor.
                             <td>
                                 <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="POST" autocomplete="off" url="Base/Controllers/CargasController.php"  model="CargasApp" findBy="id_carga" statusfield="status_carga">
                                     <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
-                                    <input type="hidden"  editable="false" disabled="disabled" name="status_carga[]" id="status_carga" value="1" >
-                                    <button type="button" name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info icon-button" onclick="EditarNotas(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <a name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info" onclick="goCalificaciones(this);">Planilla</a>
                                 </form>
                             </td>
+                            <td>  </td>
+                            <td>  </td>
                         </tr>
                     </tbody>
                 </table>

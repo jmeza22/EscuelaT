@@ -5,10 +5,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <title>Cargas</title>
+    <title>Cargas Academicas</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Registro de Cargas"/>
+    <meta name="description" content="Registro de Cargas Academicas"/>
     <meta name="author" content="Jose Meza"/>
     <link href="css/styles.css" rel="stylesheet" />
     <!-- Bootstrap Core CSS -->
@@ -28,16 +28,16 @@ and open the template in the editor.
 <body>
 
     <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Carga</div>
+        <div class="panel-heading">Cargas Academicas</div>
         <div class="panel-body table-responsive" >
             <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasApp" findBy="id_carga" mainform="true" >
                 <input type="hidden" name="id_escuela" id="id_escuela" value="0" maxlength="24" required="required" title="Codigo de Escuela">
 
                 <div class="row">
                     <div class="col-sm-2">
-                        <label>Periodo</label>
-                        <select id="id_periodo" name="id_periodo" selected="NULL" model="PeriodosApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;" >
-                            <option selected="selected" value="NULL">Ninguna</option>
+                        <label>Año</label>
+                        <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;">
+                            <option selected="selected" value="">Ninguna</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
@@ -72,7 +72,7 @@ and open the template in the editor.
                     </div>
                     <div class="col-sm-4">
                         <label>Asignatura</label>
-                        <select id="id_asignatura" name="id_asignatura" selected="NULL" model="AsignaturasApp" colname="id_asignatura" colvalue="nombre_asignatura" url="Base/Controllers/GetComboboxAsignaturasPlanEstudio.php" class="form-control" style="width: 100%;" >
+                        <select id="id_asignatura" name="id_asignatura" selected="NULL" model="AsignaturasApp" colname="id_asignatura" colvalue="nombre_asignatura" url="Base/Controllers/GetComboboxAsignaturasPlanEstudio.php" class="form-control" style="width: 100%;" onchange="" >
                             <option selected="selected" value="NULL">Ninguna</option>
                         </select>
                     </div>
@@ -131,7 +131,7 @@ and open the template in the editor.
                             <th style="width: 8%;" title="Codigo de Grupo">Grupo</th>
                             <th style="width: 8%;" title="Codigo de Prograna">Pro.</th>
                             <th style="width: 7%;" title="Codigo de Plan de Estudios">P.E.</th>
-                            <th style="width: 7%;" title="Codigo de Periodo">Per.</th>
+                            <th style="width: 7%;" title="Año Academico">Año</th>
                             <th style="width: 7%;" title="Codigo de Escuela">Esc.</th>
                             <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                         </tr>

@@ -166,8 +166,9 @@ function SendAnotacion(item) {
 }
 
 function SendEstudiante(item) {
-    if (validateForm(item)) {
-        submitForm(item, false).done(function () {
+    var form = getForm(item);
+    if (validateForm(form)) {
+        submitForm(form, false).done(function () {
             LoadTableEstudiantes();
         });
     }

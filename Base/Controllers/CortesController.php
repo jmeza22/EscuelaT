@@ -5,7 +5,7 @@ include_once 'Libraries/Controllers.php';
 $bc = null;
 $result = null;
 $session = new SessionManager();
-$model = 'CortesApp';
+$model = 'CortesPeriodosApp';
 $findBy = 'id_corte';
 $action = 'insertorupdate';
 $postdata = null;

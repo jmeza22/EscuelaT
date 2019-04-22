@@ -1040,7 +1040,7 @@ function getData(element) {
 function setFindbyCombobox(fieldname, findby, findbyvalue, num="") {
     var myfield = null;
     myfield = document.getElementById(fieldname);
-    if (myfield !== null && myfield.tagName === 'SELECT') {
+    if (myfield !== null && (myfield.tagName === 'SELECT' || myfield.tagName === 'DATALIST')) {
         setFindbyField(fieldname, findby, findbyvalue, num);
         myfield.innerHTML = '<option value="">Ninguna</option>';
         loadComboboxData(myfield);
@@ -1106,6 +1106,10 @@ function loadComboboxData(element) {
     var findbyvalue2 = null;
     var findby3 = null;
     var findbyvalue3 = null;
+    var findby4 = null;
+    var findbyvalue4 = null;
+    var findby5 = null;
+    var findbyvalue5 = null;
     var object = null;
     var vals = null;
 
@@ -1120,6 +1124,10 @@ function loadComboboxData(element) {
     findbyvalue2 = getFindByValue(element,2);
     findby3 = getFindBy(element,3);
     findbyvalue3 = getFindByValue(element,3);
+    findby4 = getFindBy(element,4);
+    findbyvalue4 = getFindByValue(element,4);
+    findby5 = getFindBy(element,5);
+    findbyvalue5 = getFindByValue(element,5);
     vals = {
         "model": model,
         "action": 'findAll',
@@ -1131,7 +1139,11 @@ function loadComboboxData(element) {
         "findby2": findby2,
         "findbyvalue2": findbyvalue2,
         "findby3": findby3,
-        "findbyvalue3": findbyvalue3
+        "findbyvalue3": findbyvalue3,
+        "findby4": findby4,
+        "findbyvalue4": findbyvalue4,
+        "findby5": findby5,
+        "findbyvalue5": findbyvalue5
     };
     console.log('Getting Data for SELECT: ' + element.id);
     if (element !== null &&
@@ -1371,18 +1383,43 @@ function loadTableData(element, dynamic) {
     var model = null;
     var findby = null;
     var findbyvalue = null;
+    var findby2 = null;
+    var findbyvalue2 = null;
+    var findby3 = null;
+    var findbyvalue3 = null;
+    var findby4 = null;
+    var findbyvalue4 = null;
+    var findby5 = null;
+    var findbyvalue5 = null;
     var vals = null;
     var object = null;
     url = getURL(element);
     model = getModel(element);
     findby = getFindBy(element);
     findbyvalue = getFindByValue(element);
+    findby2 = getFindBy(element,2);
+    findbyvalue2 = getFindByValue(element,2);
+    findby3 = getFindBy(element,3);
+    findbyvalue3 = getFindByValue(element,3);
+    findby4 = getFindBy(element,4);
+    findbyvalue4 = getFindByValue(element,4);
+    findby5 = getFindBy(element,5);
+    findbyvalue5 = getFindByValue(element,5);
     vals = {
         "model": model,
         "action": 'findAll',
         "findby": findby,
-        "findbyvalue": findbyvalue
+        "findbyvalue": findbyvalue,
+        "findby2": findby2,
+        "findbyvalue2": findbyvalue2,
+        "findby3": findby3,
+        "findbyvalue3": findbyvalue3,
+        "findby4": findby4,
+        "findbyvalue4": findbyvalue4,
+        "findby5": findby5,
+        "findbyvalue5": findbyvalue5
     };
+    
     console.log('Getting Data for TABLE: ' + element.id);
 
     if (element !== null && element.tagName === "TABLE") {

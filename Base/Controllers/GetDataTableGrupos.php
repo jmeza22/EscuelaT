@@ -14,8 +14,9 @@ if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
     $bc->setAction('findAll');
     $bc->setModel($model);
     if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
-        $where = $where . " and G." . $_POST['findby'] . " = " . $_POST['findbyvalue'] . "";
+        $where = $where . " and G." . $_POST['findby'] . " = " . $_POST['findbyvalue'] . " ";
     }
+    $where = $where . " ORDER BY G.id_grupo desc ";
     $sql = $sql . $where;
     echo $bc->selectSimple($sql);
     $bc->disconnect();

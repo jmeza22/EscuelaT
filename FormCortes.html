@@ -6,10 +6,10 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Cortes</title>
+        <title>Cortes (Periodos)</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta name="description" content="Registro de Cortes"/>
+        <meta name="description" content="Registro de Cortes (Periodos)"/>
         <meta name="author" content="Jose Meza"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
@@ -29,7 +29,7 @@ and open the template in the editor.
     <body>
 
         <div class="panel panel-primary" style="width: 80% !important;">
-            <div class="panel-heading">Cortes</div>
+            <div class="panel-heading">Cortes (Periodos)</div>
             <div class="panel-body table-responsive" >
 
                 <div class="panel panel-default">
@@ -39,7 +39,7 @@ and open the template in the editor.
                             <div class="col-sm-12">
                                 <form id="form_select">
                                     <input type="hidden" id="select_id_escuela" name="select_id_escuela" value="" required="required" maxlength="22" min="1" /> 
-                                    <label>Seleccione el Periodo</label>
+                                    <label>Seleccione el Año</label>
                                     <select id="select_id_periodo" name="select_id_periodo" selected="NN" required="required" model="PeriodosApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;" onchange="RefreshFormAndTable(this);">
                                         <option selected="selected" value="-1">Ninguno</option>
                                     </select>
@@ -50,7 +50,7 @@ and open the template in the editor.
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Datos del Corte</div>
+                    <div class="panel-heading">Datos del Corte (Periodo)</div>
                     <div class="panel-body table-responsive">
 
 

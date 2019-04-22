@@ -118,7 +118,7 @@
       <Cl au="0" df="1" nm="status_asignatura" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Fk deAc="3" nm="fk_Asignaturas_Escuelas" prLkCl="id_escuela" upAc="3">
+      <Fk deAc="3" nm="fk_AsignaturasApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
         <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="AsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_escuela" prCl="id_escuela"/>
@@ -138,13 +138,13 @@
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Codigo Calificacion</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_matricula" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
-        <Cm>Codigo de Matricula</Cm>
-      </Cl>
       <Cl au="0" df="" nm="id_escuela" nu="0">
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_matricula" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Matricula</Cm>
       </Cl>
       <Cl au="0" df="" nm="id_estudiante" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
@@ -158,10 +158,6 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
         <Cm>Codigo Plan de Estudios</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_periodo" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
-        <Cm>Codigo del Periodo</Cm>
-      </Cl>
       <Cl au="0" df="" nm="id_asignatura" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
         <Cm>Codigo Asignatura</Cm>
@@ -174,83 +170,160 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
         <Cm>Codigo del Grupo</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_corte" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="16" sc="null" sg="1" un="0"/>
-        <Cm>Codigo del Corte</Cm>
+      <Cl au="0" df="" nm="id_matasig" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="64" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura Matriculada</Cm>
       </Cl>
-      <Cl au="0" df="0" nm="numero_corte" nu="0">
-        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Numero de Corte</Cm>
+      <Cl au="0" df="" nm="id_periodo" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_docente" nu="0">
+      <Cl au="0" df="" nm="p1_id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Periodo 1</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="p1_id_docente" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
-        <Cm>Codigo de Docente</Cm>
+        <Cm>Codigo de Docente P1</Cm>
       </Cl>
-      <Cl au="0" df="1" nm="nc_calificacion" nu="1">
+      <Cl au="0" df="1" nm="p1_nc_calificacion" nu="1">
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Valor Calificacion Componente Cognositivo</Cm>
+        <Cm>Valor Calificacion Componente Cognositivo P1</Cm>
       </Cl>
-      <Cl au="0" df="1" nm="np_calificacion" nu="1">
+      <Cl au="0" df="1" nm="p1_np_calificacion" nu="1">
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Valor Calificacion Componente Procedimental</Cm>
+        <Cm>Valor Calificacion Componente Procedimental P1</Cm>
       </Cl>
-      <Cl au="0" df="1" nm="na_calificacion" nu="1">
+      <Cl au="0" df="1" nm="p1_na_calificacion" nu="1">
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Valor Calificacion Componente Actitudinal</Cm>
+        <Cm>Valor Calificacion Componente Actitudinal P1</Cm>
       </Cl>
-      <Cl au="0" df="0" nm="nd_calificacion" nu="1">
+      <Cl au="0" df="0" nm="p1_nd_calificacion" nu="1">
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Nota Definitiva</Cm>
+        <Cm>Nota Definitiva P1</Cm>
       </Cl>
-      <Cl au="0" df="" nm="nn_calificacion" nu="1">
+      <Cl au="0" df="" nm="p1_nn_calificacion" nu="1">
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Nota Nivelacion de Final de Periodo</Cm>
       </Cl>
-      <Cl au="0" df="" nm="logroc_calificacion" nu="1">
+      <Cl au="0" df="" nm="p1_logroc_calificacion" nu="1">
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Logro Cognositivo</Cm>
       </Cl>
-      <Cl au="0" df="" nm="logrop_calificacion" nu="1">
+      <Cl au="0" df="" nm="p1_logrop_calificacion" nu="1">
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Logro Procedimental</Cm>
       </Cl>
-      <Cl au="0" df="" nm="logroa_calificacion" nu="1">
+      <Cl au="0" df="" nm="p1_logroa_calificacion" nu="1">
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Logro Actitudinal</Cm>
       </Cl>
-      <Cl au="0" df="0" nm="numausencias_calificacion" nu="1">
+      <Cl au="0" df="0" nm="p1_ausencias_calificacion" nu="1">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Numero de Ausencias durante el Corte</Cm>
       </Cl>
-      <Cl au="0" df="" nm="usuariocrea_calificacion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
-        <Cm>Usuario que Crea el Registro</Cm>
+      <Cl au="0" df="" nm="p2_id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
       </Cl>
-      <Cl au="0" df="" nm="fechacrea_calificacion" nu="1">
-        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Fecha Creacion del Registro</Cm>
+      <Cl au="0" df="" nm="p2_id_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
       </Cl>
-      <Cl au="0" df="" nm="usuariomod_calificacion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
-        <Cm>Usuario que Actualiza el Registro</Cm>
+      <Cl au="0" df="" nm="p2_nc_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Cl au="0" df="" nm="fechamod_calificacion" nu="1">
-        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Fecha de Actualizacion del Registro</Cm>
+      <Cl au="0" df="" nm="p2_np_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_na_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_nd_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_nn_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_logroc_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_logrop_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_logroa_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_ausencias_calificacion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_id_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_nc_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_np_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_na_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_nd_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_nn_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_logroc_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_logrop_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_logroa_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_ausencias_calificacion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_id_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_nc_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_np_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_na_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_nd_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_nn_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_logroc_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_logrop_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_logroa_calificacion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_ausencias_calificacion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="1" nm="status_calificacion" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Cl au="0" df="" nm="id_matasig" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="120" sc="null" sg="1" un="0"/>
-        <Cm>Codigo Asignatura Matriculada</Cm>
-      </Cl>
-      <Fk deAc="3" nm="fk_CalificacionesApp_CortesApp" prLkCl="id_corte" upAc="3">
-        <PrTb mn="0" nm="CortesApp" oe="1" sch="EscuelaDB" zr="0"/>
-        <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
-        <ClPr cdCl="id_corte" prCl="id_corte"/>
-        <ClPr cdCl="numero_corte" prCl="numero_corte"/>
-      </Fk>
       <Fk deAc="3" nm="fk_CalificacionesApp_MatriculaAsignaturasApp" prLkCl="id_matasig" upAc="3">
         <PrTb mn="0" nm="MatriculaAsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
@@ -261,7 +334,7 @@
         <OptTx/>
       </Idx>
       <Idx clu="0" ftx="0" nm="CalificacionesApp_Unique_Idx" spa="0" unq="1">
-        <ClNs>id_escuela, id_estudiante, id_programa, id_planestudio, id_periodo, id_asignatura, numgrado_programa, id_grupo, id_corte</ClNs>
+        <ClNs>id_escuela, id_estudiante, id_programa, id_planestudio, id_periodo, id_asignatura, numgrado_programa, id_grupo, id_matricula, id_matasig</ClNs>
         <OptTx/>
       </Idx>
       <UniqueConstraints/>
@@ -325,7 +398,7 @@
         <ClPr cdCl="id_grupo" prCl="id_grupo"/>
       </Fk>
       <Fk deAc="3" nm="fk_CargasDocentesApp_PeriodosApp" prLkCl="id_periodo" upAc="3">
-        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <PrTb mn="0" nm="PeriodosAnualesApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="CargasDocentesApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_periodo" prCl="id_periodo"/>
         <ClPr cdCl="id_escuela" prCl="id_escuela"/>
@@ -487,6 +560,30 @@
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Valor Nota Minima Desempeño Bajo</Cm>
       </Cl>
+      <Cl au="0" df="10" nm="p1_porcentaje_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje 1er Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="20" nm="p2_porcentaje_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje 2do Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="30" nm="p3_porcentaje_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje 3er Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="40" nm="p4_porcentaje_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje 4to Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="p5_porcentaje_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje 5to Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="p6_porcentaje_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje 6to Periodo</Cm>
+      </Cl>
       <Cl au="0" df="" nm="status_configuracion" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
@@ -498,12 +595,12 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
-    <Tbl UsSo="1" nm="CortesApp">
+    <Tbl UsSo="1" nm="CortesPeriodosApp">
       <Cm>Cortes</Cm>
       <TblOpts/>
-      <Pk ClNs="id_corte, numero_corte" nm="pkCortesApp"/>
+      <Pk ClNs="id_corte" nm="pkCortesPeriodosApp"/>
       <Cl au="0" df="" nm="id_corte" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="16" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
         <Cm>Codigo del Corte</Cm>
       </Cl>
       <Cl au="0" df="0" nm="numero_corte" nu="1">
@@ -542,8 +639,8 @@
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Fk deAc="3" nm="fk_CortesApp_PeriodosApp" prLkCl="id_periodo" upAc="3">
-        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="1"/>
-        <CdTb mn="1" nm="CortesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <PrTb mn="0" nm="PeriodosAnualesApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="CortesPeriodosApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_periodo" prCl="id_periodo"/>
         <ClPr cdCl="id_escuela" prCl="id_escuela"/>
       </Fk>
@@ -582,6 +679,10 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Docente</Cm>
       </Cl>
+      <Cl au="0" df="Docente" nm="nombrecompleto_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Completo del Docente</Cm>
+      </Cl>
       <Cl au="0" df="1" nm="status_director" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Estado del Registro</Cm>
@@ -597,7 +698,7 @@
         <ClPr cdCl="id_grupo" prCl="id_grupo"/>
       </Fk>
       <Fk deAc="3" nm="fk_DirectoresGrupo_PeriodosApp" prLkCl="id_periodo" upAc="3">
-        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <PrTb mn="0" nm="PeriodosAnualesApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="DirectoresGruposApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_periodo" prCl="id_periodo"/>
         <ClPr cdCl="id_escuela" prCl="id_escuela"/>
@@ -831,7 +932,7 @@
       <TblOpts/>
       <Pk ClNs="id_matasig" nm="pkMatriculaAsignaturasApp"/>
       <Cl au="0" df="" nm="id_matasig" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="120" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="64" sc="null" sg="1" un="0"/>
         <Cm>Codigo Asignatura Matriculada</Cm>
       </Cl>
       <Cl au="0" df="" nm="id_matricula" nu="0">
@@ -990,7 +1091,7 @@
         <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
       </Fk>
       <Fk deAc="3" nm="fk_MatriculasApp_PeriodosApp" prLkCl="id_periodo" upAc="3">
-        <PrTb mn="0" nm="PeriodosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <PrTb mn="0" nm="PeriodosAnualesApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_periodo" prCl="id_periodo"/>
       </Fk>
@@ -1035,7 +1136,7 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Estudiante</Cm>
       </Cl>
-      <Cl au="0" df="" nm="nombrecompleto_estudiante" nu="1">
+      <Cl au="0" df="" nm="nombrecompleto_estudiante" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
         <Cm>Nombre del Estudiante</Cm>
       </Cl>
@@ -1107,25 +1208,21 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
-    <Tbl UsSo="1" nm="PeriodosApp">
+    <Tbl UsSo="1" nm="PeriodosAnualesApp">
       <Cm>Periodos Academicos</Cm>
       <TblOpts/>
-      <Pk ClNs="id_periodo, id_escuela" nm="pkPeriodosApp"/>
+      <Pk ClNs="id_periodo, id_escuela" nm="pkPeriodosAnualesApp"/>
       <Cl au="0" df="" nm="id_periodo" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
         <Cm>Codigo del Periodo</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_escuela" nu="1">
+      <Cl au="0" df="" nm="id_escuela" nu="0">
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Escuela</Cm>
       </Cl>
-      <Cl au="0" df="" nm="anualidad_periodo" nu="1">
+      <Cl au="0" df="" nm="anualidad_periodo" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Año del Periodo</Cm>
-      </Cl>
-      <Cl au="0" df="0" nm="num_periodo" nu="1">
-        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Numero del Periodo</Cm>
       </Cl>
       <Cl au="0" df="" nm="finicio_periodo" nu="1">
         <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
@@ -1144,7 +1241,7 @@
       </Cl>
       <Fk deAc="3" nm="fk_PeriodosApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
         <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="1"/>
-        <CdTb mn="1" nm="PeriodosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <CdTb mn="1" nm="PeriodosAnualesApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_escuela" prCl="id_escuela"/>
       </Fk>
       <Idx clu="0" ftx="0" nm="PeriodosApp_Unique_Idx" spa="0" unq="1">
@@ -1570,20 +1667,20 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TiposUsuariosApp" x="338" y="55"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AreasApp" x="1798" y="549"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsignaturasApp" x="2089" y="554"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PeriodosApp" x="1105" y="637"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PeriodosAnualesApp" x="1105" y="637"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="LogrosAsignaturasApp" x="2294" y="1102"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ProgramasApp" x="1390" y="426"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PlanEstudioDetalleApp" x="1844" y="1105"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PlanEstudiosApp" x="1534" y="884"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MatriculasApp" x="67" y="966"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ConfiguracionApp" x="877" y="290"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ConfiguracionApp" x="879" y="232"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ObservadorEstudianteApp" x="58" y="1247"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AnotacionesObservadorApp" x="21" y="1679"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CitacionesObservadorApp" x="78" y="1986"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CortesApp" x="1017" y="1181"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CortesPeriodosApp" x="1048" y="1232"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="GruposApp" x="486" y="925"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MatriculaAsignaturasApp" x="695" y="1681"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CalificacionesApp" x="674" y="1983"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CalificacionesApp" x="661" y="1940"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DirectoresGruposApp" x="497" y="1131"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CargasDocentesApp" x="678" y="1420"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DocentesApp" x="224" y="480"/>
@@ -1598,21 +1695,15 @@
         <positionableLine lineRole="CHILD_LINE" x1="1919" x2="1919" y1="526" y2="78"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AsignaturasApp.fk_Asignaturas_Escuelas" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AsignaturasApp.fk_AsignaturasApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="988" x2="2239" y1="97" y2="97"/>
-        <positionableLine lineRole="CHILD_LINE" x1="2243" x2="2243" y1="531" y2="101"/>
-      </positionableLines>
-    </FkGl>
-    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_CortesApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1152" x2="1152" y1="1361" y2="2064"/>
-        <positionableLine lineRole="CHILD_LINE" x1="1061" x2="1148" y1="2068" y2="2068"/>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="2239" y1="110" y2="110"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2243" x2="2243" y1="531" y2="114"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculaAsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1887" y2="1960"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1887" y2="1917"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_DocentesApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -1651,12 +1742,12 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ConfiguracionApp.fk_ConfiguracionApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="947" x2="947" y1="186" y2="267"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="947" x2="947" y1="186" y2="209"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CortesApp.fk_CortesApp_PeriodosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CortesPeriodosApp.fk_CortesApp_PeriodosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="1287" x2="1287" y1="791" y2="1158"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="1287" x2="1287" y1="778" y2="1209"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_DocentesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -1671,8 +1762,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_PeriodosApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1236" x2="1236" y1="791" y2="1166"/>
-        <positionableLine lineRole="CHILD_LINE" x1="819" x2="1232" y1="1170" y2="1170"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1236" x2="1236" y1="778" y2="1166"/>
+        <positionableLine lineRole="CHILD_LINE" x1="882" x2="1232" y1="1170" y2="1170"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DocentesApp.fk_DocentesApp_PersonasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -1717,7 +1808,7 @@
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculaAsignaturasApp.fk_AsignaturasMatriculadasApp_PlanEstudioDetalleApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="1995" x2="1995" y1="1272" y2="1755"/>
-        <positionableLine lineRole="CHILD_LINE" x1="1004" x2="1991" y1="1759" y2="1759"/>
+        <positionableLine lineRole="CHILD_LINE" x1="997" x2="1991" y1="1759" y2="1759"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculaAsignaturasApp.fk_MatriculaAsignaturasApp_CargasDocentesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -1757,7 +1848,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PeriodosApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1224" x2="1224" y1="791" y2="811"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1224" x2="1224" y1="778" y2="811"/>
         <positionableLine lineRole="CHILD_LINE" x1="268" x2="268" y1="943" y2="819"/>
         <positionableLine lineRole="MIDDLE_LINE" x1="272" x2="1220" y1="815" y2="815"/>
       </positionableLines>
@@ -1792,7 +1883,7 @@
         <positionableLine lineRole="CHILD_LINE" x1="35" x2="20" y1="1252" y2="1252"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PeriodosApp.fk_PeriodosApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PeriodosAnualesApp.fk_PeriodosApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="988" x2="1215" y1="144" y2="144"/>
         <positionableLine lineRole="CHILD_LINE" x1="1219" x2="1219" y1="614" y2="148"/>
@@ -1845,7 +1936,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="82">
+  <RnmMgr NxRnmId="117">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -1880,7 +1971,7 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="NivelesApp" SupCls="Schema" SupNme="schemaA">
       <Rnm id="12" nNm="id_nivel" oNm="Id"/>
     </RnmCh>
-    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PeriodosApp" SupCls="Schema" SupNme="schemaA">
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PeriodosAnualesApp" SupCls="Schema" SupNme="schemaA">
       <Rnm id="13" nNm="id_periodo" oNm="Id"/>
     </RnmCh>
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="LogrosAsignaturasApp" SupCls="Schema" SupNme="schemaA">
@@ -1921,7 +2012,7 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="TiposUsuariosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="25" nNm="external_tipousuario" oNm="external_tiposusuario"/>
     </RnmCh>
-    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PeriodosApp" SupCls="Schema" SupNme="EscuelaDB">
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PeriodosAnualesApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="26" nNm="anualidad_periodo" oNm="tiempo_periodo"/>
     </RnmCh>
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="ConfiguracionApp" SupCls="Schema" SupNme="EscuelaDB">
@@ -1950,16 +2041,16 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="CitacionesObservadorApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="35" nNm="id_citacion" oNm="Id"/>
     </RnmCh>
-    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesPeriodosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="36" nNm="id_corte" oNm="Id"/>
     </RnmCh>
-    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesPeriodosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="37" nNm="eshabilitacion_corte" oNm="habilitacion_corte"/>
     </RnmCh>
-    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesPeriodosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="38" nNm="finicio_corte" oNm="fincio_corte"/>
     </RnmCh>
-    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesApp" SupCls="Schema" SupNme="EscuelaDB">
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CortesPeriodosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="39" nNm="ffinal_corte" oNm="ffin_corte"/>
     </RnmCh>
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="MatriculasApp" SupCls="Schema" SupNme="EscuelaDB">
@@ -2068,6 +2159,83 @@
       <Rnm id="81" nNm="id_matasig" oNm="id_asigmat"/>
       <Rnm id="80" nNm="id_asigmat" oNm="id_matriculada"/>
     </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="82" nNm="PeriodosAnualesApp" oNm="PeriodosApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="83" nNm="CortesPeriodosApp" oNm="CortesApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="99" nNm="p1_nc_calificacion" oNm="p1nc_calificacion"/>
+      <Rnm id="89" nNm="p1nc_calificacion" oNm="ncp1_calificacion"/>
+      <Rnm id="84" nNm="ncp1_calificacion" oNm="nc_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="100" nNm="p1_np_calificacion" oNm="p1np_calificacion"/>
+      <Rnm id="90" nNm="p1np_calificacion" oNm="npp1_calificacion"/>
+      <Rnm id="85" nNm="npp1_calificacion" oNm="np_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="101" nNm="p1_na_calificacion" oNm="p1na_calificacion"/>
+      <Rnm id="91" nNm="p1na_calificacion" oNm="nap1_calificacion"/>
+      <Rnm id="86" nNm="nap1_calificacion" oNm="na_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="102" nNm="p1_nd_calificacion" oNm="p1nd_calificacion"/>
+      <Rnm id="92" nNm="p1nd_calificacion" oNm="ndp1_calificacion"/>
+      <Rnm id="87" nNm="ndp1_calificacion" oNm="nd_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="103" nNm="p1_nn_calificacion" oNm="p1nn_calificacion"/>
+      <Rnm id="93" nNm="p1nn_calificacion" oNm="nnp1_calificacion"/>
+      <Rnm id="88" nNm="nnp1_calificacion" oNm="nn_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="104" nNm="p1_logroc_calificacion" oNm="p1logroc_calificacion"/>
+      <Rnm id="94" nNm="p1logroc_calificacion" oNm="logroc_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="105" nNm="p1_logrop_calificacion" oNm="p1logrop_calificacion"/>
+      <Rnm id="95" nNm="p1logrop_calificacion" oNm="logrop_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="106" nNm="p1_logroa_calificacion" oNm="p1logroa_calificacion"/>
+      <Rnm id="96" nNm="p1logroa_calificacion" oNm="logroa_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="107" nNm="p1_ausencias_calificacion" oNm="p1ausencias_calificacion"/>
+      <Rnm id="97" nNm="p1ausencias_calificacion" oNm="numausencias_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="98" nNm="p1_id_docente" oNm="id_docente"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="108" nNm="p2_nc_calificacion" oNm="p2nc_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="109" nNm="p2_np_calificacion" oNm="p2np_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="110" nNm="p2_na_calificacion" oNm="p2na_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="111" nNm="p2_nd_calificacion" oNm="p2nd_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="112" nNm="p2_nn_calificacion" oNm="p2nn_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="113" nNm="p2_logroc_calificacion" oNm="p2logroc_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="114" nNm="p2_logrop_calificacion" oNm="p2logrop_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="115" nNm="p2_logroa_calificacion" oNm="p2logroa_calificacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="116" nNm="p2_ausencias_calificacion" oNm="p2ausencias_calificacion"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -2085,7 +2253,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

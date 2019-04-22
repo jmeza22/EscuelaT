@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <title>Variables de Sesion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Variables de Sesion"/>
+    <meta name="author" content="Jose Meza"/>
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/Validator.js"></script>
+    <script type="text/javascript" src="js/localStorageData.js"></script>
+    <script type="text/javascript" src="js/SimplexFramework.js"></script>
+    <script type="text/javascript" src="js-forms/VariablesSesion.js"></script>
+</head>
+<body>
+
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Variables de Sesion del Sistema</div>
+        <div class="panel-body table-responsive">
+            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/VariablesSesionController.php" model="VariablesSesion" findBy="id_escuela" mainform="true" >
+                <div class="row" id="seccionescuela">
+                    <div class="col-sm-2">
+                        <label>Cod.Escuela</label>
+                        <input type="text" name="enterpriseid" id="enterpriseid" value="" maxlength="24" required="required" class="form-control" title="Codigo de Escuela"  list="lista_id_escuela">
+                    </div>
+                    <div class="col-sm-10">
+                        <label>Nombre de Escuela</label>
+                        <input type="text" name="enterprisename" id="enterprisename" value="" maxlength="100" required="required" readonly="readonly" class="form-control" title="Nombre de Escuela">
+                    </div>
+                </div>
+                <div class="row" id="seccionusuario">
+                    <div class="col-sm-2">
+                        <label>CuentaUsuario</label>
+                        <input type="text" name="nickname" id="nickname" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Cuenta de Usuario activo">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>TipoUsuario</label>
+                        <input type="text" name="usertype" id="usertype" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Tipo de Usuario activo">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>IdUsuario</label>
+                        <input type="text" name="userid" id="userid" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Codigo de Usuario activo">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Nombre del Usuario</label>
+                        <input type="text" name="fullname" id="fullname" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Nombre del Usuario">
+                    </div>
+                </div>
+                <div class="row" id="seccionanoperiodo">
+                    <div class="col-sm-4">
+                        <label>Año Academico</label>
+                        <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('lista_id_corte', this.id, this.value);">
+                            <option selected="selected" value="">Ninguna</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Cod.Periodo</label>
+                        <input type="text" name="id_corte" id="id_corte" value="" maxlength="10" required="required" class="form-control" title="Codigo de Periodo"  list="lista_id_corte">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Num.Periodo</label>
+                        <input type="number" name="numero_corte" id="numero_corte" readonly="readonly" value="" maxlength="2" min="0" max="6" required="required" class="form-control" title="Codigo de Periodo"  list="lista_id_corte">
+                    </div>
+                </div>
+                <div>
+                    <center>
+                        <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" > Aceptar </button>
+                    </center>
+                </div>
+                <datalist id="lista_id_corte" name="lista_id_corte" required="required" selected="NULL" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" >
+                    <option selected="selected" value="">Ninguna</option>
+                </datalist>
+                <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" onchange="setFindbyCombobox('id_periodo', this.id, this.value);">
+                    <option value="">Ninguno</option>
+                </datalist>
+            </form>
+        </div>
+        <div class="panel-footer">
+            Solo el SuperAdministrador tiene los privilegios suficientes para modificar todas las variables.
+        </div>
+    </div>
+
+    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+</body>
+</html>

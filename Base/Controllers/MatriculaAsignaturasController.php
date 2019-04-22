@@ -14,6 +14,7 @@ $idmatricula = null;
 $datosmatricula = null;
 $idplanestudio = null;
 $planestudio = null;
+$grado = null;
 $count = 0;
 $rowcount = 0;
 $i = 0;
@@ -25,7 +26,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction($action);
-        if ($_POST['id_matricula'] !== null && $_POST['id_matricula'] !== 0 && $_POST['id_matricula'] !== '' && $_POST['action'] !== null && strcmp($_POST['action'], 'insertorupdate')==0) {
+        if ($_POST['id_matricula'] !== null && $_POST['id_matricula'] !== 0 && $_POST['id_matricula'] !== '' && $_POST['action'] !== null && strcmp($_POST['action'], 'insertorupdate') == 0) {
             $idmatricula = $_POST['id_matricula'];
             $datosmatricula = $bc->selectWithoutModel('MatriculasApp', '*', "id_matricula='$idmatricula'");
             if ($datosmatricula !== null && $datosmatricula !== '' && $datosmatricula !== '[]') {
@@ -33,7 +34,8 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
                 if ($datosmatricula !== null) {
                     $datosmatricula = $datosmatricula[0];
                     $idplanestudio = $datosmatricula['id_planestudio'];
-                    $planestudio = $bc->selectWithoutModel('PlanEstudioDetalleApp', '*', "id_planestudio='$idplanestudio'");
+                    $grado = $datosmatricula['numgrado_programa'];
+                    $planestudio = $bc->selectWithoutModel('PlanEstudioDetalleApp', '*', "id_planestudio='$idplanestudio' and numgrado_programa='$grado' ");
                     $planestudio = json_decode($planestudio, true);
                 }
             }
@@ -79,7 +81,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
                 }
             }
         }
-        if ($_POST['id_matasig'] !== null && $_POST['action'] !== null && strcmp($_POST['action'], 'delete')==0) {
+        if ($_POST['id_matasig'] !== null && $_POST['action'] !== null && strcmp($_POST['action'], 'delete') == 0) {
             $bc->setFindBy($findBy);
             $bc->setAction('delete');
             $result = $bc->execute(false);
