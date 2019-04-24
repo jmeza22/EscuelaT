@@ -41,8 +41,11 @@ function goCalificaciones(item) {
     if (item !== undefined && item !== null) {
         var form = getForm(item);
         var idcarga = getElement(form, 'id_carga');
+        var grado = getElement(form, 'numgrado_programa');
+        var idgrupo = getElement(form, 'id_grupo');
+        var idasignatura = getElement(form, 'id_asignatura');
+        var nomasignatura = getElement(form, 'nombre_asignatura');
         setPOST('planilla_id_carga', idcarga.value);
-        window.alert('Carga: '+getPOST('planilla_id_carga'));
-        window.location = "FormCalificaciones.html?id_carga="+idcarga.value;
+        window.location.href = "FormCalificaciones.html?"+idcarga.id+"="+idcarga.value+"&"+grado.id+"="+grado.value+"&"+idgrupo.id+"="+idgrupo.value+"&"+idasignatura.id+"="+idasignatura.value+"&"+nomasignatura.id+"="+nomasignatura.value+"";
     }
 }

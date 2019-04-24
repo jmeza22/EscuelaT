@@ -326,6 +326,7 @@ class BaseController {
     public function execute($print = false) {
         $result = false;
         if (isset($this->action)) {
+            
             if ($this->action == null || strcmp($this->action, '') == 0) {
                 $result = $this->parseResults(null, "Operacion No Permitida!", 0);
             }

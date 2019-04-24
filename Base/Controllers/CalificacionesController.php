@@ -9,6 +9,7 @@ $result = null;
 $model = "CalificacionesApp";
 $findBy = "id_calificacion";
 $rowcount = 0;
+$nullrowcount= 0;
 $data = null;
 $postdata = null;
 $count = 0;
@@ -62,18 +63,22 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
                     unset($data["ausencias_calificacion"]);
                     $data["p" . $numcorte . "_id_corte"] = $data["id_corte"];
                     unset($data["id_corte"]);
-                    print_r($data);
-                    $bc->setPostData($data);
-                    $result = $bc->execute(false);
-                    if ($bc->getRowCount() > 0) {
-                        $rowcount++;
-                    } else {
-                        break;
+                    //print_r($data);
+                    if (isset($data["id_calificacion"]) && $data["id_calificacion"] !== null && $data["id_calificacion"] !== '{{id_calificacion}}') {
+                        $bc->setPostData($data);
+                        $result = $bc->execute(false);
+                        if ($bc->getRowCount() > 0) {
+                            $rowcount++;
+                        } else {
+                            break;
+                        }
+                    }else{
+                        $nullrowcount++;
                     }
                 }
             }
         }
-        if ($rowcount == $count) {
+        if ($rowcount == ($count-$nullrowcount)) {
             $bc->commit();
         } else {
             $bc->rollback();
