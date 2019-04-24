@@ -9,7 +9,7 @@ $result = null;
 $model = "CalificacionesApp";
 $findBy = "id_calificacion";
 $rowcount = 0;
-$nullrowcount= 0;
+$nullrowcount = 0;
 $data = null;
 $postdata = null;
 $count = 0;
@@ -17,6 +17,8 @@ $i = 0;
 $idperiodo = null;
 $idcorte = null;
 $numcorte = null;
+$nombre = '';
+$errormessage = '';
 if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
@@ -25,7 +27,6 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction('insertorupdate');
-        $bc->beginTransaction();
         $idperiodo = $variables->getIdPeriodoAnual();
         $idcorte = $variables->getIdCortePeriodo();
         $numcorte = $variables->getNumCortePeriodo();
@@ -40,6 +41,8 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
                 $count = count($postdata);
                 for ($i = 0; $i < $count; $i++) {
                     $data = $postdata[$i];
+                    $nombre = $data["nombrecompleto_estudiante"];
+                    unset($data["nombrecompleto_estudiante"]);
                     $data["id_escuela"] = $session->getEnterpriseID();
                     $data["p" . $numcorte . "_id_docente"] = $session->getUserID();
                     unset($data["id_docente"]);
@@ -63,26 +66,27 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
                     unset($data["ausencias_calificacion"]);
                     $data["p" . $numcorte . "_id_corte"] = $data["id_corte"];
                     unset($data["id_corte"]);
-                    //print_r($data);
                     if (isset($data["id_calificacion"]) && $data["id_calificacion"] !== null && $data["id_calificacion"] !== '{{id_calificacion}}') {
                         $bc->setPostData($data);
                         $result = $bc->execute(false);
                         if ($bc->getRowCount() > 0) {
                             $rowcount++;
                         } else {
-                            break;
+                            if ($bc->getErrorMessage() !== null && $bc->getErrorMessage() !== '') {
+                                $errormessage = $errormessage . '' . $nombre . ': ' . $bc->getErrorMessage() . '\n';
+                            }
                         }
-                    }else{
-                        $nullrowcount++;
                     }
                 }
             }
         }
-        if ($rowcount == ($count-$nullrowcount)) {
-            $bc->commit();
-        } else {
-            $bc->rollback();
+        $result = json_decode($result, true);
+        $result['error'] = $errormessage;
+        if($rowcount>=1){
+            $result['status']=1;
+            $result['message']='Informacion Almacenada!.';
         }
+        $result = json_encode($result);
         echo $result;
         $result = null;
         $bc->disconnect();
