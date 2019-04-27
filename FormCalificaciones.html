@@ -69,7 +69,7 @@ and open the template in the editor.
                         <thead id="thead_dataTable0">
                             <tr rowhead="true">
                                 <th style="width: 2%;" title="Numero en Listado" >#</th>
-                                <th style="width: 25%;">Nombre del Estudiante</th>
+                                <th style="width: 25%;">NOMBRES Y APELLIDOS</th>
                                 <th style="width: 2%;" title="Primer Periodo" >P1</th>
                                 <th style="width: 2%;" title="Segundo Periodo" >P2</th>
                                 <th style="width: 2%;" title="Tercer Periodo" >P3</th>
@@ -81,39 +81,39 @@ and open the template in the editor.
                                 <th style="width: 5%;" title="Nota Logro Cognitivo" >NC</th>
                                 <th style="width: 5%;" title="Nota Logro Procedimental" >NP</th>
                                 <th style="width: 5%;" title="Nota Logro Actitudinal" >NA</th>
-                                <th style="width: 5%;" title="Nota Logro Actitudinal" >ND</th>
+                                <th style="width: 5%;" title="Nota Definitiva del Periodo" >ND</th>
                                 <th style="width: 5%;" title="Numero de Ausencias (Periodo Actual)" >Aus.</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
                             <tr id="rowsample" rowsample="true" style="display: none;">
                                 <td> {{rownum}}
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante" name="id_estudiante[]" value="{{id_estudiante}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_calificacion" name="id_calificacion[]" value="{{id_calificacion}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matricula" name="id_matricula[]" value="{{id_matricula}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig" name="id_matasig[]" value="{{id_matasig}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_programa" name="id_programa[]" value="{{id_programa}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_planestudio" name="id_planestudio[]" value="{{id_planestudio}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_periodo" name="id_periodo[]" value="{{id_periodo}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte" name="id_corte[]" value="{{id_corte}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_grupo" name="id_grupo[]" value="{{id_grupo}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="numgrado_programa" name="numgrado_programa[]" value="{{numgrado_programa}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante" name="nombrecompleto_estudiante[]" value="{{nombrecompleto_estudiante}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante{{rownum}}" name="id_estudiante[]" value="{{id_estudiante}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_calificacion{{rownum}}" name="id_calificacion[]" value="{{id_calificacion}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matricula{{rownum}}" name="id_matricula[]" value="{{id_matricula}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig{{rownum}}" name="id_matasig[]" value="{{id_matasig}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_programa{{rownum}}" name="id_programa[]" value="{{id_programa}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_planestudio{{rownum}}" name="id_planestudio[]" value="{{id_planestudio}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_periodo{{rownum}}" name="id_periodo[]" value="{{id_periodo}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte{{rownum}}" name="id_corte[]" value="{{id_corte}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_grupo{{rownum}}" name="id_grupo[]" value="{{id_grupo}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="numgrado_programa{{rownum}}" name="numgrado_programa[]" value="{{numgrado_programa}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="{{nombrecompleto_estudiante}}">
                                 </td>
-                                <td> {{nombrecompleto_estudiante}} </td>
-                                <td> {{np1}} </td>
-                                <td> {{np2}} </td>
-                                <td> {{np3}} </td>
-                                <td> {{np4}} </td>
-                                <td> {{def}} </td>
-                                <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" maxlength="4" id="nc_calificacion" name="nc_calificacion[]" value="{{nc_calificacion}}"> </td>
-                                <td> <input type="text" editable="true" float="true" maxlength="4" id="np_calificacion" name="np_calificacion[]" value="{{np_calificacion}}"> </td>
-                                <td> <input type="text" editable="true" float="true" maxlength="4" id="na_calificacion" name="na_calificacion[]" value="{{na_calificacion}}"> </td>
-                                <td> <input type="text" editable="true" float="true" maxlength="4" id="nd_calificacion" name="nd_calificacion[]" value="{{nd_calificacion}}"> </td>
-                                <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
+                                <td> <b>{{nombrecompleto_estudiante}}</b> </td>
+                                <td> <b>{{np1}}</b> </td>
+                                <td> <b>{{np2}}</b> </td>
+                                <td> <b>{{np3}}</b> </td>
+                                <td> <b>{{np4}}</b> </td>
+                                <td> <b>{{def}}</b> </td>
+                                <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
+                                <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
+                                <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this)"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this)"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this)"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" value="{{nd_calificacion}}" onfocus="setRequiredND(this)"> </td>
+                                <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
                                 </td>
                             </tr>
                         </tbody>

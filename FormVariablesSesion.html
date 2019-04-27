@@ -75,9 +75,10 @@ and open the template in the editor.
                         <input type="number" name="numero_corte" id="numero_corte" readonly="readonly" value="" maxlength="2" min="0" max="6" required="required" class="form-control" title="Codigo de Periodo"  list="lista_id_corte">
                     </div>
                 </div>
+                <input type="hidden" name="estado_corte" id="estado_corte" value="" maxlength="1" required="required" title="Estado de Periodo">
                 <div>
                     <center>
-                        <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" > Aceptar </button>
+                        <button type="button" id="guardar" name="guardar" action="insertorupdate" class="btn btn-primary" onclick="Send(this);" > Aceptar </button>
                     </center>
                 </div>
                 <datalist id="lista_id_corte" name="lista_id_corte" required="required" selected="NULL" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" >
@@ -86,6 +87,7 @@ and open the template in the editor.
                 <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" onchange="setFindbyCombobox('id_periodo', this.id, this.value);">
                     <option value="">Ninguno</option>
                 </datalist>
+                
             </form>
         </div>
         <div class="panel-footer">

@@ -17,7 +17,7 @@ function setDatosEncabezado() {
     var nomasignatura = null;
     var grado = null;
     var grupo = null;
-    var listalogros=null;
+    var listalogros = null;
     nombre = document.getElementById('nombrecompleto_docente');
     idasignatura = document.getElementById('id_asignatura');
     nomasignatura = document.getElementById('nombre_asignatura');
@@ -29,10 +29,10 @@ function setDatosEncabezado() {
     nomasignatura.value = GET('nombre_asignatura');
     grado.value = GET('numgrado_programa');
     grupo.value = GET('id_grupo');
-    listalogros.setAttribute('findby',idasignatura.id);
-    listalogros.setAttribute('findbyvalue',idasignatura.value);
-    listalogros.setAttribute('findby2','numgrado_logro');
-    listalogros.setAttribute('findbyvalue2',grado.value);
+    listalogros.setAttribute('findby', idasignatura.id);
+    listalogros.setAttribute('findbyvalue', idasignatura.value);
+    listalogros.setAttribute('findby2', 'numgrado_logro');
+    listalogros.setAttribute('findbyvalue2', grado.value);
     loadComboboxData(listalogros);
 }
 
@@ -42,6 +42,43 @@ function getIdCargaFromPOST() {
     var mytable = document.getElementById("dataTable0");
     mytable.setAttribute('findby', 'id_carga');
     mytable.setAttribute('findbyvalue', idcarga);
+}
+
+function setRequiredND(nd){
+    if(nd!==undefined && nd!==null){
+        nd.setAttribute('required','required');
+        nd.setAttribute('float','true');
+    }
+}
+
+function setNotaDefinitiva(item) {
+    if (item !== undefined && item !== null) {
+        var tr = null;
+        var nc = null;
+        var np = null;
+        var na = null;
+        var nd = null;
+        var valor = null;
+        tr = getParentTR(item);
+        nc = getElementByName(tr, 'nc_calificacion[]');
+        np = getElementByName(tr, 'np_calificacion[]');
+        na = getElementByName(tr, 'na_calificacion[]');
+        nd = getElementByName(tr, 'nd_calificacion[]');
+        setRequiredND(nd);
+        if (nc !== undefined && np !== undefined && na !== undefined) {
+            if(item!==nc && (nc.value==='' || isNaN(nc.value))){
+                nc.value=0;
+            }
+            if(item!==np && (np.value==='' || isNaN(np.value))){
+                np.value=0;
+            }
+            if(item!==na && (na.value==='' || isNaN(na.value))){
+                na.value=0;
+            }
+            valor=(parseFloat(nc.value) + parseFloat(np.value) + parseFloat(na.value))/3;
+            nd.value = Math.round(valor*Math.pow(10,1))/Math.pow(10,1);;
+        }
+    }
 }
 
 function LoadTable() {

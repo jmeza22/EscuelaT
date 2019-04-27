@@ -53,7 +53,7 @@ function validateOnlyNumeric(text) {
 }
 
 function validateNumber(text) {
-    if (isNaN(text)) {
+    if (isNaN(parseFloat(text))) {
         return false;
     } else {
         return true;
@@ -277,7 +277,7 @@ function validateForm(form) {
                         if (!validateNumber(item.value)) {
                             item.focus();
                             next = false;
-                            showAlert('Campo Vacio: Numerico');
+                            showAlert('Campo Vacio: Numerico Decimal');
                             break;
                         }
                     }

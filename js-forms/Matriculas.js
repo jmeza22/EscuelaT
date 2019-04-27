@@ -153,7 +153,6 @@ function setIdEscuela() {
         escuela.innerHTML = '';
         escuela.removeAttribute('selected');
         newoption = document.createElement('option');
-        newoption.setAttribute('id', 'id_escuela');
         newoption.setAttribute('value', getEnterpriseID());
         newoption.setAttribute('selected', 'selected');
         newoption.innerHTML = '' + getEnterpriseName();

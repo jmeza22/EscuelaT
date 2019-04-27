@@ -58,7 +58,7 @@ and open the template in the editor.
                     </div>
                     <div class="col-sm-3">
                         <label>Escuela</label>
-                        <select id="id_escuela" name="id_escuela" selected="NN" required="required" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" class="form-control" style="width: 100%;" onchange="RefreshSede(this); setIdJornada();">
+                        <select id="id_escuela" name="id_escuela" selected="NN" required="required" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" class="form-control" style="width: 100%;" onchange="setIdJornada();setFindbyCombobox('id_sede', this.id, this.value);">
                             <option selected="selected" value="-1">Ninguna</option>
                         </select>
                     </div>

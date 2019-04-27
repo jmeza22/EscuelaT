@@ -4,6 +4,7 @@ class SystemVariableManager {
     private $index_periodo = 'id_periodo';
     private $index_corte = 'id_corte';
     private $index_numcorte = 'numero_corte';
+    private $index_estcorte = 'estado_corte';
     
     function __construct() {
         
@@ -25,6 +26,12 @@ class SystemVariableManager {
         }
     }
     
+    function setEstadoCortePeriodoForm($estado) {
+        if ($estado != null) {
+            $_SESSION[$this->index_estcorte] = $estado;
+        }
+    }
+    
     function getIdPeriodoAnual() {
         if (isset($_SESSION[$this->index_periodo])) {
             return $_SESSION[$this->index_periodo];
@@ -42,6 +49,13 @@ class SystemVariableManager {
     function getNumCortePeriodo() {
         if (isset($_SESSION[$this->index_numcorte])) {
             return $_SESSION[$this->index_numcorte];
+        }
+        return null;
+    }
+    
+    function getEstadoCortePeriodo() {
+        if (isset($_SESSION[$this->index_estcorte])) {
+            return $_SESSION[$this->index_estcorte];
         }
         return null;
     }

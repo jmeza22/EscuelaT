@@ -74,7 +74,7 @@ and open the template in the editor.
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Programa</label>
-                                        <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;">
+                                        <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value);">
                                             <option selected="selected" value="NULL">Ninguna</option>
                                         </select>
                                     </div>
@@ -149,7 +149,7 @@ and open the template in the editor.
                         <thead id="thead_dataTable0">
                             <tr rowhead="true">
                                 <th style="width: 10%;" title="Codigo de Matricula">Codigo</th>
-                                <th style="width: 40%;">Nombre Estudiante</th>
+                                <th style="width: 45%;">Nombre Estudiante</th>
                                 <th style="width: 5%;" title="Escuela">Esc.</th>
                                 <th style="width: 5%;" title="Sede">Sed.</th>
                                 <th style="width: 5%;" title="Jornada">Jor.</th>
@@ -157,7 +157,7 @@ and open the template in the editor.
                                 <th style="width: 5%;" title="Grado">Gra.</th>
                                 <th style="width: 5%;" title="Grupo">Gru.</th>
                                 <th style="width: 5%;" title="Año Academico">AÑo</th>
-                                <th style="width: 15%; min-width: 98px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th style="width: 10%; min-width: 98px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">

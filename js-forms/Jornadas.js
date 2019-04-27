@@ -31,33 +31,6 @@ function LoadSede() {
     loadComboboxData(sede);
 }
 
-function setFinbySede(findby) {
-    if (findby !== null && findby !== '') {
-        var sede = document.getElementById("id_sede");
-        sede.setAttribute('findby', findby);
-    }
-}
-
-function setFinbyValueSede(findbyvalue) {
-    if (findbyvalue !== null && findbyvalue !== '') {
-        var sede = document.getElementById("id_sede");
-        sede.setAttribute('findbyvalue', findbyvalue);
-    }
-}
-
-function RefreshSede(item) {
-    if (item !== undefined && item !== null) {
-        console.log('Filtrando por ' + item.id);
-        setFinbySede('id_escuela');
-        if (item.selected !== undefined && item.selected !== null) {
-            setFinbyValueSede(item.selected);
-        } else {
-            setFinbyValueSede(item.value);
-        }
-        LoadSede();
-    }
-}
-
 function GrabarJornada() {
     var form0 = null;
     form0 = document.getElementById('form0');
@@ -113,10 +86,9 @@ function setIdEscuela() {
     var newoption = null;
     escuela = document.getElementById('id_escuela');
     if (escuela !== null && escuela !== undefined && escuela.tagName === 'SELECT') {
-        escuela.innerHTML = '';
+        escuela.innerHTML = "<option value='NULL'>Ninguna</option>";
         escuela.removeAttribute('selected');
         newoption = document.createElement('option');
-        newoption.setAttribute('id', 'id_escuela');
         newoption.setAttribute('value', getEnterpriseID());
         newoption.setAttribute('selected', 'selected');
         newoption.innerHTML = '' + getEnterpriseName();

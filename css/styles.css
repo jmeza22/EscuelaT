@@ -30,7 +30,7 @@ footer {
     right: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
-    height: 70px !important;
+    height: 60px !important;
     z-index: 100;
     background-color: black !important;
     opacity: 0.6 !important;
@@ -120,6 +120,7 @@ th{
     padding-top: 3px !important;
     padding-bottom: 3px !important;
     min-width: 20px !important;
+    font-size: 12pt !important;
 }
 
 td{

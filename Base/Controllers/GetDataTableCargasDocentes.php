@@ -16,7 +16,7 @@ if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
     if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
         $where = $where . " and C." . $_POST['findby'] . " = " . $_POST['findbyvalue'] . " ";
     }
-    $where = $where . " ORDER BY C.id_carga desc ";
+    $where = $where . " ORDER BY D.nombrecompleto_docente, CAST(C.numgrado_programa AS DECIMAL), A.nombre_asignatura";
     $sql = $sql . $where;
     echo $bc->selectSimple($sql);
     $bc->disconnect();

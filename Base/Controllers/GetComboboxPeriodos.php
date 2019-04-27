@@ -17,7 +17,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST != null ) {
     $colname = 'anualidad_periodo';
     $colvalue = 'id_periodo';
     $othervalue = 'id_escuela';
-    $where = "status_periodo=1 and id_escuela = " . $session->getEnterpriseID() . "";
+    $where = "status_periodo=1 and cerrado_periodo=0 and id_escuela = " . $session->getEnterpriseID() . "";
     if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
         $where = $where . " and " . $_POST['findby'] . " = " . $_POST['findbyvalue'] . "";
     }

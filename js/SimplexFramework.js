@@ -33,7 +33,7 @@ function showNotification(mytitle, mytext) {
                 message = new Notification(title, extra);
                 setTimeout(function () {
                     message.close();
-                }, 3000);
+                }, 5000);
                 return true;
             }
         } else {
@@ -545,7 +545,7 @@ function getElementByName(parent, name) {
         elements = parent.childNodes;
         if (elements.length > 0) {
             for (j = 0; j < elements.length; j++) {
-                if (elements[j].getAttribute('name') === name) {
+                if (elements[j].name === name) {
                     console.log("Element Found: " + elements[j].name);
                     result = elements[j];
                     break;
@@ -557,7 +557,7 @@ function getElementByName(parent, name) {
         }
     }
     if (parent !== null && parent !== undefined && result === null) {
-        if (parent.getAttribute('name') === name) {
+        if (parent.name === name) {
             return parent;
         }
     }

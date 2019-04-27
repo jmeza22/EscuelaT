@@ -20,7 +20,7 @@ jQuery(document).ready(function () {
         getData(idescuela).done(function () {
             var listacorte = document.getElementById("lista_id_corte");
             setFindbyCombobox(listacorte.id, periodo.id, periodo.value);
-            autoNameFromDataList('id_corte', 'numero_corte', null);
+            autoNameFromDataList('id_corte', 'numero_corte', 'estado_corte');
         });
     }
 
