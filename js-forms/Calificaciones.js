@@ -9,6 +9,7 @@ jQuery(document).ready(function () {
     LoadTable();
     idescuela = document.getElementById('id_escuela');
     setDatosEncabezado();
+    ObtenerConfiguracion();
 });
 
 function setDatosEncabezado() {
@@ -34,6 +35,17 @@ function setDatosEncabezado() {
     listalogros.setAttribute('findby2', 'numgrado_logro');
     listalogros.setAttribute('findbyvalue2', grado.value);
     loadComboboxData(listalogros);
+}
+
+function ObtenerConfiguracion(){
+    var idescuela=null;
+    var formconf=null;
+    formconf=document.getElementById("formConfig");
+    if(formconf!==undefined && formconf!==null){
+        idescuela=getElement(formconf,'id_escuela');
+        idescuela.value=getEnterpriseID();
+        getData(formconf);
+    }
 }
 
 function getIdCargaFromPOST() {

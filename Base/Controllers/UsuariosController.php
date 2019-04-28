@@ -13,6 +13,7 @@ if ($session->hasLogin() && ($session->getManagement()==1 || $session->getAdmin(
         $bc->connect();
         $bc->preparePostData();
         $postdata = $bc->getPostData();
+        $postdata['id_escuela']=$session->getEnterpriseID();
         if (isset($postdata['password_usuario']) && strcmp($postdata['password_usuario'], "") !== 0) {
             $postdata['password_usuario'] = $crypt->crypt($postdata['password_usuario']);
         }

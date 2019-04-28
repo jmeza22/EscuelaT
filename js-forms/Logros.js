@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
+    setIdEscuela();
     var idlogro = document.getElementById("id_logro");
     if (idlogro !== undefined && idlogro !== null && idlogro.value !== '') {
         getData(idlogro);
@@ -11,6 +12,30 @@ jQuery(document).ready(function () {
     LoadTable();
     loadComboboxData(document.getElementById("id_asignatura"));
 });
+
+function setIdEscuela() {
+    var item=null;
+    item=document.getElementById("id_escuela");
+    if (item !== null && item !== undefined && item.value === '') {
+        console.log('Seteando Id Escuela.');
+        if (getEnterpriseID() !== null) {
+            item.value = getEnterpriseID();
+        }
+    }
+}
+
+function setIdLogro(){
+    var item=null;
+    var escuela=null;
+    var fecha=new Date();
+    item=document.getElementById("id_logro");
+    escuela=document.getElementById("id_escuela");
+    if (item !== null && item !== undefined && item.value === '') {
+        console.log('Seteando Id Logro.');
+        item.value="L"+escuela.value+fecha.getSeconds()+getRandomNumber(0,9);
+        showNotification('Codigo','El codigo del Logro es: '+item.value);
+    }
+}
 
 function setFinbyTable(findby) {
     if (findby !== null && findby !== '') {
@@ -88,15 +113,6 @@ function DeleteItem(item) {
             status.value = '0';
             Send(item);
             deleteRowInTable(mytable);
-        }
-    }
-}
-
-function setIdEscuela(item) {
-    if (item !== null && item !== undefined && item.value === '') {
-        console.log('Seteando Id Escuela.');
-        if (getEnterpriseID() !== null) {
-            item.value = getEnterpriseID();
         }
     }
 }

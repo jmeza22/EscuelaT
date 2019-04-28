@@ -18,6 +18,8 @@ if ($session->hasLogin() && ($session->getManagement()==1 || $session->getAdmin(
         $bc->setFindBy($findBy);
         $bc->setAction($action);
         $postdata = $bc->getPostData();
+        $postdata['id_escuela']=$session->getEnterpriseID();
+        $bc->setPostData($postdata);
         if (strcmp($_POST['action'], 'find') === 0) {
             $bc->setAction('find');
         }

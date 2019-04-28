@@ -204,6 +204,13 @@ class BaseController {
         }
         return null;
     }
+    
+    public function executeSQL($sql) {
+        if(isset($sql) && $sql!==null){
+            return $this->db->exec($sql);
+        }
+        return null;
+    }
 
     public function insert() {
         if (isset($this->db) && isset($this->postData)) {

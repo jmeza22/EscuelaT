@@ -33,12 +33,12 @@ and open the template in the editor.
             <div class="panel-body">
                 <div class="">
                     <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/LogrosController.php"  model="LogrosAsignaturasApp" findBy="id_logro" statusfield="status_logro" mainform="true" > 
-
+                        <input type="hidden" id="id_escuela" name="id_escuela" value="" maxlength="22" min="1"  /> 
                         <div>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Codigo</label>
-                                    <input type="number" id="id_logro" name="id_logro" readonly="readonly" value="" class="form-control" maxlength="22" /> 
+                                    <input type="text" id="id_logro" name="id_logro" readonly="readonly" value="0" class="form-control" maxlength="22" /> 
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Asignatura</label>
@@ -61,6 +61,9 @@ and open the template in the editor.
                                     <label>Grado</label>
                                     <select id="numgrado_logro" name="numgrado_logro" class="form-control" style="width: 100%;">
                                         <option disabled="disabled" selected="selected" value="-1">Ninguno</option>
+                                        <option value="-2">PreJardin</option>
+                                        <option value="-1">Jardin</option>
+                                        <option value="0">Transicion</option>
                                         <option value="1">Primero</option>
                                         <option value="2">Segundo</option>
                                         <option value="3">Tercero</option>
@@ -76,15 +79,13 @@ and open the template in the editor.
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label title="">Corte</label>
+                                    <label title="">Periodo</label>
                                     <select id="numcorte_logro" name="numcorte_logro" class="form-control" style="width: 100%;">
                                         <option disabled="disabled" selected="selected" value=" ">Ninguno</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
@@ -107,7 +108,7 @@ and open the template in the editor.
 
                         <div>
                             <center>
-                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                                <button type="button" id="guardar" name="guardar" action="insertorupdate" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
                             </center>
                         </div>
                     </form>
@@ -123,7 +124,8 @@ and open the template in the editor.
                         <thead id="thead_dataTable0">
                             <tr rowhead="true">
                                 <th style="width: 10%;" title="Codigo">#</th>
-                                <th style="width: 60%;">Descripcion</th>
+                                <th style="width: 50%;">Descripcion</th>
+                                <th style="width: 10%;">Asignatura</th>
                                 <th style="width: 6%;">Tipo</th>
                                 <th style="width: 8%;">Grado</th>
                                 <th style="width: 8%;">Periodo</th>
@@ -134,6 +136,7 @@ and open the template in the editor.
                             <tr id="rowsample" rowsample="true" style="display: none;">
                                 <td> <label>{{id_logro}}</label> </td>
                                 <td> <label>{{descripcion_logro}}</label> </td>
+                                <td> <label>{{id_asignatura}}</label> </td>
                                 <td> <label>{{tipo_logro}}</label> </td>
                                 <td> <label>{{numgrado_logro}}</label> </td>
                                 <td> <label>{{numcorte_logro}}</label> </td>

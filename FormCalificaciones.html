@@ -52,16 +52,57 @@ and open the template in the editor.
                         <input type="text" name="id_grupo" id="id_grupo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grupo">
                     </div>
                 </div>
-                
                 <datalist id="lista_id_logro" name="lista_id_logro" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogros.php" >
                     <option selected="selected" value="">Ninguna</option>
                 </datalist>
             </form>
+            <form id="formConfig" method="POST" autocomplete="off" url="Base/Controllers/ConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
+                <input type="hidden" id="id_escuela" name="id_escuela" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valmin_configuracion" name="valmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valmax_configuracion" name="valmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valaprueba_configuracion" name="valaprueba_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valsupmin_configuracion" name="valsupmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valsupmax_configuracion" name="valsupmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valaltomin_configuracion" name="valaltomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valaltomax_configuracion" name="valaltomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valbasmin_configuracion" name="valbasmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valbasmax_configuracion" name="valbasmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                <input type="hidden" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+            </form>
         </div>
     </div>
+
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Automatizacion de Logros por Notas</div>
+        <div class="panel-body" >
+            <form id="logroauto" name="logroauto">
+                <div class="row">
+                    <div class="col-sm-3"><label>L.C. Bajo</label><input type="text" id="lcbajo" name="lcbajo" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.C. Basico</label><input type="text" id="lcbasico" name="lcbasico" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.C. Alto</label><input type="text" id="lcalto" name="lcalto" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.C. Super</label><input type="text" id="lcsuperior" name="lcsuperior" value="" list="lista_id_logro" class="form-control"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><label>L.P. Bajo</label><input type="text" id="lpbajo" name="lpbajo" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.P. Basico</label><input type="text" id="lpbasico" name="lpbasico" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.P. Alto</label><input type="text" id="lpalto" name="lpalto" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.P. Super</label><input type="text" id="lpsuperior" name="lpsuperior" value="" list="lista_id_logro" class="form-control"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><label>L.A. Bajo</label><input type="text" id="labajo" name="labajo" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.A. Basico</label><input type="text" id="labasico" name="labasico" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.A. Alto</label><input type="text" id="laalto" name="laalto" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.A. Super</label><input type="text" id="lasuperior" name="lasuperior" value="" list="lista_id_logro" class="form-control"></div>
+                </div>
+                </table>
+            </form>
+        </div>
+    </div>
+
     <div class="panel panel-primary" style="width: 80% !important;">
         <div class="panel-heading">Planilla de Calificaciones</div>
-        <div class="panel-body">
+        <div class="panel-body table-responsive">
 
             <div class="table-responsive">
                 <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/CalificacionesController.php" model="CalificacionesApp" findBy="id_calificacion" statusfield="status_calificacion" mainform="true" > 

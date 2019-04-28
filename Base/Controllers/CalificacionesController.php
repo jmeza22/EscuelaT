@@ -21,6 +21,7 @@ $numcorte = null;
 $estadocorte = null;
 $nombre = '';
 $errormessage = '';
+$fecha = date('Y-m-d H:i:s');
 if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
@@ -79,6 +80,14 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
                         unset($data["ausencias_calificacion"]);
                         $data["p" . $numcorte . "_id_corte"] = $data["id_corte"];
                         unset($data["id_corte"]);
+                        if($data[$findBy]===0){
+                            $data["usuariocrea_calificacion"]=$session->getNickname();
+                            $data["fechacrea_calificacion"]=$fecha;
+                        }
+                        if($data[$findBy]!==0){
+                            $data["usuarioedita_calificacion"]=$session->getNickname();
+                            $data["fechaedita_calificacion"]=$fecha;
+                        }
                         if (isset($data[$findBy]) && $data[$findBy] !== null && $data[$findBy] !== '{{' . $findBy . '}}') {
                             if ($estadocorte === 'A') {
                                 $bc->setPostData($data);

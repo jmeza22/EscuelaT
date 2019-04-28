@@ -207,20 +207,24 @@
         <Cm>Nota Nivelacion de Final de Periodo</Cm>
       </Cl>
       <Cl au="0" df="" nm="p1_logroc_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
         <Cm>Logro Cognositivo</Cm>
       </Cl>
       <Cl au="0" df="" nm="p1_logrop_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
         <Cm>Logro Procedimental</Cm>
       </Cl>
       <Cl au="0" df="" nm="p1_logroa_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
         <Cm>Logro Actitudinal</Cm>
       </Cl>
       <Cl au="0" df="0" nm="p1_ausencias_calificacion" nu="1">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Numero de Ausencias durante el Corte</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="p1_comentarios_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Comentarios Periodo 1</Cm>
       </Cl>
       <Cl au="0" df="" nm="p2_id_corte" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
@@ -244,16 +248,20 @@
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p2_logroc_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p2_logrop_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p2_logroa_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p2_ausencias_calificacion" nu="1">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p2_comentarios_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Comentarios Periodo 2</Cm>
       </Cl>
       <Cl au="0" df="" nm="p3_id_corte" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
@@ -277,16 +285,20 @@
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p3_logroc_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p3_logrop_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p3_logroa_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p3_ausencias_calificacion" nu="1">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p3_comentarios_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Comentarios Periodo 3</Cm>
       </Cl>
       <Cl au="0" df="" nm="p4_id_corte" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
@@ -310,16 +322,36 @@
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p4_logroc_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p4_logrop_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p4_logroa_calificacion" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
       </Cl>
       <Cl au="0" df="" nm="p4_ausencias_calificacion" nu="1">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p4_comentarios_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Comentarios Periodo 4</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuariocrea_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Usuario que crea el Registro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuarioedita_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Usuario que Modifica el Registro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechacrea_calificacion" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Creacion del Registri</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechaedita_calificacion" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Modiificacion del Registro</Cm>
       </Cl>
       <Cl au="0" df="1" nm="status_calificacion" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
@@ -879,14 +911,22 @@
     </Tbl>
     <Tbl UsSo="1" nm="LogrosAsignaturasApp">
       <TblOpts/>
-      <Pk ClNs="id_logro, id_asignatura" nm="pkLogrosAsignaturasApp"/>
-      <Cl au="1" df="" nm="id_logro" nu="1">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      <Pk ClNs="id_logro" nm="pkLogrosAsignaturasApp"/>
+      <Cl au="0" df="" nm="id_logro" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
         <Cm>Numero del Logo</Cm>
       </Cl>
       <Cl au="0" df="" nm="id_asignatura" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
-        <Cm>Codigo Asignatura</Cm>
+        <Cm>Codigo de Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="1" df="" nm="num_logro" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Numerico del Logro</Cm>
       </Cl>
       <Cl au="0" df="R" nm="tipo_logro" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
@@ -916,10 +956,19 @@
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Fk deAc="3" nm="fk_LogrosAsignaturasApp_AsignaturasApp" prLkCl="id_asignatura" upAc="3">
-        <PrTb mn="0" nm="AsignaturasApp" oe="1" sch="EscuelaDB" zr="1"/>
+        <PrTb mn="0" nm="AsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="LogrosAsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
       </Fk>
+      <Idx clu="0" ftx="0" nm="LogrosAsignaturasApp_num_logro_Idx" spa="0" unq="1">
+        <ClNs>num_logro</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="LogrosAsignaturasApp_Unique2_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_asignatura, id_logro</ClNs>
+        <OptTx/>
+      </Idx>
       <Idx clu="0" ftx="0" nm="LogrosAsignaturasApp_Unique_Idx" spa="0" unq="1">
         <ClNs>id_logro</ClNs>
         <OptTx/>
@@ -1795,7 +1844,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.LogrosAsignaturasApp.fk_LogrosAsignaturasApp_AsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="2361" x2="2361" y1="708" y2="1079"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="2346" x2="2346" y1="708" y2="1079"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MatriculaAsignaturasApp.fk_AsignaturasMatriculadasApp_MatriculasApp" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
@@ -2253,7 +2302,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

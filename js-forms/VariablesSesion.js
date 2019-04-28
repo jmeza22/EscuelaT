@@ -34,7 +34,7 @@ function Send(item) {
             role = getUserRoleLogin();
             if (window.location.href.indexOf('FormVariablesSesion.html') > -1) {
                 if (role !== null && role === "Teacher") {
-                    window.location.href = 'FormHomeDocentes.html';
+                    //window.location.href = 'FormHomeDocentes.html';
                 }
                 if (role !== null && role === "Student") {
                     window.location.href = 'FormHomeEstudiantes.html';

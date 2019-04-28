@@ -18,7 +18,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
                 $ok1 = true;
             }
         }
-        if (($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() === 1)) {
+        if (($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() == 1)) {
             if (isset($_POST['id_periodo']) && isset($_POST['id_corte']) && isset($_POST['numero_corte']) && $_POST['id_periodo'] !== 'NULL' && $_POST['id_corte'] !== 'NULL' && $_POST['numero_corte'] !== 'NULL' && $_POST['id_periodo'] !== '' && $_POST['id_corte'] !== '' && $_POST['numero_corte'] !== '') {
                 $variables->setIdPeriodoAnualForm($_POST['id_periodo']);
                 $variables->setIdCortePeriodoForm($_POST['id_corte']);

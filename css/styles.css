@@ -89,18 +89,6 @@ option{
     height: auto !important;
 }
 
-button[action="insert"]{
-    content: 'Grabar' !important;
-}
-
-button[action="update"]{
-    content: 'Actualizar' !important;
-}
-
-button[action="delete"]{
-    content: 'Eliminar' !important;
-}
-
 textarea{
     width: 100% !important;
     min-width: 225px !important;
@@ -254,15 +242,23 @@ td > input[type="text"]  {
     width: calc(100% - 70px) !important;
 }
 
+
 table > tbody > tr > td > input[type="text"], 
 table > tbody > tr > td > input[type="tel"],
 table > tbody > tr > td > input[type="email"],
 table > tbody > tr > td > input[type="number"],
 table > tbody > tr > td > input[type="date"]{
-    border: 0px !important;
+    border: 0px;
     background-color: inherit !important;
     text-transform: capitalize !important;
     min-height: 26px !important;
+}
+
+.table-form-control{
+    height: 30px !important;
+    min-width: 30px !important;
+    border: 1px !important;
+    border-color: black !important;
 }
 
 .imagePhoto{
