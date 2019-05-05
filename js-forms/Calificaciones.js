@@ -10,6 +10,7 @@ jQuery(document).ready(function () {
     idescuela = document.getElementById('id_escuela');
     setDatosEncabezado();
     ObtenerConfiguracion();
+
 });
 
 function setDatosEncabezado() {
@@ -37,14 +38,17 @@ function setDatosEncabezado() {
     loadComboboxData(listalogros);
 }
 
-function ObtenerConfiguracion(){
-    var idescuela=null;
-    var formconf=null;
-    formconf=document.getElementById("formConfig");
-    if(formconf!==undefined && formconf!==null){
-        idescuela=getElement(formconf,'id_escuela');
-        idescuela.value=getEnterpriseID();
-        getData(formconf);
+function ObtenerConfiguracion() {
+    var idescuela = null;
+    var formconf = null;
+    formconf = document.getElementById("formConfig");
+    if (formconf !== undefined && formconf !== null) {
+        idescuela = getElement(formconf, 'id_escuela');
+        idescuela.value = getEnterpriseID();
+        OcultarPeriodos();
+        getData(formconf).done(function () {
+            MostrarPeriodos();
+        });
     }
 }
 
@@ -56,10 +60,10 @@ function getIdCargaFromPOST() {
     mytable.setAttribute('findbyvalue', idcarga);
 }
 
-function setRequiredND(nd){
-    if(nd!==undefined && nd!==null){
-        nd.setAttribute('required','required');
-        nd.setAttribute('float','true');
+function setRequiredND(nd) {
+    if (nd !== undefined && nd !== null) {
+        nd.setAttribute('required', 'required');
+        nd.setAttribute('float', 'true');
     }
 }
 
@@ -78,18 +82,113 @@ function setNotaDefinitiva(item) {
         nd = getElementByName(tr, 'nd_calificacion[]');
         setRequiredND(nd);
         if (nc !== undefined && np !== undefined && na !== undefined) {
-            if(item!==nc && (nc.value==='' || isNaN(nc.value))){
-                nc.value=0;
+            if (item !== nc && (nc.value === '' || isNaN(nc.value))) {
+                nc.value = 0;
             }
-            if(item!==np && (np.value==='' || isNaN(np.value))){
-                np.value=0;
+            if (item !== np && (np.value === '' || isNaN(np.value))) {
+                np.value = 0;
             }
-            if(item!==na && (na.value==='' || isNaN(na.value))){
-                na.value=0;
+            if (item !== na && (na.value === '' || isNaN(na.value))) {
+                na.value = 0;
             }
-            valor=(parseFloat(nc.value) + parseFloat(np.value) + parseFloat(na.value))/3;
-            nd.value = Math.round(valor*Math.pow(10,1))/Math.pow(10,1);;
+            valor = (parseFloat(nc.value) + parseFloat(np.value) + parseFloat(na.value)) / 3;
+            nd.value = Math.round(valor * Math.pow(10, 1)) / Math.pow(10, 1);
+            ;
         }
+    }
+}
+
+function OcultarPeriodos() {
+    var thp1 = document.getElementById('thp1');
+    var thp2 = document.getElementById('thp2');
+    var thp3 = document.getElementById('thp3');
+    var thp4 = document.getElementById('thp4');
+    var thp5 = document.getElementById('thp5');
+    var thp6 = document.getElementById('thp6');
+    thp1.setAttribute('style', 'display: none !important;');
+    thp2.setAttribute('style', 'display: none !important;');
+    thp3.setAttribute('style', 'display: none !important;');
+    thp4.setAttribute('style', 'display: none !important;');
+    thp5.setAttribute('style', 'display: none !important;');
+    thp6.setAttribute('style', 'display: none !important;');
+
+    console.log('Ocultando Periodos');
+}
+
+function MostrarPeriodos() {
+    var numcortes = document.getElementById('numcortes_configuracion');
+    var thp1 = document.getElementById('thp1');
+    var thp2 = document.getElementById('thp2');
+    var thp3 = document.getElementById('thp3');
+    var thp4 = document.getElementById('thp4');
+    var thp5 = document.getElementById('thp5');
+    var thp6 = document.getElementById('thp6');
+    var tdp1 = null;
+    var tdp2 = null;
+    var tdp3 = null;
+    var tdp4 = null;
+    var tdp5 = null;
+    var tdp6 = null;
+    if (numcortes !== undefined && numcortes !== null && numcortes.value !== '' && numcortes.value !== '0') {
+        numcortes = numcortes.value;
+        numcortes = parseFloat(numcortes);
+        console.log('Mostrando ' + numcortes + ' Periodos.');
+
+        if (numcortes > 0) {
+            thp1.removeAttribute('style');
+            console.log('Mostrando 1er Periodo.');
+        }
+        if (numcortes > 1) {
+            thp2.removeAttribute('style');
+            console.log('Mostrando 2do Periodo.');
+        }
+        if (numcortes > 2) {
+            thp3.removeAttribute('style');
+            console.log('Mostrando 3er Periodo.');
+        }
+        if (numcortes > 3) {
+            thp4.removeAttribute('style');
+            console.log('Mostrando 4to Periodo.');
+        }
+        if (numcortes > 4) {
+            thp5.removeAttribute('style');
+            console.log('Mostrando 5to Periodo.');
+        }
+        if (numcortes > 5) {
+            thp6.removeAttribute('style');
+            console.log('Mostrando 6to Periodo.');
+        }
+
+        var i = 0;
+        tdp1 = document.getElementsByName('tdp1');
+        tdp2 = document.getElementsByName('tdp2');
+        tdp3 = document.getElementsByName('tdp3');
+        tdp4 = document.getElementsByName('tdp4');
+        tdp5 = document.getElementsByName('tdp5');
+        tdp6 = document.getElementsByName('tdp6');
+
+        while (tdp1[i] !== undefined && tdp1[i] !== null) {
+            if (numcortes > 0) {
+                tdp1[i].removeAttribute('style');
+            }
+            if (numcortes > 1) {
+                tdp2[i].removeAttribute('style');
+            }
+            if (numcortes > 2) {
+                tdp3[i].removeAttribute('style');
+            }
+            if (numcortes > 3) {
+                tdp4[i].removeAttribute('style');
+            }
+            if (numcortes > 4) {
+                tdp5[i].removeAttribute('style');
+            }
+            if (numcortes > 5) {
+                tdp6[i].removeAttribute('style');
+            }
+            i++;
+        }
+
     }
 }
 
@@ -106,4 +205,6 @@ function Send(item) {
         });
     }
 }
+
+
 

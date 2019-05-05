@@ -70,6 +70,8 @@ and open the template in the editor.
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
@@ -112,12 +114,17 @@ and open the template in the editor.
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-12">
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-6">
                                     <center>
-                                        <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="GrabarCorte();" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar Corte </button>
+                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarCorte(this);" class="btn btn-primary" >Grabar</button>        
                                     </center>
-                                </div>    
+                                </div>
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                                    </center>
+                                </div>
                             </div>
                         </form>
 
@@ -129,7 +136,7 @@ and open the template in the editor.
                     <div class="panel-heading">Cortes del Periodo</div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            
+
                             <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="CortesApp" url="Base/Controllers/GetDataTableCortes.php" >
                                 <thead id="thead_dataTable0">
                                     <tr rowhead="true">
@@ -163,7 +170,7 @@ and open the template in the editor.
                                     </tr>
                                 </tbody>
                             </table>
-                            
+
                         </div>
                     </div>
                 </div>

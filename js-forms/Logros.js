@@ -6,7 +6,7 @@
 jQuery(document).ready(function () {
     setIdEscuela();
     var idlogro = document.getElementById("id_logro");
-    if (idlogro !== undefined && idlogro !== null && idlogro.value !== '') {
+    if (idlogro !== undefined && idlogro !== null && idlogro.value !== '' && idlogro.value !== '0') {
         getData(idlogro);
     }
     LoadTable();

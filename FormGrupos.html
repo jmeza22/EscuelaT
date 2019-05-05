@@ -77,10 +77,17 @@ and open the template in the editor.
 
                             </div>
 
-                            <div>
-                                <center>
-                                    <button type="button" id="guardar" name="guardar" action="insert" class="btn btn-primary" onclick="GrabarGrupo(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
-                                </center>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarGrupo(this);" class="btn btn-primary" >Grabar</button>        
+                                    </center>
+                                </div>
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                                    </center>
+                                </div>
                             </div>
                         </div>
                     </form>

@@ -337,6 +337,78 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
         <Cm>Comentarios Periodo 4</Cm>
       </Cl>
+      <Cl au="0" df="" nm="p5_id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_id_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_nc_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_np_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_na_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_nn_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_nd_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_logroc_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_logrop_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_logroa_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_ausencias_calificacion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p5_comentarios_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_id_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_nc_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_np_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_na_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_nn_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_nd_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_logroc_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_logrop_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_logroa_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="26" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_ausencias_calificacion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="p6_comentarios_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+      </Cl>
       <Cl au="0" df="" nm="usuariocrea_calificacion" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
         <Cm>Usuario que crea el Registro</Cm>

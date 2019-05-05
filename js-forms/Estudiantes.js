@@ -155,7 +155,7 @@ function GenerarCodigoFecha() {
     GenerarCodigoAnotacion();
 }
 
-function SendAnotacion(item) {
+function GrabarAnotacion(item) {
     GenerarFecha();
     GenerarCodigoAnotacion();
     if (validateForm(item)) {
@@ -165,7 +165,7 @@ function SendAnotacion(item) {
     }
 }
 
-function SendEstudiante(item) {
+function GrabarEstudiante(item) {
     var form = getForm(item);
     if (validateForm(form)) {
         submitForm(form, false).done(function () {

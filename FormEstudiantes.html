@@ -155,10 +155,15 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
                             <center>
-                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendEstudiante(this);" class="btn btn-primary" >Grabar Estudiante</button>        
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendEstudiante(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
                             </center>
                         </div>
                     </div>
@@ -348,12 +353,12 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-6">
                                     <center>
-                                        <button type="button" id="saveA" name="save"  action="insertorupdate" save="true" onclick="SendAnotacion(this);" class="btn btn-primary" >Grabar Anotacion</button>        
+                                        <button type="button" id="saveA" name="saveA"  action="insertorupdate" save="true" onclick="GrabarAnotacion(this);" class="btn btn-primary" >Grabar Anotacion</button>        
                                     </center>
                                 </div>
                                 <div class="col-sm-6">
                                     <center>
-                                        <button type="reset" id="resetA" name="reset" class="btn btn-success">Nuevo Anotacion</button> 
+                                        <button type="reset" id="resetA" name="resetA" class="btn btn-success">Nuevo Anotacion</button> 
                                     </center>
                                 </div>
                             </div>
