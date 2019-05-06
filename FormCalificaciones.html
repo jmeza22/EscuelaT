@@ -78,23 +78,35 @@ and open the template in the editor.
         <div class="panel-heading">Automatizacion de Logros por Notas</div>
         <div class="panel-body" >
             <form id="logroauto" name="logroauto">
+                <datalist id="lista_id_logro_sup" name="lista_id_logro_sup" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosSuperior.php" >
+                    <option selected="selected" value="">Ninguna</option>
+                </datalist>
+                <datalist id="lista_id_logro_alt" name="lista_id_logro_alt" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosAlto.php" >
+                    <option selected="selected" value="">Ninguna</option>
+                </datalist>
+                <datalist id="lista_id_logro_bas" name="lista_id_logro_bas" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBasico.php" >
+                    <option selected="selected" value="">Ninguna</option>
+                </datalist>
+                <datalist id="lista_id_logro_baj" name="lista_id_logro_baj" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBajo.php" >
+                    <option selected="selected" value="">Ninguna</option>
+                </datalist>
                 <div class="row">
-                    <div class="col-sm-3"><label>L.C. Bajo</label><input type="text" id="lcbajo" name="lcbajo" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.C. Basico</label><input type="text" id="lcbasico" name="lcbasico" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.C. Alto</label><input type="text" id="lcalto" name="lcalto" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.C. Super</label><input type="text" id="lcsuperior" name="lcsuperior" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.C. Bajo</label><input type="text" id="lcbajo" name="lcbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.C. Basico</label><input type="text" id="lcbasico" name="lcbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.C. Alto</label><input type="text" id="lcalto" name="lcalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.C. Super</label><input type="text" id="lcsuperior" name="lcsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3"><label>L.P. Bajo</label><input type="text" id="lpbajo" name="lpbajo" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.P. Basico</label><input type="text" id="lpbasico" name="lpbasico" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.P. Alto</label><input type="text" id="lpalto" name="lpalto" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.P. Super</label><input type="text" id="lpsuperior" name="lpsuperior" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.P. Bajo</label><input type="text" id="lpbajo" name="lpbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.P. Basico</label><input type="text" id="lpbasico" name="lpbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.P. Alto</label><input type="text" id="lpalto" name="lpalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.P. Super</label><input type="text" id="lpsuperior" name="lpsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3"><label>L.A. Bajo</label><input type="text" id="labajo" name="labajo" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.A. Basico</label><input type="text" id="labasico" name="labasico" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.A. Alto</label><input type="text" id="laalto" name="laalto" value="" list="lista_id_logro" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.A. Super</label><input type="text" id="lasuperior" name="lasuperior" value="" list="lista_id_logro" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.A. Bajo</label><input type="text" id="labajo" name="labajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.A. Basico</label><input type="text" id="labasico" name="labasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.A. Alto</label><input type="text" id="laalto" name="laalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                    <div class="col-sm-3"><label>L.A. Super</label><input type="text" id="lasuperior" name="lasuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
                 </div>
                 </table>
             </form>
@@ -155,9 +167,9 @@ and open the template in the editor.
                                 <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
                                 <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
                                 <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this)"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this)"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this)"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);"> </td>
                                 <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" value="{{nd_calificacion}}" onfocus="setRequiredND(this)"> </td>
                                 <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
                                 </td>

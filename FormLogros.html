@@ -48,11 +48,15 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Tipo</label>
-                                    <select id="tipo_logro" name="tipo_logro" class="form-control" style="width: 100%;">
+                                    <select id="tipo_logro" name="tipo_logro" class="form-control" style="width: 100%;" onchange="setMinMaxLogro(this);">
                                         <option disabled="disabled" selected="selected" value=" ">Ninguno</option>
                                         <option value="R">Recomendacion</option>
                                         <option value="F">Fortaleza</option>
                                         <option value="D">Debilidad</option>
+                                        <option value="DI">Desempeño Bajo</option>
+                                        <option value="DB">Desempeño Basico</option>
+                                        <option value="DA">Desempeño Alto</option>
+                                        <option value="DS">Desempeño Superior</option>
                                     </select>
                                 </div>
                             </div>
@@ -90,11 +94,11 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-3">
                                     <label>CalificacionMinima</label>
-                                    <input type="number" id="min_logro" name="min_logro" value="" class="form-control" maxlength="2" min="0" max="10" /> 
+                                    <input type="number" id="min_logro" name="min_logro" value="" class="form-control" maxlength="2" min="0" max="10" readonly="readonly" /> 
                                 </div>
                                 <div class="col-sm-3">
                                     <label>CalificacionMaxima</label>
-                                    <input type="number" id="max_logro" name="max_logro" value="" class="form-control" maxlength="2" min="0" max="10" /> 
+                                    <input type="number" id="max_logro" name="max_logro" value="" class="form-control" maxlength="2" min="0" max="10" readonly="readonly" /> 
                                 </div>
 
                             </div>
@@ -112,6 +116,22 @@ and open the template in the editor.
                             </center>
                         </div>
                     </form>
+                    
+                    <form id="formConfig" method="POST" autocomplete="off" url="Base/Controllers/ConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
+                        <input type="hidden" id="id_escuela" name="id_escuela" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valmin_configuracion" name="valmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valmax_configuracion" name="valmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valaprueba_configuracion" name="valaprueba_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valsupmin_configuracion" name="valsupmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valsupmax_configuracion" name="valsupmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valaltomin_configuracion" name="valaltomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valaltomax_configuracion" name="valaltomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valbasmin_configuracion" name="valbasmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valbasmax_configuracion" name="valbasmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                        <input type="hidden" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    </form>
+                    
                 </div>    
             </div>
         </div>

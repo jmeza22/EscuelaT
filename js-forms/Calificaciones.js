@@ -20,12 +20,20 @@ function setDatosEncabezado() {
     var grado = null;
     var grupo = null;
     var listalogros = null;
+    var listalogrossup = null;
+    var listalogrosalt = null;
+    var listalogrosbas = null;
+    var listalogrosbaj = null;
     nombre = document.getElementById('nombrecompleto_docente');
     idasignatura = document.getElementById('id_asignatura');
     nomasignatura = document.getElementById('nombre_asignatura');
     grado = document.getElementById('numgrado_programa');
     grupo = document.getElementById('id_grupo');
     listalogros = document.getElementById('lista_id_logro');
+    listalogrossup = document.getElementById('lista_id_logro_sup');
+    listalogrosalt = document.getElementById('lista_id_logro_alt');
+    listalogrosbas = document.getElementById('lista_id_logro_bas');
+    listalogrosbaj = document.getElementById('lista_id_logro_baj');
     nombre.value = getFullnameLogin();
     idasignatura.value = GET('id_asignatura');
     nomasignatura.value = GET('nombre_asignatura');
@@ -36,6 +44,26 @@ function setDatosEncabezado() {
     listalogros.setAttribute('findby2', 'numgrado_logro');
     listalogros.setAttribute('findbyvalue2', grado.value);
     loadComboboxData(listalogros);
+    listalogrossup.setAttribute('findby', idasignatura.id);
+    listalogrossup.setAttribute('findbyvalue', idasignatura.value);
+    listalogrossup.setAttribute('findby2', 'numgrado_logro');
+    listalogrossup.setAttribute('findbyvalue2', grado.value);
+    loadComboboxData(listalogrossup);
+    listalogrosalt.setAttribute('findby', idasignatura.id);
+    listalogrosalt.setAttribute('findbyvalue', idasignatura.value);
+    listalogrosalt.setAttribute('findby2', 'numgrado_logro');
+    listalogrosalt.setAttribute('findbyvalue2', grado.value);
+    loadComboboxData(listalogrosalt);
+    listalogrosbas.setAttribute('findby', idasignatura.id);
+    listalogrosbas.setAttribute('findbyvalue', idasignatura.value);
+    listalogrosbas.setAttribute('findby2', 'numgrado_logro');
+    listalogrosbas.setAttribute('findbyvalue2', grado.value);
+    loadComboboxData(listalogrosbas);
+    listalogrosbaj.setAttribute('findby', idasignatura.id);
+    listalogrosbaj.setAttribute('findbyvalue', idasignatura.value);
+    listalogrosbaj.setAttribute('findby2', 'numgrado_logro');
+    listalogrosbaj.setAttribute('findbyvalue2', grado.value);
+    loadComboboxData(listalogrosbaj);
 }
 
 function ObtenerConfiguracion() {
@@ -64,6 +92,46 @@ function setRequiredND(nd) {
     if (nd !== undefined && nd !== null) {
         nd.setAttribute('required', 'required');
         nd.setAttribute('float', 'true');
+    }
+}
+
+function ValidarNotasPorFila(item) {
+    if (item !== undefined && item !== null) {
+        var tr = null;
+        var nc = null;
+        var np = null;
+        var na = null;
+        var nd = null;
+        var valor = null;
+        var valmin = document.getElementById('valmin_configuracion');
+        var valmax = document.getElementById('valmax_configuracion');
+        tr = getParentTR(item);
+        nc = getElementByName(tr, 'nc_calificacion[]');
+        np = getElementByName(tr, 'np_calificacion[]');
+        na = getElementByName(tr, 'na_calificacion[]');
+        nd = getElementByName(tr, 'nd_calificacion[]');
+        if (nc !== undefined && np !== undefined && na !== undefined) {
+            valmin = parseFloat(valmin.value);
+            valmax = parseFloat(valmax.value);
+
+            if (parseFloat(nc.value) < valmin || parseFloat(nc.value) > valmax) {
+                showNotification('Validacion', 'NC o L1 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
+                nc.value=valmin;
+                return false;
+            }
+            if (parseFloat(np.value) < valmin || parseFloat(np.value) > valmax) {
+                showNotification('Validacion', 'NP o L2 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
+                np.value=valmin;
+                return false;
+            }
+            if (parseFloat(na.value) < valmin || parseFloat(na.value) > valmax) {
+                showNotification('Validacion', 'NA o L3 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
+                na.value=valmin;
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }
 

@@ -9,13 +9,14 @@ jQuery(document).ready(function () {
     if (idlogro !== undefined && idlogro !== null && idlogro.value !== '' && idlogro.value !== '0') {
         getData(idlogro);
     }
+    ObtenerConfiguracion();
     LoadTable();
     loadComboboxData(document.getElementById("id_asignatura"));
 });
 
 function setIdEscuela() {
-    var item=null;
-    item=document.getElementById("id_escuela");
+    var item = null;
+    item = document.getElementById("id_escuela");
     if (item !== null && item !== undefined && item.value === '') {
         console.log('Seteando Id Escuela.');
         if (getEnterpriseID() !== null) {
@@ -24,16 +25,16 @@ function setIdEscuela() {
     }
 }
 
-function setIdLogro(){
-    var item=null;
-    var escuela=null;
-    var fecha=new Date();
-    item=document.getElementById("id_logro");
-    escuela=document.getElementById("id_escuela");
+function setIdLogro() {
+    var item = null;
+    var escuela = null;
+    var fecha = new Date();
+    item = document.getElementById("id_logro");
+    escuela = document.getElementById("id_escuela");
     if (item !== null && item !== undefined && item.value === '') {
         console.log('Seteando Id Logro.');
-        item.value="L"+escuela.value+fecha.getSeconds()+getRandomNumber(0,9);
-        showNotification('Codigo','El codigo del Logro es: '+item.value);
+        item.value = "L" + escuela.value + fecha.getSeconds() + getRandomNumber(0, 9);
+        showNotification('Codigo', 'El codigo del Logro es: ' + item.value);
     }
 }
 
@@ -50,6 +51,61 @@ function setFinbyValueTable(findbyvalue) {
         var mytable = document.getElementById("dataTable0");
         mytable.setAttribute('findbyvalue', findbyvalue);
         console.log('Filtrando por Valor: ' + findbyvalue);
+    }
+}
+
+function ObtenerConfiguracion() {
+    var idescuela = null;
+    var formconf = null;
+    formconf = document.getElementById("formConfig");
+    if (formconf !== undefined && formconf !== null) {
+        idescuela = getElement(formconf, 'id_escuela');
+        idescuela.value = getEnterpriseID();
+        getData(formconf).done(function () {
+        });
+    }
+}
+
+function setMinMaxLogro(item) {
+    var valmin = document.getElementById('min_logro');
+    var valmax = document.getElementById('max_logro');
+    var vminsup= document.getElementById('valsupmin_configuracion');
+    var vmaxsup= document.getElementById('valsupmax_configuracion');
+    var vminalt= document.getElementById('valaltomin_configuracion');
+    var vmaxalt= document.getElementById('valaltomax_configuracion');
+    var vminbas= document.getElementById('valbasmin_configuracion');
+    var vmaxbas= document.getElementById('valbasmax_configuracion');
+    var vminbaj= document.getElementById('valbajomin_configuracion');
+    var vmaxbaj= document.getElementById('valbajomax_configuracion');
+    if (valmin !== undefined && valmin !== null && valmax !== undefined && valmax !== null && item !== undefined && item !== null) {
+        if(item.value==='R'){
+            valmin.value=vminbaj.value;
+            valmax.value=vmaxsup.value;
+        }
+        if(item.value==='F'){
+            valmin.value=vminbas.value;
+            valmax.value=vmaxsup.value;
+        }
+        if(item.value==='D'){
+            valmin.value=vminbaj.value;
+            valmax.value=vmaxbaj.value;
+        }
+        if(item.value==='DI'){
+            valmin.value=vminbaj.value;
+            valmax.value=vmaxbaj.value;
+        }
+        if(item.value==='DB'){
+            valmin.value=vminbas.value;
+            valmax.value=vmaxbas.value;
+        }
+        if(item.value==='DA'){
+            valmin.value=vminalt.value;
+            valmax.value=vmaxalt.value;
+        }
+        if(item.value==='DS'){
+            valmin.value=vminsup.value;
+            valmax.value=vmaxsup.value;
+        }
     }
 }
 
