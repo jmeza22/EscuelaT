@@ -76,9 +76,8 @@ function LoadDocente() {
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
-        submitForm(item, false).done(function () {
+        submitForm(form, false).done(function () {
             LoadTable();
-            form.reset();
         });
     }
 }

@@ -110,13 +110,20 @@ and open the template in the editor.
                             </div>
                         </div>
 
-                        <div>
-                            <center>
-                                <button type="button" id="guardar" name="guardar" action="insertorupdate" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
-                            </center>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-sm-6">
+                                <center>
+                                    <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                                </center>
+                            </div>
+                            <div class="col-sm-6">
+                                <center>
+                                    <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                                </center>
+                            </div>
                         </div>
                     </form>
-                    
+
                     <form id="formConfig" method="POST" autocomplete="off" url="Base/Controllers/ConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
                         <input type="hidden" id="id_escuela" name="id_escuela" value="" required="required" maxlength="22" min="1"  /> 
                         <input type="hidden" id="valmin_configuracion" name="valmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
@@ -131,7 +138,7 @@ and open the template in the editor.
                         <input type="hidden" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
                         <input type="hidden" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
                     </form>
-                    
+
                 </div>    
             </div>
         </div>
