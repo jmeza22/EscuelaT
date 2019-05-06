@@ -6,7 +6,6 @@
 jQuery(document).ready(function () {
     LoadTable();
     setIdEscuela();
-    loadComboboxData(document.getElementById("id_area"));
 });
 
 function setIdEscuela() {

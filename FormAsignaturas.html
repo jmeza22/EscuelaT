@@ -33,13 +33,19 @@ and open the template in the editor.
             <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php" model="AsignaturasApp" findBy="id_asignatura" mainform="true" >
                 <input type="hidden" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" title="Codigo de Escuela">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <label>Codigo</label>
                         <input type="text" name="id_asignatura" id="id_asignatura" value="" maxlength="24" required="required" class="form-control" title="Codigo de Asignatura">
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <label>Nombre Asignatura</label>
                         <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="100" required="required" class="form-control" title="Nombre de Asignatura">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Area</label>
+                        <select id="id_area" name="id_area" model="AreasApp" colname="nombre_area" colvalue="id_area" url="Base/Controllers/GetComboboxAreas.php" class="form-control" style="min-width: 100% !important;" >
+                            <option value="">Ninguno</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -87,10 +93,11 @@ and open the template in the editor.
                     <thead id="thead_dataTable0">
                         <tr rowhead="true">
                             <th style="width: 10%;" title="Codigo">Codigo</th>
-                            <th style="width: 52%;">Nombre.Asignatura</th>
-                            <th style="width: 10%;">H.T.</th>
-                            <th style="width: 10%;">H.P.</th>
-                            <th style="width: 10%;">Cred.</th>
+                            <th style="width: 50%;">Nombre.Asignatura</th>
+                            <th style="width: 8%;">H.T.</th>
+                            <th style="width: 8%;">H.P.</th>
+                            <th style="width: 8%;">Cred.</th>
+                            <th style="width: 8%;">Area</th>
                             <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                         </tr>
                     </thead>
@@ -101,6 +108,7 @@ and open the template in the editor.
                             <td> {{hteoricas_asignatura}} </td>
                             <td> {{hpracticas_asignatura}} </td>
                             <td> {{numcreditos_asignatura}} </td>
+                            <td> {{id_area}} </td>
                             <td>
                                 <form id="Asignatura{{id_asignatura}}" name="Asignatura{{id_asignatura}}" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php"  model="AsignaturasApp" findBy="id_asignatura" statusfield="status_asignatura">
                                     <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >

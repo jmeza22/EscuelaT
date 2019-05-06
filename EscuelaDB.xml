@@ -68,6 +68,10 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
         <Cm>Nombre de Area</Cm>
       </Cl>
+      <Cl au="0" df="" nm="descripcion_area" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion de Area</Cm>
+      </Cl>
       <Cl au="0" df="1" nm="status_area" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
@@ -95,7 +99,11 @@
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Escuela</Cm>
       </Cl>
-      <Cl au="0" df="" nm="nombre_asignatura" nu="0">
+      <Cl au="0" df="" nm="id_area" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>pk</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_asignatura" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
         <Cm>Nombre Asignatura</Cm>
       </Cl>
@@ -118,6 +126,11 @@
       <Cl au="0" df="1" nm="status_asignatura" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
+      <Fk deAc="3" nm="fk_AsignaturasApp_AreasApp" prLkCl="id_area" upAc="3">
+        <PrTb mn="0" nm="AreasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="AsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_area" prCl="id_area"/>
+      </Fk>
       <Fk deAc="3" nm="fk_AsignaturasApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
         <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="AsignaturasApp" oe="0" sch="EscuelaDB" zr="1"/>
@@ -1786,8 +1799,8 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SedesApp" x="837" y="648"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="JornadasApp" x="316" y="650"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TiposUsuariosApp" x="338" y="55"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AreasApp" x="1798" y="549"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsignaturasApp" x="2089" y="554"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AreasApp" x="1680" y="592"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsignaturasApp" x="2173" y="551"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PeriodosAnualesApp" x="1105" y="637"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="LogrosAsignaturasApp" x="2294" y="1102"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ProgramasApp" x="1390" y="426"/>
@@ -1812,14 +1825,19 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AreasApp.fk_AreasApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="988" x2="1915" y1="74" y2="74"/>
-        <positionableLine lineRole="CHILD_LINE" x1="1919" x2="1919" y1="526" y2="78"/>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="1797" y1="74" y2="74"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1801" x2="1801" y1="569" y2="78"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.AsignaturasApp.fk_AsignaturasApp_AreasApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1972" x2="2150" y1="642" y2="642"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AsignaturasApp.fk_AsignaturasApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="988" x2="2239" y1="110" y2="110"/>
-        <positionableLine lineRole="CHILD_LINE" x1="2243" x2="2243" y1="531" y2="114"/>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="2323" y1="110" y2="110"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2327" x2="2327" y1="528" y2="114"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculaAsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -1916,7 +1934,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.LogrosAsignaturasApp.fk_LogrosAsignaturasApp_AsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="2346" x2="2346" y1="708" y2="1079"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="2430" x2="2430" y1="718" y2="1079"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MatriculaAsignaturasApp.fk_AsignaturasMatriculadasApp_MatriculasApp" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
@@ -2010,9 +2028,10 @@
         <positionableLine lineRole="CHILD_LINE" x1="1219" x2="1219" y1="614" y2="148"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PlanEstudioDetalleApp.fk_PlanEstudioDetalleApp_AsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PlanEstudioDetalleApp.fk_PlanEstudioDetalleApp_AsignaturasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="2117" x2="2117" y1="708" y2="1082"/>
+        <positionableLine lineRole="PARENT_LINE" x1="2204" x2="2204" y1="718" y2="1106"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2169" x2="2200" y1="1110" y2="1110"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PlanEstudioDetalleApp.fk_PlanEstudioDetalleApp_PlanEstudiosApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -2374,7 +2393,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
