@@ -56,7 +56,7 @@ and open the template in the editor.
                     <option selected="selected" value="">Ninguna</option>
                 </datalist>
             </form>
-            <form id="formConfig" method="POST" autocomplete="off" url="Base/Controllers/ConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
+            <form id="formConfig" method="POST" autocomplete="off" url="Base/Controllers/GetConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
                 <input type="hidden" id="id_escuela" name="id_escuela" value="" required="required" maxlength="22" min="1"  /> 
                 <input type="hidden" id="numcortes_configuracion" name="numcortes_configuracion" value="" required="required" maxlength="22" min="1"  /> 
                 <input type="hidden" id="valmin_configuracion" name="valmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
@@ -167,9 +167,9 @@ and open the template in the editor.
                                 <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
                                 <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
                                 <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);"> </td>
                                 <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" value="{{nd_calificacion}}" onfocus="setRequiredND(this)"> </td>
                                 <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
                                 </td>

@@ -50,7 +50,6 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
                     }
                 }
                 $data = null;
-                $count = count($postdata);
                 $resultdata=$postdata;
                 for ($i = 0; $i < $count; $i++) {
                     if (isset($postdata[$i])) {
@@ -121,6 +120,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $result['status'] = 1;
             $result['message'] = 'Informacion Almacenada!.';
             $result['data']= json_encode($resultdata);
+            //$result['data']= json_encode($_POST);
         }
         $result = json_encode($result);
         echo $result;

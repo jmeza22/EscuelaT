@@ -116,23 +116,24 @@ function ValidarNotasPorFila(item) {
 
             if (parseFloat(nc.value) < valmin || parseFloat(nc.value) > valmax) {
                 showNotification('Validacion', 'NC o L1 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
-                nc.value=valmin;
+                nc.value = valmin;
                 return false;
             }
             if (parseFloat(np.value) < valmin || parseFloat(np.value) > valmax) {
                 showNotification('Validacion', 'NP o L2 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
-                np.value=valmin;
+                np.value = valmin;
                 return false;
             }
             if (parseFloat(na.value) < valmin || parseFloat(na.value) > valmax) {
                 showNotification('Validacion', 'NA o L3 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
-                na.value=valmin;
+                na.value = valmin;
                 return false;
             }
             return true;
         }
         return false;
     }
+    return false;
 }
 
 function setNotaDefinitiva(item) {
@@ -274,5 +275,269 @@ function Send(item) {
     }
 }
 
+function ValidarConfiguracionEscuela() {
+    var vmin = document.getElementById('valmin_configuracion');
+    var vmax = document.getElementById('valmax_configuracion');
+    var vap = document.getElementById('valaprueba_configuracion');
+    if (vmin !== undefined && vmin !== null && isNaN(vmin.value) === false) {
+        vmin = parseFloat(vmin.value);
+    }
+    if (vmax !== undefined && vmax !== null && isNaN(vmax.value) === false) {
+        vmax = parseFloat(vmax.value);
+    }
+    if (vap !== undefined && vap !== null && isNaN(vap.value) === false) {
+        vap = parseFloat(vap.value);
+    }
+    if (!isNaN(vmin) && !isNaN(vmax) && !isNaN(vap)) {
+        return true;
+    }
+    return false;
+}
+
+function setLogroCAutomatico(NC) {
+    var tr = null;
+    var ncvalue = null;
+    var logroc = null;
+    var vsupmin = document.getElementById('valsupmin_configuracion');
+    var vsupmax = document.getElementById('valsupmax_configuracion');
+    var valtmin = document.getElementById('valaltomin_configuracion');
+    var valtmax = document.getElementById('valaltomax_configuracion');
+    var vbasmin = document.getElementById('valbasmin_configuracion');
+    var vbasmax = document.getElementById('valbasmax_configuracion');
+    var vbajmin = document.getElementById('valbajomin_configuracion');
+    var vbajmax = document.getElementById('valbajomax_configuracion');
+    var lcsuperior = document.getElementById('lcsuperior');
+    var lcalto = document.getElementById('lcalto');
+    var lcbasico = document.getElementById('lcbasico');
+    var lcbajo = document.getElementById('lcbajo');
+
+    if (NC !== undefined && NC !== null && NC.value !== '') {
+        if (isNaN(NC.value) === false) {
+            ncvalue = parseFloat(NC.value);
+            tr = getParentTR(NC);
+            if (tr !== undefined && tr !== null) {
+                logroc = getElementByName(tr, 'logroc_calificacion[]');
+            }
+            if (logroc !== undefined && logroc !== null && ValidarConfiguracionEscuela()) {
+                console.log('Seteando LogroC o L1.');
+                if (vsupmin !== undefined && vsupmin !== null && isNaN(vsupmin.value) === false) {
+                    vsupmin = parseFloat(vsupmin.value);
+                }
+                if (vsupmax !== undefined && vsupmax !== null && isNaN(vsupmax.value) === false) {
+                    vsupmax = parseFloat(vsupmax.value);
+                }
+                if (valtmin !== undefined && valtmin !== null && isNaN(valtmin.value) === false) {
+                    valtmin = parseFloat(valtmin.value);
+                }
+                if (valtmax !== undefined && valtmax !== null && isNaN(valtmax.value) === false) {
+                    valtmax = parseFloat(valtmax.value);
+                }
+                if (vbasmin !== undefined && vbasmin !== null && isNaN(vbasmin.value) === false) {
+                    vbasmin = parseFloat(vbasmin.value);
+                }
+                if (vbasmax !== undefined && vbasmax !== null && isNaN(vbasmax.value) === false) {
+                    vbasmax = parseFloat(vbasmax.value);
+                }
+                if (vbajmin !== undefined && vbajmin !== null && isNaN(vbajmin.value) === false) {
+                    vbajmin = parseFloat(vbajmin.value);
+                }
+                if (vbajmax !== undefined && vbajmax !== null && isNaN(vbajmax.value) === false) {
+                    vbajmax = parseFloat(vbajmax.value);
+                }
+
+                console.log('Valor NC: ' + ncvalue);
+                if (ncvalue >= vsupmin && ncvalue <= vsupmax) {
+                    console.log('Valor de NC es Superior.');
+                    if (lcsuperior !== undefined && lcsuperior !== null && lcsuperior.value !== '') {
+                        logroc.value = lcsuperior.value;
+                    }
+                }
+                if (ncvalue >= valtmin && ncvalue <= valtmax) {
+                    console.log('Valor de NC es Alto.');
+                    if (lcalto !== undefined && lcalto !== null && lcalto.value !== '') {
+                        logroc.value = lcalto.value;
+                    }
+                }
+                if (ncvalue >= vbasmin && ncvalue <= vbasmax) {
+                    console.log('Valor de NC es Basico.');
+                    if (lcbasico !== undefined && lcbasico !== null && lcbasico.value !== '') {
+                        logroc.value = lcbasico.value;
+                    }
+                }
+                if (ncvalue >= vbajmin && ncvalue <= vbajmax) {
+                    console.log('Valor de NC es Bajo.');
+                    if (lcbajo !== undefined && lcbajo !== null && lcbajo.value !== '') {
+                        logroc.value = lcbajo.value;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+function setLogroPAutomatico(NP) {
+    var tr = null;
+    var npvalue = null;
+    var logrop = null;
+    var vsupmin = document.getElementById('valsupmin_configuracion');
+    var vsupmax = document.getElementById('valsupmax_configuracion');
+    var valtmin = document.getElementById('valaltomin_configuracion');
+    var valtmax = document.getElementById('valaltomax_configuracion');
+    var vbasmin = document.getElementById('valbasmin_configuracion');
+    var vbasmax = document.getElementById('valbasmax_configuracion');
+    var vbajmin = document.getElementById('valbajomin_configuracion');
+    var vbajmax = document.getElementById('valbajomax_configuracion');
+    var lpsuperior = document.getElementById('lpsuperior');
+    var lpalto = document.getElementById('lpalto');
+    var lpbasico = document.getElementById('lpbasico');
+    var lpbajo = document.getElementById('lpbajo');
+
+    if (NP !== undefined && NP !== null && NP.value !== '') {
+        if (isNaN(NP.value) === false) {
+            npvalue = parseFloat(NP.value);
+            tr = getParentTR(NP);
+            if (tr !== undefined && tr !== null) {
+                logrop = getElementByName(tr, 'logrop_calificacion[]');
+            }
+            if (logrop !== undefined && logrop !== null && ValidarConfiguracionEscuela()) {
+                console.log('Seteando LogroP o L2.');
+                if (vsupmin !== undefined && vsupmin !== null && isNaN(vsupmin.value) === false) {
+                    vsupmin = parseFloat(vsupmin.value);
+                }
+                if (vsupmax !== undefined && vsupmax !== null && isNaN(vsupmax.value) === false) {
+                    vsupmax = parseFloat(vsupmax.value);
+                }
+                if (valtmin !== undefined && valtmin !== null && isNaN(valtmin.value) === false) {
+                    valtmin = parseFloat(valtmin.value);
+                }
+                if (valtmax !== undefined && valtmax !== null && isNaN(valtmax.value) === false) {
+                    valtmax = parseFloat(valtmax.value);
+                }
+                if (vbasmin !== undefined && vbasmin !== null && isNaN(vbasmin.value) === false) {
+                    vbasmin = parseFloat(vbasmin.value);
+                }
+                if (vbasmax !== undefined && vbasmax !== null && isNaN(vbasmax.value) === false) {
+                    vbasmax = parseFloat(vbasmax.value);
+                }
+                if (vbajmin !== undefined && vbajmin !== null && isNaN(vbajmin.value) === false) {
+                    vbajmin = parseFloat(vbajmin.value);
+                }
+                if (vbajmax !== undefined && vbajmax !== null && isNaN(vbajmax.value) === false) {
+                    vbajmax = parseFloat(vbajmax.value);
+                }
+
+                console.log('Valor NP: ' + npvalue);
+                if (npvalue >= vsupmin && npvalue <= vsupmax) {
+                    console.log('Valor de NP es Superior.');
+                    if (lpsuperior !== undefined && lpsuperior !== null && lpsuperior.value !== '') {
+                        logrop.value = lpsuperior.value;
+                    }
+                }
+                if (npvalue >= valtmin && npvalue <= valtmax) {
+                    console.log('Valor de NP es Alto.');
+                    if (lpalto !== undefined && lpalto !== null && lpalto.value !== '') {
+                        logrop.value = lpalto.value;
+                    }
+                }
+                if (npvalue >= vbasmin && npvalue <= vbasmax) {
+                    console.log('Valor de NP es Basico.');
+                    if (lpbasico !== undefined && lpbasico !== null && lpbasico.value !== '') {
+                        logrop.value = lpbasico.value;
+                    }
+                }
+                if (npvalue >= vbajmin && npvalue <= vbajmax) {
+                    console.log('Valor de NP es Bajo.');
+                    if (lpbajo !== undefined && lpbajo !== null && lpbajo.value !== '') {
+                        logrop.value = lpbajo.value;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+function setLogroAAutomatico(NA) {
+    var tr = null;
+    var navalue = null;
+    var logroa = null;
+    var vsupmin = document.getElementById('valsupmin_configuracion');
+    var vsupmax = document.getElementById('valsupmax_configuracion');
+    var valtmin = document.getElementById('valaltomin_configuracion');
+    var valtmax = document.getElementById('valaltomax_configuracion');
+    var vbasmin = document.getElementById('valbasmin_configuracion');
+    var vbasmax = document.getElementById('valbasmax_configuracion');
+    var vbajmin = document.getElementById('valbajomin_configuracion');
+    var vbajmax = document.getElementById('valbajomax_configuracion');
+    var lasuperior = document.getElementById('lasuperior');
+    var laalto = document.getElementById('laalto');
+    var labasico = document.getElementById('labasico');
+    var labajo = document.getElementById('labajo');
+
+    if (NA !== undefined && NA !== null && NA.value !== '') {
+        if (isNaN(NA.value) === false) {
+            navalue = parseFloat(NA.value);
+            tr = getParentTR(NA);
+            if (tr !== undefined && tr !== null) {
+                logroa = getElementByName(tr, 'logroa_calificacion[]');
+            }
+            if (logroa !== undefined && logroa !== null && ValidarConfiguracionEscuela()) {
+                console.log('Seteando LogroA o L3.');
+                if (vsupmin !== undefined && vsupmin !== null && isNaN(vsupmin.value) === false) {
+                    vsupmin = parseFloat(vsupmin.value);
+                }
+                if (vsupmax !== undefined && vsupmax !== null && isNaN(vsupmax.value) === false) {
+                    vsupmax = parseFloat(vsupmax.value);
+                }
+                if (valtmin !== undefined && valtmin !== null && isNaN(valtmin.value) === false) {
+                    valtmin = parseFloat(valtmin.value);
+                }
+                if (valtmax !== undefined && valtmax !== null && isNaN(valtmax.value) === false) {
+                    valtmax = parseFloat(valtmax.value);
+                }
+                if (vbasmin !== undefined && vbasmin !== null && isNaN(vbasmin.value) === false) {
+                    vbasmin = parseFloat(vbasmin.value);
+                }
+                if (vbasmax !== undefined && vbasmax !== null && isNaN(vbasmax.value) === false) {
+                    vbasmax = parseFloat(vbasmax.value);
+                }
+                if (vbajmin !== undefined && vbajmin !== null && isNaN(vbajmin.value) === false) {
+                    vbajmin = parseFloat(vbajmin.value);
+                }
+                if (vbajmax !== undefined && vbajmax !== null && isNaN(vbajmax.value) === false) {
+                    vbajmax = parseFloat(vbajmax.value);
+                }
+
+                console.log('Valor NA: ' + navalue);
+                if (navalue >= vsupmin && navalue <= vsupmax) {
+                    console.log('Valor de NA es Superior.');
+                    if (lasuperior !== undefined && lasuperior !== null && lasuperior.value !== '') {
+                        logroa.value = lasuperior.value;
+                    }
+                }
+                if (navalue >= valtmin && navalue <= valtmax) {
+                    console.log('Valor de NA es Alto.');
+                    if (laalto !== undefined && laalto !== null && laalto.value !== '') {
+                        logroa.value = laalto.value;
+                    }
+                }
+                if (navalue >= vbasmin && navalue <= vbasmax) {
+                    console.log('Valor de NA es Basico.');
+                    if (labasico !== undefined && labasico !== null && labasico.value !== '') {
+                        logroa.value = labasico.value;
+                    }
+                }
+                if (navalue >= vbajmin && navalue <= vbajmax) {
+                    console.log('Valor de NA es Bajo.');
+                    if (labajo !== undefined && labajo !== null && labajo.value !== '') {
+                        logroa.value = labajo.value;
+                    }
+                }
+            }
+
+        }
+    }
+}
 
 
