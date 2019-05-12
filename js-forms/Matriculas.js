@@ -185,7 +185,7 @@ function setIdMatricula() {
     idescuela = getElement(form0, 'id_escuela');
     if (idmatricula !== null && idmatricula !== undefined && idmatricula.value === '') {
         fecha = new Date();
-        idmatricula.value = 'M' + fecha.getFullYear() + '' + (fecha.getMonth()+1) + '' + fecha.getDate() + '' + (getRandomNumber(1, 9) * getRandomNumber(1, 9));
+        idmatricula.value = 'M' + fecha.getFullYear() + '' + (fecha.getMonth()+1) + '' + fecha.getDate()+ '' + fecha.getHours()+ '' + fecha.getMinutes()+ '' + fecha.getSeconds() + '' + (getRandomNumber(1, 9) * getRandomNumber(1, 9));
     }
 }
 

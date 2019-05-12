@@ -40,7 +40,7 @@ function BuscarEstudiante() {
         idestudiante = getElement(form0, 'id_estudiante');
         if (idestudiante !== undefined && idestudiante.value !== '') {
             idaux = idestudiante.value;
-            form0.reset();
+            resetForm(form0);
             idestudiante.value = idaux;
             getData(form0);
             LoadTableAnotaciones();

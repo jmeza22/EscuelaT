@@ -57,9 +57,9 @@ function newID() {
         tipodoc = tipodoc.value;
     }
     fecha = new Date();
-    if (nombre1 !== null && nombre1 !== "" && apellido1 !== null && apellido1 !== "" && tipodoc !== null && fecha !== null) {
+    if (nombre1 !== null && nombre1 !== "" && apellido1 !== null && apellido1 !== "") {
         if (document.getElementById('id_persona') !== undefined && (document.getElementById('id_persona').value === "" || document.getElementById('id_persona').value === "0")) {
-            nuevo = fecha.getFullYear().toString() + (fecha.getMonth() + 1) + (fecha.getDate() * getRandomNumber(0, 100000));
+            nuevo = fecha.getTime() + getRandomNumber(0, 99);
             console.log('Generando Id: ' + nuevo);
             document.getElementById('id_persona').value = nuevo;
             document.getElementById('show_id_persona').value = nuevo;

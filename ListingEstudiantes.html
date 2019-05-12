@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>ObservadorEstudiantes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de ObservadorEstudiantes"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-listing/Estudiantes.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 95% !important;">
+            <div class="panel-heading">Listado de Estudiantes</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="ObservadorEstudiantesApp" findby="id_asignatura" findbyvalue="" url="Base/Controllers/GetDataTableEstudiantes.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 10%;" title="Codigo de Estudiante">Codigo</th>
+                                <th style="width: 10%;" title="Documento de Identidad">Doc.Identidad </th>
+                                <th style="width: 40%;" title="Nombre del Estudiante">Nombre Completo</th>
+                                <th style="width: 5%;" title="Sexo del Estudiante">Sexo</th>
+                                <th style="width: 5%;" title="Edad del Estudiante">Edad</th>
+                                <th style="width: 8%;" title="Fecha de Nacimiento">FechaNac</th>
+                                <th style="width: 8%;" title="Codigo de Matricula">Mat.</th>
+                                <th style="width: 10%;" title="Nombre de Programa">Programa</th>
+                                <th style="width: 8%;" title="Codigo Plan Estudios">P.E.</th>
+                                <th style="width: 5%;" title="Grado">Gra.</th>
+                                <th style="width: 5%;" title="Grupo">Gru.</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <label>{{id_estudiante}}</label> </td>
+                                <td> <label>{{docid_persona}}</label> </td>
+                                <td> <label>{{nombrecompleto_estudiante}}</label> </td>
+                                <td> <label>{{sexo_persona}}</label> </td>
+                                <td> <label>{{edad_persona}}</label> </td>
+                                <td> <label>{{fechanacimiento_persona}}</label> </td>
+                                <td> <label>{{id_matricula}}</label> </td>
+                                <td> <label>{{nombre_programa}}</label> </td>
+                                <td> <label>{{id_planestudio}}</label> </td>
+                                <td> <label>{{numgrado_programa}}</label> </td>
+                                <td> <label>{{id_grupo}}</label> </td>
+                                <td>
+                                    <form id="Estudiante{{id_estudiante}}" name="Estudiante{{id_estudiante}}" method="POST" autocomplete="off" url="Base/Controllers/ObservadorEstudiantesController.php"  model="ObservadorEstudiantesApp" findBy="id_estudiante" statusfield="status_estudiante">
+                                        <input type="hidden"  editable="false" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
+                                        <button type="button" name="VerEstud" id="VerEstud" class="btn btn-xs btn-default icon-button" onclick="VerEstudiante(this);"><i class="glyphicon glyphicon-search"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>
