@@ -101,7 +101,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-5">
                                     <label>Asignatura</label>
-                                    <select id="id_asignatura" name="id_asignatura" model="AsignaturasApp" colname="nombre_asignatura" colvalue="id_asignatura" url="Base/Controllers/GetComboboxAsignaturas.php" style="min-width: 100% !important;" onchange="setIds();">
+                                    <select id="id_asignatura" name="id_asignatura" class="form-control" model="AsignaturasApp" colname="nombre_asignatura" colvalue="id_asignatura" url="Base/Controllers/GetComboboxAsignaturas.php" style="min-width: 100% !important;" onchange="setIds();">
                                         <option value="">Ninguno</option>
                                     </select>
                                 </div>
@@ -157,23 +157,23 @@ and open the template in the editor.
                             <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="PlanEstudioDetalleApp" findby="id_planestudio" findbyvalue="" url="Base/Controllers/GetDataTablePlanEstudioDetalle.php" >
                                 <thead id="thead_dataTable0">
                                     <tr rowhead="true">
-                                        <th style="width: 28%;" title="Codigo Asignatura">Nombre Asignatura</th>
+                                        <th style="width: 40%;" title="Codigo Asignatura">Nombre Asignatura</th>
+                                        <th style="width: 8%;" title="Numero de Grado">Gra.</th>
                                         <th style="width: 4%;" title="Horas Teoricas Semanales">H.T.</th>
                                         <th style="width: 4%;" title="Horas Practicas Semanales">H.P.</th>
-                                        <th style="width: 8%;" title="Numero de Grado">Gra.</th>
-                                        <th style="width: 8%;" title="Codigo Escuela">Esc.</th>
-                                        <th style="width: 8%;" title="Codigo Programa">Pro.</th>
-                                        <th style="width: 8%;" title="Codigo Plan Estudio">Plan</th>
+                                        <th style="width: 4%;" title="Codigo Escuela">Esc.</th>
+                                        <th style="width: 4%;" title="Codigo Programa">Pro.</th>
+                                        <th style="width: 4%;" title="Codigo Plan Estudio">Plan</th>
                                         <th style="width: 16%;" title="Codigo de Detalle Plan Estudio">Codigo</th>
                                         <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody_dataTable0">
                                     <tr id="rowsample" rowsample="true" style="display: none;">
-                                        <td> {{id_asignatura}} {{nombre_asignatura}}</td>
+                                        <td> <b>{{id_asignatura}} {{nombre_asignatura}}</b> </td>
+                                        <td> <b>{{numgrado_programa}}°</b> </td>
                                         <td> {{hteoricas_asignatura}}</td>
                                         <td> {{hpracticas_asignatura}}</td>
-                                        <td> {{numgrado_programa}}</td>
                                         <td> {{id_escuela}}</td>
                                         <td> {{id_programa}}</td>
                                         <td> {{id_planestudio}}</td>

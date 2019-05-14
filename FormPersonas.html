@@ -35,38 +35,6 @@ and open the template in the editor.
 
                     <div class="row">
                         <div class="col-sm-3">
-                            <label>Documento</label>
-                            <input type="text" alphanumeric="true" name="documento_persona" id="documento_persona" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
-                        </div>
-                        <div class="col-sm-3">
-                            <label>Tipo</label>
-                            <select name="tipodoc_persona" id="tipodoc_persona" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
-                                <option id="NN" value="NN" disabled="disabled">Desconocido</option>
-                                <option id="CC" value="CC" >Cédula de Ciudadanía</option>
-                                <option id="TI" value="TI" >Tarjeta de Identidad</option>
-                                <option id="RC" value="RC" >Registro Civil</option>
-                                <option id="CE" value="CE" >Cédula de Extranjeria</option>
-                                <option id="PP" value="PP" >Pasaporte</option>
-                                <option id="NT" value="NT" >NIT</option>
-                                <option id="OO" value="OO" >Otro</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>Sexo</label>
-                            <select name="sexo_persona" id="sexo_persona" selected="I" alphabetic="true" class="form-control" style="width: 100%; min-width: 100%;"  >
-                                <option value="I" >Indefinido</option>
-                                <option value="M" >Masculino</option>
-                                <option value="F" >Femenino</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>F. Nacimiento</label>
-                            <input type="date" date="true" name="fechanacimiento_persona" id="fechanacimiento_persona" value="" placeholder="1992-04-22" maxlength="10" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3">
                             <label>Primer Nombre</label>
                             <input type="text" name="nombre1_persona" id="nombre1_persona" value="" required="required" maxlength="50" class="form-control" title="Primer Nombre">
                         </div>
@@ -83,14 +51,46 @@ and open the template in the editor.
 
                         <div class="col-sm-3">
                             <label>Segundo Apellido</label>
-                            <input type="text" name="apellido2_persona" id="apellido2_persona" value="" required="required"  maxlength="50" class="form-control" title="Segundo Apellido">
+                            <input type="text" name="apellido2_persona" id="apellido2_persona" value=""  maxlength="50" class="form-control" title="Segundo Apellido">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-3">
-                            <label>Direccion</label>
-                            <input type="text" name="direccion_persona" id="direccion_persona" value="" maxlength="100" class="form-control" title="Direccion">
+                            <label>Tipo</label>
+                            <select name="tipodoc_persona" id="tipodoc_persona" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
+                                <option id="NN" value="NN" disabled="disabled">Desconocido</option>
+                                <option id="CC" value="CC" >Cédula de Ciudadanía</option>
+                                <option id="TI" value="TI" >Tarjeta de Identidad</option>
+                                <option id="RC" value="RC" >Registro Civil</option>
+                                <option id="CE" value="CE" >Cédula de Extranjeria</option>
+                                <option id="PP" value="PP" >Pasaporte</option>
+                                <option id="NT" value="NT" >NIT</option>
+                                <option id="OO" value="OO" >Otro</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Documento</label>
+                            <input type="text" alphanumeric="true" name="documento_persona" id="documento_persona" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Lugar Expedicion</label>
+                            <input type="text" alphanumeric="true" name="expediciondoc_persona" id="expediciondoc_persona" value="" maxlength="60" class="form-control" title="Lugar de Expedicion del Documento">
+                        </div>
+                        <div class="col-sm-3">
+                            <label>F. Nacimiento</label>
+                            <input type="date" date="true" name="fechanacimiento_persona" id="fechanacimiento_persona" value="" placeholder="1992-04-22" maxlength="10" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>Sexo</label>
+                            <select name="sexo_persona" id="sexo_persona" selected="I" alphabetic="true" class="form-control" style="width: 100%; min-width: 100%;"  >
+                                <option value="I" >Indefinido</option>
+                                <option value="M" >Masculino</option>
+                                <option value="F" >Femenino</option>
+                            </select>
                         </div>
                         <div class="col-sm-3">
                             <label>Telefono</label>
@@ -101,10 +101,30 @@ and open the template in the editor.
                             <input type="email" name="email_persona" id="email_persona" value="" maxlength="100"  class="form-control" title="Correo Electronico">
                         </div>
                         <div class="col-sm-3">
+                            <label>Direccion</label>
+                            <input type="text" name="direccion_persona" id="direccion_persona" value="" maxlength="100" class="form-control" title="Direccion de Residencia">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>Pais Residencia</label>
+                            <input type="text" alphanumeric="true" name="pais_persona" id="pais_persona" value="" maxlength="60" class="form-control" title="Pais de Residencia">
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Departamento</label>
+                            <input type="text" alphanumeric="true" name="departamento_persona" id="departamento_persona" value="" maxlength="60" class="form-control" title="Departamento de Residencia">
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Municipio</label>
+                            <input type="text" alphanumeric="true" name="ciudad_persona" id="ciudad_persona" value="" maxlength="60" class="form-control" title="Municipio o Ciudad de Residencia">
+                        </div>
+                        <div class="col-sm-3">
                             <label>Identificador</label>
                             <input type="text" name="show_id_persona" id="show_id_persona" value="0" maxlength="24" readonly="readonly" disabled="disabled" class="form-control" title="ID" onfocus="nuevoId();">
                         </div>
                     </div>
+
 
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
@@ -122,7 +142,7 @@ and open the template in the editor.
                 </form>
             </div>
         </div>
-        
+
         <div class="panel panel-primary" style="width: 80% !important;">
             <div class="panel-heading">Listado de Personas</div>
             <div class="panel-body">

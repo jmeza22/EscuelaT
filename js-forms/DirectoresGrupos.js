@@ -35,9 +35,11 @@ function LoadPeriodo() {
 
 function LoadDocente() {
     var docente = null;
-    docente = document.getElementById("id_docente");
+    docente = document.getElementById("lista_id_docente");
     docente.innerHTML = '<option disabled="disabled" value="">Ninguna</option>';
-    loadComboboxData(docente);
+    loadComboboxData(docente).done(function () {
+        autoNameFromDataList('id_docente', 'nombrecompleto_docente', null);
+    });
 }
 
 function GrabarDirectorGrupo() {

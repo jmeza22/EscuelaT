@@ -5,7 +5,8 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $model = 'PlanEstudioDetalleApp';
 $sql = "SELECT PED.*, A.nombre_asignatura "
-        . " FROM PlanEstudioDetalleApp PED INNER JOIN AsignaturasApp A ON PED.id_asignatura=A.id_asignatura ";
+        . " FROM PlanEstudioDetalleApp PED "
+        . " INNER JOIN AsignaturasApp A ON PED.id_asignatura=A.id_asignatura ";
 $where = " WHERE PED.status_planestudiodetalle=1 ";
 $bc = null;
 if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
@@ -16,6 +17,7 @@ if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
     if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
         $where = $where . " and PED." . $_POST['findby'] . " = " . $_POST['findbyvalue'] . "";
     }
+    $where = $where . " ORDER BY PED.id_planestudio, CAST(PED.numgrado_programa AS DECIMAL), PED.id_asignatura ";
     $sql = $sql . $where;
     echo $bc->selectSimple($sql);
     $bc->disconnect();
