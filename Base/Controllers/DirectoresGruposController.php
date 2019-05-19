@@ -24,6 +24,7 @@ if ($session->hasLogin() && ($session->getStandard()==1 || $session->getManageme
         $result = null;
         $result = $bc->execute(true);
         $result = null;
+        $bc->executeSQL("DELETE FROM $model WHERE status_director=0 ");
         $bc->disconnect();
     }
 } else {

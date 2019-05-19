@@ -6,7 +6,6 @@
 jQuery(document).ready(function () {
     //LoadEscuela();
     setIdEscuela();
-    RefreshSede(document.getElementById("id_escuela"));
     RefreshTable();
 });
 

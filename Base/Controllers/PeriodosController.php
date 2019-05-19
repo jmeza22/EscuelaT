@@ -23,6 +23,7 @@ if ($session->hasLogin() && $session->getSuperAdmin() == 1) {
         }
         $result = $bc->execute(true);
         $result = null;
+        $bc->executeSQL("DELETE FROM $model WHERE status_periodo=0 ");
         $bc->disconnect();
     }
 } else {

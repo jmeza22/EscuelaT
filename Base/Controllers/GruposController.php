@@ -26,6 +26,7 @@ if ($session->hasLogin() && ($session->getAdmin() == 1 || $session->getSuperAdmi
         $result = null;
         $result = $bc->execute(true);
         $result = null;
+        $bc->executeSQL("DELETE FROM $model WHERE status_grupo=0 ");
         $bc->disconnect();
     }
 } else {

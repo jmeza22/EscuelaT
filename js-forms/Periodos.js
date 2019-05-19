@@ -5,6 +5,7 @@
  */
 jQuery(document).ready(function () {
     LoadTable();
+    setAnoPeriodo();
     setIdEscuela();
 });
 
@@ -15,6 +16,38 @@ function setIdEscuela() {
         console.log('Seteando Id Escuela.');
         if (getEnterpriseID() !== null) {
             item.value = getEnterpriseID();
+        }
+    }
+}
+
+function setAnoPeriodo() {
+    var form = null;
+    var anoperiodo = null;
+    var fecha = new Date();
+    form = document.getElementById('form0');
+    if (form !== undefined && form !== null) {
+        anoperiodo = getElement(form, 'anualidad_periodo');
+        if (anoperiodo !== null) {
+            anoperiodo.value = fecha.getFullYear();
+        }
+    }
+}
+
+function setIdPeriodo() {
+    var form = null;
+    var idperiodo = null;
+    var anoperiodo = null;
+    form = document.getElementById('form0');
+    if (form !== undefined && form !== null) {
+        idperiodo = getElement(form, 'id_periodo');
+        anoperiodo = getElement(form, 'anualidad_periodo');
+        if (idperiodo !== null && anoperiodo !== null) {
+            if (idperiodo.value === '') {
+                idperiodo.value = anoperiodo.value;
+            }
+            if (idperiodo.value !== '' && idperiodo.value.toString().lastIndexOf(anoperiodo.value)===-1) {
+                idperiodo.value = anoperiodo.value;
+            }
         }
     }
 }

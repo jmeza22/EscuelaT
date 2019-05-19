@@ -119,19 +119,19 @@ and open the template in the editor.
                                         <option disabled="disabled" selected="selected" value="0">Ninguno</option>
                                         <option value="-2">PreJardin</option>
                                         <option value="-1">Jardin</option>
-                                        <option value="0">Transicion</option>
-                                        <option value="1">Primero</option>
-                                        <option value="2">Segundo</option>
-                                        <option value="3">Tercero</option>
-                                        <option value="4">Cuarto</option>
-                                        <option value="5">Quinto</option>
-                                        <option value="6">Sexto</option>
-                                        <option value="7">Septimo</option>
-                                        <option value="8">Octavo</option>
-                                        <option value="9">Noveno</option>
-                                        <option value="10">Decimo</option>
-                                        <option value="11">Undecimo</option>
-                                        <option value="12">Duodecimo</option>
+                                        <option value="0">0 - Transicion</option>
+                                        <option value="1">1 - Primero</option>
+                                        <option value="2">2 - Segundo</option>
+                                        <option value="3">3 - Tercero</option>
+                                        <option value="4">4 - Cuarto</option>
+                                        <option value="5">5 - Quinto</option>
+                                        <option value="6">6 - Sexto</option>
+                                        <option value="7">7 - Septimo</option>
+                                        <option value="8">8 - Octavo</option>
+                                        <option value="9">9 - Noveno</option>
+                                        <option value="10">10 - Decimo</option>
+                                        <option value="11">11 - Undecimo</option>
+                                        <option value="12">12 - Duodecimo</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
@@ -157,27 +157,27 @@ and open the template in the editor.
                             <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="PlanEstudioDetalleApp" findby="id_planestudio" findbyvalue="" url="Base/Controllers/GetDataTablePlanEstudioDetalle.php" >
                                 <thead id="thead_dataTable0">
                                     <tr rowhead="true">
-                                        <th style="width: 40%;" title="Codigo Asignatura">Nombre Asignatura</th>
-                                        <th style="width: 8%;" title="Numero de Grado">Gra.</th>
+                                        <th style="width: 6%;" title="Numero de Grado">Grado</th>
+                                        <th style="width: 6%;" title="Codigo Asignatura">Cod.Asig</th>
+                                        <th style="width: 48%;" title="Nombre Asignatura">Nombre Asignatura</th>
                                         <th style="width: 4%;" title="Horas Teoricas Semanales">H.T.</th>
                                         <th style="width: 4%;" title="Horas Practicas Semanales">H.P.</th>
                                         <th style="width: 4%;" title="Codigo Escuela">Esc.</th>
                                         <th style="width: 4%;" title="Codigo Programa">Pro.</th>
                                         <th style="width: 4%;" title="Codigo Plan Estudio">Plan</th>
-                                        <th style="width: 16%;" title="Codigo de Detalle Plan Estudio">Codigo</th>
-                                        <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                        <th style="width: 6%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody_dataTable0">
                                     <tr id="rowsample" rowsample="true" style="display: none;">
-                                        <td> <b>{{id_asignatura}} {{nombre_asignatura}}</b> </td>
                                         <td> <b>{{numgrado_programa}}°</b> </td>
+                                        <td> <b>{{id_asignatura}}</b> </td>
+                                        <td> <b>{{nombre_asignatura}}</b> </td>
                                         <td> {{hteoricas_asignatura}}</td>
                                         <td> {{hpracticas_asignatura}}</td>
                                         <td> {{id_escuela}}</td>
                                         <td> {{id_programa}}</td>
                                         <td> {{id_planestudio}}</td>
-                                        <td> {{id_planestudiodetalle}}</td>
                                         <td>
                                             <form id="PED{{id_planestudiodetalle}}" name="PED{{id_planestudiodetalle}}" method="POST" autocomplete="off" url="Base/Controllers/PlanEstudioDetalleController.php"  model="PlanEstudioDetalleApp" findBy="id_planestudiodetalle" statusfield="status_planestudiodetalle">
                                                 <input type="hidden" editable="true" disabled="disabled" required="required" name="id_planestudiodetalle[]" id="id_planestudiodetalle" value="{{id_planestudiodetalle}}" readonly="readonly">

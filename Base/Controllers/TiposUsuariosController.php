@@ -48,6 +48,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1)) {
         }
         echo $result;
         $result = null;
+        $bc->executeSQL("DELETE FROM $model WHERE status_tipousuario=0 ");
         $bc->disconnect();
     }
 } else {

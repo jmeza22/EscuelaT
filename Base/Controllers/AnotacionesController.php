@@ -25,6 +25,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $result = null;
         $result = $bc->execute(true);
         $result = null;
+        $bc->executeSQL("DELETE FROM $model WHERE status_anotacion=0 ");
         $bc->disconnect();
     }
 } else {

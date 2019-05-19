@@ -33,9 +33,9 @@ and open the template in the editor.
             <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/PeriodosController.php" model="PeriodosApp" findBy="id_periodo" mainform="true" >
                 <input type="hidden" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" title="Codigo de Escuela">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <label>Año</label>
-                        <input type="number" integer="true" name="anualidad_periodo" id="anualidad_periodo" value="2020" maxlength="6" min="2000" max="9999" required="required" class="form-control" title="Codigo de Periodo">
+                        <input type="number" integer="true" name="anualidad_periodo" id="anualidad_periodo" value="2020" maxlength="6" min="1900" max="9999" required="required" class="form-control" title="Año de Periodo" oninput="setIdPeriodo();">
                     </div>
                     <div class="col-sm-2">
                         <label>Fec.Inicio</label>
@@ -45,11 +45,11 @@ and open the template in the editor.
                         <label>Fec.Final</label>
                         <input type="date" name="ffinal_periodo" id="ffinal_periodo" value="" maxlength="14" required="required" class="form-control" title="Codigo de Periodo">
                     </div>
-                    <div class="col-sm-2">
-                        <label>Periodo</label>
-                        <input type="number" name="id_periodo" id="id_periodo" value="" maxlength="10" required="required" class="form-control" title="Codigo de Periodo">
+                    <div class="col-sm-3">
+                        <label>Codigo</label>
+                        <input type="number" name="id_periodo" id="id_periodo" value="" maxlength="10" required="required" class="form-control" title="Codigo de Periodo" onfocus="setIdPeriodo();">
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <label>Cerrado</label>
                         <select id="cerrado_periodo" name="cerrado_periodo" class="form-control" style="width: 100%;">
                             <option disabled="disabled" selected="selected" value=" ">Ninguno</option>
@@ -99,7 +99,7 @@ and open the template in the editor.
                             <td>
                                 <form id="Periodo{{id_periodo}}" name="Periodo{{id_periodo}}" method="POST" autocomplete="off" url="Base/Controllers/PeriodosController.php"  model="PeriodosApp" findBy="id_periodo" statusfield="status_periodo">
                                     <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
-                                    <input type="hidden"  editable="false" disabled="disabled" name="status_periodo[]" id="status_periodo" value="1" >
+                                    <input type="hidden"  editable="false" disabled="disabled" name="status_periodo" id="status_periodo" value="1" >
                                     <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
                                     <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
                                 </form>

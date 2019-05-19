@@ -26,6 +26,7 @@ if ($session->hasLogin() && ($session->getManagement()==1 || $session->getAdmin(
         $result = null;
         $result = $bc->execute(true);
         $result = null;
+        $bc->executeSQL("DELETE FROM $model WHERE status_corte=0 ");
         $bc->disconnect();
     }
 } else {
