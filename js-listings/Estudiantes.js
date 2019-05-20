@@ -32,3 +32,12 @@ function VerEstudiante(item) {
         window.location.href = "FormEstudiantes.html?"+idestudiante.id+"="+idestudiante.value+"";
     }
 }
+
+function VerNotas(item) {
+    if (item !== undefined && item !== null) {
+        var form = getForm(item);
+        var idmat = getElement(form, 'id_matricula');
+        setPOST('listingcalificaciones_id_matricula', idmat.value);
+        window.location.href = "ListingCalificaciones.html?"+idmat.id+"="+idmat.value+"";
+    }
+}

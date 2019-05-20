@@ -17,6 +17,7 @@ function setDatosEncabezado() {
     var nombre = null;
     var idasignatura = null;
     var nomasignatura = null;
+    var periodo = null;
     var grado = null;
     var grupo = null;
     var listalogros = null;
@@ -27,6 +28,7 @@ function setDatosEncabezado() {
     nombre = document.getElementById('nombrecompleto_docente');
     idasignatura = document.getElementById('id_asignatura');
     nomasignatura = document.getElementById('nombre_asignatura');
+    periodo = document.getElementById('id_periodo');
     grado = document.getElementById('numgrado_programa');
     grupo = document.getElementById('id_grupo');
     listalogros = document.getElementById('lista_id_logro');
@@ -37,6 +39,7 @@ function setDatosEncabezado() {
     nombre.value = getFullnameLogin();
     idasignatura.value = GET('id_asignatura');
     nomasignatura.value = GET('nombre_asignatura');
+    periodo.value = GET('id_periodo');
     grado.value = GET('numgrado_programa');
     grupo.value = GET('id_grupo');
     listalogros.setAttribute('findby', idasignatura.id);

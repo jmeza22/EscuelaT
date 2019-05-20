@@ -30,18 +30,22 @@ and open the template in the editor.
     <div class="panel panel-primary" style="width: 80% !important;">
         <div class="panel-heading">Datos de Planilla</div>
         <div class="panel-body table-responsive" >
-            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="EscuelasApp" findBy="id_escuela" mainform="true" >
+            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasDocentesApp" findBy="id_carga" mainform="true" >
                 <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
                 <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
 
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label>Docente</label>
                         <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre del Docente Activo">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label>Asignatura</label>
                         <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre de Asignatura">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Año</label>
+                        <input type="text" name="id_periodo" id="id_periodo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Año">
                     </div>
                     <div class="col-sm-2">
                         <label>Grado</label>
@@ -156,14 +160,14 @@ and open the template in the editor.
                                     <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="numgrado_programa{{rownum}}" name="numgrado_programa[]" value="{{numgrado_programa}}">
                                     <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="{{nombrecompleto_estudiante}}">
                                 </td>
-                                <td> <b>{{nombrecompleto_estudiante}}</b> </td>
-                                <td name="tdp1" style="display: none !important;"> <b>{{np1}}</b> </td>
-                                <td name="tdp2" style="display: none !important;"> <b>{{np2}}</b> </td>
-                                <td name="tdp3" style="display: none !important;"> <b>{{np3}}</b> </td>
-                                <td name="tdp4" style="display: none !important;"> <b>{{np4}}</b> </td>
-                                <td name="tdp5" style="display: none !important;"> <b>{{np5}}</b> </td>
-                                <td name="tdp6" style="display: none !important;"> <b>{{np6}}</b> </td>
-                                <td name="tddef"> <b>{{def}}</b> </td>
+                                <td> <label>{{nombrecompleto_estudiante}}</label> </td>
+                                <td name="tdp1" style="display: none !important;"> <label>{{np1}}</label> </td>
+                                <td name="tdp2" style="display: none !important;"> <label>{{np2}}</label> </td>
+                                <td name="tdp3" style="display: none !important;"> <label>{{np3}}</label> </td>
+                                <td name="tdp4" style="display: none !important;"> <label>{{np4}}</label> </td>
+                                <td name="tdp5" style="display: none !important;"> <label>{{np5}}</label> </td>
+                                <td name="tdp6" style="display: none !important;"> <label>{{np6}}</label> </td>
+                                <td name="tddef"> <label>{{def}}</label> </td>
                                 <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
                                 <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
                                 <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>

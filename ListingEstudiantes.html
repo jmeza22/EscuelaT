@@ -24,7 +24,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/Validator.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/SimplexFramework.js"></script>
-        <script type="text/javascript" src="js-listing/Estudiantes.js"></script>
+        <script type="text/javascript" src="js-listings/Estudiantes.js"></script>
     </head>
     <body>
 
@@ -65,7 +65,9 @@ and open the template in the editor.
                                 <td>
                                     <form id="Estudiante{{id_estudiante}}" name="Estudiante{{id_estudiante}}" method="POST" autocomplete="off" url="Base/Controllers/ObservadorEstudiantesController.php"  model="ObservadorEstudiantesApp" findBy="id_estudiante" statusfield="status_estudiante">
                                         <input type="hidden"  editable="false" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
+                                        <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
                                         <button type="button" name="VerEstud" id="VerEstud" class="btn btn-xs btn-default icon-button" onclick="VerEstudiante(this);"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button type="button" name="VerNot" id="VerNot" class="btn btn-xs btn-warning icon-button" onclick="VerNotas(this);"><i class="glyphicon glyphicon-search"></i></button>
                                     </form>
                                 </td>
                             </tr>

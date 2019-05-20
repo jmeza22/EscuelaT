@@ -53,6 +53,7 @@ and open the template in the editor.
                             <td>
                                 <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="POST" autocomplete="off" url="Base/Controllers/CargasController.php"  model="CargasApp" findBy="id_carga" statusfield="status_carga">
                                     <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
+                                    <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
                                     <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
                                     <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
                                     <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >

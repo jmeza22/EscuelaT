@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <title>Planilla de Calificaciones</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Registro de Calificaciones"/>
+    <meta name="author" content="Jose Meza"/>
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/Validator.js"></script>
+    <script type="text/javascript" src="js/localStorageData.js"></script>
+    <script type="text/javascript" src="js/SimplexFramework.js"></script>
+    <script type="text/javascript" src="js-listings/Calificaciones.js"></script>
+</head>
+<body>
+
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Datos de Matricula</div>
+        <div class="panel-body table-responsive" >
+            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php" model="MatriculasApp" findBy="id_matricula" mainform="true" >
+                <input type="hidden" id="id_matricula" name="id_matricula" value="" required="required" maxlength="22" min="1"  /> 
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Nombre Estudiante</label>
+                        <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre del Estudiante">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Año</label>
+                        <input type="text" name="id_periodo" id="id_periodo" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Periodo">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Grado</label>
+                        <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grado">
+                    </div>
+                    <div class="col-sm-2">
+                        <label>Grupo</label>
+                        <input type="text" name="id_grupo" id="id_grupo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grupo">
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Calificaciones de Asignaturas</div>
+        <div class="panel-body table-responsive">
+            <div class="table-responsive">
+                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="EscuelasApp" url="Base/Controllers/GetDataTableCalificacionesEstudiantes.php" >
+                    <thead id="thead_dataTable0">
+                        <tr rowhead="true">
+                            <th style="width: 2%;" title="#" >#</th>
+                            <th style="width: 40%;">Nombre Asignatura</th>
+                            <th style="width: 1%;" title="Primer Periodo" id="thp1" >P1</th>
+                            <th style="width: 1%;" title="Segundo Periodo" id="thp2" >P2</th>
+                            <th style="width: 1%;" title="Tercer Periodo" id="thp3" >P3</th>
+                            <th style="width: 1%;" title="Cuarto Periodo" id="thp4" >P4</th>
+                            <th style="width: 1%;" title="Quinto Periodo" id="thp5" >P5</th>
+                            <th style="width: 1%;" title="Sexto Periodo" id="thp6" >P6</th>
+                            <th style="width: 2%;" title="Definiva Año" id="thdef" >Def</th>
+                            </tr>
+                    </thead>
+                    <tbody id="tbody_dataTable0">
+                        <tr id="rowsample" rowsample="true" style="display: none;">
+                            <td> {{rownum}}
+                            </td>
+                            <td> <label>{{nombre_asignatura}}</label> </td>
+                            <td name="tdp1" > <label>{{np1}}</label> </td>
+                            <td name="tdp2" > <label>{{np2}}</label> </td>
+                            <td name="tdp3" > <label>{{np3}}</label> </td>
+                            <td name="tdp4" > <label>{{np4}}</label> </td>
+                            <td name="tdp5" > <label>{{np5}}</label> </td>
+                            <td name="tdp6" > <label>{{np6}}</label> </td>
+                            <td name="tddef"> <label>{{def}}</label> </td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+</body>
+</html>
