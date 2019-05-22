@@ -59,6 +59,7 @@ function DeleteItem(item) {
         var mytable = getParentTable(item);
         var id = null;
         var status = null;
+        var lastId = null;
         if (tr !== null && tr !== undefined) {
             id = getElement(tr, getFindBy(form));
             status = getElement(tr, getStatusFieldName(form));
@@ -68,8 +69,14 @@ function DeleteItem(item) {
             addAttributeDisabled(mytable);
             removeAttributeDisabled(tr);
             status.value = '0';
-            Send(item);
-            deleteRowInTable(mytable);
+            Send(item).done(function () {
+                lastId =window.sessionStorage.getItem('LastInsertId');
+                if (lastId !== undefined && lastId !== null) {
+                    deleteRowInTable(mytable);
+                }else{
+                    status.value = '1';
+                }
+            });
         }
     }
 }

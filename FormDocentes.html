@@ -35,6 +35,7 @@ and open the template in the editor.
                     <div class="panel-heading">Datos Basicos</div>
                     <div class="panel-body" >
                         <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/DocentesController.php" model="DocentesApp" findBy="id_docente" mainform="true" >
+                            <input type="hidden" id="status_docente" name="status_docente" value="0" maxlength="22" min="1"  /> 
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Codigo</label>
@@ -126,10 +127,11 @@ and open the template in the editor.
                                         <td> <label>{{nombrecompleto_docente}}</label> </td>
                                         <td> <label>{{ultimotitulo_docente}}</label> </td>
                                         <td>
-                                            <form id="Anotacion{{id_docente}}" name="Anotacion{{id_docente}}" method="POST" autocomplete="off" url="Base/Controllers/DocentesController.php"  model="DocentesApp" findBy="id_docente" statusfield="status_docente">
+                                            <form id="Docente{{id_docente}}" name="Docente{{id_docente}}" method="POST" autocomplete="off" url="Base/Controllers/DocentesController.php"  model="DocentesApp" findBy="id_docente" statusfield="status_docente">
                                                 <input type="hidden"  editable="false" name="id_docente" id="id_docente" value="{{id_docente}}" >
                                                 <input type="hidden"  editable="false" name="status_docente" id="status_docente" value="1" >
                                                 <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
                                             </form>
                                         </td>
                                     </tr>

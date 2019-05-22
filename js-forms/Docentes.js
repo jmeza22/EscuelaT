@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
 });
 
 function Send(item) {
-    var form= document.getElementById('form0');
+    var form= getForm(item);
     if (validateForm(form)) {
         submitForm(form, false).done(function () {
             LoadTable();
@@ -42,4 +42,34 @@ function LoadTable() {
     var mytable = document.getElementById("dataTable0");
     loadTableData(mytable, false);
     return mytable;
+}
+
+function DeleteItem(item) {
+    if (confirm('Desea eliminar este Registro?')) {
+        var form = getForm(item);
+        var tr = getParentTR(item);
+        var mytable = getParentTable(item);
+        var id = null;
+        var status = null;
+        var rowcount = 0;
+        if (tr !== null && tr !== undefined) {
+            id = getElement(tr, getFindBy(form));
+            status = getElement(tr, getStatusFieldName(form));
+        }
+        if (id !== null && status !== null && mytable !== null) {
+            console.log('Tratando de Eliminar id: ' + id);
+            addAttributeDisabled(mytable);
+            removeAttributeDisabled(tr);
+            status.value = '0';
+            Send(item).done(function () {
+                rowcount = window.sessionStorage.getItem('rowCount');
+                rowcount = parseFloat(rowcount);
+                if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
+                    deleteRowInTable(mytable);
+                } else {
+                    status.value = '1';
+                }
+            });
+        }
+    }
 }

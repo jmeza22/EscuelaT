@@ -5,12 +5,12 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $variables = new SystemVariableManager();
 $model = 'CalificacionesApp';
-$porcP1 = null;
-$porcP2 = null;
-$porcP3 = null;
-$porcP4 = null;
-$porcP5 = null;
-$porcP6 = null;
+$porcP1 = 0;
+$porcP2 = 0;
+$porcP3 = 0;
+$porcP4 = 0;
+$porcP5 = 0;
+$porcP6 = 0;
 $idescuela = null;
 $idcarga = null;
 $idmatricula = null;
@@ -91,6 +91,7 @@ if ($session->hasLogin() && $_REQUEST !== null && isset($_REQUEST)) {
             . " IFNULL(C.p".$numcorte."_nn_calificacion,'') as nn_calificacion, "
             . " IFNULL(C.p".$numcorte."_nd_calificacion,'') as nd_calificacion, "
             . " IFNULL(C.p".$numcorte."_ausencias_calificacion,'') as ausencias_calificacion, "
+            . " IFNULL(C.p".$numcorte."_comentarios_calificacion,'') as comentarios_calificacion, "
             . " '" . $idcorte . "' as id_corte "
             . " FROM (SELECT @rownum :=0) R, "
             . " MatriculaAsignaturasApp MA "

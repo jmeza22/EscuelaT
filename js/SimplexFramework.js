@@ -900,6 +900,14 @@ function submitAjax(formData, url, header, reload) {
                         console.log('Error (lastInsertId).');
                     }
                 }
+                if (result.rowcount !== null && result.rowcount !== undefined && result.rowcount !== '') {
+                    try {
+                        console.log('rowCount: ' + result.rowcount);
+                        sessionStorage.setItem('rowCount', result.rowcount);
+                    } catch (e) {
+                        console.log('Error (rowCount).');
+                    }
+                }
                 if (result.status !== null && result.status !== undefined && result.status === 1) {
                     console.log('Submit OK!.');
                     if (reload === true) {
