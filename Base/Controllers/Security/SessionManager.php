@@ -88,7 +88,7 @@ class SessionManager {
             $_SESSION[$this->index_enterpriseid] = $id;
         }
     }
-    
+
     function setEnterpriseNameForm($name) {
         if ($name != null) {
             $_SESSION[$this->index_enterprisename] = $name;
@@ -121,11 +121,11 @@ class SessionManager {
         }
     }
 
-    function GenerateToken() {
+    function generateToken() {
         $_SESSION[$this->index_token] = md5(uniqid(rand() * 9204, true));
     }
 
-    function GenerateTokenSingUp() {
+    function generateTokenSingUp() {
         $_SESSION[$this->index_othertoken] = md5(uniqid(rand() * 2204, true));
     }
 
@@ -143,26 +143,26 @@ class SessionManager {
         return null;
     }
 
-    function CheckToken() {
+    function checkToken() {
         if (isset($this->tokenForm) && $this->tokenForm != NULL && $this->tokenForm != '' && isset($_SESSION[$this->index_token]) && $this->tokenForm == $_SESSION[$this->index_token]) {
             return true;
         }
         return false;
     }
 
-    function CheckTokenSingUp() {
+    function checkTokenSingUp() {
         if (isset($this->tokenForm) && $this->tokenForm != NULL && $this->tokenForm != '' && $this->getTokenSingUp() != '' && $this->tokenForm == $_SESSION['tokensingup']) {
             return true;
         }
         return false;
     }
 
-    function CleanTokenSingUp() {
+    function cleanTokenSingUp() {
         $_SESSION['tokensingup'] = null;
     }
 
     function setLogin($iduser, $user, $type = null, $fullname = null, $identerprise = null, $super = null, $admin = null, $management = null, $standard = null, $limited = null, $external = null) {
-        if ($iduser != null && $user != null) {
+        if ($user != null) {
             $_SESSION[$this->index_time] = time();
             $_SESSION[$this->index_userid] = $iduser;
             $_SESSION[$this->index_nickname] = $user;
@@ -175,7 +175,7 @@ class SessionManager {
             $_SESSION[$this->index_standard] = $standard;
             $_SESSION[$this->index_limited] = $limited;
             $_SESSION[$this->index_external] = $external;
-            $this->GenerateToken();
+            $this->generateToken();
             return true;
         } else {
             return false;
@@ -199,7 +199,7 @@ class SessionManager {
         session_destroy();
     }
 
-    function TimeOff() {
+    function timeOff() {
         if (isset($_SESSION[$this->index_time])) {
             $timeoff = $_SESSION[$this->index_time] + $this->time;
             if (time() > $timeoff) {
@@ -249,7 +249,7 @@ class SessionManager {
         }
         return null;
     }
-    
+
     function getEnterpriseName() {
         if (isset($_SESSION[$this->index_enterprisename])) {
             return $_SESSION[$this->index_enterprisename];
@@ -324,10 +324,6 @@ class SessionManager {
         $array['data'] = $data;
         $array = json_encode($array);
         return $array;
-    }
-
-    function AccessControl() {
-        
     }
 
 }

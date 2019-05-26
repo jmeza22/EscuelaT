@@ -22,6 +22,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/Validator.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/SimplexFramework.js"></script>
         <script type="text/javascript" src="js-forms/login.js"></script>
     </head>
@@ -34,11 +35,11 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-12">
                             <label>Usuario</label>
-                            <input type="text" name="mynickname" id="mynickname" value="" required="required" maxlength="50" class="form-control" title="Usuario">
+                            <input type="text" username="true" name="mynickname" id="mynickname" value="" required="required" maxlength="50" class="form-control" title="Usuario">
                         </div>
                         <div class="col-sm-12">
                             <label>Contraseña</label>
-                            <input type="password" name="mypassword" id="mypassword" value="" required="required" maxlength="32" class="form-control" title="Contraseña">
+                            <input type="password" alphanumeric="true" name="mypassword" id="mypassword" value="" required="required" maxlength="32" class="form-control" title="Contraseña">
                         </div>
                         <div class="col-sm-12">
                             <label>Tipo de Usuario</label>

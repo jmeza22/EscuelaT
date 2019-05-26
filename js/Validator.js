@@ -114,7 +114,7 @@ function validateUser(text) {
 }
 
 function validatePassword(text) {
-    var pattern = /^[a-zA-Z0-9\s\@\á\é\í\ó\ú\Á\É\Í\Ó\Ú\ñ\Ñ\.\,\:\;\-\_\*\/\+]*$/;
+    var pattern = /^[a-zA-Z0-9\s\@\á\é\í\ó\ú\Á\É\Í\Ó\Ú\ñ\Ñ\.\ \+]*$/;
     if (/^\s+$/.test(text)) {
         return false;
     }

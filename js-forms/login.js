@@ -1,10 +1,12 @@
 jQuery(document).ready(function () {
+    if (getUsernameLogin() !== null) {
+        goHome();
+    }
     resetLocalPOST();
     document.getElementById("mynickname").value = getUsernameLogin();
     document.getElementById("mypassword").value = getPasswordLogin();
     loadComboboxData(document.getElementById("id_tipousuario"));
     LoadEscuela();
-    LoadSede();
     if (getUserIdLogin() !== null) {
         window.location.href = 'home.html';
     }
@@ -54,7 +56,7 @@ function RefreshSede(item) {
 function goHome() {
     var role = null;
     role = getUserRoleLogin();
-    showNotification('Bienvenido a EscuelaT de '+getEnterpriseName()+'!', 'Bienvenido ' + getFullnameLogin());
+    showNotification('Bienvenido a EscuelaT de ' + getEnterpriseName() + '!', 'Bienvenido ' + getFullnameLogin());
     if (role !== null && (role === "SuperAdmin" || role === "Admin" || role === "Management")) {
         window.location.href = 'home.html';
     }

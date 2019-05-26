@@ -8,7 +8,8 @@ $result = null;
 $model = 'PersonasApp';
 $findBy = 'id_persona';
 $action = 'insertorupdate';
-if ($session->hasLogin()) {
+$idpersona = null;
+if ($session->hasLogin() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();
@@ -21,6 +22,10 @@ if ($session->hasLogin()) {
         }
         $result = $bc->execute(true);
         $result = null;
+        if ($bc->getRowCount() > 0) {
+            $sql = "UPDATE $model SET id_persona=CONCAT('P',num_persona) WHERE id_persona='" . $bc->getPostData()[$findBy] . "' ";
+            $bc->executeSQL($sql);
+        }
         $bc->disconnect();
     }
 } else {

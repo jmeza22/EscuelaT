@@ -1705,8 +1705,8 @@ function login(element, destinationPage) {
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
-                console.error('Error: [' + textStatus + '] --- [' + xhr + '] --- [' + errorThrown + ']');
                 showNotification('Connection error:', 'Try again later!');
+                console.error('Error: [' + textStatus + '] --- [' + xhr + '] --- [' + errorThrown + ']');
             }
 
         });

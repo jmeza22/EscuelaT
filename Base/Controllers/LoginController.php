@@ -14,6 +14,7 @@ $idtipousuario = null;
 $enterprise = 1;
 $login = null;
 $tipousuario = null;
+$idpersona = null;
 $crypt = new MyCrypt();
 $sql = null;
 
@@ -36,13 +37,11 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
     $pw = $_POST['mypassword'];
     $password = $crypt->crypt($pw);
     $idtipousuario = $_POST['id_tipousuario'];
-    $sql = "SELECT Us.id_persona as userid, Us.username_usuario as user, Us.id_tipousuario as userrole, concat(Pe.nombre1_persona,' ',Pe.apellido1_persona) as fullname, Es.nombre_escuela as enterprisename "
-            . "FROM UsuariosApp Us INNER JOIN PersonasApp Pe ON Us.id_persona=Pe.id_persona INNER JOIN EscuelasApp Es ON Us.id_escuela=Es.id_escuela "
-            . "WHERE Us.username_usuario='$user' and Us.password_usuario='$password' and Us.id_tipousuario='$idtipousuario' and Us.id_escuela=$enterprise and Us.status_usuario=1 and Pe.status_persona=1 and Es.status_escuela=1";
-    //print_r($_POST);
-    //print_r($sql);
+    $sql = "SELECT IFNULL(Us.id_persona,'') as userid, IFNULL(Us.username_usuario,'') as user, IFNULL(Us.id_tipousuario,'') as userrole, IFNULL(Es.nombre_escuela,'') as enterprisename, CONCAT(IFNULL(Pe.nombre1_persona,''),' ',IFNULL(Pe.apellido1_persona,'')) as fullname "
+            . " FROM UsuariosApp Us LEFT JOIN PersonasApp Pe ON Us.id_persona=Pe.id_persona LEFT JOIN EscuelasApp Es ON Us.id_escuela=Es.id_escuela  "
+            . " WHERE Us.username_usuario='$user' and Us.password_usuario='$password' and Us.id_tipousuario='$idtipousuario' and Us.id_escuela=$enterprise "
+            . " and Us.status_usuario=1 and Es.status_escuela=1";
     $result = $bc->selectSimple($sql);
-
     $array = array();
     $array['message'] = '';
     $array['error'] = null;
@@ -56,16 +55,17 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
         $login = json_decode($result, true);
         $login = $login[0];
         if (!$session->hasLogin()) {
-            $session->setLogin($login['userid'], $login['user'], $login['userrole'], $login['fullname'], $enterprise);
+            $session->setLogin($login['userid'], $login['user'], $login['userrole'], null, $enterprise);
             $session->setEnterpriseNameForm($login['enterprisename']);
             $array['token'] = $session->getToken();
             $array['data'] = json_encode($login);
+            $idpersona = $login['userid'];
         } else {
             $array['status'] = 0;
             $array['message'] = 'You have a Active Session!.';
         }
     }
-    
+
     $sql = "SELECT * FROM TiposUsuariosApp WHERE id_tipousuario='" . $idtipousuario . "'";
     $result = $bc->selectSimple($sql);
     if ($session->hasLogin() && !isset($result) || $result !== null || strcmp($result, '') !== 0 || strcmp($result, '[]') !== 0) {
@@ -75,6 +75,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
             $session->setUserPermissions($tipousuario['superadmin_tipousuario'], $tipousuario['admin_tipousuario'], $tipousuario['management_tipousuario'], $tipousuario['standard_tipousuario'], $tipousuario['limited_tipousuario'], $tipousuario['external_tipousuario']);
         }
     }
+
     $login = null;
     $tipousuario = null;
     $array = json_encode($array);
