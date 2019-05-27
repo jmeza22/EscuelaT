@@ -8,7 +8,7 @@ $result = null;
 $model = 'DocentesApp';
 $findBy = 'id_docente';
 $action = 'insertorupdate';
-if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1)) {
     if (isset($_POST) && $_POST != null) {
         if ($session->getStandard() == 1 || $session->getLimited() || $session->getExternal()) {
             unset($_POST['status_docente']);

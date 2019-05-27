@@ -1572,8 +1572,12 @@
       <Cl au="0" df="1" nm="status_persona" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Idx clu="0" ftx="0" nm="PersonasApp_documento_Idx" spa="0" unq="1">
-        <ClNs>documento_persona, tipodoc_persona</ClNs>
+      <Idx clu="0" ftx="0" nm="PersonasApp_id_persona_Idx" spa="0" unq="1">
+        <ClNs>id_persona</ClNs>
+        <OptTx/>
+      </Idx>
+      <Idx clu="0" ftx="0" nm="PersonasApp_num_persona_Idx" spa="0" unq="1">
+        <ClNs>num_persona</ClNs>
         <OptTx/>
       </Idx>
       <UniqueConstraints/>
@@ -1878,11 +1882,6 @@
         <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="UsuariosApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_escuela" prCl="id_escuela"/>
-      </Fk>
-      <Fk deAc="3" nm="fk_UsuariosApp_PersonasApp" prLkCl="id_persona" upAc="3">
-        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="0"/>
-        <CdTb mn="1" nm="UsuariosApp" oe="0" sch="EscuelaDB" zr="1"/>
-        <ClPr cdCl="id_persona" prCl="id_persona"/>
       </Fk>
       <Fk deAc="3" nm="fk_UsuariosApp_TiposUsuariosApp" prLkCl="id_tipousuario" upAc="3">
         <PrTb mn="0" nm="TiposUsuariosApp" oe="1" sch="EscuelaDB" zr="1"/>
@@ -2208,11 +2207,6 @@
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="832" x2="832" y1="186" y2="399"/>
         <positionableLine lineRole="CHILD_LINE" x1="651" x2="828" y1="403" y2="403"/>
-      </positionableLines>
-    </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_PersonasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="339" x2="339" y1="310" y2="295"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_TiposUsuariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2558,7 +2552,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

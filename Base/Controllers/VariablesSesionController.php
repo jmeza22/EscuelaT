@@ -7,7 +7,7 @@ $variables = new SystemVariableManager();
 $ok1 = false;
 $ok2 = false;
 $result = null;
-if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
+if ($session->hasLogin() && $session->checkToken() && isset($_POST) && $_POST !== null) {
     $result = $session->getSessionStateJSON();
     
     if (isset($_POST['action']) && $_POST['action'] == 'insertorupdate') {

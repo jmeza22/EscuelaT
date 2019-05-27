@@ -10,7 +10,7 @@ $findBy = 'id_persona';
 $action = 'insertorupdate';
 $idpersona = null;
 $idtipousuario = null;
-if ($session->hasLogin() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST) && $_POST != null) {
         if (isset($_POST['id_tipousuario']) && $_POST['id_tipousuario'] !== null) {
             $idtipousuario = $_POST['id_tipousuario'];

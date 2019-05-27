@@ -53,7 +53,7 @@ and open the template in the editor.
                             </thead>
                             <tbody id="tbody_dataTable0">
                                 <tr id="rowsample" rowsample="true" style="display: none;">
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="id_tipousuario[]" id="id_tipousuario" value="{{id_tipousuario}}"></td>
+                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="id_tipousuario[]" id="id_tipousuario" value="{{id_tipousuario}}" list="lista_tipos"></td>
                                     <td> <input type="text" editable="true" disabled="disabled" required="required" name="nombre_tipousuario[]" id="nombre_tipousuario" value="{{nombre_tipousuario}}"> </td>
                                     <td> <input type="text" editable="true" disabled="disabled" required="required" name="superadmin_tipousuario[]" id="superadmin_tipousuario" value="{{superadmin_tipousuario}}" maxlength="1" min="0" max="1"> </td>
                                     <td> <input type="text" editable="true" disabled="disabled" required="required" name="admin_tipousuario[]" id="admin_tipousuario" value="{{admin_tipousuario}}" maxlength="1" min="0" max="1"> </td>
@@ -75,6 +75,14 @@ and open the template in the editor.
                             <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
                         </center>
                     </div>
+                    <datalist id="lista_tipos" name="lista_tipos" >
+                        <option value="SuperAdmin">SuperAdmin</option>
+                        <option value="Admin">Administrador</option>
+                        <option value="Manager">Gestion</option>
+                        <option value="Teacher">Docente</option>
+                        <option value="Student">Estudiante</option>
+                        <option value="Visitor">Acudiente</option>
+                    </datalist>
                 </form>
 
             </div>

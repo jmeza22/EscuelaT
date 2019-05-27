@@ -8,7 +8,7 @@ $result = null;
 $model = 'PlanEstudioDetalleApp';
 $findBy = 'id_planestudiodetalle';
 $action = 'insertorupdate';
-if ($session->hasLogin() && ($session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();

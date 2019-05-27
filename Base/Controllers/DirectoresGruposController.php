@@ -9,7 +9,7 @@ $model = 'DirectoresGruposApp';
 $findBy = 'id_director';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && ($session->getStandard()==1 || $session->getManagement()==1 || $session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getStandard()==1 || $session->getManagement()==1 || $session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();

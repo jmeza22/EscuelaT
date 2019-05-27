@@ -3,7 +3,7 @@
 ob_start();
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
-if ($session->hasLogin()) {
+if ($session->hasLogin() && $session->checkToken()) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();

@@ -12,7 +12,7 @@ $data = null;
 $postdata = null;
 $count = 0;
 $i = 0;
-if ($session->hasLogin() && ($session->getSuperAdmin() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();
