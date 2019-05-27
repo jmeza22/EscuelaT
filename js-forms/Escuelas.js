@@ -59,7 +59,7 @@ function DeleteItem(item) {
         var mytable = getParentTable(item);
         var id = null;
         var status = null;
-        var lastId = null;
+        var rowcount = 0;
         if (tr !== null && tr !== undefined) {
             id = getElement(tr, getFindBy(form));
             status = getElement(tr, getStatusFieldName(form));
@@ -69,11 +69,12 @@ function DeleteItem(item) {
             addAttributeDisabled(mytable);
             removeAttributeDisabled(tr);
             status.value = '0';
-            Send(item).done(function () {
-                lastId =window.sessionStorage.getItem('LastInsertId');
-                if (lastId !== undefined && lastId !== null) {
+            submitForm(form, false).done(function () {
+                rowcount = window.sessionStorage.getItem('rowCount');
+                rowcount = parseFloat(rowcount);
+                if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
                     deleteRowInTable(mytable);
-                }else{
+                } else {
                     status.value = '1';
                 }
             });

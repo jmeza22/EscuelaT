@@ -25,7 +25,7 @@ header{
 }
 
 footer {
-    position: fixed; 
+    position: relative;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
@@ -34,9 +34,9 @@ footer {
     z-index: 100;
     background-color: black !important;
     opacity: 0.6 !important;
-    -moz-opacity:0.6;
-    -khtml-opacity:0.6;
-    filter: aplha(opacity=60);
+    -moz-opacity:0.6 !important;
+    -khtml-opacity:0.6 !important;
+    filter: aplha(opacity=60) !important;
     font-family: 'Orbitron', sans-serif !important;
     font-size: 16px;
     font-weight: bolder;

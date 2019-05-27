@@ -6,7 +6,7 @@
 
 
 jQuery(document).ready(function () {
-    //setWebServicePath();
+    setWebServicePath();
 });
 
 function setWebServicePath() {

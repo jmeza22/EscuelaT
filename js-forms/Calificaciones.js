@@ -6,11 +6,9 @@
 jQuery(document).ready(function () {
     var idescuela = null;
     getIdCargaFromPOST();
-    LoadTable();
     idescuela = document.getElementById('id_escuela');
     setDatosEncabezado();
-    ObtenerConfiguracion();
-
+    ObtenerDatosCuerpo();
 });
 
 function setDatosEncabezado() {
@@ -69,16 +67,26 @@ function setDatosEncabezado() {
     loadComboboxData(listalogrosbaj);
 }
 
-function ObtenerConfiguracion() {
+function ObtenerDatosCuerpo() {
     var idescuela = null;
+    var mytable = null;
     var formconf = null;
+    var valaprueba = null;
+    mytable = document.getElementById("dataTable0");
     formconf = document.getElementById("formConfig");
     if (formconf !== undefined && formconf !== null) {
         idescuela = getElement(formconf, 'id_escuela');
         idescuela.value = getEnterpriseID();
         OcultarPeriodos();
         getData(formconf).done(function () {
-            MostrarPeriodos();
+            valaprueba = getElement(formconf, 'valaprueba_configuracion');
+            if (valaprueba !== undefined && valaprueba !== null && valaprueba.value !== null && valaprueba.value !== '') {
+                loadTableData(mytable, false);
+                MostrarPeriodos();
+            }else{
+                alert('No existen datos de Configuracion de la Escuela. Contacte al Administrador.');
+                document.getElementById('guardar').setAttribute('disabled','disabled');
+            }
         });
     }
 }

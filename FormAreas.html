@@ -34,7 +34,7 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-sm-3">
                         <label>Codigo</label>
-                        <input type="text" name="id_area" id="id_area" value="" maxlength="24" required="required" class="form-control" title="Codigo de Area">
+                        <input type="text" name="id_area" id="id_area" value="" maxlength="24" required="required" class="form-control" title="Codigo de Area" list="lista_areas">
                     </div>
                     <div class="col-sm-9">
                         <label>Nombre Area</label>
@@ -59,6 +59,21 @@ and open the template in the editor.
                         </center>
                     </div>
                 </div>
+                <datalist id="lista_areas" name="lista_areas" >
+                    <option value="CD">COMPORTAMIENTO Y DISCIPLINA</option>
+                    <option value="MAT">MATEMATICAS</option>
+                    <option value="HUM">HUMANIDADES</option>
+                    <option value="CNAT">CIENCIAS NATURALES</option>
+                    <option value="CSOC">CIENCIAS SOCIALES</option>
+                    <option value="ART">EDUCACION ARTISTICA</option>
+                    <option value="EVA">ETICA Y VALORES</option>
+                    <option value="REL">EDUCACION RELIGIOSA</option>
+                    <option value="EFI">EDUCACION FISICA</option>
+                    <option value="TECNO">TECNOLOGIA</option>
+                    <option value="FIL">FILOSOFIA</option>
+                    <option value="ECO">ECONOMIA</option>
+                    <option value="DIM">DIMENSIONES</option>
+                </datalist>
             </form>
         </div>
     </div>

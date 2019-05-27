@@ -13,7 +13,7 @@ function LoadTable() {
     loadTableData(mytable, false);
 }
 
-function Send(item) {
+function SendPersona(item){
     var form = getForm(item);
     var idpersona = document.getElementById('id_persona');
     if (idpersona.value === '0' || idpersona.value === '') {
@@ -23,6 +23,15 @@ function Send(item) {
     if (validateForm(form)) {
         submitForm(item, false).done(function () {
             resetForm(form);
+            LoadTable();
+        });
+    }
+}
+
+function Send(item) {
+    var form = getForm(item);
+    if (validateForm(form)) {
+        submitForm(item, false).done(function () {
             LoadTable();
         });
     }
@@ -41,11 +50,15 @@ function showID() {
 
 
 function newID() {
+    var idpersona = null;
     var nombre1 = null;
     var apellido1 = null;
     var tipodoc = null;
     var fecha = null;
     var nuevo = null;
+    if (document.getElementById('id_persona') !== null && document.getElementById('id_persona') !== undefined) {
+        idpersona = document.getElementById('id_persona');
+    }
     if (document.getElementById('nombre1_persona') !== null && document.getElementById('nombre1_persona') !== undefined) {
         nombre1 = document.getElementById('nombre1_persona').value;
     }
@@ -58,7 +71,7 @@ function newID() {
     }
     fecha = new Date();
     if (nombre1 !== null && nombre1 !== "" && apellido1 !== null && apellido1 !== "") {
-        if (document.getElementById('id_persona') !== undefined && (document.getElementById('id_persona').value === "" || document.getElementById('id_persona').value === "0")) {
+        if (document.getElementById('id_persona') !== undefined && (idpersona.value === "" || idpersona.value === "0")) {
             nuevo = fecha.getTime() + getRandomNumber(0, 99);
             console.log('Generando Id: ' + nuevo);
             document.getElementById('id_persona').value = nuevo;
@@ -100,7 +113,7 @@ function DeleteItem(item) {
             addAttributeDisabled(mytable);
             removeAttributeDisabled(tr);
             status.value = '0';
-            Send(item).done(function () {
+            submitForm(form, false).done(function () {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {

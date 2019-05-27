@@ -441,17 +441,6 @@
       <Cl au="0" df="1" nm="status_calificacion" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Fk deAc="3" nm="fk_CalificacionesApp_AsignaturasApp" prLkCl="id_asignatura" upAc="3">
-        <PrTb mn="0" nm="AsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
-        <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
-        <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
-        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
-      </Fk>
-      <Fk deAc="3" nm="fk_CalificacionesApp_GruposApp" prLkCl="id_grupo" upAc="3">
-        <PrTb mn="0" nm="GruposApp" oe="1" sch="EscuelaDB" zr="0"/>
-        <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
-        <ClPr cdCl="id_grupo" prCl="id_grupo"/>
-      </Fk>
       <Fk deAc="3" nm="fk_CalificacionesApp_MatriculaAsignaturasApp" prLkCl="id_matasig" upAc="3">
         <PrTb mn="0" nm="MatriculaAsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
@@ -466,19 +455,6 @@
         <PrTb mn="0" nm="ObservadorEstudianteApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
-      </Fk>
-      <Fk deAc="3" nm="fk_CalificacionesApp_PeriodosAnualesApp" prLkCl="id_periodo" upAc="3">
-        <PrTb mn="0" nm="PeriodosAnualesApp" oe="1" sch="EscuelaDB" zr="0"/>
-        <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
-        <ClPr cdCl="id_periodo" prCl="id_periodo"/>
-        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
-      </Fk>
-      <Fk deAc="3" nm="fk_CalificacionesApp_PlanEstudiosApp" prLkCl="id_planestudio" upAc="3">
-        <PrTb mn="0" nm="PlanEstudiosApp" oe="1" sch="EscuelaDB" zr="0"/>
-        <CdTb mn="1" nm="CalificacionesApp" oe="0" sch="EscuelaDB" zr="1"/>
-        <ClPr cdCl="id_planestudio" prCl="id_planestudio"/>
-        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
-        <ClPr cdCl="id_programa" prCl="id_programa"/>
       </Fk>
       <Idx clu="0" ftx="0" nm="CalificacionesApp_id_calificacion_Idx" spa="0" unq="1">
         <ClNs>id_calificacion</ClNs>
@@ -632,7 +608,7 @@
         <Cm>Codigo de Escuela</Cm>
       </Cl>
       <Cl au="0" df="" nm="tipodocumento_configuracion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="3" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="4" sc="null" sg="1" un="0"/>
         <Cm>Nombre del Documento de Identificacion </Cm>
       </Cl>
       <Cl au="0" df="" nm="numdocumento_configuracion" nu="1">
@@ -1661,7 +1637,7 @@
         <OptTx/>
       </Idx>
       <Idx clu="0" ftx="0" nm="PlanEstudioDetalleApp_Unique_Idx" spa="0" unq="1">
-        <ClNs>id_escuela, id_programa, id_asignatura, numgrado_programa</ClNs>
+        <ClNs>id_escuela, id_programa, id_planestudio, numgrado_programa, id_asignatura</ClNs>
         <OptTx/>
       </Idx>
       <UniqueConstraints/>
@@ -1867,7 +1843,7 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
         <Cm>Codigo Tipo Usuario</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_persona" nu="1">
+      <Cl au="0" df="" nm="id_persona" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
         <Cm>Llave Primaria Personas</Cm>
       </Cl>
@@ -1998,17 +1974,6 @@
         <positionableLine lineRole="CHILD_LINE" x1="2327" x2="2327" y1="528" y2="114"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_AsignaturasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="2327" x2="2327" y1="718" y2="2521"/>
-        <positionableLine lineRole="CHILD_LINE" x1="1058" x2="2323" y1="2525" y2="2525"/>
-      </positionableLines>
-    </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_GruposApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="672" x2="672" y1="1027" y2="1917"/>
-      </positionableLines>
-    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculaAsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1887" y2="1917"/>
@@ -2025,18 +1990,6 @@
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="434" x2="844" y1="1395" y2="1395"/>
         <positionableLine lineRole="CHILD_LINE" x1="848" x2="848" y1="1917" y2="1399"/>
-      </positionableLines>
-    </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_PeriodosAnualesApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1125" x2="852" y1="716" y2="716"/>
-        <positionableLine lineRole="CHILD_LINE" x1="848" x2="848" y1="1917" y2="720"/>
-      </positionableLines>
-    </FkGl>
-    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_PlanEstudiosApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1684" x2="1684" y1="1025" y2="2521"/>
-        <positionableLine lineRole="CHILD_LINE" x1="1058" x2="1680" y1="2525" y2="2525"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_DocentesApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -2259,7 +2212,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_PersonasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="339" x2="339" y1="287" y2="318"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="339" x2="339" y1="310" y2="295"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_TiposUsuariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2605,7 +2558,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

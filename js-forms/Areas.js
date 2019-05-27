@@ -6,6 +6,13 @@
 jQuery(document).ready(function () {
     LoadTable();
     setIdEscuela();
+    var form0 = document.getElementById("form0");
+    var idarea = null;
+    var nombrearea = null;
+    idarea = getElement(form0, 'id_area');
+    nombrearea = getElement(form0, 'nombre_area');
+    autoNameFromDataList(idarea, nombrearea.id, null);
+
 });
 
 function setIdEscuela() {
@@ -61,7 +68,7 @@ function DeleteItem(item) {
             addAttributeDisabled(mytable);
             removeAttributeDisabled(tr);
             status.value = '0';
-            Send(item).done(function () {
+            submitForm(form, false).done(function () {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {

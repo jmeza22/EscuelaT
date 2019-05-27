@@ -31,7 +31,7 @@ and open the template in the editor.
             <div class="panel-heading">Persona</div>
             <div class="panel-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/PersonasController.php" model="PersonasApp" findBy="id_persona" mainform="true" >
-                    <input type="hidden" integer="true" name="id_persona" id="id_persona" value="" required="required" onhashchange="showID();" oninput="showID();" >
+                    <input type="hidden" name="id_persona" id="id_persona" value="" required="required" onhashchange="showID();" oninput="showID();" >
 
                     <div class="row">
                         <div class="col-sm-3">
@@ -125,12 +125,23 @@ and open the template in the editor.
                             <input type="text" name="show_id_persona" id="show_id_persona" value="0" maxlength="24" readonly="readonly" disabled="disabled" class="form-control" title="ID" onfocus="nuevoId();">
                         </div>
                     </div>
-
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Perfil de Usuario</label>
+                            <select name="id_tipousuario" id="id_tipousuario" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Usuario"  >
+                                <option id="NN" value="NN" disabled="disabled">Desconocido</option>
+                                <option id="Student" value="Student" >Estudiante</option>
+                                <option id="Visitor" value="Visitor" >Acudiente</option>
+                                <option id="Teacher" value="Teacher" >Docente</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
                             <center>
-                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendPersona(this);" class="btn btn-primary" >Grabar</button>        
                             </center>
                         </div>
                         <div class="col-sm-6">

@@ -44,7 +44,7 @@ function DeleteItem(item) {
             addAttributeDisabled(mytable);
             removeAttributeDisabled(tr);
             status.value = '0';
-            Send(item).done(function () {
+            submitForm(form, false).done(function () {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {

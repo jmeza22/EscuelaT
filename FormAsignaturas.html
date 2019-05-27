@@ -35,7 +35,7 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-sm-2">
                         <label>Codigo</label>
-                        <input type="text" name="id_asignatura" id="id_asignatura" value="" maxlength="24" required="required" class="form-control" title="Codigo de Asignatura">
+                        <input type="text" name="id_asignatura" id="id_asignatura" value="" maxlength="24" required="required" class="form-control" title="Codigo de Asignatura" list="lista_asignaturas">
                     </div>
                     <div class="col-sm-6">
                         <label>Nombre Asignatura</label>
@@ -57,18 +57,46 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-sm-4">
                         <label>Horas Teoricas</label>
-                        <input type="number" double="true" name="hteoricas_asignatura" id="hteoricas_asignatura" value="" maxlength="2" required="required" class="form-control" title="">
+                        <input type="number" double="true" name="hteoricas_asignatura" id="hteoricas_asignatura" value="0" maxlength="2" required="required" class="form-control" title="">
                     </div>
                     <div class="col-sm-4">
                         <label>Horas Practicas</label>
-                        <input type="number" double="true" name="hpracticas_asignatura" id="hpracticas_asignatura" value="" maxlength="2" required="required" class="form-control" title="">
+                        <input type="number" double="true" name="hpracticas_asignatura" id="hpracticas_asignatura" value="0" maxlength="2" required="required" class="form-control" title="">
                     </div>
                     <div class="col-sm-4">
                         <label>Creditos</label>
-                        <input type="number" double="true" name="numcreditos_asignatura" id="numcreditos_asignatura" value="" maxlength="2" required="required" class="form-control" title="Numero de Creditos Academicos">
+                        <input type="number" double="true" name="numcreditos_asignatura" id="numcreditos_asignatura" value="0" maxlength="2" required="required" class="form-control" title="Numero de Creditos Academicos">
                     </div>
                 </div> 
-
+                <datalist id="lista_asignaturas" name="lista_asignaturas" >
+                    <option value="ACD">COMPORTAMIENTO Y DISCIPLINA</option>
+                    <option value="AMAT">MATEMATICAS</option>
+                    <option value="AEST">ESTADISTICA</option>
+                    <option value="AGEOM">GEOMETRIA</option>
+                    <option value="AESP">ESPAÑOL</option>
+                    <option value="ANAT">CIENCIAS NATURALES</option>
+                    <option value="AQUI">QUIMICA</option>
+                    <option value="AFIS">FISICA</option>
+                    <option value="ASOC">CIENCIAS SOCIALES</option>
+                    <option value="AGEO">GEOGRAFIA</option>
+                    <option value="AHIS">HISTORIA</option>
+                    <option value="ADEM">DEMOCRACIA Y CONSTITUCION</option>
+                    <option value="AART">EDUCACION ARTISTICA</option>
+                    <option value="AEVA">ETICA Y VALORES</option>
+                    <option value="AREL">EDUCACION RELIGIOSA</option>
+                    <option value="AEFI">EDUCACION FISICA</option>
+                    <option value="AINF">TECNOLOGIA E INFORMATICA</option>
+                    <option value="AFIL">FILOSOFIA</option>
+                    <option value="AECO">ECONOMIA</option>
+                    <option value="AING">INGLES</option>
+                    <option value="ADIMA">DIMENSION AFECTIVA</option>
+                    <option value="ADIMC">DIMENSION COGNITIVA</option>
+                    <option value="ADIMCP">DIMENSION CORPORAL</option>
+                    <option value="ADIMEV">DIMENSION ETICA Y VALORES</option>
+                    <option value="ADIMCM">DIMENSION COMUNICATIVA</option>
+                    <option value="ADIMRL">DIMENSION RELIGIOSA</option>
+                    
+                </datalist>
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-sm-6">
                         <center>

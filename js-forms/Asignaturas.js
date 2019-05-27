@@ -7,6 +7,12 @@ jQuery(document).ready(function () {
     LoadTable();
     setIdEscuela();
     loadComboboxData(document.getElementById("id_area"));
+    var form0 = document.getElementById("form0");
+    var idasig = null;
+    var nombreasig = null;
+    idasig = getElement(form0, 'id_asignatura');
+    nombreasig = getElement(form0, 'nombre_asignatura');
+    autoNameFromDataList(idasig, nombreasig.id, null);
 });
 
 function setIdEscuela() {
@@ -62,7 +68,7 @@ function DeleteItem(item) {
             addAttributeDisabled(mytable);
             removeAttributeDisabled(tr);
             status.value = '0';
-            Send(item).done(function () {
+            submitForm(form, false).done(function () {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
