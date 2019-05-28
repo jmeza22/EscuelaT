@@ -43,7 +43,6 @@ function showNotification(mytitle, mytext) {
     return false;
 }
 
-
 function noContextMenu() {
     document.oncontextmenu = function () {
         return false;
@@ -62,6 +61,27 @@ function noBackButton() {
     window.onhashchange = function () {
         window.location.hash = "no-back-button";
     };
+}
+
+function automaticSize(element) {
+    var contentsize=0;
+    if (element !== undefined && element !== null) {
+        if (!window.opera && document.all && document.getElementById) {
+            contentsize=parseInt(element.contentWindow.document.body.scrollHeight);
+            contentsize=contentsize+100;
+            element.style.height = contentsize;
+            element.setAttribute("height",""+contentsize+"px");
+            return true;
+        } else if (document.getElementById) {
+            contentsize=parseInt(element.contentDocument.body.scrollHeight);
+            contentsize=contentsize+100;
+            element.style.height = ""+contentsize+"px";
+            element.setAttribute("height",""+contentsize+"px");
+            return true;
+        }
+        return false;
+    }
+    return false;
 }
 
 function getRandomNumber(lowerlimit, upperlimit) {
@@ -792,48 +812,48 @@ function getToken(element) {
     return null;
 }
 
-function setFindBy(element, findby, num="") {
+function setFindBy(element, findby, num = "") {
     if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        element.setAttribute('findby'+num, findby);
+        element.setAttribute('findby' + num, findby);
     }
     return null;
 }
 
-function setFindByValue(element, findbyvalue, num="") {
+function setFindByValue(element, findbyvalue, num = "") {
     if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        element.setAttribute('findbyvalue'+num, findbyvalue);
+        element.setAttribute('findbyvalue' + num, findbyvalue);
     }
     return null;
 }
 
-function getFindBy(element, num="") {
+function getFindBy(element, num = "") {
     if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        if (element.getAttribute("findby"+num) !== null && element.getAttribute("findby"+num) !== '') {
-            return element.getAttribute("findby"+num);
+        if (element.getAttribute("findby" + num) !== null && element.getAttribute("findby" + num) !== '') {
+            return element.getAttribute("findby" + num);
         }
     }
     return null;
 }
 
-function getFindByValue(element, num="") {
+function getFindByValue(element, num = "") {
     if (element !== null && (element.tagName === "INPUT" || element.tagName === "SELECT" || element.tagName === "DATALIST" || element.tagName === "TABLE" || element.tagName === "FORM")) {
-        if (element.getAttribute("findbyvalue"+num) !== null && element.getAttribute("findbyvalue"+num) !== '') {
-            return element.getAttribute("findbyvalue"+num);
+        if (element.getAttribute("findbyvalue" + num) !== null && element.getAttribute("findbyvalue" + num) !== '') {
+            return element.getAttribute("findbyvalue" + num);
         }
     }
     return null;
 }
 
-function setFindbyField(fieldname, findby, findbyvalue, num="") {
+function setFindbyField(fieldname, findby, findbyvalue, num = "") {
     if (fieldname !== null && fieldname !== '' && findby !== null && findby !== '' && findbyvalue !== null && findbyvalue !== '') {
         var field = document.getElementById(fieldname);
         if (field !== null && field !== undefined) {
             if (field !== null && (field.tagName === "INPUT" || field.tagName === "SELECT" || field.tagName === "DATALIST" || field.tagName === "TABLE" || field.tagName === "FORM")) {
-                field.setAttribute('findby'+num, findby);
-                field.setAttribute('findbyvalue'+num, findbyvalue);
+                field.setAttribute('findby' + num, findby);
+                field.setAttribute('findbyvalue' + num, findbyvalue);
             }
         }
-    }
+}
 }
 
 function getStatusFieldName(element) {
@@ -1045,14 +1065,14 @@ function getData(element) {
     return promise;
 }
 
-function setFindbyCombobox(fieldname, findby, findbyvalue, num="") {
+function setFindbyCombobox(fieldname, findby, findbyvalue, num = "") {
     var myfield = null;
     myfield = document.getElementById(fieldname);
     if (myfield !== null && (myfield.tagName === 'SELECT' || myfield.tagName === 'DATALIST')) {
         setFindbyField(fieldname, findby, findbyvalue, num);
         myfield.innerHTML = '<option value="">Ninguna</option>';
         loadComboboxData(myfield);
-    }
+}
 }
 
 function setComboboxValue(element) {
@@ -1128,14 +1148,14 @@ function loadComboboxData(element) {
     othervalue = getOtherValueCombobox(element);
     findby = getFindBy(element);
     findbyvalue = getFindByValue(element);
-    findby2 = getFindBy(element,2);
-    findbyvalue2 = getFindByValue(element,2);
-    findby3 = getFindBy(element,3);
-    findbyvalue3 = getFindByValue(element,3);
-    findby4 = getFindBy(element,4);
-    findbyvalue4 = getFindByValue(element,4);
-    findby5 = getFindBy(element,5);
-    findbyvalue5 = getFindByValue(element,5);
+    findby2 = getFindBy(element, 2);
+    findbyvalue2 = getFindByValue(element, 2);
+    findby3 = getFindBy(element, 3);
+    findbyvalue3 = getFindByValue(element, 3);
+    findby4 = getFindBy(element, 4);
+    findbyvalue4 = getFindByValue(element, 4);
+    findby5 = getFindBy(element, 5);
+    findbyvalue5 = getFindByValue(element, 5);
     vals = {
         "model": model,
         "action": 'findAll',
@@ -1405,14 +1425,14 @@ function loadTableData(element, dynamic) {
     model = getModel(element);
     findby = getFindBy(element);
     findbyvalue = getFindByValue(element);
-    findby2 = getFindBy(element,2);
-    findbyvalue2 = getFindByValue(element,2);
-    findby3 = getFindBy(element,3);
-    findbyvalue3 = getFindByValue(element,3);
-    findby4 = getFindBy(element,4);
-    findbyvalue4 = getFindByValue(element,4);
-    findby5 = getFindBy(element,5);
-    findbyvalue5 = getFindByValue(element,5);
+    findby2 = getFindBy(element, 2);
+    findbyvalue2 = getFindByValue(element, 2);
+    findby3 = getFindBy(element, 3);
+    findbyvalue3 = getFindByValue(element, 3);
+    findby4 = getFindBy(element, 4);
+    findbyvalue4 = getFindByValue(element, 4);
+    findby5 = getFindBy(element, 5);
+    findbyvalue5 = getFindByValue(element, 5);
     vals = {
         "model": model,
         "action": 'findAll',
@@ -1427,7 +1447,7 @@ function loadTableData(element, dynamic) {
         "findby5": findby5,
         "findbyvalue5": findbyvalue5
     };
-    
+
     console.log('Getting Data for TABLE: ' + element.id);
 
     if (element !== null && element.tagName === "TABLE") {

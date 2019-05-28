@@ -6,12 +6,38 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Portal Estudiantes</title>
+        <title>Portal de Estudiantes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Portal Estudiantes"/>
-        <meta name="author" content="Jose Meza"/>    </head>
+        <meta name="description" content="Portal de Estudiantes"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/menu.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+    </head>
     <body>
-        <div>TODO write content</div>
+        <header>
+            <div class="container">
+                <div class="menucss">
+                    <ul>
+                        <li><a target="myframe" href="FormHomeEstudiantes.html">Mis Matriculas</a></li>
+                        <li><a target="myframe" href="FormEstudiantes.html">Mi Observador</a></li>
+                        <li><a href="logout.html">Salir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="contentframe">
+            <iframe name="myframe" id="myframe" src="FormHomeEstudiantes.html" height="900" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);"></iframe> 
+        </div>
+        <footer class="information">
+            <p>
+                Sistema Integral de Gestion Academica - EscuelaT
+            </p>
+        </footer>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
     </body>
 </html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <title>Mis Matriculas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Mis Matriculas"/>
+    <meta name="author" content="Jose Meza"/>
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/Validator.js"></script>
+    <script type="text/javascript" src="js/localStorageData.js"></script>
+    <script type="text/javascript" src="js/SimplexFramework.js"></script>
+    <script type="text/javascript" src="js-forms/HomeEstudiantes.js"></script>
+</head>
+<body>
+
+    <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel-heading">Matriculas de: <h3 id="nombrecompleto_docente"><b>Estudiante</b></h3> </div>
+        <div class="panel-body table-responsive">
+
+            <div class="table-responsive">
+                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="MatriculasApp" url="Base/Controllers/GetDataTableMatriculas.php" >
+                    <thead id="thead_dataTable0">
+                        <tr rowhead="true">
+                            <th style="width: 5%;" title="Codigo de Matricula">Matricula</th>
+                            <th style="width: 5%;" title="Codigo de Programa">Programa</th>
+                            <th style="width: 5%;" title="Grado">Grado</th>
+                            <th style="width: 5%;" title="Codigo de Grupo">Grupo</th>
+                            <th style="width: 5%;" title="Año">Año</th>
+                            <th style="width: 70%;" title="Nombre del Estudiante">Nombre Completo</th>
+                            <th style="width: 5%; min-width: 32px !important;">Calificaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_dataTable0">
+                        <tr id="rowsample" rowsample="true" style="display: none;">
+                            <td> <label>{{id_matricula}}</label> </td>
+                            <td> <label>{{id_programa}}</label> </td>
+                            <td> <label>{{numgrado_programa}}</label> </td>
+                            <td> <label>{{id_grupo}}</label> </td>
+                            <td> <label>{{id_periodo}}</label> </td>
+                            <td> <label>{{nombrecompleto_estudiante}}</label> </td>
+                            <td>
+                                <form id="Matriculas{{id_matricula}}" name="Matriculas{{id_matricula}}" method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php"  model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula">
+                                    <input type="hidden"  editable="false" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
+                                    <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
+                                    <button type="button" name="VerNot" id="VerNot" class="btn btn-xs btn-warning icon-button" onclick="VerNotas(this);"><i class="glyphicon glyphicon-search"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ $session = new SessionManager();
 $model = 'LogrosAsignaturasApp';
 $bc = null;
 $where = null;
-if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $where = " status_logro=1 ";
     $bc = new BaseController();
     $bc->connect();

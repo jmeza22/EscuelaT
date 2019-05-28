@@ -7,6 +7,7 @@
 jQuery(document).ready(function () {
     CargarNombres();
     BuscarEstudiante();
+    BuscarEstudianteActivo();
 });
 
 function CargarNombres() {
@@ -22,7 +23,6 @@ function CargarNombres() {
             });
         }
     }
-
 }
 
 function Send(item) {
@@ -45,6 +45,29 @@ function BuscarEstudiante() {
             getData(form0);
             LoadTableAnotaciones();
             CopiarCodigoEstudiante();
+        }
+    }
+}
+
+function BuscarEstudianteActivo() {
+    var form0 = document.getElementById("form0");
+    var idestudiante = null;
+    console.log('Tipo de Usuario: ' + getUserRoleLogin());
+    if (getUserRoleLogin() !== null && getUserRoleLogin() === 'Student') {
+        form0.setAttribute('url', 'Base/Controllers/FindEstudiantesController.php');
+        idestudiante = getElement(form0, 'id_estudiante');
+        if (idestudiante !== undefined && idestudiante !== null) {
+            idestudiante.value = getUserIdLogin();
+            idestudiante.setAttribute('readonly', 'readonly');
+            if (idestudiante.value !== '') {
+                getData(form0).done(function () {
+                    CopiarCodigoEstudiante();
+                    LoadTableAnotaciones();
+                    document.getElementById("save").setAttribute('disabled','disabled');
+                    document.getElementById("reset").setAttribute('disabled','disabled');
+                    document.getElementById("btAnotacion").setAttribute('disabled','disabled');
+                });
+            }
         }
     }
 }
@@ -115,9 +138,9 @@ function CopiarCodigoEstudiante() {
     if (idestudianteanotacion !== undefined && idestudianteanotacion !== null) {
         console.log('Copiando Datos de Estudiante a Panel de Anotacion.');
         idestudianteanotacion.value = idestudiante.value;
-        mytable.setAttribute('findby', 'id_estudiante');
-        mytable.setAttribute('findbyvalue', idestudiante.value);
     }
+    mytable.setAttribute('findby', 'id_estudiante');
+    mytable.setAttribute('findbyvalue', idestudiante.value);
 }
 
 function GenerarFecha() {
@@ -131,7 +154,7 @@ function GenerarFecha() {
         if (dia < 10)
             dia = '0' + dia;
         if (mes < 10)
-            mes = '0' + mes
+            mes = '0' + mes;
         fechaanotacion.value = ano + "-" + mes + "-" + dia;
     }
 }
@@ -174,6 +197,6 @@ function GrabarEstudiante(item) {
     }
 }
 
-function resetAnoacion(){
-    
+function resetAnoacion() {
+
 }

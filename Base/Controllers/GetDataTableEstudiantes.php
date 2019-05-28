@@ -25,7 +25,7 @@ $sql = "SELECT OE.id_estudiante, "
 $where = "";
 $bc = null;
 $result = null;
-if ($session->hasLogin() && $_REQUEST !== null && isset($_REQUEST)) {
+if ($session->hasLogin() && isset($_POST) && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');

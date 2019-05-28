@@ -30,6 +30,10 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $result = $bc->execute(true);
         $result = null;
         if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'insertorupdate') === 0 && $bc->getRowCount() > 0) {
+            $sql = "UPDATE MatriculaAsignaturasApp SET id_programa='" . $postdata['id_programa'] . "' WHERE id_matricula='" . $postdata['id_matricula'] . "' ";
+            $bc->executeSQL($sql);
+            $sql = "UPDATE MatriculaAsignaturasApp SET id_planestudio='" . $postdata['id_planestudio'] . "' WHERE id_matricula='" . $postdata['id_matricula'] . "' ";
+            $bc->executeSQL($sql);
             $sql = "UPDATE MatriculaAsignaturasApp SET numgrado_programa='" . $postdata['numgrado_programa'] . "' WHERE id_matricula='" . $postdata['id_matricula'] . "' ";
             $bc->executeSQL($sql);
             $sql = "UPDATE MatriculaAsignaturasApp SET id_grupo='" . $postdata['id_grupo'] . "' WHERE id_matricula='" . $postdata['id_matricula'] . "' ";

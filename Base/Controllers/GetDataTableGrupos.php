@@ -8,7 +8,7 @@ $sql = "SELECT G.*, P.nombre_programa "
         . "FROM GruposApp G INNER JOIN ProgramasApp P ON G.id_programa=P.id_programa ";
 $where = " WHERE G.status_grupo=1 and G.id_escuela = " . $session->getEnterpriseID();
 $bc = null;
-if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');

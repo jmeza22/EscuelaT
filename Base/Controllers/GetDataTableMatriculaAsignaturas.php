@@ -9,7 +9,7 @@ $sql = "SELECT MA.*, A.nombre_asignatura "
         . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura ";
 $where = " WHERE MA.id_escuela=" . $session->getEnterpriseID();
 $bc = null;
-if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');

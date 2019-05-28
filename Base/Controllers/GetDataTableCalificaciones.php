@@ -26,14 +26,14 @@ $idgrupo = null;
 $resultCarga = null;
 $resultConfig = null;
 $resultMatasig = null;
-if ($session->hasLogin() && $_REQUEST !== null && isset($_REQUEST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');
     $bc->setModel($model);
 
-    if (isset($_REQUEST['findby']) && isset($_REQUEST['findbyvalue']) && strcmp($_REQUEST['findby'], '') !== 0 && strcmp($_REQUEST['findbyvalue'], '') !== 0 && strcmp($_REQUEST['findby'], 'id_carga') === 0) {
-        $idcarga = $_REQUEST['findbyvalue'];
+    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findby'], '') !== 0 && strcmp($_POST['findbyvalue'], '') !== 0 && strcmp($_POST['findby'], 'id_carga') === 0) {
+        $idcarga = $_POST['findbyvalue'];
     }
 
     $sql0 = "SELECT * FROM CargasDocentesApp "

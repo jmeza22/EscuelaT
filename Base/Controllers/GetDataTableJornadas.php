@@ -5,7 +5,7 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $model = 'JornadasApp';
 $bc = null;
-if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $where = " status_jornada=1 ";
     $bc = new BaseController();
     $bc->connect();

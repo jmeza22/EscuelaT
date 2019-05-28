@@ -2,7 +2,9 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
-if ($_POST != null && isset($_POST)) {
+$session = new SessionManager();
+$bc = null;
+if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     $bc = new BaseController();
     $bc->connect();
     $bc->preparePostData();
@@ -16,6 +18,8 @@ if ($_POST != null && isset($_POST)) {
     $othervalue = 'documento_persona';
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, ' status_persona=1');
     $bc->disconnect();
+}else{
+    echo 'null';
 }
 ob_end_flush();
 ?>

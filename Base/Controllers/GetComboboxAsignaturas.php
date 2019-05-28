@@ -5,7 +5,7 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $where = null;
-if ($session->hasLogin() && $_POST != null && isset($_POST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new BaseController();
     $bc->connect();
     $bc->preparePostData();

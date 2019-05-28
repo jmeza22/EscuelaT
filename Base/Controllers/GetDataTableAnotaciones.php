@@ -6,7 +6,7 @@ $session = new SessionManager();
 $model = 'AnotacionesObservadorApp';
 $where = " status_anotacion=1 ";
 $bc = null;
-if ($session->hasLogin() && $_POST !== null && isset($_POST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');

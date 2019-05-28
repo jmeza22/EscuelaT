@@ -9,7 +9,7 @@ $sql = "SELECT C.*, D.nombrecompleto_docente, A.nombre_asignatura "
         . " FROM CargasDocentesApp C INNER JOIN DocentesApp D ON C.id_docente=D.id_docente INNER JOIN AsignaturasApp A ON C.id_asignatura=A.id_asignatura ";
 $where = " WHERE C.status_carga=1 and C.id_escuela = " . $session->getEnterpriseID() . " and C.id_docente = '" . $session->getUserID(). "' and C.id_periodo= '".$variables->getIdPeriodoAnual()."'";
 $bc = null;
-if ($session->hasLogin() && $_REQUEST !== null && isset($_REQUEST)) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new BaseController();
     $bc->connect();
     $bc->setAction('findAll');
