@@ -90,8 +90,12 @@ and open the template in the editor.
                     <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php">
                         <option value="">Ninguno</option>
                     </datalist>
-                    <datalist id="lista_id_tipousuario" name="lista_id_tipousuario" model="TiposUsuariosApp" colname="nombre_tipoususario" colvalue="id_tipousuario" url="Base/Controllers/GetComboboxTiposUsuarios.php">
-                        <option value="">Ninguno</option>
+                    <datalist id="lista_id_tipousuario" name="lista_id_tipousuario" model="TiposUsuariosApp" colname="nombre_tipoususario">
+                        <option disabled="disabled" value="">Ninguno</option>
+                        <option id="Student" value="Student" >Estudiante</option>
+                        <option id="Visitor" value="Visitor" >Acudiente</option>
+                        <option id="Teacher" value="Teacher" >Docente</option>
+                        <option id="Manager" value="Manager" >Gestion</option>
                     </datalist>
 
                 </form>

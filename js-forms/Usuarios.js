@@ -9,11 +9,7 @@ jQuery(document).ready(function () {
     loadComboboxData(document.getElementById("lista_id_escuela")).done(function () {
         autoNameFromDataList('id_escuela', 'nombre_escuela', null);
     });
-
-    loadComboboxData(document.getElementById("lista_id_tipousuario")).done(function () {
-        autoNameFromDataList('id_tipousuario', 'nombre_tipousuario', null);
-    });
-
+    autoNameFromDataList('id_tipousuario', 'nombre_tipousuario', null);
     autoLoadNameFromId('id_persona', 'nombre1_persona', 'apellido1_persona', null);
 
     setIdEscuela();
@@ -43,6 +39,8 @@ function Send(item) {
 function SendUsuario(item) {
     var username = document.getElementById('username_usuario');
     var password = document.getElementById('password_usuario');
+    var nombre1 = document.getElementById("nombre1_persona");
+    var apellido1 = document.getElementById("nombre1_persona");
     var myform = null;
     myform = getForm(item);
     if (validateForm(myform)) {
@@ -52,7 +50,9 @@ function SendUsuario(item) {
         if (password.value === ' ' || password.value === '') {
             nuevoPassword();
         }
-        document.getElementById("nombrecompleto_persona").value = document.getElementById("nombre1_persona").value + ' ' + document.getElementById("apellido1_persona").value;
+        if (nombre1 !== undefined && apellido1 !== undefined && nombre1.value !== '' && apellido1.value !== '') {
+            document.getElementById("nombrecompleto_persona").value = nombre1.value + ' ' + apellido1.value;
+        }
         Send(myform);
     }
 }

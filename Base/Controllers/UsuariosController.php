@@ -14,11 +14,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()
         $bc->preparePostData();
         $postdata = $bc->getPostData();
         $postdata['id_escuela']=$session->getEnterpriseID();
+        if (isset($postdata['password_usuario']) && strcmp($postdata['password_usuario'], "") === 0) {
+            unset($postdata['password_usuario']);
+        }
         if (isset($postdata['password_usuario']) && strcmp($postdata['password_usuario'], "") !== 0) {
             $postdata['password_usuario'] = $crypt->crypt($postdata['password_usuario']);
-        }
-        if (strcmp($postdata['password_usuario'], "") === 0) {
-            unset($postdata['password_usuario']);
         }
         $bc->setModel($model);
         $bc->setAction($action);
