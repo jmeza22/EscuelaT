@@ -5,164 +5,165 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <title>Cargas Academicas</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Registro de Cargas Academicas"/>
-    <meta name="author" content="Jose Meza"/>
-    <link href="css/styles.css" rel="stylesheet" />
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <head>
+        <title>Cargas Academicas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Cargas Academicas"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/Validator.js"></script>
-    <script type="text/javascript" src="js/localStorageData.js"></script>
-    <script type="text/javascript" src="js/SimplexFramework.js"></script>
-    <script type="text/javascript" src="js-forms/CargasDocentes.js"></script>
-</head>
-<body>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/CargasDocentes.js"></script>
+    </head>
+    <body>
 
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Cargas Academicas</div>
-        <div class="panel-body table-responsive" >
-            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasApp" findBy="id_carga" mainform="true" >
-                <input type="hidden" name="id_escuela" id="id_escuela" value="0" maxlength="24" required="required" title="Codigo de Escuela">
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Cargas Academicas</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasApp" findBy="id_carga" mainform="true" >
+                    <input type="hidden" name="id_escuela" id="id_escuela" value="0" maxlength="24" required="required" title="Codigo de Escuela">
 
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Año</label>
-                        <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;">
-                            <option selected="selected" value="">Ninguna</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Año</label>
+                            <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;">
+                                <option selected="selected" value="">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Programa</label>
+                            <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value);">
+                                <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Plan Estudios</label>
+                            <select id="id_planestudio" name="id_planestudio" selected="NULL" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value);">
+                                <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grado</label>
+                            <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value, 2); setFindbyCombobox('id_grupo', this.id, this.value);">
+                                <option disabled="disabled" selected="selected" value="0">Ninguno</option>
+                                <option value="1">Primero</option>
+                                <option value="2">Segundo</option>
+                                <option value="3">Tercero</option>
+                                <option value="4">Cuarto</option>
+                                <option value="5">Quinto</option>
+                                <option value="6">Sexto</option>
+                                <option value="7">Septimo</option>
+                                <option value="8">Octavo</option>
+                                <option value="9">Noveno</option>
+                                <option value="10">Decimo</option>
+                                <option value="11">Undecimo</option>
+                                <option value="12">Duodecimo</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Asignatura</label>
+                            <select id="id_asignatura" name="id_asignatura" selected="NULL" model="AsignaturasApp" colname="id_asignatura" colvalue="nombre_asignatura" url="Base/Controllers/GetComboboxAsignaturasPlanEstudio.php" class="form-control" style="width: 100%;" onchange="" >
+                                <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-sm-2">
-                        <label>Programa</label>
-                        <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value);">
-                            <option selected="selected" value="NULL">Ninguna</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <label>Plan Estudios</label>
-                        <select id="id_planestudio" name="id_planestudio" selected="NULL" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value);">
-                            <option selected="selected" value="NULL">Ninguna</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <label>Grado</label>
-                        <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value, 2); setFindbyCombobox('id_grupo', this.id, this.value);">
-                            <option disabled="disabled" selected="selected" value="0">Ninguno</option>
-                            <option value="1">Primero</option>
-                            <option value="2">Segundo</option>
-                            <option value="3">Tercero</option>
-                            <option value="4">Cuarto</option>
-                            <option value="5">Quinto</option>
-                            <option value="6">Sexto</option>
-                            <option value="7">Septimo</option>
-                            <option value="8">Octavo</option>
-                            <option value="9">Noveno</option>
-                            <option value="10">Decimo</option>
-                            <option value="11">Undecimo</option>
-                            <option value="12">Duodecimo</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <label>Asignatura</label>
-                        <select id="id_asignatura" name="id_asignatura" selected="NULL" model="AsignaturasApp" colname="id_asignatura" colvalue="nombre_asignatura" url="Base/Controllers/GetComboboxAsignaturasPlanEstudio.php" class="form-control" style="width: 100%;" onchange="" >
-                            <option selected="selected" value="NULL">Ninguna</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label>Docente</label>
-                        <select id="id_docente" name="id_docente" selected="NN" required="required" model="DocentesApp" colname="nombrecompleto_docente" colvalue="id_docente" url="Base/Controllers/GetComboboxDocentes.php" class="form-control" style="width: 100%;">
-                            <option selected="selected" value="-1">Ninguna</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Docente</label>
+                            <select id="id_docente" name="id_docente" selected="NN" required="required" model="DocentesApp" colname="nombrecompleto_docente" colvalue="id_docente" url="Base/Controllers/GetComboboxDocentes.php" class="form-control" style="width: 100%;">
+                                <option selected="selected" value="-1">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grupo</label>
+                            <select id="id_grupo" name="id_grupo" selected="NULL" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
+                                <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Horas</label>
+                            <input type="number" id="numhoras_carga" name="numhoras_carga" value="0" min="1" max="24"  maxlength="2" class="form-control" /> 
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Codigo</label>
+                            <input type="text" name="id_carga" id="id_carga" value="0" maxlength="24" required="required" readonly="readonly" title="Codigo de Carga"  class="form-control">
+                        </div>
                     </div>
-                    <div class="col-sm-2">
-                        <label>Grupo</label>
-                        <select id="id_grupo" name="id_grupo" selected="NULL" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
-                            <option selected="selected" value="NULL">Ninguna</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <label>Horas</label>
-                        <input type="number" id="numhoras_carga" name="numhoras_carga" value="0" min="1" max="24"  maxlength="2" class="form-control" /> 
-                    </div>
-                    <div class="col-sm-2">
-                        <label>Codigo</label>
-                        <input type="text" name="id_carga" id="id_carga" value="0" maxlength="24" required="required" readonly="readonly" title="Codigo de Carga"  class="form-control">
-                    </div>
-                </div>
 
 
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-sm-6">
-                        <center>
-                            <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
-                        </center>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <center>
-                            <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
-                        </center>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Listado de Cargas</div>
-        <div class="panel-body">
-
-            <div class="table-responsive">
-                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="CargasDocentesApp" url="Base/Controllers/GetDataTableCargasDocentes.php" >
-                    <thead id="thead_dataTable0">
-                        <tr rowhead="true">
-                            <th style="width: 25%;" title="Nombre de Docente">Docente</th>
-                            <th style="width: 25%;" title="Nombre de la Asignatura">Asignatura</th>
-                            <th style="width: 8%;" title="Codigo de Grupo">Grupo</th>
-                            <th style="width: 8%;" title="Numero de Horas">Hrs.</th>
-                            <th style="width: 8%;" title="Codigo de Prograna">Pro.</th>
-                            <th style="width: 7%;" title="Codigo de Plan de Estudios">P.E.</th>
-                            <th style="width: 7%;" title="Año Academico">Año</th>
-                            <th style="width: 7%;" title="Codigo de Escuela">Esc.</th>
-                            <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_dataTable0">
-                        <tr id="rowsample" rowsample="true" style="display: none;">
-                            <td> <label>{{nombrecompleto_docente}}</label> </td>
-                            <td> <label>{{nombre_asignatura}}</label> </td>
-                            <td> <label>{{id_grupo}}</label> </td>
-                            <td> {{numhoras_carga}} </td>
-                            <td> {{id_programa}} </td>
-                            <td> {{id_planestudio}} </td>
-                            <td> <label>{{id_periodo}}</label> </td>
-                            <td> {{id_escuela}} </td>
-                            <td>
-                                <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="POST" autocomplete="off" url="Base/Controllers/CargasController.php"  model="CargasApp" findBy="id_carga" statusfield="status_carga">
-                                    <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
-                                    <input type="hidden"  editable="false" disabled="disabled" name="status_carga[]" id="status_carga" value="1" >
-                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                </form>
             </div>
         </div>
-    </div>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Cargas</div>
+            <div class="panel-body">
 
-    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="CargasDocentesApp" url="Base/Controllers/GetDataTableCargasDocentes.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 25%;" title="Nombre de Docente">Docente</th>
+                                <th style="width: 25%;" title="Nombre de la Asignatura">Asignatura</th>
+                                <th style="width: 8%;" title="Codigo de Grupo">Grupo</th>
+                                <th style="width: 8%;" title="Numero de Horas">Hrs.</th>
+                                <th style="width: 8%;" title="Codigo de Prograna">Pro.</th>
+                                <th style="width: 7%;" title="Codigo de Plan de Estudios">P.E.</th>
+                                <th style="width: 7%;" title="Año Academico">Año</th>
+                                <th style="width: 7%;" title="Codigo de Escuela">Esc.</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <label>{{nombrecompleto_docente}}</label> </td>
+                                <td> <label>{{nombre_asignatura}}</label> </td>
+                                <td> <label>{{id_grupo}}</label> </td>
+                                <td> {{numhoras_carga}} </td>
+                                <td> {{id_programa}} </td>
+                                <td> {{id_planestudio}} </td>
+                                <td> <label>{{id_periodo}}</label> </td>
+                                <td> {{id_escuela}} </td>
+                                <td>
+                                    <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="POST" autocomplete="off" url="Base/Controllers/CargasController.php"  model="CargasApp" findBy="id_carga" statusfield="status_carga">
+                                        <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_carga[]" id="status_carga" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-</body>
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
 </html>

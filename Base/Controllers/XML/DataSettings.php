@@ -11,7 +11,7 @@ class DataSettings {
 
     public function __construct($url = null) {
         if ($url != null) {
-            $this->xmlURL=$url;
+            $this->xmlURL = $url;
         }
         try {
             $content = $this->loadfile();
@@ -27,11 +27,13 @@ class DataSettings {
 
     private function loadfile() {
         try {
-            $content = file_get_contents($this->xmlURL);
-
+             $content='';
+            if (file_exists($this->xmlURL)) {
+                $content = file_get_contents($this->xmlURL);
+            }
             return $content;
         } catch (Exception $e) {
-            exit;
+            
         }
         return null;
     }

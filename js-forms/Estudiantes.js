@@ -192,6 +192,9 @@ function GrabarEstudiante(item) {
     var form = getForm(item);
     if (validateForm(form)) {
         submitForm(form, false).done(function () {
+            if(getLastInsertId()!==null){
+                alert('El Codigo del Estudiante es: '+getLastInsertId());
+            }
             LoadTableEstudiantes();
         });
     }

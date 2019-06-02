@@ -28,8 +28,8 @@ class BaseController {
     private $message = '';
     private $data = null;
 
-    public function __construct($code = 1) {
-        $this->config = new DataSettings();
+    public function __construct($urlsettings=null, $code = 1) {
+        $this->config = new DataSettings($urlsettings);
         $index = null;
         $index = $this->config->getSettingIndex($code);
         if ($index != null) {

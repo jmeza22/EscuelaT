@@ -5,287 +5,288 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <title>Planilla de Calificaciones</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Registro de Calificaciones"/>
-    <meta name="author" content="Jose Meza"/>
-    <link href="css/styles.css" rel="stylesheet" />
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <head>
+        <title>Planilla de Calificaciones</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Calificaciones"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/Validator.js"></script>
-    <script type="text/javascript" src="js/localStorageData.js"></script>
-    <script type="text/javascript" src="js/SimplexFramework.js"></script>
-    <script type="text/javascript" src="js-forms/Calificaciones.js"></script>
-</head>
-<body>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Calificaciones.js"></script>
+    </head>
+    <body>
 
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Datos de Planilla</div>
-        <div class="panel-body table-responsive" >
-            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasDocentesApp" findBy="id_carga" mainform="true" >
-                <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Datos de Planilla</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasDocentesApp" findBy="id_carga" mainform="true" >
+                    <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label>Docente</label>
-                        <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre del Docente Activo">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>Docente</label>
+                            <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre del Docente Activo">
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Asignatura</label>
+                            <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre de Asignatura">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Año</label>
+                            <input type="text" name="id_periodo" id="id_periodo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Año">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grado</label>
+                            <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grado">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grupo</label>
+                            <input type="text" name="id_grupo" id="id_grupo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grupo">
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        <label>Asignatura</label>
-                        <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre de Asignatura">
-                    </div>
-                    <div class="col-sm-2">
-                        <label>Año</label>
-                        <input type="text" name="id_periodo" id="id_periodo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Año">
-                    </div>
-                    <div class="col-sm-2">
-                        <label>Grado</label>
-                        <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grado">
-                    </div>
-                    <div class="col-sm-2">
-                        <label>Grupo</label>
-                        <input type="text" name="id_grupo" id="id_grupo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grupo">
-                    </div>
-                </div>
-                <datalist id="lista_id_logro" name="lista_id_logro" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogros.php" >
-                    <option selected="selected" value="">Ninguna</option>
-                </datalist>
-            </form>
-            <form id="formConfig" method="POST" autocomplete="off" url="Base/Controllers/GetConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
-                <input type="hidden" id="id_escuela" name="id_escuela" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="numcortes_configuracion" name="numcortes_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valmin_configuracion" name="valmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valmax_configuracion" name="valmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valaprueba_configuracion" name="valaprueba_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valsupmin_configuracion" name="valsupmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valsupmax_configuracion" name="valsupmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valaltomin_configuracion" name="valaltomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valaltomax_configuracion" name="valaltomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valbasmin_configuracion" name="valbasmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valbasmax_configuracion" name="valbasmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-                <input type="hidden" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
-            </form>
-        </div>
-    </div>
-
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Automatizacion de Logros por Notas</div>
-        <div class="panel-body" >
-            <form id="logroauto" name="logroauto">
-                <datalist id="lista_id_logro_sup" name="lista_id_logro_sup" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosSuperior.php" >
-                    <option selected="selected" value="">Ninguna</option>
-                </datalist>
-                <datalist id="lista_id_logro_alt" name="lista_id_logro_alt" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosAlto.php" >
-                    <option selected="selected" value="">Ninguna</option>
-                </datalist>
-                <datalist id="lista_id_logro_bas" name="lista_id_logro_bas" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBasico.php" >
-                    <option selected="selected" value="">Ninguna</option>
-                </datalist>
-                <datalist id="lista_id_logro_baj" name="lista_id_logro_baj" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBajo.php" >
-                    <option selected="selected" value="">Ninguna</option>
-                </datalist>
-                <div class="row">
-                    <div class="col-sm-3"><label>L.C. Bajo</label><input type="text" id="lcbajo" name="lcbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.C. Basico</label><input type="text" id="lcbasico" name="lcbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.C. Alto</label><input type="text" id="lcalto" name="lcalto" value="" list="lista_id_logro_alt" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.C. Super</label><input type="text" id="lcsuperior" name="lcsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3"><label>L.P. Bajo</label><input type="text" id="lpbajo" name="lpbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.P. Basico</label><input type="text" id="lpbasico" name="lpbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.P. Alto</label><input type="text" id="lpalto" name="lpalto" value="" list="lista_id_logro_alt" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.P. Super</label><input type="text" id="lpsuperior" name="lpsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3"><label>L.A. Bajo</label><input type="text" id="labajo" name="labajo" value="" list="lista_id_logro_baj" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.A. Basico</label><input type="text" id="labasico" name="labasico" value="" list="lista_id_logro_bas" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.A. Alto</label><input type="text" id="laalto" name="laalto" value="" list="lista_id_logro_alt" class="form-control"></div>
-                    <div class="col-sm-3"><label>L.A. Super</label><input type="text" id="lasuperior" name="lasuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
-                </div>
-                </table>
-            </form>
-        </div>
-    </div>
-
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Planilla de Calificaciones</div>
-        <div class="panel-body table-responsive">
-
-            <div class="table-responsive">
-                <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/CalificacionesController.php" model="CalificacionesApp" findBy="id_calificacion" statusfield="status_calificacion" mainform="true" > 
-                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="EscuelasApp" url="Base/Controllers/GetDataTableCalificaciones.php" >
-                        <thead id="thead_dataTable0">
-                            <tr rowhead="true">
-                                <th style="width: 2%;" title="Numero en Listado" >#</th>
-                                <th style="width: 40%;">NOMBRES Y APELLIDOS</th>
-                                <th style="width: 1%;" title="Primer Periodo" id="thp1" style="display: none !important;">P1</th>
-                                <th style="width: 1%;" title="Segundo Periodo" id="thp2" style="display: none !important;">P2</th>
-                                <th style="width: 1%;" title="Tercer Periodo" id="thp3" style="display: none !important;">P3</th>
-                                <th style="width: 1%;" title="Cuarto Periodo" id="thp4" style="display: none !important;">P4</th>
-                                <th style="width: 1%;" title="Quinto Periodo" id="thp5" style="display: none !important;">P5</th>
-                                <th style="width: 1%;" title="Sexto Periodo" id="thp6" style="display: none !important;">P6</th>
-                                <th style="width: 2%;" title="Definiva Año" id="thdef" >Def</th>
-                                <th style="width: 5%;" title="Codigo Logro Cognitivo" >LC</th>
-                                <th style="width: 5%;" title="Codigo Logro Procedimental" >LP</th>
-                                <th style="width: 5%;" title="Codigo Logro Actitudinal" >LA</th>
-                                <th style="width: 5%;" title="Nota Logro Cognitivo" >NC</th>
-                                <th style="width: 5%;" title="Nota Logro Procedimental" >NP</th>
-                                <th style="width: 5%;" title="Nota Logro Actitudinal" >NA</th>
-                                <th style="width: 5%;" title="Nota Definitiva del Periodo" >ND</th>
-                                <th style="width: 5%;" title="Numero de Ausencias (Periodo Actual)" >Aus.</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody_dataTable0">
-                            <tr id="rowsample" rowsample="true" style="display: none;">
-                                <td> {{rownum}}
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante{{rownum}}" name="id_estudiante[]" value="{{id_estudiante}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_calificacion{{rownum}}" name="id_calificacion[]" value="{{id_calificacion}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matricula{{rownum}}" name="id_matricula[]" value="{{id_matricula}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig{{rownum}}" name="id_matasig[]" value="{{id_matasig}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_programa{{rownum}}" name="id_programa[]" value="{{id_programa}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_planestudio{{rownum}}" name="id_planestudio[]" value="{{id_planestudio}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_periodo{{rownum}}" name="id_periodo[]" value="{{id_periodo}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte{{rownum}}" name="id_corte[]" value="{{id_corte}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_grupo{{rownum}}" name="id_grupo[]" value="{{id_grupo}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="numgrado_programa{{rownum}}" name="numgrado_programa[]" value="{{numgrado_programa}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="{{nombrecompleto_estudiante}}">
-                                </td>
-                                <td> <label>{{nombrecompleto_estudiante}}</label> </td>
-                                <td name="tdp1" style="display: none !important;"> <label>{{np1}}</label> </td>
-                                <td name="tdp2" style="display: none !important;"> <label>{{np2}}</label> </td>
-                                <td name="tdp3" style="display: none !important;"> <label>{{np3}}</label> </td>
-                                <td name="tdp4" style="display: none !important;"> <label>{{np4}}</label> </td>
-                                <td name="tdp5" style="display: none !important;"> <label>{{np5}}</label> </td>
-                                <td name="tdp6" style="display: none !important;"> <label>{{np6}}</label> </td>
-                                <td name="tddef"> <label>{{def}}</label> </td>
-                                <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" value="{{nd_calificacion}}" onfocus="setRequiredND(this)"> </td>
-                                <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div>
-                        <center>
-                            <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
-                        </center>
-                    </div>
-                    <datalist id="lista_calificaciones" name="lista_calificaciones" >
-                        <option value="1.0">1.0</option>
-                        <option value="1.1">1.1</option>
-                        <option value="1.2">1.2</option>
-                        <option value="1.3">1.3</option>
-                        <option value="1.4">1.4</option>
-                        <option value="1.5">1.5</option>
-                        <option value="1.6">1.6</option>
-                        <option value="1.7">1.7</option>
-                        <option value="1.8">1.8</option>
-                        <option value="1.9">1.9</option>
-                        <option value="2.0">2.0</option>
-                        <option value="2.1">2.1</option>
-                        <option value="2.2">2.2</option>
-                        <option value="2.3">2.3</option>
-                        <option value="2.4">2.4</option>
-                        <option value="2.5">2.5</option>
-                        <option value="2.6">2.6</option>
-                        <option value="2.7">2.7</option>
-                        <option value="2.8">2.8</option>
-                        <option value="2.9">2.9</option>
-                        <option value="3.0">3.0</option>
-                        <option value="3.1">3.1</option>
-                        <option value="3.2">3.2</option>
-                        <option value="3.3">3.3</option>
-                        <option value="3.4">3.4</option>
-                        <option value="3.5">3.5</option>
-                        <option value="3.6">3.6</option>
-                        <option value="3.7">3.7</option>
-                        <option value="3.8">3.8</option>
-                        <option value="3.9">3.9</option>
-                        <option value="4.0">4.0</option>
-                        <option value="4.1">4.1</option>
-                        <option value="4.2">4.2</option>
-                        <option value="4.3">4.3</option>
-                        <option value="4.4">4.4</option>
-                        <option value="4.5">4.5</option>
-                        <option value="4.6">4.6</option>
-                        <option value="4.7">4.7</option>
-                        <option value="4.8">4.8</option>
-                        <option value="4.9">4.9</option>
-                        <option value="5.0">5.0</option>
-                        <option value="5.1">5.1</option>
-                        <option value="5.2">5.2</option>
-                        <option value="5.3">5.3</option>
-                        <option value="5.4">5.4</option>
-                        <option value="5.5">5.5</option>
-                        <option value="5.6">5.6</option>
-                        <option value="5.7">5.7</option>
-                        <option value="5.8">5.8</option>
-                        <option value="5.9">5.9</option>
-                        <option value="6.0">6.0</option>
-                        <option value="6.1">6.1</option>
-                        <option value="6.2">6.2</option>
-                        <option value="6.3">6.3</option>
-                        <option value="6.4">6.4</option>
-                        <option value="6.5">6.5</option>
-                        <option value="6.6">6.6</option>
-                        <option value="6.7">6.7</option>
-                        <option value="6.8">6.8</option>
-                        <option value="6.9">6.9</option>
-                        <option value="7.0">7.0</option>
-                        <option value="7.1">7.1</option>
-                        <option value="7.2">7.2</option>
-                        <option value="7.3">7.3</option>
-                        <option value="7.4">7.4</option>
-                        <option value="7.5">7.5</option>
-                        <option value="7.6">7.6</option>
-                        <option value="7.7">7.7</option>
-                        <option value="7.8">7.8</option>
-                        <option value="7.9">7.9</option>
-                        <option value="8.0">8.0</option>
-                        <option value="8.1">8.1</option>
-                        <option value="8.2">8.2</option>
-                        <option value="8.3">8.3</option>
-                        <option value="8.4">8.4</option>
-                        <option value="8.5">8.5</option>
-                        <option value="8.6">8.6</option>
-                        <option value="8.7">8.7</option>
-                        <option value="8.8">8.8</option>
-                        <option value="8.9">8.9</option>
-                        <option value="9.0">9.0</option>
-                        <option value="9.1">9.1</option>
-                        <option value="9.2">9.2</option>
-                        <option value="9.3">9.3</option>
-                        <option value="9.4">9.4</option>
-                        <option value="9.5">9.5</option>
-                        <option value="9.6">9.6</option>
-                        <option value="9.7">9.7</option>
-                        <option value="9.8">9.8</option>
-                        <option value="9.9">9.9</option>
-                        <option value="10.0">10.0</option>
+                    <datalist id="lista_id_logro" name="lista_id_logro" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogros.php" >
+                        <option selected="selected" value="">Ninguna</option>
                     </datalist>
                 </form>
+                <form id="formConfig" method="POST" autocomplete="off" url="Base/Controllers/GetConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
+                    <input type="hidden" id="id_escuela" name="id_escuela" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="numcortes_configuracion" name="numcortes_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valmin_configuracion" name="valmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valmax_configuracion" name="valmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valaprueba_configuracion" name="valaprueba_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valsupmin_configuracion" name="valsupmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valsupmax_configuracion" name="valsupmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valaltomin_configuracion" name="valaltomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valaltomax_configuracion" name="valaltomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valbasmin_configuracion" name="valbasmin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valbasmax_configuracion" name="valbasmax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" required="required" maxlength="22" min="1"  /> 
+                </form>
             </div>
-
         </div>
-    </div>
 
-    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Automatizacion de Logros por Notas</div>
+            <div class="panel-body" >
+                <form id="logroauto" name="logroauto">
+                    <datalist id="lista_id_logro_sup" name="lista_id_logro_sup" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosSuperior.php" >
+                        <option selected="selected" value="">Ninguna</option>
+                    </datalist>
+                    <datalist id="lista_id_logro_alt" name="lista_id_logro_alt" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosAlto.php" >
+                        <option selected="selected" value="">Ninguna</option>
+                    </datalist>
+                    <datalist id="lista_id_logro_bas" name="lista_id_logro_bas" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBasico.php" >
+                        <option selected="selected" value="">Ninguna</option>
+                    </datalist>
+                    <datalist id="lista_id_logro_baj" name="lista_id_logro_baj" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBajo.php" >
+                        <option selected="selected" value="">Ninguna</option>
+                    </datalist>
+                    <div class="row">
+                        <div class="col-sm-3"><label>L.C. Bajo</label><input type="text" id="lcbajo" name="lcbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.C. Basico</label><input type="text" id="lcbasico" name="lcbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.C. Alto</label><input type="text" id="lcalto" name="lcalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.C. Super</label><input type="text" id="lcsuperior" name="lcsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3"><label>L.P. Bajo</label><input type="text" id="lpbajo" name="lpbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.P. Basico</label><input type="text" id="lpbasico" name="lpbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.P. Alto</label><input type="text" id="lpalto" name="lpalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.P. Super</label><input type="text" id="lpsuperior" name="lpsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3"><label>L.A. Bajo</label><input type="text" id="labajo" name="labajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.A. Basico</label><input type="text" id="labasico" name="labasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.A. Alto</label><input type="text" id="laalto" name="laalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                        <div class="col-sm-3"><label>L.A. Super</label><input type="text" id="lasuperior" name="lasuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                    </div>
+                    </table>
+                </form>
+            </div>
+        </div>
 
-</body>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Planilla de Calificaciones</div>
+            <div class="panel-body table-responsive">
+
+                <div class="table-responsive">
+                    <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/CalificacionesController.php" model="CalificacionesApp" findBy="id_calificacion" statusfield="status_calificacion" mainform="true" > 
+                        <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="EscuelasApp" url="Base/Controllers/GetDataTableCalificaciones.php" >
+                            <thead id="thead_dataTable0">
+                                <tr rowhead="true">
+                                    <th style="width: 2%;" title="Numero en Listado" >#</th>
+                                    <th style="width: 40%;">NOMBRES Y APELLIDOS</th>
+                                    <th style="width: 1%;" title="Primer Periodo" id="thp1" style="display: none !important;">P1</th>
+                                    <th style="width: 1%;" title="Segundo Periodo" id="thp2" style="display: none !important;">P2</th>
+                                    <th style="width: 1%;" title="Tercer Periodo" id="thp3" style="display: none !important;">P3</th>
+                                    <th style="width: 1%;" title="Cuarto Periodo" id="thp4" style="display: none !important;">P4</th>
+                                    <th style="width: 1%;" title="Quinto Periodo" id="thp5" style="display: none !important;">P5</th>
+                                    <th style="width: 1%;" title="Sexto Periodo" id="thp6" style="display: none !important;">P6</th>
+                                    <th style="width: 2%;" title="Definiva Año" id="thdef" >Def</th>
+                                    <th style="width: 5%;" title="Codigo Logro Cognitivo" >LC</th>
+                                    <th style="width: 5%;" title="Codigo Logro Procedimental" >LP</th>
+                                    <th style="width: 5%;" title="Codigo Logro Actitudinal" >LA</th>
+                                    <th style="width: 5%;" title="Nota Logro Cognitivo" >NC</th>
+                                    <th style="width: 5%;" title="Nota Logro Procedimental" >NP</th>
+                                    <th style="width: 5%;" title="Nota Logro Actitudinal" >NA</th>
+                                    <th style="width: 5%;" title="Nota Definitiva del Periodo" >ND</th>
+                                    <th style="width: 5%;" title="Numero de Ausencias (Periodo Actual)" >Aus.</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_dataTable0">
+                                <tr id="rowsample" rowsample="true" style="display: none;">
+                                    <td> {{rownum}}
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante{{rownum}}" name="id_estudiante[]" value="{{id_estudiante}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_calificacion{{rownum}}" name="id_calificacion[]" value="{{id_calificacion}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matricula{{rownum}}" name="id_matricula[]" value="{{id_matricula}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig{{rownum}}" name="id_matasig[]" value="{{id_matasig}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_programa{{rownum}}" name="id_programa[]" value="{{id_programa}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_planestudio{{rownum}}" name="id_planestudio[]" value="{{id_planestudio}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_periodo{{rownum}}" name="id_periodo[]" value="{{id_periodo}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte{{rownum}}" name="id_corte[]" value="{{id_corte}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_grupo{{rownum}}" name="id_grupo[]" value="{{id_grupo}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="numgrado_programa{{rownum}}" name="numgrado_programa[]" value="{{numgrado_programa}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="{{nombrecompleto_estudiante}}">
+                                    </td>
+                                    <td> <label>{{nombrecompleto_estudiante}}</label> </td>
+                                    <td name="tdp1" style="display: none !important;"> <label>{{np1}}</label> </td>
+                                    <td name="tdp2" style="display: none !important;"> <label>{{np2}}</label> </td>
+                                    <td name="tdp3" style="display: none !important;"> <label>{{np3}}</label> </td>
+                                    <td name="tdp4" style="display: none !important;"> <label>{{np4}}</label> </td>
+                                    <td name="tdp5" style="display: none !important;"> <label>{{np5}}</label> </td>
+                                    <td name="tdp6" style="display: none !important;"> <label>{{np6}}</label> </td>
+                                    <td name="tddef"> <label>{{def}}</label> </td>
+                                    <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
+                                    <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
+                                    <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
+                                    <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones"> </td>
+                                    <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones"> </td>
+                                    <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones"> </td>
+                                    <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" value="{{nd_calificacion}}" onfocus="setRequiredND(this)"> </td>
+                                    <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <center>
+                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                            </center>
+                        </div>
+                        <datalist id="lista_calificaciones" name="lista_calificaciones" >
+                            <option value="1.0">1.0</option>
+                            <option value="1.1">1.1</option>
+                            <option value="1.2">1.2</option>
+                            <option value="1.3">1.3</option>
+                            <option value="1.4">1.4</option>
+                            <option value="1.5">1.5</option>
+                            <option value="1.6">1.6</option>
+                            <option value="1.7">1.7</option>
+                            <option value="1.8">1.8</option>
+                            <option value="1.9">1.9</option>
+                            <option value="2.0">2.0</option>
+                            <option value="2.1">2.1</option>
+                            <option value="2.2">2.2</option>
+                            <option value="2.3">2.3</option>
+                            <option value="2.4">2.4</option>
+                            <option value="2.5">2.5</option>
+                            <option value="2.6">2.6</option>
+                            <option value="2.7">2.7</option>
+                            <option value="2.8">2.8</option>
+                            <option value="2.9">2.9</option>
+                            <option value="3.0">3.0</option>
+                            <option value="3.1">3.1</option>
+                            <option value="3.2">3.2</option>
+                            <option value="3.3">3.3</option>
+                            <option value="3.4">3.4</option>
+                            <option value="3.5">3.5</option>
+                            <option value="3.6">3.6</option>
+                            <option value="3.7">3.7</option>
+                            <option value="3.8">3.8</option>
+                            <option value="3.9">3.9</option>
+                            <option value="4.0">4.0</option>
+                            <option value="4.1">4.1</option>
+                            <option value="4.2">4.2</option>
+                            <option value="4.3">4.3</option>
+                            <option value="4.4">4.4</option>
+                            <option value="4.5">4.5</option>
+                            <option value="4.6">4.6</option>
+                            <option value="4.7">4.7</option>
+                            <option value="4.8">4.8</option>
+                            <option value="4.9">4.9</option>
+                            <option value="5.0">5.0</option>
+                            <option value="5.1">5.1</option>
+                            <option value="5.2">5.2</option>
+                            <option value="5.3">5.3</option>
+                            <option value="5.4">5.4</option>
+                            <option value="5.5">5.5</option>
+                            <option value="5.6">5.6</option>
+                            <option value="5.7">5.7</option>
+                            <option value="5.8">5.8</option>
+                            <option value="5.9">5.9</option>
+                            <option value="6.0">6.0</option>
+                            <option value="6.1">6.1</option>
+                            <option value="6.2">6.2</option>
+                            <option value="6.3">6.3</option>
+                            <option value="6.4">6.4</option>
+                            <option value="6.5">6.5</option>
+                            <option value="6.6">6.6</option>
+                            <option value="6.7">6.7</option>
+                            <option value="6.8">6.8</option>
+                            <option value="6.9">6.9</option>
+                            <option value="7.0">7.0</option>
+                            <option value="7.1">7.1</option>
+                            <option value="7.2">7.2</option>
+                            <option value="7.3">7.3</option>
+                            <option value="7.4">7.4</option>
+                            <option value="7.5">7.5</option>
+                            <option value="7.6">7.6</option>
+                            <option value="7.7">7.7</option>
+                            <option value="7.8">7.8</option>
+                            <option value="7.9">7.9</option>
+                            <option value="8.0">8.0</option>
+                            <option value="8.1">8.1</option>
+                            <option value="8.2">8.2</option>
+                            <option value="8.3">8.3</option>
+                            <option value="8.4">8.4</option>
+                            <option value="8.5">8.5</option>
+                            <option value="8.6">8.6</option>
+                            <option value="8.7">8.7</option>
+                            <option value="8.8">8.8</option>
+                            <option value="8.9">8.9</option>
+                            <option value="9.0">9.0</option>
+                            <option value="9.1">9.1</option>
+                            <option value="9.2">9.2</option>
+                            <option value="9.3">9.3</option>
+                            <option value="9.4">9.4</option>
+                            <option value="9.5">9.5</option>
+                            <option value="9.6">9.6</option>
+                            <option value="9.7">9.7</option>
+                            <option value="9.8">9.8</option>
+                            <option value="9.9">9.9</option>
+                            <option value="10.0">10.0</option>
+                        </datalist>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
 </html>

@@ -22,6 +22,9 @@ function SendPersona(item){
     }
     if (validateForm(form)) {
         submitForm(item, false).done(function () {
+            if(getLastInsertId()!==null){
+                alert('El Codigo de Persona Asignado es: P'+getLastInsertId());
+            }
             resetForm(form);
             LoadTable();
         });

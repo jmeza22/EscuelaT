@@ -43,13 +43,13 @@ function SendUsuario(item) {
     var apellido1 = document.getElementById("nombre1_persona");
     var myform = null;
     myform = getForm(item);
+    if (username.value === '0' || username.value === '') {
+        nuevoUsername();
+    }
+    if (password.value === ' ' || password.value === '') {
+        nuevoPassword();
+    }
     if (validateForm(myform)) {
-        if (username.value === '0' || username.value === '') {
-            nuevoUsername();
-        }
-        if (password.value === ' ' || password.value === '') {
-            nuevoPassword();
-        }
         if (nombre1 !== undefined && apellido1 !== undefined && nombre1.value !== '' && apellido1.value !== '') {
             document.getElementById("nombrecompleto_persona").value = nombre1.value + ' ' + apellido1.value;
         }

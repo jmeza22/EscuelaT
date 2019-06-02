@@ -5,155 +5,156 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <title>Asignaturas</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Registro de Asignaturas"/>
-    <meta name="author" content="Jose Meza"/>
-    <link href="css/styles.css" rel="stylesheet" />
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <head>
+        <title>Asignaturas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Asignaturas"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/Validator.js"></script>
-    <script type="text/javascript" src="js/localStorageData.js"></script>
-    <script type="text/javascript" src="js/SimplexFramework.js"></script>
-    <script type="text/javascript" src="js-forms/Asignaturas.js"></script>
-</head>
-<body>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Asignaturas.js"></script>
+    </head>
+    <body>
 
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Asignatura</div>
-        <div class="panel-body table-responsive" >
-            <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php" model="AsignaturasApp" findBy="id_asignatura" mainform="true" >
-                <input type="hidden" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" title="Codigo de Escuela">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>Codigo</label>
-                        <input type="text" name="id_asignatura" id="id_asignatura" value="" maxlength="24" required="required" class="form-control" title="Codigo de Asignatura" list="lista_asignaturas">
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Asignatura</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php" model="AsignaturasApp" findBy="id_asignatura" mainform="true" >
+                    <input type="hidden" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" title="Codigo de Escuela">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Codigo</label>
+                            <input type="text" name="id_asignatura" id="id_asignatura" value="" maxlength="24" required="required" class="form-control" title="Codigo de Asignatura" list="lista_asignaturas">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Nombre Asignatura</label>
+                            <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="100" required="required" class="form-control" title="Nombre de Asignatura">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Area</label>
+                            <select id="id_area" name="id_area" model="AreasApp" colname="nombre_area" colvalue="id_area" url="Base/Controllers/GetComboboxAreas.php" class="form-control" style="min-width: 100% !important;" >
+                                <option value="">Ninguno</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label>Nombre Asignatura</label>
-                        <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="100" required="required" class="form-control" title="Nombre de Asignatura">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Descripcion</label>
+                            <textarea id="descripcion_asignatura" name="descripcion_asignatura" maxlength="200" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <label>Area</label>
-                        <select id="id_area" name="id_area" model="AreasApp" colname="nombre_area" colvalue="id_area" url="Base/Controllers/GetComboboxAreas.php" class="form-control" style="min-width: 100% !important;" >
-                            <option value="">Ninguno</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <label>Descripcion</label>
-                        <textarea id="descripcion_asignatura" name="descripcion_asignatura" maxlength="200" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label>Horas Teoricas</label>
-                        <input type="number" double="true" name="hteoricas_asignatura" id="hteoricas_asignatura" value="0" maxlength="2" required="required" class="form-control" title="">
-                    </div>
-                    <div class="col-sm-4">
-                        <label>Horas Practicas</label>
-                        <input type="number" double="true" name="hpracticas_asignatura" id="hpracticas_asignatura" value="0" maxlength="2" required="required" class="form-control" title="">
-                    </div>
-                    <div class="col-sm-4">
-                        <label>Creditos</label>
-                        <input type="number" double="true" name="numcreditos_asignatura" id="numcreditos_asignatura" value="0" maxlength="2" required="required" class="form-control" title="Numero de Creditos Academicos">
-                    </div>
-                </div> 
-                <datalist id="lista_asignaturas" name="lista_asignaturas" >
-                    <option value="ACD">COMPORTAMIENTO Y DISCIPLINA</option>
-                    <option value="AMAT">MATEMATICAS</option>
-                    <option value="AEST">ESTADISTICA</option>
-                    <option value="AGEOM">GEOMETRIA</option>
-                    <option value="AESP">ESPAÑOL</option>
-                    <option value="ANAT">CIENCIAS NATURALES</option>
-                    <option value="AQUI">QUIMICA</option>
-                    <option value="AFIS">FISICA</option>
-                    <option value="ASOC">CIENCIAS SOCIALES</option>
-                    <option value="AGEO">GEOGRAFIA</option>
-                    <option value="AHIS">HISTORIA</option>
-                    <option value="ADEM">DEMOCRACIA Y CONSTITUCION</option>
-                    <option value="AART">EDUCACION ARTISTICA</option>
-                    <option value="AEVA">ETICA Y VALORES</option>
-                    <option value="AREL">EDUCACION RELIGIOSA</option>
-                    <option value="AEFI">EDUCACION FISICA</option>
-                    <option value="AINF">TECNOLOGIA E INFORMATICA</option>
-                    <option value="AFIL">FILOSOFIA</option>
-                    <option value="AECO">ECONOMIA</option>
-                    <option value="AING">INGLES</option>
-                    <option value="ADIMA">DIMENSION AFECTIVA</option>
-                    <option value="ADIMC">DIMENSION COGNITIVA</option>
-                    <option value="ADIMCP">DIMENSION CORPORAL</option>
-                    <option value="ADIMEV">DIMENSION ETICA Y VALORES</option>
-                    <option value="ADIMCM">DIMENSION COMUNICATIVA</option>
-                    <option value="ADIMRL">DIMENSION RELIGIOSA</option>
-                    
-                </datalist>
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-sm-6">
-                        <center>
-                            <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
-                        </center>
-                    </div>
-                    <div class="col-sm-6">
-                        <center>
-                            <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
-                        </center>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Listado de Asignaturas</div>
-        <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Horas Teoricas</label>
+                            <input type="number" double="true" name="hteoricas_asignatura" id="hteoricas_asignatura" value="0" maxlength="2" required="required" class="form-control" title="">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Horas Practicas</label>
+                            <input type="number" double="true" name="hpracticas_asignatura" id="hpracticas_asignatura" value="0" maxlength="2" required="required" class="form-control" title="">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Creditos</label>
+                            <input type="number" double="true" name="numcreditos_asignatura" id="numcreditos_asignatura" value="0" maxlength="2" required="required" class="form-control" title="Numero de Creditos Academicos">
+                        </div>
+                    </div> 
+                    <datalist id="lista_asignaturas" name="lista_asignaturas" >
+                        <option value="ACD">COMPORTAMIENTO Y DISCIPLINA</option>
+                        <option value="AMAT">MATEMATICAS</option>
+                        <option value="AEST">ESTADISTICA</option>
+                        <option value="AGEOM">GEOMETRIA</option>
+                        <option value="AESP">ESPAÑOL</option>
+                        <option value="ANAT">CIENCIAS NATURALES</option>
+                        <option value="AQUI">QUIMICA</option>
+                        <option value="AFIS">FISICA</option>
+                        <option value="ASOC">CIENCIAS SOCIALES</option>
+                        <option value="AGEO">GEOGRAFIA</option>
+                        <option value="AHIS">HISTORIA</option>
+                        <option value="ADEM">DEMOCRACIA Y CONSTITUCION</option>
+                        <option value="AART">EDUCACION ARTISTICA</option>
+                        <option value="AEVA">ETICA Y VALORES</option>
+                        <option value="AREL">EDUCACION RELIGIOSA</option>
+                        <option value="AEFI">EDUCACION FISICA</option>
+                        <option value="AINF">TECNOLOGIA E INFORMATICA</option>
+                        <option value="AFIL">FILOSOFIA</option>
+                        <option value="AECO">ECONOMIA</option>
+                        <option value="AING">INGLES</option>
+                        <option value="ADIMA">DIMENSION AFECTIVA</option>
+                        <option value="ADIMC">DIMENSION COGNITIVA</option>
+                        <option value="ADIMCP">DIMENSION CORPORAL</option>
+                        <option value="ADIMEV">DIMENSION ETICA Y VALORES</option>
+                        <option value="ADIMCM">DIMENSION COMUNICATIVA</option>
+                        <option value="ADIMRL">DIMENSION RELIGIOSA</option>
 
-            <div class="table-responsive">
-                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="AsignaturasApp" url="Base/Controllers/GetDataTableAsignaturas.php" >
-                    <thead id="thead_dataTable0">
-                        <tr rowhead="true">
-                            <th style="width: 10%;" title="Codigo">Codigo</th>
-                            <th style="width: 50%;">Nombre.Asignatura</th>
-                            <th style="width: 8%;">H.T.</th>
-                            <th style="width: 8%;">H.P.</th>
-                            <th style="width: 8%;">Cred.</th>
-                            <th style="width: 8%;">Area</th>
-                            <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_dataTable0">
-                        <tr id="rowsample" rowsample="true" style="display: none;">
-                            <td> <label>{{id_asignatura}}</label></td>
-                            <td> <label>{{nombre_asignatura}}</label></td>
-                            <td> {{hteoricas_asignatura}} </td>
-                            <td> {{hpracticas_asignatura}} </td>
-                            <td> {{numcreditos_asignatura}} </td>
-                            <td> {{id_area}} </td>
-                            <td>
-                                <form id="Asignatura{{id_asignatura}}" name="Asignatura{{id_asignatura}}" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php"  model="AsignaturasApp" findBy="id_asignatura" statusfield="status_asignatura">
-                                    <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
-                                    <input type="hidden"  editable="false" disabled="disabled" name="status_asignatura[]" id="status_asignatura" value="1" >
-                                    <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    </datalist>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Asignaturas</div>
+            <div class="panel-body">
 
-    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="AsignaturasApp" url="Base/Controllers/GetDataTableAsignaturas.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 10%;" title="Codigo">Codigo</th>
+                                <th style="width: 50%;">Nombre.Asignatura</th>
+                                <th style="width: 8%;">H.T.</th>
+                                <th style="width: 8%;">H.P.</th>
+                                <th style="width: 8%;">Cred.</th>
+                                <th style="width: 8%;">Area</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> <label>{{id_asignatura}}</label></td>
+                                <td> <label>{{nombre_asignatura}}</label></td>
+                                <td> {{hteoricas_asignatura}} </td>
+                                <td> {{hpracticas_asignatura}} </td>
+                                <td> {{numcreditos_asignatura}} </td>
+                                <td> {{id_area}} </td>
+                                <td>
+                                    <form id="Asignatura{{id_asignatura}}" name="Asignatura{{id_asignatura}}" method="POST" autocomplete="off" url="Base/Controllers/AsignaturasController.php"  model="AsignaturasApp" findBy="id_asignatura" statusfield="status_asignatura">
+                                        <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_asignatura[]" id="status_asignatura" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-</body>
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
 </html>

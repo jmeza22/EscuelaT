@@ -5,73 +5,74 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <title>Mi Carga Academica</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Mi Carga Academica"/>
-    <meta name="author" content="Jose Meza"/>
-    <link href="css/styles.css" rel="stylesheet" />
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-    <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <head>
+        <title>Mi Carga Academica</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Mi Carga Academica"/>
+        <meta name="author" content="Jose Meza"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/Validator.js"></script>
-    <script type="text/javascript" src="js/localStorageData.js"></script>
-    <script type="text/javascript" src="js/SimplexFramework.js"></script>
-    <script type="text/javascript" src="js-forms/HomeDocentes.js"></script>
-</head>
-<body>
-    
-    <div class="panel panel-primary" style="width: 80% !important;">
-        <div class="panel-heading">Carga Academica de: <h3 id="nombrecompleto_docente"><b>Docente</b></h3> </div>
-        <div class="panel-body table-responsive">
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/HomeDocentes.js"></script>
+    </head>
+    <body>
 
-            <div class="table-responsive">
-                <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="CargasDocentesApp" url="Base/Controllers/GetDataTableHomeDocentes.php" >
-                    <thead id="thead_dataTable0">
-                        <tr rowhead="true">
-                            <th style="width: 5%;" title="Codigo de Grupo">Grupo</th>
-                            <th style="width: 70%;" title="Nombre de la Asignatura">Asignatura</th>
-                            <th style="width: 5%;" title="Numero de Horas">Hrs.</th>
-                            <th style="width: 5%;" title="Año">Año</th>
-                            <th style="width: 5%; min-width: 32px !important;">Planilla</th>
-                            <th style="width: 5%; min-width: 32px !important;">Boletin</th>
-                            <th style="width: 5%; min-width: 32px !important;">Lista</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_dataTable0">
-                        <tr id="rowsample" rowsample="true" style="display: none;">
-                            <td> {{id_grupo}} </td>
-                            <td> {{nombre_asignatura}} </td>
-                            <td> {{numhoras_carga}} </td>
-                            <td> {{id_periodo}} </td>
-                            <td>
-                                <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="POST" autocomplete="off" url="Base/Controllers/CargasController.php"  model="CargasApp" findBy="id_carga" statusfield="status_carga">
-                                    <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
-                                    <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
-                                    <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
-                                    <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
-                                    <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
-                                    <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
-                                    <a name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info" onclick="goCalificaciones(this);">Planilla</a>
-                                </form>
-                            </td>
-                            <td>  </td>
-                            <td>  </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Carga Academica de: <h3 id="nombrecompleto_docente"><b>Docente</b></h3> </div>
+            <div class="panel-body table-responsive">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="CargasDocentesApp" url="Base/Controllers/GetDataTableHomeDocentes.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 5%;" title="Codigo de Grupo">Grupo</th>
+                                <th style="width: 70%;" title="Nombre de la Asignatura">Asignatura</th>
+                                <th style="width: 5%;" title="Numero de Horas">Hrs.</th>
+                                <th style="width: 5%;" title="Año">Año</th>
+                                <th style="width: 5%; min-width: 32px !important;">Planilla</th>
+                                <th style="width: 5%; min-width: 32px !important;">Boletin</th>
+                                <th style="width: 5%; min-width: 32px !important;">Lista</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> {{id_grupo}} </td>
+                                <td> {{nombre_asignatura}} </td>
+                                <td> {{numhoras_carga}} </td>
+                                <td> {{id_periodo}} </td>
+                                <td>
+                                    <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="POST" autocomplete="off" url="Base/Controllers/CargasController.php"  model="CargasApp" findBy="id_carga" statusfield="status_carga">
+                                        <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
+                                        <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
+                                        <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
+                                        <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
+                                        <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
+                                        <a name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info" onclick="goCalificaciones(this);">Planilla</a>
+                                    </form>
+                                </td>
+                                <td>  </td>
+                                <td>  </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
 
-</body>
+    </body>
 </html>
