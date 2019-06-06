@@ -30,7 +30,7 @@ class FPDFReports extends FPDF {
 
     public function __construct($urlsettingsdb = null) {
         parent::__construct();
-        $this->bc = new BaseController($urlsettingsdb);
+        $this->bc = new BancoReportes($urlsettingsdb);
         $this->session = new SessionManager();
     }
 
@@ -108,8 +108,7 @@ class FPDFReports extends FPDF {
 
     public function ListadoDocentes() {
         $result = null;
-        $sql = 'SELECT * FROM DocentesApp WHERE status_docente=1 ORDER BY nombrecompleto_docente asc';
-        $result = $this->bc->selectSimple($sql);
+        $result = $this->bc->getDocentes();
         if ($result !== null && $result !== '' && $result !== '[]') {
             $result = json_decode($result, true);
             if (count($result) > 0) {
@@ -122,6 +121,27 @@ class FPDFReports extends FPDF {
                 for ($i = 0; $i < count($result); $i++) {
                     $this->Cell(16, 6, $result[$i]['id_docente']);
                     $this->Cell(100, 6, $result[$i]['nombrecompleto_docente']);
+                    $this->Ln();
+                }
+            }
+        }
+    }
+    
+    public function ListadoEstudiantes() {
+        $result = null;
+        $result = $this->bc->getEstudiantes();
+        if ($result !== null && $result !== '' && $result !== '[]') {
+            $result = json_decode($result, true);
+            if (count($result) > 0) {
+                $this->Ln();
+                $this->SetFont('Arial', 'B', 10);
+                $this->Cell(16, 8, 'CODIGO');
+                $this->Cell(100, 8, 'NOMBRE COMPLETO');
+                $this->Ln();
+                $this->SetFont('Arial', '', 8);
+                for ($i = 0; $i < count($result); $i++) {
+                    $this->Cell(16, 6, $result[$i]['id_estudiante']);
+                    $this->Cell(100, 6, $result[$i]['nombrecompleto_estudiante']);
                     $this->Ln();
                 }
             }

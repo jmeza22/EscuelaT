@@ -46,13 +46,6 @@ function LoadJornada() {
     loadComboboxData(jornada);
 }
 
-function LoadJornada() {
-    var jornada = null;
-    jornada = document.getElementById("id_jornada");
-    jornada.innerHTML = '<option value="">Ninguna</option>';
-    loadComboboxData(jornada);
-}
-
 function LoadPrograma() {
     var programa = null;
     programa = document.getElementById("id_programa");

@@ -306,7 +306,7 @@ class BaseController {
         return $array;
     }
 
-    public function selectSimple($sql) {
+    public function selectJSONArray($sql) {
         if ($sql != null) {
             return $this->db->selectJSONArray($sql);
         }
