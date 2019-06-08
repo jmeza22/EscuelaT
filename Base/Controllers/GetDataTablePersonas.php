@@ -2,16 +2,13 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
-$model = 'PersonasApp';
 $bc = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $where = " status_persona=1 ";
-    $bc = new BaseController();
+    $bc = new BancoReportes();
     $bc->connect();
-    $bc->setAction('findAll');
-    $bc->setModel($model);
-    echo $bc->selectWithoutModel($model, '*', $where);
+    echo $bc->getPersonas();
     $bc->disconnect();
     $bc = null;
 }

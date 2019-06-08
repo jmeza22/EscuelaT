@@ -2,21 +2,21 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
-$model = 'LogrosAsignaturasApp';
 $bc = null;
-$where = null;
+$idasignatura = null;
+$numgrado = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $where = " status_logro=1 ";
-    $bc = new BaseController();
+    $bc = new BancoReportes();
     $bc->connect();
-    $bc->setAction('findAll');
-    $bc->setModel($model);
-    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
-        $where = $where . " and " . $_POST['findby'] . " = " . $_POST['findbyvalue'] . "";
+    if (isset($_POST['findby']) && $_POST['findby'] == 'id_asignatura' && isset($_POST['findbyvalue']) && $_POST['findbyvalue'] !== '') {
+        $idasignatura = $_POST['findbyvalue'];
     }
-     $where = $where . " ORDER BY id_logro desc ";
-    echo $bc->selectWithoutModel($model, '*', $where);
+    if (isset($_POST['findby2']) && $_POST['findby2'] == 'numgrado_programa' && isset($_POST['findbyvalue2']) && $_POST['findbyvalue2'] !== '') {
+        $numgrado = $_POST['findbyvalue2'];
+    }
+    echo $bc->getLogrosAsignaturas($session->getEnterpriseID(), $idasignatura, $numgrado);
     $bc->disconnect();
     $bc = null;
 }

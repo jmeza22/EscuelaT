@@ -41,7 +41,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
             . " FROM UsuariosApp Us LEFT JOIN PersonasApp Pe ON Us.id_persona=Pe.id_persona LEFT JOIN EscuelasApp Es ON Us.id_escuela=Es.id_escuela  "
             . " WHERE Us.username_usuario='$user' and Us.password_usuario='$password' and Us.id_tipousuario='$idtipousuario' and Us.id_escuela=$enterprise "
             . " and Us.status_usuario=1 and Es.status_escuela=1";
-    $result = $bc->selectSimple($sql);
+    $result = $bc->selectJSONArray($sql);
     $array = array();
     $array['message'] = '';
     $array['error'] = null;
@@ -67,7 +67,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
     }
 
     $sql = "SELECT * FROM TiposUsuariosApp WHERE id_tipousuario='" . $idtipousuario . "'";
-    $result = $bc->selectSimple($sql);
+    $result = $bc->selectJSONArray($sql);
     if ($session->hasLogin() && !isset($result) || $result !== null || strcmp($result, '') !== 0 || strcmp($result, '[]') !== 0) {
         $tipousuario = json_decode($result, true);
         $tipousuario = $tipousuario[0];

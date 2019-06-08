@@ -2,16 +2,12 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
-$model = 'ProgramasApp';
-$bc = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $where = " status_programa=1 and id_escuela='".$session->getEnterpriseID()."'";
-    $bc = new BaseController();
+    $bc = new BancoReportes();
     $bc->connect();
-    $bc->setAction('findAll');
-    $bc->setModel($model);
-    echo $bc->selectWithoutModel($model, '*', $where);
+    echo $bc->getProgramas($session->getEnterpriseID());
     $bc->disconnect();
     $bc = null;
 }

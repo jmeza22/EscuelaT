@@ -1,18 +1,12 @@
 <?php
 
 ob_start();
-include_once './fpdf/fpdf.php';
-include_once 'Base/Controllers/XML/DataSettings.php';
-include_once 'Base/Controllers/Database/SQLDatabase.php';
-include_once 'Base/Controllers/Database/BaseController.php';
-include_once 'Base/Controllers/Security/SetsAndHeaders.php';
-include_once 'Base/Controllers/Security/SessionManager.php';
-include_once 'Base/Controllers/Security/SystemVariableManager.php';
-include_once 'Base/Controllers/Reports/FPDFReports.php';
+include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$report = new FPDFReports('Base/Controllers/XML/Settings.xml');
+$report = new FPDFReports();
 $tipo = null;
 if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     if (isset($_POST) && isset($_POST['tipo_informe'])) {
@@ -27,7 +21,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
     if ($tipo !== null && $tipo !== '') {
         if ($tipo == 1) {
             $report->AddPage();
-            //$report->ListadoDocentes();
+            $report->InformeCalificaciones();
             $report->generateDocument();
         }
     }

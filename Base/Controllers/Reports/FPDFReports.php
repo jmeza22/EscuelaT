@@ -43,7 +43,7 @@ class FPDFReports extends FPDF {
         $this->SetCreator('EscuelaT!');
         $this->SetSubject($this->reportname);
         $this->SetKeywords('EscuelaT!');
-        $this->SetTitle('Reporte: '.$this->reportname);
+        $this->SetTitle('Reporte: ' . $this->reportname);
     }
 
     public function setPageFormat($pagesize = 'Legal', $orientation = 'P') {
@@ -126,7 +126,7 @@ class FPDFReports extends FPDF {
             }
         }
     }
-    
+
     public function ListadoEstudiantes() {
         $result = null;
         $result = $this->bc->getEstudiantes();
@@ -143,6 +143,48 @@ class FPDFReports extends FPDF {
                     $this->Cell(16, 6, $result[$i]['id_estudiante']);
                     $this->Cell(100, 6, $result[$i]['nombrecompleto_estudiante']);
                     $this->Ln();
+                }
+            }
+        }
+    }
+
+    public function InformeCalificaciones() {
+        $result = null;
+        $result = $this->bc->getInformesCalificaciones();
+        if ($result !== null && $result !== '' && $result !== '[]') {
+            $result = json_decode($result, true);
+            if (count($result) > 0) {
+                for ($i = 0; $i < count($result); $i++) {
+                    $this->Ln();
+                    $this->SetFont('Arial', 'B', 12);
+                    $this->Cell(20, 8, 'CODIGO');
+                    $this->Cell(100, 8, 'NOMBRE DEL ESTUDIANTE');
+                    $this->Ln();
+                    $this->SetFont('Arial', '', 12);
+                    $this->Cell(20, 6, $result[$i]['id_estudiante']);
+                    $this->Cell(100, 6, $result[$i]['nombrecompleto_estudiante']);
+                    $this->Ln();
+                    $this->Ln();
+                    $this->SetFont('Arial', 'B', 10);
+                    $this->Cell(80, 8, 'ASIGNATURA');
+                    $this->Cell(10, 8, 'P1');
+                    $this->Cell(10, 8, 'P2');
+                    $this->Cell(10, 8, 'P3');
+                    $this->Cell(10, 8, 'P4');
+                    $this->Ln();
+                    $result[$i]['calificaciones'] = json_decode($result[$i]['calificaciones'], true);
+                    if ($result[$i]['calificaciones'] !== null && $result[$i]['calificaciones'] !== '[]') {
+                        for ($j = 0; $j < count($result[$i]['calificaciones']); $j++) {
+                            $this->SetFont('Arial', '', 10);
+                            $this->Cell(80, 8, $result[$i]['calificaciones'][$j]['nombre_asignatura']);
+                            $this->Cell(10, 8, $result[$i]['calificaciones'][$j]['np1']);
+                            $this->Cell(10, 8, $result[$i]['calificaciones'][$j]['np2']);
+                            $this->Cell(10, 8, $result[$i]['calificaciones'][$j]['np3']);
+                            $this->Cell(10, 8, $result[$i]['calificaciones'][$j]['np4']);
+                            $this->Ln();
+                        }
+                    }
+                    $this->AddPage();
                 }
             }
         }

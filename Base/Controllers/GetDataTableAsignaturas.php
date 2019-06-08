@@ -2,17 +2,13 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
-$model = 'AsignaturasApp';
 $bc = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $where = " status_asignatura=1 and id_escuela = " . $session->getEnterpriseID() . " ";
-    $where = $where . " ORDER BY CAST(id_asignatura AS DECIMAL)";
-    $bc = new BaseController();
+    $bc = new BancoReportes();
     $bc->connect();
-    $bc->setAction('findAll');
-    $bc->setModel($model);
-    echo $bc->selectWithoutModel($model, '*', $where);
+    echo $bc->getAsignaturas($session->getEnterpriseID());
     $bc->disconnect();
     $bc = null;
 }
