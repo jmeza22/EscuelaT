@@ -2,23 +2,21 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
-$model = 'MatriculaAsignaturasApp';
-$sql = "SELECT MA.*, A.nombre_asignatura "
-        . "FROM MatriculaAsignaturasApp MA "
-        . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura ";
-$where = " WHERE MA.id_escuela=" . $session->getEnterpriseID();
 $bc = null;
+$idmatricula = null;
+$idestudiante = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $bc = new BaseController();
+    $bc = new BancoReportes();
     $bc->connect();
-    $bc->setAction('findAll');
-    $bc->setModel($model);
-    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
-        $where = $where . " and MA." . $_POST['findby'] . " = '" . $_POST['findbyvalue'] . "'";
+    if (isset($_POST['findby']) && $_POST['findby'] == 'id_matricula' && isset($_POST['findbyvalue']) && $_POST['findbyvalue'] !== '') {
+        $idmatricula= $_POST['findbyvalue'];
     }
-    $sql = $sql . $where;
-    echo $bc->selectSimple($sql);
+    if (isset($_POST['findby']) && $_POST['findby'] == 'id_estudiante' && isset($_POST['findbyvalue']) && $_POST['findbyvalue'] !== '') {
+        $idestudiante= $_POST['findbyvalue'];
+    }
+    echo $bc->getAsignaturasMatriculadas($session->getEnterpriseID(), $idmatricula, $idestudiante);
     $bc->disconnect();
     $bc = null;
 }

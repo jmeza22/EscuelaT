@@ -277,6 +277,38 @@ class BancoReportes extends BaseController {
         return $result;
     }
 
+    public function getAnotaciones($idestudiante = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM AnotacionesApp WHERE status_anotacion=1 ";
+        if ($idestudiante !== null) {
+            $sql = $sql . " AND id_estudiante='$idestudiante' ";
+        }
+        $sql = $sql . " ORDER BY fecha_anotacion DESC";
+        $result = $this->selectJSONArray($sql);
+        return $result;
+    }
+
+    public function getAsignaturasMatriculadas($idescuela = null, $idmatricula = null, $idestudiante = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT MA.*, A.nombre_asignatura "
+                . "FROM MatriculaAsignaturasApp MA "
+                . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
+                . "WHERE 1 = 1 ";
+        if ($idescuela !== null) {
+            $sql = $sql . " AND MA.id_escuela='$idescuela' ";
+        }
+        if ($idmatricula !== null) {
+            $sql = $sql . " AND MA.id_matricula='$idmatricula' ";
+        }
+        if ($idestudiante !== null) {
+            $sql = $sql . " AND MA.id_estudiante='$idestudiante' ";
+        }
+        $result = $this->selectJSONArray($sql);
+        return $result;
+    }
+
     public function getEstudiantesMatriculas($idescuela = null, $idsede = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idmatricula = null, $idestudiante = null) {
         $sql = null;
         $result = null;
@@ -392,7 +424,7 @@ class BancoReportes extends BaseController {
                         . " and MA.id_grupo = '" . $resultEstudiantes[$i]['id_grupo'] . "' "
                         . " and MA.id_matricula = '" . $resultEstudiantes[$i]['id_matricula'] . "' "
                         . " and MA.id_estudiante = '" . $resultEstudiantes[$i]['id_estudiante'] . "' "
-                        . " ORDER BY rownum, OE.nombrecompleto_estudiante asc "
+                        . " ORDER BY rownum ASC, OE.nombrecompleto_estudiante ASC "
                 ;
                 $resultCalificaciones = $this->selectJSONArray($sql1);
 
@@ -401,7 +433,6 @@ class BancoReportes extends BaseController {
                 }
             }
         }
-        //print_r($resultEstudiantes);
         $resultEstudiantes = json_encode($resultEstudiantes);
         return $resultEstudiantes;
     }

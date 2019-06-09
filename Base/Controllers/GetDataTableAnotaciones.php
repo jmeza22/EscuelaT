@@ -2,20 +2,17 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
-$model = 'AnotacionesObservadorApp';
-$where = " status_anotacion=1 ";
 $bc = null;
+$idestudiante = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $bc = new BaseController();
+    $bc = new BancoReportes();
     $bc->connect();
-    $bc->setAction('findAll');
-    $bc->setModel($model);
-    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
-        $where = $where . " and " . $_POST['findby'] . " = " . $_POST['findbyvalue'] . " ";
+    if (isset($_POST['findby']) && $_POST['findby'] == 'id_estudiante' && isset($_POST['findbyvalue']) && $_POST['findbyvalue'] !== '') {
+        $idestudiante = $_POST['findbyvalue'];
     }
-    $where = $where . " ORDER BY fecha_anotacion ";
-    echo $bc->selectWithoutModel($model, '*', $where);
+    echo $bc->getAnotaciones($idestudiante);
     $bc->disconnect();
     $bc = null;
 }

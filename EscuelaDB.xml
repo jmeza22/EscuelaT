@@ -422,22 +422,6 @@
       <Cl au="0" df="" nm="p6_comentarios_calificacion" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
       </Cl>
-      <Cl au="0" df="" nm="usuariocrea_calificacion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
-        <Cm>Usuario que crea el Registro</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="usuarioedita_calificacion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
-        <Cm>Usuario que Modifica el Registro</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="fechacrea_calificacion" nu="1">
-        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Fecha de Creacion del Registri</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="fechaedita_calificacion" nu="1">
-        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Fecha de Modiificacion del Registro</Cm>
-      </Cl>
       <Cl au="0" df="" nm="phab_id_corte" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
       </Cl>
@@ -473,6 +457,22 @@
       </Cl>
       <Cl au="0" df="" nm="phab_comentarios_calificacion" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="usuariocrea_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Usuario que crea el Registro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuarioedita_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Usuario que Modifica el Registro</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechacrea_calificacion" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Creacion del Registri</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechaedita_calificacion" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Modiificacion del Registro</Cm>
       </Cl>
       <Cl au="0" df="1" nm="status_calificacion" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
