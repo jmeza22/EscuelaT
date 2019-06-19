@@ -2,8 +2,9 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 if ($_POST != null && isset($_POST)) {
-    $bc = new BaseController();
+    $bc = new ReportsBank();
     $bc->connect();
     $bc->preparePostData();
     $bc->setModel('EscuelasApp');
@@ -11,9 +12,9 @@ if ($_POST != null && isset($_POST)) {
     $colname = null;
     $colvalue = null;
     $othervalue = null;
-    $colname = 'nombre_escuela';
-    $colvalue = 'id_escuela';
-    $othervalue = 'id_escuela';
+    $colname = "nombre_escuela";
+    $colvalue = "id_escuela";
+    $othervalue = "id_escuela";
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, 'status_escuela=1');
     $bc->disconnect();
 }

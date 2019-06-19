@@ -8,7 +8,7 @@ $bc = null;
 $idmatricula = null;
 $idestudiante = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $bc = new BancoReportes();
+    $bc = new ReportsBank();
     $bc->connect();
     if (isset($_POST['findby']) && $_POST['findby'] == 'id_matricula' && isset($_POST['findbyvalue']) && $_POST['findbyvalue'] !== '') {
         $idmatricula= $_POST['findbyvalue'];

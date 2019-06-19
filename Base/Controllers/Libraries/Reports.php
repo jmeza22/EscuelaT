@@ -1,4 +1,4 @@
 <?php
-include_once 'fpdf/fpdf.php';
-include_once 'Reports/BancoReportes.php';
-include_once 'Reports/FPDFReports.php';
+include_once 'TCPDF/tcpdf.php';
+include_once 'Reports/ReportsBank.php';
+include_once 'Reports/PDFReports.php';

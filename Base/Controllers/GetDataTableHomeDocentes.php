@@ -20,7 +20,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $where = $where . " ORDER BY CAST(C.numgrado_programa AS DECIMAL), C.id_grupo, A.nombre_asignatura ";
     $sql = $sql . $where;
     //echo $sql;
-    echo $bc->selectSimple($sql);
+    echo $bc->selectJSONArray($sql);
     $bc->disconnect();
     $bc = null;
 }

@@ -330,6 +330,25 @@ class SQLDatabase {
         return $refs;
     }
 
+    public function parseToUTF8($array) {
+        if (isset($array) && is_array($array)) {
+            $sub = null;
+            $columns = null;
+            for ($i = 0; $i < count($array); $i++) {
+                $sub = $array[$i];
+                $columns = $this->getColumns($sub);
+                if (is_array($columns)) {
+                    foreach ($columns as $key => $value) {
+                        $sub[$value] = utf8_decode($sub[$value]);
+                    }
+                }
+                $array[$i] = $sub;
+            }
+            return true;
+        }
+        return false;
+    }
+
     private function buildInsertString($table, $values) {
         if ($table != null && $values != null) {
             $sql = 'INSERT INTO ' . $table . ' values(' . $values . ')';

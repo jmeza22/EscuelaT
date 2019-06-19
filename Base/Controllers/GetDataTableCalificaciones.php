@@ -2,6 +2,7 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 $variables = new SystemVariableManager();
 $model = 'CalificacionesApp';
@@ -27,7 +28,7 @@ $resultCarga = null;
 $resultConfig = null;
 $resultMatasig = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
-    $bc = new BaseController();
+    $bc = new ReportsBank();
     $bc->connect();
     $bc->setAction('findAll');
     $bc->setModel($model);
@@ -36,9 +37,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
         $idcarga = $_POST['findbyvalue'];
     }
 
-    $sql0 = "SELECT * FROM CargasDocentesApp "
-            . "WHERE id_carga = " . $idcarga . " ";
-    $resultCarga = $bc->selectSimple($sql0);
+    $resultCarga = $bc->getCargasDocentes($session->getEnterpriseID(), null, $idcarga);
     $resultCarga = json_decode($resultCarga, true);
     $resultCarga = $resultCarga[0];
 
@@ -53,9 +52,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $numcorte = $variables->getNumCortePeriodo();
     $iddocente = $resultCarga['id_docente'];
 
-    $sql1 = "SELECT * FROM ConfiguracionApp "
-            . "WHERE id_escuela = " . $idescuela . " ";
-    $resultConfig = $bc->selectSimple($sql1);
+    $resultConfig = $bc->getConfiguracionEscuela($session->getEnterpriseID());
     $resultConfig = json_decode($resultConfig, true);
     $resultConfig = $resultConfig[0];
     $porcP1 = $resultConfig['p1_porcentaje_configuracion'];
@@ -81,35 +78,34 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " IFNULL(C.p4_nd_calificacion,'') as np4, "
             . " IFNULL(C.p5_nd_calificacion,'') as np5, "
             . " IFNULL(C.p6_nd_calificacion,'') as np6, "
-            . " ROUND(IFNULL((IFNULL(C.p1_nd_calificacion,0)*".$porcP1." + IFNULL(C.p2_nd_calificacion,0)*".$porcP2." + IFNULL(C.p3_nd_calificacion,0)*".$porcP3." + IFNULL(C.p4_nd_calificacion,0)*".$porcP4." + IFNULL(C.p5_nd_calificacion,0)*".$porcP5." + IFNULL(C.p6_nd_calificacion,0)*".$porcP6." ),'0'),1) as def, "
-            . " IFNULL(C.p".$numcorte."_logroc_calificacion,'') as logroc_calificacion, "
-            . " IFNULL(C.p".$numcorte."_logrop_calificacion,'') as logrop_calificacion, "
-            . " IFNULL(C.p".$numcorte."_logroa_calificacion,'') as logroa_calificacion, "
-            . " IFNULL(C.p".$numcorte."_nc_calificacion,'') as nc_calificacion, "
-            . " IFNULL(C.p".$numcorte."_np_calificacion,'') as np_calificacion, "
-            . " IFNULL(C.p".$numcorte."_na_calificacion,'') as na_calificacion, "
-            . " IFNULL(C.p".$numcorte."_nn_calificacion,'') as nn_calificacion, "
-            . " IFNULL(C.p".$numcorte."_nd_calificacion,'') as nd_calificacion, "
-            . " IFNULL(C.p".$numcorte."_ausencias_calificacion,'') as ausencias_calificacion, "
-            . " IFNULL(C.p".$numcorte."_comentarios_calificacion,'') as comentarios_calificacion, "
+            . " ROUND(IFNULL((IFNULL(C.p1_nd_calificacion,0)*" . $porcP1 . " + IFNULL(C.p2_nd_calificacion,0)*" . $porcP2 . " + IFNULL(C.p3_nd_calificacion,0)*" . $porcP3 . " + IFNULL(C.p4_nd_calificacion,0)*" . $porcP4 . " + IFNULL(C.p5_nd_calificacion,0)*" . $porcP5 . " + IFNULL(C.p6_nd_calificacion,0)*" . $porcP6 . " ),'0'),1) as def, "
+            . " IFNULL(C.p" . $numcorte . "_logroc_calificacion,'') as logroc_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_logrop_calificacion,'') as logrop_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_logroa_calificacion,'') as logroa_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_nc_calificacion,'') as nc_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_np_calificacion,'') as np_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_na_calificacion,'') as na_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_nn_calificacion,'') as nn_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_nd_calificacion,'') as nd_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_ausencias_calificacion,'') as ausencias_calificacion, "
+            . " IFNULL(C.p" . $numcorte . "_comentarios_calificacion,'') as comentarios_calificacion, "
             . " '" . $idcorte . "' as id_corte "
             . " FROM (SELECT @rownum :=0) R, "
             . " MatriculaAsignaturasApp MA "
             . " INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
             . " INNER JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
             . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
-            . " WHERE MA.id_escuela = '" . $idescuela . "' "
+            . " WHERE M.status_matricula=1 AND MA.status_matriculaasignatura=1 AND status_calificacion=1 "
+            . " and MA.id_escuela = '" . $idescuela . "' "
             . " and MA.id_programa = '" . $idprograma . "' "
             . " and MA.id_planestudio = '" . $idplanestudio . "' "
             . " and MA.id_asignatura = '" . $idasignatura . "' "
             . " and MA.numgrado_programa = '" . $numgrado . "' "
             . " and MA.id_grupo = '" . $idgrupo . "' "
             . " and MA.id_periodo = '" . $idperiodo . "' "
-            . " ORDER BY OE.nombrecompleto_estudiante asc, rownum "
+            . " ORDER BY OE.nombrecompleto_estudiante asc "
     ;
-    //echo $sql2;
-    $resultMatasig = $bc->selectSimple($sql2);
-    //$resultMatasig = json_decode($resultMatasig, true);
+    $resultMatasig = $bc->selectJSONArray($sql2);
     print_r($resultMatasig);
 
     $bc->disconnect();

@@ -25,10 +25,11 @@ and open the template in the editor.
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/SimplexFramework.js"></script>
         <script type="text/javascript" src="js-forms/Configuracion.js"></script>
+        <script type="text/javascript" src="js/LoadImage.js"></script>
     </head>
     <body>
         <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/ConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
-
+            <input type="hidden" name="logo_configuracion" id="logo_configuracion" value="Escuela0.png" maxlength="24" readonly="readonly" >
             <div class="panel panel-primary" style="width: 80% !important;">
                 <div class="panel-heading">Datos Escuela</div>
                 <div class="panel-body" >
@@ -43,7 +44,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Nombre Escuela</label>
-                                    <input type="text" name="nombre_escuela" id="nombre_escuela" value="" maxlength="100" disabled="disabled" class="form-control" title="Nombre de Escuela" getname="true" idname="id_escuela" model="EscuelasApp" >
+                                    <input type="text" name="nombremostrar_configuracion" id="nombremostrar_configuracion" value="" maxlength="100" class="form-control" title="Nombre de Escuela" getname="true" idname="id_escuela" model="EscuelasApp" >
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Documento</label>
@@ -86,6 +87,18 @@ and open the template in the editor.
                                 <div class="col-sm-3">
                                     <label>Documento</label>
                                     <input type="text" name="documentorector_configuracion" id="documentorector_configuracion" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Logotipo</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <button id="VerLogo" name="VerLogo" type="button" class="btn btn-default" href="#modal_logo" data-toggle="modal" onclick="MostrarLogo();">Modificar Logotipo Institucional</button>
+                                    </center>
                                 </div>
                             </div>
                         </div>
@@ -228,14 +241,9 @@ and open the template in the editor.
             </div>
 
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <center>
-                        <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-lg btn-primary" >Grabar</button>        
-                    </center>
-                </div>
-                <div class="col-sm-6">
-                    <center>
-                        <button type="reset" id="reset" name="reset" class="btn btn-lg btn-success">Nuevo</button> 
+                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendConfiguracion();" class="btn btn-primary" >Grabar Configuracion</button>        
                     </center>
                 </div>
             </div>
@@ -244,5 +252,50 @@ and open the template in the editor.
                 <option value="">Ninguno</option>
             </datalist>
         </form>
+
+        <div class="modal fade" id="modal_logo">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Logo de Escuela</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="uploadImage" name="uploadImage" action="UploadImageController.php" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <div class="photoPanel">
+                                            <center>
+                                                <img name="imagePhoto" id="imagePhoto" class="imagePhoto" onclick="clickButton();" alt="Subir Foto" title="Click to Change Photo" style="min-width: 300px !important; min-height: 300px !important;" />
+                                                <input type="file" name="imageFile" id="imageFile" class="imageFile" accept="image/*" required="required" onchange="showMyImage(this)" title="Click to Change Photo" />
+                                            </center>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Prefijo</label>
+                                    <input type="text" alphanumeric="true" name="prefix_image" id="prefix_image" value="Escuela" readonly="readonly" required="required" maxlength="100" class="form-control" title="Prefijo">
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>Nombre de Imagen</label>
+                                    <input type="text" alphanumeric="true" name="name_image" id="name_image" value="0" readonly="readonly" required="required" maxlength="100" class="form-control" title="Nombre Imagen">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <button id="Guardar" name="save" type="submit" class="btn btn-primary" onclick="Send(this)">Grabar Imagen</button>
+                                    </center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

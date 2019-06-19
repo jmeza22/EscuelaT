@@ -5,24 +5,31 @@
  */
 
 jQuery(document).ready(function () {
-    var idescuela = null;
     loadComboboxData(document.getElementById("lista_id_escuela")).done(function () {
-        autoNameFromDataList('id_escuela', 'nombre_escuela', null);
     });
-    idescuela = document.getElementById('id_escuela');
     setIdEscuela();
-
+    var idescuela = document.getElementById('id_escuela');
     if (idescuela !== undefined && idescuela !== null && idescuela.value !== '') {
         console.log('Buscando Datos de Configuracion.');
         getData(idescuela);
+        MostrarLogo();
     }
-
 
 });
 
+function SendConfiguracion() {
+    var form = document.getElementById('form0');
+    var idescuela = getElement(form, 'id_escuela');
+    var logo = document.getElementById('logo_configuracion');
+    if (validateForm(form) && ValidarPorcentajesPeriodos() && ValidarValoracion()) {
+        logo.value = 'Escuela' + idescuela.value + '.png';
+        submitForm(form, false);
+    }
+}
+
 function Send(item) {
     var form = getForm(item);
-    if (validateForm(form) && ValidarPorcentajesPeriodos() && ValidarValoracion()) {
+    if (validateForm(form)) {
         submitForm(form, false);
     }
 }
@@ -31,7 +38,7 @@ function setIdEscuela() {
     var item = null;
     item = document.getElementById('id_escuela');
     var item2 = null;
-    item2 = document.getElementById('nombre_escuela');
+    item2 = document.getElementById('nombremostrar_configuracion');
     if (item !== null && item !== undefined && item.value === '') {
         console.log('Seteando Id Escuela.');
         if (getEnterpriseID() !== null) {
@@ -123,14 +130,14 @@ function ValidarValoracion() {
     }
     if (vmin > vmax) {
         alert('Valor Maximo debe ser Mayor que Valor Minimo');
-        console.log('Rango: ('+vmin+' - '+vmax+')');
+        console.log('Rango: (' + vmin + ' - ' + vmax + ')');
         return false;
     }
     if (vap < vmin || vap > vmax) {
         alert('Valor Aprueba debe ser (Mayor que Valor Minimo) y (Menor que Valor Maximo)');
         return false;
     }
-    if ((vsupmax < vmin || vsupmax > vmax)){
+    if ((vsupmax < vmin || vsupmax > vmax)) {
         alert('Val.Max.Sup debe estar entre Valor Minimo y Valor Maximo');
         return false;
     }
@@ -138,7 +145,7 @@ function ValidarValoracion() {
         alert('Val.Min.Sup debe estar entre Valor Minimo y Valor Maximo. \nDebe ser mayor que Val.Max.Alto. \nDebe ser menor que Val.Max.Sup.');
         return false;
     }
-    if ((valtmax < vmin || valtmax > vmax)){
+    if ((valtmax < vmin || valtmax > vmax)) {
         alert('Val.Max.Alto debe estar entre Valor Minimo y Valor Maximo');
         return false;
     }
@@ -146,7 +153,7 @@ function ValidarValoracion() {
         alert('Val.Min.Alto debe estar entre Valor Minimo y Valor Maximo. \nDebe ser mayor que Val.Max.Basico. \nDebe ser menor que Val.Max.Alto.');
         return false;
     }
-    if ((vbasmax < vmin || vbasmax > vmax)){
+    if ((vbasmax < vmin || vbasmax > vmax)) {
         alert('Val.Max.Basico debe estar entre Valor Minimo y Valor Maximo');
         return false;
     }
@@ -154,7 +161,7 @@ function ValidarValoracion() {
         alert('Val.Min.Basico debe estar entre Valor Minimo y Valor Maximo. \nDebe ser mayor que Val.Max.Bajo. \nDebe ser menor que Val.Max.Basico.');
         return false;
     }
-    if ((vbajmax < vmin || vbajmax > vmax)){
+    if ((vbajmax < vmin || vbajmax > vmax)) {
         alert('Val.Max.Bajo debe estar entre Valor Minimo y Valor Maximo');
         return false;
     }
@@ -243,4 +250,18 @@ function ValidarPorcentajesPeriodos() {
 
     }
     return false;
+}
+
+function MostrarLogo() {
+    var idescuela = null;
+    var logo = null;
+    var img = null;
+    var nameimage = null;
+    idescuela = document.getElementById('id_escuela');
+    logo = document.getElementById('logo_configuracion');
+    img = document.getElementById('imagePhoto');
+    nameimage = document.getElementById('name_image');
+    nameimage.value = idescuela.value;
+    img.src = "ImageFiles/" + logo.value;
+
 }

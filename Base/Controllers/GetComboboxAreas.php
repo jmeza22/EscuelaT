@@ -2,11 +2,12 @@
 
 ob_start();
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 $bc = null;
 $where = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $bc = new BaseController();
+    $bc = new ReportsBank();
     $bc->connect();
     $bc->preparePostData();
     $bc->setModel('AreasApp');

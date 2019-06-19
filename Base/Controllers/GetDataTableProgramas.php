@@ -5,7 +5,7 @@ include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $bc = new BancoReportes();
+    $bc = new ReportsBank();
     $bc->connect();
     echo $bc->getProgramas($session->getEnterpriseID());
     $bc->disconnect();

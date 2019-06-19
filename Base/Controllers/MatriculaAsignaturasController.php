@@ -58,7 +58,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $planestudio[$i]['id_periodo'] = $datosmatricula['id_periodo'];
                     $planestudio[$i]['numgrado_programa'] = $datosmatricula['numgrado_programa'];
                     $planestudio[$i]['id_matasig'] = $planestudio[$i]['id_matricula'] . $planestudio[$i]['id_asignatura'];
-                    unset($planestudio[$i]['id_planestudiodetalle']);
                     unset($planestudio[$i]['hteoricas_asignatura']);
                     unset($planestudio[$i]['hpracticas_asignatura']);
                     unset($planestudio[$i]['status_planestudiodetalle']);

@@ -40,7 +40,7 @@ and open the template in the editor.
                         <div class="col-sm-9">
                             <label>Nombre</label>
                             <select id="nombre_jornada" name="nombre_jornada" class="form-control" required="required" style="width: 100%;" onchange="setIdJornada();">
-                                <option value="Manana">Mañana</option>
+                                <option value="Mañana">Mañana</option>
                                 <option value="Tarde">Tarde</option>
                                 <option value="Noche">Noche</option>
                                 <option value="Mixta">Mixta</option>
@@ -98,7 +98,7 @@ and open the template in the editor.
                         <tbody id="tbody_dataTable0">
                             <tr id="rowsample" rowsample="true" style="display: none;">
                                 <td> {{id_jornada}} </td>
-                                <td> {{nombre_jornada}} </td>
+                                <td> <b>{{nombre_jornada}}</b> </td>
                                 <td> {{horainicio_jornada}} </td>
                                 <td> {{horafin_jornada}} </td>
                                 <td> {{id_escuela}} </td>

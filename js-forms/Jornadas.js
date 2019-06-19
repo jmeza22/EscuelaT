@@ -130,7 +130,7 @@ function setIdJornada() {
     idsede = getElement(form0, 'id_sede');
     nombre = getElement(form0, 'nombre_jornada');
     if (idjornada !== null && idjornada !== undefined) {
-        idjornada.value = '' + nombre.value + '_E' + idescuela.value + 'S' + idsede.value + '';
+        idjornada.value = '' + nombre.value.replace("ñ", "n").replace('Ñ','N') + '_E' + idescuela.value + 'S' + idsede.value + '';
     }
 }
 

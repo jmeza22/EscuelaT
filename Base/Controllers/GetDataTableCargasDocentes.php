@@ -6,7 +6,7 @@ include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 $bc = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
-    $bc = new BancoReportes();
+    $bc = new ReportsBank();
     $bc->connect();
     echo $bc->getCargasDocentes($session->getEnterpriseID());
     $bc->disconnect();
