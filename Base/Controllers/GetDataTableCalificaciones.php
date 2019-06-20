@@ -37,7 +37,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
         $idcarga = $_POST['findbyvalue'];
     }
 
-    $resultCarga = $bc->getCargasDocentes($session->getEnterpriseID(), null, $idcarga);
+    $resultCarga = $bc->getCargasDocentes($session->getEnterpriseID(), null, null, null, null, $idcarga);
     $resultCarga = json_decode($resultCarga, true);
     $resultCarga = $resultCarga[0];
 
