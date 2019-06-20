@@ -8,6 +8,7 @@ $bc = null;
 $result = null;
 $report = new PDFReports();
 $tipo = null;
+
 $idescuela = null;
 $idsede = null;
 $idjornada = null;
@@ -59,15 +60,13 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         if (isset($_POST['id_estudiante']) && $_POST['id_estudiante'] !== '' && $_POST['id_estudiante'] !== 'NULL') {
             $idestudiante = $_POST['id_estudiante'];
         }
-        $report->setReportName('Informe de Calificaciones. ' . $idprograma . '_' . $idcorte . '_' . $grupo);
-        $report->setMetaData();
     }
     if (isset($_POST) && isset($_POST['format_page'])) {
         $format = $_POST['format_page'];
         if (isset($_POST) && isset($_POST['orientation_page']) && $_POST['orientation_page'] !== '' && $_POST['orientation_page'] !== 'NULL') {
             $orientation = $_POST['orientation_page'];
         }
-        if (isset($_POST) && isset($_POST['left_margin'])  && $_POST['left_margin'] !== '' && $_POST['left_margin'] !== 'NULL') {
+        if (isset($_POST) && isset($_POST['left_margin']) && $_POST['left_margin'] !== '' && $_POST['left_margin'] !== 'NULL') {
             $left = $_POST['left_margin'];
         }
         if (isset($_POST) && isset($_POST['right_margin']) && $_POST['right_margin'] !== '' && $_POST['right_margin'] !== 'NULL') {
@@ -91,8 +90,13 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         if (isset($_POST) && isset($_POST['sizefooter_font']) && $_POST['sizefooter_font'] !== '' && $_POST['sizefooter_font'] !== 'NULL') {
             $sizefooter = $_POST['sizefooter_font'];
         }
+    }
+
+    if ($tipo !== null && $tipo !== '') {
+        $report->setReportName('Informe de Calificaciones. ' . $idprograma . '_' . $idcorte);
+        $report->setMetaData();
         $report->setPageOrientation($orientation);
-        $report->SetTopMargin($top+18);
+        $report->SetTopMargin($top + 20);
         $report->SetLeftMargin($left);
         $report->SetRightMargin($right);
         $report->SetAutoPageBreak(true, $bottom);
@@ -101,10 +105,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $report->setFontFooter($family, 'I', $sizefooter);
         $report->SetFont($family, $style, $sizecontent);
         $report->AddPage($orientation, $format, true);
-            
-    }
 
-    if ($tipo !== null && $tipo !== '') {
         if ($tipo == 1) {
             $report->InformeCalificaionesTipo1($idescuela, $idsede, $idprograma, null, $grado, $grupo, $idperiodo, $idcorte, null, $idestudiante);
             $report->generatePDFDocument();

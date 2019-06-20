@@ -8,7 +8,7 @@ $result = null;
 $model = 'ObservadorEstudianteApp';
 $findBy = 'id_estudiante';
 $action = 'find';
-if ($session->hasLogin() && $session->checkToken()) {
+if ($session->hasLogin()) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();

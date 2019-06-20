@@ -164,18 +164,21 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getGrupos($idescuela = null, $idprograma = null) {
+    public function getGrupos($idescuela = null, $idprograma = null, $numgrado = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT G.*, Pr.nombre_programa "
                 . " FROM GruposApp G INNER JOIN ProgramasApp Pr "
                 . " ON G.id_programa=Pr.id_programa "
-                . " WHERE status_grupo=1 ";
+                . " WHERE G.status_grupo=1 ";
         if ($idescuela !== null) {
             $sql = $sql . " AND G.id_escuela='$idescuela' ";
         }
         if ($idprograma !== null) {
             $sql = $sql . " AND G.id_programa='$idprograma' ";
+        }
+        if ($numgrado !== null) {
+            $sql = $sql . " AND G.numgrado_programa='$numgrado' ";
         }
         $sql = $sql . " ORDER BY CAST(G.numgrado_programa AS DECIMAL), G.num_grupo ASC";
         $result = $this->selectJSONArray($sql);
@@ -240,14 +243,17 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getUsuarios($idescuela = null) {
+    public function getUsuarios($idescuela = null, $idtipousuario = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM UsuariosApp WHERE status_usuario=1 ";
         if ($idescuela !== null) {
             $sql = $sql . " AND id_escuela='$idescuela' ";
         }
-        $sql = $sql . " ORDER BY fechacrea_usuario DESC";
+        if ($idtipousuario !== null) {
+            $sql = $sql . " AND id_tipousuario='$idtipousuario' ";
+        }
+        $sql = $sql . " ORDER BY username_usuario, fechacrea_usuario DESC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }
@@ -262,29 +268,45 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getDirectoresGrupos($idescuela = null) {
+    public function getDirectoresGrupos($idescuela = null, $idgrupo = null, $idperiodo = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM DirectoresGruposApp WHERE status_director=1 ";
         if ($idescuela !== null) {
             $sql = $sql . " AND id_escuela='$idescuela' ";
         }
+        if ($idgrupo !== null) {
+            $sql = $sql . " AND id_grupo='$idgrupo' ";
+        }
+        if ($idperiodo !== null) {
+            $sql = $sql . " AND id_periodo='$idperiodo' ";
+        }
         $sql = $sql . " ORDER BY id_director DESC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }
 
-    public function getCargasDocentes($idescuela = null, $iddocente = null, $idcarga = null) {
+    public function getCargasDocentes($idescuela = null, $idperiodo = null, $idprograma = null, $iddocente = null, $idgrupo = null, $idcarga = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT C.*, D.nombrecompleto_docente, A.nombre_asignatura "
+        $sql = "SELECT C.*, D.nombrecompleto_docente, A.nombre_asignatura, P.nombre_programa "
                 . " FROM CargasDocentesApp C INNER JOIN DocentesApp D ON C.id_docente=D.id_docente "
-                . "INNER JOIN AsignaturasApp A ON C.id_asignatura=A.id_asignatura ";
+                . " INNER JOIN AsignaturasApp A ON C.id_asignatura=A.id_asignatura "
+                . " INNER JOIN ProgramasApp P ON C.id_programa=P.id_programa ";
         if ($idescuela !== null) {
             $sql = $sql . " AND C.id_escuela='$idescuela' ";
         }
+        if ($idperiodo !== null) {
+            $sql = $sql . " AND C.id_periodo='$idperiodo' ";
+        }
+        if ($idprograma !== null) {
+            $sql = $sql . " AND C.id_programa='$idprograma' ";
+        }
         if ($iddocente !== null) {
             $sql = $sql . " AND C.id_docente='$iddocente' ";
+        }
+        if ($idgrupo !== null) {
+            $sql = $sql . " AND C.id_grupo='$idgrupo' ";
         }
         if ($idcarga !== null) {
             $sql = $sql . " AND C.id_carga='$idcarga' ";

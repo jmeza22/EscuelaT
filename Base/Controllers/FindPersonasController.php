@@ -5,12 +5,9 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'MatriculasApp';
-$findBy = 'id_matricula';
+$model = 'PersonasApp';
+$findBy = 'id_persona';
 $action = 'find';
-$postdata = null;
-$ahora = getdate();
-$sql = null;
 if ($session->hasLogin()) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();

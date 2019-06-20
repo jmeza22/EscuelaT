@@ -31,9 +31,21 @@ and open the template in the editor.
             <div class="panel-heading">Generador de Informes</div>
             <div class="panel-body table-responsive">
                 <form id="form0" method="POST" autocomplete="off" target="_blank" action="Base/Controllers/InformesController.php" url="Base/Controllers/InformesController.php" model="CalificacionesApp" findBy="id_calificacion" mainform="true" >
-
                     <div class="panel panel-default">
-                        <div class="panel-heading">Filtrar</div>
+                        <div class="panel-heading">Tipo de Informe</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Seleccione uno:</label>
+                                    <select id="tipo_informe" name="tipo_informe" selected="NULL" class="form-control" style="width: 100%;" >
+                                        <option selected="selected" value="1">Formato Completo - Califizaciones Izquierda - Logros Derecha</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Filtrado</div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-sm-3">
@@ -103,14 +115,7 @@ and open the template in the editor.
                                     </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label>Tipo Informe</label>
-                                    <select id="tipo_informe" name="tipo_informe" selected="NULL" class="form-control" style="width: 100%;" >
-                                        <option selected="selected" value="1">Tipo 1</option>
-                                    </select>
-                                </div>
-                            </div>
+
 
                         </div>
                     </div>
@@ -182,7 +187,7 @@ and open the template in the editor.
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
                             <center>
-                                <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="Send(this);" class="btn btn-primary" >Generar PDF</button>        
+                                <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-primary" >Generar PDF</button>        
                             </center>
                         </div>
                     </div>

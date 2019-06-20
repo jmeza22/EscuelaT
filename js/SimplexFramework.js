@@ -1579,6 +1579,7 @@ function loadNameFromId(field, namefield1, namefield2, namefield3) {
                     try {
                         result = JSON.parse(result);
                         console.log('Parse to JSON (Successful) - LoadNameFromId!');
+                        console.log('Result:'+result.message);
                     } catch (e) {
                         console.log(result);
                         console.log('Parse to JSON (Failed) - LoadNameFromId!');
