@@ -42,22 +42,19 @@ and open the template in the editor.
                                     <label>Codigo</label>
                                     <input type="text" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" readonly="readonly" class="form-control" title="Código de Escuela" list="lista_id_escuela">
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <label>Nombre Escuela</label>
                                     <input type="text" name="nombremostrar_configuracion" id="nombremostrar_configuracion" value="" maxlength="100" class="form-control" title="Nombre de Escuela" getname="true" idname="id_escuela" model="EscuelasApp" >
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label>Documento</label>
                                     <select name="tipodocumento_configuracion" id="tipodocumento_configuracion" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
                                         <option id="NN" value="NN" disabled="disabled">Desconocido</option>
                                         <option id="DANE" value="DANE" >DANE</option>
                                         <option id="NIT" value="TI" >NIT</option>
-                                        <option id="RUT" value="RC" >RUT</option>
-                                        <option id="RESO" value="RESO" >Resolucion</option>
-                                        <option id="DECR" value="DECR" >Decreto</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label>No.Documento</label>
                                     <input type="text" name="numdocumento_configuracion" id="numdocumento_configuracion" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
                                 </div>
@@ -80,9 +77,18 @@ and open the template in the editor.
                         <div class="panel-heading">Datos del Rector</div>
                         <div class="panel-body" >
                             <div class="row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-6">
                                     <label>Nombre Completo</label>
                                     <input type="text" name="nombrerector_configuracion" id="nombrerector_configuracion" value="" maxlength="100" required="required" class="form-control" title="Nombre del Rector">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Tipo</label>
+                                    <select name="tipodocrector_configuracion" id="tipodocrector_configuracion" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
+                                        <option id="NN" value="NN" >Desconocido</option>
+                                        <option id="CC" value="CC" >Cédula de Ciudadanía</option>
+                                        <option id="CE" value="CE" >Cédula de Extranjeria</option>
+                                        <option id="PP" value="PP" >Pasaporte</option>
+                                    </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Documento</label>

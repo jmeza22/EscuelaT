@@ -84,7 +84,7 @@ class PDFReports extends TCPDF {
             }
 
             if (is_array($configuracion)) {
-                $this->SetFont($this->fontfamilyheader, 'B', ($this->fontsizeheader+4));
+                $this->SetFont($this->fontfamilyheader, 'B', ($this->fontsizeheader + 4));
                 $this->Cell(0, 8, $configuracion[0]['nombremostrar_configuracion'], 0, 0, 'C');
                 $this->Ln();
                 $this->Image('../../ImageFiles/' . $configuracion[0]['logo_configuracion'], 3, 3, 20, 20);
@@ -252,6 +252,45 @@ class PDFReports extends TCPDF {
                     $this->Cell(20, 6, $result[$i]['id_asignatura']);
                     $this->Cell(140, 6, $result[$i]['nombre_asignatura']);
                     $this->Cell(40, 6, $result[$i]['id_area']);
+                    $this->Ln();
+                }
+            }
+        }
+    }
+
+    public function ListadoLogrosAsignaturas($idescuela = null, $idasignatura = null, $grado = null, $tipo = null) {
+        $result = null;
+        $result = $this->bc->getLogrosAsignaturas($idescuela, $idasignatura, $grado, $tipo);
+        if ($result !== null && $result !== '' && $result !== '[]') {
+            $result = json_decode($result, true);
+            if (count($result) > 0) {
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
+                $this->Cell(0, 8, 'LISTADO DE LOGROS Y/O COMPETENCIAS');
+                $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 2));
+                $this->Ln();
+                $this->Cell(20, 4, 'CODIGO', 1);
+                $this->Cell(80, 4, 'NOMBRE DE ASIGNATURA', 1);
+                $this->Cell(20, 4, 'TIPO', 1);
+                $this->Cell(20, 4, 'MINIMO', 1);
+                $this->Cell(20, 4, 'MAXIMO', 1);
+                $this->Cell(20, 4, 'GRADO', 1);
+                $this->Cell(20, 4, 'PERIODO', 1);
+                $this->Ln();
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
+                for ($i = 0; $i < count($result); $i++) {
+                    $this->SetFont($this->fontfamilycontent, 'B', $this->fontsizecontent);
+                    $this->Cell(20, 4, $result[$i]['id_logro'], 1);
+                    $this->Cell(80, 4, $result[$i]['nombre_asignatura'], 1);
+                    $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
+                    $this->Cell(20, 4, $result[$i]['tipo_logro'], 1);
+                    $this->Cell(20, 4, $result[$i]['min_logro'], 1);
+                    $this->Cell(20, 4, $result[$i]['max_logro'], 1);
+                    $this->Cell(20, 4, $result[$i]['numgrado_logro'], 1);
+                    $this->Cell(20, 4, $result[$i]['numcorte_logro'], 1);
+                    $this->Ln();
+                    $this->MultiCell(200, 4, $result[$i]['descripcion_logro'], 1, 'L');
                     $this->Ln();
                 }
             }

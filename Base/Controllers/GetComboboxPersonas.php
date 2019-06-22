@@ -17,7 +17,9 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $colname = " UPPER(concat(apellido1_persona,' ', apellido2_persona,' ', nombre1_persona,' ', nombre2_persona)) ";
     $colvalue = "id_persona";
     $othervalue = "documento_persona";
-    echo $bc->getComboboxData($colname, $colvalue, $othervalue, ' status_persona=1');
+    $arraywhere = $bc->parseFindByToArray($_POST);
+    $arraywhere['status_persona'] = '1';
+    echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
     $bc->disconnect();
 }else{
     echo 'null';

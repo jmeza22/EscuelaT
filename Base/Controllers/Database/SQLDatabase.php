@@ -218,11 +218,20 @@ class SQLDatabase {
         return null;
     }
 
+    public function makeValuesReferenced(&$array) {
+        $refs = array();
+        foreach ($array as $key => $value) {
+            $refs[$key] = &$array[$key];
+        }
+        return $refs;
+    }
+
     public function bindParams($stmt, $array) {
-        if ($stmt != null && is_array($array)) {
-            $array_pdo_types = $this->getPDOColumnTypes($array);
+        if ($this->link != null && $stmt != null && is_array($array)) {
             $array_columns = $this->getColumns($array);
             $array_values = $this->getValues($array);
+            $array_pdo_types = $this->getPDOColumnTypes($array);
+            $this->makeValuesReferenced($array_values);
             if ($this->getCount($array_columns) == $this->getCount($array_values)) {
                 $i = 0;
                 for ($i = 0; $i < count($array); $i++) {
@@ -322,29 +331,16 @@ class SQLDatabase {
         return 0;
     }
 
-    public function makeValuesReferenced(&$array) {
-        $refs = array();
-        foreach ($array as $key => $value) {
-            $refs[$key] = &$array[$key];
-        }
-        return $refs;
-    }
-
     public function parseToUTF8($array) {
         if (isset($array) && is_array($array)) {
-            $sub = null;
-            $columns = null;
-            for ($i = 0; $i < count($array); $i++) {
-                $sub = $array[$i];
-                $columns = $this->getColumns($sub);
-                if (is_array($columns)) {
-                    foreach ($columns as $key => $value) {
-                        $sub[$value] = utf8_decode($sub[$value]);
-                    }
+            foreach ($array as $key => $value) {
+                if (is_array($value)) {
+                    $array[$key] = $this->parseToUTF8($value);
+                } else {
+                    $array[$key] = utf8_decode($value);
                 }
-                $array[$i] = $sub;
             }
-            return true;
+            return $array;
         }
         return false;
     }
@@ -477,7 +473,32 @@ class SQLDatabase {
                 $sql = $sql . " " . $column . "= :" . $column . ",";
             }
             $sql = substr($sql, 0, -1);
-            if ($where != null && strcmp($where, '') !== 0) {
+            if ($arraywhere !== null && is_array($arraywhere)) {
+                $sql = $sql . ' WHERE ';
+                $columnsWhere = $this->getColumns($arraywhere);
+                foreach ($columnsWhere as $column) {
+                    $sql = $sql . " " . $column . "= :" . $column . " AND";
+                }
+                $sql = substr($sql, 0, -3);
+            } elseif ($where != null && strcmp($where, '') !== 0) {
+                $sql = $sql . ' WHERE ' . $where;
+            }
+            return $sql;
+        }
+        return null;
+    }
+
+    private function buildDeleteStmtString($table, $where = NULL, $arraywhere = NULL) {
+        if (is_array($arraycolumns)) {
+            $sql = "DELETE  FROM " . $table . " ";
+            if ($arraywhere !== null && is_array($arraywhere)) {
+                $sql = $sql . ' WHERE ';
+                $columnsWhere = $this->getColumns($arraywhere);
+                foreach ($columnsWhere as $column) {
+                    $sql = $sql . " " . $column . "= :" . $column . " AND";
+                }
+                $sql = substr($sql, 0, -3);
+            } elseif ($where != null && strcmp($where, '') !== 0) {
                 $sql = $sql . ' WHERE ' . $where;
             }
             return $sql;
@@ -489,7 +510,7 @@ class SQLDatabase {
         if ($table != null && $arraycolumns != null) {
             $sql = 'SELECT';
             if (is_array($arraycolumns)) {
-                $columns = $this->getValues($array);
+                $columns = $this->getValues($arraycolumns);
                 foreach ($columns as $column) {
                     $sql = $sql . " " . $column . ",";
                 }
@@ -500,9 +521,17 @@ class SQLDatabase {
 
             $sql = $sql . ' FROM ' . $table;
 
-            if ($where != null && strcmp($where, '') !== 0) {
+            if ($arraywhere !== null && is_array($arraywhere)) {
+                $sql = $sql . ' WHERE ';
+                $columnsWhere = $this->getColumns($arraywhere);
+                foreach ($columnsWhere as $column) {
+                    $sql = $sql . " " . $column . "= :" . $column . " AND";
+                }
+                $sql = substr($sql, 0, -3);
+            } elseif ($where != null && strcmp($where, '') !== 0) {
                 $sql = $sql . ' WHERE ' . $where;
             }
+            //echo $sql;
             return $sql;
         }
         return null;
@@ -511,7 +540,7 @@ class SQLDatabase {
     public function insertStmt($table, $array) {
         $result = false;
         $this->stmt = null;
-        if ($this->link != null && $table != null && isset($table) && $array != null && isset($array)) {
+        if ($this->link != null && isset($table) && $table != null && isset($array) && $array != null) {
             $sql = $this->buildInsertStmtString($table, $array);
             $this->stmt = $this->link->prepare($sql);
             $this->stmt = $this->bindParams($this->stmt, $array);
@@ -526,7 +555,7 @@ class SQLDatabase {
     public function insertOrUpdateStmt($table, $array) {
         $result = false;
         $this->stmt = null;
-        if ($this->link != null && $table != null && isset($table) && $array != null && isset($array)) {
+        if ($this->link != null && isset($table) && $table != null && isset($array) && $array != null) {
             $sql = $this->buildInsertOrUpdateStmtString($table, $array);
             $this->stmt = $this->link->prepare($sql);
             $this->stmt = $this->bindParams($this->stmt, $array);
@@ -541,7 +570,7 @@ class SQLDatabase {
     public function replaceStmt($table, $array) {
         $result = false;
         $this->stmt = null;
-        if ($this->link != null && $table != null && isset($table) && $array != null && isset($array)) {
+        if ($this->link != null && isset($table) && $table != null && isset($array) && $array != null) {
             $sql = $this->buildReplaceStmtString($table, $array);
             $this->stmt = $this->link->prepare($sql);
             $this->stmt = $this->bindParams($this->stmt, $array);
@@ -556,11 +585,11 @@ class SQLDatabase {
     public function updateStmt($table, $array, $where = null, $arraywhere = null) {
         $result = false;
         $this->stmt = null;
-        if ($this->link != null && $table != null && isset($table) && $array != null && isset($array)) {
+        if ($this->link != null && isset($table) && $table != null && isset($array) && $array != null) {
             $sql = $this->buildUpdateStmtString($table, $array, $where, $arraywhere);
             $this->stmt = $this->link->prepare($sql);
-            $this->stmt = $this->bindParams($this->stmt, $array);
-            $this->stmt = $this->bindParams($this->stmt, $arraywhere);
+            $arraymix = array_merge($array, $arraywhere);
+            $this->stmt = $this->bindParams($this->stmt, $arraymix);
             $this->executeSTMT();
             if ($this->stmt->rowCount() > 0) {
                 $result = true;
@@ -572,7 +601,7 @@ class SQLDatabase {
     public function deleteStmt($table, $where = null, $arraywhere = null) {
         $result = false;
         $this->stmt = null;
-        if ($this->link != null && $table != null && isset($table)) {
+        if ($this->link != null && isset($table) && $table != null) {
             $sql = $this->buildDeleteString($table, $where);
             $this->stmt = $this->link->prepare($sql);
             $this->stmt = $this->bindParams($this->stmt, $arraywhere);
@@ -584,18 +613,17 @@ class SQLDatabase {
         return $result;
     }
 
-    public function queryStmt($sql, $array1 = null, $array2 = null) {
+    public function queryStmt($sql, $arraywhere = null) {
         $result = null;
         $this->stmt = null;
-        if ($this->link != null && $sql != null && isset($sql)) {
+        if ($this->link != null && isset($sql) && $sql != null) {
             $this->stmt = $this->link->prepare($sql);
-            $this->stmt = $this->bindParams($this->stmt, $array1);
-            $this->stmt = $this->bindParams($this->stmt, $array2);
+            $this->stmt = $this->bindParams($this->stmt, $arraywhere);
             $this->executeSTMT();
             if ($this->stmt->rowCount() > 0) {
                 $result = true;
             }
-            if ($this->stmt != null && isset($this->stmt)) {
+            if (isset($this->stmt) && $this->stmt != null) {
                 $myarray = array();
                 while ($row = $this->stmt->fetch()) {
                     array_push($myarray, $row);
@@ -603,15 +631,16 @@ class SQLDatabase {
                 $result = $myarray;
             }
         }
+        $result = $this->parseToUTF8($result);
         return $result;
     }
 
     public function selectStmt($table, $array, $where = null, $arraywhere = null) {
-        $result = false;
+        $result = null;
         $this->stmt = null;
-        if ($this->link != null && $table != null && isset($table) && $array != null && isset($array)) {
+        if ($this->link != null && isset($table) && $table != null && isset($array) && $array != null) {
             $sql = $this->buildSelectStmtString($table, $array, $where, $arraywhere);
-            return $this->queryStmt($sql, $array, $arraywhere);
+            return $this->queryStmt($sql, $arraywhere);
         }
         return $result;
     }
@@ -623,6 +652,7 @@ class SQLDatabase {
             while ($row = $resultset->fetch()) {
                 array_push($myarray, $row);
             }
+            $this->parseToUTF8($myarray);
             return $myarray;
         }
         return null;
@@ -638,6 +668,7 @@ class SQLDatabase {
                     $myarray[$i][$j] = $row[$j];
                 }
             }
+            $this->parseToUTF8($myarray);
             return $myarray;
         }
         return null;
@@ -654,6 +685,7 @@ class SQLDatabase {
                     $json[] = $row;
                 }
             }
+            $json = $this->parseToUTF8($json);
             $json = json_encode($json);
             return $json;
         }

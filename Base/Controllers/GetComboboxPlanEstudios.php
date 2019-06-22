@@ -18,11 +18,10 @@ if ($session->hasLogin() && $_POST != null && isset($_POST)) {
     $colvalue = "id_planestudio";
     $colname = "descripcion_planestudio";
     $othervalue = "id_programa";
-    $where = "status_planestudio=1 and id_escuela='" . $session->getEnterpriseID() . "' ";
-    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
-        $where = $where . " and " . $_POST['findby'] . " = " . $_POST['findbyvalue'] . "";
-    }
-    echo $bc->getComboboxData($colname, $colvalue, $othervalue, $where);
+    $arraywhere = $bc->parseFindByToArray($_POST);
+    $arraywhere['status_planestudio'] = '1';
+    $arraywhere['id_escuela'] = ''.$session->getEnterpriseID();
+    echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
     $bc->disconnect();
 }
 ob_end_flush();

@@ -18,12 +18,10 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $colvalue = "id_grupo";
     $colname = "CONCAT(numgrado_programa, num_grupo)";
     $othervalue = "id_escuela";
-    $where = "status_grupo=1 and id_escuela='" . $session->getEnterpriseID() . "' ";
-    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findbyvalue'], '') !== 0) {
-        $where = $where . " and " . $_POST['findby'] . " = " . $_POST['findbyvalue'] . " ";
-    }
-    $where = $where . " ORDER BY CAST(numgrado_programa AS DECIMAL), num_grupo";
-    echo $bc->getComboboxData($colname, $colvalue, $othervalue, $where);
+    $arraywhere = $bc->parseFindByToArray($_POST);
+    $arraywhere['status_grupo'] = '1';
+    $arraywhere['id_escuela'] = ''.$session->getEnterpriseID();
+    echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
     $bc->disconnect();
 }
 ob_end_flush();

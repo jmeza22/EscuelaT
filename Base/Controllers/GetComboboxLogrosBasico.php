@@ -16,13 +16,13 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $colvalue = null;
     $othervalue = null;
     $colvalue = "id_logro";
-    $colname = " concat('(',id_logro,') ',descripcion_logro) ";
-    $othervalue = "tipo_logro";
-    $where = " status_logro=1 and tipo_logro='DB' and id_escuela='" . $session->getEnterpriseID() . "' ";
-    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && isset($_POST['findby2']) && isset($_POST['findbyvalue2']) && strcmp($_POST['findbyvalue'], '') !== 0 && strcmp($_POST['findbyvalue2'], '') !== 0) {
-        $where = $where . " and " . $_POST['findby'] . " = '" . $_POST['findbyvalue'] . "' and " . $_POST['findby2'] . " = '" . $_POST['findbyvalue2'] . "' ";
-    }
-    echo $bc->getComboboxData($colname, $colvalue, $othervalue, $where);
+    $colname = "id_logro";
+    $othervalue = "descripcion_logro";
+    $arraywhere = $bc->parseFindByToArray($_POST);
+    $arraywhere['status_logo'] = '1';
+    $arraywhere['tipo_logo'] = 'DB';
+    $arraywhere['id_escuela'] = ''.$session->getEnterpriseID();
+    echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
     $bc->disconnect();
 }
 ob_end_flush();

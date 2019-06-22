@@ -137,6 +137,19 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
+    public function getPlanEstudioDetallado($idescuela = null, $idprograma = null) {
+        $plan = $this->getPlanEstudio($idescuela, $idprograma);
+        if ($plan !== null && $plan !== '' && $plan !== '[]') {
+            $plan = json_decode($plan, true);
+            if ($plan !== null && is_array($plan)) {
+                for ($i = 0; $i < count($plan); $i++) {
+                    $plan[$i]['detalle'] = $this->getPlanEstudioDetalle($plan['id_escuela'], $plan['id_programa'], $plan['id_planestudio']);
+                }
+            }
+        }
+        return $plan;
+    }
+
     public function getAreas($idescuela = null) {
         $sql = null;
         $result = null;
@@ -215,20 +228,22 @@ class ReportsBank extends BaseController {
     public function getLogrosAsignaturas($idescuela = null, $idasignatura = null, $grado = null, $tipo = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT * FROM LogrosAsignaturasApp WHERE status_logro=1 ";
+        $sql = "SELECT L.*, A.nombre_asignatura "
+                . " FROM LogrosAsignaturasApp L INNER JOIN AsignaturasApp A ON L.id_asignatura=A.id_asignatura "
+                . " WHERE L.status_logro=1 ";
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $sql = $sql . " AND L.id_escuela='$idescuela' ";
         }
         if ($idasignatura !== null) {
-            $sql = $sql . " AND id_asignatura='$idasignatura' ";
+            $sql = $sql . " AND L.id_asignatura='$idasignatura' ";
         }
         if ($grado !== null) {
-            $sql = $sql . " AND numgrado_logro='$grado' ";
+            $sql = $sql . " AND L.numgrado_logro='$grado' ";
         }
         if ($tipo !== null) {
-            $sql = $sql . " AND tipo_logro='$tipo' ";
+            $sql = $sql . " AND L.tipo_logro='$tipo' ";
         }
-        $sql = $sql . " ORDER BY id_logro ASC";
+        $sql = $sql . " ORDER BY L.id_logro ASC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }

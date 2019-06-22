@@ -28,7 +28,7 @@ class BaseController {
     private $message = '';
     private $data = null;
 
-    public function __construct($urlsettings=null, $code = 1) {
+    public function __construct($urlsettings = null, $code = 1) {
         $this->config = new DataSettings($urlsettings);
         $index = null;
         $index = $this->config->getSettingIndex($code);
@@ -188,7 +188,7 @@ class BaseController {
     }
 
     public function parseMultiRows($postdata) {
-        if (isset($postdata) && ($postdata)) {
+        if (isset($postdata) && is_array($postdata)) {
             $columns = array_keys($postdata);
             $numrows = count($postdata[$columns[0]]);
             $newarray = array();
@@ -204,9 +204,29 @@ class BaseController {
         }
         return null;
     }
-    
+
+    public function parseFindByToArray($postdata) {
+        if (isset($postdata) && is_array($postdata)) {
+            $arrayfindby = array();
+            if (isset($postdata['findby']) && isset($postdata['findbyvalue'])) {
+                if ($postdata['findby'] !== null && $postdata['findby'] !== '' && $postdata['findbyvalue'] !== null && $postdata['findbyvalue'] !== '') {
+                    $arrayfindby[$postdata['findby']] = $postdata['findbyvalue'];
+                }
+            }
+            for ($i = 0; $i < count($postdata); $i++) {
+                if (isset($postdata['findby' . $i]) && isset($postdata['findbyvalue' . $i])) {
+                    if ($postdata['findby' . $i] !== null && $postdata['findby' . $i] !== '' && $postdata['findbyvalue' . $i] !== null && $postdata['findbyvalue' . $i] !== '') {
+                        $arrayfindby[$postdata['findby' . $i]] = $postdata['findbyvalue' . $i];
+                    }
+                }
+            }
+            return $arrayfindby;
+        }
+        return null;
+    }
+
     public function executeSQL($sql) {
-        if(isset($sql) && $sql!==null){
+        if (isset($sql) && $sql !== null) {
             return $this->db->exec($sql);
         }
         return null;
@@ -281,7 +301,7 @@ class BaseController {
         return false;
     }
 
-    public function select($table = null, $columns = '*', $where = null) {
+    public function select($table = null, $columns = '*', $where = null, $arraywhere = null) {
         $result = null;
         if ($table == null) {
             $table = $this->model;
@@ -290,7 +310,7 @@ class BaseController {
             $where = $this->where;
         }
         if (isset($this->db) && isset($this->model)) {
-            $result = $this->db->selectJSON($table, $columns, $where);
+            $result = $this->db->selectStmt($table, $columns, $where, $arraywhere);
             return $result;
         }
         return null;
@@ -333,7 +353,7 @@ class BaseController {
     public function execute($print = false) {
         $result = false;
         if (isset($this->action)) {
-            
+
             if ($this->action == null || strcmp($this->action, '') == 0) {
                 $result = $this->parseResults(null, "Operacion No Permitida!", 0);
             }
@@ -418,10 +438,15 @@ class BaseController {
         return $result;
     }
 
-    public function getComboboxData($colname = 'colname', $colvalue = 'colvalue', $othervalue = 'othervalue', $where = '') {
+    public function getComboboxData($colname = 'colname', $colvalue = 'colvalue', $othervalue = 'othervalue', $where = null, $arraywhere = null) {
         $result = null;
         if (isset($this->db) && isset($this->model) && isset($colname) && isset($colvalue)) {
-            $result = $this->db->selectJSON($this->model, $colname . ' as iname, ' . $colvalue . ' as ivalue, ' . $othervalue . ' as iothervalue ', $where);
+            $columns = array();
+            array_push($columns, $colname . ' AS iname');
+            array_push($columns, $colvalue . ' AS ivalue');
+            array_push($columns, $othervalue . ' AS iothervalue');
+            $result = $this->db->selectStmt($this->model, $columns, $where, $arraywhere);
+            $result = json_encode($result);
             return $result;
         }
         return null;

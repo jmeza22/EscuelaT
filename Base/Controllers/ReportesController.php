@@ -130,6 +130,11 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->ListadoAsignaturas($session->getEnterpriseID());
             $report->generatePDFDocument();
         }
+        if ($tipo === 'Logros') {
+            $report->setReportName('Listado de Logros');
+            $report->ListadoLogrosAsignaturas($idescuela, null, $grado, null);
+            $report->generatePDFDocument();
+        }
         if ($tipo === 'Grupos') {
             $report->setReportName('Listado de Grupos');
             $report->ListadoGrupos($session->getEnterpriseID(), $idprograma, $grado);
