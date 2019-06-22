@@ -93,7 +93,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
     }
 
     if ($tipo !== null && $tipo !== '') {
-        $report->setReportName('Informe de Calificaciones. ' . $idprograma . '_' . $idcorte);
+        $report->setReportName('Informe de Calificaciones ' . $idprograma . '' . $idcorte);
         $report->setMetaData();
         $report->setPageOrientation($orientation);
         $report->SetTopMargin($top + 20);

@@ -3,7 +3,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * AND open the template in the editor.
  */
 
 /**
@@ -243,7 +243,7 @@ class ReportsBank extends BaseController {
         if ($tipo !== null) {
             $sql = $sql . " AND L.tipo_logro='$tipo' ";
         }
-        $sql = $sql . " ORDER BY L.id_logro ASC";
+        $sql = $sql . " ORDER BY L.num_logro DESC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }
@@ -253,7 +253,7 @@ class ReportsBank extends BaseController {
         $result = null;
         $sql = "SELECT * FROM PersonasApp "
                 . "WHERE status_persona=1 "
-                . "ORDER BY id_persona ASC";
+                . "ORDER BY num_persona DESC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }
@@ -501,13 +501,13 @@ class ReportsBank extends BaseController {
                 . " AR.nombre_area, "
                 . " PED.hteoricas_asignatura AS hteoricas_asignatura, "
                 . " PED.hpracticas_asignatura AS hpracticas_asignatura, "
-                . " IFNULL(C.p1_nd_calificacion,'') AS np1, "
-                . " IFNULL(C.p2_nd_calificacion,'') AS np2, "
-                . " IFNULL(C.p3_nd_calificacion,'') AS np3, "
-                . " IFNULL(C.p4_nd_calificacion,'') AS np4, "
-                . " IFNULL(C.p5_nd_calificacion,'') AS np5, "
-                . " IFNULL(C.p6_nd_calificacion,'') AS np6, "
-                . " IFNULL(C.phab_nd_calificacion,'') AS nphab, "
+                . " ROUND(IFNULL(C.p1_nd_calificacion+0,''),1) AS np1, "
+                . " ROUND(IFNULL(C.p2_nd_calificacion+0,''),1) AS np2, "
+                . " ROUND(IFNULL(C.p3_nd_calificacion+0,''),1) AS np3, "
+                . " ROUND(IFNULL(C.p4_nd_calificacion+0,''),1) AS np4, "
+                . " ROUND(IFNULL(C.p5_nd_calificacion+0,''),1) AS np5, "
+                . " ROUND(IFNULL(C.p6_nd_calificacion+0,''),1) AS np6, "
+                . " ROUND(IFNULL(C.phab_nd_calificacion,''),1) AS nphab, "
                 . " IFNULL(C.p1_ausencias_calificacion,'') AS p1_ausencias_calificacion, "
                 . " IFNULL(C.p2_ausencias_calificacion,'') AS p2_ausencias_calificacion, "
                 . " IFNULL(C.p3_ausencias_calificacion,'') AS p3_ausencias_calificacion, "

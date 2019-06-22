@@ -677,18 +677,10 @@ class SQLDatabase {
         return null;
     }
 
-    public function selectJSONArray($sql, $table = null) {
-        $resultset = $this->getResultSet($sql);
+    public function selectJSONArray($sql, $arraywhere = null) {
+        $resultset = $this->queryStmt($sql, $arraywhere);
         if ($resultset != null) {
-            $json = array();
-            while ($row = $resultset->fetch()) {
-                if ($table != null) {
-                    $json[$table][] = $row;
-                } else {
-                    $json[] = $row;
-                }
-            }
-            $json = json_encode($json);
+            $json = json_encode($resultset);
             return $json;
         }
         return null;
