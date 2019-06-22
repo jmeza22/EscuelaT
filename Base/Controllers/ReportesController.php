@@ -157,7 +157,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         }
         if ($tipo === 'Estudiantes') {
             $report->setReportName('Listado de Estudiantes');
-            $report->ListadoEstudiantes($idescuela, $idsede, $idprograma, $grado, $grupo, $idperiodo);
+            $report->ListadoEstudiantes($idescuela, $idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'UsuariosDocentes') {

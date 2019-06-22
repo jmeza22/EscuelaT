@@ -397,11 +397,11 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getEstudiantesMatriculas($idescuela = null, $idsede = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
+    public function getEstudiantesMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT OE.id_estudiante, "
-                . "IFNULL(CONCAT(P.tipodoc_persona,' ',P.documento_persona),'') as docid_persona, "
+                . "IFNULL(CONCAT(P.tipodoc_persona,' ',P.documento_persona),'') AS docid_persona, "
                 . "OE.nombrecompleto_estudiante, "
                 . "P.sexo_persona, "
                 . "P.fechanacimiento_persona, "
@@ -439,6 +439,9 @@ class ReportsBank extends BaseController {
         if ($idsede !== null) {
             $sql = $sql . " AND M.id_sede='$idsede' ";
         }
+        if ($idjornada !== null) {
+            $sql = $sql . " AND M.id_jornada='$idjornada' ";
+        }
         if ($idprograma !== null) {
             $sql = $sql . " AND M.id_programa='$idprograma' ";
         }
@@ -465,7 +468,7 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getCalificaciones($idescuela = null, $idsede = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
+    public function getCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
         $sql = null;
         $result = null;
         $porcP1 = null;
@@ -492,53 +495,54 @@ class ReportsBank extends BaseController {
         $porcP6 = $porcP6 / 100;
 
         $sql = "SELECT @rownum := @rownum +1 AS rownum, "
-                . " IFNULL(C.id_calificacion,0) as id_calificacion,"
+                . " IFNULL(C.id_calificacion,0) AS id_calificacion,"
                 . " MA.*, "
                 . " A.nombre_asignatura, "
                 . " AR.nombre_area, "
-                . " IFNULL((PED.hpracticas_asignatura+PED.hteoricas_asignatura),'') as horas_asignatura, "
-                . " IFNULL(C.p1_nd_calificacion,'') as np1, "
-                . " IFNULL(C.p2_nd_calificacion,'') as np2, "
-                . " IFNULL(C.p3_nd_calificacion,'') as np3, "
-                . " IFNULL(C.p4_nd_calificacion,'') as np4, "
-                . " IFNULL(C.p5_nd_calificacion,'') as np5, "
-                . " IFNULL(C.p6_nd_calificacion,'') as np6, "
-                . " IFNULL(C.phab_nd_calificacion,'') as nphab, "
-                . " IFNULL(C.p1_ausencias_calificacion,'') as p1_ausencias_calificacion, "
-                . " IFNULL(C.p2_ausencias_calificacion,'') as p2_ausencias_calificacion, "
-                . " IFNULL(C.p3_ausencias_calificacion,'') as p3_ausencias_calificacion, "
-                . " IFNULL(C.p4_ausencias_calificacion,'') as p4_ausencias_calificacion, "
-                . " IFNULL(C.p5_ausencias_calificacion,'') as p5_ausencias_calificacion, "
-                . " IFNULL(C.p6_ausencias_calificacion,'') as p6_ausencias_calificacion, "
-                . " IFNULL(C.p1_comentarios_calificacion,'') as p1_comentarios_calificacion, "
-                . " IFNULL(C.p2_comentarios_calificacion,'') as p2_comentarios_calificacion, "
-                . " IFNULL(C.p3_comentarios_calificacion,'') as p3_comentarios_calificacion, "
-                . " IFNULL(C.p4_comentarios_calificacion,'') as p4_comentarios_calificacion, "
-                . " IFNULL(C.p5_comentarios_calificacion,'') as p5_comentarios_calificacion, "
-                . " IFNULL(C.p6_comentarios_calificacion,'') as p6_comentarios_calificacion, "
-                . " IFNULL(C.phab_comentarios_calificacion,'') as phab_comentarios_calificacion, "
-                . " IFNULL((SELECT lcp1.descripcion_logro FROM LogrosAsignaturasApp lcp1 WHERE lcp1.id_logro=C.p1_logroc_calificacion),'') as p1_descripcion_logroc, "
-                . " IFNULL((SELECT lpp1.descripcion_logro FROM LogrosAsignaturasApp lpp1 WHERE lpp1.id_logro=C.p1_logrop_calificacion),'') as p1_descripcion_logrop, "
-                . " IFNULL((SELECT lap1.descripcion_logro FROM LogrosAsignaturasApp lap1 WHERE lap1.id_logro=C.p1_logroa_calificacion),'') as p1_descripcion_logroa, "
-                . " IFNULL((SELECT lcp2.descripcion_logro FROM LogrosAsignaturasApp lcp2 WHERE lcp2.id_logro=C.p1_logroc_calificacion),'') as p2_descripcion_logroc, "
-                . " IFNULL((SELECT lpp2.descripcion_logro FROM LogrosAsignaturasApp lpp2 WHERE lpp2.id_logro=C.p1_logrop_calificacion),'') as p2_descripcion_logrop, "
-                . " IFNULL((SELECT lap2.descripcion_logro FROM LogrosAsignaturasApp lap2 WHERE lap2.id_logro=C.p1_logroa_calificacion),'') as p2_descripcion_logroa, "
-                . " IFNULL((SELECT lcp3.descripcion_logro FROM LogrosAsignaturasApp lcp3 WHERE lcp3.id_logro=C.p1_logroc_calificacion),'') as p3_descripcion_logroc, "
-                . " IFNULL((SELECT lpp3.descripcion_logro FROM LogrosAsignaturasApp lpp3 WHERE lpp3.id_logro=C.p1_logrop_calificacion),'') as p3_descripcion_logrop, "
-                . " IFNULL((SELECT lap3.descripcion_logro FROM LogrosAsignaturasApp lap3 WHERE lap3.id_logro=C.p1_logroa_calificacion),'') as p3_descripcion_logroa, "
-                . " IFNULL((SELECT lcp4.descripcion_logro FROM LogrosAsignaturasApp lcp4 WHERE lcp4.id_logro=C.p1_logroc_calificacion),'') as p4_descripcion_logroc, "
-                . " IFNULL((SELECT lpp4.descripcion_logro FROM LogrosAsignaturasApp lpp4 WHERE lpp4.id_logro=C.p1_logrop_calificacion),'') as p4_descripcion_logrop, "
-                . " IFNULL((SELECT lap4.descripcion_logro FROM LogrosAsignaturasApp lap4 WHERE lap4.id_logro=C.p1_logroa_calificacion),'') as p4_descripcion_logroa, "
-                . " IFNULL((SELECT lcp5.descripcion_logro FROM LogrosAsignaturasApp lcp5 WHERE lcp5.id_logro=C.p1_logroc_calificacion),'') as p5_descripcion_logroc, "
-                . " IFNULL((SELECT lpp5.descripcion_logro FROM LogrosAsignaturasApp lpp5 WHERE lpp5.id_logro=C.p1_logrop_calificacion),'') as p5_descripcion_logrop, "
-                . " IFNULL((SELECT lap5.descripcion_logro FROM LogrosAsignaturasApp lap5 WHERE lap5.id_logro=C.p1_logroa_calificacion),'') as p5_descripcion_logroa, "
-                . " IFNULL((SELECT lcp6.descripcion_logro FROM LogrosAsignaturasApp lcp6 WHERE lcp6.id_logro=C.p1_logroc_calificacion),'') as p6_descripcion_logroc, "
-                . " IFNULL((SELECT lpp6.descripcion_logro FROM LogrosAsignaturasApp lpp6 WHERE lpp6.id_logro=C.p1_logrop_calificacion),'') as p6_descripcion_logrop, "
-                . " IFNULL((SELECT lap6.descripcion_logro FROM LogrosAsignaturasApp lap6 WHERE lap6.id_logro=C.p1_logroa_calificacion),'') as p6_descripcion_logroa, "
-                . " IFNULL((SELECT lcphab.descripcion_logro FROM LogrosAsignaturasApp lcphab WHERE lcphab.id_logro=C.phab_logroc_calificacion),'') as phab_descripcion_logroc, "
-                . " IFNULL((SELECT lpphab.descripcion_logro FROM LogrosAsignaturasApp lpphab WHERE lpphab.id_logro=C.phab_logrop_calificacion),'') as phab_descripcion_logrop, "
-                . " IFNULL((SELECT laphab.descripcion_logro FROM LogrosAsignaturasApp laphab WHERE laphab.id_logro=C.phab_logroa_calificacion),'') as phab_descripcion_logroa, "
-                . " ROUND(IFNULL((IFNULL(C.p1_nd_calificacion,0)*" . $porcP1 . " + IFNULL(C.p2_nd_calificacion,0)*" . $porcP2 . " + IFNULL(C.p3_nd_calificacion,0)*" . $porcP3 . " + IFNULL(C.p4_nd_calificacion,0)*" . $porcP4 . " + IFNULL(C.p5_nd_calificacion,0)*" . $porcP5 . " + IFNULL(C.p6_nd_calificacion,0)*" . $porcP6 . " ),'0'),1) as def "
+                . " PED.hteoricas_asignatura AS hteoricas_asignatura, "
+                . " PED.hpracticas_asignatura AS hpracticas_asignatura, "
+                . " IFNULL(C.p1_nd_calificacion,'') AS np1, "
+                . " IFNULL(C.p2_nd_calificacion,'') AS np2, "
+                . " IFNULL(C.p3_nd_calificacion,'') AS np3, "
+                . " IFNULL(C.p4_nd_calificacion,'') AS np4, "
+                . " IFNULL(C.p5_nd_calificacion,'') AS np5, "
+                . " IFNULL(C.p6_nd_calificacion,'') AS np6, "
+                . " IFNULL(C.phab_nd_calificacion,'') AS nphab, "
+                . " IFNULL(C.p1_ausencias_calificacion,'') AS p1_ausencias_calificacion, "
+                . " IFNULL(C.p2_ausencias_calificacion,'') AS p2_ausencias_calificacion, "
+                . " IFNULL(C.p3_ausencias_calificacion,'') AS p3_ausencias_calificacion, "
+                . " IFNULL(C.p4_ausencias_calificacion,'') AS p4_ausencias_calificacion, "
+                . " IFNULL(C.p5_ausencias_calificacion,'') AS p5_ausencias_calificacion, "
+                . " IFNULL(C.p6_ausencias_calificacion,'') AS p6_ausencias_calificacion, "
+                . " IFNULL(C.p1_comentarios_calificacion,'') AS p1_comentarios_calificacion, "
+                . " IFNULL(C.p2_comentarios_calificacion,'') AS p2_comentarios_calificacion, "
+                . " IFNULL(C.p3_comentarios_calificacion,'') AS p3_comentarios_calificacion, "
+                . " IFNULL(C.p4_comentarios_calificacion,'') AS p4_comentarios_calificacion, "
+                . " IFNULL(C.p5_comentarios_calificacion,'') AS p5_comentarios_calificacion, "
+                . " IFNULL(C.p6_comentarios_calificacion,'') AS p6_comentarios_calificacion, "
+                . " IFNULL(C.phab_comentarios_calificacion,'') AS phab_comentarios_calificacion, "
+                . " IFNULL((SELECT lcp1.descripcion_logro FROM LogrosAsignaturasApp lcp1 WHERE lcp1.id_logro=C.p1_logroc_calificacion),'') AS p1_descripcion_logroc, "
+                . " IFNULL((SELECT lpp1.descripcion_logro FROM LogrosAsignaturasApp lpp1 WHERE lpp1.id_logro=C.p1_logrop_calificacion),'') AS p1_descripcion_logrop, "
+                . " IFNULL((SELECT lap1.descripcion_logro FROM LogrosAsignaturasApp lap1 WHERE lap1.id_logro=C.p1_logroa_calificacion),'') AS p1_descripcion_logroa, "
+                . " IFNULL((SELECT lcp2.descripcion_logro FROM LogrosAsignaturasApp lcp2 WHERE lcp2.id_logro=C.p2_logroc_calificacion),'') AS p2_descripcion_logroc, "
+                . " IFNULL((SELECT lpp2.descripcion_logro FROM LogrosAsignaturasApp lpp2 WHERE lpp2.id_logro=C.p2_logrop_calificacion),'') AS p2_descripcion_logrop, "
+                . " IFNULL((SELECT lap2.descripcion_logro FROM LogrosAsignaturasApp lap2 WHERE lap2.id_logro=C.p2_logroa_calificacion),'') AS p2_descripcion_logroa, "
+                . " IFNULL((SELECT lcp3.descripcion_logro FROM LogrosAsignaturasApp lcp3 WHERE lcp3.id_logro=C.p3_logroc_calificacion),'') AS p3_descripcion_logroc, "
+                . " IFNULL((SELECT lpp3.descripcion_logro FROM LogrosAsignaturasApp lpp3 WHERE lpp3.id_logro=C.p3_logrop_calificacion),'') AS p3_descripcion_logrop, "
+                . " IFNULL((SELECT lap3.descripcion_logro FROM LogrosAsignaturasApp lap3 WHERE lap3.id_logro=C.p3_logroa_calificacion),'') AS p3_descripcion_logroa, "
+                . " IFNULL((SELECT lcp4.descripcion_logro FROM LogrosAsignaturasApp lcp4 WHERE lcp4.id_logro=C.p4_logroc_calificacion),'') AS p4_descripcion_logroc, "
+                . " IFNULL((SELECT lpp4.descripcion_logro FROM LogrosAsignaturasApp lpp4 WHERE lpp4.id_logro=C.p4_logrop_calificacion),'') AS p4_descripcion_logrop, "
+                . " IFNULL((SELECT lap4.descripcion_logro FROM LogrosAsignaturasApp lap4 WHERE lap4.id_logro=C.p4_logroa_calificacion),'') AS p4_descripcion_logroa, "
+                . " IFNULL((SELECT lcp5.descripcion_logro FROM LogrosAsignaturasApp lcp5 WHERE lcp5.id_logro=C.p5_logroc_calificacion),'') AS p5_descripcion_logroc, "
+                . " IFNULL((SELECT lpp5.descripcion_logro FROM LogrosAsignaturasApp lpp5 WHERE lpp5.id_logro=C.p5_logrop_calificacion),'') AS p5_descripcion_logrop, "
+                . " IFNULL((SELECT lap5.descripcion_logro FROM LogrosAsignaturasApp lap5 WHERE lap5.id_logro=C.p5_logroa_calificacion),'') AS p5_descripcion_logroa, "
+                . " IFNULL((SELECT lcp6.descripcion_logro FROM LogrosAsignaturasApp lcp6 WHERE lcp6.id_logro=C.p6_logroc_calificacion),'') AS p6_descripcion_logroc, "
+                . " IFNULL((SELECT lpp6.descripcion_logro FROM LogrosAsignaturasApp lpp6 WHERE lpp6.id_logro=C.p6_logrop_calificacion),'') AS p6_descripcion_logrop, "
+                . " IFNULL((SELECT lap6.descripcion_logro FROM LogrosAsignaturasApp lap6 WHERE lap6.id_logro=C.p6_logroa_calificacion),'') AS p6_descripcion_logroa, "
+                . " IFNULL((SELECT lcphab.descripcion_logro FROM LogrosAsignaturasApp lcphab WHERE lcphab.id_logro=C.phab_logroc_calificacion),'') AS phab_descripcion_logroc, "
+                . " IFNULL((SELECT lpphab.descripcion_logro FROM LogrosAsignaturasApp lpphab WHERE lpphab.id_logro=C.phab_logrop_calificacion),'') AS phab_descripcion_logrop, "
+                . " IFNULL((SELECT laphab.descripcion_logro FROM LogrosAsignaturasApp laphab WHERE laphab.id_logro=C.phab_logroa_calificacion),'') AS phab_descripcion_logroa, "
+                . " ROUND(IFNULL((IFNULL(C.p1_nd_calificacion,0)*" . $porcP1 . " + IFNULL(C.p2_nd_calificacion,0)*" . $porcP2 . " + IFNULL(C.p3_nd_calificacion,0)*" . $porcP3 . " + IFNULL(C.p4_nd_calificacion,0)*" . $porcP4 . " + IFNULL(C.p5_nd_calificacion,0)*" . $porcP5 . " + IFNULL(C.p6_nd_calificacion,0)*" . $porcP6 . " ),'0'),1) AS def "
                 . " FROM (SELECT @rownum :=0) R, "
                 . " MatriculaAsignaturasApp MA "
                 . " INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
@@ -554,6 +558,9 @@ class ReportsBank extends BaseController {
         }
         if ($idsede !== null) {
             $sql = $sql . " AND M.id_sede='$idsede' ";
+        }
+        if ($idjornada !== null) {
+            $sql = $sql . " AND M.id_jornada='$idjornada' ";
         }
         if ($idprograma !== null) {
             $sql = $sql . " AND MA.id_programa='$idprograma' ";
@@ -581,16 +588,16 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getInformesCalificaciones($idescuela = null, $idsede = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
+    public function getInformesCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
         $resultEstudiantes = null;
         $resultCalificaciones = null;
-        $resultEstudiantes = $this->getEstudiantesMatriculas($idescuela, $idsede, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idmatricula, $idestudiante);
+        $resultEstudiantes = $this->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idmatricula, $idestudiante);
         if ($resultEstudiantes !== null && $resultEstudiantes !== '[]') {
             $resultEstudiantes = json_decode($resultEstudiantes, true);
         }
         if ($resultEstudiantes !== null && is_array($resultEstudiantes)) {
             for ($i = 0; $i < count($resultEstudiantes); $i++) {
-                $resultCalificaciones = $this->getCalificaciones($resultEstudiantes[$i]['id_escuela'], $resultEstudiantes[$i]['id_sede'], $resultEstudiantes[$i]['id_programa'], $resultEstudiantes[$i]['id_planestudio'], $resultEstudiantes[$i]['numgrado_programa'], $resultEstudiantes[$i]['id_grupo'], $resultEstudiantes[$i]['id_periodo'], $resultEstudiantes[$i]['id_matricula'], $resultEstudiantes[$i]['id_estudiante']);
+                $resultCalificaciones = $this->getCalificaciones($resultEstudiantes[$i]['id_escuela'], $resultEstudiantes[$i]['id_sede'], $resultEstudiantes[$i]['id_jornada'], $resultEstudiantes[$i]['id_programa'], $resultEstudiantes[$i]['id_planestudio'], $resultEstudiantes[$i]['numgrado_programa'], $resultEstudiantes[$i]['id_grupo'], $resultEstudiantes[$i]['id_periodo'], $resultEstudiantes[$i]['id_matricula'], $resultEstudiantes[$i]['id_estudiante']);
                 if ($resultCalificaciones !== null) {
                     $resultEstudiantes[$i]['calificaciones'] = $resultCalificaciones;
                 }

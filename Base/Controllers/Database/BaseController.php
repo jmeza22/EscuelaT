@@ -311,15 +311,16 @@ class BaseController {
         }
         if (isset($this->db) && isset($this->model)) {
             $result = $this->db->selectStmt($table, $columns, $where, $arraywhere);
+            $result = json_encode($result);
             return $result;
         }
         return null;
     }
 
     public function selectWithoutModel($table = null, $columns = '*', $where = null) {
-        $json = $this->select($table, $columns, $where);
-        $array = json_decode($json, true);
-        if ($array != null) {
+        $array = $this->select($table, $columns, $where);
+        $array = json_decode($array, true);
+        if ($array != null && isset($array[$table])) {
             $array = $array[$table];
         }
         $array = json_encode($array);

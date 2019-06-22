@@ -409,9 +409,9 @@ class PDFReports extends TCPDF {
         }
     }
 
-    public function ListadoEstudiantes($idescuela = null, $idsede = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null) {
+    public function ListadoEstudiantes($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null) {
         $result = null;
-        $result = $this->bc->getEstudiantesMatriculas($idescuela, $idsede, $idprograma, null, $numgrado, $idgrupo, $idperiodo);
+        $result = $this->bc->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, null, $numgrado, $idgrupo, $idperiodo);
         if ($result !== null && $result !== '' && $result !== '[]') {
             $result = json_decode($result, true);
             if (count($result) > 0) {
@@ -469,11 +469,11 @@ class PDFReports extends TCPDF {
         }
     }
 
-    public function InformeCalificaionesTipo1($idescuela = null, $idsede = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idcorte = null, $idmatricula = null, $idestudiante = null) {
+    public function InformeCalificaionesTipo1($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idcorte = null, $idmatricula = null, $idestudiante = null) {
         $htmltable = '';
         $data = null;
         $subdata = null;
-        $data = $this->bc->getInformesCalificaciones($idescuela, $idsede, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idmatricula, $idestudiante);
+        $data = $this->bc->getInformesCalificaciones($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idmatricula, $idestudiante);
         $corte = $this->bc->selectJSONArray("SELECT numero_corte FROM CortesPeriodosApp WHERE id_corte = '$idcorte'");
         if ($corte !== null && $corte !== '[]') {
             $corte = json_decode($corte, true);
@@ -542,7 +542,7 @@ class PDFReports extends TCPDF {
                             $htmltable = $htmltable . '<tr>';
                             $htmltable = $htmltable . '<td><label style="font-size:4pt; padding-top: 0px;">' . $subdata[$j]['nombre_area'] . '</label> <br>'
                                     . '<b>' . $subdata[$j]['nombre_asignatura'] . '</b></td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . utf8_decode($subdata[$j]['horas_asignatura']) . '</td>';
+                            $htmltable = $htmltable . '<td style="text-align: center;">' . ($subdata[$j]['hteoricas_asignatura']+$subdata[$j]['hpracticas_asignatura']) . '</td>';
                             $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['np1'] . '</td>';
                             $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['np2'] . '</td>';
                             $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['np3'] . '</td>';
@@ -578,8 +578,9 @@ class PDFReports extends TCPDF {
                     $this->writeHTML($htmltable, true, false, false, false, '');
                     $this->MultiCell(0, 30, 'Observaciones:', 1);
                     $htmltable = '';
-
-                    $this->AddPage();
+                    if ($i < (count($data)-1)) {
+                        $this->AddPage();
+                    }
                 }
             }
         }

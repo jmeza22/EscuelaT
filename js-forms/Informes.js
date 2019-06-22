@@ -67,6 +67,13 @@ function LoadCorte() {
     loadComboboxData(corte);
 }
 
+function LoadEstudiante() {
+    var estudiante = null;
+    estudiante = document.getElementById("id_estudiante");
+    estudiante.innerHTML = '<option value="">Ninguna</option>';
+    loadComboboxData(estudiante);
+}
+
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {

@@ -24,7 +24,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/Validator.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/SimplexFramework.js"></script>
-        <script type="text/javascript" src="js-forms/Informes.js"></script>
+        <script type="text/javascript" src="js-forms/Reportes.js"></script>
     </head>
     <body>
         <div class="panel panel-primary" style="width: 80% !important;">
@@ -63,25 +63,25 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Sede</label>
-                                    <select id="id_sede" name="id_sede" selected="NULL" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_jornada', this.id, this.value);">
+                                    <select id="id_sede" name="id_sede" selected="NULL" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_jornada', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Jornada</label>
-                                    <select id="id_jornada" name="id_jornada" selected="NULL" model="JornadasApp" colname="nombre_jornada" colvalue="id_jornada" url="Base/Controllers/GetComboboxJornadas.php" class="form-control" style="width: 100%;">
+                                    <select id="id_jornada" name="id_jornada" selected="NULL" model="JornadasApp" colname="nombre_jornada" colvalue="id_jornada" url="Base/Controllers/GetComboboxJornadas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_estudiante', this.id, this.value, 1);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Programa</label>
-                                    <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value);">
+                                    <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 2);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Año</label>
-                                    <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setFindbyCombobox('id_corte', this.id, this.value);">
+                                    <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setFindbyCombobox('id_corte', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 3);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
@@ -95,7 +95,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Grado</label>
-                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value);">
+                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 4);">
                                         <option disabled="disabled" selected="selected" value="NULL">Ninguno</option>
                                         <option value="-2">PreJardin</option>
                                         <option value="-1">Jardin</option>
@@ -116,19 +116,17 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Grupo</label>
-                                    <select id="id_grupo" name="id_grupo" selected="NULL" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
+                                    <select id="id_grupo" name="id_grupo" selected="NULL" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_estudiante', this.id, this.value, 5);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Estudiante</label>
-                                    <select id="id_estudiante" name="id_estudiante" selected="NULL" model="GruposApp" colname="nombrecompleto_estudiante" colvalue="id_estudiante" url="Base/Controllers/GetComboboxEstudiantes.php" class="form-control" style="width: 100%;">
+                                    <select id="id_estudiante" name="id_estudiante" selected="NULL" model="ObservadorEstudianteApp" colname="nombrecompleto_estudiante" colvalue="id_estudiante" url="Base/Controllers/GetComboboxEstudiantesMatriculados.php" class="form-control" style="width: 100%;">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 

@@ -61,7 +61,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     unset($planestudio[$i]['hteoricas_asignatura']);
                     unset($planestudio[$i]['hpracticas_asignatura']);
                     unset($planestudio[$i]['status_planestudiodetalle']);
-                    //print_r($planestudio[$i]);
                 }
                 $i = 0;
                 for ($i = 0; $i < $count; $i++) {

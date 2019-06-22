@@ -1130,6 +1130,8 @@ function loadComboboxData(element) {
     var othervalue = null;
     var findby = null;
     var findbyvalue = null;
+    var findby1 = null;
+    var findbyvalue1 = null;
     var findby2 = null;
     var findbyvalue2 = null;
     var findby3 = null;
@@ -1138,6 +1140,8 @@ function loadComboboxData(element) {
     var findbyvalue4 = null;
     var findby5 = null;
     var findbyvalue5 = null;
+    var findby6 = null;
+    var findbyvalue6 = null;
     var object = null;
     var vals = null;
 
@@ -1148,6 +1152,8 @@ function loadComboboxData(element) {
     othervalue = getOtherValueCombobox(element);
     findby = getFindBy(element);
     findbyvalue = getFindByValue(element);
+    findby1 = getFindBy(element, 1);
+    findbyvalue1 = getFindByValue(element, 1);
     findby2 = getFindBy(element, 2);
     findbyvalue2 = getFindByValue(element, 2);
     findby3 = getFindBy(element, 3);
@@ -1156,6 +1162,8 @@ function loadComboboxData(element) {
     findbyvalue4 = getFindByValue(element, 4);
     findby5 = getFindBy(element, 5);
     findbyvalue5 = getFindByValue(element, 5);
+    findby6 = getFindBy(element, 6);
+    findbyvalue6 = getFindByValue(element, 6);
     vals = {
         "model": model,
         "action": 'findAll',
@@ -1171,7 +1179,9 @@ function loadComboboxData(element) {
         "findby4": findby4,
         "findbyvalue4": findbyvalue4,
         "findby5": findby5,
-        "findbyvalue5": findbyvalue5
+        "findbyvalue5": findbyvalue5,
+        "findby6": findby6,
+        "findbyvalue6": findbyvalue6
     };
     console.log('Getting Data for SELECT: ' + element.id);
     if (element !== null &&

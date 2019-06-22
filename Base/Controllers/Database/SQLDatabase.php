@@ -90,6 +90,7 @@ class SQLDatabase {
                 $this->link = new PDO("{$this->dbms}:host={$this->hostdb};port={$this->portdb};dbname={$this->namedb}", $this->userdb, $this->passdb, array(PDO::ATTR_PERSISTENT => $this->persistent))
                         or die('MySql Database Connection Error!.');
                 $this->link->query("SET NAMES 'utf8'");
+                $this->link->query("SET CHARACTER SET 'utf8'");
             }
             if ($this->link == null) {
                 echo 'Error de Conexion';
@@ -332,17 +333,22 @@ class SQLDatabase {
     }
 
     public function parseToUTF8($array) {
-        if (isset($array) && is_array($array)) {
+        if (isset($array) && $array !== null && is_array($array)) {
             foreach ($array as $key => $value) {
-                if (is_array($value)) {
-                    $array[$key] = $this->parseToUTF8($value);
+                if (!is_array($value)) {
+                    try {
+                        $array[$key] = utf8_decode($value);
+                    } catch (Exception $exc) {
+                        $array[$key] = $value;
+                    }
                 } else {
-                    $array[$key] = utf8_decode($value);
+                    $array[$key] = $this->parseToUTF8($array[$key]);
                 }
             }
+            //print_r($array);
             return $array;
         }
-        return false;
+        return null;
     }
 
     private function buildInsertString($table, $values) {
@@ -631,7 +637,6 @@ class SQLDatabase {
                 $result = $myarray;
             }
         }
-        $result = $this->parseToUTF8($result);
         return $result;
     }
 
@@ -652,7 +657,6 @@ class SQLDatabase {
             while ($row = $resultset->fetch()) {
                 array_push($myarray, $row);
             }
-            $this->parseToUTF8($myarray);
             return $myarray;
         }
         return null;
@@ -668,7 +672,6 @@ class SQLDatabase {
                     $myarray[$i][$j] = $row[$j];
                 }
             }
-            $this->parseToUTF8($myarray);
             return $myarray;
         }
         return null;
@@ -685,7 +688,6 @@ class SQLDatabase {
                     $json[] = $row;
                 }
             }
-            $json = $this->parseToUTF8($json);
             $json = json_encode($json);
             return $json;
         }
