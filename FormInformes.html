@@ -51,7 +51,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Sede</label>
-                                    <select id="id_sede" name="id_sede" selected="NULL" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_jornada', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value);">
+                                    <select id="id_sede" name="id_sede" selected="NULL" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_jornada', this.id, this.value); setFindbyCombobox('id_grupo', this.id, this.value, 1); setFindbyCombobox('id_estudiante', this.id, this.value);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
@@ -63,7 +63,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Programa</label>
-                                    <select id="id_programa" name="id_programa" required="required" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 2);">
+                                    <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 2);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
@@ -77,13 +77,13 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Periodo</label>
-                                    <select id="id_corte" name="id_corte" required="required" selected="NULL" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" class="form-control" style="width: 100%;">
+                                    <select id="id_corte" name="id_corte" selected="NULL" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" class="form-control" style="width: 100%;">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Grado</label>
-                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 4);">
+                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value, 2); setFindbyCombobox('id_estudiante', this.id, this.value, 4);">
                                         <option disabled="disabled" selected="selected" value="NULL">Ninguno</option>
                                         <option value="-2">PreJardin</option>
                                         <option value="-1">Jardin</option>
@@ -127,8 +127,6 @@ and open the template in the editor.
                                     <select id="format_page" name="format_page" class="form-control" style="width: 100%;">
                                         <option value="Legal">Oficio</option>
                                         <option value="Letter">Carta</option>
-                                        <option value="A4">A4</option>
-                                        <option value="A5">A5</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -163,7 +161,6 @@ and open the template in the editor.
                                         <option value="times">Times New Roman</option>
                                         <option value="helvetica">Helvetica</option>
                                         <option value="courier">Courier</option>
-                                        <option value="Verdana">Verdana</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">

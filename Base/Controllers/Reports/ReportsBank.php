@@ -353,15 +353,24 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getMatriculas($idescuela = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idestudiante = null) {
+    public function getMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM MatriculasApp WHERE status_matricula=1 ";
         if ($idescuela !== null) {
             $sql = $sql . " AND id_escuela='$idescuela' ";
         }
+        if ($idsede !== null) {
+            $sql = $sql . " AND id_sede='$idsede' ";
+        }
+        if ($idjornada !== null) {
+            $sql = $sql . " AND id_jornada='$idjornada' ";
+        }
         if ($idprograma !== null) {
             $sql = $sql . " AND id_programa='$idprograma' ";
+        }
+        if ($idplanestudio !== null) {
+            $sql = $sql . " AND id_planestudio='$idplanestudio' ";
         }
         if ($numgrado !== null) {
             $sql = $sql . " AND numgrado_programa='$numgrado' ";
@@ -369,8 +378,14 @@ class ReportsBank extends BaseController {
         if ($idgrupo !== null) {
             $sql = $sql . " AND id_grupo='$idgrupo' ";
         }
+        if ($idperiodo !== null) {
+            $sql = $sql . " AND id_periodo='$idperiodo' ";
+        }
         if ($idestudiante !== null) {
             $sql = $sql . " AND id_estudiante='$idestudiante' ";
+        }
+        if ($idmatricula !== null) {
+            $sql = $sql . " AND id_matricula='$idmatricula' ";
         }
         $sql = $sql . " ORDER BY fecha_matricula DESC";
         $result = $this->selectJSONArray($sql);
@@ -397,11 +412,12 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getEstudiantesMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
+    public function getEstudiantesMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT OE.id_estudiante, "
-                . "IFNULL(CONCAT(P.tipodoc_persona,' ',P.documento_persona),'') AS docid_persona, "
+                . "P.tipodoc_persona, "
+                . "P.documento_persona, "
                 . "OE.nombrecompleto_estudiante, "
                 . "P.sexo_persona, "
                 . "P.fechanacimiento_persona, "
@@ -468,7 +484,7 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
+    public function getCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $sql = null;
         $result = null;
         $porcP1 = null;
@@ -588,16 +604,16 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getInformesCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idmatricula = null, $idestudiante = null) {
+    public function getInformesCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $resultEstudiantes = null;
         $resultCalificaciones = null;
-        $resultEstudiantes = $this->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idmatricula, $idestudiante);
+        $resultEstudiantes = $this->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idestudiante, $idmatricula);
         if ($resultEstudiantes !== null && $resultEstudiantes !== '[]') {
             $resultEstudiantes = json_decode($resultEstudiantes, true);
         }
         if ($resultEstudiantes !== null && is_array($resultEstudiantes)) {
             for ($i = 0; $i < count($resultEstudiantes); $i++) {
-                $resultCalificaciones = $this->getCalificaciones($resultEstudiantes[$i]['id_escuela'], $resultEstudiantes[$i]['id_sede'], $resultEstudiantes[$i]['id_jornada'], $resultEstudiantes[$i]['id_programa'], $resultEstudiantes[$i]['id_planestudio'], $resultEstudiantes[$i]['numgrado_programa'], $resultEstudiantes[$i]['id_grupo'], $resultEstudiantes[$i]['id_periodo'], $resultEstudiantes[$i]['id_matricula'], $resultEstudiantes[$i]['id_estudiante']);
+                $resultCalificaciones = $this->getCalificaciones($resultEstudiantes[$i]['id_escuela'], $resultEstudiantes[$i]['id_sede'], $resultEstudiantes[$i]['id_jornada'], $resultEstudiantes[$i]['id_programa'], $resultEstudiantes[$i]['id_planestudio'], $resultEstudiantes[$i]['numgrado_programa'], $resultEstudiantes[$i]['id_grupo'], $resultEstudiantes[$i]['id_periodo'], $resultEstudiantes[$i]['id_estudiante'], $resultEstudiantes[$i]['id_matricula']);
                 if ($resultCalificaciones !== null) {
                     $resultEstudiantes[$i]['calificaciones'] = $resultCalificaciones;
                 }

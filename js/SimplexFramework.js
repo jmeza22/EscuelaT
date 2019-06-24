@@ -1172,6 +1172,8 @@ function loadComboboxData(element) {
         "othervalue": othervalue,
         "findby": findby,
         "findbyvalue": findbyvalue,
+        "findby1": findby1,
+        "findbyvalue1": findbyvalue1,
         "findby2": findby2,
         "findbyvalue2": findbyvalue2,
         "findby3": findby3,

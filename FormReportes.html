@@ -37,7 +37,9 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Seleccione uno:</label>
-                                    <select id="tipo_reporte" name="tipo_reporte" required="required" class="form-control" style="width: 100%;" >
+                                    <select id="tipo_reporte" name="tipo_reporte" required="required" class="form-control" style="width: 100%;" onchange="setRequiredsInputs(this);" >
+                                        <option value="CertificadoEstudios">Certificado de Estudios</option>
+                                        <option value="CertificadoNotas">Certificado de Notas</option>
                                         <option value="Escuelas">Listado de Escuelas</option>
                                         <option value="Sedes">Listado de Sedes</option>
                                         <option value="Programas">Listado de Programas</option>
@@ -63,7 +65,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Sede</label>
-                                    <select id="id_sede" name="id_sede" selected="NULL" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_jornada', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value);">
+                                    <select id="id_sede" name="id_sede" selected="NULL" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_jornada', this.id, this.value); setFindbyCombobox('id_grupo', this.id, this.value, 1); setFindbyCombobox('id_estudiante', this.id, this.value);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
@@ -95,7 +97,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Grado</label>
-                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 4);">
+                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value, 2); setFindbyCombobox('id_estudiante', this.id, this.value, 4);">
                                         <option disabled="disabled" selected="selected" value="NULL">Ninguno</option>
                                         <option value="-2">PreJardin</option>
                                         <option value="-1">Jardin</option>
@@ -139,8 +141,6 @@ and open the template in the editor.
                                     <select id="format_page" name="format_page" required="required" class="form-control" style="width: 100%;">
                                         <option value="Legal">Oficio</option>
                                         <option value="Letter">Carta</option>
-                                        <option value="A4">A4</option>
-                                        <option value="A5">A5</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -175,7 +175,6 @@ and open the template in the editor.
                                         <option value="times">Times New Roman</option>
                                         <option value="helvetica">Helvetica</option>
                                         <option value="courier">Courier</option>
-                                        <option value="Verdana">Verdana</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">

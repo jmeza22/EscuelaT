@@ -6,9 +6,23 @@
 
 jQuery(document).ready(function () {
     LoadTable();
-    loadComboboxData(document.getElementById("id_programa"));
-    setIdEscuela();
+    LoadSede();
+    LoadPrograma();
 });
+
+function LoadSede() {
+    var sede = null;
+    sede = document.getElementById("id_sede");
+    sede.innerHTML = '<option value="">Ninguna</option>';
+    loadComboboxData(sede);
+}
+
+function LoadPrograma() {
+    var programa = null;
+    programa = document.getElementById("id_programa");
+    programa.innerHTML = '<option value="">Ninguna</option>';
+    loadComboboxData(programa);
+}
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");

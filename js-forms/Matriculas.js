@@ -7,14 +7,13 @@ jQuery(document).ready(function () {
     showNotification('Espere...', 'Espere a que se carguen todos los elementos. Tenga paciencia. No recargue la pagina.')
     //LoadEscuela();
     autoLoadNameFromId('id_estudiante', 'nombrecompleto_estudiante', null, null);
-    setIdEscuela();
     LoadSede();
     LoadJornada();
     LoadPrograma();
     LoadPlanEstudios();
-    LoadGrupo();
     LoadPeriodo();
-    RefreshTable();
+    LoadGrupo();
+    LoadTable();
 
 });
 
@@ -74,19 +73,6 @@ function LoadPeriodo() {
     loadComboboxData(periodo);
 }
 
-function RefreshSede(item) {
-    if (item !== undefined && item !== null) {
-        console.log('Filtrando por ' + item.id);
-        setFinbySede('id_escuela');
-        if (item.selected !== undefined && item.selected !== null) {
-            setFinbyValueSede(item.selected);
-        } else {
-            setFinbyValueSede(item.value);
-        }
-        LoadSede();
-    }
-}
-
 function GrabarMatricula() {
     var form0 = null;
     form0 = document.getElementById('form0');
@@ -143,36 +129,6 @@ function DeleteItem(item) {
                 }
             });
         }
-    }
-}
-
-function setIdEscuela() {
-    var escuela = null;
-    var newoption = null;
-    escuela = document.getElementById('id_escuela');
-    if (escuela !== null && escuela !== undefined && escuela.tagName === 'SELECT') {
-        escuela.innerHTML = '';
-        escuela.removeAttribute('selected');
-        newoption = document.createElement('option');
-        newoption.setAttribute('value', getEnterpriseID());
-        newoption.setAttribute('selected', 'selected');
-        newoption.innerHTML = '' + getEnterpriseName();
-        if (getEnterpriseName() === null) {
-            newoption.innerHTML = 'Escuela Actual';
-        }
-        escuela.appendChild(newoption);
-    }
-}
-
-function RefreshTable() {
-    var table0 = null;
-    var idescuela = null;
-    table0 = document.getElementById("dataTable0");
-    if (table0 !== null && table0 !== undefined) {
-        idescuela = document.getElementById("id_escuela");
-        table0.setAttribute('findby', 'id_escuela');
-        table0.setAttribute('findbyvalue', idescuela.value);
-        LoadTable();
     }
 }
 

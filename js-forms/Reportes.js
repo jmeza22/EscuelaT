@@ -9,7 +9,46 @@ jQuery(document).ready(function () {
     LoadPrograma();
     LoadGrupo();
     LoadPeriodo();
+    setRequiredsInputs(document.getElementById("tipo_reporte"));
 });
+
+function setRequiredsInputs(tipo) {
+    var form0 = document.getElementById("form0");
+    var sede = getElement(form0, 'id_sede');
+    var jornada = getElement(form0, 'id_jornada');
+    var programa = getElement(form0, 'id_programa');
+    var periodo = getElement(form0, 'id_periodo');
+    var corte = getElement(form0, 'id_corte');
+    var grado = getElement(form0, 'numgrado_programa');
+    var grupo = getElement(form0, 'id_grupo');
+    var estudiante = getElement(form0, 'id_estudiante');
+    sede.removeAttribute('required');
+    jornada.removeAttribute('required');
+    programa.removeAttribute('required');
+    periodo.removeAttribute('required');
+    corte.removeAttribute('required');
+    grado.removeAttribute('required');
+    grupo.removeAttribute('required');
+    estudiante.removeAttribute('required');
+    if (tipo !== undefined && tipo !== null) {
+        programa.setAttribute('required', 'required');
+        periodo.setAttribute('required', 'required');
+        if (tipo.value === 'CertificadoEstudios') {
+            sede.setAttribute('required', 'required');
+            jornada.setAttribute('required', 'required');
+            grado.setAttribute('required', 'required');
+            grupo.setAttribute('required', 'required');
+            estudiante.setAttribute('required', 'required');
+        }
+        if (tipo.value === 'CertificadoNotas') {
+            sede.setAttribute('required', 'required');
+            jornada.setAttribute('required', 'required');
+            grado.setAttribute('required', 'required');
+            grupo.setAttribute('required', 'required');
+            estudiante.setAttribute('required', 'required');
+        }
+    }
+}
 
 function LoadEscuela() {
     var escuela = null;

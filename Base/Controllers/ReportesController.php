@@ -105,6 +105,20 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $report->SetFont($family, $style, $sizecontent);
         $report->AddPage($orientation, $format, true);
 
+        if ($tipo === 'CertificadoEstudios') {
+            $report->SetLeftMargin(14);
+            $report->SetRightMargin(14);
+            $report->setReportName('Certificado de Estudios');
+            $report->CertificadoEstudios($idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idestudiante, null);
+            $report->generatePDFDocument();
+        }
+        if ($tipo === 'CertificadoNotas') {
+            $report->SetLeftMargin(12);
+            $report->SetRightMargin(12);
+            $report->setReportName('Certificado de Notas');
+            $report->CertificadoNotas($idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idestudiante, null);
+            $report->generatePDFDocument();
+        }
         if ($tipo === 'Escuelas') {
             $report->setReportName('Listado de Escuelas');
             $report->ListadoEscuelas();

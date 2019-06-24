@@ -107,7 +107,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $report->AddPage($orientation, $format, true);
 
         if ($tipo == 1) {
-            $report->InformeCalificaionesTipo1($idescuela, $idsede, $idjornada, $idprograma, null, $grado, $grupo, $idperiodo, $idcorte, null, $idestudiante);
+            $report->InformeCalificaionesTipo1($idescuela, $idsede, $idjornada, $idprograma, null, $grado, $grupo, $idperiodo, $idcorte, $idestudiante, null);
             $report->generatePDFDocument();
         }
     }
