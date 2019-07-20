@@ -30,7 +30,7 @@ and open the template in the editor.
     <body>
         <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/ConfiguracionController.php" model="ConfiguracionApp" findBy="id_escuela" mainform="true" >
             <input type="hidden" name="logo_configuracion" id="logo_configuracion" value="Escuela0.png" maxlength="24" readonly="readonly" >
-            <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel panel-primary" style="width: 95% !important;">
                 <div class="panel-heading">Datos Escuela</div>
                 <div class="panel-body" >
 
@@ -40,23 +40,39 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Codigo</label>
-                                    <input type="text" name="id_escuela" id="id_escuela" value="" maxlength="24" required="required" readonly="readonly" class="form-control" title="Código de Escuela" list="lista_id_escuela">
+                                    <input type="text" name="id_escuela" id="id_escuela" value="1" maxlength="24" required="required" readonly="readonly" class="form-control" title="Código de Escuela" list="lista_id_escuela">
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-10">
                                     <label>Nombre Escuela</label>
                                     <input type="text" name="nombremostrar_configuracion" id="nombremostrar_configuracion" value="" maxlength="100" class="form-control" title="Nombre de Escuela" getname="true" idname="id_escuela" model="EscuelasApp" >
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Documento</label>
-                                    <select name="tipodocumento_configuracion" id="tipodocumento_configuracion" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
-                                        <option id="NN" value="NN" disabled="disabled">Desconocido</option>
-                                        <option id="DANE" value="DANE" >DANE</option>
-                                        <option id="NIT" value="TI" >NIT</option>
-                                    </select>
+                                    <label>Codigo DANE</label>
+                                    <input type="text" name="dane_configuracion" id="dane_configuracion" value="" maxlength="30" class="form-control" title="Código DANE de Escuela" >
                                 </div>
                                 <div class="col-sm-2">
-                                    <label>No.Documento</label>
-                                    <input type="text" name="numdocumento_configuracion" id="numdocumento_configuracion" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
+                                    <label>Numero NIT</label>
+                                    <input type="text" name="nit_configuracion" id="nit_configuracion" value="" maxlength="30" class="form-control" title="Numero NIT de Escuela">
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>Resolucion Aprobacion</label>
+                                    <input type="text" name="resolucion_configuracion" id="resolucion_configuracion" value="" maxlength="200" class="form-control" title="Resolucion de Aprobacion de Escuela">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Pais/Nacion</label>
+                                    <input type="text" name="pais_configuracion" id="pais_configuracion" value="" maxlength="50" class="form-control" title="Código DANE de Escuela" >
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Departamento/Estado</label>
+                                    <input type="text" name="departamento_configuracion" id="departamento_configuracion" value="" maxlength="50" class="form-control" title="Numero NIT de Escuela">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Municipio/Ciudad</label>
+                                    <input type="text" name="municipio_configuracion" id="municipio_configuracion" value="" maxlength="50" class="form-control" title="Resolucion de Aprobacion de Escuela">
                                 </div>
                             </div>
                             <div class="row">
@@ -103,7 +119,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-12">
                                     <center>
-                                        <button id="VerLogo" name="VerLogo" type="button" class="btn btn-default" href="#modal_logo" data-toggle="modal" onclick="MostrarLogo();">Modificar Logotipo Institucional</button>
+                                        <button id="VerLogo" name="VerLogo" type="button" class="btn btn-default" onclick="MostrarLogo();">Modificar Logotipo Institucional</button>
                                     </center>
                                 </div>
                             </div>
@@ -111,30 +127,37 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel panel-primary" style="width: 95% !important;">
                 <div class="panel-heading">Configuracion</div>
                 <div class="panel-body" >
                     <div class="row">
-                        <div class="col-sm-3">
-                            <label title="Numero de Periodos por Año">Años (Periodos Anuales)</label>
+                        <div class="col-sm-2">
+                            <label title="Numero de Periodos Academicos por Año">Años (Periodos Anuales)</label>
                             <input type="number" id="numperiodos_configuracion" name="numperiodos_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
                         </div>
-                        <div class="col-sm-3">
-                            <label title="Numero de Cortes por Periodo">Periodos (Cortes por Año)</label>
+                        <div class="col-sm-2">
+                            <label title="Numero de Cortes por Año">Periodos (Cortes por Año)</label>
                             <input type="number" id="numcortes_configuracion" name="numcortes_configuracion" value="" class="form-control" maxlength="2" min="1" max="5" />                                 
                         </div>
-                        <div class="col-sm-3">
-                            <label title="Numero de Semanas por Periodo Anual">Semanas por Años</label>
+                        <div class="col-sm-2">
+                            <label title="Numero de Semanas por Periodo Anual">Semanas Año</label>
                             <input type="number" id="numsemanas_configuracion" name="numsemanas_configuracion" value="" class="form-control" maxlength="2" min="1" max="50" />                                 
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <label title="Numero de Horas por Semana">Horas Semanales</label>
                             <input type="number" id="horassemanales_configuracion" name="horassemanales_configuracion" value="" class="form-control" maxlength="2" min="1" max="48" />                                 
+                        </div>
+                        <div class="col-sm-4">
+                            <label title="Tipo de Promedio para Calculo en Boletines">Tipo Promedio</label>
+                            <select id="tipoperiodo_configuracion" name="tipoperiodo_configuracion" required="required" class="form-control"  style="width: 100%;" onchange="setIdCorte();">
+                                <option value="ARITMETICO">ARITMETICO</option>
+                                <option value="PONDERADO">PONDERADO</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel panel-primary" style="width: 95% !important;">
                 <div class="panel-heading">Valoracion Academica</div>
                 <div class="panel-body" >
                     <div class="row">
@@ -258,50 +281,6 @@ and open the template in the editor.
                 <option value="">Ninguno</option>
             </datalist>
         </form>
-
-        <div class="modal fade" id="modal_logo">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Logo de Escuela</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="uploadImage" name="uploadImage" action="UploadImageController.php" method="POST" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <center>
-                                        <div class="photoPanel">
-                                            <center>
-                                                <img name="imagePhoto" id="imagePhoto" class="imagePhoto" onclick="clickButton();" alt="Subir Foto" title="Click to Change Photo" style="min-width: 300px !important; min-height: 300px !important;" />
-                                                <input type="file" name="imageFile" id="imageFile" class="imageFile" accept="image/*" required="required" onchange="showMyImage(this)" title="Click to Change Photo" />
-                                            </center>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <label>Prefijo</label>
-                                    <input type="text" alphanumeric="true" name="prefix_image" id="prefix_image" value="Escuela" readonly="readonly" required="required" maxlength="100" class="form-control" title="Prefijo">
-                                </div>
-                                <div class="col-sm-8">
-                                    <label>Nombre de Imagen</label>
-                                    <input type="text" alphanumeric="true" name="name_image" id="name_image" value="0" readonly="readonly" required="required" maxlength="100" class="form-control" title="Nombre Imagen">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <center>
-                                        <button id="Guardar" name="save" type="submit" class="btn btn-primary" onclick="Send(this)">Grabar Imagen</button>
-                                    </center>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </body>
 </html>

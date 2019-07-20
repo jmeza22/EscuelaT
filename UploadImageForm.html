@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Pruebas Subir Imagen</title>
+        <title>Subir Imagen al Servidor</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="Pruebas"/>
@@ -23,17 +23,20 @@ and open the template in the editor.
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css"/>
 
-        <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/Validator.js"></script>
         <script type="text/javascript" src="js/LoadImage.js"></script>
-
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/UploadImage.js"></script>
+    
     </head>
     <body>
         <div class="panel panel-primary" style="width: 80% !important;">
             <div class="panel-heading">Subir Imagen</div>
             <div class="panel-body" >
-                <form action="Base/Controllers/UploadImageController.php" method="POST" enctype="multipart/form-data">
+                <form id="formUpload" action="UploadImageController.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-12">
                         <center>
@@ -49,11 +52,11 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-sm-4">
                         <label>Prefijo</label>
-                        <input type="text" alphanumeric="true" name="prefix_image" id="prefix_image" value="" required="required" maxlength="100" class="form-control" title="Prefijo">
+                        <input type="text" alphanumeric="true" name="prefix_image" id="prefix_image" value="" required="required" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
                     </div>
                     <div class="col-sm-8">
                         <label>Nombre de Imagen</label>
-                        <input type="text" alphanumeric="true" name="name_image" id="name_image" value="" required="required" maxlength="100" class="form-control" title="Nombre Imagen">
+                        <input type="text" alphanumeric="true" name="name_image" id="name_image" value="" required="required" readonly="readonly" maxlength="100" class="form-control" title="Nombre Imagen">
                     </div>
                 </div>
                 <div class="row">

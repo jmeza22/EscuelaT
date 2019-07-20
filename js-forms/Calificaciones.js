@@ -5,7 +5,7 @@
  */
 jQuery(document).ready(function () {
     var idescuela = null;
-    getIdCargaFromPOST();
+    getIdCargaFromGET();
     idescuela = document.getElementById('id_escuela');
     setDatosEncabezado();
     ObtenerDatosCuerpo();
@@ -91,7 +91,7 @@ function ObtenerDatosCuerpo() {
     }
 }
 
-function getIdCargaFromPOST() {
+function getIdCargaFromGET() {
     var idcarga = null;
     idcarga = GET('id_carga');
     var mytable = document.getElementById("dataTable0");

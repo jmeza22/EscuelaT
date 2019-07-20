@@ -655,6 +655,30 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
         <Cm>Numero de Documento</Cm>
       </Cl>
+      <Cl au="0" df="" nm="dane_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del DANE de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nit_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>NIT de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="resolucion_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Resolucion de aprobacion de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="pais_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Pais de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="departamento_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Departamento / Estado / Provincia de la Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="municipio_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Municipio / Ciudad de la Escuela</Cm>
+      </Cl>
       <Cl au="0" df="" nm="eslogan_configuracion" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
         <Cm>Eslogan de la Escuela</Cm>
@@ -694,6 +718,10 @@
       <Cl au="0" df="" nm="documentorector_configuracion" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="25" sc="null" sg="1" un="0"/>
         <Cm>Documento de Identidad del Rector</Cm>
+      </Cl>
+      <Cl au="0" df="ARITMETICO" nm="tipopromedio_configuracion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Tipo de Promedio para Calcular promedio en Informes</Cm>
       </Cl>
       <Cl au="0" df="10" nm="valmax_configuracion" nu="0">
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>

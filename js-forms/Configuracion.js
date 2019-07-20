@@ -12,9 +12,7 @@ jQuery(document).ready(function () {
     if (idescuela !== undefined && idescuela !== null && idescuela.value !== '') {
         console.log('Buscando Datos de Configuracion.');
         getData(idescuela);
-        MostrarLogo();
     }
-
 });
 
 function SendConfiguracion() {
@@ -259,9 +257,6 @@ function MostrarLogo() {
     var nameimage = null;
     idescuela = document.getElementById('id_escuela');
     logo = document.getElementById('logo_configuracion');
-    img = document.getElementById('imagePhoto');
-    nameimage = document.getElementById('name_image');
-    nameimage.value = idescuela.value;
-    img.src = "ImageFiles/" + logo.value;
-
+    logo.value = 'Escuela' + idescuela.value + '.png';
+    window.open("UploadImageForm.html?prefix=Escuela" + "&id=" + idescuela.value + "&img=" + logo.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
 }

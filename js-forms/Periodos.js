@@ -6,19 +6,7 @@
 jQuery(document).ready(function () {
     LoadTable();
     setAnoPeriodo();
-    setIdEscuela();
 });
-
-function setIdEscuela() {
-    var item = null;
-    item = document.getElementById('id_escuela');
-    if (item !== null && item !== undefined && item.value === '') {
-        console.log('Seteando Id Escuela.');
-        if (getEnterpriseID() !== null) {
-            item.value = getEnterpriseID();
-        }
-    }
-}
 
 function setAnoPeriodo() {
     var form = null;
