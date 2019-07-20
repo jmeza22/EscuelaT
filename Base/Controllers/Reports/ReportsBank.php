@@ -210,7 +210,7 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getCortesPeriodos($idescuela = null, $idperiodo = null) {
+    public function getCortesPeriodos($idescuela = null, $idperiodo = null, $idcorte = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM CortesPeriodosApp WHERE status_corte=1 ";
@@ -219,6 +219,9 @@ class ReportsBank extends BaseController {
         }
         if ($idperiodo !== null) {
             $sql = $sql . " AND id_periodo='$idperiodo' ";
+        }
+        if ($idcorte !== null) {
+            $sql = $sql . " AND id_corte='$idcorte' ";
         }
         $sql = $sql . " ORDER BY id_corte ASC";
         $result = $this->selectJSONArray($sql);
@@ -273,12 +276,15 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getDocentes() {
+    public function getDocentes($iddocente = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM DocentesApp "
-                . "WHERE status_docente=1 "
-                . "ORDER BY nombrecompleto_docente ASC";
+                . "WHERE status_docente=1 ";
+        if ($iddocente !== null) {
+            $sql = $sql . " AND id_docente='$iddocente' ";
+        }
+        $sql = $sql . "ORDER BY nombrecompleto_docente ASC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }
@@ -599,7 +605,7 @@ class ReportsBank extends BaseController {
         if ($idestudiante !== null) {
             $sql = $sql . " AND MA.id_estudiante='$idestudiante' ";
         }
-        $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante ";
+        $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante, AR.nombre_area ";
         $result = $this->selectJSONArray($sql);
         return $result;
     }

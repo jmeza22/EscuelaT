@@ -106,8 +106,12 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $report->SetFont($family, $style, $sizecontent);
         $report->AddPage($orientation, $format, true);
 
-        if ($tipo == 1) {
-            $report->InformeCalificaionesTipo1($idescuela, $idsede, $idjornada, $idprograma, null, $grado, $grupo, $idperiodo, $idcorte, $idestudiante, null);
+        if ($tipo === 'Completo') {
+            $report->InformeCalificacionesCompleto($idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idcorte, $idestudiante, null);
+            $report->generatePDFDocument();
+        }
+        if ($tipo === 'Simple') {
+            $report->InformeCalificacionesSimple($idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idcorte, $idestudiante, null);
             $report->generatePDFDocument();
         }
     }

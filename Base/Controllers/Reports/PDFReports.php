@@ -117,7 +117,6 @@ class PDFReports extends TCPDF {
                 $this->SetFont($this->fontfamilyheader, 'I', $this->fontsizeheader);
                 $this->MultiCell(0, 6, $configuracion[0]['eslogan_configuracion'], 0, 'C');
                 $this->Image('../../ImageFiles/' . $configuracion[0]['logo_configuracion'], 3, 3, 20, 20);
-                
             } else {
                 $this->Cell(0, 8, $this->session->getEnterpriseName(), 0, 0, 'C');
             }
@@ -149,11 +148,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoEscuelas() {
-        $result = null;
-        $result = $this->bc->getEscuelas();
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getEscuelas();
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE ESCUELAS');
@@ -165,11 +164,11 @@ class PDFReports extends TCPDF {
                 $this->Cell(20, 8, 'TELEFONO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_escuela']);
-                    $this->Cell(80, 6, $result[$i]['nombre_escuela']);
-                    $this->Cell(80, 6, $result[$i]['direccion_escuela']);
-                    $this->Cell(20, 6, $result[$i]['telefono_escuela']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_escuela']);
+                    $this->Cell(80, 6, $data[$i]['nombre_escuela']);
+                    $this->Cell(80, 6, $data[$i]['direccion_escuela']);
+                    $this->Cell(20, 6, $data[$i]['telefono_escuela']);
                     $this->Ln();
                 }
             }
@@ -177,11 +176,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoSedes($idescuela = null) {
-        $result = null;
-        $result = $this->bc->getSedes($idescuela);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getSedes($idescuela);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE SEDES');
@@ -193,11 +192,11 @@ class PDFReports extends TCPDF {
                 $this->Cell(20, 8, 'TELEFONO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_sede']);
-                    $this->Cell(80, 6, $result[$i]['nombre_sede']);
-                    $this->Cell(80, 6, $result[$i]['direccion_sede']);
-                    $this->Cell(20, 6, $result[$i]['telefono_sede']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_sede']);
+                    $this->Cell(80, 6, $data[$i]['nombre_sede']);
+                    $this->Cell(80, 6, $data[$i]['direccion_sede']);
+                    $this->Cell(20, 6, $data[$i]['telefono_sede']);
                     $this->Ln();
                 }
             }
@@ -205,11 +204,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoProgramas($idescuela = null) {
-        $result = null;
-        $result = $this->bc->getProgramas($idescuela);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getProgramas($idescuela);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE PROGRAMAS');
@@ -222,12 +221,12 @@ class PDFReports extends TCPDF {
                 $this->Cell(40, 8, 'PERIODICIDAD');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_programa']);
-                    $this->Cell(80, 6, $result[$i]['nombre_programa']);
-                    $this->Cell(40, 6, $result[$i]['nivel_programa']);
-                    $this->Cell(20, 6, $result[$i]['ngrados_programa']);
-                    $this->Cell(40, 6, $result[$i]['periodicidadgrado_programa']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_programa']);
+                    $this->Cell(80, 6, $data[$i]['nombre_programa']);
+                    $this->Cell(40, 6, $data[$i]['nivel_programa']);
+                    $this->Cell(20, 6, $data[$i]['ngrados_programa']);
+                    $this->Cell(40, 6, $data[$i]['periodicidadgrado_programa']);
                     $this->Ln();
                 }
             }
@@ -235,11 +234,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoAreas($idescuela = null) {
-        $result = null;
-        $result = $this->bc->getAreas($idescuela);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getAreas($idescuela);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE AREAS');
@@ -249,9 +248,9 @@ class PDFReports extends TCPDF {
                 $this->Cell(180, 8, 'NOMBRE DE AREA');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_area']);
-                    $this->Cell(180, 6, $result[$i]['nombre_area']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_area']);
+                    $this->Cell(180, 6, $data[$i]['nombre_area']);
                     $this->Ln();
                 }
             }
@@ -259,11 +258,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoAsignaturas($idescuela = null) {
-        $result = null;
-        $result = $this->bc->getAsignaturas($idescuela);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getAsignaturas($idescuela);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE ASIGNATURAS');
@@ -274,10 +273,10 @@ class PDFReports extends TCPDF {
                 $this->Cell(40, 8, 'AREA');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_asignatura']);
-                    $this->Cell(140, 6, $result[$i]['nombre_asignatura']);
-                    $this->Cell(40, 6, $result[$i]['id_area']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_asignatura']);
+                    $this->Cell(140, 6, $data[$i]['nombre_asignatura']);
+                    $this->Cell(40, 6, $data[$i]['id_area']);
                     $this->Ln();
                 }
             }
@@ -285,11 +284,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoLogrosAsignaturas($idescuela = null, $idasignatura = null, $grado = null, $tipo = null) {
-        $result = null;
-        $result = $this->bc->getLogrosAsignaturas($idescuela, $idasignatura, $grado, $tipo);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getLogrosAsignaturas($idescuela, $idasignatura, $grado, $tipo);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE LOGROS Y/O COMPETENCIAS');
@@ -305,18 +304,18 @@ class PDFReports extends TCPDF {
                 $this->Ln();
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
+                for ($i = 0; $i < count($data); $i++) {
                     $this->SetFont($this->fontfamilycontent, 'B', $this->fontsizecontent);
-                    $this->Cell(20, 4, $result[$i]['id_logro'], 1);
-                    $this->Cell(80, 4, $result[$i]['nombre_asignatura'], 1);
+                    $this->Cell(20, 4, $data[$i]['id_logro'], 1);
+                    $this->Cell(80, 4, $data[$i]['nombre_asignatura'], 1);
                     $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                    $this->Cell(20, 4, $result[$i]['tipo_logro'], 1);
-                    $this->Cell(20, 4, $result[$i]['min_logro'], 1);
-                    $this->Cell(20, 4, $result[$i]['max_logro'], 1);
-                    $this->Cell(20, 4, $result[$i]['numgrado_logro'], 1);
-                    $this->Cell(20, 4, $result[$i]['numcorte_logro'], 1);
+                    $this->Cell(20, 4, $data[$i]['tipo_logro'], 1);
+                    $this->Cell(20, 4, $data[$i]['min_logro'], 1);
+                    $this->Cell(20, 4, $data[$i]['max_logro'], 1);
+                    $this->Cell(20, 4, $data[$i]['numgrado_logro'], 1);
+                    $this->Cell(20, 4, $data[$i]['numcorte_logro'], 1);
                     $this->Ln();
-                    $this->MultiCell(200, 4, $result[$i]['descripcion_logro'], 1, 'L');
+                    $this->MultiCell(200, 4, $data[$i]['descripcion_logro'], 1, 'L');
                     $this->Ln();
                 }
             }
@@ -324,11 +323,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoGrupos($idescuela = null, $idprograma = null, $numgrado = null) {
-        $result = null;
-        $result = $this->bc->getGrupos($idescuela, $idprograma, $numgrado);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getGrupos($idescuela, $idprograma, $numgrado);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE GRUPOS');
@@ -341,12 +340,12 @@ class PDFReports extends TCPDF {
                 $this->Cell(25, 8, 'GRUPO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(25, 6, $result[$i]['id_grupo']);
-                    $this->Cell(100, 6, $result[$i]['nombre_programa']);
-                    $this->Cell(25, 6, $result[$i]['id_sede']);
-                    $this->Cell(25, 6, $result[$i]['numgrado_programa'] . '°');
-                    $this->Cell(25, 6, $result[$i]['numgrado_programa'] . $result[$i]['num_grupo']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(25, 6, $data[$i]['id_grupo']);
+                    $this->Cell(100, 6, $data[$i]['nombre_programa']);
+                    $this->Cell(25, 6, $data[$i]['id_sede']);
+                    $this->Cell(25, 6, $data[$i]['numgrado_programa'] . '°');
+                    $this->Cell(25, 6, $data[$i]['numgrado_programa'] . $data[$i]['num_grupo']);
                     $this->Ln();
                 }
             }
@@ -354,11 +353,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoDocentes() {
-        $result = null;
-        $result = $this->bc->getDocentes();
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getDocentes();
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE DOCENTES');
@@ -369,10 +368,10 @@ class PDFReports extends TCPDF {
                 $this->Cell(80, 8, 'TITULO ACADEMICO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_docente']);
-                    $this->Cell(100, 6, $result[$i]['nombrecompleto_docente']);
-                    $this->Cell(80, 6, $result[$i]['ultimotitulo_docente']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_docente']);
+                    $this->Cell(100, 6, $data[$i]['nombrecompleto_docente']);
+                    $this->Cell(80, 6, $data[$i]['ultimotitulo_docente']);
                     $this->Ln();
                 }
             }
@@ -380,11 +379,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoCargasDocentes($idescuela = null, $idperiodo = null, $idprograma = null, $iddocente = null, $idgrupo = null) {
-        $result = null;
-        $result = $this->bc->getCargasDocentes($idescuela, $idperiodo, $idprograma, $iddocente, $idgrupo);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getCargasDocentes($idescuela, $idperiodo, $idprograma, $iddocente, $idgrupo);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'CARGA ACADEMICA DOCENTE');
@@ -397,12 +396,12 @@ class PDFReports extends TCPDF {
                 $this->Cell(20, 8, 'AÑO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(80, 6, $result[$i]['nombrecompleto_docente']);
-                    $this->Cell(40, 6, $result[$i]['nombre_programa']);
-                    $this->Cell(40, 6, $result[$i]['nombre_asignatura']);
-                    $this->Cell(20, 6, $result[$i]['id_grupo']);
-                    $this->Cell(20, 6, $result[$i]['id_periodo']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(80, 6, $data[$i]['nombrecompleto_docente']);
+                    $this->Cell(40, 6, $data[$i]['nombre_programa']);
+                    $this->Cell(40, 6, $data[$i]['nombre_asignatura']);
+                    $this->Cell(20, 6, $data[$i]['id_grupo']);
+                    $this->Cell(20, 6, $data[$i]['id_periodo']);
                     $this->Ln();
                 }
             }
@@ -410,11 +409,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoDirectoresGrupos($idescuela = null, $idgrupo = null, $idperiodo = null) {
-        $result = null;
-        $result = $this->bc->getDirectoresGrupos($idescuela, $idgrupo, $idperiodo);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getDirectoresGrupos($idescuela, $idgrupo, $idperiodo);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE DIRECTORES DE GRUPOS');
@@ -426,11 +425,11 @@ class PDFReports extends TCPDF {
                 $this->Cell(40, 8, 'PERIODO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_docente']);
-                    $this->Cell(100, 6, $result[$i]['nombrecompleto_docente']);
-                    $this->Cell(40, 6, $result[$i]['id_grupo']);
-                    $this->Cell(40, 6, $result[$i]['id_periodo']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_docente']);
+                    $this->Cell(100, 6, $data[$i]['nombrecompleto_docente']);
+                    $this->Cell(40, 6, $data[$i]['id_grupo']);
+                    $this->Cell(40, 6, $data[$i]['id_periodo']);
                     $this->Ln();
                 }
             }
@@ -438,11 +437,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoEstudiantes($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null) {
-        $result = null;
-        $result = $this->bc->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, null, $numgrado, $idgrupo, $idperiodo);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, null, $numgrado, $idgrupo, $idperiodo);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE ESTUDIANTES');
@@ -456,13 +455,13 @@ class PDFReports extends TCPDF {
                 $this->Cell(20, 8, 'GRUPO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(20, 6, $result[$i]['id_estudiante']);
-                    $this->Cell(80, 6, $result[$i]['nombrecompleto_estudiante']);
-                    $this->Cell(20, 6, $result[$i]['anualidad_periodo']);
-                    $this->Cell(40, 6, $result[$i]['nombre_programa']);
-                    $this->Cell(20, 6, $result[$i]['numgrado_programa'] . '°');
-                    $this->Cell(20, 6, $result[$i]['nombre_grupo']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(20, 6, $data[$i]['id_estudiante']);
+                    $this->Cell(80, 6, $data[$i]['nombrecompleto_estudiante']);
+                    $this->Cell(20, 6, $data[$i]['anualidad_periodo']);
+                    $this->Cell(40, 6, $data[$i]['nombre_programa']);
+                    $this->Cell(20, 6, $data[$i]['numgrado_programa'] . '°');
+                    $this->Cell(20, 6, $data[$i]['nombre_grupo']);
                     $this->Ln();
                 }
             }
@@ -470,11 +469,11 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoUsuarios($idescuela = null, $idtipousuario = null) {
-        $result = null;
-        $result = $this->bc->getUsuarios($idescuela, $idtipousuario);
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
-            if (is_array($result) && count($result) > 0) {
+        $data = null;
+        $data = $this->bc->getUsuarios($idescuela, $idtipousuario);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE USUARIOS');
@@ -486,11 +485,11 @@ class PDFReports extends TCPDF {
                 $this->Cell(30, 8, 'EDITADO');
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                for ($i = 0; $i < count($result); $i++) {
-                    $this->Cell(80, 6, $result[$i]['nombrecompleto_persona']);
-                    $this->Cell(40, 6, $result[$i]['username_usuario']);
-                    $this->Cell(30, 6, $result[$i]['id_tipousuario']);
-                    $this->Cell(30, 6, $result[$i]['fechaedita_usuario']);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell(80, 6, $data[$i]['nombrecompleto_persona']);
+                    $this->Cell(40, 6, $data[$i]['username_usuario']);
+                    $this->Cell(30, 6, $data[$i]['id_tipousuario']);
+                    $this->Cell(30, 6, $data[$i]['fechaedita_usuario']);
                     $this->Ln();
                 }
             }
@@ -498,16 +497,16 @@ class PDFReports extends TCPDF {
     }
 
     public function CertificadoEstudios($idsede, $idjornada, $idprograma, $grado, $idgrupo, $idperiodo, $idestudiante, $idmatricula) {
-        $result = null;
+        $data = null;
         $configuracion = null;
-        $result = $this->bc->getEstudiantesMatriculas($this->session->getEnterpriseID(), $idsede, $idjornada, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
+        $data = $this->bc->getEstudiantesMatriculas($this->session->getEnterpriseID(), $idsede, $idjornada, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
         $configuracion = $this->bc->getConfiguracionEscuela($this->session->getEnterpriseID());
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
             $configuracion = json_decode($configuracion, true);
-            $result = $result[0];
+            $data = $data[0];
             $configuracion = $configuracion[0];
-            if (is_array($result) && count($result) > 0) {
+            if (is_array($data) && count($data) > 0) {
                 $this->SetFont($this->fontfamilycontent, 'B', 16);
                 $this->Cell(0, 6, 'CERTIFICADO DE NOTAS', 0, 1, 'C');
                 $this->Ln(12);
@@ -520,11 +519,11 @@ class PDFReports extends TCPDF {
                 $this->Cell(0, 4, 'CERTIFICA', 0, 1, 'C');
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
                 $this->Ln(8);
-                $text1 = "Que " . strtoupper($result['nombrecompleto_estudiante']) . ""
-                        . " identificado(a) con " . $result['tipodoc_persona'] . " número " . $result['documento_persona'] . ""
+                $text1 = "Que " . strtoupper($data['nombrecompleto_estudiante']) . ""
+                        . " identificado(a) con " . $data['tipodoc_persona'] . " número " . $data['documento_persona'] . ""
                         . " se encuentra matriculado(a) en esta Institución Educativa, "
-                        . " y actualmente se encuentra cursando el grado " . strtoupper($this->getSpanishOrdinalsNumbers($result['numgrado_programa'])) . ""
-                        . " de " . strtoupper($result['nombre_programa']) . ", en el grupo " . $result['nombre_grupo'] . ",  para el Año Lectivo " . $result['anualidad_periodo'] . ".";
+                        . " y actualmente se encuentra cursando el grado " . strtoupper($this->getSpanishOrdinalsNumbers($data['numgrado_programa'])) . ""
+                        . " de " . strtoupper($data['nombre_programa']) . ", en el grupo " . $data['nombre_grupo'] . ",  para el Año Lectivo " . $data['anualidad_periodo'] . ".";
                 $text2 = "Se expide la presente certificación a petición de la parte interesada, y se firma el " . $this->getSpanishActualDate() . ".";
                 $this->MultiCell(0, 6, $text1, 0, 'J', false, 1);
                 $this->Ln(4);
@@ -541,16 +540,16 @@ class PDFReports extends TCPDF {
     }
 
     public function CertificadoNotas($idsede, $idjornada, $idprograma, $grado, $idgrupo, $idperiodo, $idestudiante, $idmatricula) {
-        $result = null;
+        $data = null;
         $configuracion = null;
-        $result = $this->bc->getInformesCalificaciones($this->session->getEnterpriseID(), $idsede, $idjornada, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
+        $data = $this->bc->getInformesCalificaciones($this->session->getEnterpriseID(), $idsede, $idjornada, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
         $configuracion = $this->bc->getConfiguracionEscuela($this->session->getEnterpriseID());
-        if ($result !== null && $result !== '' && $result !== '[]') {
-            $result = json_decode($result, true);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
             $configuracion = json_decode($configuracion, true);
-            $result = $result[0];
+            $data = $data[0];
             $configuracion = $configuracion[0];
-            if (is_array($result) && count($result) > 0) {
+            if (is_array($data) && count($data) > 0) {
                 $this->SetFont($this->fontfamilycontent, 'B', 16);
                 $this->Cell(0, 6, 'CERTIFICADO DE NOTAS', 0, 1, 'C');
                 $this->Ln(6);
@@ -565,32 +564,32 @@ class PDFReports extends TCPDF {
                 $this->SetFont($this->fontfamilycontent, '', 12);
                 $pageWidth = $this->getRealPageWidth();
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
-                $this->Cell($pageWidth / 2, 4, 'ESTUDIANTE', 0, 0, 'C');
-                $this->Cell($pageWidth / 2, 4, 'IDENTIDAD', 0, 0, 'C');
+                $this->Cell($pageWidth * 50 / 100, 4, 'ESTUDIANTE', 0, 0, 'C');
+                $this->Cell($pageWidth * 50 / 100, 4, 'IDENTIDAD', 0, 0, 'C');
                 $this->Ln(4);
                 $this->SetFont($this->fontfamilycontent, '', 12);
-                $this->Cell($pageWidth / 2, 4, $result['nombrecompleto_estudiante'], 0, 0, 'C');
-                $this->Cell($pageWidth / 2, 4, $result['tipodoc_persona'] . " número " . $result['documento_persona'], 0, 0, 'C');
+                $this->Cell($pageWidth * 50 / 100, 4, $data['nombrecompleto_estudiante'], 0, 0, 'C');
+                $this->Cell($pageWidth * 50 / 100, 4, $data['tipodoc_persona'] . " número " . $data['documento_persona'], 0, 0, 'C');
                 $this->Ln(8);
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
-                $this->Cell($pageWidth / 3, 4, 'PROGRAMA', 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, 'SEDE', 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, 'JORNADA', 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, 'PROGRAMA', 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, 'SEDE', 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, 'JORNADA', 0, 0, 'C');
                 $this->Ln(4);
                 $this->SetFont($this->fontfamilycontent, '', 12);
-                $this->Cell($pageWidth / 3, 4, $result['nombre_programa'], 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, $result['nombre_sede'], 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, $result['nombre_jornada'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_programa'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_sede'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_jornada'], 0, 0, 'C');
                 $this->Ln(4);
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
-                $this->Cell($pageWidth / 3, 4, 'AÑO', 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, 'GRADO', 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, 'GRUPO', 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, 'AÑO', 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, 'GRADO', 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, 'GRUPO', 0, 0, 'C');
                 $this->Ln(4);
                 $this->SetFont($this->fontfamilycontent, '', 12);
-                $this->Cell($pageWidth / 3, 4, $result['anualidad_periodo'], 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, $result['numgrado_programa'], 0, 0, 'C');
-                $this->Cell($pageWidth / 3, 4, $result['nombre_grupo'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, $data['anualidad_periodo'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, $data['numgrado_programa'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_grupo'], 0, 0, 'C');
                 $this->Ln(8);
 
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
@@ -605,8 +604,8 @@ class PDFReports extends TCPDF {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', 12);
                 $calificaciones = null;
-                if (isset($result['calificaciones'])) {
-                    $calificaciones = $result['calificaciones'];
+                if (isset($data['calificaciones'])) {
+                    $calificaciones = $data['calificaciones'];
                     if ($calificaciones !== null && $calificaciones !== '' && $calificaciones !== '[]') {
                         $calificaciones = json_decode($calificaciones, true);
                     }
@@ -638,16 +637,129 @@ class PDFReports extends TCPDF {
         }
     }
 
-    public function InformeCalificaionesTipo1($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idcorte = null, $idestudiante = null, $idmatricula = null) {
-        $htmltable = '';
+    public function InformeCalificacionesSimple($idsede, $idjornada, $idprograma, $grado, $idgrupo, $idperiodo, $idcorte, $idestudiante) {
         $data = null;
-        $subdata = null;
-        $data = $this->bc->getInformesCalificaciones($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idestudiante, $idmatricula);
-        $corte = $this->bc->selectJSONArray("SELECT numero_corte FROM CortesPeriodosApp WHERE id_corte = '$idcorte'");
+        $configuracion = null;
+        $data = $this->bc->getInformesCalificaciones($this->session->getEnterpriseID(), $idsede, $idjornada, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
+        $configuracion = $this->bc->getConfiguracionEscuela($this->session->getEnterpriseID());
+        $corte = $this->bc->getCortesPeriodos($this->session->getEnterpriseID(), $idperiodo, $idcorte);
         if ($corte !== null && $corte !== '[]') {
             $corte = json_decode($corte, true);
             $corte = $corte[0]['numero_corte'];
         }
+        $pageWidth = $this->getRealPageWidth();
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            $configuracion = json_decode($configuracion, true);
+            $configuracion = $configuracion[0];
+            if (is_array($data) && count($data) > 0) {
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->SetFont($this->fontfamilycontent, 'B', 16);
+                    $this->Cell(0, 6, 'INFORME DE NOTAS', 0, 1, 'C');
+                    $this->Ln(2);
+                    $this->SetFont($this->fontfamilycontent, '', 12);
+                    $this->Cell($pageWidth, 4, 'ESTUDIANTE', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 14);
+                    $this->Cell($pageWidth, 4, $data[$i]['nombrecompleto_estudiante'], 0, 0, 'C');
+                    $this->Ln(6);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 33.333 / 100, 4, 'PROGRAMA', 0, 0, 'C');
+                    $this->Cell($pageWidth * 33.333 / 100, 4, 'SEDE', 0, 0, 'C');
+                    $this->Cell($pageWidth * 33.333 / 100, 4, 'JORNADA', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_programa']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_sede']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_jornada']), 0, 0, 'C');
+                    $this->Ln(5);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 25 / 100, 4, 'AÑO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'PERIODO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'GRADO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'GRUPO', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['anualidad_periodo'], 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'P' . $corte, 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa'])), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['nombre_grupo'], 0, 0, 'C');
+                    $this->Ln(8);
+
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 42 / 100, 4, 'ASIGNATURA', 1, 0, 'L');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'IH', 1, 0, 'C');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'P1', 1, 0, 'C');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'P2', 1, 0, 'C');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'P3', 1, 0, 'C');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'P4', 1, 0, 'C');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'P5', 1, 0, 'C');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'P6', 1, 0, 'C');
+                    $this->Cell($pageWidth * 6 / 100, 4, 'HAB', 1, 0, 'C');
+                    $this->Cell($pageWidth * 10 / 100, 4, 'DEF', 1, 0, 'C');
+                    $this->Ln();
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $calificaciones = null;
+                    $observaciones = '';
+                    if (isset($data[$i]['calificaciones'])) {
+                        $calificaciones = $data[$i]['calificaciones'];
+                        if ($calificaciones !== null && $calificaciones !== '' && $calificaciones !== '[]') {
+                            $calificaciones = json_decode($calificaciones, true);
+                        }
+                    }
+                    if (is_array($calificaciones) && count($calificaciones) > 0) {
+                        for ($j = 0; $j < count($calificaciones); $j++) {
+                            $ih = '' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']);
+                            $this->Cell($pageWidth * 42 / 100, 4, strtoupper($calificaciones[$j]['nombre_asignatura']), 1, 0, 'L');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0', '', $ih), 1, 0, 'C');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np1']), 1, 0, 'C');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np2']), 1, 0, 'C');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np3']), 1, 0, 'C');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np4']), 1, 0, 'C');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np5']), 1, 0, 'C');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np6']), 1, 0, 'C');
+                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['nphab']), 1, 0, 'C');
+                            $this->Cell($pageWidth * 10 / 100, 4, $calificaciones[$j]['def'], 1, 0, 'C');
+                            $this->Ln();
+                            $comentario = null;
+                            if (isset($calificaciones[$j]['p' . $corte . '_comentarios_calificacion'])) {
+                                $comentario = $calificaciones[$j]['p' . $corte . '_comentarios_calificacion'];
+                            }
+                            if ($comentario !== null && $comentario !== '') {
+                                $observaciones = $observaciones . strtoupper($calificaciones[$j]['nombre_asignatura']) . ': ' . $comentario . "\n";
+                            }
+                        }
+                    }
+                    $this->Ln();
+                    $this->SetFont($this->fontfamilycontent, 'B', 10);
+                    $this->Cell($pageWidth, 4, 'Observaciones o Comentarios:');
+                    $this->Ln();
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->MultiCell($pageWidth, 20, $observaciones, 1);
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 10);
+                    $this->MultiCell($pageWidth / 2, 10, '________________________' . "\n" . 'Director de Grupo', 0, 'C', false, 0);
+                    $this->MultiCell($pageWidth / 2, 10, '________________________' . "\n" . 'Cordinador Académico', 0, 'C', false, 0);
+                    $this->Ln(4);
+                    if ($i < (count($data) - 1)) {
+                        $this->AddPage();
+                    }
+                }
+            }
+        }
+    }
+
+    public function InformeCalificacionesCompleto($idsede = null, $idjornada = null, $idprograma = null, $grado = null, $idgrupo = null, $idperiodo = null, $idcorte = null, $idestudiante = null) {
+        $htmltable = '';
+        $data = null;
+        $subdata = null;
+        $data = $this->bc->getInformesCalificaciones($this->session->getEnterpriseID(), $idsede, $idjornada, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
+        $corte = $this->bc->getCortesPeriodos($this->session->getEnterpriseID(), $idperiodo, $idcorte);
+        if ($corte !== null && $corte !== '[]') {
+            $corte = json_decode($corte, true);
+            $corte = $corte[0]['numero_corte'];
+        }
+        $pageWidth = $this->getRealPageWidth();
         if ($data !== null && $data !== '' && $data !== '[]') {
             $this->SetFont($this->fontfamilycontent, $this->fontstylecontent, $this->fontsizecontent);
             $data = json_decode($data, true);
@@ -664,10 +776,10 @@ class PDFReports extends TCPDF {
                     $headtable = $headtable . '<th style="width: 20%;"><b>Jornada:</b></th>';
                     $headtable = $headtable . '</tr>';
                     $headtable = $headtable . '<tr>';
-                    $headtable = $headtable . '<td>' . $data[$i]['nombrecompleto_estudiante'] . '</td>';
-                    $headtable = $headtable . '<td>' . $data[$i]['nombre_programa'] . '</td>';
-                    $headtable = $headtable . '<td>' . $data[$i]['nombre_sede'] . '</td>';
-                    $headtable = $headtable . '<td>' . $data[$i]['nombre_jornada'] . '</td>';
+                    $headtable = $headtable . '<td><b>' . strtoupper($data[$i]['nombrecompleto_estudiante']) . '</b></td>';
+                    $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_programa']) . '</td>';
+                    $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_sede']) . '</td>';
+                    $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_jornada']) . '</td>';
                     $headtable = $headtable . '</tr>';
                     $headtable = $headtable . '</table>';
 
@@ -682,7 +794,7 @@ class PDFReports extends TCPDF {
                     $headtable = $headtable . '<tr>';
                     $headtable = $headtable . '<td>' . $data[$i]['anualidad_periodo'] . '</td>';
                     $headtable = $headtable . '<td>' . $corte . '° ' . '</td>';
-                    $headtable = $headtable . '<td>' . $data[$i]['numgrado_programa'] . '°</td>';
+                    $headtable = $headtable . '<td>' . strtoupper($this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa'])) . '</td>';
                     $headtable = $headtable . '<td>' . $data[$i]['nombre_grupo'] . '</td>';
                     $headtable = $headtable . '<td>' . utf8_decode($data[$i]['nombre_director']) . '</td>';
                     $headtable = $headtable . '</tr>';
@@ -691,15 +803,17 @@ class PDFReports extends TCPDF {
 
                     $htmltable = $htmltable . '<table border="1">';
                     $htmltable = $htmltable . '<tr>';
-                    $htmltable = $htmltable . '<th style="text-align: justify; width: 30%;"><b>AREAS Y/O ASIGNATURA</b></th>';
+                    $htmltable = $htmltable . '<th style="text-align: justify; width: 26%;"><b>AREAS Y/O ASIGNATURA</b></th>';
                     $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>IH</b></th>';
                     $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P1</b></th>';
                     $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P2</b></th>';
                     $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P3</b></th>';
                     $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P4</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 5%;"><b>Acu</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 5%;"><b>Aus</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 40%;"><b>LOGROS / DIFICULTADES / RECOMENDACIONES </b></th>';
+                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P5</b></th>';
+                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P6</b></th>';
+                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>Acu</b></th>';
+                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>Aus</b></th>';
+                    $htmltable = $htmltable . '<th style="text-align: center; width: 38%;"><b>LOGROS / DIFICULTADES / RECOMENDACIONES </b></th>';
                     $htmltable = $htmltable . '</tr>';
 
                     $subdata = $data[$i]['calificaciones'];
@@ -709,20 +823,22 @@ class PDFReports extends TCPDF {
                     if ($subdata !== null && is_array($subdata)) {
                         for ($j = 0; $j < count($subdata); $j++) {
                             $htmltable = $htmltable . '<tr>';
-                            $htmltable = $htmltable . '<td><label style="font-size:4pt; padding-top: 0px;">' . $subdata[$j]['nombre_area'] . '</label> <br>'
-                                    . '<b>' . $subdata[$j]['nombre_asignatura'] . '</b></td>';
+                            $htmltable = $htmltable . '<td><label style="font-size: 4pt; padding-top: 0px;">' . strtoupper($subdata[$j]['nombre_area']) . '</label> <br>'
+                                    . '<b>' . strtoupper($subdata[$j]['nombre_asignatura']) . '</b></td>';
                             $htmltable = $htmltable . '<td style="text-align: center;">' . ($subdata[$j]['hteoricas_asignatura'] + $subdata[$j]['hpracticas_asignatura']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['np1'] . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['np2'] . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['np3'] . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['np4'] . '</td>';
+                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np1']) . '</td>';
+                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np2']) . '</td>';
+                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np3']) . '</td>';
+                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np4']) . '</td>';
+                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np5']) . '</td>';
+                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np6']) . '</td>';
                             $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['def'] . '</td>';
                             $htmltable = $htmltable . '<td style="text-align: center;">';
                             if ($corte !== null) {
                                 $htmltable = $htmltable . $subdata[$j]['p' . $corte . '_ausencias_calificacion'];
                             }
                             $htmltable = $htmltable . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: justify;">';
+                            $htmltable = $htmltable . '<td style="text-align: justify; font-size: 8pt;">';
                             if ($corte !== null && is_numeric($corte)) {
                                 if ($subdata[$j]['p' . $corte . '_descripcion_logroc'] !== '') {
                                     $htmltable = $htmltable . ' - ' . utf8_decode($subdata[$j]['p' . $corte . '_descripcion_logroc']) . '';
@@ -745,7 +861,12 @@ class PDFReports extends TCPDF {
                     $htmltable = $htmltable . '</table>';
                     $this->SetFontSize($this->fontsizecontent);
                     $this->writeHTML($htmltable, true, false, false, false, '');
-                    $this->MultiCell(0, 30, 'Observaciones:', 1);
+                    $this->Ln(2);
+                    $this->SetFont($this->fontfamilycontent, 'B', 10);
+                    $this->MultiCell($pageWidth * 70 / 100, 20, 'Observaciones', 1, 'C', false, 0);
+                    $this->SetFont($this->fontfamilycontent, 'B', 8);
+                    $this->MultiCell($pageWidth * 30 / 100, 10, '______________________________' . "\n" . 'Director de Grupo' . "\n\n" . '______________________________' . "\n" . 'Cordinador Académico', 0, 'C', false, 0);
+                    $this->Ln(4);
                     $htmltable = '';
                     if ($i < (count($data) - 1)) {
                         $this->AddPage();

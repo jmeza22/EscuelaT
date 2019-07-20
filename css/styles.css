@@ -248,7 +248,7 @@ table > tbody > tr > td > input[type="tel"],
 table > tbody > tr > td > input[type="email"],
 table > tbody > tr > td > input[type="number"],
 table > tbody > tr > td > input[type="date"]{
-    border: 0px;
+    border-color: #489cdf !important;
     background-color: inherit !important;
     text-transform: capitalize !important;
     min-height: 26px !important;

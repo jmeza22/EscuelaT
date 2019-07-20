@@ -12,7 +12,7 @@ if ($session->hasLogin() && isset($_POST) && ($session->getSuperAdmin() == 1 || 
     if (isset($_REQUEST['findby']) && isset($_REQUEST['findbyvalue']) && strcmp($_REQUEST['findby'], '') !== 0 && strcmp($_REQUEST['findbyvalue'], '') !== 0 && strcmp($_REQUEST['findby'], 'id_matricula') === 0) {
         $idmatricula = $_REQUEST['findbyvalue'];
     }
-    echo $bc->getCalificaciones($session->getEnterpriseID(), NULL, null, null, null, null, null, null, $idmatricula, null);
+    echo $bc->getCalificaciones($session->getEnterpriseID(), NULL, null, null, null, null, null, null, null, $idmatricula);
     $bc->disconnect();
     $bc = null;
 }
