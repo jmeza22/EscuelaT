@@ -132,7 +132,7 @@ class ReportsBank extends BaseController {
         if ($idplanestudio !== null) {
             $sql = $sql . " AND PED.id_planestudio='$idplanestudio' ";
         }
-        $sql = $sql . " ORDER BY PED.id_planestudiodetalle ASC";
+        $sql = $sql . " ORDER BY CAST(PED.numgrado_programa as DECIMAL), A.nombre_asignatura, PED.id_planestudiodetalle ASC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }
@@ -205,7 +205,7 @@ class ReportsBank extends BaseController {
         if ($idescuela !== null) {
             $sql = $sql . " AND id_escuela='$idescuela' ";
         }
-        $sql = $sql . " ORDER BY id_periodo ASC";
+        $sql = $sql . " ORDER BY id_periodo DESC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }

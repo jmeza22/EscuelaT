@@ -11,6 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="Variables de Sesion"/>
         <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -23,6 +24,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/Validator.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/SimplexFramework.js"></script>
         <script type="text/javascript" src="js-forms/VariablesSesion.js"></script>
     </head>
@@ -45,19 +47,19 @@ and open the template in the editor.
                     <div class="row" id="seccionusuario">
                         <div class="col-sm-2">
                             <label>CuentaUsuario</label>
-                            <input type="text" name="nickname" id="nickname" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Cuenta de Usuario activo">
+                            <input type="text" name="nickname" id="nickname" value="" maxlength="50" disabled="disabled" class="form-control" title="Cuenta de Usuario activo">
                         </div>
                         <div class="col-sm-2">
                             <label>TipoUsuario</label>
-                            <input type="text" name="usertype" id="usertype" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Tipo de Usuario activo">
+                            <input type="text" name="usertype" id="usertype" value="" maxlength="50" disabled="disabled" class="form-control" title="Tipo de Usuario activo">
                         </div>
                         <div class="col-sm-2">
                             <label>IdUsuario</label>
-                            <input type="text" name="userid" id="userid" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Codigo de Usuario activo">
+                            <input type="text" name="userid" id="userid" value="" maxlength="50" disabled="disabled" class="form-control" title="Codigo de Usuario activo">
                         </div>
                         <div class="col-sm-6">
                             <label>Nombre del Usuario</label>
-                            <input type="text" name="fullname" id="fullname" value="" maxlength="50" required="required" disabled="disabled" class="form-control" title="Nombre del Usuario">
+                            <input type="text" name="fullname" id="fullname" value="" maxlength="50" disabled="disabled" class="form-control" title="Nombre del Usuario">
                         </div>
                     </div>
                     <div class="row" id="seccionanoperiodo">

@@ -15,14 +15,12 @@ jQuery(document).ready(function () {
     loadComboboxData(periodo);
     VisibilidadSecciones();
 
-    if (idescuela !== undefined && idescuela !== null && idescuela.value !== '') {
-        console.log('Buscando Datos de Configuracion.');
-        getData(idescuela).done(function () {
-            var listacorte = document.getElementById("lista_id_corte");
-            setFindbyCombobox(listacorte.id, periodo.id, periodo.value);
-            autoNameFromDataList('id_corte', 'numero_corte', 'estado_corte');
-        });
-    }
+    console.log('Buscando Datos de Configuracion.');
+    getData(idescuela).done(function () {
+        var listacorte = document.getElementById("lista_id_corte");
+        setFindbyCombobox(listacorte.id, periodo.id, periodo.value);
+        autoNameFromDataList('id_corte', 'numero_corte', 'estado_corte');
+    });
 
 });
 

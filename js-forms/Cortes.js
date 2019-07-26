@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    setIdEscuela();
     loadComboboxData(document.getElementById("select_id_periodo"));
     LoadTable();
 });
@@ -57,25 +56,14 @@ function DeleteItem(item) {
     }
 }
 
-function setIdEscuela() {
-    var item = null;
-    item = document.getElementById('select_id_escuela');
-    if (item !== null && item !== undefined && item.value === '') {
-        console.log('Seteando Id Escuela.');
-        if (getEnterpriseID() !== null) {
-            item.value = getEnterpriseID();
-        }
-        item.focus();
-    }
-}
-
 function RefreshFormAndTable(item) {
     var form0 = null;
+    var theform = null;
     var table0 = null;
     if (item !== null && item !== undefined) {
+        theform = getForm(item);
         form0 = document.getElementById('form0');
-        sendValue(item, 'select_id_periodo', form0, 'id_periodo');
-        sendValue(item, 'select_id_escuela', form0, 'id_escuela');
+        sendValue(theform, 'select_id_periodo', form0, 'id_periodo');
         table0 = document.getElementById("dataTable0");
         table0.setAttribute('findby', 'id_periodo');
         table0.setAttribute('findbyvalue', item.value);
@@ -85,6 +73,7 @@ function RefreshFormAndTable(item) {
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
+    clearTableData(mytable);
     loadTableData(mytable, false).done(function () {
     });
     return mytable;
@@ -102,7 +91,7 @@ function setIdCorte() {
     idperiodo = getElement(form0, 'id_periodo');
     numero = getElement(form0, 'numero_corte');
     if (idcorte !== null && idcorte !== undefined) {
-        idcorte.value = idescuela.value + '' + idperiodo.value + '' + numero.value;
+        idcorte.value = getEnterpriseID() + '' + idperiodo.value + '' + numero.value;
     }
 }
 

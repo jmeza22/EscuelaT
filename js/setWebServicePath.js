@@ -11,10 +11,12 @@ jQuery(document).ready(function () {
 
 function setWebServicePath() {
     var path = null;
+    var project = null;
     if (LocalStorageStatus()) {
         path = "http://localhost/EscuelaT/";
+        project = "EscuelaT";
         if (path !== null && path !== "") {
-            localStorage.setItem("WebServicePath", path);
+            localStorage.setItem("WebServicePath"+project, path);
             return true;
         } else {
             return false;

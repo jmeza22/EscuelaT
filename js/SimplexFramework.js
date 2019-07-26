@@ -11,6 +11,18 @@ jQuery(document).ready(function () {
     RequestNotificationPermission();
 });
 
+function getMETAElement(name) {
+    if (name !== undefined && name !== null) {
+        var metaelements = document.getElementsByTagName("META");
+        for (var i = 0; i < metaelements.length; i++) {
+            if (metaelements[i].getAttribute('name') === name) {
+                return metaelements[i];
+            }
+        }
+    }
+    return null;
+}
+
 function RequestNotificationPermission() {
     if (Notification.permission == "default" || Notification.permission == "denied") {
         Notification.requestPermission();
@@ -64,19 +76,19 @@ function noBackButton() {
 }
 
 function automaticSize(element) {
-    var contentsize=0;
+    var contentsize = 0;
     if (element !== undefined && element !== null) {
         if (!window.opera && document.all && document.getElementById) {
-            contentsize=parseInt(element.contentWindow.document.body.scrollHeight);
-            contentsize=contentsize+100;
+            contentsize = parseInt(element.contentWindow.document.body.scrollHeight);
+            contentsize = contentsize + 100;
             element.style.height = contentsize;
-            element.setAttribute("height",""+contentsize+"px");
+            element.setAttribute("height", "" + contentsize + "px");
             return true;
         } else if (document.getElementById) {
-            contentsize=parseInt(element.contentDocument.body.scrollHeight);
-            contentsize=contentsize+100;
-            element.style.height = ""+contentsize+"px";
-            element.setAttribute("height",""+contentsize+"px");
+            contentsize = parseInt(element.contentDocument.body.scrollHeight);
+            contentsize = contentsize + 100;
+            element.style.height = "" + contentsize + "px";
+            element.setAttribute("height", "" + contentsize + "px");
             return true;
         }
         return false;
@@ -230,10 +242,12 @@ function hideAjaxLoading() {
 
 function setWSPath() {
     var path = null;
+    var project = null;
     if (LocalStorageStatus()) {
+        project = getMETAElement('ProjectName').content;
         path = prompt('Enter the Web Service path:', '');
         if (path !== null && path !== "") {
-            localStorage.setItem("WebServicePath", path);
+            localStorage.setItem("WebServicePath" + project, path);
             return true;
         } else {
             return setWSPath();
@@ -243,8 +257,10 @@ function setWSPath() {
 
 function getWSPath() {
     var path = null;
+    var project = null;
     if (LocalStorageStatus()) {
-        path = localStorage.getItem("WebServicePath");
+        project = getMETAElement('ProjectName').content;
+        path = localStorage.getItem("WebServicePath" + project);
         if (path === null) {
             console.log("WebServicePath is null.");
             setWSPath();
@@ -1423,6 +1439,8 @@ function loadTableData(element, dynamic) {
     var model = null;
     var findby = null;
     var findbyvalue = null;
+    var findby1 = null;
+    var findbyvalue1 = null;
     var findby2 = null;
     var findbyvalue2 = null;
     var findby3 = null;
@@ -1437,6 +1455,8 @@ function loadTableData(element, dynamic) {
     model = getModel(element);
     findby = getFindBy(element);
     findbyvalue = getFindByValue(element);
+    findby1 = getFindBy(element, 1);
+    findbyvalue1 = getFindByValue(element, 1);
     findby2 = getFindBy(element, 2);
     findbyvalue2 = getFindByValue(element, 2);
     findby3 = getFindBy(element, 3);
@@ -1450,6 +1470,8 @@ function loadTableData(element, dynamic) {
         "action": 'findAll',
         "findby": findby,
         "findbyvalue": findbyvalue,
+        "findby1": findby2,
+        "findbyvalue1": findbyvalue2,
         "findby2": findby2,
         "findbyvalue2": findbyvalue2,
         "findby3": findby3,
@@ -1591,7 +1613,7 @@ function loadNameFromId(field, namefield1, namefield2, namefield3) {
                     try {
                         result = JSON.parse(result);
                         console.log('Parse to JSON (Successful) - LoadNameFromId!');
-                        console.log('Result:'+result.message);
+                        console.log('Result:' + result.message);
                     } catch (e) {
                         console.log(result);
                         console.log('Parse to JSON (Failed) - LoadNameFromId!');

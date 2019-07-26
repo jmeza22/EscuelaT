@@ -74,6 +74,7 @@ function DeleteItem(item) {
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
+    clearTableData(mytable);
     loadTableData(mytable, false).done(function () {
     });
     return mytable;
