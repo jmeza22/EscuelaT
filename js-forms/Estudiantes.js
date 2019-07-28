@@ -21,6 +21,7 @@ function CargarNombres() {
                 autoNameFromDataList('idacudiente1_estudiante', 'nombreacudiente1_estudiante', null);
                 autoNameFromDataList('idacudiente2_estudiante', 'nombreacudiente2_estudiante', null);
             });
+            loadComboboxData(document.getElementById("lista_acudientes"));
         }
     }
 }
@@ -82,7 +83,18 @@ function EditEstudiante(item) {
 
 function EditAnotacion(item) {
     var myform = null;
-    myform = document.getElementById('form1');
+    myform = document.getElementById('formAN');
+    resetForm(myform);
+    sendValue(item, null, myform, null);
+    getData(myform).done(function () {
+        setTimeout(function () {
+        }, 1);
+    });
+}
+
+function EditCitacion(item) {
+    var myform = null;
+    myform = document.getElementById('formCI');
     resetForm(myform);
     sendValue(item, null, myform, null);
     getData(myform).done(function () {
@@ -114,7 +126,13 @@ function DeleteItem(item) {
 }
 
 function LoadTableAnotaciones() {
-    var mytable = document.getElementById("dataTable0");
+    var mytable = document.getElementById("dataTableAN");
+    loadTableData(mytable, false);
+    return mytable;
+}
+
+function LoadTableCitaciones() {
+    var mytable = document.getElementById("dataTableCI");
     loadTableData(mytable, false);
     return mytable;
 }
@@ -125,16 +143,16 @@ function LoadTableEstudiantes() {
     return mytable;
 }
 
-function CopiarCodigoEstudiante() {
+function CopiarCodigoEstudianteAnotacion() {
     var form0 = null;
-    var form1 = null;
+    var formAN = null;
     var idestudiante = null;
     var idestudianteanotacion = null;
-    var mytable = document.getElementById("dataTable0");
+    var mytable = document.getElementById("dataTableAN");
     form0 = document.getElementById('form0');
-    form1 = document.getElementById('form1');
+    formAN = document.getElementById('formAN');
     idestudiante = getElement(form0, "id_estudiante");
-    idestudianteanotacion = getElement(form1, "id_estudiante");
+    idestudianteanotacion = getElement(formAN, "id_estudiante");
     if (idestudianteanotacion !== undefined && idestudianteanotacion !== null) {
         console.log('Copiando Datos de Estudiante a Panel de Anotacion.');
         idestudianteanotacion.value = idestudiante.value;
@@ -143,7 +161,25 @@ function CopiarCodigoEstudiante() {
     mytable.setAttribute('findbyvalue', idestudiante.value);
 }
 
-function GenerarFecha() {
+function CopiarCodigoEstudianteCitacion() {
+    var form0 = null;
+    var formCI = null;
+    var idestudiante = null;
+    var idestudiantecitacion = null;
+    var mytable = document.getElementById("dataTableCI");
+    form0 = document.getElementById('form0');
+    formCI = document.getElementById('formCI');
+    idestudiante = getElement(form0, "id_estudiante");
+    idestudiantecitacion = getElement(formCI, "id_estudiante");
+    if (idestudiantecitacion !== undefined && idestudiantecitacion !== null) {
+        console.log('Copiando Datos de Estudiante a Panel de Citacion.');
+        idestudiantecitacion.value = idestudiante.value;
+    }
+    mytable.setAttribute('findby', 'id_estudiante');
+    mytable.setAttribute('findbyvalue', idestudiante.value);
+}
+
+function GenerarFechaAnotacion() {
     var fechaanotacion = null;
     var fecha = new Date();
     var mes = fecha.getMonth() + 1;
@@ -159,11 +195,27 @@ function GenerarFecha() {
     }
 }
 
+function GenerarFechaCitacion() {
+    var fechacitacion = null;
+    var fecha = new Date();
+    var mes = fecha.getMonth() + 1;
+    var dia = fecha.getDate();
+    var ano = fecha.getFullYear();
+    fechacitacion = document.getElementById('fechacita_citacion');
+    if (fechacitacion !== undefined && (fechacitacion.value === '' || fechacitacion.value === ' ')) {
+        if (dia < 10)
+            dia = '0' + dia;
+        if (mes < 10)
+            mes = '0' + mes;
+        fechacitacion.value = ano + "-" + mes + "-" + dia;
+    }
+}
+
 function GenerarCodigoAnotacion() {
     var idanotacion = null;
     var fecha = null;
     var codigo = null;
-    idanotacion = getElement(document.getElementById('form1'), 'id_anotacion');
+    idanotacion = getElement(document.getElementById('formAN'), 'id_anotacion');
     if (idanotacion !== undefined && (idanotacion.value === '' || idanotacion.value === ' ')) {
         fecha = new Date();
         codigo = 'AN' + fecha.getFullYear().toString() + (fecha.getMonth() + 1) + (fecha.getDate() * fecha.getMilliseconds());
@@ -172,18 +224,47 @@ function GenerarCodigoAnotacion() {
     }
 }
 
-function GenerarCodigoFecha() {
-    CopiarCodigoEstudiante();
-    GenerarFecha();
+function GenerarCodigoCitacion() {
+    var idcitacion = null;
+    var fecha = null;
+    var codigo = null;
+    idcitacion = getElement(document.getElementById('formCI'), 'id_citacion');
+    if (idcitacion !== undefined && (idcitacion.value === '' || idcitacion.value === ' ')) {
+        fecha = new Date();
+        codigo = 'CI' + fecha.getFullYear().toString() + (fecha.getMonth() + 1) + (fecha.getDate() * fecha.getMilliseconds());
+        console.log('Generando Codigo Citacion: ' + codigo);
+        idcitacion.value = codigo;
+    }
+}
+
+function GenerarCodigoFechaAnotacion() {
+    CopiarCodigoEstudianteAnotacion();
+    GenerarFechaAnotacion();
     GenerarCodigoAnotacion();
 }
 
+function GenerarCodigoFechaCitacion() {
+    CopiarCodigoEstudianteCitacion();
+    GenerarFechaCitacion();
+    GenerarCodigoCitacion();
+}
+
 function GrabarAnotacion(item) {
-    GenerarFecha();
+    GenerarFechaAnotacion();
     GenerarCodigoAnotacion();
     if (validateForm(item)) {
         submitForm(item, false).done(function () {
             LoadTableAnotaciones();
+        });
+    }
+}
+
+function GrabarCitacion(item) {
+    GenerarFechaCitacion();
+    GenerarCodigoCitacion();
+    if (validateForm(item)) {
+        submitForm(item, false).done(function () {
+            LoadTableCitaciones();
         });
     }
 }

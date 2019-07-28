@@ -30,7 +30,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Datos Basicos del Observador del Estudiante</div>
             <div class="panel-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php" model="ObservadorEstudianteApp" findBy="id_estudiante" mainform="true" >
@@ -109,7 +109,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Estatura</label>
-                                    <input type="number" name="estaturam_estudiante" id="estaturam_estudiante" value="60" maxlength="6" min="60" max="2" required="required" class="form-control" title="Estatura en Metros">
+                                    <input type="number" name="estaturam_estudiante" id="estaturam_estudiante" value="60" maxlength="6" min="60" max="2" required="required" class="form-control" title="Estatura en Centimetros">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Grupo Sanguineo</label>
@@ -133,14 +133,14 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Def. Visual</label>
-                                    <select id="deficienciavisual_estudiante" name="deficienciavisual_estudiante" class="form-control" style="width: 100%;">
+                                    <select id="deficienciavisual_estudiante" name="deficienciavisual_estudiante" class="form-control" style="width: 100%;" title="Deficiencia Visual?">
                                         <option value="0">NO</option>
                                         <option value="1">SI</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Def. Auditiva</label>
-                                    <select id="deficienciaauditiva_estudiante" name="deficienciaauditiva_estudiante" class="form-control" style="width: 100%;">
+                                    <select id="deficienciaauditiva_estudiante" name="deficienciaauditiva_estudiante" class="form-control" style="width: 100%;" title="Deficiencia Auditiva?">
                                         <option value="0">NO</option>
                                         <option value="1">SI</option>
                                     </select>
@@ -201,7 +201,7 @@ and open the template in the editor.
         </div>
 
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Anotaciones al Observador</div>
             <div class="panel-body table-responsive" >
 
@@ -212,7 +212,7 @@ and open the template in the editor.
                             <button type="button" id="btAnotacion" name="btAnotacion" href="#modal_anotacion" data-toggle="modal" class="btn btn-default" onclick="" >Nueva Anotacion</button> 
                         </center>
                         <div class="table-responsive">
-                            <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="AnotacionesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableAnotaciones.php" >
+                            <table style="width: 100% !Important;" name="dataTableAN" id="dataTableAN" border="1" class="table table-form" model="AnotacionesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableAnotaciones.php" >
                                 <thead id="thead_dataTable0">
                                     <tr rowhead="true">
                                         <th style="width: 10%;" title="Codigo de Anotacion">#</th>
@@ -247,6 +247,54 @@ and open the template in the editor.
 
             </div>
         </div>
+
+        <div class="panel panel-primary" style="width: 90% !important;">
+            <div class="panel-heading">Citaciones del Estudiante</div>
+            <div class="panel-body table-responsive" >
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Listado de Citaciones</div>
+                    <div class="panel-body">
+                        <center>
+                            <button type="button" id="btCitacion" name="btCitacion" href="#modal_citacion" data-toggle="modal" class="btn btn-default" onclick="" >Nueva Citacion</button> 
+                        </center>
+                        <div class="table-responsive">
+                            <table style="width: 100% !Important;" name="dataTableCI" id="dataTableCI" border="1" class="table table-form" model="AnotacionesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableAnotaciones.php" >
+                                <thead id="thead_dataTable0">
+                                    <tr rowhead="true">
+                                        <th style="width: 10%;" title="Codigo de Citacion">#</th>
+                                        <th style="width: 10%;" title="Codigo de Estudiante">Estudiante</th>
+                                        <th style="width: 42%;">Motivo</th>
+                                        <th style="width: 20%;">Acudiente</th>
+                                        <th style="width: 10%;">F.Cita</th>
+                                        <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_dataTable0">
+                                    <tr id="rowsample" rowsample="true" style="display: none;">
+                                        <td> <label>{{id_citacion}}</label> </td>
+                                        <td> <label>{{id_estudiante}}</label> </td>
+                                        <td> <label>{{motivo_citacion}}</label> </td>
+                                        <td> <label>{{nombreacudiente_citacion}}</label> </td>
+                                        <td> <label>{{fechacita_citacion}}</label> </td>
+                                        <td>
+                                            <form id="Citacion{{id_citacion}}" name="Anotacion{{id_citacion}}" method="POST" autocomplete="off" url="Base/Controllers/CitacionesController.php"  model="CitacionesObervadorApp" findBy="id_citacion" statusfield="status_citacion">
+                                                <input type="hidden"  editable="false" name="id_citacion" id="id_citacion" value="{{id_citacion}}" >
+                                                <input type="hidden"  editable="false" name="status_citacion" id="status_citacion" value="1" >
+                                                <button type="button" name="EditarFila" id="EditarFila" href="#modal_citacion" data-toggle="modal" class="btn btn-xs btn-warning icon-button" onclick="EditCitacion(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
 
         <div class="modal fade" id="modal_listado">
             <div class="modal-dialog">
@@ -300,11 +348,11 @@ and open the template in the editor.
                         <h4 class="modal-title">Agregar Anotacion</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="form1" method="POST" autocomplete="off" url="Base/Controllers/AnotacionesController.php" model="AnotacionesObservadorApp" findBy="id_anotacion" mainform="true" >
+                        <form id="formAN" method="POST" autocomplete="off" url="Base/Controllers/AnotacionesController.php" model="AnotacionesObservadorApp" findBy="id_anotacion" mainform="true" >
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Codigo</label>
-                                    <input type="text" name="id_anotacion" id="id_anotacion" value="" maxlength="24" required="required" class="form-control" title="Codigo de Anotacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFecha();">
+                                    <input type="text" name="id_anotacion" id="id_anotacion" value="" maxlength="24" required="required" class="form-control" title="Codigo de Anotacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFechaAnotacion();">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Tipo</label>
@@ -364,6 +412,66 @@ and open the template in the editor.
                                     </center>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_citacion">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Agregar Citacion</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formCI" method="POST" autocomplete="off" url="Base/Controllers/CitacionesController.php" model="CitacionesObservadorApp" findBy="id_citacion" mainform="true" >
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label>Codigo</label>
+                                    <input type="text" name="id_citacion" id="id_citacion" value="" maxlength="24" required="required" class="form-control" title="Codigo de Citacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFechaCitacion();">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Estudiante</label>
+                                    <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" readonly="readonly">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Fecha Cita</label>
+                                    <input type="date" name="fechacita_citacion" id="fechacita_citacion" value="" maxlength="12" required="required" class="form-control" title="Fecha de la Citacion" >
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Nombre Acudiente</label>
+                                    <input type="text" name="nombreacudiente_citacion" id="nombreacudiente_citacion" value="" maxlength="200" required="required" class="form-control" title="Nombre del Acudiente Citado" list="lista_acudientes">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Descripcion</label>
+                                    <textarea id="motivo_citacion" name="motivo_citacion" maxlength="5000" required="required" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="button" id="saveA" name="saveA"  action="insertorupdate" save="true" onclick="GrabarCitacion(this);" class="btn btn-primary" >Grabar Citacion</button>        
+                                    </center>
+                                </div>
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="reset" id="resetA" name="resetA" class="btn btn-success">Nuevo Citacion</button> 
+                                    </center>
+                                </div>
+                            </div>
+
+                            <datalist id="lista_acudientes" name="lista_acudientes" model="ObservadorEstudianteApp" colname="nombreacudiente1_estudiante" colvalue="idacudiente1_estudiante" url="Base/Controllers/GetComboboxAcudientes.php">
+                                <option value="">Ninguno</option>
+                            </datalist>
                         </form>
                     </div>
                 </div>

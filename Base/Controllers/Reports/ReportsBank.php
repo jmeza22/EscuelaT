@@ -347,14 +347,44 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
+    public function getAcudientes($idestudiante = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT A1.nombreacudiente1_estudiante, A1.idacudiente1_estudiante FROM ObservadorEstudianteApp A1 "
+                . "WHERE A1.status_estudiante=1 ";
+        if ($idestudiante !== null) {
+            $sql = $sql . " AND A1.id_estudiante='$idestudiante' ";
+        }
+        $sql = $sql . " UNION ";
+        $sql = $sql . "SELECT A2.nombreacudiente2_estudiante, A2.idacudiente2_estudiante FROM ObservadorEstudianteApp A2 "
+                . "WHERE A2.status_estudiante=1 ";
+        if ($idestudiante !== null) {
+            $sql = $sql . " AND A2.id_estudiante='$idestudiante' ";
+        }
+        $result = $this->selectJSONArray($sql);
+        return $result;
+    }
+
     public function getAnotaciones($idestudiante = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT * FROM AnotacionesApp WHERE status_anotacion=1 ";
+        $sql = "SELECT * FROM AnotacionesObservadorApp WHERE status_anotacion=1 ";
         if ($idestudiante !== null) {
             $sql = $sql . " AND id_estudiante='$idestudiante' ";
         }
         $sql = $sql . " ORDER BY fecha_anotacion DESC";
+        $result = $this->selectJSONArray($sql);
+        return $result;
+    }
+
+    public function getCitaciones($idestudiante = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM CitacionesObservadorApp WHERE status_citacion=1 ";
+        if ($idestudiante !== null) {
+            $sql = $sql . " AND id_estudiante='$idestudiante' ";
+        }
+        $sql = $sql . " ORDER BY fecha_citacion DESC";
         $result = $this->selectJSONArray($sql);
         return $result;
     }

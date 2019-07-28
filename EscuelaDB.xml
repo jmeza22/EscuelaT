@@ -680,7 +680,7 @@
         <Cm>Municipio / Ciudad de la Escuela</Cm>
       </Cl>
       <Cl au="0" df="" nm="eslogan_configuracion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
         <Cm>Eslogan de la Escuela</Cm>
       </Cl>
       <Cl au="0" df="" nm="membrete_configuracion" nu="1">
@@ -688,7 +688,7 @@
         <Cm>Membrete para documentos y reportes oficiales.</Cm>
       </Cl>
       <Cl au="0" df="" nm="logo_configuracion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
         <Cm>Logo de la Escuela</Cm>
       </Cl>
       <Cl au="0" df="1" nm="numperiodos_configuracion" nu="1">
@@ -1506,8 +1506,12 @@
         <Cm>Enfermedad Cronica del Estudiante</Cm>
       </Cl>
       <Cl au="0" df="" nm="foto_estudiante" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
         <Cm>Foto del Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="imgdocumento_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <Cm>Documento de Identidad Escaneado</Cm>
       </Cl>
       <Cl au="0" df="1" nm="status_estudiante" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
@@ -2045,7 +2049,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1406" y="3676"/>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1579" y2="1656"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1592" y2="1656"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AreasApp.fk_AreasApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -2079,7 +2083,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_ObservadorEstudianteApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="441" x2="844" y1="1395" y2="1395"/>
+        <positionableLine lineRole="PARENT_LINE" x1="434" x2="844" y1="1395" y2="1395"/>
         <positionableLine lineRole="CHILD_LINE" x1="848" x2="848" y1="1917" y2="1399"/>
       </positionableLines>
     </FkGl>
@@ -2113,7 +2117,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CitacionesObservadorApp.fk_CitacionesObservadorApp_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="272" x2="272" y1="1579" y2="1963"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="272" x2="272" y1="1592" y2="1963"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ConfiguracionApp.fk_ConfiguracionApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
