@@ -221,8 +221,10 @@ class SQLDatabase {
 
     public function makeValuesReferenced(&$array) {
         $refs = array();
-        foreach ($array as $key => $value) {
-            $refs[$key] = &$array[$key];
+        if (isset($array) && is_array($array) && count($array) > 0) {
+            foreach ($array as $key => $value) {
+                $refs[$key] = &$array[$key];
+            }
         }
         return $refs;
     }
@@ -248,7 +250,7 @@ class SQLDatabase {
         if (isset($arrayval) && is_array($arrayval)) {
             $array_result = $arrayval;
         }
-        if (isset($array) && ($array)) {
+        if (isset($array) && is_array($array) && count($array) > 0) {
             foreach ($array as $valor) {
                 if (is_array($valor)) {
                     $array_result = $this->getValues($valor, $array_result);
@@ -263,7 +265,7 @@ class SQLDatabase {
 
     public function getColumns($array) {
         $array_result = array();
-        if (isset($array) && ($array)) {
+        if (isset($array) && is_array($array) && count($array) > 0) {
             $array_result = array_keys($array);
             return $array_result;
         }
@@ -273,7 +275,7 @@ class SQLDatabase {
     public function getVarTypes($array) {
         $arrayval = $this->getValues($array);
         $arraytype = array();
-        if (is_array($array)) {
+        if (isset($array) && is_array($array) && count($array) > 0) {
             foreach ($arrayval as $valor) {
                 array_push($arraytype, gettype($valor));
             }
@@ -285,7 +287,7 @@ class SQLDatabase {
     public function getSQLColumnTypes($array) {
         $arraytype = $this->getVarTypes($array);
         $arrayresult = array();
-        if ($arraytype != null && is_array($arraytype)) {
+        if (isset($arraytype) && is_array($arraytype) && count($arraytype) > 0) {
             foreach ($arraytype as $valor) {
                 if (strcmp($valor, "integer") == 0 || strcmp($valor, "boolean") == 0) {
                     array_push($arrayresult, "i");
@@ -304,7 +306,7 @@ class SQLDatabase {
     public function getPDOColumnTypes($array) {
         $arraytype = $this->getVarTypes($array);
         $arrayresult = array();
-        if ($arraytype != null && is_array($arraytype)) {
+        if (isset($arraytype) && is_array($arraytype) && count($arraytype) > 0) {
             foreach ($arraytype as $valor) {
                 if (strcmp($valor, "integer") == 0) {
                     array_push($arrayresult, PDO::PARAM_INT);
@@ -333,7 +335,7 @@ class SQLDatabase {
     }
 
     public function parseToUTF8($array) {
-        if (isset($array) && $array !== null && is_array($array)) {
+        if (isset($array) && is_array($array) && count($array) > 0) {
             foreach ($array as $key => $value) {
                 if (!is_array($value)) {
                     try {

@@ -66,11 +66,13 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM SedesApp WHERE status_sede=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         $sql = $sql . " ORDER BY nombre_sede ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -78,14 +80,17 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM JornadasApp WHERE status_jornada=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idsede !== null) {
-            $sql = $sql . " AND id_sede='$idsede' ";
+            $arraywhere['p_id_sede'] = $idsede;
+            $sql = $sql . " AND id_sede=:p_id_sede ";
         }
         $sql = $sql . " ORDER BY nombre_jornada ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -93,11 +98,13 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM ProgramasApp WHERE status_programa=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         $sql = $sql . " ORDER BY nombre_programa ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -105,14 +112,17 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM PlanEstudioApp WHERE status_planestudio=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
-            $sql = $sql . " AND id_programa='$idprograma' ";
+            $arraywhere['p_id_prograna'] = $idprograma;
+            $sql = $sql . " AND id_programa=:p_id_programa ";
         }
         $sql = $sql . " ORDER BY id_planestudio ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -123,17 +133,21 @@ class ReportsBank extends BaseController {
                 . " FROM PlanEstudioDetalleApp PED "
                 . " INNER JOIN AsignaturasApp A ON PED.id_asignatura=A.id_asignatura "
                 . " WHERE PED.status_planestudiodetalle=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND PED.id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND PED.id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
-            $sql = $sql . " AND PED.id_programa='$idprograma' ";
+            $arraywhere['p_id_prograna'] = $idprograma;
+            $sql = $sql . " AND PED.id_programa=:p_id_programa ";
         }
         if ($idplanestudio !== null) {
-            $sql = $sql . " AND PED.id_planestudio='$idplanestudio' ";
+            $arraywhere['p_id_planestudio'] = $idplanestudio;
+            $sql = $sql . " AND PED.id_planestudio=:p_id_planestudio ";
         }
         $sql = $sql . " ORDER BY CAST(PED.numgrado_programa as DECIMAL), A.nombre_asignatura, PED.id_planestudiodetalle ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -154,11 +168,13 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM AreasApp WHERE status_area=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         $sql = $sql . " ORDER BY nombre_area ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -166,14 +182,17 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM AsignaturasApp WHERE status_asignatura=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idarea !== null) {
-            $sql = $sql . " AND id_area='$idarea' ";
+            $arraywhere['p_id_area'] = $idarea;
+            $sql = $sql . " AND id_area=:p_id_area ";
         }
         $sql = $sql . " ORDER BY nombre_asignatura ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -184,17 +203,21 @@ class ReportsBank extends BaseController {
                 . " FROM GruposApp G INNER JOIN ProgramasApp Pr "
                 . " ON G.id_programa=Pr.id_programa "
                 . " WHERE G.status_grupo=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND G.id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND G.id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
-            $sql = $sql . " AND G.id_programa='$idprograma' ";
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND G.id_programa=:p_id_programa ";
         }
         if ($numgrado !== null) {
-            $sql = $sql . " AND G.numgrado_programa='$numgrado' ";
+            $arraywhere['p_numgrado_programa'] = $numgrado;
+            $sql = $sql . " AND G.numgrado_programa=:p_numgrado_programa ";
         }
         $sql = $sql . " ORDER BY CAST(G.numgrado_programa AS DECIMAL), G.num_grupo ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -202,11 +225,13 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM PeriodosAnualesApp WHERE status_periodo=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         $sql = $sql . " ORDER BY id_periodo DESC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -214,17 +239,21 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM CortesPeriodosApp WHERE status_corte=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idperiodo !== null) {
-            $sql = $sql . " AND id_periodo='$idperiodo' ";
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND id_periodo=:p_id_periodo ";
         }
         if ($idcorte !== null) {
-            $sql = $sql . " AND id_corte='$idcorte' ";
+            $arraywhere['p_id_corte'] = $idcorte;
+            $sql = $sql . " AND id_corte=:p_id_corte ";
         }
         $sql = $sql . " ORDER BY id_corte ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -234,20 +263,25 @@ class ReportsBank extends BaseController {
         $sql = "SELECT L.*, A.nombre_asignatura "
                 . " FROM LogrosAsignaturasApp L INNER JOIN AsignaturasApp A ON L.id_asignatura=A.id_asignatura "
                 . " WHERE L.status_logro=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND L.id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND L.id_escuela=:p_id_escuela ";
         }
         if ($idasignatura !== null) {
-            $sql = $sql . " AND L.id_asignatura='$idasignatura' ";
+            $arraywhere['p_id_asignatura'] = $idasignatura;
+            $sql = $sql . " AND L.id_asignatura=:p_id_asignatura ";
         }
         if ($grado !== null) {
-            $sql = $sql . " AND L.numgrado_logro='$grado' ";
+            $arraywhere['p_num_grado'] = $grado;
+            $sql = $sql . " AND L.numgrado_logro=:p_num_grado ";
         }
         if ($tipo !== null) {
-            $sql = $sql . " AND L.tipo_logro='$tipo' ";
+            $arraywhere['p_tipo_logro'] = $tipo;
+            $sql = $sql . " AND L.tipo_logro=:p_tipo_logro ";
         }
         $sql = $sql . " ORDER BY L.num_logro DESC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -265,14 +299,17 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM UsuariosApp WHERE status_usuario=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idtipousuario !== null) {
-            $sql = $sql . " AND id_tipousuario='$idtipousuario' ";
+            $arraywhere['p_id_tipousuario'] = $idtipousuario;
+            $sql = $sql . " AND id_tipousuario=:p_id_tipousuario ";
         }
         $sql = $sql . " ORDER BY username_usuario, fechacrea_usuario DESC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -281,11 +318,13 @@ class ReportsBank extends BaseController {
         $result = null;
         $sql = "SELECT * FROM DocentesApp "
                 . "WHERE status_docente=1 ";
+        $arraywhere = Array();
         if ($iddocente !== null) {
-            $sql = $sql . " AND id_docente='$iddocente' ";
+            $arraywhere['p_id_docente'] = $iddocente;
+            $sql = $sql . " AND id_docente=:p_id_docente ";
         }
         $sql = $sql . "ORDER BY nombrecompleto_docente ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -293,17 +332,21 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM DirectoresGruposApp WHERE status_director=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idgrupo !== null) {
-            $sql = $sql . " AND id_grupo='$idgrupo' ";
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND id_grupo=:p_id_grupo ";
         }
         if ($idperiodo !== null) {
-            $sql = $sql . " AND id_periodo='$idperiodo' ";
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND id_periodo=:p_id_periodo ";
         }
         $sql = $sql . " ORDER BY id_director DESC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -314,26 +357,33 @@ class ReportsBank extends BaseController {
                 . " FROM CargasDocentesApp C INNER JOIN DocentesApp D ON C.id_docente=D.id_docente "
                 . " INNER JOIN AsignaturasApp A ON C.id_asignatura=A.id_asignatura "
                 . " INNER JOIN ProgramasApp P ON C.id_programa=P.id_programa ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND C.id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND C.id_escuela=:p_id_escuela ";
         }
         if ($idperiodo !== null) {
-            $sql = $sql . " AND C.id_periodo='$idperiodo' ";
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND C.id_periodo=:p_id_periodo ";
         }
         if ($idprograma !== null) {
-            $sql = $sql . " AND C.id_programa='$idprograma' ";
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND C.id_programa=:p_id_programa ";
         }
         if ($iddocente !== null) {
-            $sql = $sql . " AND C.id_docente='$iddocente' ";
+            $arraywhere['p_id_docente'] = $iddocente;
+            $sql = $sql . " AND C.id_docente=:p_id_docente ";
         }
         if ($idgrupo !== null) {
-            $sql = $sql . " AND C.id_grupo='$idgrupo' ";
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND C.id_grupo=:p_id_grupo ";
         }
         if ($idcarga !== null) {
-            $sql = $sql . " AND C.id_carga='$idcarga' ";
+            $arraywhere['p_id_carga'] = $idcarga;
+            $sql = $sql . " AND C.id_carga=:p_id_carga ";
         }
         $sql = $sql . " ORDER BY D.nombrecompleto_docente, CAST(C.numgrado_programa AS DECIMAL), A.nombre_asignatura ";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -350,18 +400,21 @@ class ReportsBank extends BaseController {
     public function getAcudientes($idestudiante = null) {
         $sql = null;
         $result = null;
+        $arraywhere = Array();
         $sql = "SELECT A1.nombreacudiente1_estudiante, A1.idacudiente1_estudiante FROM ObservadorEstudianteApp A1 "
                 . "WHERE A1.status_estudiante=1 ";
         if ($idestudiante !== null) {
-            $sql = $sql . " AND A1.id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND A1.id_estudiante=:p_id_estudiante ";
         }
         $sql = $sql . " UNION ";
         $sql = $sql . "SELECT A2.nombreacudiente2_estudiante, A2.idacudiente2_estudiante FROM ObservadorEstudianteApp A2 "
                 . "WHERE A2.status_estudiante=1 ";
         if ($idestudiante !== null) {
-            $sql = $sql . " AND A2.id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND A2.id_estudiante=:p_id_estudiante ";
         }
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -369,11 +422,13 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM AnotacionesObservadorApp WHERE status_anotacion=1 ";
+        $arraywhere = Array();
         if ($idestudiante !== null) {
-            $sql = $sql . " AND id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND id_estudiante=:p_id_estudiante ";
         }
         $sql = $sql . " ORDER BY fecha_anotacion DESC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -381,11 +436,13 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM CitacionesObservadorApp WHERE status_citacion=1 ";
+        $arraywhere = Array();
         if ($idestudiante !== null) {
-            $sql = $sql . " AND id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND id_estudiante=:p_id_estudiante ";
         }
         $sql = $sql . " ORDER BY fecha_citacion DESC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -393,38 +450,49 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM MatriculasApp WHERE status_matricula=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idsede !== null) {
-            $sql = $sql . " AND id_sede='$idsede' ";
+            $arraywhere['p_id_sede'] = $idsede;
+            $sql = $sql . " AND id_sede=:p_id_sede ";
         }
         if ($idjornada !== null) {
-            $sql = $sql . " AND id_jornada='$idjornada' ";
+            $arraywhere['p_id_jornada'] = $idjornada;
+            $sql = $sql . " AND id_jornada=:p_id_jornada ";
         }
         if ($idprograma !== null) {
-            $sql = $sql . " AND id_programa='$idprograma' ";
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND id_programa=:p_id_programa ";
         }
         if ($idplanestudio !== null) {
-            $sql = $sql . " AND id_planestudio='$idplanestudio' ";
+            $arraywhere['p_id_planestudio'] = $idplanestudio;
+            $sql = $sql . " AND id_planestudio=:p_id_planestudio ";
         }
         if ($numgrado !== null) {
-            $sql = $sql . " AND numgrado_programa='$numgrado' ";
+            $arraywhere['p_num_grado'] = $numgrado;
+            $sql = $sql . " AND numgrado_programa=:p_num_grado ";
         }
         if ($idgrupo !== null) {
-            $sql = $sql . " AND id_grupo='$idgrupo' ";
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND id_grupo=:p_id_grupo ";
         }
         if ($idperiodo !== null) {
-            $sql = $sql . " AND id_periodo='$idperiodo' ";
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND id_periodo=:p_id_periodo ";
         }
         if ($idestudiante !== null) {
-            $sql = $sql . " AND id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND id_estudiante=:p_id_estudiante ";
         }
         if ($idmatricula !== null) {
-            $sql = $sql . " AND id_matricula='$idmatricula' ";
+            $arraywhere['p_id_matricula'] = $idmatricula;
+            $sql = $sql . " AND id_matricula=:p_id_matricula ";
         }
         $sql = $sql . " ORDER BY fecha_matricula DESC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -435,16 +503,20 @@ class ReportsBank extends BaseController {
                 . "FROM MatriculaAsignaturasApp MA "
                 . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
                 . "WHERE MA.status_matriculaasignatura=1 AND A.status_asignatura=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND MA.id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND MA.id_escuela=:p_id_escuela ";
         }
         if ($idmatricula !== null) {
-            $sql = $sql . " AND MA.id_matricula='$idmatricula' ";
+            $arraywhere['p_id_matricula'] = $idmatricula;
+            $sql = $sql . " AND MA.id_matricula=:p_id_matricula ";
         }
         if ($idestudiante !== null) {
-            $sql = $sql . " AND MA.id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND MA.id_estudiante=:p_id_estudiante ";
         }
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -452,11 +524,8 @@ class ReportsBank extends BaseController {
         $sql = null;
         $result = null;
         $sql = "SELECT OE.id_estudiante, "
-                . "P.tipodoc_persona, "
-                . "P.documento_persona, "
-                . "OE.nombrecompleto_estudiante, "
-                . "P.sexo_persona, "
-                . "P.fechanacimiento_persona, "
+                . "P.* , "
+                . "OE.* , "
                 . "IFNULL(DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(P.fechanacimiento_persona)), '%Y')+0,'?') AS edad_persona, "
                 . "IFNULL(M.id_escuela,'') AS id_escuela, "
                 . "IFNULL(M.id_jornada,'') AS id_jornada, "
@@ -485,38 +554,49 @@ class ReportsBank extends BaseController {
                 . " LEFT JOIN DirectoresGruposApp DG ON M.id_grupo=DG.id_grupo "
                 . " INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa "
                 . " WHERE OE.status_estudiante=1 AND M.status_matricula=1 ";
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND M.id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND M.id_escuela=:p_id_escuela ";
         }
         if ($idsede !== null) {
-            $sql = $sql . " AND M.id_sede='$idsede' ";
+            $arraywhere['p_id_sede'] = $idsede;
+            $sql = $sql . " AND M.id_sede=:p_id_sede ";
         }
         if ($idjornada !== null) {
-            $sql = $sql . " AND M.id_jornada='$idjornada' ";
+            $arraywhere['p_id_jornada'] = $idjornada;
+            $sql = $sql . " AND M.id_jornada=:p_id_jornada ";
         }
         if ($idprograma !== null) {
-            $sql = $sql . " AND M.id_programa='$idprograma' ";
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND M.id_programa=:p_id_programa ";
         }
         if ($idplanestudio !== null) {
-            $sql = $sql . " AND M.id_planestudio='$idplanestudio' ";
+            $arraywhere['p_id_planestudio'] = $idplanestudio;
+            $sql = $sql . " AND M.id_planestudio=:p_id_planestudio ";
         }
         if ($grado !== null) {
-            $sql = $sql . " AND M.numgrado_programa='$grado' ";
+            $arraywhere['p_num_grado'] = $grado;
+            $sql = $sql . " AND M.numgrado_programa=:p_num_grado ";
         }
         if ($idgrupo !== null) {
-            $sql = $sql . " AND M.id_grupo='$idgrupo' ";
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND M.id_grupo=:p_id_grupo ";
         }
         if ($idperiodo !== null) {
-            $sql = $sql . " AND M.id_periodo='$idperiodo' ";
-        }
-        if ($idmatricula !== null) {
-            $sql = $sql . " AND M.id_matricula='$idmatricula' ";
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND M.id_periodo=:p_id_periodo ";
         }
         if ($idestudiante !== null) {
-            $sql = $sql . " AND OE.id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND M.id_estudiante=:p_id_estudiante ";
+        }
+        if ($idmatricula !== null) {
+            $arraywhere['p_id_matricula'] = $idmatricula;
+            $sql = $sql . " AND M.id_matricula=:p_id_matricula ";
         }
         $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante ASC";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -605,38 +685,49 @@ class ReportsBank extends BaseController {
                 . " LEFT JOIN AreasApp AR ON A.id_area=AR.id_area "
                 . " WHERE MA.status_matriculaasignatura=1 AND M.status_matricula=1 AND OE.status_estudiante=1 "
         ;
+        $arraywhere = Array();
         if ($idescuela !== null) {
-            $sql = $sql . " AND M.id_escuela='$idescuela' ";
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND M.id_escuela=:p_id_escuela ";
         }
         if ($idsede !== null) {
-            $sql = $sql . " AND M.id_sede='$idsede' ";
+            $arraywhere['p_id_sede'] = $idsede;
+            $sql = $sql . " AND M.id_sede=:p_id_sede ";
         }
         if ($idjornada !== null) {
-            $sql = $sql . " AND M.id_jornada='$idjornada' ";
+            $arraywhere['p_id_jornada'] = $idjornada;
+            $sql = $sql . " AND M.id_jornada=:p_id_jornada ";
         }
         if ($idprograma !== null) {
-            $sql = $sql . " AND MA.id_programa='$idprograma' ";
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND MA.id_programa=:p_id_programa ";
         }
         if ($idplanestudio !== null) {
-            $sql = $sql . " AND MA.id_planestudio='$idplanestudio' ";
+            $arraywhere['p_id_planestudio'] = $idplanestudio;
+            $sql = $sql . " AND MA.id_planestudio=:p_id_planestudio ";
         }
         if ($grado !== null) {
-            $sql = $sql . " AND MA.numgrado_programa='$grado' ";
+            $arraywhere['p_num_grado'] = $grado;
+            $sql = $sql . " AND MA.numgrado_programa=:p_num_grado ";
         }
         if ($idgrupo !== null) {
-            $sql = $sql . " AND MA.id_grupo='$idgrupo' ";
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND MA.id_grupo=:p_id_grupo ";
         }
         if ($idperiodo !== null) {
-            $sql = $sql . " AND MA.id_periodo='$idperiodo' ";
-        }
-        if ($idmatricula !== null) {
-            $sql = $sql . " AND MA.id_matricula='$idmatricula' ";
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND MA.id_periodo=:p_id_periodo ";
         }
         if ($idestudiante !== null) {
-            $sql = $sql . " AND MA.id_estudiante='$idestudiante' ";
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND MA.id_estudiante=:p_id_estudiante ";
+        }
+        if ($idmatricula !== null) {
+            $arraywhere['p_id_matricula'] = $idmatricula;
+            $sql = $sql . " AND MA.id_matricula=:p_id_matricula ";
         }
         $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante, AR.nombre_area ";
-        $result = $this->selectJSONArray($sql);
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
