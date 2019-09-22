@@ -35,9 +35,11 @@ function Send(item) {
 
 function Edit(item) {
     var myform = null;
+    var itemform = null;
     myform = document.getElementById('form0');
+    itemform=getForm(item);
     resetForm(myform);
-    sendValue(item, null, myform, null);
+    sendValue(itemform, null, myform, null);
     getData(myform).done(function () {
         setTimeout(function () {
         }, 1);

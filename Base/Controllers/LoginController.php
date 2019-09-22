@@ -36,7 +36,6 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
     $user = $_POST['mynickname'];
     $pw = $_POST['mypassword'];
     $password = $crypt->crypt($pw);
-    //$password = $pw;
     $idtipousuario = $_POST['id_tipousuario'];
     $params=Array();
     $params['p_username_usuario']=$user;

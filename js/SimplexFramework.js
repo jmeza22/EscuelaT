@@ -344,6 +344,12 @@ function getParent(element, tagname = null) {
 function getForm(element) {
     if (element !== null) {
         var found = null;
+        if (element.tagName === undefined) {
+            var element0 = document.getElementById(element);
+            if (element0 !== undefined && element0 !== null && element0.tagName === 'FORM') {
+                return element0;
+            }
+        }
         if (element.tagName === 'FORM') {
             return element;
         }
@@ -1932,16 +1938,19 @@ function sendValue(form1, field1, form2, field2) {
             if (field1 !== null && field1 !== '') {
                 valid1 = getElement(form1, field1);
             } else {
+                console.log('Getting findby in ' + form1.id);
                 findby1 = getFindBy(form1);
                 valid1 = getElement(form1, findby1);
             }
             if (field2 !== null && field2 !== '') {
                 valid2 = getElement(form2, field2);
             } else {
+                console.log('Getting findby in ' + form2.id);
                 findby2 = getFindBy(form2);
                 valid2 = getElement(form2, findby2);
             }
             if (valid1 !== null && valid2 !== null) {
+                console.log('Copy value FROM ' + valid1.id + '=' + valid1.value + ' TO ' + valid2.id + '=' + valid2.value);
                 valid2.value = valid1.value;
             }
         }

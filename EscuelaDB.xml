@@ -591,7 +591,7 @@
       <TblOpts/>
       <Pk ClNs="id_citacion" nm="pkCitacionesObservadorApp"/>
       <Cl au="0" df="" nm="id_citacion" nu="0">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Citacion</Cm>
       </Cl>
       <Cl au="0" df="" nm="id_estudiante" nu="0">
@@ -2812,7 +2812,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

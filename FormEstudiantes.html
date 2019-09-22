@@ -31,29 +31,131 @@ and open the template in the editor.
     <body>
 
         <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Datos Basicos del Observador del Estudiante</div>
+            <div class="panel-heading">Datos Basicos del Estudiante (Persona)</div>
             <div class="panel-body table-responsive" >
+                <form id="formP" method="POST" autocomplete="off" url="Base/Controllers/PersonasController.php" model="PersonasApp" findBy="id_persona" mainform="true" >
+                    <input type="hidden" name="id_tipousuario" id="id_tipousuario" value="Student" maxlength="24" required="required" >
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Codigo</label>
+                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" onchange="BuscarEstudiante()">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Opciones</label>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="BuscarEstudiante();" style="width: 100% !important;">Buscar</button> 
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" id="listado" name="listado" href="#modal_listado" data-toggle="modal" class="btn btn-default" onclick="LoadTableEstudiantes(this);" style="width: 100% !important;">Listado</button> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Primer Nombre</label>
+                            <input type="text" name="nombre1_persona" id="nombre1_persona" value="" required="required" maxlength="50" class="form-control" title="Primer Nombre">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Segundo Nombre</label>
+                            <input type="text" name="nombre2_persona" id="nombre2_persona" value=""  maxlength="50" class="form-control" title="Segundo Nombre">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Primer Apellido</label>
+                            <input type="text" name="apellido1_persona" id="apellido1_persona" value="" required="required" maxlength="50" class="form-control" title="Primer Apellido">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Segundo Apellido</label>
+                            <input type="text" name="apellido2_persona" id="apellido2_persona" value="" required="required" maxlength="50" class="form-control" title="Segundo Apellido">
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Tipo</label>
+                            <select name="tipodoc_persona" id="tipodoc_persona" selected="NN" alphabetic="true" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
+                                <option id="NN" value="NN" disabled="disabled">Desconocido</option>
+                                <option id="CC" value="CC" >Cédula de Ciudadanía</option>
+                                <option id="TI" value="TI" >Tarjeta de Identidad</option>
+                                <option id="RC" value="RC" >Registro Civil</option>
+                                <option id="CE" value="CE" >Cédula de Extranjeria</option>
+                                <option id="PP" value="PP" >Pasaporte</option>
+                                <option id="NIT" value="NIT" >NIT</option>
+                                <option id="NES" value="NES" >Num. Establecido Secretaria</option>
+                                <option id="OO" value="OO" >Otro</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Documento</label>
+                            <input type="text" alphanumeric="true" name="documento_persona" id="documento_persona" value="" maxlength="24" class="form-control" title="Numero de Documento">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Lugar.Expedicion</label>
+                            <input type="text" alphanumeric="true" name="expediciondoc_persona" id="expediciondoc_persona" value="" maxlength="60" class="form-control" title="Lugar de Expedicion del Documento">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>F.Nacimiento</label>
+                            <input type="date" date="true" name="fechanacimiento_persona" id="fechanacimiento_persona" value="" placeholder="1992-04-22" maxlength="10" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Sexo</label>
+                            <select name="sexo_persona" id="sexo_persona" selected="I" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;"  >
+                                <option value="" >Seleccione</option>
+                                <option value="I" >Indefinido</option>
+                                <option value="M" >Masculino</option>
+                                <option value="F" >Femenino</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Telefono</label>
+                            <input type="tel" name="telefono_persona" id="telefono_persona" value="" maxlength="20" class="form-control" title="Fijo o Celular" >
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Email</label>
+                            <input type="email" name="email_persona" id="email_persona" value="" maxlength="100"  class="form-control" title="Correo Electronico">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Direccion</label>
+                            <input type="text" name="direccion_persona" id="direccion_persona" value="" maxlength="100" class="form-control" title="Direccion de Residencia">
+                        </div>
+                    </div>
+                    <datalist id="lista_id_persona" name="lista_id_persona" model="PersonasApp" colname="nombre_persona" colvalue="id_persona" url="Base/Controllers/GetComboboxPersonas.php">
+                        <option value="">Ninguno</option>
+                    </datalist>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save" action="update" save="true" onclick="GrabarPersona(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-primary" style="width: 90% !important;">
+            <div class="panel-heading">Observador del Estudiante</div>
+            <div class="panel-body table-responsive" >
+
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php" model="ObservadorEstudianteApp" findBy="id_estudiante" mainform="true" >
+                    <input type="hidden" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
 
                     <div class="panel panel-default">
                         <div class="panel-heading">Estudiante</div>
                         <div class="panel-body" >
                             <div class="row">
-                                <div class="col-sm-2">
-                                    <label>Codigo</label>
-                                    <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona">
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label>Nombre del Estudiante</label>
                                     <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" required="required" readonly="readonly" class="form-control" title="Nombre del Estudiante" >
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Buscar</label>
-                                    <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="BuscarEstudiante();" style="width: 100% !important;">Buscar</button> 
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Listado</label>
-                                    <button type="button" id="listado" name="listado" href="#modal_listado" data-toggle="modal" class="btn btn-default" onclick="LoadTableEstudiantes(this);" style="width: 100% !important;">Listado</button> 
                                 </div>
                             </div>
                         </div>
@@ -191,10 +293,6 @@ and open the template in the editor.
                         <option value="Otro">Otro</option>
                     </datalist>
 
-                    <datalist id="lista_id_persona" name="lista_id_persona" model="PersonasApp" colname="nombre_persona" colvalue="id_persona" url="Base/Controllers/GetComboboxPersonas.php">
-                        <option value="">Ninguno</option>
-                    </datalist>
-
 
                 </form>
             </div>
@@ -259,7 +357,7 @@ and open the template in the editor.
                             <button type="button" id="btCitacion" name="btCitacion" href="#modal_citacion" data-toggle="modal" class="btn btn-default" onclick="" >Nueva Citacion</button> 
                         </center>
                         <div class="table-responsive">
-                            <table style="width: 100% !Important;" name="dataTableCI" id="dataTableCI" border="1" class="table table-form" model="AnotacionesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableAnotaciones.php" >
+                            <table style="width: 100% !Important;" name="dataTableCI" id="dataTableCI" border="1" class="table table-form" model="CitacionesApp" findby="id_citacionq" findbyvalue="0" url="Base/Controllers/GetDataTableCitaciones.php" >
                                 <thead id="thead_dataTable0">
                                     <tr rowhead="true">
                                         <th style="width: 10%;" title="Codigo de Citacion">#</th>
@@ -278,7 +376,7 @@ and open the template in the editor.
                                         <td> <label>{{nombreacudiente_citacion}}</label> </td>
                                         <td> <label>{{fechacita_citacion}}</label> </td>
                                         <td>
-                                            <form id="Citacion{{id_citacion}}" name="Anotacion{{id_citacion}}" method="POST" autocomplete="off" url="Base/Controllers/CitacionesController.php"  model="CitacionesObervadorApp" findBy="id_citacion" statusfield="status_citacion">
+                                            <form id="Citacion{{id_citacion}}" name="Citacion{{id_citacion}}" method="POST" autocomplete="off" url="Base/Controllers/CitacionesController.php"  model="CitacionesObervadorApp" findBy="id_citacion" statusfield="status_citacion">
                                                 <input type="hidden"  editable="false" name="id_citacion" id="id_citacion" value="{{id_citacion}}" >
                                                 <input type="hidden"  editable="false" name="status_citacion" id="status_citacion" value="1" >
                                                 <button type="button" name="EditarFila" id="EditarFila" href="#modal_citacion" data-toggle="modal" class="btn btn-xs btn-warning icon-button" onclick="EditCitacion(this);"><i class="glyphicon glyphicon-edit"></i></button>
@@ -321,7 +419,7 @@ and open the template in the editor.
                                             <form id="Estudiante{{id_estudiante}}" name="Estudiante{{id_estudiante}}" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php"  model="EstudiantesApp" findBy="id_estudiante" statusfield="status_estudiante">
                                                 <input type="hidden"  editable="false" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
                                                 <input type="hidden"  editable="false" name="status_estudiante" id="status_estudiante" value="1" >
-                                                <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" data-dismiss="modal" aria-hidden="true" onclick="EditEstudiante(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" data-dismiss="modal" aria-hidden="true" onclick="EditPersona(this);"><i class="glyphicon glyphicon-edit"></i></button>
                                             </form>
                                         </td>
                                     </tr>

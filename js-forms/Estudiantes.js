@@ -34,18 +34,25 @@ function Send(item) {
 }
 
 function BuscarEstudiante() {
+    var formP = document.getElementById("formP");
     var form0 = document.getElementById("form0");
+    var idpersona = null;
     var idestudiante = null;
     var idaux = null;
     if (form0 !== undefined && form0 !== null) {
+        idpersona = getElement(formP, 'id_persona');
         idestudiante = getElement(form0, 'id_estudiante');
-        if (idestudiante !== undefined && idestudiante.value !== '') {
-            idaux = idestudiante.value;
+        if (idpersona !== undefined && idpersona.value !== '') {
+            idaux = idpersona.value;
             resetForm(form0);
+            idpersona.value = idaux;
             idestudiante.value = idaux;
+            document.getElementById('id_tipousuario').value = 'Student';
+            getData(formP);
             getData(form0);
             LoadTableAnotaciones();
-            CopiarCodigoEstudiante();
+            LoadTableCitaciones();
+            CopiarCodigoEstudianteAnotacion();
         }
     }
 }
@@ -62,20 +69,21 @@ function BuscarEstudianteActivo() {
             idestudiante.setAttribute('readonly', 'readonly');
             if (idestudiante.value !== '') {
                 getData(form0).done(function () {
-                    CopiarCodigoEstudiante();
+                    CopiarCodigoEstudianteAnotacion();
                     LoadTableAnotaciones();
-                    document.getElementById("save").setAttribute('disabled','disabled');
-                    document.getElementById("reset").setAttribute('disabled','disabled');
-                    document.getElementById("btAnotacion").setAttribute('disabled','disabled');
+                    LoadTableCitaciones();
+                    document.getElementById("save").setAttribute('disabled', 'disabled');
+                    document.getElementById("reset").setAttribute('disabled', 'disabled');
+                    document.getElementById("btAnotacion").setAttribute('disabled', 'disabled');
                 });
             }
         }
     }
 }
 
-function EditEstudiante(item) {
+function EditPersona(item) {
     var myform = null;
-    myform = document.getElementById('form0');
+    myform = document.getElementById('formP');
     resetForm(myform);
     sendValue(item, null, myform, null);
     BuscarEstudiante();
@@ -127,18 +135,27 @@ function DeleteItem(item) {
 
 function LoadTableAnotaciones() {
     var mytable = document.getElementById("dataTableAN");
+    var idestudiante = getElement(getForm('form0'), 'id_estudiante');
+    clearTableData(mytable);
+    mytable.setAttribute('findby', 'id_estudiante');
+    mytable.setAttribute('findbyvalue', idestudiante.value);
     loadTableData(mytable, false);
     return mytable;
 }
 
 function LoadTableCitaciones() {
     var mytable = document.getElementById("dataTableCI");
+    var idestudiante = getElement(getForm('form0'), 'id_estudiante');
+    clearTableData(mytable);
+    mytable.setAttribute('findby', 'id_estudiante');
+    mytable.setAttribute('findbyvalue', idestudiante.value);
     loadTableData(mytable, false);
     return mytable;
 }
 
 function LoadTableEstudiantes() {
     var mytable = document.getElementById("dataTableE");
+    clearTableData(mytable);
     loadTableData(mytable, true);
     return mytable;
 }
@@ -249,23 +266,62 @@ function GenerarCodigoFechaCitacion() {
     GenerarCodigoCitacion();
 }
 
+function GenerarIdPersona() {
+    var idpersona = null;
+    var nombre1 = null;
+    var apellido1 = null;
+    var tipodoc = null;
+    var fecha = null;
+    var nuevo = null;
+    if (document.getElementById('id_persona') !== null && document.getElementById('id_persona') !== undefined) {
+        idpersona = document.getElementById('id_persona');
+    }
+    if (document.getElementById('nombre1_persona') !== null && document.getElementById('nombre1_persona') !== undefined) {
+        nombre1 = document.getElementById('nombre1_persona').value;
+    }
+    if (document.getElementById('apellido1_persona') !== null && document.getElementById('apellido1_persona') !== undefined) {
+        apellido1 = document.getElementById('apellido1_persona').value;
+    }
+    if (document.getElementById('tipodoc_persona') !== null && document.getElementById('tipodoc_persona') !== undefined) {
+        tipodoc = document.getElementById('tipodoc_persona');
+        tipodoc = tipodoc.value;
+    }
+    fecha = new Date();
+    if (nombre1 !== null && nombre1 !== "" && apellido1 !== null && apellido1 !== "") {
+        if (document.getElementById('id_persona') !== undefined && (idpersona.value === "" || idpersona.value === "0")) {
+            nuevo = fecha.getTime() + getRandomNumber(0, 99);
+            console.log('Generando Id: ' + nuevo);
+            document.getElementById('id_persona').value = nuevo;
+        }
+    } else {
+        alert("Debe ingresar Nombre y Apellido.");
+        return false;
+    }
+    return true;
+}
+
+
 function GrabarAnotacion(item) {
     GenerarFechaAnotacion();
     GenerarCodigoAnotacion();
-    if (validateForm(item)) {
+    if (validateForm(getForm(item))) {
         submitForm(item, false).done(function () {
             LoadTableAnotaciones();
         });
+    } else {
+        showNotification('Verifique los datos de la Anotacion!');
     }
 }
 
 function GrabarCitacion(item) {
     GenerarFechaCitacion();
     GenerarCodigoCitacion();
-    if (validateForm(item)) {
+    if (validateForm(getForm(item))) {
         submitForm(item, false).done(function () {
             LoadTableCitaciones();
         });
+    } else {
+        showNotification('Verifique los datos de la Citacion!');
     }
 }
 
@@ -273,13 +329,34 @@ function GrabarEstudiante(item) {
     var form = getForm(item);
     if (validateForm(form)) {
         submitForm(form, false).done(function () {
-            if(getLastInsertId()!==null){
-                alert('El Codigo del Estudiante es: '+getLastInsertId());
+            if (getLastInsertId() !== null) {
+                alert('El Codigo del Estudiante es: ' + getLastInsertId());
             }
             LoadTableEstudiantes();
         });
     }
 }
+
+function GrabarPersona(item) {
+    var formP = getForm(item);
+    var formE = document.getElementById('form0');
+    var idpersona = getElement(formP, 'id_persona');
+    var idestudiante = getElement(formE, 'id_estudiante');
+    if (idpersona.value === '0' || idpersona.value === '') {
+        GenerarIdPersona();
+    }
+    if (validateForm(formP)) {
+        submitForm(formP, false).done(function () {
+            if (getLastInsertId() !== null) {
+                idpersona.value = 'P' + getLastInsertId();
+                idestudiante.value = 'P' + getLastInsertId();
+                BuscarEstudiante();
+                alert('El Codigo de Persona Asignado es: P' + getLastInsertId()+'. Ahora debe completar las secciones Acudiente 1, Acudiente 2, Salud y Crecimiento.\n * Use las secciones de Anotaciones y Citaciones cuando se presente alguna novedad.');
+            }
+        });
+    }
+}
+
 
 function resetAnoacion() {
 

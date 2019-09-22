@@ -44,12 +44,12 @@ and open the template in the editor.
                             <input type="text" name="concepto_pago" id="concepto_pago" value="Pago" editable="true" required="required" maxlength="100" class="form-control">
                         </div>
                         <div class="col-sm-2">
-                            <label>Tipo Documento</label>
+                            <label>Tipo.Documento</label>
                             <input type="text" name="tipodoc_pago" id="tipodoc_pago" value="" editable="true" required="required" maxlength="30" class="form-control">
                         </div>
                         <div class="col-sm-2">
-                            <label>Num. Documento</label>
-                            <input type="text" name="tipodoc_pago" id="tipodoc_pago" value="0" editable="true" required="required" maxlength="30" class="form-control">
+                            <label>Num.Documento</label>
+                            <input type="text" name="numdoc_pago" id="numdoc_pago" value="0" editable="true" required="required" maxlength="30" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -72,18 +72,26 @@ and open the template in the editor.
                             <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" url="Base/Controllers/FindEstudiantesController.php" model="ObservadorEstudianteApp">
                         </div>
                         <div class="col-sm-6">
-                            <label>Nombre Estudiante</label>
+                            <label>Nombre.Estudiante</label>
                             <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" class="form-control" title="Nombre del Estudiante" readonly="readonly">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8">
-                            <label>Nombre Completo de Pagador</label>
+                        <div class="col-sm-4">
+                            <label>Nombre.Pagador</label>
                             <input type="text" name="nombrepagador_pago" id="nombrepagador_pago" value="" editable="true" required="required" maxlength="200" class="form-control" list="lista_nombre_acudiente">
                         </div>
-                        <div class="col-sm-4">
-                            <label>Documento Pagador</label>
+                        <div class="col-sm-2">
+                            <label>Doc.Pagador</label>
                             <input type="text" name="docpagador_pago" id="docpagador_pago" value="" editable="true" maxlength="30" class="form-control">
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Fecha</label>
+                            <input type="datetime" name="fecha_pago" id="fecha_pago" value="" editable="true" maxlength="30" class="form-control" readonly="readonly">
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Codigo</label>
+                            <input type="text" name="id_pago" id="id_pago" value="0" editable="true" maxlength="30" class="form-control" readonly="readonly">
                         </div>
                     </div>
                     <datalist id="lista_id_pecuniario" name="lista_id_pecuniario" model="ValoresPecuniariosApp" colname="nombre_pecuniario" colvalue="id_pecuniario" url="Base/Controllers/GetComboboxValoresPecuniarios.php" >
@@ -126,12 +134,12 @@ and open the template in the editor.
                         <tbody id="tbody_dataTable0">
                             <tr id="rowsample" rowsample="true" style="display: none;">
                                 <td> <label>{{id_pago}}</label></td>
-                                <td> <label>{{concepto_pago}}</label></td>
+                                <td> <label>{{concepto_pago}} {{tipodoc_pago}}</label></td>
                                 <td> <label>${{valor_pago}}</label></td>
                                 <td> <label>{{nombrecompleto_estudiante}}</label></td>
                                 <td> <label>{{fecha_pago}}</label></td>
                                 <td>
-                                    <form id="Pagos{{id_pago}}" name="Pagos{{id_pago}}" method="POST" autocomplete="off" url="Base/Controllers/ValoresPecuniariosController.php"  model="ValoresPecuniariosApp" findBy="id_pecuniario" statusfield="status_pecuniario">
+                                    <form id="Pagos{{id_pago}}" name="Pagos{{id_pago}}" method="POST" autocomplete="off" url="Base/Controllers/ValoresPecuniariosController.php"  model="PagosRecibidosApp" findBy="id_pago" statusfield="status_pago">
                                         <input type="hidden"  editable="false" name="id_pago" id="id_pago" value="{{id_pago}}" >
                                         <input type="hidden"  editable="false" disabled="disabled" name="status_pago[]" id="status_pago" value="1" >
                                         <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>

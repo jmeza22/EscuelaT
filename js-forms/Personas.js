@@ -13,7 +13,7 @@ function LoadTable() {
     loadTableData(mytable, false);
 }
 
-function SendPersona(item){
+function GrabarPersona(item) {
     var form = getForm(item);
     var idpersona = document.getElementById('id_persona');
     if (idpersona.value === '0' || idpersona.value === '') {
@@ -22,8 +22,19 @@ function SendPersona(item){
     }
     if (validateForm(form)) {
         submitForm(item, false).done(function () {
-            if(getLastInsertId()!==null){
-                alert('El Codigo de Persona Asignado es: P'+getLastInsertId());
+            var tipousuario = document.getElementById("id_tipousuario");
+            if (getLastInsertId() !== null) {
+                alert('El Codigo de Persona Asignado es: P' + getLastInsertId());
+            }
+            if (tipousuario.value === 'Student') {
+                if (confirm('Desea Completar los Datos del Observador del Estudiante?')) {
+                    window.location.href = 'FormEstudiantes.html?' + 'id_persona=P' + getLastInsertId();
+                }
+            }
+            if (tipousuario.value === 'Teacher') {
+                if (confirm('Desea Completar los Datos del Docente?')) {
+                    window.location.href = 'FormDocentes.html?' + 'id_docente=P' + getLastInsertId();
+                }
             }
             resetForm(form);
             LoadTable();
