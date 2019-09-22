@@ -1328,6 +1328,10 @@
         <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Fecha de Matricula</Cm>
       </Cl>
+      <Cl au="0" df="" nm="valor_matricula" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor de la Matricula</Cm>
+      </Cl>
       <Cl au="0" df="" nm="usuariocrea_matricula" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
         <Cm>Usuario que crea la matricula.</Cm>
@@ -1517,6 +1521,85 @@
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Estado del Registro</Cm>
       </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="PagosRecibidosApp">
+      <Cm>Pagos Recibidos por Diferentes Conceptos</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_pago" nm="pkPagosRecibidosApp"/>
+      <Cl au="1" df="" nm="id_pago" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Pago</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_pecuniario" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Valor Pecuniario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="concepto_pago" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Concepto del Pago</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="tipodoc_pago" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Tipo de Documento a Pagar</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numdoc_pago" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Numero Documento a Pagar</Cm>
+      </Cl>
+      <Cl au="0" df="Efectivo" nm="mediopago_pago" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Medio de Pago</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="valor_pago" nu="0">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor recibido en pago</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombrecompleto_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="docpagador_pago" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="nombrepagador_pago" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="Sistema" nm="usuariorecibe_pago" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Usuario que Registra el Pago</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fecha_pago" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha y Hora del Pago</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_pago" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_PagosRecibidosApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PagosRecibidosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_PagosRecibidosApp_ObservadorEstudianteApp" prLkCl="id_estudiante" upAc="3">
+        <PrTb mn="0" nm="ObservadorEstudianteApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PagosRecibidosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_PagosRecibidosApp_ValoresPecuniariosApp" prLkCl="id_pecuniario" upAc="3">
+        <PrTb mn="0" nm="ValoresPecuniariosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PagosRecibidosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_pecuniario" prCl="id_pecuniario"/>
+      </Fk>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -1995,6 +2078,48 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="ValoresPecuniariosApp">
+      <Cm>Valores pecubiarios para la vigencia anual</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_pecuniario" nm="pkValoresPecuniariosApp"/>
+      <Cl au="1" df="" nm="id_pecuniario" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Valor Pecuniario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="tipo_pecuniario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Tipo de Pecuniario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_pecuniario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="0" nm="valor_pecuniario" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor del Pecuniario</Cm>
+      </Cl>
+      <Cl au="0" df="2020" nm="anualidad_pecuniario" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Anualidad de Pecuniario (Vigencia)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_pecuniario" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_ValoresPecuniariosApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="ValoresPecuniariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="ValoresPecuniariosApp_Unique" spa="0" unq="1">
+        <ClNs>nombre_pecuniario, anualidad_pecuniario, id_escuela</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <CustomTypes/>
   </Sch>
   <Dgm nm="EscuelaDB">
@@ -2019,12 +2144,12 @@
       <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
       <svg path=""/>
     </DiaProps>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PersonasApp" x="4" y="0"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PersonasApp" x="0" y="0"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="UsuariosApp" x="314" y="318"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="EscuelasApp" x="699" y="58"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SedesApp" x="837" y="682"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="JornadasApp" x="347" y="635"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TiposUsuariosApp" x="376" y="48"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TiposUsuariosApp" x="387" y="50"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AreasApp" x="1680" y="592"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsignaturasApp" x="2173" y="551"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PeriodosAnualesApp" x="1153" y="684"/>
@@ -2047,6 +2172,8 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PaisesApp" x="60" y="3695"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DepartamentosEstadosApp" x="610" y="3680"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1406" y="3676"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PagosRecibidosApp" x="36" y="3369"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ValoresPecuniariosApp" x="537" y="3383"/>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1592" y2="1656"/>
@@ -2232,7 +2359,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ObservadorEstudianteApp" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1237"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1250"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PeriodosApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
@@ -2263,6 +2390,22 @@
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MunicipiosCiudadesApp.fk_MunicipiosCiudadesApp_DepartamentosEstadosApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="922" x2="1383" y1="3707" y2="3707"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="832" x2="832" y1="186" y2="3469"/>
+        <positionableLine lineRole="CHILD_LINE" x1="435" x2="828" y1="3473" y2="3473"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="227" x2="227" y1="1592" y2="3346"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_ValoresPecuniariosApp" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="514" x2="435" y1="3452" y2="3452"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PeriodosAnualesApp.fk_PeriodosApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -2313,13 +2456,19 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_TiposUsuariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="523" x2="523" y1="215" y2="295"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="534" x2="534" y1="217" y2="295"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ValoresPecuniariosApp.fk_ValoresPecuniariosApp_EscuelasApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="676" x2="646" y1="158" y2="158"/>
+        <positionableLine lineRole="CHILD_LINE" x1="642" x2="642" y1="3360" y2="162"/>
       </positionableLines>
     </FkGl>
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="123">
+  <RnmMgr NxRnmId="126">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -2637,6 +2786,15 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="UsuariosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="122" nNm="fechaedita_usuario" oNm="fmodificacion_usuario"/>
     </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PagosRecibidosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="123" nNm="id_pago" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ValoresPecuniariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="124" nNm="id_pecuniario" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PagosRecibidosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="125" nNm="docpagador_pago" oNm="documentopagador_pago"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -2660,7 +2818,7 @@
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (28)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (30)</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

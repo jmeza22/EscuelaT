@@ -750,4 +750,52 @@ class ReportsBank extends BaseController {
         return $resultEstudiantes;
     }
 
+    public function getValoresPecuniarios($idescuela = null, $idpecuniario = null, $tipopecuniario = null, $anualidad = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM ValoresPecuniariosApp WHERE status_pecuniario=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idpecuniario !== null) {
+            $arraywhere['p_id_pecuniario'] = $idpecuniario;
+            $sql = $sql . " AND id_pecuniario=:p_id_pecuniario ";
+        }
+        if ($tipopecuniario !== null) {
+            $arraywhere['p_tipo_pecuniario'] = $tipopecuniario;
+            $sql = $sql . " AND tipo_pecuniario=:p_tipo_pecuniario ";
+        }
+        if ($anualidad !== null) {
+            $arraywhere['p_anualidad_pecuniario'] = $anualidad;
+            $sql = $sql . " AND anualidad_pecuniario=:p_anualidad_pecuniario ";
+        }
+        $sql = $sql . " ORDER BY anualidad_pecuniario DESC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getPagosRecibidos($idescuela = null, $idestudiante = null, $idpecuniario = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM PagosRecibidosApp WHERE status_pago=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idestudiante !== null) {
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND id_estudiante=:p_id_estudiante ";
+        }
+        if ($idpecuniario !== null) {
+            $arraywhere['p_id_pecuniario'] = $idpecuniario;
+            $sql = $sql . " AND id_pecuniario=:p_id_pecuniario ";
+        }
+        $sql = $sql . " ORDER BY fecha_pago DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
 }

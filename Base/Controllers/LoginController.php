@@ -36,12 +36,19 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
     $user = $_POST['mynickname'];
     $pw = $_POST['mypassword'];
     $password = $crypt->crypt($pw);
+    //$password = $pw;
     $idtipousuario = $_POST['id_tipousuario'];
+    $params=Array();
+    $params['p_username_usuario']=$user;
+    $params['p_password_usuario']=$password;
+    $params['p_id_tipousuario']=$idtipousuario;
+    $params['p_id_escuela']=$enterprise;
+    
     $sql = "SELECT IFNULL(Us.id_persona,'') as userid, IFNULL(Us.username_usuario,'') as user, IFNULL(Us.id_tipousuario,'') as userrole, IFNULL(Es.nombre_escuela,'') as enterprisename, CONCAT(IFNULL(Pe.nombre1_persona,''),' ',IFNULL(Pe.apellido1_persona,'')) as fullname "
             . " FROM UsuariosApp Us LEFT JOIN PersonasApp Pe ON Us.id_persona=Pe.id_persona LEFT JOIN EscuelasApp Es ON Us.id_escuela=Es.id_escuela  "
-            . " WHERE Us.username_usuario='$user' and Us.password_usuario='$password' and Us.id_tipousuario='$idtipousuario' and Us.id_escuela=$enterprise "
+            . " WHERE Us.username_usuario=:p_username_usuario and Us.password_usuario=:p_password_usuario and Us.id_tipousuario=:p_id_tipousuario and Us.id_escuela=:p_id_escuela "
             . " and Us.status_usuario=1 and Es.status_escuela=1";
-    $result = $bc->selectJSONArray($sql);
+    $result = $bc->selectJSONArray($sql, $params);
     $array = array();
     $array['message'] = '';
     $array['error'] = null;
@@ -66,8 +73,10 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
         }
     }
 
-    $sql = "SELECT * FROM TiposUsuariosApp WHERE id_tipousuario='" . $idtipousuario . "'";
-    $result = $bc->selectJSONArray($sql);
+    $sql = "SELECT * FROM TiposUsuariosApp WHERE id_tipousuario=:p_id_tipousuario";
+    $paramsTU=Array();
+    $paramsTU['p_id_tipousuario']=$idtipousuario;
+    $result = $bc->selectJSONArray($sql,$paramsTU);
     if ($session->hasLogin() && !isset($result) || $result !== null || strcmp($result, '') !== 0 || strcmp($result, '[]') !== 0) {
         $tipousuario = json_decode($result, true);
         $tipousuario = $tipousuario[0];
