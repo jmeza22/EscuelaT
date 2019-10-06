@@ -1,0 +1,4 @@
+idescuela;idtipousuario;idpersona;username;password;nombrecompleto;fechacrea;fechaedita;usuariocrea;usuarioedita;status
+1;SuperAdmin;P1;superadmin;;Super Administrador;1/01/2019;1/01/2019;superadmin;superadmin;1
+1;Admin;P2;admin;;Administrador - Rector;1/01/2019;1/01/2019;superadmin;superadmin;1
+1;Management;P3;secretario;;Secretario;1/01/2019;1/01/2019;superadmin;superadmin;1

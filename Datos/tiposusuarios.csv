@@ -1,0 +1,7 @@
+idtipousuario;nombre;superadmin;admin;management;standard;limited;external;status
+SuperAdmin;SuperAdministrador;1;0;0;0;0;0;1
+Admin;Rector;0;1;0;0;0;0;1
+Management;Secretario;0;0;1;0;0;0;1
+Teacher;Docente;0;0;0;1;0;0;1
+Student;Estudiante;0;0;0;0;1;0;1
+Visitor;Acudiente;0;0;0;0;0;1;1

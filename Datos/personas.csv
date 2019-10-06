@@ -1,0 +1,125 @@
+idpersona;documento;tipodoc;expedicion;nombre1;nombre2;apellido1;apellido2;sexo;telefono;pais;departamento;ciudad;barrio;direccion;email;fechanac;lugarnac;num_persona;status
+P1;0;OO;Sistema;Super;Administrador;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;1;1
+P2;1;OO;Sistema;Administrador;Rector;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;2;1
+P3;2;OO;Sistema;Reservado;Docente 1;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;3;1
+P4;3;OO;Sistema;Reservado;Docente 2;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;4;1
+P5;4;OO;Sistema;Reservado;Docente 3;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;5;1
+P6;5;OO;Sistema;Reservado;Docente 4;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;6;1
+P7;6;OO;Sistema;Reservado;Docente 5;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;7;1
+P8;7;OO;Sistema;Reservado;Docente 6;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;8;1
+P9;8;OO;Sistema;Reservado;Docente 7;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;9;1
+P10;9;OO;Sistema;Reservado;Docente 8;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;10;1
+P11;10;OO;Sistema;Reservado;Docente 9;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;11;1
+P12;11;OO;Sistema;Reservado;Docente 10;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;12;1
+P13;12;OO;Sistema;Reservado;Docente 11;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;13;1
+P14;13;OO;Sistema;Reservado;Docente 12;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;14;1
+P15;14;OO;Sistema;Reservado;Docente 13;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;15;1
+P16;15;OO;Sistema;Reservado;Docente 14;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;16;1
+P17;16;OO;Sistema;Reservado;Docente 15;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;17;1
+P18;17;OO;Sistema;Reservado;Docente 16;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;18;1
+P19;18;OO;Sistema;Reservado;Docente 17;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;19;1
+P20;19;OO;Sistema;Reservado;Docente 18;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;20;1
+P21;20;OO;Sistema;Reservado;Docente 19;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;21;1
+P22;21;OO;Sistema;Reservado;Docente 20;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;22;1
+P23;22;OO;Sistema;Reservado;Docente 21;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;23;1
+P24;23;OO;Sistema;Reservado;Docente 22;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;24;1
+P25;24;OO;Sistema;Reservado;Docente 23;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;25;1
+P26;25;OO;Sistema;Reservado;Docente 24;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;26;1
+P27;26;OO;Sistema;Reservado;Docente 25;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;27;1
+P28;27;OO;Sistema;Reservado;Docente 26;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;28;1
+P29;28;OO;Sistema;Reservado;Docente 27;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;29;1
+P30;29;OO;Sistema;Reservado;Docente 28;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;30;1
+P31;30;OO;Sistema;Reservado;Docente 29;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;31;1
+P32;31;OO;Sistema;Reservado;Docente 30;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;32;1
+P33;32;OO;Sistema;Reservado;Docente 31;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;33;1
+P34;33;OO;Sistema;Reservado;Docente 32;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;34;1
+P35;34;OO;Sistema;Reservado;Docente 33;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;35;1
+P36;35;OO;Sistema;Reservado;Docente 34;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;36;1
+P37;36;OO;Sistema;Reservado;Docente 35;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;37;1
+P38;37;OO;Sistema;Reservado;Docente 36;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;38;1
+P39;38;OO;Sistema;Reservado;Docente 37;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;39;1
+P40;39;OO;Sistema;Reservado;Docente 38;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;40;1
+P41;40;OO;Sistema;Reservado;Docente 39;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;41;1
+P42;41;OO;Sistema;Reservado;Docente 40;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;42;1
+P43;42;OO;Sistema;Reservado;Docente 41;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;43;1
+P44;43;OO;Sistema;Reservado;Docente 42;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;44;1
+P45;44;OO;Sistema;Reservado;Docente 43;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;45;1
+P46;45;OO;Sistema;Reservado;Docente 44;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;46;1
+P47;46;OO;Sistema;Reservado;Docente 45;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;47;1
+P48;47;OO;Sistema;Reservado;Docente 46;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;48;1
+P49;48;OO;Sistema;Reservado;Docente 47;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;49;1
+P50;49;OO;Sistema;Reservado;Docente 48;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;50;1
+P51;50;OO;Sistema;Reservado;Docente 49;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;51;1
+P52;51;OO;Sistema;Reservado;Docente 50;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;52;1
+P53;52;OO;Sistema;Reservado;Docente 51;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;53;1
+P54;53;OO;Sistema;Reservado;Docente 52;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;54;1
+P55;54;OO;Sistema;Reservado;Docente 53;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;55;1
+P56;55;OO;Sistema;Reservado;Docente 54;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;56;1
+P57;56;OO;Sistema;Reservado;Docente 55;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;57;1
+P58;57;OO;Sistema;Reservado;Docente 56;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;58;1
+P59;58;OO;Sistema;Reservado;Docente 57;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;59;1
+P60;59;OO;Sistema;Reservado;Docente 58;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;60;1
+P61;60;OO;Sistema;Reservado;Docente 59;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;61;1
+P62;61;OO;Sistema;Reservado;Docente 60;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;62;1
+P63;62;TI;Sistema;Estudiante;De Prueba 1;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;63;1
+P64;63;TI;Sistema;Estudiante;De Prueba 2;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;64;1
+P65;64;TI;Sistema;Estudiante;De Prueba 3;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;65;1
+P66;65;TI;Sistema;Estudiante;De Prueba 4;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;66;1
+P67;66;TI;Sistema;Estudiante;De Prueba 5;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;67;1
+P68;67;TI;Sistema;Estudiante;De Prueba 6;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;68;1
+P69;68;TI;Sistema;Estudiante;De Prueba 7;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;69;1
+P70;69;TI;Sistema;Estudiante;De Prueba 8;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;70;1
+P71;70;TI;Sistema;Estudiante;De Prueba 9;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;71;1
+P72;71;TI;Sistema;Estudiante;De Prueba 10;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;72;1
+P73;72;TI;Sistema;Estudiante;De Prueba 11;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;73;1
+P74;73;TI;Sistema;Estudiante;De Prueba 12;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;74;1
+P75;74;TI;Sistema;Estudiante;De Prueba 13;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;75;1
+P76;75;TI;Sistema;Estudiante;De Prueba 14;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;76;1
+P77;76;TI;Sistema;Estudiante;De Prueba 15;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;77;1
+P78;77;TI;Sistema;Estudiante;De Prueba 16;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;78;1
+P79;78;TI;Sistema;Estudiante;De Prueba 17;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;79;1
+P80;79;TI;Sistema;Estudiante;De Prueba 18;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;80;1
+P81;80;TI;Sistema;Estudiante;De Prueba 19;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;81;1
+P82;81;TI;Sistema;Estudiante;De Prueba 20;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;82;1
+P83;82;TI;Sistema;Estudiante;De Prueba 21;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;83;1
+P84;83;TI;Sistema;Estudiante;De Prueba 22;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;84;1
+P85;84;TI;Sistema;Estudiante;De Prueba 23;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;85;1
+P86;85;TI;Sistema;Estudiante;De Prueba 24;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;86;1
+P87;86;TI;Sistema;Estudiante;De Prueba 25;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;87;1
+P88;87;TI;Sistema;Estudiante;De Prueba 26;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;88;1
+P89;88;TI;Sistema;Estudiante;De Prueba 27;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;89;1
+P90;89;TI;Sistema;Estudiante;De Prueba 28;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;90;1
+P91;90;TI;Sistema;Estudiante;De Prueba 29;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;91;1
+P92;91;TI;Sistema;Estudiante;De Prueba 30;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;92;1
+P93;92;TI;Sistema;Estudiante;De Prueba 31;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;93;1
+P94;93;TI;Sistema;Estudiante;De Prueba 32;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;94;1
+P95;94;TI;Sistema;Estudiante;De Prueba 33;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;95;1
+P96;95;TI;Sistema;Estudiante;De Prueba 34;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;96;1
+P97;96;TI;Sistema;Estudiante;De Prueba 35;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;97;1
+P98;97;TI;Sistema;Estudiante;De Prueba 36;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;98;1
+P99;98;TI;Sistema;Estudiante;De Prueba 37;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;99;1
+P100;99;TI;Sistema;Estudiante;De Prueba 38;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;100;1
+P101;100;TI;Sistema;Estudiante;De Prueba 39;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;101;1
+P102;101;TI;Sistema;Estudiante;De Prueba 40;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;102;1
+P103;102;TI;Sistema;Estudiante;De Prueba 41;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;103;1
+P104;103;TI;Sistema;Estudiante;De Prueba 42;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;104;1
+P105;104;TI;Sistema;Estudiante;De Prueba 43;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;105;1
+P106;105;TI;Sistema;Estudiante;De Prueba 44;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;106;1
+P107;106;TI;Sistema;Estudiante;De Prueba 45;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;107;1
+P108;107;TI;Sistema;Estudiante;De Prueba 46;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;108;1
+P109;108;TI;Sistema;Estudiante;De Prueba 47;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;109;1
+P110;109;TI;Sistema;Estudiante;De Prueba 48;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;110;1
+P111;110;TI;Sistema;Estudiante;De Prueba 49;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;111;1
+P112;111;TI;Sistema;Estudiante;De Prueba 50;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;112;1
+P113;112;TI;Sistema;Estudiante;De Prueba 51;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;113;1
+P114;113;TI;Sistema;Estudiante;De Prueba 52;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;114;1
+P115;114;TI;Sistema;Estudiante;De Prueba 53;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;115;1
+P116;115;TI;Sistema;Estudiante;De Prueba 54;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;116;1
+P117;116;TI;Sistema;Estudiante;De Prueba 55;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;117;1
+P118;117;TI;Sistema;Estudiante;De Prueba 56;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;118;1
+P119;118;TI;Sistema;Estudiante;De Prueba 57;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;119;1
+P120;119;TI;Sistema;Estudiante;De Prueba 58;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;120;1
+P121;120;TI;Sistema;Estudiante;De Prueba 59;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;121;1
+P122;121;TI;Sistema;Estudiante;De Prueba 60;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;122;1
+P123;122;TI;Sistema;Estudiante;De Prueba 61;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;123;1
+P124;123;TI;Sistema;Estudiante;De Prueba 62;Sistema;EscuelaT;I;0;COLOMBIA;NINGUNO;NINGUNO;NINGUNO;NINGUNO;email@email.com;1/01/2019;Sistema;124;1

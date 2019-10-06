@@ -17,7 +17,7 @@ $tipousuario = null;
 $idpersona = null;
 $crypt = new MyCrypt();
 $sql = null;
-
+//pw admin 92042202128fb12b1241f0dce1e6fe8c56c9fb6911c527e063aabcd
 if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token'] != null) {
 
     if (strcmp($_POST['token'], '92a04b22c02d12e8') != 0) {
