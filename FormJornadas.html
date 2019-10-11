@@ -59,13 +59,7 @@ and open the template in the editor.
                             <label>Hora.Fin</label>
                             <input type="time" id="horafin_jornada" name="horafin_jornada" value="" class="form-control" required="required" >
                         </div>
-                        <div class="col-sm-3">
-                            <label>Escuela</label>
-                            <select id="id_escuela" name="id_escuela" selected="NN" required="required" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" class="form-control" style="width: 100%;" onchange="setIdJornada();setFindbyCombobox('id_sede', this.id, this.value);">
-                                <option selected="selected" value="-1">Ninguna</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-6">
                             <label>Sede</label>
                             <select id="id_sede" name="id_sede" selected="NN" required="required" model="SedesApp" colname="nombre_sede" colvalue="id_sede" findby="id_escuela" findbyvalue="-1" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="setIdJornada();">
                                 <option disabled="disabled" selected="selected" value="-1">Ninguna</option>

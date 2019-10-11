@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    //LoadEscuela();
-    setIdEscuela();
     RefreshTable();
+    LoadSede();
 });
 
 function LoadTable() {
@@ -14,13 +13,6 @@ function LoadTable() {
     loadTableData(mytable, false).done(function () {
     });
     return mytable;
-}
-
-function LoadEscuela() {
-    var escuela = null;
-    escuela = document.getElementById("id_escuela");
-    escuela.innerHTML = '<option value="">Ninguna</option>';
-    loadComboboxData(escuela);
 }
 
 function LoadSede() {
@@ -113,7 +105,7 @@ function RefreshTable() {
     if (table0 !== null && table0 !== undefined) {
         idescuela = document.getElementById("id_escuela");
         table0.setAttribute('findby', 'id_escuela');
-        table0.setAttribute('findbyvalue', idescuela.value);
+        table0.setAttribute('findbyvalue', getEnterpriseID());
         LoadTable();
     }
 }
@@ -130,7 +122,7 @@ function setIdJornada() {
     idsede = getElement(form0, 'id_sede');
     nombre = getElement(form0, 'nombre_jornada');
     if (idjornada !== null && idjornada !== undefined) {
-        idjornada.value = '' + nombre.value.replace("ñ", "n").replace('Ñ','N') + '_E' + idescuela.value + 'S' + idsede.value + '';
+        idjornada.value = '' + nombre.value.replace("ñ", "n").replace('Ñ','N') + '_E' + getEnterpriseID() + 'S' + idsede.value + '';
     }
 }
 
