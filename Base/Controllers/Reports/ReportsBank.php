@@ -195,6 +195,34 @@ class ReportsBank extends BaseController {
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
+    
+    public function getGrados($idescuela = null, $idprograma = null, $idplanestudio = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT PED.numgrado_programa, Pr.nombre_programa, PES.descripcion_planestudio "
+                . " FROM "
+                . " PlanEstudioDetalleApp PED INNER JOIN PlanEstudiosApp PES "
+                . " ON PED.id_planestudio=PES.id_planestudio "
+                . " INNER JOIN ProgramasApp Pr "
+                . " ON PED.id_programa=Pr.id_programa "
+                . " WHERE PED.status_planestudiodetalle=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND PED.id_escuela=:p_id_escuela ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND PED.id_programa=:p_id_programa ";
+        }
+        if ($idplanestudio !== null) {
+            $arraywhere['p_id_planestudio'] = $idplanestudio;
+            $sql = $sql . " AND PED.id_planestudio=:p_id_planestudio ";
+        }
+        $sql = $sql . " GROUP BY PED.numgrado_programa ORDER BY CAST(PED.numgrado_programa AS DECIMAL)";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
 
     public function getGrupos($idescuela = null, $idprograma = null, $numgrado = null) {
         $sql = null;

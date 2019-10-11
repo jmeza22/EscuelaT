@@ -1,4 +1,5 @@
 idsede;idescuela;nombre;direccion;telefono;email;cordinador;status
-0101;1;Sede 1;Direccion;0;sede1@email.com;Cordinador;1
-0102;1;Sede 2;Direccion;0;sede1@email.com;Cordinador;1
-0103;1;Sede 3;Direccion;0;sede1@email.com;Cordinador;1
+0101;1;Sede 1: IED SAN PABLO;Direccion;0;sede1@email.com;Cordinador;1
+0102;1;Sede 2: MI PRIMERA ILUSION;Direccion;0;sede1@email.com;Cordinador;1
+0103;1;Sede 3: ANTONIO NARIÑO;Direccion;0;sede1@email.com;Cordinador;1
+0104;1;Sede 4: ANTONIA SANTOS;Direccion;0;sede1@email.com;Cordinador;1

@@ -76,7 +76,7 @@ and open the template in the editor.
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Plan Estudios</label>
-                                        <select id="id_planestudio" name="id_planestudio" selected="NULL" required="required" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" >
+                                        <select id="id_planestudio" name="id_planestudio" selected="NULL" required="required" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('numgrado_programa', this.id, this.value);">
                                             <option selected="selected" value="NULL">Ninguna</option>
                                         </select>
                                     </div>
@@ -91,23 +91,8 @@ and open the template in the editor.
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Grado</label>
-                                        <select id="numgrado_programa" name="numgrado_programa" required="required" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value, 2);">
-                                            <option selected="selected" value="">Ninguno</option>
-                                            <option value="-2">PreJardin</option>
-                                            <option value="-1">Jardin</option>
-                                            <option value="0">Transicion</option>
-                                            <option value="1">Primero</option>
-                                            <option value="2">Segundo</option>
-                                            <option value="3">Tercero</option>
-                                            <option value="4">Cuarto</option>
-                                            <option value="5">Quinto</option>
-                                            <option value="6">Sexto</option>
-                                            <option value="7">Septimo</option>
-                                            <option value="8">Octavo</option>
-                                            <option value="9">Noveno</option>
-                                            <option value="10">Decimo</option>
-                                            <option value="11">Undecimo</option>
-                                            <option value="12">Duodecimo</option>
+                                        <select id="numgrado_programa" name="numgrado_programa"  model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value);">
+                                            <option disabled="disabled" selected="selected" value="0">Ninguno</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
@@ -119,6 +104,24 @@ and open the template in the editor.
                                     <div class="col-sm-3">
                                         <label title="Codigo del Matricula">Codigo</label>
                                         <input type="text" id="id_matricula" name="id_matricula" readonly="readonly" value="" class="form-control" maxlength="30" onfocus="setIdMatricula();" /> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label>Estado Matricula</label>
+                                        <input type="text" name="estado_matricula" id="estado_matricula" value="A" maxlength="24" required="required" class="form-control" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Valor Matricula</label>
+                                        <input type="number" name="valor_matricula" id="valor_matricula" value="0" maxlength="24" required="required" class="form-control" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Valor Pagado</label>
+                                        <input type="number" name="valorpagado_matricula" id="valorpagado_matricula" value="0" maxlength="24" required="required" class="form-control" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Valor Deuda</label>
+                                        <input type="number" name="valordeuda_matricula" id="valordeuda_matricula" value="0" maxlength="24" required="required" class="form-control" >
                                     </div>
                                 </div>
                             </div>

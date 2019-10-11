@@ -51,26 +51,14 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-2">
                             <label>Plan Estudios</label>
-                            <select id="id_planestudio" name="id_planestudio" selected="NULL" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value);">
+                            <select id="id_planestudio" name="id_planestudio" selected="NULL" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value); setFindbyCombobox('numgrado_programa', this.id, this.value);">
                                 <option selected="selected" value="NULL">Ninguna</option>
                             </select>
                         </div>
                         <div class="col-sm-2">
                             <label>Grado</label>
-                            <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value, 2); setFindbyCombobox('id_grupo', this.id, this.value);">
+                            <select id="numgrado_programa" name="numgrado_programa"  model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_asignatura', this.id, this.value, 2); setFindbyCombobox('id_grupo', this.id, this.value);">
                                 <option disabled="disabled" selected="selected" value="0">Ninguno</option>
-                                <option value="1">Primero</option>
-                                <option value="2">Segundo</option>
-                                <option value="3">Tercero</option>
-                                <option value="4">Cuarto</option>
-                                <option value="5">Quinto</option>
-                                <option value="6">Sexto</option>
-                                <option value="7">Septimo</option>
-                                <option value="8">Octavo</option>
-                                <option value="9">Noveno</option>
-                                <option value="10">Decimo</option>
-                                <option value="11">Undecimo</option>
-                                <option value="12">Duodecimo</option>
                             </select>
                         </div>
                         <div class="col-sm-4">

@@ -514,7 +514,7 @@ class SQLDatabase {
         return null;
     }
 
-    private function buildSelectStmtString($table, $arraycolumns, $where = NULL, $arraywhere = NULL) {
+    private function buildSelectStmtString($table, $arraycolumns, $where = NULL, $arraywhere = NULL, $groupby = NULL, $orderby = NULL) {
         if ($table != null && $arraycolumns != null) {
             $sql = 'SELECT';
             if (is_array($arraycolumns)) {
@@ -538,6 +538,13 @@ class SQLDatabase {
                 $sql = substr($sql, 0, -3);
             } elseif ($where != null && strcmp($where, '') !== 0) {
                 $sql = $sql . ' WHERE ' . $where;
+            }
+
+            if ($groupby !== null && $groupby !== '') {
+                $sql = $sql . ' GROUP BY ' . $groupby . ' ';
+            }
+            if ($orderby !== null && $orderby !== '') {
+                $sql = $sql . ' ORDER BY ' . $orderby . ' ';
             }
             //echo $sql;
             return $sql;
@@ -642,11 +649,11 @@ class SQLDatabase {
         return $result;
     }
 
-    public function selectStmt($table, $array, $where = null, $arraywhere = null) {
+    public function selectStmt($table, $array, $where = null, $arraywhere = null, $groupby = null, $orderby = null) {
         $result = null;
         $this->stmt = null;
         if ($this->link != null && isset($table) && $table != null && isset($array) && $array != null) {
-            $sql = $this->buildSelectStmtString($table, $array, $where, $arraywhere);
+            $sql = $this->buildSelectStmtString($table, $array, $where, $arraywhere, $groupby, $orderby);
             return $this->queryStmt($sql, $arraywhere);
         }
         return $result;

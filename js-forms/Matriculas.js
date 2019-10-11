@@ -12,6 +12,7 @@ jQuery(document).ready(function () {
     LoadPrograma();
     LoadPlanEstudios();
     LoadPeriodo();
+    LoadGrado();
     LoadGrupo();
     LoadTable();
 
@@ -57,6 +58,13 @@ function LoadPlanEstudios() {
     plan = document.getElementById("id_planestudio");
     plan.innerHTML = '<option value="">Ninguna</option>';
     loadComboboxData(plan);
+}
+
+function LoadGrado() {
+    var grado = null;
+    grado = document.getElementById("numgrado_programa");
+    grado.innerHTML = '<option value="">Ninguna</option>';
+    loadComboboxData(grado);
 }
 
 function LoadGrupo() {

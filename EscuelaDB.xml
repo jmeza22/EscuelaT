@@ -1332,6 +1332,10 @@
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Valor de la Matricula</Cm>
       </Cl>
+      <Cl au="0" df="Normal" nm="estado_matricula" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Estado de Matricula (Normal, Condicional, Anulada, Morosa)</Cm>
+      </Cl>
       <Cl au="0" df="" nm="usuariocrea_matricula" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
         <Cm>Usuario que crea la matricula.</Cm>
@@ -2359,7 +2363,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ObservadorEstudianteApp" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1250"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1263"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PeriodosApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
@@ -2812,7 +2816,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

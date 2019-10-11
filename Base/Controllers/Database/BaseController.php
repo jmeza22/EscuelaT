@@ -301,7 +301,7 @@ class BaseController {
         return false;
     }
 
-    public function select($table = null, $columns = '*', $where = null, $arraywhere = null) {
+    public function select($table = null, $columns = '*', $where = null, $arraywhere = null, $groupby = null, $orderby = null) {
         $result = null;
         if ($table == null) {
             $table = $this->model;
@@ -310,7 +310,7 @@ class BaseController {
             $where = $this->where;
         }
         if (isset($this->db) && isset($this->model)) {
-            $result = $this->db->selectStmt($table, $columns, $where, $arraywhere);
+            $result = $this->db->selectStmt($table, $columns, $where, $arraywhere, $groupby, $orderby);
             $result = json_encode($result);
             return $result;
         }
@@ -439,14 +439,14 @@ class BaseController {
         return $result;
     }
 
-    public function getComboboxData($colname = 'colname', $colvalue = 'colvalue', $othervalue = 'othervalue', $where = null, $arraywhere = null) {
+    public function getComboboxData($colname = 'colname', $colvalue = 'colvalue', $othervalue = 'othervalue', $where = null, $arraywhere = null, $groupby = null, $orderby = null) {
         $result = null;
         if (isset($this->db) && isset($this->model) && isset($colname) && isset($colvalue)) {
             $columns = array();
             array_push($columns, $colname . ' AS iname');
             array_push($columns, $colvalue . ' AS ivalue');
             array_push($columns, $othervalue . ' AS iothervalue');
-            $result = $this->db->selectStmt($this->model, $columns, $where, $arraywhere);
+            $result = $this->db->selectStmt($this->model, $columns, $where, $arraywhere, $groupby, $orderby);
             $result = json_encode($result);
             return $result;
         }

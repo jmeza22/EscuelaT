@@ -28,8 +28,8 @@ function VerEstudiante(item) {
     if (item !== undefined && item !== null) {
         var form = getForm(item);
         var idestudiante = getElement(form, 'id_estudiante');
-        setPOST('observador_id_estudiante', idestudiante.value);
-        window.location.href = "FormEstudiantes.html?"+idestudiante.id+"="+idestudiante.value+"";
+        setPOST('observador_id_persona', idestudiante.value);
+        window.location.href = "FormEstudiantes.html?id_persona="+idestudiante.value+"";
     }
 }
 
