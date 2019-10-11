@@ -17,6 +17,14 @@ jQuery(document).ready(function () {
 
 });
 
+function setNombreCompleto() {
+    var nombre1 = document.getElementById("nombre1_persona");
+    var apellido1 = document.getElementById("apellido1_persona");
+    if (nombre1 !== undefined && apellido1 !== undefined && nombre1.value !== '' && apellido1.value !== '') {
+        document.getElementById("nombrecompleto_persona").value = nombre1.value + ' ' + apellido1.value;
+    }
+}
+
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
     loadTableData(mytable, false);
@@ -39,8 +47,6 @@ function Send(item) {
 function SendUsuario(item) {
     var username = document.getElementById('username_usuario');
     var password = document.getElementById('password_usuario');
-    var nombre1 = document.getElementById("nombre1_persona");
-    var apellido1 = document.getElementById("nombre1_persona");
     var myform = null;
     myform = getForm(item);
     if (username.value === '0' || username.value === '') {
@@ -50,9 +56,7 @@ function SendUsuario(item) {
         nuevoPassword();
     }
     if (validateForm(myform)) {
-        if (nombre1 !== undefined && apellido1 !== undefined && nombre1.value !== '' && apellido1.value !== '') {
-            document.getElementById("nombrecompleto_persona").value = nombre1.value + ' ' + apellido1.value;
-        }
+        setNombreCompleto();
         Send(myform);
     }
 }
