@@ -16,12 +16,9 @@ function CargarNombres() {
     if (form0 !== undefined && form0 !== null) {
         idestudiante = getElement(form0, 'id_estudiante');
         if (idestudiante !== undefined && idestudiante !== null) {
-            loadComboboxData(document.getElementById("lista_id_persona")).done(function () {
-                autoNameFromDataList(idestudiante, 'nombrecompleto_estudiante', null);
-                autoNameFromDataList('idacudiente1_estudiante', 'nombreacudiente1_estudiante', null);
-                autoNameFromDataList('idacudiente2_estudiante', 'nombreacudiente2_estudiante', null);
-            });
             loadComboboxData(document.getElementById("lista_acudientes"));
+            autoNameFromDataList('idacudiente1_estudiante', 'nombreacudiente1_estudiante', null);
+            autoNameFromDataList('idacudiente2_estudiante', 'nombreacudiente2_estudiante', null);
         }
     }
 }
@@ -158,6 +155,15 @@ function LoadTableEstudiantes() {
     clearTableData(mytable);
     loadTableData(mytable, true);
     return mytable;
+}
+
+function ClearTableAnotaciones() {
+    var mytable = document.getElementById("dataTableAN");
+    clearTableData(mytable);
+}
+function ClearTableCitaciones() {
+    var mytable = document.getElementById("dataTableCI");
+    clearTableData(mytable);
 }
 
 function CopiarCodigoEstudianteAnotacion() {
@@ -351,13 +357,28 @@ function GrabarPersona(item) {
                 idpersona.value = 'P' + getLastInsertId();
                 idestudiante.value = 'P' + getLastInsertId();
                 BuscarEstudiante();
-                alert('El Codigo de Persona Asignado es: P' + getLastInsertId()+'. Ahora debe completar las secciones Acudiente 1, Acudiente 2, Salud y Crecimiento.\n * Use las secciones de Anotaciones y Citaciones cuando se presente alguna novedad.');
+                alert('El Codigo de Persona Asignado es: P' + getLastInsertId() + '. Ahora debe completar las secciones Acudiente 1, Acudiente 2, Salud y Crecimiento.\n * Use las secciones de Anotaciones y Citaciones cuando se presente alguna novedad.');
             }
         });
     }
 }
 
+function resetEstudiante() {
+    var formE = document.getElementById('form0');
+    resetForm(formE);
+    ClearTableAnotaciones();
+    ClearTableCitaciones();
+}
 
 function resetAnoacion() {
 
+}
+
+function VerHistorialMatriculas() {
+    var formE = document.getElementById('form0');
+    var idestudiante = getElement(formE, 'id_estudiante');
+    if (idestudiante !== null) {
+        window.location.href = 'FormHomeEstudiantes.html?id_estudiante='+idestudiante.value;
+        setPOST('id_estudiante', idestudiante.value);
+    }
 }

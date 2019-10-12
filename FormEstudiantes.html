@@ -44,27 +44,27 @@ and open the template in the editor.
                             <label>Opciones</label>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="BuscarEstudiante();" style="width: 100% !important;">Buscar</button> 
+                                    <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="BuscarEstudiante();" style="width: 100% !important;" title="Buscar por Codigo"><i class="glyphicon glyphicon-search"></i></button> 
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="button" id="listado" name="listado" href="#modal_listado" data-toggle="modal" class="btn btn-default" onclick="LoadTableEstudiantes(this);" style="width: 100% !important;">Listado</button> 
+                                    <button type="button" id="listado" name="listado" href="#modal_listado" data-toggle="modal" class="btn btn-default" onclick="LoadTableEstudiantes(this);" style="width: 100% !important;" title="Escoger del Listado de Estudiantes"><i class="glyphicon glyphicon-list"></i></button> 
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <label>Primer Nombre</label>
+                            <label>1er Nombre</label>
                             <input type="text" name="nombre1_persona" id="nombre1_persona" value="" required="required" maxlength="50" class="form-control" title="Primer Nombre">
                         </div>
                         <div class="col-sm-2">
-                            <label>Segundo Nombre</label>
+                            <label>2do Nombre</label>
                             <input type="text" name="nombre2_persona" id="nombre2_persona" value=""  maxlength="50" class="form-control" title="Segundo Nombre">
                         </div>
                         <div class="col-sm-2">
-                            <label>Primer Apellido</label>
+                            <label>1er Apellido</label>
                             <input type="text" name="apellido1_persona" id="apellido1_persona" value="" required="required" maxlength="50" class="form-control" title="Primer Apellido">
                         </div>
                         <div class="col-sm-2">
-                            <label>Segundo Apellido</label>
+                            <label>2do Apellido</label>
                             <input type="text" name="apellido2_persona" id="apellido2_persona" value="" required="required" maxlength="50" class="form-control" title="Segundo Apellido">
                         </div>
 
@@ -133,7 +133,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-6">
                             <center>
-                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this); resetEstudiante();" class="btn btn-success">Nuevo</button> 
                             </center>
                         </div>
                     </div>
@@ -260,17 +260,21 @@ and open the template in the editor.
                     </div>
 
                     <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <center>
-                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante(this);" class="btn btn-primary" >Grabar</button>        
-                            </center>
-                        </div>
-                        <div class="col-sm-6">
-                            <center>
-                                <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante(this);" class="btn btn-primary" style="width: 140px;">Grabar</button>        
                             </center>
                         </div>
                     </div>
+                    
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-12">
+                            <center>
+                                <button type="button" id="btMatriculas" name="btMatriculas" onclick="VerHistorialMatriculas();" class="btn btn-default" style="min-width: 140px;">Historial Matriculas</button>        
+                            </center>
+                        </div>
+                    </div>
+
 
                     <datalist id="lista_parentesco" name="lista_parentesco" >
                         <option value="Ninguno">Ninguno</option>
