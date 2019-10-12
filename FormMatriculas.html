@@ -102,15 +102,17 @@ and open the template in the editor.
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label title="Codigo del Matricula">Codigo</label>
-                                        <input type="text" id="id_matricula" name="id_matricula" readonly="readonly" value="" class="form-control" maxlength="30" onfocus="setIdMatricula();" /> 
+                                        <label>Estado Matricula</label>
+                                        <select id="estado_matricula" name="estado_matricula" class="form-control" style="width: 100%;">
+                                            <option disabled="disabled" selected="selected" value="0">Ninguno</option>
+                                            <option value="Normal">Normal</option>
+                                            <option value="Condicionada">Condicionada</option>
+                                            <option value="Suspendida">Suspendida</option>
+                                            <option value="Finalizada">Finalizada</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <label>Estado Matricula</label>
-                                        <input type="text" name="estado_matricula" id="estado_matricula" value="A" maxlength="24" required="required" class="form-control" >
-                                    </div>
                                     <div class="col-sm-3">
                                         <label>Valor Matricula</label>
                                         <input type="number" name="valor_matricula" id="valor_matricula" value="0" maxlength="24" required="required" class="form-control" >
@@ -122,6 +124,10 @@ and open the template in the editor.
                                     <div class="col-sm-3">
                                         <label>Valor Deuda</label>
                                         <input type="number" name="valordeuda_matricula" id="valordeuda_matricula" value="0" maxlength="24" required="required" class="form-control" disabled="disabled" >
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label title="Codigo del Matricula">Codigo</label>
+                                        <input type="text" id="id_matricula" name="id_matricula" readonly="readonly" value="" class="form-control" maxlength="30" onfocus="setIdMatricula();" /> 
                                     </div>
                                 </div>
                             </div>

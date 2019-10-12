@@ -1,0 +1,14 @@
+idpecuniario;tipo;nombrepecuniario;valor;anualidad;idescuela;status
+1;Inscripcion;Derecho de Inscripcion 2019;5000;2019;1;1
+2;Matricula;Matricula Bachiller 2019;15000;2019;1;1
+3;MatriculaTyT;Matricula Tecnicos y Tecnologos 2019;400000;2019;1;1
+4;MatriculaPro;Matricula Programa Profesional 2019;1500000;2019;1;1
+5;CertificadoEstudios;Certificado de Estudios 2019;4000;2019;1;1
+6;CertificadoNotas;Certificado de Notas 2019;4000;2019;1;1
+7;CertificadoComportamiento;Certificado de Conportamiento y Conducta 2019;4000;2019;1;1
+8;PruebasSaber11;Pruebas Saber 11 2019;45000;2019;1;1
+9;PruebasSaberTyT;Pruebas Saber Tecnicos y Tecnologos 2019;105000;2019;1;1
+10;PruebasSaberPro;Pruebas Saber PRO 2019;105000;2019;1;1
+11;DerechoGrado;Derecho de Grado Basica y Media (Ceremonia) 2019;30000;2019;1;1
+12;DerechoGradoTyT;Derecho de Grado Tecnicos y Tecnologos (Ceremonia) 2019;30000;2019;1;1
+13;DerechoGradoPro;Derecho de Grado Profesional (Ceremonia) 2019;30000;2019;1;1

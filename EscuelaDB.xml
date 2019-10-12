@@ -2160,7 +2160,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TiposUsuariosApp" x="387" y="50"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AreasApp" x="1680" y="592"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsignaturasApp" x="2173" y="551"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PeriodosAnualesApp" x="1153" y="684"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PeriodosAnualesApp" x="1254" y="681"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="LogrosAsignaturasApp" x="2294" y="1102"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ProgramasApp" x="1390" y="426"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PlanEstudioDetalleApp" x="1844" y="1101"/>
@@ -2235,8 +2235,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_PeriodosApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1130" x2="880" y1="749" y2="749"/>
-        <positionableLine lineRole="CHILD_LINE" x1="876" x2="876" y1="1396" y2="753"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1231" x2="880" y1="746" y2="746"/>
+        <positionableLine lineRole="CHILD_LINE" x1="876" x2="876" y1="1396" y2="750"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_PlanEstudioDetalleApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
@@ -2262,8 +2262,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.CortesPeriodosApp.fk_CortesApp_PeriodosApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1339" x2="1339" y1="825" y2="1233"/>
-        <positionableLine lineRole="CHILD_LINE" x1="1342" x2="1335" y1="1237" y2="1237"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1440" x2="1440" y1="822" y2="1233"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1342" x2="1436" y1="1237" y2="1237"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.DepartamentosEstadosApp.fk_DepartamentosEstadosApp_PaisesApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
@@ -2284,8 +2284,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_PeriodosApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1284" x2="1284" y1="825" y2="1192"/>
-        <positionableLine lineRole="CHILD_LINE" x1="911" x2="1280" y1="1196" y2="1196"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1385" x2="1385" y1="822" y2="1192"/>
+        <positionableLine lineRole="CHILD_LINE" x1="911" x2="1381" y1="1196" y2="1196"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.GruposApp.fk_GruposApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2372,9 +2372,9 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PeriodosApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1272" x2="1272" y1="825" y2="811"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1373" x2="1373" y1="822" y2="811"/>
         <positionableLine lineRole="CHILD_LINE" x1="268" x2="268" y1="943" y2="819"/>
-        <positionableLine lineRole="MIDDLE_LINE" x1="272" x2="1268" y1="815" y2="815"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="272" x2="1369" y1="815" y2="815"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PlanEstudiosApp" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
@@ -2418,8 +2418,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PeriodosAnualesApp.fk_PeriodosApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="988" x2="1263" y1="144" y2="144"/>
-        <positionableLine lineRole="CHILD_LINE" x1="1267" x2="1267" y1="661" y2="148"/>
+        <positionableLine lineRole="PARENT_LINE" x1="988" x2="1364" y1="144" y2="144"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1368" x2="1368" y1="658" y2="148"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PlanEstudioDetalleApp.fk_PlanEstudioDetalleApp_AsignaturasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
