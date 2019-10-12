@@ -8,12 +8,6 @@ jQuery(document).ready(function () {
     if (idprograma !== undefined && idprograma !== null && idprograma.value !== '') {
         getData(idprograma);
     }
-    
-    loadComboboxData(document.getElementById("lista_id_escuela")).done(function () {
-        autoNameFromDataList('id_escuela', 'nombre_escuela', null);
-    });
-    
-    setIdEscuela();
     LoadTable();
 });
 
@@ -78,13 +72,3 @@ function DeleteItem(item) {
     }
 }
 
-function setIdEscuela() {
-    var item = null;
-    item = document.getElementById('id_escuela');
-    if (item !== null && item !== undefined && item.value === '') {
-        console.log('Seteando Id Escuela.');
-        if (getEnterpriseID() !== null) {
-            item.value = getEnterpriseID();
-        }
-    }
-}

@@ -6,7 +6,7 @@ include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 $bc = null;
 $where = null;
-if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
+if ($session->hasLogin() ) {
     $bc = new ReportsBank();
     $bc->connect();
     $bc->preparePostData();
@@ -20,6 +20,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $othervalue = "id_matricula";
     $arraywhere = $bc->parseFindByToArray($_POST);
     $arraywhere['status_matricula'] = '1';
+    //print_r($_POST);
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
     $bc->disconnect();
 }

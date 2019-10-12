@@ -1914,6 +1914,10 @@
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Numero de Grados o Niveles (Semestres o Años) en que se divide el programa</Cm>
       </Cl>
+      <Cl au="0" df="0" nm="valor_programa" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Valor de Matricula</Cm>
+      </Cl>
       <Cl au="0" df="1" nm="status_programa" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
@@ -2291,7 +2295,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.GruposApp.fk_GruposApp_ProgramasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1558" x2="1558" y1="580" y2="947"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1558" x2="1558" y1="593" y2="947"/>
         <positionableLine lineRole="CHILD_LINE" x1="766" x2="1554" y1="951" y2="951"/>
       </positionableLines>
     </FkGl>
@@ -2380,7 +2384,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ProgramasApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="1558" x2="1558" y1="580" y2="861"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1558" x2="1558" y1="593" y2="861"/>
         <positionableLine lineRole="CHILD_LINE" x1="314" x2="314" y1="943" y2="869"/>
         <positionableLine lineRole="MIDDLE_LINE" x1="318" x2="1554" y1="865" y2="865"/>
       </positionableLines>
@@ -2438,7 +2442,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PlanEstudiosApp.fk_PlanEstudiosApp_ProgramasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="1629" x2="1629" y1="580" y2="861"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="1629" x2="1629" y1="593" y2="861"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ProgramasApp.fk_Programa_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
