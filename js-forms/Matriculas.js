@@ -5,7 +5,6 @@
  */
 jQuery(document).ready(function () {
     showNotification('Espere...', 'Espere a que se carguen todos los elementos. Tenga paciencia. No recargue la pagina.')
-    //LoadEscuela();
     autoLoadNameFromId('id_estudiante', 'nombrecompleto_estudiante', null, null);
     LoadSede();
     LoadJornada();
@@ -23,13 +22,6 @@ function LoadTable() {
     loadTableData(mytable, false).done(function () {
     });
     return mytable;
-}
-
-function LoadEscuela() {
-    var escuela = null;
-    escuela = document.getElementById("id_escuela");
-    escuela.innerHTML = '<option value="">Ninguna</option>';
-    loadComboboxData(escuela);
 }
 
 function LoadSede() {
@@ -87,7 +79,14 @@ function GrabarMatricula() {
     setIdMatricula();
     if (validateForm(form0)) {
         submitForm(form0, false).done(function () {
-            LoadTable();
+            if (getLastInsertId() !== null && getLastInsertId() !== '') {
+                var rowcount = sessionStorage.getItem('rowCount');
+                rowcount = parseInt(rowcount);
+                if (isNaN(rowcount) === false && rowcount > 0) {
+                    LoadTable();
+                    MatriculaAsignaturasAutomatica(getElement(form0, 'id_matricula'));
+                }
+            }
         });
     }
 }
@@ -150,11 +149,28 @@ function setIdMatricula() {
     idescuela = getElement(form0, 'id_escuela');
     if (idmatricula !== null && idmatricula !== undefined && idmatricula.value === '') {
         fecha = new Date();
-        idmatricula.value = 'M' + fecha.getFullYear() + '' + (fecha.getMonth()+1) + '' + fecha.getDate()+ '' + fecha.getHours()+ '' + fecha.getMinutes()+ '' + fecha.getSeconds() + '' + (getRandomNumber(1, 9) * getRandomNumber(1, 9));
+        idmatricula.value = 'M' + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + '' + (getRandomNumber(1, 9) * getRandomNumber(1, 9));
     }
 }
 
-function MatricularAsignaturas(item) {
+function MatriculaAsignaturasAutomatica(idmatricula) {
+    if (idmatricula !== null && idmatricula !== undefined && idmatricula.value !== '' && idmatricula.value !== '0') {
+        var formMA = document.getElementById('FormMatAsignatura');
+        var idmatFormMA = null;
+        if (formMA !== null && formMA !== undefined) {
+            idmatFormMA = getElement(formMA, 'id_matricula');
+            idmatFormMA.value = idmatricula.value;
+            if (validateForm(formMA)) {
+                submitForm(formMA, false).done(function () {
+                    showNotification('Matricula Automatica de Asignaturas:', 'Se ha ejecutado el proceso. Verifique el resultado por favor.');
+                    idmatFormMA.value = '';
+                });
+            }
+        }
+    }
+}
+
+function FormMatriculaAsignaturas(item) {
     if (item !== null) {
         var subform = null;
         subform = getForm(item);

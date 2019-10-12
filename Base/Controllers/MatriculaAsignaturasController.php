@@ -18,6 +18,7 @@ $grado = null;
 $count = 0;
 $rowcount = 0;
 $i = 0;
+//print_r($_POST);
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
@@ -26,7 +27,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction($action);
-        if ($_POST['id_matricula'] !== null && $_POST['id_matricula'] !== 0 && $_POST['id_matricula'] !== '' && $_POST['action'] !== null && strcmp($_POST['action'], 'insertorupdate') == 0) {
+        if ($_POST['id_matricula'] !== null && $_POST['id_matricula'] !== 0 && $_POST['id_matricula'] !== '' && isset($_POST['action']) && strcmp($_POST['action'], 'insertorupdate') == 0) {
             $idmatricula = $_POST['id_matricula'];
             $datosmatricula = $bc->selectWithoutModel('MatriculasApp', '*', "id_matricula='$idmatricula'");
             if ($datosmatricula !== null && $datosmatricula !== '' && $datosmatricula !== '[]') {
@@ -79,7 +80,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                 }
             }
         }
-        if ($_POST['id_matasig'] !== null && $_POST['action'] !== null && strcmp($_POST['action'], 'delete') == 0) {
+        if (isset($_POST['id_matasig']) && isset($_POST['action']) && strcmp($_POST['action'], 'delete') == 0) {
             $bc->setFindBy($findBy);
             $bc->setAction('delete');
             $result = $bc->execute(false);
