@@ -654,95 +654,97 @@ class PDFReports extends TCPDF {
             $configuracion = $configuracion[0];
             if (is_array($data) && count($data) > 0) {
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->SetFont($this->fontfamilycontent, 'B', 16);
-                    $this->Cell(0, 6, 'INFORME DE NOTAS', 0, 1, 'C');
-                    $this->Ln(2);
-                    $this->SetFont($this->fontfamilycontent, '', 12);
-                    $this->Cell($pageWidth, 4, 'ESTUDIANTE', 0, 0, 'C');
-                    $this->Ln(4);
-                    $this->SetFont($this->fontfamilycontent, 'B', 14);
-                    $this->Cell($pageWidth, 4, $data[$i]['nombrecompleto_estudiante'], 0, 0, 'C');
-                    $this->Ln(6);
-                    $this->SetFont($this->fontfamilycontent, 'B', 12);
-                    $this->Cell($pageWidth * 33.333 / 100, 4, 'PROGRAMA', 0, 0, 'C');
-                    $this->Cell($pageWidth * 33.333 / 100, 4, 'SEDE', 0, 0, 'C');
-                    $this->Cell($pageWidth * 33.333 / 100, 4, 'JORNADA', 0, 0, 'C');
-                    $this->Ln(4);
-                    $this->SetFont($this->fontfamilycontent, '', 10);
-                    $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_programa']), 0, 0, 'C');
-                    $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_sede']), 0, 0, 'C');
-                    $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_jornada']), 0, 0, 'C');
-                    $this->Ln(5);
-                    $this->SetFont($this->fontfamilycontent, 'B', 12);
-                    $this->Cell($pageWidth * 25 / 100, 4, 'AÑO', 0, 0, 'C');
-                    $this->Cell($pageWidth * 25 / 100, 4, 'PERIODO', 0, 0, 'C');
-                    $this->Cell($pageWidth * 25 / 100, 4, 'GRADO', 0, 0, 'C');
-                    $this->Cell($pageWidth * 25 / 100, 4, 'GRUPO', 0, 0, 'C');
-                    $this->Ln(4);
-                    $this->SetFont($this->fontfamilycontent, '', 10);
-                    $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['anualidad_periodo'], 0, 0, 'C');
-                    $this->Cell($pageWidth * 25 / 100, 4, 'P' . $corte, 0, 0, 'C');
-                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa'])), 0, 0, 'C');
-                    $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['nombre_grupo'], 0, 0, 'C');
-                    $this->Ln(8);
-
-                    $this->SetFont($this->fontfamilycontent, 'B', 12);
-                    $this->Cell($pageWidth * 42 / 100, 4, 'ASIGNATURA', 1, 0, 'L');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'IH', 1, 0, 'C');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'P1', 1, 0, 'C');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'P2', 1, 0, 'C');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'P3', 1, 0, 'C');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'P4', 1, 0, 'C');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'P5', 1, 0, 'C');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'P6', 1, 0, 'C');
-                    $this->Cell($pageWidth * 6 / 100, 4, 'HAB', 1, 0, 'C');
-                    $this->Cell($pageWidth * 10 / 100, 4, 'DEF', 1, 0, 'C');
-                    $this->Ln();
-                    $this->SetFont($this->fontfamilycontent, '', 10);
                     $calificaciones = null;
-                    $observaciones = '';
                     if (isset($data[$i]['calificaciones'])) {
                         $calificaciones = $data[$i]['calificaciones'];
                         if ($calificaciones !== null && $calificaciones !== '' && $calificaciones !== '[]') {
                             $calificaciones = json_decode($calificaciones, true);
                         }
                     }
-                    if (is_array($calificaciones) && count($calificaciones) > 0) {
-                        for ($j = 0; $j < count($calificaciones); $j++) {
-                            $ih = '' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']);
-                            $this->Cell($pageWidth * 42 / 100, 4, strtoupper($calificaciones[$j]['nombre_asignatura']), 1, 0, 'L');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0', '', $ih), 1, 0, 'C');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np1']), 1, 0, 'C');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np2']), 1, 0, 'C');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np3']), 1, 0, 'C');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np4']), 1, 0, 'C');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np5']), 1, 0, 'C');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np6']), 1, 0, 'C');
-                            $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['nphab']), 1, 0, 'C');
-                            $this->Cell($pageWidth * 10 / 100, 4, $calificaciones[$j]['def'], 1, 0, 'C');
-                            $this->Ln();
-                            $comentario = null;
-                            if (isset($calificaciones[$j]['p' . $corte . '_comentarios_calificacion'])) {
-                                $comentario = $calificaciones[$j]['p' . $corte . '_comentarios_calificacion'];
-                            }
-                            if ($comentario !== null && $comentario !== '') {
-                                $observaciones = $observaciones . strtoupper($calificaciones[$j]['nombre_asignatura']) . ': ' . $comentario . "\n";
+                    if ($calificaciones !== null && is_array($calificaciones)) {
+                        $this->SetFont($this->fontfamilycontent, 'B', 16);
+                        $this->Cell(0, 6, 'INFORME DE NOTAS', 0, 1, 'C');
+                        $this->Ln(2);
+                        $this->SetFont($this->fontfamilycontent, '', 12);
+                        $this->Cell($pageWidth, 4, 'ESTUDIANTE', 0, 0, 'C');
+                        $this->Ln(4);
+                        $this->SetFont($this->fontfamilycontent, 'B', 14);
+                        $this->Cell($pageWidth, 4, $data[$i]['nombrecompleto_estudiante'], 0, 0, 'C');
+                        $this->Ln(6);
+                        $this->SetFont($this->fontfamilycontent, 'B', 12);
+                        $this->Cell($pageWidth * 33.333 / 100, 4, 'PROGRAMA', 0, 0, 'C');
+                        $this->Cell($pageWidth * 33.333 / 100, 4, 'SEDE', 0, 0, 'C');
+                        $this->Cell($pageWidth * 33.333 / 100, 4, 'JORNADA', 0, 0, 'C');
+                        $this->Ln(4);
+                        $this->SetFont($this->fontfamilycontent, '', 10);
+                        $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_programa']), 0, 0, 'C');
+                        $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_sede']), 0, 0, 'C');
+                        $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data[$i]['nombre_jornada']), 0, 0, 'C');
+                        $this->Ln(5);
+                        $this->SetFont($this->fontfamilycontent, 'B', 12);
+                        $this->Cell($pageWidth * 25 / 100, 4, 'AÑO', 0, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 4, 'PERIODO', 0, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 4, 'GRADO', 0, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 4, 'GRUPO', 0, 0, 'C');
+                        $this->Ln(4);
+                        $this->SetFont($this->fontfamilycontent, '', 10);
+                        $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['anualidad_periodo'], 0, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 4, 'P' . $corte, 0, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 4, strtoupper($this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa'])), 0, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['nombre_grupo'], 0, 0, 'C');
+                        $this->Ln(8);
+
+                        $this->SetFont($this->fontfamilycontent, 'B', 12);
+                        $this->Cell($pageWidth * 42 / 100, 4, 'ASIGNATURA', 1, 0, 'L');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'IH', 1, 0, 'C');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'P1', 1, 0, 'C');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'P2', 1, 0, 'C');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'P3', 1, 0, 'C');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'P4', 1, 0, 'C');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'P5', 1, 0, 'C');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'P6', 1, 0, 'C');
+                        $this->Cell($pageWidth * 6 / 100, 4, 'HAB', 1, 0, 'C');
+                        $this->Cell($pageWidth * 10 / 100, 4, 'DEF', 1, 0, 'C');
+                        $this->Ln();
+                        $this->SetFont($this->fontfamilycontent, '', 10);
+                        $observaciones = '';
+                        if (is_array($calificaciones) && count($calificaciones) > 0) {
+                            for ($j = 0; $j < count($calificaciones); $j++) {
+                                $ih = '' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']);
+                                $this->Cell($pageWidth * 42 / 100, 4, strtoupper($calificaciones[$j]['nombre_asignatura']), 1, 0, 'L');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0', '', $ih), 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np1']), 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np2']), 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np3']), 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np4']), 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np5']), 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['np6']), 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, str_replace('0.0', '', $calificaciones[$j]['nphab']), 1, 0, 'C');
+                                $this->Cell($pageWidth * 10 / 100, 4, $calificaciones[$j]['def'], 1, 0, 'C');
+                                $this->Ln();
+                                $comentario = null;
+                                if (isset($calificaciones[$j]['p' . $corte . '_comentarios_calificacion'])) {
+                                    $comentario = $calificaciones[$j]['p' . $corte . '_comentarios_calificacion'];
+                                }
+                                if ($comentario !== null && $comentario !== '') {
+                                    $observaciones = $observaciones . strtoupper($calificaciones[$j]['nombre_asignatura']) . ': ' . $comentario . "\n";
+                                }
                             }
                         }
-                    }
-                    $this->Ln();
-                    $this->SetFont($this->fontfamilycontent, 'B', 10);
-                    $this->Cell($pageWidth, 4, 'Observaciones o Comentarios:');
-                    $this->Ln();
-                    $this->SetFont($this->fontfamilycontent, '', 10);
-                    $this->MultiCell($pageWidth, 20, $observaciones, 1);
-                    $this->Ln(4);
-                    $this->SetFont($this->fontfamilycontent, 'B', 10);
-                    $this->MultiCell($pageWidth / 2, 10, '________________________' . "\n" . 'Director de Grupo', 0, 'C', false, 0);
-                    $this->MultiCell($pageWidth / 2, 10, '________________________' . "\n" . 'Cordinador Académico', 0, 'C', false, 0);
-                    $this->Ln(4);
-                    if ($i < (count($data) - 1)) {
-                        $this->AddPage();
+                        $this->Ln();
+                        $this->SetFont($this->fontfamilycontent, 'B', 10);
+                        $this->Cell($pageWidth, 4, 'Observaciones o Comentarios:');
+                        $this->Ln();
+                        $this->SetFont($this->fontfamilycontent, '', 10);
+                        $this->MultiCell($pageWidth, 20, $observaciones, 1);
+                        $this->Ln(4);
+                        $this->SetFont($this->fontfamilycontent, 'B', 10);
+                        $this->MultiCell($pageWidth / 2, 10, '________________________' . "\n" . 'Director de Grupo', 0, 'C', false, 0);
+                        $this->MultiCell($pageWidth / 2, 10, '________________________' . "\n" . 'Cordinador Académico', 0, 'C', false, 0);
+                        $this->Ln(4);
+                        if ($i < (count($data) - 1)) {
+                            $this->AddPage();
+                        }
                     }
                 }
             }
@@ -752,7 +754,7 @@ class PDFReports extends TCPDF {
     public function InformeCalificacionesCompleto($idsede = null, $idjornada = null, $idprograma = null, $grado = null, $idgrupo = null, $idperiodo = null, $idcorte = null, $idestudiante = null) {
         $htmltable = '';
         $data = null;
-        $subdata = null;
+        $calificaciones = null;
         $data = $this->bc->getInformesCalificaciones($this->session->getEnterpriseID(), $idsede, $idjornada, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
         $corte = $this->bc->getCortesPeriodos($this->session->getEnterpriseID(), $idperiodo, $idcorte);
         if ($corte !== null && $corte !== '[]') {
@@ -765,111 +767,116 @@ class PDFReports extends TCPDF {
             $data = json_decode($data, true);
             if ($data !== null && is_array($data)) {
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->SetFont($this->fontfamilycontent, $this->fontstylecontent, $this->fontsizecontent);
-                    $headtable = '';
-
-                    $headtable = $headtable . '<table border="0">';
-                    $headtable = $headtable . '<tr>';
-                    $headtable = $headtable . '<th style="width: 40%;"><b>Estudiante:</b></th>';
-                    $headtable = $headtable . '<th style="width: 20%;"><b>Programa:</b></th>';
-                    $headtable = $headtable . '<th style="width: 20%;"><b>Sede:</b></th>';
-                    $headtable = $headtable . '<th style="width: 20%;"><b>Jornada:</b></th>';
-                    $headtable = $headtable . '</tr>';
-                    $headtable = $headtable . '<tr>';
-                    $headtable = $headtable . '<td><b>' . strtoupper($data[$i]['nombrecompleto_estudiante']) . '</b></td>';
-                    $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_programa']) . '</td>';
-                    $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_sede']) . '</td>';
-                    $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_jornada']) . '</td>';
-                    $headtable = $headtable . '</tr>';
-                    $headtable = $headtable . '</table>';
-
-                    $headtable = $headtable . '<table border="0">';
-                    $headtable = $headtable . '<tr>';
-                    $headtable = $headtable . '<th style="width: 15%;"><b>Año:</b></th>';
-                    $headtable = $headtable . '<th style="width: 15%;"><b>Periodo:</b></th>';
-                    $headtable = $headtable . '<th style="width: 15%;"><b>Grado:</b></th>';
-                    $headtable = $headtable . '<th style="width: 15%;"><b>Grupo:</b></th>';
-                    $headtable = $headtable . '<th style="width: 40%;"><b>Director Grupo:</b></th>';
-                    $headtable = $headtable . '</tr>';
-                    $headtable = $headtable . '<tr>';
-                    $headtable = $headtable . '<td>' . $data[$i]['anualidad_periodo'] . '</td>';
-                    $headtable = $headtable . '<td>' . $corte . '° ' . '</td>';
-                    $headtable = $headtable . '<td>' . strtoupper($this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa'])) . '</td>';
-                    $headtable = $headtable . '<td>' . $data[$i]['nombre_grupo'] . '</td>';
-                    $headtable = $headtable . '<td>' . utf8_decode($data[$i]['nombre_director']) . '</td>';
-                    $headtable = $headtable . '</tr>';
-                    $headtable = $headtable . '</table>';
-                    $this->writeHTML($headtable, true, false, false, false, '');
-
-                    $htmltable = $htmltable . '<table border="1">';
-                    $htmltable = $htmltable . '<tr>';
-                    $htmltable = $htmltable . '<th style="text-align: justify; width: 26%;"><b>AREAS Y/O ASIGNATURA</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>IH</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P1</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P2</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P3</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P4</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P5</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P6</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>Acu</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>Aus</b></th>';
-                    $htmltable = $htmltable . '<th style="text-align: center; width: 38%;"><b>LOGROS / DIFICULTADES / RECOMENDACIONES </b></th>';
-                    $htmltable = $htmltable . '</tr>';
-
-                    $subdata = $data[$i]['calificaciones'];
-                    if ($subdata !== null && $subdata !== '' && $subdata !== '[]') {
-                        $subdata = json_decode($subdata, true);
-                    }
-                    if ($subdata !== null && is_array($subdata)) {
-                        for ($j = 0; $j < count($subdata); $j++) {
-                            $htmltable = $htmltable . '<tr>';
-                            $htmltable = $htmltable . '<td><label style="font-size: 4pt; padding-top: 0px;">' . strtoupper($subdata[$j]['nombre_area']) . '</label> <br>'
-                                    . '<b>' . strtoupper($subdata[$j]['nombre_asignatura']) . '</b></td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . ($subdata[$j]['hteoricas_asignatura'] + $subdata[$j]['hpracticas_asignatura']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np1']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np2']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np3']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np4']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np5']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $subdata[$j]['np6']) . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">' . $subdata[$j]['def'] . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: center;">';
-                            if ($corte !== null) {
-                                $htmltable = $htmltable . $subdata[$j]['p' . $corte . '_ausencias_calificacion'];
-                            }
-                            $htmltable = $htmltable . '</td>';
-                            $htmltable = $htmltable . '<td style="text-align: justify; font-size: 8pt;">';
-                            if ($corte !== null && is_numeric($corte)) {
-                                if ($subdata[$j]['p' . $corte . '_descripcion_logroc'] !== '') {
-                                    $htmltable = $htmltable . ' - ' . utf8_decode($subdata[$j]['p' . $corte . '_descripcion_logroc']) . '';
-                                }
-                                if ($subdata[$j]['p' . $corte . '_descripcion_logrop'] !== '') {
-                                    $htmltable = $htmltable . '<br> - ' . utf8_decode($subdata[$j]['p' . $corte . '_descripcion_logrop']) . '';
-                                }
-                                if ($subdata[$j]['p' . $corte . '_descripcion_logroa'] !== '') {
-                                    $htmltable = $htmltable . '<br> - ' . utf8_decode($subdata[$j]['p' . $corte . '_descripcion_logroa']) . '';
-                                }
-                                if ($subdata[$j]['p' . $corte . '_comentarios_calificacion'] !== '') {
-                                    $htmltable = $htmltable . '<br> - ' . utf8_decode($subdata[$j]['p' . $corte . '_comentarios_calificacion']) . '';
-                                }
-                            }
-                            $htmltable = $htmltable . '</td>';
-
-                            $htmltable = $htmltable . '</tr>';
+                    $calificaciones = null;
+                    if (isset($data[$i]['calificaciones'])) {
+                        $calificaciones = $data[$i]['calificaciones'];
+                        if ($calificaciones !== null && $calificaciones !== '' && $calificaciones !== '[]') {
+                            $calificaciones = json_decode($calificaciones, true);
                         }
                     }
-                    $htmltable = $htmltable . '</table>';
-                    $this->SetFontSize($this->fontsizecontent);
-                    $this->writeHTML($htmltable, true, false, false, false, '');
-                    $this->Ln(2);
-                    $this->SetFont($this->fontfamilycontent, 'B', 10);
-                    $this->MultiCell($pageWidth * 70 / 100, 20, 'Observaciones', 1, 'C', false, 0);
-                    $this->SetFont($this->fontfamilycontent, 'B', 8);
-                    $this->MultiCell($pageWidth * 30 / 100, 10, '______________________________' . "\n" . 'Director de Grupo' . "\n\n" . '______________________________' . "\n" . 'Cordinador Académico', 0, 'C', false, 0);
-                    $this->Ln(4);
-                    $htmltable = '';
-                    if ($i < (count($data) - 1)) {
-                        $this->AddPage();
+                    if ($calificaciones !== null && is_array($calificaciones)) {
+                        $this->SetFont($this->fontfamilycontent, $this->fontstylecontent, $this->fontsizecontent);
+                        $headtable = '';
+
+                        $headtable = $headtable . '<table border="0">';
+                        $headtable = $headtable . '<tr>';
+                        $headtable = $headtable . '<th style="width: 40%;"><b>Estudiante:</b></th>';
+                        $headtable = $headtable . '<th style="width: 20%;"><b>Programa:</b></th>';
+                        $headtable = $headtable . '<th style="width: 20%;"><b>Sede:</b></th>';
+                        $headtable = $headtable . '<th style="width: 20%;"><b>Jornada:</b></th>';
+                        $headtable = $headtable . '</tr>';
+                        $headtable = $headtable . '<tr>';
+                        $headtable = $headtable . '<td><b>' . strtoupper($data[$i]['nombrecompleto_estudiante']) . '</b></td>';
+                        $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_programa']) . '</td>';
+                        $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_sede']) . '</td>';
+                        $headtable = $headtable . '<td>' . strtoupper($data[$i]['nombre_jornada']) . '</td>';
+                        $headtable = $headtable . '</tr>';
+                        $headtable = $headtable . '</table>';
+
+                        $headtable = $headtable . '<table border="0">';
+                        $headtable = $headtable . '<tr>';
+                        $headtable = $headtable . '<th style="width: 15%;"><b>Año:</b></th>';
+                        $headtable = $headtable . '<th style="width: 15%;"><b>Periodo:</b></th>';
+                        $headtable = $headtable . '<th style="width: 15%;"><b>Grado:</b></th>';
+                        $headtable = $headtable . '<th style="width: 15%;"><b>Grupo:</b></th>';
+                        $headtable = $headtable . '<th style="width: 40%;"><b>Director Grupo:</b></th>';
+                        $headtable = $headtable . '</tr>';
+                        $headtable = $headtable . '<tr>';
+                        $headtable = $headtable . '<td>' . $data[$i]['anualidad_periodo'] . '</td>';
+                        $headtable = $headtable . '<td>' . $corte . '° ' . '</td>';
+                        $headtable = $headtable . '<td>' . strtoupper($this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa'])) . '</td>';
+                        $headtable = $headtable . '<td>' . $data[$i]['nombre_grupo'] . '</td>';
+                        $headtable = $headtable . '<td>' . utf8_decode($data[$i]['nombre_director']) . '</td>';
+                        $headtable = $headtable . '</tr>';
+                        $headtable = $headtable . '</table>';
+                        $this->writeHTML($headtable, true, false, false, false, '');
+
+                        $htmltable = $htmltable . '<table border="1">';
+                        $htmltable = $htmltable . '<tr>';
+                        $htmltable = $htmltable . '<th style="text-align: justify; width: 26%;"><b>AREAS Y/O ASIGNATURA</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>IH</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P1</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P2</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P3</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P4</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P5</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>P6</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>Acu</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 4%;"><b>Aus</b></th>';
+                        $htmltable = $htmltable . '<th style="text-align: center; width: 38%;"><b>LOGROS / DIFICULTADES / RECOMENDACIONES </b></th>';
+                        $htmltable = $htmltable . '</tr>';
+
+                        if ($calificaciones !== null && is_array($calificaciones)) {
+                            for ($j = 0; $j < count($calificaciones); $j++) {
+                                $htmltable = $htmltable . '<tr>';
+                                $htmltable = $htmltable . '<td><label style="font-size: 4pt; padding-top: 0px;">' . strtoupper($calificaciones[$j]['nombre_area']) . '</label> <br>'
+                                        . '<b>' . strtoupper($calificaciones[$j]['nombre_asignatura']) . '</b></td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']) . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $calificaciones[$j]['np1']) . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $calificaciones[$j]['np2']) . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $calificaciones[$j]['np3']) . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $calificaciones[$j]['np4']) . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $calificaciones[$j]['np5']) . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . str_replace('0.0', '', $calificaciones[$j]['np6']) . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['def'] . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">';
+                                if ($corte !== null) {
+                                    $htmltable = $htmltable . $calificaciones[$j]['p' . $corte . '_ausencias_calificacion'];
+                                }
+                                $htmltable = $htmltable . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: justify; font-size: 8pt;">';
+                                if ($corte !== null && is_numeric($corte)) {
+                                    if ($calificaciones[$j]['p' . $corte . '_descripcion_logroc'] !== '') {
+                                        $htmltable = $htmltable . ' - ' . utf8_decode($calificaciones[$j]['p' . $corte . '_descripcion_logroc']) . '';
+                                    }
+                                    if ($calificaciones[$j]['p' . $corte . '_descripcion_logrop'] !== '') {
+                                        $htmltable = $htmltable . '<br> - ' . utf8_decode($calificaciones[$j]['p' . $corte . '_descripcion_logrop']) . '';
+                                    }
+                                    if ($calificaciones[$j]['p' . $corte . '_descripcion_logroa'] !== '') {
+                                        $htmltable = $htmltable . '<br> - ' . utf8_decode($calificaciones[$j]['p' . $corte . '_descripcion_logroa']) . '';
+                                    }
+                                    if ($calificaciones[$j]['p' . $corte . '_comentarios_calificacion'] !== '') {
+                                        $htmltable = $htmltable . '<br> - ' . utf8_decode($calificaciones[$j]['p' . $corte . '_comentarios_calificacion']) . '';
+                                    }
+                                }
+                                $htmltable = $htmltable . '</td>';
+
+                                $htmltable = $htmltable . '</tr>';
+                            }
+                        }
+                        $htmltable = $htmltable . '</table>';
+                        $this->SetFontSize($this->fontsizecontent);
+                        $this->writeHTML($htmltable, true, false, false, false, '');
+                        $this->Ln(2);
+                        $this->SetFont($this->fontfamilycontent, 'B', 10);
+                        $this->MultiCell($pageWidth * 70 / 100, 20, 'Observaciones', 1, 'C', false, 0);
+                        $this->SetFont($this->fontfamilycontent, 'B', 8);
+                        $this->MultiCell($pageWidth * 30 / 100, 10, '______________________________' . "\n" . 'Director de Grupo' . "\n\n" . '______________________________' . "\n" . 'Cordinador Académico', 0, 'C', false, 0);
+                        $this->Ln(4);
+                        $htmltable = '';
+                        if ($i < (count($data) - 1)) {
+                            $this->AddPage();
+                        }
                     }
                 }
             }
