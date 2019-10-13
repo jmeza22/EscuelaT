@@ -1028,7 +1028,7 @@ function setDataForm(myform, json) {
     return false;
 }
 
-function getData(element) {
+function getData(element, myurl = null) {
     var promise = null;
     var myform = null, object = null, url = null, formData = null;
     myform = getForm(element);
@@ -1037,6 +1037,9 @@ function getData(element) {
     createTempInputs(myform);
     formData = new FormData(myform);
     deleteTemporalElements(myform);
+    if (myurl !== null) {
+        url = myurl;
+    }
     console.log('Getting Data to Form!');
     if (formData !== null && url !== null && url !== '') {
         promise = $.ajax({

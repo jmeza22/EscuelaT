@@ -97,6 +97,18 @@ function Send(item) {
     }
 }
 
+function CalcularValores() {
+    var myform = document.getElementById('form0');
+    var valormat = getElement(myform, 'valor_matricula');
+    var valorpag = getElement(myform, 'valorpagado_matricula');
+    var valordeu = getElement(myform, 'valordeuda_matricula');
+    valormat = valormat.value;
+    valorpag = valorpag.value;
+    valormat = parseFloat(valormat);
+    valorpag = parseFloat(valorpag);
+    valordeu.value = valormat - valorpag;
+}
+
 function Edit(item) {
     var myform = null;
     myform = document.getElementById('form0');
@@ -104,6 +116,9 @@ function Edit(item) {
     sendValue(item, null, myform, null);
     getData(myform).done(function () {
         setTimeout(function () {
+            getData(myform, 'Base/Controllers/FindValorTotalPagadoController.php').done(function () {
+                CalcularValores();
+            });
         }, 1);
     });
 }
