@@ -9,13 +9,13 @@ jQuery(document).ready(function () {
     var idpec = null;
     var tipodoc=null;
     var valor = null;
-    autoLoadNameFromId('id_estudiante', 'nombrecompleto_estudiante', null, null);
-    loadComboboxData(document.getElementById('lista_id_pecuniario'));
-    loadComboboxData(document.getElementById('lista_nombre_acudiente'));
     idpec = getElement(form0, 'id_pecuniario');
     tipodoc = getElement(form0, 'tipodoc_pago');
     valor = getElement(form0, 'valor_pago');
+    loadComboboxData(idpec);
+    loadComboboxData(document.getElementById('lista_nombre_acudiente'));
     autoNameFromDataList(idpec, tipodoc.id, valor.id);
+    autoLoadNameFromId('id_estudiante', 'nombrecompleto_estudiante', null, null);
     
 });
 

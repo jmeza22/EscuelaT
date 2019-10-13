@@ -1958,7 +1958,7 @@ function sendValue(form1, field1, form2, field2) {
 }
 
 function setNameFromDataList(idfield, idfieldname, idothervalue) {
-    if (idfield !== null && idfieldname !== null) {
+    if (idfield !== null) {
 
         var field = null;
         var fieldTarget = null;
@@ -1975,13 +1975,13 @@ function setNameFromDataList(idfield, idfieldname, idothervalue) {
         if (field.getAttribute('list') !== null && field.getAttribute('list') !== '') {
             datalist = field.getAttribute('list');
         }
-        if (document.getElementById(datalist) !== null) {
+        if (datalist !== null && datalist !== undefined && document.getElementById(datalist) !== null) {
             datalist = document.getElementById(datalist);
         }
-        if (document.getElementById(idfieldname) !== null) {
+        if (idfieldname !== null && idfieldname !== undefined && document.getElementById(idfieldname) !== null) {
             fieldTarget = document.getElementById(idfieldname);
         }
-        if (document.getElementById(idothervalue) !== null) {
+        if (idothervalue !== null && idothervalue !== undefined && document.getElementById(idothervalue) !== null) {
             fieldOther = document.getElementById(idothervalue);
         }
 
@@ -1991,10 +1991,10 @@ function setNameFromDataList(idfield, idfieldname, idothervalue) {
         }
 
         if (selected !== null) {
-            if (selected.innerHTML !== null && selected.innerHTML !== '') {
+            if (fieldTarget !== null && fieldTarget.tagName !== undefined && selected.innerHTML !== null && selected.innerHTML !== '') {
                 fieldTarget.value = selected.innerHTML;
             }
-            if (fieldOther !== null && selected.getAttribute('othervalue') !== null) {
+            if (fieldOther !== null && fieldOther.tagName !== undefined && selected.getAttribute('othervalue') !== null) {
                 fieldOther.value = selected.getAttribute('othervalue');
             }
         }

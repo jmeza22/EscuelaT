@@ -336,7 +336,7 @@ class ReportsBank extends BaseController {
             $arraywhere['p_id_tipousuario'] = $idtipousuario;
             $sql = $sql . " AND id_tipousuario=:p_id_tipousuario ";
         }
-        $sql = $sql . " ORDER BY username_usuario, fechacrea_usuario DESC";
+        $sql = $sql . " ORDER BY fechacrea_usuario DESC, username_usuario";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -519,7 +519,7 @@ class ReportsBank extends BaseController {
             $arraywhere['p_id_matricula'] = $idmatricula;
             $sql = $sql . " AND id_matricula=:p_id_matricula ";
         }
-        $sql = $sql . " ORDER BY fecha_matricula DESC";
+        $sql = $sql . " ORDER BY CAST(numgrado_programa AS DECIMAL), fecha_matricula DESC";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -623,7 +623,7 @@ class ReportsBank extends BaseController {
             $arraywhere['p_id_matricula'] = $idmatricula;
             $sql = $sql . " AND M.id_matricula=:p_id_matricula ";
         }
-        $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante ASC";
+        $sql = $sql . " ORDER BY CAST(M.numgrado_programa AS DECIMAL), OE.nombrecompleto_estudiante ASC";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

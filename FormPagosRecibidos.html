@@ -37,19 +37,21 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-2">
                             <label>Pecuniario</label>
-                            <input type="text" name="id_pecuniario" id="id_pecuniario" value="" editable="true" required="required" maxlength="100" class="form-control" list="lista_id_pecuniario">
+                            <select id="id_pecuniario" name="id_pecuniario" list="id_pecuniario" model="ValoresPecuniariosApp" colname="nombre_pecuniario" colvalue="id_pecuniario" url="Base/Controllers/GetComboboxValoresPecuniarios.php"  required="required" class="form-control" style="width: 100%; min-width: 100%;">
+                                <option selected="selected" value="">Ninguna</option>
+                            </select>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label>Concepto</label>
                             <input type="text" name="concepto_pago" id="concepto_pago" value="Pago" editable="true" required="required" maxlength="100" class="form-control">
                         </div>
                         <div class="col-sm-2">
-                            <label>Tipo.Documento</label>
-                            <input type="text" name="tipodoc_pago" id="tipodoc_pago" value="" editable="true" required="required" maxlength="30" class="form-control">
+                            <label>Cod.Estudiante</label>
+                            <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" url="Base/Controllers/FindEstudiantesController.php" model="ObservadorEstudianteApp">
                         </div>
-                        <div class="col-sm-2">
-                            <label>Num.Documento</label>
-                            <input type="text" name="numdoc_pago" id="numdoc_pago" value="0" editable="true" required="required" maxlength="30" class="form-control">
+                        <div class="col-sm-4">
+                            <label>Nombre.Estudiante</label>
+                            <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" class="form-control" title="Nombre del Estudiante" readonly="readonly">
                         </div>
                     </div>
                     <div class="row">
@@ -63,17 +65,17 @@ and open the template in the editor.
                                 <option value="PagoOnline">Pago en Linea</option>
                             </select>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <label>Valor.Pago</label>
                             <input type="number" double="true" name="valor_pago" id="valor_pago" value="0" editable="true" required="required" maxlength="22" min="0" class="form-control">
                         </div>
                         <div class="col-sm-2">
-                            <label>Cod.Estudiante</label>
-                            <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" url="Base/Controllers/FindEstudiantesController.php" model="ObservadorEstudianteApp">
+                            <label>Tipo.Documento</label>
+                            <input type="text" name="tipodoc_pago" id="tipodoc_pago" value="" editable="true" required="required" maxlength="30" class="form-control">
                         </div>
-                        <div class="col-sm-6">
-                            <label>Nombre.Estudiante</label>
-                            <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" class="form-control" title="Nombre del Estudiante" readonly="readonly">
+                        <div class="col-sm-4">
+                            <label>Num.Documento</label>
+                            <input type="text" name="numdoc_pago" id="numdoc_pago" value="0" editable="true" required="required" maxlength="30" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -94,9 +96,6 @@ and open the template in the editor.
                             <input type="text" name="id_pago" id="id_pago" value="0" editable="true" maxlength="30" class="form-control" readonly="readonly">
                         </div>
                     </div>
-                    <datalist id="lista_id_pecuniario" name="lista_id_pecuniario" model="ValoresPecuniariosApp" colname="nombre_pecuniario" colvalue="id_pecuniario" url="Base/Controllers/GetComboboxValoresPecuniarios.php" >
-                        <option selected="selected" value="">Ninguna</option>
-                    </datalist>
                     <datalist id="lista_nombre_acudiente" name="lista_nombre_acudiente" model="ObservadorEstudianteApp" colname="nombreacudiente1_estudiante" colvalue="idacudiente1_estudiante" url="Base/Controllers/GetComboboxAcudientes.php" >
                         <option selected="selected" value="">Ninguna</option>
                     </datalist>

@@ -14,7 +14,6 @@ jQuery(document).ready(function () {
     LoadGrado();
     LoadGrupo();
     LoadTable();
-
 });
 
 function LoadTable() {
