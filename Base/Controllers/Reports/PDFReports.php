@@ -92,6 +92,19 @@ class PDFReports extends TCPDF {
         return $number;
     }
 
+    private function getLongNameColombianID($shortname) {
+        $longnames = array();
+        $longnames['RC'] = 'Registro Civil';
+        $longnames['TI'] = 'Tarjeta de Identidad';
+        $longnames['CC'] = 'Cedula de Ciudadanía';
+        $longnames['CE'] = 'Cedula de Extranjería';
+        $longnames['PP'] = 'Pasaporte';
+        if (isset($longnames[$shortname])) {
+            return $longnames[$shortname];
+        }
+        return $shortname;
+    }
+
     public function getRealPageWidth() {
         return ($this->getPageWidth() - $this->lMargin - $this->rMargin);
     }
@@ -102,7 +115,7 @@ class PDFReports extends TCPDF {
 
     public function writeDefaultHeader() {
         if ($this->session->hasLogin()) {
-            
+
             $configuracion = null;
             $configuracion = $this->bc->getConfiguracionEscuela($this->session->getEnterpriseID());
             if ($configuracion !== null && $configuracion !== '' && $configuracion !== '[]') {
@@ -489,8 +502,8 @@ class PDFReports extends TCPDF {
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->Cell(80, 6, $data[$i]['nombrecompleto_persona']);
-                    $this->Cell(40, 6, $data[$i]['username_usuario']);
+                    $this->Cell(80, 6, strtoupper($data[$i]['nombrecompleto_persona']));
+                    $this->Cell(40, 6, strtoupper($data[$i]['username_usuario']));
                     $this->Cell(30, 6, $data[$i]['id_tipousuario']);
                     $this->Cell(30, 6, $data[$i]['fechaedita_usuario']);
                     $this->Ln();
@@ -518,14 +531,14 @@ class PDFReports extends TCPDF {
                 $this->Cell(0, 4, 'EL (LA) SUSCRITO(A) RECTOR(A)', 0, 1, 'C');
                 $this->Cell(0, 4, 'DE', 0, 1, 'C');
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
-                $this->Cell(0, 4, $configuracion['nombremostrar_configuracion'], 0, 1, 'C');
+                $this->Cell(0, 4, strtoupper($configuracion['nombremostrar_configuracion']), 0, 1, 'C');
                 $this->Ln(12);
                 $this->SetFont($this->fontfamilycontent, 'B', 14);
                 $this->Cell(0, 4, 'CERTIFICA', 0, 1, 'C');
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
                 $this->Ln(8);
                 $text1 = "Que " . strtoupper($data['nombrecompleto_estudiante']) . ""
-                        . " identificado(a) con " . $data['tipodoc_persona'] . " número " . $data['documento_persona'] . ""
+            . " identificado(a) con " . $this->getLongNameColombianID($data['tipodoc_persona']) . " número " . $data['documento_persona'] . ""
                         . " se encuentra matriculado(a) en esta Institución Educativa, "
                         . " y actualmente se encuentra cursando el grado " . strtoupper($this->getSpanishOrdinalsNumbers($data['numgrado_programa'])) . ""
                         . " de " . strtoupper($data['nombre_programa']) . ", en el grupo " . $data['nombre_grupo'] . ",  para el Año Lectivo " . $data['anualidad_periodo'] . ".";
@@ -575,8 +588,8 @@ class PDFReports extends TCPDF {
                 $this->Cell($pageWidth * 50 / 100, 4, 'DOCUMENTO DE IDENTIDAD', 0, 0, 'C');
                 $this->Ln(4);
                 $this->SetFont($this->fontfamilycontent, '', 12);
-                $this->Cell($pageWidth * 50 / 100, 4, $data['nombrecompleto_estudiante'], 0, 0, 'C');
-                $this->Cell($pageWidth * 50 / 100, 4, $data['tipodoc_persona'] . " número " . $data['documento_persona'], 0, 0, 'C');
+                $this->Cell($pageWidth * 50 / 100, 4, strtoupper($data['nombrecompleto_estudiante']), 0, 0, 'C');
+                $this->Cell($pageWidth * 50 / 100, 4, strtoupper($this->getLongNameColombianID($data['tipodoc_persona'])) . " No. " . $data['documento_persona'], 0, 0, 'C');
                 $this->Ln(6);
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
                 $this->Cell($pageWidth * 33.333 / 100, 4, 'PROGRAMA', 0, 0, 'C');
@@ -584,9 +597,9 @@ class PDFReports extends TCPDF {
                 $this->Cell($pageWidth * 33.333 / 100, 4, 'JORNADA', 0, 0, 'C');
                 $this->Ln(4);
                 $this->SetFont($this->fontfamilycontent, '', 12);
-                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_programa'], 0, 0, 'C');
-                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_sede'], 0, 0, 'C');
-                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_jornada'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data['nombre_programa']), 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data['nombre_sede']), 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data['nombre_jornada']), 0, 0, 'C');
                 $this->Ln(6);
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
                 $this->Cell($pageWidth * 33.333 / 100, 4, 'AÑO', 0, 0, 'C');
@@ -594,9 +607,9 @@ class PDFReports extends TCPDF {
                 $this->Cell($pageWidth * 33.333 / 100, 4, 'GRUPO', 0, 0, 'C');
                 $this->Ln(4);
                 $this->SetFont($this->fontfamilycontent, '', 12);
-                $this->Cell($pageWidth * 33.333 / 100, 4, $data['anualidad_periodo'], 0, 0, 'C');
-                $this->Cell($pageWidth * 33.333 / 100, 4, $data['numgrado_programa'], 0, 0, 'C');
-                $this->Cell($pageWidth * 33.333 / 100, 4, $data['nombre_grupo'], 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data['anualidad_periodo']), 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data['numgrado_programa']), 0, 0, 'C');
+                $this->Cell($pageWidth * 33.333 / 100, 4, strtoupper($data['nombre_grupo']), 0, 0, 'C');
                 $this->Ln(6);
 
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
@@ -636,7 +649,7 @@ class PDFReports extends TCPDF {
                 $this->Ln(12);
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
                 $this->MultiCell(0, 6, '___________________________________', 0, 'C');
-                $this->MultiCell(0, 6, $configuracion['nombrerector_configuracion'], 0, 'C');
+                $this->MultiCell(0, 6, strtoupper($configuracion['nombrerector_configuracion']), 0, 'C');
                 $this->MultiCell(0, 6, $configuracion['tipodocrector_configuracion'] . ": " . $configuracion['documentorector_configuracion'], 0, 'C');
                 $this->SetFont($this->fontfamilycontent, 'B', 10);
                 $this->MultiCell(0, 6, 'RECTOR(A)', 0, 'C');
@@ -676,7 +689,7 @@ class PDFReports extends TCPDF {
                         $this->Cell($pageWidth, 4, 'ESTUDIANTE', 0, 0, 'C');
                         $this->Ln(4);
                         $this->SetFont($this->fontfamilycontent, 'B', 14);
-                        $this->Cell($pageWidth, 4, $data[$i]['nombrecompleto_estudiante'], 0, 0, 'C');
+                        $this->Cell($pageWidth, 4, strtoupper($data[$i]['nombrecompleto_estudiante']), 0, 0, 'C');
                         $this->Ln(6);
                         $this->SetFont($this->fontfamilycontent, 'B', 12);
                         $this->Cell($pageWidth * 33.333 / 100, 4, 'PROGRAMA', 0, 0, 'C');
@@ -698,7 +711,7 @@ class PDFReports extends TCPDF {
                         $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['anualidad_periodo'], 0, 0, 'C');
                         $this->Cell($pageWidth * 25 / 100, 4, 'P' . $corte, 0, 0, 'C');
                         $this->Cell($pageWidth * 25 / 100, 4, strtoupper($this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa'])), 0, 0, 'C');
-                        $this->Cell($pageWidth * 25 / 100, 4, $data[$i]['nombre_grupo'], 0, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['nombre_grupo']), 0, 0, 'C');
                         $this->Ln(8);
 
                         $this->SetFont($this->fontfamilycontent, 'B', 12);
