@@ -235,7 +235,7 @@ class TCPDF2DBarcode {
 			$png->drawimage($bar);
 			return $png;
 		} else {
-			ob_start();
+			
 			imagepng($png);
 			$imagedata = ob_get_clean();
 			imagedestroy($png);

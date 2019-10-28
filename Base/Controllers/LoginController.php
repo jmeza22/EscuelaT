@@ -1,6 +1,5 @@
 <?php
 
-ob_start();
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $model = 'UsuariosApp';
@@ -65,6 +64,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
             $session->setEnterpriseNameForm($login['enterprisename']);
             $array['token'] = $session->getToken();
             $array['data'] = json_encode($login);
+            $array['session_id'] = session_id(); 
             $idpersona = $login['userid'];
         } else {
             $array['status'] = 0;
@@ -92,6 +92,6 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
     $result = null;
     $array = null;
     $bc->disconnect();
+    exit();
 }
-ob_end_flush();
 ?>

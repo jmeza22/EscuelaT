@@ -1,5 +1,5 @@
 <?php
-ob_start();
+
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 if ($session->hasLogin()) {
@@ -7,6 +7,6 @@ if ($session->hasLogin()) {
     
 }
 echo $session->getSessionStateJSON();
-ob_end_flush();
+
 ?>
 

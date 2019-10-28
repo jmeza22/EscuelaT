@@ -1,6 +1,5 @@
 <?php
 
-ob_start();
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session=new SessionManager();
@@ -24,5 +23,4 @@ if ($_POST != null && isset($_POST)) {
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
     $bc->disconnect();
 }
-ob_end_flush();
 ?>

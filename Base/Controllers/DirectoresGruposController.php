@@ -1,6 +1,5 @@
 <?php
 
-ob_start();
 include_once 'Libraries/Controllers.php';
 $bc = null;
 $result = null;
@@ -9,7 +8,7 @@ $model = 'DirectoresGruposApp';
 $findBy = 'id_director';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getStandard()==1 || $session->getManagement()==1 || $session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()==1 || $session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();
@@ -30,5 +29,5 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard()==
 } else {
     echo $session->getSessionStateJSON();
 }
-ob_end_flush();
+
 ?>

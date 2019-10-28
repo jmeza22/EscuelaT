@@ -85,3 +85,11 @@ function VisibilidadSecciones() {
         seccionescuela.style = 'display:none; visibility:hidden;';
     }
 }
+
+function VerSesion(item){
+    if(getUserRoleLogin()==='SuperAdmin'){
+        window.open('Base/Controllers/ShowSessionDataController.php', "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
+    }else{
+        alert('Operacion No Permitida!');
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-ob_start();
+
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -12,5 +12,5 @@ if ($session->hasLogin() && isset($_POST) && ($session->getSuperAdmin() == 1 || 
     $bc->disconnect();
     $bc = null;
 }
-ob_end_flush();
+
 ?>

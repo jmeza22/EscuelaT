@@ -1,5 +1,5 @@
 <?php
-ob_start();
+
 class SystemVariableManager {
     private $index_periodo = 'id_periodo';
     private $index_corte = 'id_corte';

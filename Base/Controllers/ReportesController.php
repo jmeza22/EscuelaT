@@ -1,6 +1,5 @@
 <?php
 
-ob_start();
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -193,5 +192,4 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
 } else {
     echo $session->getSessionStateJSON();
 }
-ob_end_flush();
 ?>

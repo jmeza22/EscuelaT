@@ -1,6 +1,5 @@
 <?php
 
-ob_start();
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $variables = new SystemVariableManager();
@@ -65,5 +64,5 @@ if ($session->hasLogin() && $session->checkToken() && isset($_POST) && $_POST !=
 } else {
     echo $session->getSessionStateJSON();
 }
-ob_end_flush();
+
 ?>

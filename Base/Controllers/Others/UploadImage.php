@@ -1,6 +1,6 @@
 <?php
 
-ob_start();
+
 
 class UploadImage {
 
@@ -113,5 +113,5 @@ class UploadImage {
 
 }
 
-ob_end_flush();
+
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-ob_start();
+
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -35,5 +35,5 @@ if ($session->hasLogin() && isset($_REQUEST) && $_REQUEST !== null) {
     echo $arraymerge;
     $bc->disconnect();
 }
-ob_end_flush();
+
 ?>

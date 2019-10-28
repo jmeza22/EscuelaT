@@ -11,7 +11,11 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        header('location: login.html');
+        if (!headers_sent()) {
+            header('Content-Type: text/html; charset=UTF-8');
+            header('Access-Control-Allow-Origin: *');
+            header('location: login.html');
+        }
         ?>
     </body>
 </html>

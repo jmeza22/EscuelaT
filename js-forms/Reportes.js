@@ -31,11 +31,10 @@ function setRequiredsInputs(tipo) {
     grupo.removeAttribute('required');
     estudiante.removeAttribute('required');
     if (tipo !== undefined && tipo !== null) {
-        programa.setAttribute('required', 'required');
-        periodo.setAttribute('required', 'required');
         if (tipo.value === 'CertificadoEstudios') {
             sede.setAttribute('required', 'required');
             jornada.setAttribute('required', 'required');
+            programa.setAttribute('required', 'required');
             grado.setAttribute('required', 'required');
             grupo.setAttribute('required', 'required');
             estudiante.setAttribute('required', 'required');
@@ -43,10 +42,24 @@ function setRequiredsInputs(tipo) {
         if (tipo.value === 'CertificadoNotas') {
             sede.setAttribute('required', 'required');
             jornada.setAttribute('required', 'required');
+            programa.setAttribute('required', 'required');
             grado.setAttribute('required', 'required');
             grupo.setAttribute('required', 'required');
             estudiante.setAttribute('required', 'required');
         }
+        if (tipo.value === 'Estudiantes') {
+            sede.setAttribute('required', 'required');
+            jornada.setAttribute('required', 'required');
+        }
+        if (tipo.value === 'DirectoresGrupos') {
+            programa.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+        }
+        if (tipo.value === 'CargasDocentes') {
+            programa.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+        }
+        
     }
 }
 

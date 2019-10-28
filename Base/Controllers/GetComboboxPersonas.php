@@ -1,6 +1,6 @@
 <?php
 
-ob_start();
+
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -24,5 +24,5 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
 }else{
     echo 'null';
 }
-ob_end_flush();
+
 ?>

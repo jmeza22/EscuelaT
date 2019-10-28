@@ -1,6 +1,5 @@
 <?php
 
-ob_start();
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $crypt = new MyCrypt();
@@ -80,5 +79,5 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
 } else {
     echo $session->getSessionStateJSON();
 }
-ob_end_flush();
+
 ?>

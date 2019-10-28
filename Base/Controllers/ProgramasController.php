@@ -1,6 +1,5 @@
 <?php
 
-ob_start();
 include_once 'Libraries/Controllers.php';
 $bc = null;
 $result = null;
@@ -31,5 +30,5 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getAdmin() == 1
 } else {
     echo $session->getSessionStateJSON();
 }
-ob_end_flush();
+
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-ob_start();
+
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $variables = new SystemVariableManager();
@@ -24,5 +24,5 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc->disconnect();
     $bc = null;
 }
-ob_end_flush();
+
 ?>

@@ -1,9 +1,5 @@
 <?php
-
-ob_start();
 include_once 'SetsAndHeaders.php';
-session_start();
-
 class SessionManager {
 
     private $lock = true;
@@ -328,5 +324,4 @@ class SessionManager {
 
 }
 
-ob_end_flush();
 ?>

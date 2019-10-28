@@ -26,7 +26,7 @@ function getMETAElement(name) {
 function RequestNotificationPermission() {
     if (Notification.permission == "default" || Notification.permission == "denied") {
         Notification.requestPermission();
-        alert('Please enable the Notifications! ');
+        //alert('Please enable the Notifications! ');
     }
     if (Notification.permission == "denied") {
         //RequestNotificationPermission();
@@ -1749,7 +1749,6 @@ function login(element, destinationPage) {
                     if (result.message !== null && result.message !== '') {
                         showNotification('Result:', result.message);
                     }
-
                     if (result.status === 1) {
                         try {
                             object = JSON.parse(result.data);

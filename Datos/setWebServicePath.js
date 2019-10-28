@@ -13,7 +13,7 @@ function setWebServicePath() {
     var path = null;
     var project = null;
     if (LocalStorageStatus()) {
-        path = "/EscuelaT/";
+        path = "https://escuelat.000webhostapp.com/MiEscuela/";
         project = "EscuelaT";
         if (path !== null && path !== "") {
             localStorage.setItem("WebServicePath"+project, path);

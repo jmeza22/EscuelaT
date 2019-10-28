@@ -1,5 +1,5 @@
 <?php
-ob_start();
+
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
@@ -25,5 +25,5 @@ if ($session->hasLogin() && $session->checkToken() && $session->getSuperAdmin() 
 } else {
     echo $session->getSessionStateJSON();
 }
-ob_end_flush();
+
 ?>

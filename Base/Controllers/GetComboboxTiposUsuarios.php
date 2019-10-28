@@ -1,6 +1,6 @@
 <?php
 
-ob_start();
+
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 if ($_POST != null && isset($_POST)) {
@@ -18,5 +18,5 @@ if ($_POST != null && isset($_POST)) {
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, 'status_tipousuario=1');
     $bc->disconnect();
 }
-ob_end_flush();
+
 ?>
