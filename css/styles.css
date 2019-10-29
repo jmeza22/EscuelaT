@@ -289,6 +289,11 @@ table > tbody > tr > td > input[type="date"]{
     margin-bottom: 15px;
 }
 
+@keyframes rotate {from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}}
+@-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);}}
+  
 .AjaxLoading{
     background-color: black !important;
     vertical-align: middle !important;
@@ -324,7 +329,6 @@ table > tbody > tr > td > input[type="date"]{
     -moz-opacity:0.75;
     -khtml-opacity:0.75;
     filter: aplha(opacity=75);
-
 }
 
 .SubLoading > p{
@@ -334,6 +338,7 @@ table > tbody > tr > td > input[type="date"]{
 }
 
 .ImageLoading{
+    position: relative;
     margin-top: 18px !important;
     border-radius: 50% !important;
     min-width: 120px !important;
@@ -341,14 +346,22 @@ table > tbody > tr > td > input[type="date"]{
     height: 180px !important;
     min-height: 120px !important;
     max-height: 180px !important;
+    font-size: 150pt !important;
+    font-family: monospace !important;
+    font-weight: bold !important;
+    color: white;
+    -webkit-animation: 3s rotate linear infinite;
+    animation: 3s rotate linear infinite;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
 }
 
 @media screen and (max-width:640px) {
-    
+
     body{
         margin-top: 0px !important;
     }
-    
+
     header, footer{
         height: auto !important;
         position: relative !important;
@@ -366,7 +379,7 @@ table > tbody > tr > td > input[type="date"]{
     iframe{
         min-height: 860px !important;
     }
-    
+
     img{
         min-width: 60px !important;
         min-width: 60px !important;

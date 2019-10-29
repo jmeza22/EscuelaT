@@ -603,7 +603,11 @@ class SQLDatabase {
         if ($this->link != null && isset($table) && $table != null && isset($array) && $array != null) {
             $sql = $this->buildUpdateStmtString($table, $array, $where, $arraywhere);
             $this->stmt = $this->link->prepare($sql);
-            $arraymix = array_merge($array, $arraywhere);
+            if ($arraywhere !== null) {
+                $arraymix = array_merge($array, $arraywhere);
+            } else {
+                $arraymix = $array;
+            }
             $this->stmt = $this->bindParams($this->stmt, $arraymix);
             $this->executeSTMT();
             if ($this->stmt->rowCount() > 0) {
@@ -659,18 +663,6 @@ class SQLDatabase {
         return $result;
     }
 
-    public function selectAssocArray($sql) {
-        $resultset = $this->getResultSet($sql);
-        if ($resultset != null) {
-            $myarray = array();
-            while ($row = $resultset->fetch()) {
-                array_push($myarray, $row);
-            }
-            return $myarray;
-        }
-        return null;
-    }
-
     public function selectArray($sql) {
         $resultset = $this->getResultSet($sql);
         if ($resultset != null) {
@@ -682,6 +674,14 @@ class SQLDatabase {
                 }
             }
             return $myarray;
+        }
+        return null;
+    }
+
+    public function selectAssocArray($sql, $arraywhere = null) {
+        $resultset = $this->queryStmt($sql, $arraywhere);
+        if ($resultset != null) {
+            return $resultset;
         }
         return null;
     }

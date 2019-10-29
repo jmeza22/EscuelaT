@@ -334,9 +334,9 @@ class BaseController {
         return null;
     }
 
-    public function selectAssocArray($sql) {
+    public function selectAssocArray($sql, $arraywhere = null) {
         if ($sql != null) {
-            return $this->db->selectAssocArray($sql);
+            return $this->db->selectAssocArray($sql, $arraywhere);
         }
         return null;
     }

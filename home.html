@@ -14,9 +14,12 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/menu.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/SimplexFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Home.js"></script>
     </head>
-    <body>
+    <body onbeforeunload="logoutSystem();">
         <header>
             <div class="container">
                 <div class="menucss">
@@ -87,6 +90,7 @@ and open the template in the editor.
                                 <li><a target="myframe" href="FormTiposUsuarios.html">Tipos de Usuario</a></li>
                             </ul>
                         </li>
+                        <li><a target="myframe" href="ChangePasswordForm.html">Contraseña</a></li>
                         <li><a href="logout.html">Salir</a></li>
                     </ul>
                 </div>

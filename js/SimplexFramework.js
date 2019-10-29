@@ -210,7 +210,8 @@ function createAjaxLoading() {
     subdiv.setAttribute("style", "display: inline-block;");
     imgload.setAttribute("id", "ImageLoading");
     imgload.setAttribute("class", "ImageLoading");
-    imgload.setAttribute("src", "css/loadingAnimation.gif");
+    imgload.setAttribute("src", "css/loading.webp");
+    imgload.setAttribute("alt", "?");
     text.setAttribute("class", "TextLoading");
     text.innerHTML = '...LOADING...';
 
