@@ -1,8 +1,4 @@
 jQuery(document).ready(function () {
-    if (getUsernameLogin() !== null) {
-        setLogin(null);
-        sendLogin(document.getElementById("FormLogin"));
-    }
     resetLocalPOST();
     document.getElementById("mynickname").value = getUsernameLogin();
     document.getElementById("mypassword").value = getPasswordLogin();
