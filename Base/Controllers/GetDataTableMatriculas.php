@@ -8,12 +8,37 @@ $bc = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new ReportsBank();
     $bc->connect();
-    $idestudiante=null;
     $arraywhere = $bc->parseFindByToArray($_POST);
+    $idestudiante=null;
     if(isset($arraywhere['id_estudiante'])){
         $idestudiante=$arraywhere['id_estudiante'];
     }
-    echo $bc->getMatriculas($session->getEnterpriseID(), null, null, null, null, null, null, null, $idestudiante);
+    
+    $idprograma=null;
+    if(isset($arraywhere['id_programa'])){
+        $idprograma=$arraywhere['id_programa'];
+    }
+    
+    $idperiodo=null;
+    if(isset($arraywhere['id_periodo'])){
+        $idperiodo=$arraywhere['id_periodo'];
+    }
+    
+    $grado=null;
+    if(isset($arraywhere['numgrado_programa'])){
+        $grado=$arraywhere['numgrado_programa'];
+    }
+    
+    $idsede=null;
+    if(isset($arraywhere['id_sede'])){
+        $idsede=$arraywhere['id_sede'];
+    }
+    
+    $idgrupo=null;
+    if(isset($arraywhere['id_grupo'])){
+        $idgrupo=$arraywhere['id_grupo'];
+    }
+    echo $bc->getMatriculas($session->getEnterpriseID(), $idsede, null, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante);
     $bc->disconnect();
     $bc = null;
 }

@@ -195,7 +195,7 @@ class BaseController {
             for ($i = 0; $i < $numrows; $i++) {
                 $newarray[$i] = array();
                 foreach ($columns as $col) {
-                    if (isset($postdata[$col][$i])) {
+                    if (isset($postdata[$col][$i]) && is_array($postdata[$col])) {
                         $newarray[$i][$col] = $postdata[$col][$i];
                     }
                 }

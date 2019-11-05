@@ -909,6 +909,8 @@ function getSelectedOption(element) {
 function submitAjax(formData, url, header, reload) {
     var promise = null;
     console.log('Trying Submit!. ' + Object.keys(formData));
+    sessionStorage.removeItem('rowCount');
+    sessionStorage.removeItem('lastInsertId');
     promise = $.ajax({
         method: "POST",
         url: url,
@@ -938,7 +940,7 @@ function submitAjax(formData, url, header, reload) {
                 if (result.lastInsertId !== null && result.lastInsertId !== undefined && result.lastInsertId !== '') {
                     try {
                         console.log('LastId: ' + result.lastInsertId);
-                        sessionStorage.setItem('LastInsertId', result.lastInsertId);
+                        sessionStorage.setItem('lastInsertId', result.lastInsertId);
                     } catch (e) {
                         console.log('Error (lastInsertId).');
                     }
