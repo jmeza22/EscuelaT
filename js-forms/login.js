@@ -1,6 +1,7 @@
 jQuery(document).ready(function () {
     if (getUsernameLogin() !== null) {
-        goHome();
+        setLogin(null);
+        sendLogin(document.getElementById("FormLogin"));
     }
     resetLocalPOST();
     document.getElementById("mynickname").value = getUsernameLogin();
@@ -17,40 +18,6 @@ function LoadEscuela() {
     escuela = document.getElementById("id_escuela");
     escuela.innerHTML = '<option value="">Ninguna</option>';
     loadComboboxData(escuela);
-}
-
-function LoadSede() {
-    var sede = null;
-    sede = document.getElementById("id_sede");
-    sede.innerHTML = '<option disabled="disabled" value="">Ninguna</option>';
-    loadComboboxData(sede);
-}
-
-function setFinbySede(findby) {
-    if (findby !== null && findby !== '') {
-        var sede = document.getElementById("id_sede");
-        sede.setAttribute('findby', findby);
-    }
-}
-
-function setFinbyValueSede(findbyvalue) {
-    if (findbyvalue !== null && findbyvalue !== '') {
-        var sede = document.getElementById("id_sede");
-        sede.setAttribute('findbyvalue', findbyvalue);
-    }
-}
-
-function RefreshSede(item) {
-    if (item !== undefined && item !== null) {
-        console.log('Filtrando por ' + item.id);
-        setFinbySede('id_escuela');
-        if (item.selected !== undefined && item.selected !== null) {
-            setFinbyValueSede(item.selected);
-        } else {
-            setFinbyValueSede(item.value);
-        }
-        LoadSede();
-    }
 }
 
 function goHome() {
@@ -71,25 +38,29 @@ function goHome() {
     }
 }
 
+function sendLogin(form) {
+    var enterprise = document.getElementById("id_escuela");
+    login(form, null).done(function () {
+        setTimeout(function () {
+            console.log(getErrorMessage());
+            setUsernameLogin(document.getElementById("mynickname").value);
+            if (enterprise.selected !== undefined && enterprise.selected !== null) {
+                setEnterpriseID(enterprise.selected);
+                setEnterpriseName(enterprise.getAttribute('text'));
+            } else {
+                setEnterpriseID(enterprise.value);
+                setEnterpriseName(enterprise.getAttribute('text'));
+            }
+            if (getUserIdLogin() !== null) {
+                window.setTimeout(goHome(), 5000);
+            }
+        }, 0);
+    });
+}
+
 function Send(item) {
     var form = document.getElementById("FormLogin");
-    var enterprise = document.getElementById("id_escuela");
     if (validateForm(form)) {
-        login(form, null).done(function () {
-            setTimeout(function () {
-                console.log(getErrorMessage());
-                setUsernameLogin(document.getElementById("mynickname").value);
-                if (enterprise.selected !== undefined && enterprise.selected !== null) {
-                    setEnterpriseID(enterprise.selected);
-                    setEnterpriseName(enterprise.getAttribute('text'));
-                } else {
-                    setEnterpriseID(enterprise.value);
-                    setEnterpriseName(enterprise.getAttribute('text'));
-                }
-                if (getUserIdLogin() !== null) {
-                    window.setTimeout(goHome(), 5000);
-                }
-            }, 0);
-        });
+        sendLogin(form);
     }
 }

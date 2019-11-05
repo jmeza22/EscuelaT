@@ -96,6 +96,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " LEFT JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
             . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
             . " WHERE M.status_matricula=1 "
+            . " AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Finalizado' "
             . " AND MA.status_matriculaasignatura=1 "
             . " AND MA.id_escuela = '" . $idescuela . "' "
             . " AND MA.id_programa = '" . $idprograma . "' "

@@ -1667,33 +1667,33 @@ function autoLoadNameFromId(idfield, namefield1, namefield2, namefield3) {
 }
 
 function setLogin(data) {
-    if (data !== null) {
+    if (data !== undefined) {
         try {
-            if (data['user'] !== null) {
+            if (data !== null && data['user'] !== null) {
                 localStorage.setItem("UsernameLogin", "" + data['user']);
                 console.log('UsernameLogin Stored!');
             } else {
                 localStorage.removeItem("UsernameLogin");
             }
-            if (data['userrole'] !== null) {
+            if (data !== null && data['userrole'] !== null) {
                 localStorage.setItem("UserRoleLogin", "" + data['userrole']);
                 console.log('UserRoleLogin Stored!');
             } else {
                 localStorage.removeItem("UserRoleLogin");
             }
-            if (data['userid'] !== null) {
+            if (data !== null && data['userid'] !== null) {
                 localStorage.setItem("UserIdLogin", "" + data['userid']);
                 console.log('UserIdLogin Stored!');
             } else {
                 localStorage.removeItem("UserIdLogin");
             }
-            if (data['fullname'] !== null) {
+            if (data !== null && data['fullname'] !== null) {
                 localStorage.setItem("FullnameLogin", "" + data['fullname']);
                 console.log('FullnameLogin Stored!');
             } else {
                 localStorage.removeItem("FullnameLogin");
             }
-            if (data['enterprisename'] !== null) {
+            if (data !== null && data['enterprisename'] !== null) {
                 localStorage.setItem("EnterpriseName", "" + data['enterprisename']);
                 console.log('EnterpriseName Stored!');
             } else {

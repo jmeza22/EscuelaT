@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    showNotification('Espere...', 'Espere a que se carguen todos los elementos. Tenga paciencia. No recargue la pagina.')
     LoadSede();
     LoadPrograma();
     LoadGrupo();

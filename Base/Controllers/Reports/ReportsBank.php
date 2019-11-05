@@ -195,7 +195,7 @@ class ReportsBank extends BaseController {
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
-    
+
     public function getGrados($idescuela = null, $idprograma = null, $idplanestudio = null) {
         $sql = null;
         $result = null;
@@ -711,7 +711,10 @@ class ReportsBank extends BaseController {
                 . " LEFT JOIN PlanEstudioDetalleApp PED ON MA.id_planestudiodetalle=PED.id_planestudiodetalle "
                 . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
                 . " LEFT JOIN AreasApp AR ON A.id_area=AR.id_area "
-                . " WHERE MA.status_matriculaasignatura=1 AND M.status_matricula=1 AND OE.status_estudiante=1 "
+                . " WHERE MA.status_matriculaasignatura=1 "
+                . " AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Finalizado' "
+                . " AND M.status_matricula=1 "
+                . " AND OE.status_estudiante=1 "
         ;
         $arraywhere = Array();
         if ($idescuela !== null) {
