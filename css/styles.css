@@ -160,7 +160,7 @@ td > input[type="text"]  {
     -moz-opacity:0.85;
     -khtml-opacity:0.85;
     filter: aplha(opacity=85);
-    min-width: 300px;
+    min-width: 260px;
 }
 
 .panel-heading{

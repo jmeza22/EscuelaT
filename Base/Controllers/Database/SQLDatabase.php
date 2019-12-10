@@ -641,13 +641,17 @@ class SQLDatabase {
             $this->executeSTMT();
             if ($this->stmt->rowCount() > 0) {
                 $result = true;
-            }
-            if (isset($this->stmt) && $this->stmt != null) {
-                $myarray = array();
-                while ($row = $this->stmt->fetch()) {
-                    array_push($myarray, $row);
+                if (isset($this->stmt) && $this->stmt != null) {
+                    $myarray = array();
+                    try {
+                        while ($row = $this->stmt->fetch()) {
+                            array_push($myarray, $row);
+                        }
+                    } catch (Exception $ex) {
+                        
+                    }
+                    $result = $myarray;
                 }
-                $result = $myarray;
             }
         }
         return $result;

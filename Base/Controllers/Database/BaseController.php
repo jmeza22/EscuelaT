@@ -341,11 +341,19 @@ class BaseController {
         return null;
     }
 
-    public function parseResults($result, $message = '', $status = 0) {
+    public function query($sql, $arraywhere = null) {
+        if ($sql != null) {
+            return $this->db->queryStmt($sql, $arraywhere);
+        }
+        return null;
+    }
+
+    public function parseResults($result = NULL, $message = '', $status = 0) {
         $array = array();
-        $array = ["data" => NULL, "message" => $message, "status" => $status, "error" => $this->db->getErrorMessage(), "lastInsertId" => $this->getLastInsertId(), "rowcount" => $this->getRowCount()];
         if ($result != NULL) {
             $array = ["data" => $result, "message" => $message, "status" => $status, "error" => null, "lastInsertId" => $this->getLastInsertId(), "rowcount" => $this->getRowCount()];
+        } else {
+            $array = ["data" => NULL, "message" => $message, "status" => $status, "error" => $this->db->getErrorMessage(), "lastInsertId" => $this->getLastInsertId(), "rowcount" => $this->getRowCount()];
         }
         $array = json_encode($array);
         return $array;

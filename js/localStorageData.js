@@ -506,6 +506,30 @@ function getLastInsertId() {
     return null;
 }
 
+function setRowCount(rowcount) {
+    if (LocalStorageStatus()) {
+        if (rowcount !== null) {
+            localStorage.removeItem("rowCount");
+            localStorage.setItem("rowCount", rowcount);
+            return true;
+        }
+    }
+    return false;
+}
+
+function getRowCount() {
+    if (LocalStorageStatus()) {
+        var rc = null;
+        rc = sessionStorage.getItem("rowCount");
+        if (rc === null) {
+            console.log("rowCount is null");
+        } else {
+            return rc;
+        }
+    }
+    return null;
+}
+
 function getIdFromPOST() {
     var frms = document.forms;
     var form = null;

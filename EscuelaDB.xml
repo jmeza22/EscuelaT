@@ -458,17 +458,37 @@
       <Cl au="0" df="" nm="phab_comentarios_calificacion" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
       </Cl>
+      <Cl au="0" df="" nm="pfin_id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Corte Final</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="pfin_id_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Docente</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="pfin_nd_calificacion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Nota Definitiva Final General</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="pfin_ausencias_calificacion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Total Ausencias Final</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="pfin_comentarios_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Comentario Final</Cm>
+      </Cl>
       <Cl au="0" df="" nm="usuariocrea_calificacion" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
         <Cm>Usuario que crea el Registro</Cm>
       </Cl>
-      <Cl au="0" df="" nm="usuarioedita_calificacion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
-        <Cm>Usuario que Modifica el Registro</Cm>
-      </Cl>
       <Cl au="0" df="" nm="fechacrea_calificacion" nu="1">
         <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Fecha de Creacion del Registri</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuarioedita_calificacion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Usuario que Modifica el Registro</Cm>
       </Cl>
       <Cl au="0" df="" nm="fechaedita_calificacion" nu="1">
         <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
@@ -2476,7 +2496,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="126">
+  <RnmMgr NxRnmId="127">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -2803,6 +2823,9 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="PagosRecibidosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="125" nNm="docpagador_pago" oNm="documentopagador_pago"/>
     </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="126" nNm="pfin_comentarios_calificacion" oNm="pfin_comentarios_calificaciones"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -2820,7 +2843,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
