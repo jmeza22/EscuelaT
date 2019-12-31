@@ -46,6 +46,9 @@ function setRequiredsInputs(tipo) {
             grupo.setAttribute('required', 'required');
             estudiante.setAttribute('required', 'required');
         }
+        if (tipo.value === 'ObservadorEstudiante') {
+            estudiante.setAttribute('required', 'required');
+        }
         if (tipo.value === 'Estudiantes') {
             sede.setAttribute('required', 'required');
             jornada.setAttribute('required', 'required');

@@ -38,7 +38,7 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-2">
                             <label>Codigo</label>
-                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" onchange="BuscarEstudiante()">
+                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" onchange="BuscarEstudiante();">
                         </div>
                         <div class="col-sm-2">
                             <label>Opciones</label>
@@ -161,46 +161,6 @@ and open the template in the editor.
                     </div>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading">Acudiente 1</div>
-                        <div class="panel-body" >
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label>Codigo Acudiente</label>
-                                    <input type="text" name="idacudiente1_estudiante" id="idacudiente1_estudiante" value="P0" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Acudiente 1" list="lista_id_persona">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Nombre de Acudiente</label>
-                                    <input type="text" name="nombreacudiente1_estudiante" id="nombreacudiente1_estudiante" value="Admin" maxlength="100" required="required" class="form-control" title="Nombre del Acudiente 1" readonly="readonly">
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Parentesco</label>
-                                    <input type="text" name="parentescoacudiente1_estudiante" id="parentescoacudiente1_estudiante" value="Ninguno" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Acudiente 2</div>
-                        <div class="panel-body" >
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label>Codigo Acudiente</label>
-                                    <input type="text" name="idacudiente2_estudiante" id="idacudiente2_estudiante" value="" maxlength="24" class="form-control" title="Codigo Asignado al Acudiente 2" list="lista_id_persona">
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Nombre de Acudiente</label>
-                                    <input type="text" name="nombreacudiente2_estudiante" id="nombreacudiente2_estudiante" value="" maxlength="100" class="form-control" title="Nombre del Acudiente 2" readonly="readonly">
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Parentesco</label>
-                                    <input type="text" name="parentescoacudiente2_estudiante" id="parentescoacudiente2_estudiante" value="" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
                         <div class="panel-heading">Salud y Crecimiento</div>
                         <div class="panel-body" >
                             <div class="row">
@@ -258,6 +218,63 @@ and open the template in the editor.
                         </div>
                     </div>
 
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Acudiente 1</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Codigo Acudiente</label>
+                                    <input type="text" name="idacudiente1_estudiante" id="idacudiente1_estudiante" value="P0" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Acudiente 1" list="lista_id_persona">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Nombre de Acudiente</label>
+                                    <input type="text" name="nombreacudiente1_estudiante" id="nombreacudiente1_estudiante" value="Admin" maxlength="100" required="required" class="form-control" title="Nombre del Acudiente 1" readonly="readonly">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Parentesco</label>
+                                    <input type="text" name="parentescoacudiente1_estudiante" id="parentescoacudiente1_estudiante" value="Ninguno" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Ocupacion</label>
+                                    <input type="text" name="ocupacionacudiente1_estudiante" id="ocupacionacudiente1_estudiante" value="Ninguno" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Telefono</label>
+                                    <input type="text" name="telefonoacudiente1_estudiante" id="telefonoacudiente1_estudiante" value="Ninguno" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Acudiente 2</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label>Codigo Acudiente</label>
+                                    <input type="text" name="idacudiente2_estudiante" id="idacudiente2_estudiante" value="" maxlength="24" class="form-control" title="Codigo Asignado al Acudiente 2" list="lista_id_persona">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Nombre de Acudiente</label>
+                                    <input type="text" name="nombreacudiente2_estudiante" id="nombreacudiente2_estudiante" value="" maxlength="100" class="form-control" title="Nombre del Acudiente 2" readonly="readonly">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Parentesco</label>
+                                    <input type="text" name="parentescoacudiente2_estudiante" id="parentescoacudiente2_estudiante" value="" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Ocupacion</label>
+                                    <input type="text" name="ocupacionacudiente2_estudiante" id="ocupacionacudiente2_estudiante" value="Ninguno" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Telefono</label>
+                                    <input type="text" name="telefonoacudiente2_estudiante" id="telefonoacudiente2_estudiante" value="Ninguno" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
                             <center>
@@ -265,7 +282,7 @@ and open the template in the editor.
                             </center>
                         </div>
                     </div>
-                    
+
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
                             <center>
@@ -296,8 +313,20 @@ and open the template in the editor.
                         <option value="Otro">Otro</option>
                     </datalist>
 
-
                 </form>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-12">
+                        <center>
+                            <form id="formRep" method="POST" autocomplete="off" target="_blank" action="Base/Controllers/ReportesController.php" url="Base/Controllers/InformesController.php" model="EscuelasApp" findBy="id_escuela" mainform="true" >
+                                <input type="hidden" id="tipo_reporte" name="tipo_reporte" required="required" value="ObservadorEstudiante" />
+                                <input type="hidden" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
+                                <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-default" >PDF</button>        
+                            </form>
+                        </center>
+                    </div>
+                </div>
+
             </div>
         </div>
 

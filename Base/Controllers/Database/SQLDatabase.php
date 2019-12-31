@@ -694,6 +694,7 @@ class SQLDatabase {
         $resultset = $this->queryStmt($sql, $arraywhere);
         if ($resultset != null) {
             $json = json_encode($resultset);
+            
             return $json;
         }
         return null;

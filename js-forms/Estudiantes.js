@@ -10,6 +10,17 @@ jQuery(document).ready(function () {
     BuscarEstudianteActivo();
 });
 
+function CopiarCodigo(){
+    var formP = document.getElementById("formP");
+    var formE = document.getElementById("form0");
+    var formR = document.getElementById("formRep");
+    var idpersona = getElement(formP, 'id_persona');
+    var idestudiante = getElement(formE, 'id_estudiante');
+    var idestudianteR = getElement(formR, 'id_estudiante');
+    idestudiante.value=idpersona.value;
+    idestudianteR.value=idpersona.value;
+}
+
 function CargarNombres() {
     var form0 = document.getElementById("form0");
     var idestudiante = null;
@@ -31,6 +42,7 @@ function Send(item) {
 }
 
 function BuscarEstudiante() {
+    CopiarCodigo();
     var formP = document.getElementById("formP");
     var form0 = document.getElementById("form0");
     var idpersona = null;

@@ -92,6 +92,30 @@ class PDFReports extends TCPDF {
         return $number;
     }
 
+    private function getSpanishGender($shortcode) {
+        if ($shortcode !== null) {
+            if ($shortcode === 'M') {
+                return 'MASCULINO';
+            }
+            if ($shortcode === 'F') {
+                return 'FEMENINO';
+            }
+        }
+        return $shortcode;
+    }
+
+    private function getSpanishBoolean($shortcode) {
+        if ($shortcode !== null) {
+            if ($shortcode == 0) {
+                return 'NO';
+            }
+            if ($shortcode == 1) {
+                return 'SI';
+            }
+        }
+        return $shortcode;
+    }
+
     private function getLongNameColombianID($shortname) {
         $longnames = array();
         $longnames['RC'] = 'Registro Civil';
@@ -538,7 +562,7 @@ class PDFReports extends TCPDF {
                 $this->SetFont($this->fontfamilycontent, 'B', 12);
                 $this->Ln(8);
                 $text1 = "Que " . strtoupper($data['nombrecompleto_estudiante']) . ""
-            . " identificado(a) con " . $this->getLongNameColombianID($data['tipodoc_persona']) . " número " . $data['documento_persona'] . ""
+                        . " identificado(a) con " . $this->getLongNameColombianID($data['tipodoc_persona']) . " número " . $data['documento_persona'] . ""
                         . " se encuentra matriculado(a) en esta Institución Educativa, "
                         . " y actualmente se encuentra cursando el grado " . strtoupper($this->getSpanishOrdinalsNumbers($data['numgrado_programa'])) . ""
                         . " de " . strtoupper($data['nombre_programa']) . ", en el grupo " . $data['nombre_grupo'] . ",  para el Año Lectivo " . $data['anualidad_periodo'] . ".";
@@ -896,6 +920,151 @@ class PDFReports extends TCPDF {
                         $htmltable = '';
                         if ($i < (count($data) - 1)) {
                             $this->AddPage();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function ObservadorEstudiante($idestudiante) {
+        $data = null;
+        $periodos = null;
+        $data = $this->bc->getObservadorEstudiante($this->session->getEnterpriseID(), $idestudiante);
+        $periodos = $this->bc->getPeriodosAnuales($this->session->getEnterpriseID());
+        $pageWidth = $this->getRealPageWidth();
+        if ($periodos !== null && $periodos !== '' && $periodos !== '[]') {
+            $periodos = json_decode($periodos, true);
+        }
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->SetFont($this->fontfamilycontent, 'B', 18);
+                    $this->Cell(0, 6, 'OBSERVADOR DE ESTUDIANTE', 0, 1, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 25 / 100, 4, 'PRIMER APELLIDO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'SEGUNDO APELLIDO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'PRIMER NOMBRE', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'SEGUNDO NOMBRE', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['apellido1_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['apellido2_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['nombre1_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['nombre2_persona']), 0, 0, 'C');
+                    $this->Ln(8);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 25 / 100, 4, 'SEXO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'EDAD', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'FECHA NACIMIENTO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'CODIGO', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($this->getSpanishGender($data[$i]['sexo_persona'])), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['edad_persona'] . ' AÑOS'), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['fechanacimiento_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['id_persona']), 0, 0, 'C');
+                    $this->Ln(8);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 25 / 100, 4, 'TIPO IDENTIFICACION', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'NUMERO IDENTIFICACION', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'TELEFONO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'EMAIL', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['tipodoc_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['documento_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['telefono_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['email_persona']), 0, 0, 'C');
+                    $this->Ln(8);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 25 / 100, 4, 'PAIS', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'DEPARTAMENTO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'MUNICIPIO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'DIRECCION', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['pais_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['departamento_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['ciudad_persona']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['direccion_persona']), 0, 0, 'C');
+                    $this->Ln(8);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 25 / 100, 4, 'PESO (kg)', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'ESTATURA (cm)', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'GRUPO SANGUINEO', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'FACTOR RH', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['pesokg_estudiante']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['estaturam_estudiante']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['grupotiposangre_estudiante']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['rhtiposangre_estudiante']), 0, 0, 'C');
+                    $this->Ln(8);
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 25 / 100, 4, 'DEF. VISUAL', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'DEF. AUDITIVA', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'ALERGIAS', 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, 'ENF. CRONICA', 0, 0, 'C');
+                    $this->Ln(4);
+                    $this->SetFont($this->fontfamilycontent, 'B', 12);
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($this->getSpanishBoolean($data[$i]['deficienciavisual_estudiante'])), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($this->getSpanishBoolean($data[$i]['deficienciaauditiva_estudiante'])), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['alergias_estudiante']), 0, 0, 'C');
+                    $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['enfermedadcronica_estudiante']), 0, 0, 'C');
+                    $this->Ln(10);
+                    $this->SetFont($this->fontfamilycontent, 'B', 14);
+                    $this->Cell($pageWidth, 4, 'HISTORIAL DE NOTAS', 0, 0, 'C');
+                    $this->Ln(2);
+                    $calificaciones = null;
+                    if (is_array($periodos) && count($periodos) > 0) {
+                        if (isset($data[$i]['calificaciones'])) {
+                            $calificaciones = $data[$i]['calificaciones'];
+                            if ($calificaciones !== null && $calificaciones !== '' && $calificaciones !== '[]') {
+                                $calificaciones = json_decode($calificaciones, true);
+                            }
+                        }
+                        if ($calificaciones !== null && is_array($calificaciones)) {
+                            for ($j = 0; $j < count($periodos); $j++) {
+                                $labelperiodo = true;
+                                $ok = false;
+                                for ($k = 0; $k < count($calificaciones); $k++) {
+                                    if ($calificaciones[$k]['id_periodo'] == $periodos[$j]['id_periodo']) {
+                                        if ($labelperiodo == true) {
+                                            $this->Ln(4);
+                                            $this->SetFont($this->fontfamilycontent, 'B', 12);
+                                            $this->Cell($pageWidth, 4, 'Año: ' . $calificaciones[$k]['id_periodo'] . ' - Programa: ' . $calificaciones[$k]['id_programa'] . ' - Grado: ' . $calificaciones[$k]['numgrado_programa'] . ' - Grupo: ' . $calificaciones[$k]['id_grupo'], 0, 0, 'C');
+                                            $this->Ln(8);
+                                            $this->SetFont($this->fontfamilycontent, 'B', 12);
+                                            $this->Cell($pageWidth * 42 / 100, 4, 'ASIGNATURA', 1, 0, 'L');
+                                            $this->Cell($pageWidth * 7 / 100, 4, 'P1', 1, 0, 'C');
+                                            $this->Cell($pageWidth * 7 / 100, 4, 'P2', 1, 0, 'C');
+                                            $this->Cell($pageWidth * 7 / 100, 4, 'P3', 1, 0, 'C');
+                                            $this->Cell($pageWidth * 7 / 100, 4, 'P4', 1, 0, 'C');
+                                            $this->Cell($pageWidth * 7 / 100, 4, 'P5', 1, 0, 'C');
+                                            $this->Cell($pageWidth * 7 / 100, 4, 'P6', 1, 0, 'C');
+                                            $this->Cell($pageWidth * 7 / 100, 4, 'HAB', 1, 0, 'C');
+                                            $this->Cell($pageWidth * 9 / 100, 4, 'DEF', 1, 0, 'C');
+                                            $this->Ln();
+                                            $labelperiodo = false;
+                                        }
+                                        $this->SetFont($this->fontfamilycontent, '', 10);
+                                        $this->Cell($pageWidth * 42 / 100, 4, $calificaciones[$k]['nombre_asignatura'], 1, 0, 'L');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np1']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np2']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np3']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np4']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np5']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np6']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['nphab']), 1, 0, 'C');
+                                        $this->SetFont($this->fontfamilycontent, 'B', 10);
+                                        $this->Cell($pageWidth * 9 / 100, 4, $calificaciones[$k]['npfin'], 1, 0, 'C');
+                                        $this->Ln();
+                                    }
+                                }
+                            }
                         }
                     }
                 }

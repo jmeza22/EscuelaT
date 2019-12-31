@@ -415,13 +415,20 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getEstudiantes() {
+    public function getEstudiantes($idestudiante = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT * FROM ObservadorEstudianteApp "
-                . "WHERE status_estudiante=1 "
-                . "ORDER BY nombrecompleto_estudiante ASC";
-        $result = $this->selectJSONArray($sql);
+        $arraywhere = Array();
+        $sql = "SELECT OE.*, P.*, IFNULL(DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(P.fechanacimiento_persona)), '%Y')+0,'?') AS edad_persona  "
+                . " FROM ObservadorEstudianteApp OE "
+                . " INNER JOIN PersonasApp P ON OE.id_estudiante=P.id_persona "
+                . " WHERE OE.status_estudiante=1 ";
+        if ($idestudiante !== null) {
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND OE.id_estudiante=:p_id_estudiante ";
+        }
+        $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante ASC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -778,6 +785,30 @@ class ReportsBank extends BaseController {
                 $resultCalificaciones = $this->getCalificaciones($resultEstudiantes[$i]['id_escuela'], $resultEstudiantes[$i]['id_sede'], $resultEstudiantes[$i]['id_jornada'], $resultEstudiantes[$i]['id_programa'], $resultEstudiantes[$i]['id_planestudio'], $resultEstudiantes[$i]['numgrado_programa'], $resultEstudiantes[$i]['id_grupo'], $resultEstudiantes[$i]['id_periodo'], $resultEstudiantes[$i]['id_estudiante'], $resultEstudiantes[$i]['id_matricula']);
                 if ($resultCalificaciones !== null) {
                     $resultEstudiantes[$i]['calificaciones'] = $resultCalificaciones;
+                }
+            }
+        }
+        $resultEstudiantes = json_encode($resultEstudiantes);
+        return $resultEstudiantes;
+    }
+
+    public function getObservadorEstudiante($idescuela, $idestudiante) {
+        $resultEstudiantes = null;
+        $resultCalificaciones = null;
+        $resultAnotaciones = null;
+        $resultEstudiantes = $this->getEstudiantes($idestudiante);
+        if ($resultEstudiantes !== null && $resultEstudiantes !== '[]') {
+            $resultEstudiantes = json_decode($resultEstudiantes, true);
+        }
+        if ($resultEstudiantes !== null && is_array($resultEstudiantes)) {
+            for ($i = 0; $i < count($resultEstudiantes); $i++) {
+                $resultCalificaciones = $this->getCalificaciones($idescuela, null, null, null, null, null, null, null, $resultEstudiantes[$i]['id_estudiante'], null);
+                if ($resultCalificaciones !== null) {
+                    $resultEstudiantes[$i]['calificaciones'] = $resultCalificaciones;
+                }
+                $resultAnotaciones = $this->getAnotaciones($resultEstudiantes[$i]['id_estudiante']);
+                if ($resultAnotaciones !== null) {
+                    $resultEstudiantes[$i]['anotaciones'] = $resultAnotaciones;
                 }
             }
         }

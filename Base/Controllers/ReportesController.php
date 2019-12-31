@@ -188,6 +188,11 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->ListadoUsuarios($session->getEnterpriseID(), 'Visitor');
             $report->generatePDFDocument();
         }
+        if ($tipo === 'ObservadorEstudiante') {
+            $report->setReportName('Observador del Estudiante '.$idestudiante);
+            $report->ObservadorEstudiante($idestudiante);
+            $report->generatePDFDocument();
+        }
     }
 } else {
     echo $session->getSessionStateJSON();
