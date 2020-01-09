@@ -43,8 +43,8 @@ and open the template in the editor.
                                 <th style="width: 5%;" title="Numero de Horas">Hrs.</th>
                                 <th style="width: 5%;" title="Año">Año</th>
                                 <th style="width: 5%; min-width: 32px !important;">Planilla</th>
-                                <th style="width: 5%; min-width: 32px !important;">Boletin</th>
-                                <th style="width: 5%; min-width: 32px !important;">Lista</th>
+                                <th style="width: 5%; min-width: 32px !important;">Asistencia</th>
+                                <th style="width: 5%; min-width: 32px !important;">Informes</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -54,7 +54,7 @@ and open the template in the editor.
                                 <td> {{numhoras_carga}} </td>
                                 <td> {{id_periodo}} </td>
                                 <td>
-                                    <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="POST" autocomplete="off" url="Base/Controllers/CargasController.php"  model="CargasApp" findBy="id_carga" statusfield="status_carga">
+                                    <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="GET" autocomplete="off" action="FormCalificaciones.html" model="CalificacionesApp">
                                         <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
                                         <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
                                         <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
@@ -64,8 +64,28 @@ and open the template in the editor.
                                         <a name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info" onclick="goCalificaciones(this);">Planilla</a>
                                     </form>
                                 </td>
-                                <td>  </td>
-                                <td>  </td>
+                                <td>
+                                    <form id="Asistencia{{id_carga}}" name="Asistencia{{id_carga}}" method="GET" autocomplete="off" action="FormAsistencia.html" model="AsistenciaApp">
+                                        <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
+                                        <input type="hidden"  editable="false" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
+                                        <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
+                                        <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
+                                        <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
+                                        <a name="VerAsistencia" id="VerAsistencia" class="btn btn-xs btn-info" onclick="goAsistencia(this);">Asistencia</a>
+                                    </form>
+                                </td>
+                                <td>  
+                                    <form id="Informes{{id_carga}}" name="Informes{{id_carga}}" method="POST" autocomplete="off" action="Base/Controllers/InformesController.php" url="Base/Controllers/InformesController.php" model="CalificacionesApp" target="_blank">
+                                        <input type="hidden"  editable="false" name="tipo_informe" id="tipo_informe" value="Completo" >
+                                        <input type="hidden"  editable="false" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
+                                        <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
+                                        <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-xs btn-primary" >Generar PDF</button>        
+                                    </form>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

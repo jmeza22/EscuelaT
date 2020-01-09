@@ -143,6 +143,62 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="AsistenciaApp">
+      <Cm>Asistencia a Clases</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_asistencia" nm="pkAsistenciaApp"/>
+      <Cl au="0" df="" nm="id_asistencia" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asistencia</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechahora_asistencia" nu="0">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha y Hora de Asistencia</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="presente_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Asistio a Clases?</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="tarde_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Llega Tarde?</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nota_asistencia" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Observaciones</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_matasig" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="64" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura Matriculada</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_corte" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Corte</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_AsistenciaApp_CortesPeriodosApp" prLkCl="id_corte" upAc="3">
+        <PrTb mn="0" nm="CortesPeriodosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="AsistenciaApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_corte" prCl="id_corte"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_AsistenciaApp_MatriculaAsignaturasApp" prLkCl="id_matasig" upAc="3">
+        <PrTb mn="0" nm="MatriculaAsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="AsistenciaApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_matasig" prCl="id_matasig"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="CalificacionesApp">
       <Cm>Planilla de Calificaciones por Periodo</Cm>
       <TblOpts/>
@@ -2218,6 +2274,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1406" y="3676"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PagosRecibidosApp" x="36" y="3369"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ValoresPecuniariosApp" x="537" y="3383"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsistenciaApp" x="1107" y="1703"/>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1644" y2="1656"/>
@@ -2238,6 +2295,16 @@
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="988" x2="2323" y1="110" y2="110"/>
         <positionableLine lineRole="CHILD_LINE" x1="2327" x2="2327" y1="528" y2="114"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AsistenciaApp.fk_AsistenciaApp_CortesPeriodosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1213" x2="1213" y1="1412" y2="1680"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.AsistenciaApp.fk_AsistenciaApp_MatriculaAsignaturasApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1030" x2="1084" y1="1729" y2="1729"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculaAsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2512,7 +2579,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="127">
+  <RnmMgr NxRnmId="128">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -2842,6 +2909,9 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="CalificacionesApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="126" nNm="pfin_comentarios_calificacion" oNm="pfin_comentarios_calificaciones"/>
     </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="AsistenciaApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="127" nNm="id_asistencia" oNm="Id"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -2859,13 +2929,13 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (30)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (31)</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

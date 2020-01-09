@@ -50,3 +50,18 @@ function goCalificaciones(item) {
         window.location.href = "FormCalificaciones.html?"+idcarga.id+"="+idcarga.value+"&"+grado.id+"="+grado.value+"&"+idgrupo.id+"="+idgrupo.value+"&"+idasignatura.id+"="+idasignatura.value+"&"+nomasignatura.id+"="+nomasignatura.value+"&"+periodo.id+"="+periodo.value+"";
     }
 }
+
+function goAsistencia(item) {
+    if (item !== undefined && item !== null) {
+        var form = getForm(item);
+        var idcarga = getElement(form, 'id_carga');
+        var periodo = getElement(form, 'id_periodo');
+        var programa = getElement(form, 'id_programa');
+        var grado = getElement(form, 'numgrado_programa');
+        var idgrupo = getElement(form, 'id_grupo');
+        var idasignatura = getElement(form, 'id_asignatura');
+        var nomasignatura = getElement(form, 'nombre_asignatura');
+        setPOST('asistencia_id_carga', idcarga.value);
+        window.location.href = "FormAsistencia.html?"+idcarga.id+"="+idcarga.value+"&"+programa.id+"="+programa.value+"&"+grado.id+"="+grado.value+"&"+idgrupo.id+"="+idgrupo.value+"&"+idasignatura.id+"="+idasignatura.value+"&"+nomasignatura.id+"="+nomasignatura.value+"&"+periodo.id+"="+periodo.value+"";
+    }
+}

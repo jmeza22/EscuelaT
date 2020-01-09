@@ -531,12 +531,13 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getAsignaturasMatriculadas($idescuela = null, $idmatricula = null, $idestudiante = null) {
+    public function getAsignaturasMatriculadas($idescuela = null, $idmatricula = null, $idestudiante = null, $idprograma = null, $idasignatura = null, $idperiodo = null, $grado = null, $idgrupo = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT MA.*, A.nombre_asignatura "
+        $sql = "SELECT MA.*, A.nombre_asignatura, OE.nombrecompleto_estudiante "
                 . "FROM MatriculaAsignaturasApp MA "
                 . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
+                . "INNER JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
                 . "WHERE MA.status_matriculaasignatura=1 AND A.status_asignatura=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
@@ -550,6 +551,26 @@ class ReportsBank extends BaseController {
         if ($idestudiante !== null) {
             $arraywhere['p_id_estudiante'] = $idestudiante;
             $sql = $sql . " AND MA.id_estudiante=:p_id_estudiante ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND MA.id_programa=:p_id_programa ";
+        }
+        if ($idasignatura !== null) {
+            $arraywhere['p_id_asignatura'] = $idasignatura;
+            $sql = $sql . " AND MA.id_asignatura=:p_id_asignatura ";
+        }
+        if ($idperiodo !== null) {
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND MA.id_periodo=:p_id_periodo ";
+        }
+        if ($grado !== null) {
+            $arraywhere['p_num_grado'] = $grado;
+            $sql = $sql . " AND MA.numgrado_programa=:p_num_grado ";
+        }
+        if ($idgrupo !== null) {
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND MA.id_grupo=:p_id_grupo ";
         }
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;

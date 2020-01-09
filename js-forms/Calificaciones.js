@@ -126,17 +126,17 @@ function ValidarNotasPorFila(item) {
             valmax = parseFloat(valmax.value);
 
             if (parseFloat(nc.value) < valmin || parseFloat(nc.value) > valmax) {
-                showNotification('Validacion', 'NC o L1 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
+                //showNotification('Validacion', 'NC o L1 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
                 nc.value = valmin;
                 return false;
             }
             if (parseFloat(np.value) < valmin || parseFloat(np.value) > valmax) {
-                showNotification('Validacion', 'NP o L2 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
+                //showNotification('Validacion', 'NP o L2 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
                 np.value = valmin;
                 return false;
             }
             if (parseFloat(na.value) < valmin || parseFloat(na.value) > valmax) {
-                showNotification('Validacion', 'NA o L3 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
+                //showNotification('Validacion', 'NA o L3 debe ser un valor Numerico entre ' + valmin + ' y ' + valmax + '.');
                 na.value = valmin;
                 return false;
             }
