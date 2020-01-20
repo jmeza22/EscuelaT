@@ -147,7 +147,7 @@
       <Cm>Asistencia a Clases</Cm>
       <TblOpts/>
       <Pk ClNs="id_asistencia" nm="pkAsistenciaApp"/>
-      <Cl au="0" df="" nm="id_asistencia" nu="0">
+      <Cl au="1" df="" nm="id_asistencia" nu="0">
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Codigo Asistencia</Cm>
       </Cl>
@@ -159,7 +159,7 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
         <Cm>Codigo Asignatura</Cm>
       </Cl>
-      <Cl au="0" df="" nm="fechahora_asistencia" nu="0">
+      <Cl au="0" df="" nm="fecha_asistencia" nu="0">
         <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Fecha y Hora de Asistencia</Cm>
       </Cl>
@@ -2579,7 +2579,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="128">
+  <RnmMgr NxRnmId="129">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -2911,6 +2911,9 @@
     </RnmCh>
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="AsistenciaApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="127" nNm="id_asistencia" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="AsistenciaApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="128" nNm="fecha_asistencia" oNm="fechahora_asistencia"/>
     </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>

@@ -30,7 +30,11 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     if (!isset($arraywhere['id_grupo'])) {
         $arraywhere['id_grupo'] = null;
     }
-    echo $bc->getAsignaturasMatriculadas($session->getEnterpriseID(), $arraywhere['id_matricula'], $arraywhere['id_estudiante'], $arraywhere['id_programa'], $arraywhere['id_asignatura'], $arraywhere['id_periodo'], $arraywhere['numgrado_programa'], $arraywhere['id_grupo']);
+    if (!isset($arraywhere['fecha_asistencia'])) {
+        $arraywhere['fecha_asistencia'] = null;
+    }
+    print_r($arraywhere);
+    echo $bc->getAsistencias($session->getEnterpriseID(), $arraywhere['id_matricula'], $arraywhere['id_estudiante'], $arraywhere['id_programa'], $arraywhere['id_asignatura'], $arraywhere['id_periodo'], $arraywhere['numgrado_programa'], $arraywhere['id_grupo'], $arraywhere['fecha_asistencia']);
     $bc->disconnect();
     $bc = null;
 }

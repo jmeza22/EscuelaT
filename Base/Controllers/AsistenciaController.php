@@ -2,6 +2,7 @@
 
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
+$variables = new SystemVariableManager();
 $bc = null;
 $result = null;
 $model = "AsistenciaApp";
@@ -11,7 +12,7 @@ $data = null;
 $postdata = null;
 $count = 0;
 $i = 0;
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();
@@ -19,7 +20,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction('insertorupdate');
-        $bc->beginTransaction();
         if (isset($_POST[$findBy])) {
 
             $data = array();
@@ -30,6 +30,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                 $postdata = $bc->parseMultiRows($postdata);
                 $count = count($postdata);
                 for ($i = 0; $i < $count; $i++) {
+                    $postdata[$i]['id_corte']=$variables->getIdCortePeriodo();
                     $bc->setPostData($postdata[$i]);
                     $result = $bc->execute(false);
                     if ($bc->getRowCount() > 0) {
@@ -39,11 +40,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     }
                 }
             }
-        }
-        if ($rowcount == $count) {
-            $bc->commit();
-        } else {
-            $bc->rollback();
         }
         echo $result;
         $result = null;

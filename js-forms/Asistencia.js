@@ -12,6 +12,7 @@ jQuery(document).ready(function () {
 
 function setDatosEncabezado() {
     var nombre = null;
+    var idprograma = null;
     var idasignatura = null;
     var nomasignatura = null;
     var periodo = null;
@@ -25,27 +26,46 @@ function setDatosEncabezado() {
     grado = document.getElementById('numgrado_programa');
     grupo = document.getElementById('id_grupo');
     nombre.value = getFullnameLogin();
+    idprograma = GET('id_programa');
     idasignatura.value = GET('id_asignatura');
     nomasignatura.value = GET('nombre_asignatura');
     periodo.value = GET('id_periodo');
     grado.value = GET('numgrado_programa');
     grupo.value = GET('id_grupo');
-    mytable.setAttribute('findby1','fecha_asistencia');
-    mytable.setAttribute('findbyvalue1',getDateTimeString().toString());
-    mytable.setAttribute('findby2','id_asignatura');
-    mytable.setAttribute('findbyvalue2',idasignatura.value);
-    mytable.setAttribute('findby3','numgrado_programa');
-    mytable.setAttribute('findbyvalue3',grado.value);
-    mytable.setAttribute('findby4','id_grupo');
-    mytable.setAttribute('findbyvalue4',grupo.value);
-    mytable.setAttribute('findby5','id_periodo');
-    mytable.setAttribute('findbyvalue5',periodo.value);
-    
+    mytable.setAttribute('findby', 'id_programa');
+    mytable.setAttribute('findbyvalue', idprograma);
+    mytable.setAttribute('findby1', 'fecha_asistencia');
+    mytable.setAttribute('findbyvalue1', getCurrentDate());
+    mytable.setAttribute('findby2', 'id_asignatura');
+    mytable.setAttribute('findbyvalue2', idasignatura.value);
+    mytable.setAttribute('findby3', 'numgrado_programa');
+    mytable.setAttribute('findbyvalue3', grado.value);
+    mytable.setAttribute('findby4', 'id_grupo');
+    mytable.setAttribute('findbyvalue4', grupo.value);
+    mytable.setAttribute('findby5', 'id_periodo');
+    mytable.setAttribute('findbyvalue5', periodo.value);
+    var fecha = document.getElementById("fecha");
+    fecha.value = getCurrentDate();
+}
+
+function setFecha() {
+    var fecha = document.getElementById("fecha");
+    var mytable = document.getElementById("dataTable0");
+    mytable.setAttribute('findby1', 'fecha_asistencia');
+    mytable.setAttribute('findbyvalue1', fecha.value);
 }
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
-    loadTableData(mytable, false);
+    var formTable = document.getElementById("formTable");
+    loadTableData(mytable, false).done(function () {
+        for (var i = 0; i < formTable.elements.length; i++) {
+            if (formTable.elements[i].tagName === 'SELECT') {
+                console.log(formTable.elements[i].name);
+                setComboboxValue(formTable.elements[i]);
+            }
+        }
+    });
 }
 
 

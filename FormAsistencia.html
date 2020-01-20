@@ -59,6 +59,16 @@ and open the template in the editor.
                             <input type="text" name="id_grupo" id="id_grupo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grupo">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <label>Fecha</label>
+                            <input type="date" id="fecha" name="fecha" required="required" class="form-control" oninput="setFecha();" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Buscar</label>
+                            <button id="consulta" class="btn btn-default" onclick="LoadTable();">Consultar</button>
+                        </div>
+                    </div>
                 </form>
 
             </div>
@@ -69,44 +79,53 @@ and open the template in the editor.
             <div class="panel-body table-responsive">
                 <div class="table-responsive">
                     <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/AsistenciaController.php" model="AsistenciaApp" findBy="id_asistencia" statusfield="status_asistencia" mainform="true" > 
-                        <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="MatriculaAsignaturasApp" url="Base/Controllers/GetDataTableMatriculaAsignaturas.php" >
+                        <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="MatriculaAsignaturasApp" url="Base/Controllers/GetDataTableAsistencias.php" >
                             <thead id="thead_dataTable0">
                                 <tr rowhead="true">
-                                    <th style="width: 2%;" title="Numero en Listado" >#</th>
+                                    <th style="width: 2%;">#</th>
                                     <th style="width: 40%;">NOMBRES COMPLETO</th>
                                     <th style="width: 10%;">PRESENTE?</th>
-                                    <th style="width: 10%;">TARDE?</th>
-                                    <th style="width: 38%;">OBSERVACIONES</th>
+                                    <th style="width: 8%;">TARDE?</th>
+                                    <th style="width: 40%;">OBSERVACIONES</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody_dataTable0">
                                 <tr id="rowsample" rowsample="true" style="display: none;">
-                                    <td> {{rownum}}
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_asistencia{{rownum}}" name="id_asistencia[]" value="{{id_asistencia}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante{{rownum}}" name="id_estudiante[]" value="{{id_estudiante}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig{{rownum}}" name="id_matasig[]" value="{{id_matasig}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_periodo{{rownum}}" name="id_periodo[]" value="{{id_periodo}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte{{rownum}}" name="id_corte[]" value="">
-                                    </td>
-                                    <td> <label>{{nombrecompleto_estudiante}}</label> </td>
                                     <td>
-                                        <input type="checkbox" editable="true" required="required" maxlength="24" id="presente_asistencia{{rownum}}" name="presente_asistencia[]" value="{{presente_asistencia}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_asistencia" name="id_asistencia[]" value="{{id_asistencia}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="fecha_asistencia" name="fecha_asistencia[]" value="{{fecha_asistencia}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante" name="id_estudiante[]" value="{{id_estudiante}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig" name="id_matasig[]" value="{{id_matasig}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_asignatura" name="id_asignatura[]" value="{{id_asignatura}}">
+                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte" name="id_corte[]" value="">
+                                        {{rownum}}
                                     </td>
                                     <td>
-                                        <input type="checkbox" editable="true" required="required" maxlength="24" id="tarde_asistencia{{rownum}}" name="tarde_asistencia[]" value="{{tarde_asistencia}}">
+                                        <label>{{nombrecompleto_estudiante}}</label> </td>
+                                    <td style="text-align: center !important;">
+                                        <select id="presente_asistencia" name="presente_asistencia[]" class="form-control" selected="{{presente_asistencia}}" >
+                                            <option id="1" value="1">Si</option>
+                                            <option id="0" value="0">No</option>
+                                        </select>
+                                    </td>
+                                    <td style="text-align: center !important;">
+                                        <select id="tarde_asistencia" name="tarde_asistencia[]" class="form-control" selected="{{tarde_asistencia}}" >
+                                            <option id="1" value="1">Si</option>
+                                            <option id="0" value="0">No</option>
+                                        </select>
                                     </td>
                                     <td>
-                                        <textarea id="nota_asistencia{{rownum}}" name="nota_asistencia[]" required="required" maxlength="200" style="min-width: 100% !important;">{{nota_asistencia}}</textarea>
+                                        <textarea id="nota_asistencia" name="nota_asistencia[]" required="required" maxlength="200" style="min-width: 100% !important; min-height: 30px !important; height: 30px !important;" class="form-control">{{nota_asistencia}}</textarea>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div>
                             <center>
-                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="submitForm(this,false);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
                             </center>
                         </div>
-                        
+
                     </form>
                 </div>
 

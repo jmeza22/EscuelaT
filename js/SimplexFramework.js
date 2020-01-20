@@ -1014,6 +1014,15 @@ function setDataForm(myform, json) {
                     if (element.getAttribute('type') !== null && element.getAttribute('type') === 'password') {
                         element.value = '';
                     }
+                    if (element.getAttribute('type') !== null && element.getAttribute('type') === 'checkbox') {
+                        element.value = values[col];
+                        if (values[col] == '0' || values[col] == 'n' || values[col] == 'no') {
+                            element.removeAttribute('checked');
+                        }
+                        if (values[col] == '1' || values[col] == 'y' || values[col] == 'yes') {
+                            element.setAttribute('checked', 'checked');
+                        }
+                    }
                     if (element.tagName === "SELECT") {
                         element.setAttribute('value', values[col]);
                         element.value = values[col];

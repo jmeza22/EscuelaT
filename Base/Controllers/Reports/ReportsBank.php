@@ -576,6 +576,57 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
+    public function getAsistencias($idescuela = null, $idmatricula = null, $idestudiante = null, $idprograma = null, $idasignatura = null, $idperiodo = null, $grado = null, $idgrupo = null, $fecha = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT @rownum := @rownum +1 AS rownum, MA.*, A.nombre_asignatura, OE.nombrecompleto_estudiante, "
+                . "IFNULL(Asi.id_asistencia, '0') AS id_asistencia, IFNULL(Asi.presente_asistencia,1) AS presente_asistencia, IFNULL(Asi.tarde_asistencia,0) AS tarde_asistencia, IFNULL(Asi.fecha_asistencia,:p_fecha_asistencia) AS fecha_asistencia, IFNULL(Asi.nota_asistencia,'') AS nota_asistencia, Asi.id_corte "
+                . "FROM (SELECT @rownum :=0) R, MatriculaAsignaturasApp MA "
+                . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
+                . "INNER JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
+                . "LEFT JOIN AsistenciaApp Asi ON MA.id_matasig=Asi.id_matasig "
+                . "WHERE MA.status_matriculaasignatura=1 AND A.status_asignatura=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND MA.id_escuela=:p_id_escuela ";
+        }
+        if ($idmatricula !== null) {
+            $arraywhere['p_id_matricula'] = $idmatricula;
+            $sql = $sql . " AND MA.id_matricula=:p_id_matricula ";
+        }
+        if ($idestudiante !== null) {
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND MA.id_estudiante=:p_id_estudiante ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND MA.id_programa=:p_id_programa ";
+        }
+        if ($idasignatura !== null) {
+            $arraywhere['p_id_asignatura'] = $idasignatura;
+            $sql = $sql . " AND MA.id_asignatura=:p_id_asignatura ";
+        }
+        if ($idperiodo !== null) {
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND MA.id_periodo=:p_id_periodo ";
+        }
+        if ($grado !== null) {
+            $arraywhere['p_num_grado'] = $grado;
+            $sql = $sql . " AND MA.numgrado_programa=:p_num_grado ";
+        }
+        if ($idgrupo !== null) {
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND MA.id_grupo=:p_id_grupo ";
+        }
+        if ($fecha !== null) {
+            $arraywhere['p_fecha_asistencia'] = $fecha;
+            $sql = $sql . " AND Asi.fecha_asistencia=:p_fecha_asistencia ";
+        }
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
     public function getEstudiantesMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $sql = null;
         $result = null;
