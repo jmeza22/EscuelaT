@@ -710,28 +710,6 @@ class ReportsBank extends BaseController {
     public function getCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $sql = null;
         $result = null;
-        $porcP1 = null;
-        $porcP2 = null;
-        $porcP3 = null;
-        $porcP4 = null;
-        $porcP5 = null;
-        $porcP6 = null;
-        $resultConfig = null;
-        $resultConfig = $this->getConfiguracionEscuela($idescuela);
-        $resultConfig = json_decode($resultConfig, true);
-        $resultConfig = $resultConfig[0];
-        $porcP1 = $resultConfig['p1_porcentaje_configuracion'];
-        $porcP2 = $resultConfig['p2_porcentaje_configuracion'];
-        $porcP3 = $resultConfig['p3_porcentaje_configuracion'];
-        $porcP4 = $resultConfig['p4_porcentaje_configuracion'];
-        $porcP5 = $resultConfig['p5_porcentaje_configuracion'];
-        $porcP6 = $resultConfig['p6_porcentaje_configuracion'];
-        $porcP1 = $porcP1 / 100;
-        $porcP2 = $porcP2 / 100;
-        $porcP3 = $porcP3 / 100;
-        $porcP4 = $porcP4 / 100;
-        $porcP5 = $porcP5 / 100;
-        $porcP6 = $porcP6 / 100;
 
         $sql = "SELECT @rownum := @rownum +1 AS rownum, "
                 . " C.id_calificacion AS id_calificacion,"
@@ -785,9 +763,17 @@ class ReportsBank extends BaseController {
                 . " IFNULL((SELECT lcphab.descripcion_logro FROM LogrosAsignaturasApp lcphab WHERE lcphab.id_logro=C.phab_logroc_calificacion),'') AS phab_descripcion_logroc, "
                 . " IFNULL((SELECT lpphab.descripcion_logro FROM LogrosAsignaturasApp lpphab WHERE lpphab.id_logro=C.phab_logrop_calificacion),'') AS phab_descripcion_logrop, "
                 . " IFNULL((SELECT laphab.descripcion_logro FROM LogrosAsignaturasApp laphab WHERE laphab.id_logro=C.phab_logroa_calificacion),'') AS phab_descripcion_logroa, "
-                . " ROUND(IFNULL((IFNULL(C.p1_nd_calificacion,0)*" . $porcP1 . " + IFNULL(C.p2_nd_calificacion,0)*" . $porcP2 . " + IFNULL(C.p3_nd_calificacion,0)*" . $porcP3 . " + IFNULL(C.p4_nd_calificacion,0)*" . $porcP4 . " + IFNULL(C.p5_nd_calificacion,0)*" . $porcP5 . " + IFNULL(C.p6_nd_calificacion,0)*" . $porcP6 . " ),'0'),1) AS def"
+                . " ROUND(IFNULL(("
+                . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p3_nd_calificacion,0)*(IFNULL(Cn.p3_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100))"
+                . " ),'0'),1) AS def"
                 . " FROM (SELECT @rownum :=0) R, "
                 . " MatriculaAsignaturasApp MA "
+                . " INNER JOIN ConfiguracionApp Cn ON MA.id_escuela=Cn.id_escuela "
                 . " INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
                 . " INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
                 . " INNER JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "

@@ -1015,18 +1015,75 @@ class PDFReports extends TCPDF {
                     $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['alergias_estudiante']), 0, 0, 'C');
                     $this->Cell($pageWidth * 25 / 100, 4, strtoupper($data[$i]['enfermedadcronica_estudiante']), 0, 0, 'C');
                     $this->Ln(10);
-                    $this->SetFont($this->fontfamilycontent, 'B', 14);
-                    $this->Cell($pageWidth, 4, 'HISTORIAL DE NOTAS', 0, 0, 'C');
-                    $this->Ln(2);
-                    $calificaciones = null;
                     if (is_array($periodos) && count($periodos) > 0) {
+                        $anotaciones = null;
+                        if (isset($data[$i]['anotaciones'])) {
+                            $anotaciones = $data[$i]['anotaciones'];
+                            if ($anotaciones !== null && $anotaciones !== '' && $anotaciones !== '[]') {
+                                $anotaciones = json_decode($anotaciones, true);
+                            }
+                        }
+                        if ($anotaciones !== null && is_array($anotaciones) && count($anotaciones) > 0) {
+                            $this->AddPage('P');
+                            $pageWidth = $this->getRealPageWidth();
+                            $this->SetFont($this->fontfamilycontent, 'B', 14);
+                            $this->Cell($pageWidth, 4, 'ANOTACIONES', 0, 0, 'C');
+                            $this->Ln();
+                            $this->writeHTML("<hr/>", false);
+                            for ($a = 0; $a < count($anotaciones); $a++) {
+                                $this->SetFont($this->fontfamilycontent, 'B', 12);
+                                $this->Cell($pageWidth * 33.3 / 100, 4, 'ANOTACION', 0, 0, 'C');
+                                $this->Cell($pageWidth * 33.3 / 100, 4, 'FECHA', 0, 0, 'C');
+                                $this->Cell($pageWidth * 33.3 / 100, 4, 'TIPO', 0, 0, 'C');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, '', 10);
+                                $this->Cell($pageWidth * 33.3 / 100, 4, $anotaciones[$a]['id_anotacion'], 0, 0, 'C');
+                                $this->Cell($pageWidth * 33.3 / 100, 4, $anotaciones[$a]['fecha_anotacion'], 0, 0, 'C');
+                                $this->Cell($pageWidth * 33.3 / 100, 4, $anotaciones[$a]['tipo_anotacion'], 0, 0, 'C');
+                                $this->Ln(6);
+                                $this->SetFont($this->fontfamilycontent, 'B', 10);
+                                $this->Cell($pageWidth * 100 / 100, 4, 'DESCRIPCION', 0, 0, 'L');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, '', 10);
+                                $this->MultiCell($pageWidth * 100 / 100, null, $anotaciones[$a]['descripcion_anotacion'], 0, 'L');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, 'B', 10);
+                                $this->Cell($pageWidth * 100 / 100, 4, 'ESTRATEGIAS', 0, 0, 'L');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, '', 10);
+                                $this->MultiCell($pageWidth * 100 / 100, null, $anotaciones[$a]['estrategias_anotacion'], 0, 'L');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, 'B', 10);
+                                $this->Cell($pageWidth * 100 / 100, 4, 'COMPROMISOS DEL ACUDIENTE', 0, 0, 'L');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, '', 10);
+                                $this->MultiCell($pageWidth * 100 / 100, null, $anotaciones[$a]['compromisosacudiente_anotacion'], 0, 'L');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, 'B', 10);
+                                $this->Cell($pageWidth * 100 / 100, 4, 'COMPROMISOS DEL ESTUDIANTE', 0, 0, 'L');
+                                $this->Ln();
+                                $this->SetFont($this->fontfamilycontent, '', 10);
+                                $this->MultiCell($pageWidth * 100 / 100, null, $anotaciones[$a]['compromisosestudiante_anotacion'], 0, 'L');
+                                $this->Ln(4);
+                                $this->writeHTML("<hr/>", false);
+                            }
+                        }
+
+                        $calificaciones = null;
+
                         if (isset($data[$i]['calificaciones'])) {
                             $calificaciones = $data[$i]['calificaciones'];
                             if ($calificaciones !== null && $calificaciones !== '' && $calificaciones !== '[]') {
                                 $calificaciones = json_decode($calificaciones, true);
                             }
                         }
-                        if ($calificaciones !== null && is_array($calificaciones)) {
+                        if ($calificaciones !== null && is_array($calificaciones) && count($calificaciones) > 0) {
+                            $this->AddPage('P');
+                            $pageWidth = $this->getRealPageWidth();
+                            $this->SetFont($this->fontfamilycontent, 'B', 14);
+                            $this->Cell($pageWidth, 4, 'HISTORIAL DE NOTAS', 0, 0, 'C');
+                            $this->Ln(2);
+
                             for ($j = 0; $j < count($periodos); $j++) {
                                 $labelperiodo = true;
                                 $ok = false;

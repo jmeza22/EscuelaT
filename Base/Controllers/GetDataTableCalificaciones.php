@@ -1,6 +1,5 @@
 <?php
 
-
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -41,34 +40,19 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $resultCarga = json_decode($resultCarga, true);
     $resultCarga = $resultCarga[0];
 
-    $idescuela = $resultCarga['id_escuela'];
-    $idprograma = $resultCarga['id_programa'];
-    $idplanestudio = $resultCarga['id_planestudio'];
-    $idasignatura = $resultCarga['id_asignatura'];
-    $numgrado = $resultCarga['numgrado_programa'];
-    $idgrupo = $resultCarga['id_grupo'];
-    $idperiodo = $variables->getIdPeriodoAnual();
-    $idcorte = $variables->getIdCortePeriodo();
-    $numcorte = $variables->getNumCortePeriodo();
+    $arraywhere = array();
+    $arraywhere['p_id_escuela'] = $resultCarga['id_escuela'];
+    $arraywhere['p_id_programa'] = $resultCarga['id_programa'];
+    $arraywhere['p_id_planestudio'] = $resultCarga['id_planestudio'];
+    $arraywhere['p_id_asignatura'] = $resultCarga['id_asignatura'];
+    $arraywhere['p_numgrado_programa'] = $resultCarga['numgrado_programa'];
+    $arraywhere['p_id_grupo'] = $resultCarga['id_grupo'];
+    $arraywhere['p_id_periodo'] = $variables->getIdPeriodoAnual();
     $iddocente = $resultCarga['id_docente'];
+    $idcorte= $variables->getIdCortePeriodo();
+    $numcorte = $variables->getNumCortePeriodo();
 
-    $resultConfig = $bc->getConfiguracionEscuela($session->getEnterpriseID());
-    $resultConfig = json_decode($resultConfig, true);
-    $resultConfig = $resultConfig[0];
-    $porcP1 = $resultConfig['p1_porcentaje_configuracion'];
-    $porcP2 = $resultConfig['p2_porcentaje_configuracion'];
-    $porcP3 = $resultConfig['p3_porcentaje_configuracion'];
-    $porcP4 = $resultConfig['p4_porcentaje_configuracion'];
-    $porcP5 = $resultConfig['p5_porcentaje_configuracion'];
-    $porcP6 = $resultConfig['p6_porcentaje_configuracion'];
-    $porcP1 = $porcP1 / 100;
-    $porcP2 = $porcP2 / 100;
-    $porcP3 = $porcP3 / 100;
-    $porcP4 = $porcP4 / 100;
-    $porcP5 = $porcP5 / 100;
-    $porcP6 = $porcP6 / 100;
-
-    $sql2 = "SELECT @rownum := @rownum +1 AS rownum, "
+    $sqlC = "SELECT @rownum := @rownum +1 AS rownum, "
             . " IFNULL(C.id_calificacion,0) AS id_calificacion,"
             . " MA.*, "
             . " OE.nombrecompleto_estudiante, "
@@ -78,7 +62,14 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " ROUND(IFNULL(C.p4_nd_calificacion+0,''),1) AS np4, "
             . " ROUND(IFNULL(C.p5_nd_calificacion+0,''),1) AS np5, "
             . " ROUND(IFNULL(C.p6_nd_calificacion+0,''),1) AS np6, "
-            . " ROUND(IFNULL((IFNULL(C.p1_nd_calificacion,0)*" . $porcP1 . " + IFNULL(C.p2_nd_calificacion,0)*" . $porcP2 . " + IFNULL(C.p3_nd_calificacion,0)*" . $porcP3 . " + IFNULL(C.p4_nd_calificacion,0)*" . $porcP4 . " + IFNULL(C.p5_nd_calificacion,0)*" . $porcP5 . " + IFNULL(C.p6_nd_calificacion,0)*" . $porcP6 . " ),'0'),1) AS def, "
+            . " ROUND(IFNULL(("
+            . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
+            . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
+            . " (IFNULL(C.p3_nd_calificacion,0)*(IFNULL(Cn.p3_porcentaje_configuracion,0)/100)) + "
+            . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
+            . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
+            . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100))"
+            . " ),'0'),1) AS def,"
             . " IFNULL(C.p" . $numcorte . "_logroc_calificacion,'') AS logroc_calificacion, "
             . " IFNULL(C.p" . $numcorte . "_logrop_calificacion,'') AS logrop_calificacion, "
             . " IFNULL(C.p" . $numcorte . "_logroa_calificacion,'') AS logroa_calificacion, "
@@ -92,26 +83,27 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " '" . $idcorte . "' AS id_corte "
             . " FROM (SELECT @rownum :=0) R, "
             . " MatriculaAsignaturasApp MA "
+            . " INNER JOIN ConfiguracionApp Cn ON MA.id_escuela=Cn.id_escuela "
             . " INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
             . " LEFT JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
             . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
             . " WHERE M.status_matricula=1 "
-            . " AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Finalizado' "
+            . " AND M.estado_matricula!='Retirado' "
+            . " AND M.estado_matricula!='Finalizado' "
             . " AND MA.status_matriculaasignatura=1 "
-            . " AND MA.id_escuela = '" . $idescuela . "' "
-            . " AND MA.id_programa = '" . $idprograma . "' "
-            . " AND MA.id_planestudio = '" . $idplanestudio . "' "
-            . " AND MA.id_asignatura = '" . $idasignatura . "' "
-            . " AND MA.numgrado_programa = '" . $numgrado . "' "
-            . " AND MA.id_grupo = '" . $idgrupo . "' "
-            . " AND MA.id_periodo = '" . $idperiodo . "' "
+            . " AND MA.id_escuela = :p_id_escuela "
+            . " AND MA.id_programa = :p_id_programa "
+            . " AND MA.id_planestudio = :p_id_planestudio "
+            . " AND MA.id_asignatura = :p_id_asignatura "
+            . " AND MA.numgrado_programa = :p_numgrado_programa "
+            . " AND MA.id_grupo = :p_id_grupo "
+            . " AND MA.id_periodo = :p_id_periodo "
             . " ORDER BY OE.nombrecompleto_estudiante ASC "
     ;
-    $resultMatasig = $bc->selectJSONArray($sql2);
+    $resultMatasig = $bc->selectJSONArray($sqlC, $arraywhere);
     print_r($resultMatasig);
 
     $bc->disconnect();
     $bc = null;
 }
-
 ?>

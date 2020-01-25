@@ -196,6 +196,10 @@
         <CdTb mn="1" nm="AsistenciaApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_matasig" prCl="id_matasig"/>
       </Fk>
+      <Idx clu="0" ftx="0" nm="AsistenciaApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>fecha_asistencia, id_matasig</ClNs>
+        <OptTx/>
+      </Idx>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -2932,7 +2936,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
