@@ -15,20 +15,22 @@
             <div class="panel-heading">Cargar Imagen</div>
             <div class="panel-body" >
                 <?php
+                session_start();
+                include_once 'Base/Controllers/Security/SessionManager.php';
                 include_once 'Base/Controllers/Security/SetsAndHeaders.php';
                 include_once 'Base/Controllers/Others/UploadImage.php';
-                include_once 'Base/Controllers/Security/SessionManager.php';
                 $session = new SessionManager();
                 $upload = null;
                 $result = null;
-                if ($session->hasLogin() && isset($_POST) && $_POST != null) {
+                if ($session->hasLogin() && isset($_POST['prefix_image'])  && isset($_POST['name_image'])) {
+
                     $result = $session->getSessionStateJSON();
                     $result = json_decode($result, true);
                     $upload = new UploadImage();
                     $upload->setFileName('imageFile');
                     $upload->setPrefix($_POST['prefix_image']);
                     $upload->setNewName($_POST['name_image']);
-                    $upload->setExtension('.png');
+                    $upload->setExtension('.jpg');
                     if ($upload->Upload()) {
                         $result['message'] = 'La Imagen se ha Cargado con Exito!.';
                         $result['status'] = 1;

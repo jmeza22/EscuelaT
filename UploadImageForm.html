@@ -32,42 +32,34 @@ and open the template in the editor.
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/SimplexFramework.js"></script>
         <script type="text/javascript" src="js-forms/UploadImage.js"></script>
-    
+
     </head>
-    <body>
+    <body style="min-height: fit-content !important;">
         <div class="panel panel-primary" style="width: 80% !important;">
-            <div class="panel-heading">Subir Imagen</div>
+            <div class="panel-heading">Subir Foto</div>
             <div class="panel-body" >
                 <form id="formUpload" action="UploadImageController.php" method="POST" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <center>
-                            <div class="photoPanel">
-                                <center>
-                                    <img name="imagePhoto" id="imagePhoto" class="imagePhoto" onclick="clickButton();" alt="Subir Foto" title="Click to Change Photo" style="width: 300px !important;" />
-                                    <input type="file" name="imageFile" id="imageFile" class="imageFile" accept="image/*" required="required" onchange="showMyImage(this)" title="Click to Change Photo" />
-                                </center>
-                            </div>
-                        </center>
+                    <input type="hidden" alphanumeric="true" name="prefix_image" id="prefix_image" value="" required="required" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
+                    <input type="hidden" alphanumeric="true" name="name_image" id="name_image" value="" required="required" readonly="readonly" maxlength="100" class="form-control" title="Nombre Imagen">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <center>
+                                <div class="photoPanel">
+                                    <center>
+                                        <img name="imagePhoto" id="imagePhoto" class="imagePhoto" onclick="clickButton();" alt="Subir Foto" title="Click para Cambiar Foto." style="width: 300px !important;" />
+                                        <input type="file" name="imageFile" id="imageFile" class="imageFile" accept="image/*" required="required" onchange="showMyImage(this)" title="Click para Cambiar Foto." />
+                                    </center>
+                                </div>
+                            </center>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label>Prefijo</label>
-                        <input type="text" alphanumeric="true" name="prefix_image" id="prefix_image" value="" required="required" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <center>
+                                <button id="Guardar" name="save" type="submit" onsubmit="return validateForm(this);" class="btn btn-primary" >Guardar Foto</button>
+                            </center>
+                        </div>
                     </div>
-                    <div class="col-sm-8">
-                        <label>Nombre de Imagen</label>
-                        <input type="text" alphanumeric="true" name="name_image" id="name_image" value="" required="required" readonly="readonly" maxlength="100" class="form-control" title="Nombre Imagen">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <center>
-                            <button id="Guardar" name="save" type="submit" class="btn btn-primary" >Guardar</button>
-                        </center>
-                    </div>
-                </div>
                 </form>
             </div>
         </div>

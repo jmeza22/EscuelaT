@@ -38,7 +38,7 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-2">
                             <label>Codigo</label>
-                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" onchange="BuscarEstudiante();">
+                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" onchange="BuscarEstudiante(); CargarFrameFoto();">
                         </div>
                         <div class="col-sm-2">
                             <label>Opciones</label>
@@ -147,74 +147,81 @@ and open the template in the editor.
 
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php" model="ObservadorEstudianteApp" findBy="id_estudiante" >
                     <input type="hidden" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
+                    <input type="hidden" name="foto_estudiante" id="foto_estudiante" value="" maxlength="200" required="required"  title="Fotografia de Estudiante" >
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Estudiante</div>
+                                <div class="panel-body" >
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label>Nombre del Estudiante</label>
+                                            <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" required="required" readonly="readonly" class="form-control" title="Nombre del Estudiante" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Estudiante</div>
-                        <div class="panel-body" >
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label>Nombre del Estudiante</label>
-                                    <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" required="required" readonly="readonly" class="form-control" title="Nombre del Estudiante" >
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Salud y Crecimiento</div>
+                                <div class="panel-body" >
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <label>Peso</label>
+                                            <input type="number" name="pesokg_estudiante" id="pesokg_estudiante" value="10" maxlength="6" min="10" max="200" required="required" class="form-control" title="Peso en Kilogramos">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>Estatura</label>
+                                            <input type="number" name="estaturam_estudiante" id="estaturam_estudiante" value="60" maxlength="6" min="60" max="2" required="required" class="form-control" title="Estatura en Centimetros">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>Grupo Sanguineo</label>
+                                            <select id="grupotiposangre_estudiante" name="grupotiposangre_estudiante" class="form-control" style="width: 100%;">
+                                                <option value=" ">Desconocido</option>
+                                                <option value="O">Grupo O</option>
+                                                <option value="A">Grupo A</option>
+                                                <option value="B">Grupo B</option>
+                                                <option value="AB">Grupo AB</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>Factor RH</label>
+                                            <select id="rhtiposangre_estudiante" name="rhtiposangre_estudiante" class="form-control" style="width: 100%;">
+                                                <option value=" ">Desconocido</option>
+                                                <option value="+">Positivo (+)</option>
+                                                <option value="-">Negativo (-)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <label>Def. Visual</label>
+                                            <select id="deficienciavisual_estudiante" name="deficienciavisual_estudiante" class="form-control" style="width: 100%;" title="Deficiencia Visual?">
+                                                <option value="0">NO</option>
+                                                <option value="1">SI</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>Def. Auditiva</label>
+                                            <select id="deficienciaauditiva_estudiante" name="deficienciaauditiva_estudiante" class="form-control" style="width: 100%;" title="Deficiencia Auditiva?">
+                                                <option value="0">NO</option>
+                                                <option value="1">SI</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>Alergias</label>
+                                            <input type="text" name="alergias_estudiante" id="alergias_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Alergias del Estudiante">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>Enf. Cronica</label>
+                                            <input type="text" name="enfermedadcronica_estudiante" id="enfermedadcronica_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Enfermedad Cronica del Estudiante">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Salud y Crecimiento</div>
-                        <div class="panel-body" >
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label>Peso</label>
-                                    <input type="number" name="pesokg_estudiante" id="pesokg_estudiante" value="10" maxlength="6" min="10" max="200" required="required" class="form-control" title="Peso en Kilogramos">
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Estatura</label>
-                                    <input type="number" name="estaturam_estudiante" id="estaturam_estudiante" value="60" maxlength="6" min="60" max="2" required="required" class="form-control" title="Estatura en Centimetros">
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Grupo Sanguineo</label>
-                                    <select id="grupotiposangre_estudiante" name="grupotiposangre_estudiante" class="form-control" style="width: 100%;">
-                                        <option value=" ">Desconocido</option>
-                                        <option value="O">Grupo O</option>
-                                        <option value="A">Grupo A</option>
-                                        <option value="B">Grupo B</option>
-                                        <option value="AB">Grupo AB</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Factor RH</label>
-                                    <select id="rhtiposangre_estudiante" name="rhtiposangre_estudiante" class="form-control" style="width: 100%;">
-                                        <option value=" ">Desconocido</option>
-                                        <option value="+">Positivo (+)</option>
-                                        <option value="-">Negativo (-)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label>Def. Visual</label>
-                                    <select id="deficienciavisual_estudiante" name="deficienciavisual_estudiante" class="form-control" style="width: 100%;" title="Deficiencia Visual?">
-                                        <option value="0">NO</option>
-                                        <option value="1">SI</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Def. Auditiva</label>
-                                    <select id="deficienciaauditiva_estudiante" name="deficienciaauditiva_estudiante" class="form-control" style="width: 100%;" title="Deficiencia Auditiva?">
-                                        <option value="0">NO</option>
-                                        <option value="1">SI</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Alergias</label>
-                                    <input type="text" name="alergias_estudiante" id="alergias_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Alergias del Estudiante">
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Enf. Cronica</label>
-                                    <input type="text" name="enfermedadcronica_estudiante" id="enfermedadcronica_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Enfermedad Cronica del Estudiante">
-                                </div>
-                            </div>
+                        <div class="col-sm-4">
+                            <iframe name="frameFoto" id="frameFoto" src="UploadImageForm.html" style="min-height: 370px !important; min-width: 100% !important;"></iframe>
                         </div>
                     </div>
 

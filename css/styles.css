@@ -3,6 +3,7 @@ body{
     margin-top: 35px !important;
     margin-bottom: 40px;
     min-height: 100% !important;
+    max-height: fit-content !important;
     min-width: 300px !important;
 }
 
@@ -290,118 +291,118 @@ table > tbody > tr > td > input[type="date"]{
 }
 
 @keyframes rotate {from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}}
-@-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
-  to {-webkit-transform: rotate(360deg);}}
-  
-.AjaxLoading{
-    background-color: black !important;
-    vertical-align: middle !important;
-    overflow: hidden !important;
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 0 !important;
-    z-index: 10000 !important;
-    padding-top: 60px !important;
-    margin-bottom: 60px !important;
-    text-align: center !important;
-    min-height: 720px !important;
-    opacity: 0.75 !important;
-    -moz-opacity:0.75;
-    -khtml-opacity:0.75;
-    filter: aplha(opacity=75);
-}
+                   to {transform: rotate(360deg);}}
+                   @-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
+                                              to {-webkit-transform: rotate(360deg);}}
 
-.SubLoading{
-    background-color: #337ab7 !important;
-    display: inline-block !important;
-    padding: 40px !important;
-    width: 20% !important;
-    min-width: 260px !important;
-    max-width: 320px !important;
-    height: 20% !important;
-    min-height: 260px !important;
-    max-height: 320px !important;
-    text-align: center !important;
-    border-radius: 50% !important;
-    opacity: 0.75 !important;
-    -moz-opacity:0.75;
-    -khtml-opacity:0.75;
-    filter: aplha(opacity=75);
-}
+                                              .AjaxLoading{
+                                                  background-color: black !important;
+                                                  vertical-align: middle !important;
+                                                  overflow: hidden !important;
+                                                  position: fixed !important;
+                                                  left: 0 !important;
+                                                  right: 0 !important;
+                                                  top: 0 !important;
+                                                  z-index: 10000 !important;
+                                                  padding-top: 60px !important;
+                                                  margin-bottom: 60px !important;
+                                                  text-align: center !important;
+                                                  min-height: 720px !important;
+                                                  opacity: 0.75 !important;
+                                                  -moz-opacity:0.75;
+                                                  -khtml-opacity:0.75;
+                                                  filter: aplha(opacity=75);
+                                              }
 
-.SubLoading > p{
-    font-family: 'Orbitron', sans-serif !important;
-    font-weight: bolder;
-    color: white !important;
-}
+                                              .SubLoading{
+                                                  background-color: #337ab7 !important;
+                                                  display: inline-block !important;
+                                                  padding: 40px !important;
+                                                  width: 20% !important;
+                                                  min-width: 260px !important;
+                                                  max-width: 320px !important;
+                                                  height: 20% !important;
+                                                  min-height: 260px !important;
+                                                  max-height: 320px !important;
+                                                  text-align: center !important;
+                                                  border-radius: 50% !important;
+                                                  opacity: 0.75 !important;
+                                                  -moz-opacity:0.75;
+                                                  -khtml-opacity:0.75;
+                                                  filter: aplha(opacity=75);
+                                              }
 
-.ImageLoading{
-    position: relative;
-    margin-top: 18px !important;
-    border-radius: 50% !important;
-    min-width: 120px !important;
-    max-width: 180px !important;
-    height: 180px !important;
-    min-height: 120px !important;
-    max-height: 180px !important;
-    font-size: 150pt !important;
-    font-family: monospace !important;
-    font-weight: bold !important;
-    color: white;
-    -webkit-animation: 3s rotate linear infinite;
-    animation: 3s rotate linear infinite;
-    -webkit-transform-origin: 50% 50%;
-    transform-origin: 50% 50%;
-}
+                                              .SubLoading > p{
+                                                  font-family: 'Orbitron', sans-serif !important;
+                                                  font-weight: bolder;
+                                                  color: white !important;
+                                              }
 
-@media screen and (max-width:640px) {
+                                              .ImageLoading{
+                                                  position: relative;
+                                                  margin-top: 18px !important;
+                                                  border-radius: 50% !important;
+                                                  min-width: 120px !important;
+                                                  max-width: 180px !important;
+                                                  height: 180px !important;
+                                                  min-height: 120px !important;
+                                                  max-height: 180px !important;
+                                                  font-size: 150pt !important;
+                                                  font-family: monospace !important;
+                                                  font-weight: bold !important;
+                                                  color: white;
+                                                  -webkit-animation: 3s rotate linear infinite;
+                                                  animation: 3s rotate linear infinite;
+                                                  -webkit-transform-origin: 50% 50%;
+                                                  transform-origin: 50% 50%;
+                                              }
 
-    body{
-        margin-top: 0px !important;
-    }
+                                              @media screen and (max-width:640px) {
 
-    header, footer{
-        height: auto !important;
-        position: relative !important;
-        opacity: 1 !important;
-        -moz-opacity:1;
-        -khtml-opacity:1;
-        padding-top: 5px !important;
-        filter: aplha(opacity=100);
-    }
+                                                  body{
+                                                      margin-top: 0px !important;
+                                                  }
 
-    header{
-        margin-top: 1px !important;
-    }
+                                                  header, footer{
+                                                      height: auto !important;
+                                                      position: relative !important;
+                                                      opacity: 1 !important;
+                                                      -moz-opacity:1;
+                                                      -khtml-opacity:1;
+                                                      padding-top: 5px !important;
+                                                      filter: aplha(opacity=100);
+                                                  }
 
-    iframe{
-        min-height: 860px !important;
-    }
+                                                  header{
+                                                      margin-top: 1px !important;
+                                                  }
 
-    img{
-        min-width: 60px !important;
-        min-width: 60px !important;
-        max-width: 40% !important;
-        max-height: 40% !important;
-    }
+                                                  iframe{
+                                                      min-height: 860px !important;
+                                                  }
 
-    .photoPanel{
-        margin-top: 10px !important;
-    }
+                                                  img{
+                                                      min-width: 60px !important;
+                                                      min-width: 60px !important;
+                                                      max-width: 40% !important;
+                                                      max-height: 40% !important;
+                                                  }
 
-    .panel{
-        min-width: 320px !important;
-    }
+                                                  .photoPanel{
+                                                      margin-top: 10px !important;
+                                                  }
 
-}
+                                                  .panel{
+                                                      min-width: 320px !important;
+                                                  }
 
-@media screen and (max-width:840px) {
-    body{
-        margin-top: 0px !important;
-    }
-    header, footer{
-        position: relative !important;
-    }
-}
+                                              }
+
+                                              @media screen and (max-width:840px) {
+                                                  body{
+                                                      margin-top: 0px !important;
+                                                  }
+                                                  header, footer{
+                                                      position: relative !important;
+                                                  }
+                                              }

@@ -10,15 +10,15 @@ jQuery(document).ready(function () {
     BuscarEstudianteActivo();
 });
 
-function CopiarCodigo(){
+function CopiarCodigo() {
     var formP = document.getElementById("formP");
     var formE = document.getElementById("form0");
     var formR = document.getElementById("formRep");
     var idpersona = getElement(formP, 'id_persona');
     var idestudiante = getElement(formE, 'id_estudiante');
     var idestudianteR = getElement(formR, 'id_estudiante');
-    idestudiante.value=idpersona.value;
-    idestudianteR.value=idpersona.value;
+    idestudiante.value = idpersona.value;
+    idestudianteR.value = idpersona.value;
 }
 
 function CargarNombres() {
@@ -88,6 +88,16 @@ function BuscarEstudianteActivo() {
             }
         }
     }
+}
+
+function CargarFrameFoto() {
+    var prefix="Estudiante";
+    var form0 = document.getElementById("form0");
+    var idestudiante = getElement(form0, "id_estudiante");
+    var frameFoto = document.getElementById("frameFoto");
+    var foto = document.getElementById("foto_estudiante");
+    foto.value = prefix + idestudiante.value + ".jpg";
+    frameFoto.src = "UploadImageForm.html?prefix="+prefix+"&id=" + idestudiante.value + "&img=" + foto.value;
 }
 
 function EditPersona(item) {
@@ -390,7 +400,7 @@ function VerHistorialMatriculas() {
     var formE = document.getElementById('form0');
     var idestudiante = getElement(formE, 'id_estudiante');
     if (idestudiante !== null) {
-        window.location.href = 'FormHomeEstudiantes.html?id_estudiante='+idestudiante.value;
+        window.location.href = 'FormHomeEstudiantes.html?id_estudiante=' + idestudiante.value;
         setPOST('id_estudiante', idestudiante.value);
     }
 }
