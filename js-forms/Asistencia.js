@@ -7,6 +7,7 @@ jQuery(document).ready(function () {
     var idescuela = null;
     idescuela = document.getElementById('id_escuela');
     setDatosEncabezado();
+    setFecha();
     LoadTable();
 });
 
@@ -19,6 +20,7 @@ function setDatosEncabezado() {
     var grado = null;
     var grupo = null;
     var mytable = document.getElementById("dataTable0");
+    var fecha = document.getElementById("fecha");
     nombre = document.getElementById('nombrecompleto_docente');
     idasignatura = document.getElementById('id_asignatura');
     nomasignatura = document.getElementById('nombre_asignatura');
@@ -34,8 +36,6 @@ function setDatosEncabezado() {
     grupo.value = GET('id_grupo');
     mytable.setAttribute('findby', 'id_programa');
     mytable.setAttribute('findbyvalue', idprograma);
-    mytable.setAttribute('findby1', 'fecha_asistencia');
-    mytable.setAttribute('findbyvalue1', getCurrentDate());
     mytable.setAttribute('findby2', 'id_asignatura');
     mytable.setAttribute('findbyvalue2', idasignatura.value);
     mytable.setAttribute('findby3', 'numgrado_programa');
@@ -44,7 +44,6 @@ function setDatosEncabezado() {
     mytable.setAttribute('findbyvalue4', grupo.value);
     mytable.setAttribute('findby5', 'id_periodo');
     mytable.setAttribute('findbyvalue5', periodo.value);
-    var fecha = document.getElementById("fecha");
     fecha.value = getCurrentDate();
 }
 
@@ -53,6 +52,7 @@ function setFecha() {
     var mytable = document.getElementById("dataTable0");
     mytable.setAttribute('findby1', 'fecha_asistencia');
     mytable.setAttribute('findbyvalue1', fecha.value);
+    
 }
 
 function LoadTable() {
@@ -68,4 +68,13 @@ function LoadTable() {
     });
 }
 
-
+function Send(item) {
+    var form = getForm(item);
+    if (validateForm(form)) {
+        submitForm(form, false).done(function () {
+            if (parseInt(getRowCount()) > 0) {
+                LoadTable();
+            }
+        });
+    }
+}

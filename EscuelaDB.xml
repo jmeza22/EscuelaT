@@ -160,7 +160,7 @@
         <Cm>Codigo Asignatura</Cm>
       </Cl>
       <Cl au="0" df="" nm="fecha_asistencia" nu="0">
-        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Fecha y Hora de Asistencia</Cm>
       </Cl>
       <Cl au="0" df="1" nm="presente_asistencia" nu="1">
@@ -1056,6 +1056,14 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="4" sc="null" sg="1" un="0"/>
         <Cm>Año en que obtuvo el ultimo titulo</Cm>
       </Cl>
+      <Cl au="0" df="" nm="foto_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Foto del Docente</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="firma_docente" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Imagen Firma del Docente</Cm>
+      </Cl>
       <Cl au="0" df="1" nm="status_docente" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Estado del Registro</Cm>
@@ -1610,11 +1618,11 @@
         <Cm>Enfermedad Cronica del Estudiante</Cm>
       </Cl>
       <Cl au="0" df="" nm="foto_estudiante" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
         <Cm>Foto del Estudiante</Cm>
       </Cl>
       <Cl au="0" df="" nm="imgdocumento_estudiante" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
         <Cm>Documento de Identidad Escaneado</Cm>
       </Cl>
       <Cl au="0" df="1" nm="status_estudiante" nu="1">
@@ -1787,6 +1795,10 @@
       <Cl au="0" df="" nm="expediciondoc_persona" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
         <Cm>Lugar de expedicion del Documento de Identidad</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechaexpdoc_persona" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Expedicion Documento</Cm>
       </Cl>
       <Cl au="0" df="" nm="nombre1_persona" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
@@ -2251,7 +2263,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PersonasApp" x="0" y="0"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="UsuariosApp" x="314" y="318"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="EscuelasApp" x="699" y="58"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SedesApp" x="837" y="682"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SedesApp" x="768" y="753"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="JornadasApp" x="347" y="635"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TiposUsuariosApp" x="387" y="50"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AreasApp" x="1680" y="592"/>
@@ -2380,7 +2392,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_DocentesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="532" x2="532" y1="627" y2="1134"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="532" x2="532" y1="653" y2="1134"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_GruposApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
@@ -2408,8 +2420,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.GruposApp.fk_GruposApp_SedesApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="814" x2="607" y1="747" y2="747"/>
-        <positionableLine lineRole="CHILD_LINE" x1="603" x2="603" y1="876" y2="751"/>
+        <positionableLine lineRole="PARENT_LINE" x1="745" x2="607" y1="818" y2="818"/>
+        <positionableLine lineRole="CHILD_LINE" x1="603" x2="603" y1="876" y2="822"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.JornadasApp.fk_JornadasApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
@@ -2420,8 +2432,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="EscuelaDB.JornadasApp.fk_JornadasApp_SedesApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="814" x2="610" y1="759" y2="759"/>
-        <positionableLine lineRole="CHILD_LINE" x1="606" x2="606" y1="776" y2="755"/>
+        <positionableLine lineRole="PARENT_LINE" x1="745" x2="610" y1="830" y2="830"/>
+        <positionableLine lineRole="CHILD_LINE" x1="606" x2="606" y1="776" y2="826"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.LogrosAsignaturasApp.fk_LogrosAsignaturasApp_AsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2498,8 +2510,8 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_SedesApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="814" x2="228" y1="808" y2="808"/>
-        <positionableLine lineRole="CHILD_LINE" x1="224" x2="224" y1="943" y2="812"/>
+        <positionableLine lineRole="PARENT_LINE" x1="745" x2="228" y1="879" y2="879"/>
+        <positionableLine lineRole="CHILD_LINE" x1="224" x2="224" y1="943" y2="883"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MunicipiosCiudadesApp.fk_MunicipiosCiudadesApp_DepartamentosEstadosApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
@@ -2560,7 +2572,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.SedesApp.fk_SedesApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="853" x2="853" y1="186" y2="659"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="852" x2="852" y1="186" y2="730"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">

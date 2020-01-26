@@ -61,7 +61,7 @@ and open the template in the editor.
                                         <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
                                         <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
                                         <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
-                                        <a name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info" onclick="goCalificaciones(this);">Planilla</a>
+                                        <a name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info" onclick="goCalificaciones(this);" title="Planilla de Calificaciones para Periodo Seleccionado.">Planilla</a>
                                     </form>
                                 </td>
                                 <td>
@@ -73,7 +73,7 @@ and open the template in the editor.
                                         <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
                                         <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
                                         <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
-                                        <a name="VerAsistencia" id="VerAsistencia" class="btn btn-xs btn-default" onclick="goAsistencia(this);">Asistencia</a>
+                                        <a name="VerAsistencia" id="VerAsistencia" class="btn btn-xs btn-default" onclick="goAsistencia(this);" title="Planilla de Asistencia Diaria">Asistencia</a>
                                     </form>
                                 </td>
                                 <td>  
@@ -83,7 +83,7 @@ and open the template in the editor.
                                         <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
                                         <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
                                         <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
-                                        <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-xs btn-primary" >Generar PDF</button>        
+                                        <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-xs btn-primary" title="Boletines de Calificaciones en PDF." >Generar PDF</button>        
                                     </form>
                                 </td>
                             </tr>

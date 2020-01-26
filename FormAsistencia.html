@@ -38,14 +38,17 @@ and open the template in the editor.
                     <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-6">
                             <label>Docente</label>
                             <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre del Docente Activo">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-6">
                             <label>Asignatura</label>
                             <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre de Asignatura">
                         </div>
+                        
+                    </div>
+                    <div class="row">
                         <div class="col-sm-2">
                             <label>Año</label>
                             <input type="text" name="id_periodo" id="id_periodo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Año">
@@ -54,19 +57,17 @@ and open the template in the editor.
                             <label>Grado</label>
                             <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grado">
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <label>Grupo</label>
                             <input type="text" name="id_grupo" id="id_grupo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grupo">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-10">
+                        <div class="col-sm-3">
                             <label>Fecha</label>
                             <input type="date" id="fecha" name="fecha" required="required" class="form-control" oninput="setFecha();" >
                         </div>
                         <div class="col-sm-2">
                             <label>Buscar</label>
-                            <button id="consulta" class="btn btn-default" onclick="LoadTable();">Consultar</button>
+                            <button id="consulta" class="btn btn-default" onclick="LoadTable();" style="width: 100% !important;">Consultar</button>
                         </div>
                     </div>
                 </form>

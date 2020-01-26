@@ -621,7 +621,7 @@ class ReportsBank extends BaseController {
         }
         if ($fecha !== null) {
             $arraywhere['p_fecha_asistencia'] = $fecha;
-            $sql = $sql . " AND Asi.fecha_asistencia=:p_fecha_asistencia ";
+            $sql = $sql . " AND IFNULL(Asi.fecha_asistencia,:p_fecha_asistencia)=:p_fecha_asistencia ";
         }
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
