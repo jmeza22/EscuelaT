@@ -49,23 +49,21 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     . " AND numgrado_programa=:p_numgrado_programa "
                     . " AND id_grupo=:p_id_grupo "
                     . " AND status_calificacion=1 ";
-            //echo $sql;
+            echo $sql;
             $arraywhere = array();
             $arraywhere['p_id_escuela'] = $session->getEnterpriseID();
             $arraywhere['p_id_periodo'] = $_POST['id_periodo'];
             $arraywhere['p_id_programa'] = $_POST['id_programa'];
             $arraywhere['p_numgrado_programa'] = $_POST['numgrado_programa'];
             $arraywhere['p_id_grupo'] = $_POST['id_grupo'];
-            //print_r($arraywhere);
             $result = $bc->query($sql, $arraywhere);
-            
 
             if ($result !== null) {
                 $result = $bc->parseResults($result, 'Operaciones Realizadas con Exito!.', 1);
             } else {
                 $result = $bc->parseResults($result, 'Operaciones han fallado!.', 0);
             }
-            
+
             $sql = "UPDATE CalificacionesApp "
                     . " SET pfin_comentarios_calificacion="
                     . " 'El Estudiante Aprobó la Asignatura.' "
