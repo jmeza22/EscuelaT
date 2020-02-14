@@ -1,6 +1,5 @@
 <?php
 
-
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -21,9 +20,12 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $arraywhere = $bc->parseFindByToArray($_POST);
     $arraywhere['status_periodo'] = '1';
     $arraywhere['cerrado_periodo'] = '0';
-    $arraywhere['id_escuela'] = ''.$session->getEnterpriseID();
-    echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
+    $arraywhere['id_escuela'] = '' . $session->getEnterpriseID();
+    $where = " id_escuela = '" . $session->getEnterpriseID() . "' AND cerrado_periodo=0 AND status_periodo=1 ";
+    if (isset($arraywhere['anualidad_periodo_old'])) {
+        $where = $where . " AND anualidad_periodo >= " . $arraywhere['anualidad_periodo_old'];
+    }
+    echo $bc->getComboboxData($colname, $colvalue, $othervalue, $where, null);
     $bc->disconnect();
 }
-
 ?>

@@ -263,6 +263,24 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
+    public function getPeriodosAnualesSiguientes($idescuela, $anoactual) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM PeriodosAnualesApp WHERE status_periodo=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($anoactual !== null) {
+            $arraywhere['p_ano_actual'] = $anoactual;
+            $sql = $sql . " AND anualidad_periodo > :p_ano_actual ";
+        }
+        $sql = $sql . " ORDER BY id_periodo DESC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
     public function getCortesPeriodos($idescuela = null, $idperiodo = null, $idcorte = null) {
         $sql = null;
         $result = null;

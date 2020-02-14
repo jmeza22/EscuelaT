@@ -1432,6 +1432,14 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
         <Cm>Estado de Matricula (Normal, Condicional, Anulada, Morosa)</Cm>
       </Cl>
+      <Cl au="0" df="" nm="id_matricula_ant" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Matricula Anterior</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo_ant" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Periodo Anterior</Cm>
+      </Cl>
       <Cl au="0" df="" nm="usuariocrea_matricula" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
         <Cm>Usuario que crea la matricula.</Cm>
@@ -1452,6 +1460,11 @@
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Estado del Registro</Cm>
       </Cl>
+      <Fk deAc="3" nm="fk_matricula_anterior" prLkCl="id_matricula" upAc="3">
+        <PrTb mn="0" nm="MatriculasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_matricula_ant" prCl="id_matricula"/>
+      </Fk>
       <Fk deAc="3" nm="fk_MatriculasApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
         <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
         <CdTb mn="1" nm="MatriculasApp" oe="0" sch="EscuelaDB" zr="1"/>
@@ -2289,7 +2302,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CortesPeriodosApp" x="1048" y="1232"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="GruposApp" x="464" y="899"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MatriculaAsignaturasApp" x="695" y="1681"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CalificacionesApp" x="661" y="1940"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CalificacionesApp" x="648" y="1939"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DirectoresGruposApp" x="526" y="1157"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CargasDocentesApp" x="692" y="1419"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DocentesApp" x="223" y="499"/>
@@ -2333,20 +2346,20 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculaAsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1913" y2="1917"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1913" y2="1916"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculasApp" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="417" x2="432" y1="1209" y2="1209"/>
-        <positionableLine lineRole="CHILD_LINE" x1="638" x2="440" y1="2525" y2="2525"/>
-        <positionableLine lineRole="MIDDLE_LINE" x1="436" x2="436" y1="2521" y2="1213"/>
+        <positionableLine lineRole="PARENT_LINE" x1="417" x2="419" y1="1209" y2="1209"/>
+        <positionableLine lineRole="CHILD_LINE" x1="625" x2="427" y1="2524" y2="2524"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="423" x2="423" y1="2520" y2="1213"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_ObservadorEstudianteApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="434" x2="844" y1="1395" y2="1395"/>
-        <positionableLine lineRole="CHILD_LINE" x1="848" x2="848" y1="1917" y2="1399"/>
+        <positionableLine lineRole="PARENT_LINE" x1="434" x2="831" y1="1395" y2="1395"/>
+        <positionableLine lineRole="CHILD_LINE" x1="835" x2="835" y1="1916" y2="1399"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_DocentesApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -2473,6 +2486,9 @@
         <positionableLine lineRole="CHILD_LINE" x1="834" x2="834" y1="1658" y2="1177"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="EscuelaDB.MatriculasApp.fk_matricula_anterior" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_EscuelasApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="704" x2="704" y1="186" y2="298"/>
@@ -2494,7 +2510,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ObservadorEstudianteApp" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1263"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1289"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PeriodosApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
