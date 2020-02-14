@@ -133,29 +133,23 @@ and open the template in the editor.
                 <div class="panel-heading">Configuracion</div>
                 <div class="panel-body" >
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <label title="Numero de Periodos Academicos por Año">Años (Periodos Anuales)</label>
                             <input type="number" id="numperiodos_configuracion" name="numperiodos_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <label title="Numero de Cortes por Año">Periodos (Cortes por Año)</label>
                             <input type="number" id="numcortes_configuracion" name="numcortes_configuracion" value="" class="form-control" maxlength="2" min="1" max="5" />                                 
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <label title="Numero de Semanas por Periodo Anual">Semanas Año</label>
                             <input type="number" id="numsemanas_configuracion" name="numsemanas_configuracion" value="" class="form-control" maxlength="2" min="1" max="50" />                                 
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <label title="Numero de Horas por Semana">Horas Semanales</label>
                             <input type="number" id="horassemanales_configuracion" name="horassemanales_configuracion" value="" class="form-control" maxlength="2" min="1" max="48" />                                 
                         </div>
-                        <div class="col-sm-4">
-                            <label title="Tipo de Promedio para Calculo en Boletines">Tipo Promedio</label>
-                            <select id="tipopromedio_configuracion" name="tipopromedio_configuracion" required="required" class="form-control"  style="width: 100%;" onchange="setIdCorte();">
-                                <option value="ARITMETICO">ARITMETICO</option>
-                                <option value="PONDERADO">PONDERADO</option>
-                            </select>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -163,7 +157,7 @@ and open the template in the editor.
                 <div class="panel-heading">Valoracion Academica</div>
                 <div class="panel-body" >
                     <div class="row">
-                        <div class="col-sm-12 panel panel-default">
+                        <div class="col-sm-6 panel panel-default">
                             <label class="panel-heading">Rangos Valoracion</label>
                             <div class="row panel-body">
                                 <div class="col-sm-4">
@@ -175,8 +169,28 @@ and open the template in the editor.
                                     <input type="number" id="valmax_configuracion" name="valmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
                                 </div>
                                 <div class="col-sm-4">
-                                    <label title="Valor Calificacion Minima para Aprobar">Valor Aprueba</label>
+                                    <label title="Valor Calificacion Minima para Aprobar Asignatura">Valor Aprueba</label>
                                     <input type="number" id="valaprueba_configuracion" name="valaprueba_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 panel panel-default">
+                            <label class="panel-heading">Promedio y Promoción</label>
+                            <div class="row panel-body">
+                                <div class="col-sm-4">
+                                    <label title="Tipo de Promedio para Calculo en Boletines">Tipo.Promedio</label>
+                                    <select id="tipopromedio_configuracion" name="tipopromedio_configuracion" required="required" class="form-control"  style="width: 100%;" onchange="setIdCorte();">
+                                        <option value="ARITMETICO">ARITMETICO</option>
+                                        <option value="PONDERADO">PONDERADO</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label title="Promedio Minimo para Promocion">Min.Promedio</label>
+                                    <input type="number" double="true" id="minpromedio_configuracion" name="minpromedioF_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                </div>
+                                <div class="col-sm-4">
+                                    <label title="Cantidad Maxima de Asignaturas Reprobadas">Max.Asig.Rep</label>
+                                    <input type="number" id="maxasigrep_configuracion" name="maxasigrep_configuracion" value="" class="form-control" maxlength="2" min="0" max="20" />                                 
                                 </div>
                             </div>
                         </div>
@@ -243,27 +257,27 @@ and open the template in the editor.
                             <div class="row panel-body">
                                 <div class="col-sm-2">
                                     <label title="Peso Porcentual del Primer Periodo">Primer Periodo</label>
-                                    <input type="number" float="true" id="p1_porcentaje_configuracion" name="p1_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" />                                 
+                                    <input type="number" float="true" id="p1_porcentaje_configuracion" name="p1_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label title="Peso Porcentual del Segundo Periodo">Segundo Periodo</label>
-                                    <input type="number" float="true" id="p2_porcentaje_configuracion" name="p2_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" />                                 
+                                    <input type="number" float="true" id="p2_porcentaje_configuracion" name="p2_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label title="Peso Porcentual del Tercer Periodo">Tercer Periodo</label>
-                                    <input type="number" float="true" id="p3_porcentaje_configuracion" name="p3_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" />                                 
+                                    <input type="number" float="true" id="p3_porcentaje_configuracion" name="p3_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label title="Peso Porcentual del Cuarto Periodo">Cuarto Periodo</label>
-                                    <input type="number" float="true" id="p4_porcentaje_configuracion" name="p4_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" />                                 
+                                    <input type="number" float="true" id="p4_porcentaje_configuracion" name="p4_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label title="Peso Porcentual del Quinto Periodo">Quinto Periodo</label>
-                                    <input type="number" float="true" id="p5_porcentaje_configuracion" name="p5_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" />                                 
+                                    <input type="number" float="true" id="p5_porcentaje_configuracion" name="p5_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" placeholder="0%" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label title="Peso Porcentual del Sexto Periodo">Sexto Periodo</label>
-                                    <input type="number" float="true" id="p6_porcentaje_configuracion" name="p6_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" />                                 
+                                    <input type="number" float="true" id="p6_porcentaje_configuracion" name="p6_porcentaje_configuracion" value="" class="form-control" maxlength="3" min="0" max="100" placeholder="0%" />                                 
                                 </div>
                             </div>
                         </div>

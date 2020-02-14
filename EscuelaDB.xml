@@ -803,6 +803,14 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
         <Cm>Tipo de Promedio para Calcular promedio en Informes</Cm>
       </Cl>
+      <Cl au="0" df="6" nm="minpromedio_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Promedio Minimo para Promocion</Cm>
+      </Cl>
+      <Cl au="0" df="3" nm="maxasigrep_configuracion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Cantidad Maxima de Asignaturas Reprobadas</Cm>
+      </Cl>
       <Cl au="0" df="10" nm="valmax_configuracion" nu="0">
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Valor Nota Maxima</Cm>
@@ -2948,7 +2956,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
