@@ -6,23 +6,24 @@ $crypt = new MyCrypt();
 $model = "UsuariosApp";
 $action = "insertorupdate";
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()==1 || $session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST) && $_POST != null) {
         $bc = new BaseController();
         $bc->connect();
+        if (strcmp($_POST['action'], 'find') === 0) {
+            $action='find';
+        }
         $bc->preparePostData();
         $postdata = $bc->getPostData();
-        $postdata['id_escuela']=$session->getEnterpriseID();
-        if (isset($postdata['password_usuario']) && strcmp($postdata['password_usuario'], "") !== 0 && ($session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
+        $postdata['id_escuela'] = $session->getEnterpriseID();
+        if (isset($postdata['password_usuario']) && strcmp($postdata['password_usuario'], "") !== 0 && ($session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
             $postdata['password_usuario'] = $crypt->crypt($postdata['password_usuario']);
-        }else{
+        } else {
             unset($postdata['password_usuario']);
         }
         $bc->setModel($model);
         $bc->setAction($action);
-        if (strcmp($_POST['action'], 'find') === 0) {
-            $bc->setAction('find');
-        }
+        
         $bc->setPostData($postdata);
         $result = null;
         $result = $bc->execute(true);
@@ -32,6 +33,5 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()
 } else {
     echo $session->getSessionStateJSON();
 }
-
 ?>
 
