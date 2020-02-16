@@ -11,23 +11,18 @@ jQuery(document).ready(function () {
 function setFindbyTable() {
     var mytable = document.getElementById("dataTable0");
     var periodo = null;
-    periodo = document.getElementById("id_periodo");
+    periodo = document.getElementById("id_periodo_new");
     var programa = null;
     programa = document.getElementById("id_programa");
-    var grado = null;
-    grado = document.getElementById("numgrado_programa");
-    var grupo = null;
-    grupo = document.getElementById("id_grupo");
-    mytable.setAttribute("findby1", periodo.id);
+    mytable.setAttribute("findby1", 'id_periodo');
     mytable.setAttribute("findbyvalue1", periodo.value);
     mytable.setAttribute("findby2", programa.id);
     mytable.setAttribute("findbyvalue2", programa.value);
-    mytable.setAttribute("findby3", grado.id);
-    mytable.setAttribute("findbyvalue3", grado.value);
-    mytable.setAttribute("findby4", grupo.id);
-    mytable.setAttribute("findbyvalue4", grupo.value);
-    mytable.setAttribute("findby5", 'usuariocrea_matricula');
-    mytable.setAttribute("findbyvalue5", getUserIdLogin());
+    mytable.setAttribute("findby3", 'usuariocrea_matricula');
+    mytable.setAttribute("findbyvalue3", getUserIdLogin());
+    mytable.setAttribute("findby4", 'fecha_matricula');
+    mytable.setAttribute("findbyvalue4", getCurrentDate());
+
 }
 
 function LoadPeriodo() {
@@ -76,8 +71,9 @@ function Send(item) {
             setTimeout(function () {
                 ClearTable();
                 if (parseInt(getRowCount()) > 0) {
-                    alert('Exito: Se han Promovido los Estudiantes que Aprobaron!.');
+                    setFindbyTable();
                     LoadTable();
+                    alert('Exito: Se han Promovido los Estudiantes que Aprobaron!.');
                 } else {
                     alert("Hubo un error. Es posible que no hayan datos. Tambien es posible que ya se haya realizado la Operacion de Calculo anteriormente.");
                 }

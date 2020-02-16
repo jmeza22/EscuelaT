@@ -1,6 +1,5 @@
 <?php
 
-
 include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;

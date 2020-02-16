@@ -49,7 +49,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     . " AND numgrado_programa=:p_numgrado_programa "
                     . " AND id_grupo=:p_id_grupo "
                     . " AND status_calificacion=1 ";
-            echo $sql;
             $arraywhere = array();
             $arraywhere['p_id_escuela'] = $session->getEnterpriseID();
             $arraywhere['p_id_periodo'] = $_POST['id_periodo'];

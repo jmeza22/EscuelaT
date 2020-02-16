@@ -1421,7 +1421,7 @@
         <Cm>Nombre Completo del Estudiante</Cm>
       </Cl>
       <Cl au="0" df="" nm="fecha_matricula" nu="1">
-        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Fecha de Matricula</Cm>
       </Cl>
       <Cl au="0" df="" nm="valor_matricula" nu="1">
@@ -2972,7 +2972,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
