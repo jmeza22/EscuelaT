@@ -3,6 +3,7 @@
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
+$variables = new SystemVariableManager();
 $bc = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new ReportsBank();
@@ -21,6 +22,8 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $idperiodo = null;
     if (isset($arraywhere['id_periodo'])) {
         $idperiodo = $arraywhere['id_periodo'];
+    } else {
+        $idperiodo = $variables->getIdPeriodoAnual();
     }
 
     $grado = null;
