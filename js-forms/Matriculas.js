@@ -157,13 +157,15 @@ function setIdMatricula() {
     var form0 = null;
     var idmatricula = null;
     var idescuela = null;
+    var idestudiante = null;
     var fecha = null;
     form0 = document.getElementById('form0');
     idmatricula = getElement(form0, 'id_matricula');
     idescuela = getElement(form0, 'id_escuela');
+    idestudiante = getElement(form0, 'id_estudiante');
     if (idmatricula !== null && idmatricula !== undefined && idmatricula.value === '') {
         fecha = new Date();
-        idmatricula.value = 'M' + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + '' + (getRandomNumber(1, 9) * getRandomNumber(1, 9));
+        idmatricula.value = 'M' + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + '' + (getRandomNumber(1, 9) * getRandomNumber(1, 9)) + idestudiante.value;
     }
 }
 

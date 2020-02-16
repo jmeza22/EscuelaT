@@ -72,7 +72,7 @@ and open the template in the editor.
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
                             <center>
-                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Ejecutar Calculo</button>        
+                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Promocionar</button>        
                             </center>
                         </div>
                     </div>
@@ -80,8 +80,12 @@ and open the template in the editor.
                 </form>
 
             </div>
-            <div class="panel-footer">
-                Se promocionan al Siguiente Grado los Estudiantes que cumplan los criterios definidos en la Configuracion del Sistema.
+            <div class="panel-footer" style="text-align: center;">
+                Este procedimiento se realiza cuando ya han finalizado todas las actividades académicas del año y ya no habrá cambios en las valoraciones. <br>
+                Antes de ejecutar este Procedimiento asegúrese de haber ejecutado el Informe Final por lo menos 5 minutos antes. <br>
+                Si el Informe Final fue ejecutado hace más de 24 horas, debe volver a ejecutarlo. <br>
+                Se promocionan al Siguiente Grado los Estudiantes que cumplan los criterios definidos en la Configuración del Sistema. <br>
+                Al Promocionar se crean automáticamente las matriculas para el siguiente año.
             </div>
         </div>
         <div class="panel panel-primary" style="width: 80% !important;">

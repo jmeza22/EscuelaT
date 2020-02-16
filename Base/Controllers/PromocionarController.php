@@ -77,7 +77,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $postdata['estado_matricula'] = 'Finalizado';
                     $bc->setPostData($postdata);
                     $bc->execute(false);
-                    $idmatriculanew = 'M' . $fecha . rand(1, 320) . $matriculas[$i]['id_estudiante'];
+                    $idmatriculanew = 'M' . $fecha . rand(1, 99) . $matriculas[$i]['id_estudiante'];
                     $postdata = array();
                     $postdata['id_matricula_ant'] = $matriculas[$i]['id_matricula'];
                     $postdata['id_periodo_ant'] = $matriculas[$i]['id_periodo'];
@@ -99,23 +99,25 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $postdata['usuarioedita_matricula'] = $session->getNickname();
                     $postdata['fechacrea_matricula'] = date('Y-m-d H:i:s');
                     $postdata['fechaedita_matricula'] = date('Y-m-d H:i:s');
-                    if ($matriculas[$i]['promedio'] >= $configuracion['valaprueba_configuracion'] && $matriculas[$i]['cantidad'] < $configuracion['maxasigrep_configuracion']) {
-                        $numgradoprogramanew = ($matriculas[$i]['numgrado_programa'] + 1);
-                        $grados = ($programa['ngrados_programa'] + 0);
-                        $gradoviejo=$matriculas[$i]['numgrado_programa'];
-                        $grupoviejo= $matriculas[$i]['id_grupo'];
-                        $n=1;
-                        $idgruponew = str_replace("".$gradoviejo, "".$numgradoprogramanew, "".$grupoviejo, $n);
-                        $grupos = $bc->getGrupos(null, null, null, $idgruponew);
-                        if ($numgradoprogramanew <= $grados) {
-                            $postdata['numgrado_programa'] = $numgradoprogramanew;
+                    if ($matriculas[$i]['promedio'] >= 1) {
+                        if ($matriculas[$i]['promedio'] >= $configuracion['valaprueba_configuracion'] && ($matriculas[$i]['cantidad'] < $configuracion['maxasigrep_configuracion'])) {
+                            $numgradoprogramanew = ($matriculas[$i]['numgrado_programa'] + 1);
+                            $grados = ($programa['ngrados_programa'] + 0);
+                            $gradoviejo = $matriculas[$i]['numgrado_programa'];
+                            $grupoviejo = $matriculas[$i]['id_grupo'];
+                            $n = 1;
+                            $idgruponew = str_replace("" . $gradoviejo, "" . $numgradoprogramanew, "" . $grupoviejo, $n);
+                            $grupos = $bc->getGrupos(null, null, null, $idgruponew);
+                            if ($numgradoprogramanew <= $grados) {
+                                $postdata['numgrado_programa'] = $numgradoprogramanew;
+                            }
+                            if ($grupos !== null && $grupos !== '[]' && is_array(json_decode($grupos, true)[0])) {
+                                $postdata['id_grupo'] = $idgruponew;
+                            }
+                        } else {
+                            $postdata['numgrado_programa'] = $matriculas[$i]['numgrado_programa'];
+                            $postdata['id_grupo'] = $matriculas[$i]['id_grupo'];
                         }
-                        if ($grupos !== null && $grupos !== '[]' && is_array(json_decode($grupos, true)[0])) {
-                            $postdata['id_grupo'] = $idgruponew;
-                        }
-                    } else {
-                        $postdata['numgrado_programa'] = $matriculas[$i]['numgrado_programa'];
-                        $postdata['id_grupo'] = $matriculas[$i]['id_grupo'];
                     }
                     $bc->setAction('insert');
                     $bc->setPostData($postdata);

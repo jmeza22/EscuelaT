@@ -66,7 +66,7 @@ function Send(item) {
     var periodo = document.getElementById("id_periodo");
     var newperiodo = document.getElementById("id_periodo_new");
     myform = getForm(item);
-    if (validateForm(myform) && periodo.value !== newperiodo.value) {
+    if (validateForm(myform) && periodo.value !== newperiodo.value && confirm('Este procedimiento no se puede reversar. Está seguro de ejecutarlo?')) {
         submitForm(myform, false).done(function () {
             setTimeout(function () {
                 ClearTable();

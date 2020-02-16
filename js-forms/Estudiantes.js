@@ -106,6 +106,7 @@ function EditPersona(item) {
     resetForm(myform);
     sendValue(item, null, myform, null);
     BuscarEstudiante();
+    CargarFrameFoto();
 }
 
 function EditAnotacion(item) {

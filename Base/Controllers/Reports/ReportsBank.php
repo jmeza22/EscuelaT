@@ -552,7 +552,7 @@ class ReportsBank extends BaseController {
             $arraywhere['p_fecha_matricula'] = $fechamatricula;
             $sql = $sql . " AND fecha_matricula=:p_fecha_matricula ";
         }
-        $sql = $sql . " ORDER BY CAST(numgrado_programa AS DECIMAL), fecha_matricula DESC";
+        $sql = $sql . " ORDER BY fecha_matricula DESC, CAST(numgrado_programa AS DECIMAL) ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
