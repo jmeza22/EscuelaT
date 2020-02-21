@@ -102,9 +102,18 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $report->setFontContent($family, '', $sizecontent);
         $report->setFontFooter($family, 'I', $sizefooter);
         $report->SetFont($family, $style, $sizecontent);
-        $report->AddPage($orientation, $format, true);
-
+        
+        if ($tipo === 'CarnetEstudiantil') {
+            $report->headertype=-1;
+            $report->AddPage('P', 'Letter', true);
+            $report->SetLeftMargin(25);
+            $report->SetRightMargin(25);
+            $report->setReportName('Carnet Estudiantil');
+            $report->CarnetsEstudiantiles($idescuela, $idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idestudiante);
+            $report->generatePDFDocument();
+        }
         if ($tipo === 'CertificadoEstudios') {
+            $report->AddPage($orientation, $format, true);
             $report->SetLeftMargin(14);
             $report->SetRightMargin(14);
             $report->setReportName('Certificado de Estudios');
@@ -112,6 +121,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->generatePDFDocument();
         }
         if ($tipo === 'CertificadoNotas') {
+            $report->AddPage($orientation, $format, true);
             $report->SetLeftMargin(12);
             $report->SetRightMargin(12);
             $report->setReportName('Certificado de Notas');
@@ -119,76 +129,91 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->generatePDFDocument();
         }
         if ($tipo === 'Escuelas') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Escuelas');
             $report->ListadoEscuelas();
             $report->generatePDFDocument();
         }
         if ($tipo === 'Sedes') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Sedes');
             $report->ListadoSedes($session->getEnterpriseID());
             $report->generatePDFDocument();
         }
         if ($tipo === 'Programas') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Programas');
             $report->ListadoProgramas($session->getEnterpriseID());
             $report->generatePDFDocument();
         }
         if ($tipo === 'Areas') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Areas');
             $report->ListadoAreas($session->getEnterpriseID());
             $report->generatePDFDocument();
         }
         if ($tipo === 'Asignaturas') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Asignaturas');
             $report->ListadoAsignaturas($session->getEnterpriseID());
             $report->generatePDFDocument();
         }
         if ($tipo === 'Logros') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Logros');
             $report->ListadoLogrosAsignaturas($idescuela, null, $grado, null);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Grupos') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Grupos');
             $report->ListadoGrupos($session->getEnterpriseID(), $idprograma, $grado);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Docentes') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Docentes');
             $report->ListadoDocentes();
             $report->generatePDFDocument();
         }
         if ($tipo === 'CargasDocentes') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Carga Academica Docente');
             $report->ListadoCargasDocentes($session->getEnterpriseID(), $idperiodo, $idprograma, null, $grupo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'DirectoresGrupos') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Directores de Grupos');
             $report->ListadoDirectoresGrupos($session->getEnterpriseID(), $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Estudiantes') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Estudiantes');
             $report->ListadoEstudiantes($idescuela, $idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'UsuariosDocentes') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Usuarios de Docentes');
             $report->ListadoUsuarios($session->getEnterpriseID(), 'Teacher');
             $report->generatePDFDocument();
         }
         if ($tipo === 'UsuariosEstudiantes') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Usuarios de Estudiantes');
             $report->ListadoUsuarios($session->getEnterpriseID(), 'Student');
             $report->generatePDFDocument();
         }
         if ($tipo === 'UsuariosAcudientes') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Usuarios de Acudientes');
             $report->ListadoUsuarios($session->getEnterpriseID(), 'Visitor');
             $report->generatePDFDocument();
         }
         if ($tipo === 'ObservadorEstudiante') {
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Observador del Estudiante '.$idestudiante);
             $report->ObservadorEstudiante($idestudiante);
             $report->generatePDFDocument();

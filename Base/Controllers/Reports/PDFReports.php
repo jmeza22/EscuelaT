@@ -85,7 +85,7 @@ class PDFReports extends TCPDF {
     }
 
     private function getSpanishOrdinalsNumbers($number) {
-        $ordinals = array("Transicion", "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Septimo", "Octavo", "Noveno", "Decimo", "Undecimo", "Duodecimo");
+        $ordinals = array("Transicion", "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Septimo", "Octavo", "Noveno", "Décimo", "Undecimo", "Duodecimo");
         if (isset($ordinals[$number])) {
             return $ordinals[$number];
         }
@@ -530,6 +530,58 @@ class PDFReports extends TCPDF {
                     $this->Cell(40, 6, strtoupper($data[$i]['username_usuario']));
                     $this->Cell(30, 6, $data[$i]['id_tipousuario']);
                     $this->Cell(30, 6, $data[$i]['fechaedita_usuario']);
+                    $this->Ln();
+                }
+            }
+        }
+    }
+
+    public function CarnetsEstudiantiles($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null) {
+        $data = null;
+        $data = $this->bc->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, null, $numgrado, $idgrupo, $idperiodo, $idestudiante);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, '', 11);
+
+                for ($i = 0; $i < count($data); $i++) {
+                    $html = '';
+                    $html = $html . '<table border="1" style="width: 100%; ">';
+                    $html = $html . '<tr >';
+
+                    $html = $html . '<td style="height: 140px !important;">';
+                    $html = $html . '<table border="0">';
+                    $html = $html . '<tr>';
+                    $html = $html . '<td style="width: 70%;">';
+                    $html = $html . '<label><b>Código:</b> ' . $data[$i]['id_estudiante'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>Nombres: </b> ' . $data[$i]['nombre1_persona'] .' '. $data[$i]['nombre2_persona'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>Apellidos: </b> ' . $data[$i]['apellido1_persona'] .' '. $data[$i]['apellido2_persona'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>Documento: </b> ' . $data[$i]['tipodoc_persona'] . ' ' . $data[$i]['documento_persona'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>Programa: </b> ' . $data[$i]['nombre_programa'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>Grado: </b> ' . $this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa']) . '</label>' . '<br>';
+                    $html = $html . '</td>';
+                    $html = $html . '<td style="width: 30%;">';
+                    $html = $html . '<img alt="Foto">';
+                    $html = $html . '</td>';
+                    $html = $html . '</tr>';
+                    $html = $html . '</table>';
+                    $html = $html . '</td>';
+
+                    $html = $html . '<td style="text-align: center; vertical-align: middle;">';
+                    $html = $html . '<b>Carnet Estudiantil</b><br>';
+                    $html = $html . '';
+                    $html = $html . 'Este carnet es personal e intransferible.<br>';
+                    $html = $html . 'Matricula: '.$data[$i]['id_matricula'].'.<br>';
+                    $html = $html . 'Expedición: '.$this->getSpanishActualDate().'.<br>';
+                    $html = $html . '</td>';
+
+                    $html = $html . '</tr>';
+                    $html = $html . '</table>';
+                    $this->writeHTML($html);
+                    if (($i+1) % 4 === 0 && $i !== 0) {
+                        $this->AddPage();
+                    }
                     $this->Ln();
                 }
             }

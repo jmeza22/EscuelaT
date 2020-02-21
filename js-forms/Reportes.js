@@ -31,6 +31,11 @@ function setRequiredsInputs(tipo) {
     estudiante.removeAttribute('required');
     if (tipo !== undefined && tipo !== null) {
         if (tipo.value === 'CertificadoEstudios') {
+            programa.setAttribute('required', 'required');
+            grado.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+        }
+        if (tipo.value === 'CertificadoEstudios') {
             sede.setAttribute('required', 'required');
             jornada.setAttribute('required', 'required');
             programa.setAttribute('required', 'required');
