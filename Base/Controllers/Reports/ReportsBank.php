@@ -908,51 +908,6 @@ class ReportsBank extends BaseController {
         return $result;
     }
 
-    public function getCantidadAsignaturasReprobadas($idescuela = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
-        $sql = null;
-        $result = null;
-
-        $sql = "SELECT C.id_escuela, C.id_estudiante, C.id_matricula, C.id_periodo, COUNT(C.pfin_nd_calificacion) AS cantidadRep  "
-                . "FROM CalificacionesApp C INNER JOIN ConfiguracionApp Cn ON C.id_escuela=Cn.id_escuela "
-                . "WHERE C.status_calificacion=1 AND C.pfin_nd_calificacion < Cn.valaprueba_configuracion ";
-        $arraywhere = Array();
-        if ($idescuela !== null) {
-            $arraywhere['p_id_escuela'] = $idescuela;
-            $sql = $sql . " AND C.id_escuela=:p_id_escuela ";
-        }
-        if ($idprograma !== null) {
-            $arraywhere['p_id_programa'] = $idprograma;
-            $sql = $sql . " AND C.id_programa=:p_id_programa ";
-        }
-        if ($idplanestudio !== null) {
-            $arraywhere['p_id_planestudio'] = $idplanestudio;
-            $sql = $sql . " AND C.id_planestudio=:p_id_planestudio ";
-        }
-        if ($grado !== null) {
-            $arraywhere['p_num_grado'] = $grado;
-            $sql = $sql . " AND C.numgrado_programa=:p_num_grado ";
-        }
-        if ($idgrupo !== null) {
-            $arraywhere['p_id_grupo'] = $idgrupo;
-            $sql = $sql . " AND C.id_grupo=:p_id_grupo ";
-        }
-        if ($idperiodo !== null) {
-            $arraywhere['p_id_periodo'] = $idperiodo;
-            $sql = $sql . " AND C.id_periodo=:p_id_periodo ";
-        }
-        if ($idestudiante !== null) {
-            $arraywhere['p_id_estudiante'] = $idestudiante;
-            $sql = $sql . " AND C.id_estudiante=:p_id_estudiante ";
-        }
-        if ($idmatricula !== null) {
-            $arraywhere['p_id_matricula'] = $idmatricula;
-            $sql = $sql . " AND C.id_matricula=:p_id_matricula ";
-        }
-        $sql = $sql . "GROUP BY C.id_estudiante, C.id_matricula ORDER BY C.id_matricula ";
-        $result = $this->selectJSONArray($sql, $arraywhere);
-        return $result;
-    }
-
     public function getInformesCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $resultEstudiantes = null;
         $resultCalificaciones = null;

@@ -37,7 +37,7 @@ and open the template in the editor.
                     <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
                     <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
                     <input type="hidden" id="id_corte" name="id_corte" value="" required="required" maxlength="22" min="1" disabled="disabled"  /> 
-                    
+
                     <div class="row">
                         <div class="col-sm-3">
                             <label>Docente</label>
@@ -136,14 +136,14 @@ and open the template in the editor.
                                 <tr rowhead="true">
                                     <th style="width: 2%;" title="Numero en Listado" >#</th>
                                     <th style="width: 40%;">NOMBRES Y APELLIDOS</th>
-                                    <th style="width: 1%;" title="Primer Periodo" id="thp1" style="display: none !important;">P1</th>
-                                    <th style="width: 1%;" title="Segundo Periodo" id="thp2" style="display: none !important;">P2</th>
-                                    <th style="width: 1%;" title="Tercer Periodo" id="thp3" style="display: none !important;">P3</th>
-                                    <th style="width: 1%;" title="Cuarto Periodo" id="thp4" style="display: none !important;">P4</th>
-                                    <th style="width: 1%;" title="Quinto Periodo" id="thp5" style="display: none !important;">P5</th>
-                                    <th style="width: 1%;" title="Sexto Periodo" id="thp6" style="display: none !important;">P6</th>
+                                    <th style="width: 1%;" title="Primer Periodo" id="thp1" >P1</th>
+                                    <th style="width: 1%;" title="Segundo Periodo" id="thp2" >P2</th>
+                                    <th style="width: 1%;" title="Tercer Periodo" id="thp3" >P3</th>
+                                    <th style="width: 1%;" title="Cuarto Periodo" id="thp4" >P4</th>
+                                    <th style="width: 1%;" title="Quinto Periodo" id="thp5" >P5</th>
+                                    <th style="width: 1%;" title="Sexto Periodo" id="thp6" >P6</th>
+                                    <th style="width: 2%;" title="Acumulado Año (Definitiva Parcial)" id="thdef" >Acu</th>
                                     <th style="width: 2%;" title="Habilitacion" id="thhab" >Hab</th>
-                                    <th style="width: 2%;" title="Definiva Año" id="thdef" >Def</th>
                                     <th style="width: 5%;" title="Codigo Logro Cognitivo" id="thlc">LC</th>
                                     <th style="width: 5%;" title="Codigo Logro Procedimental" id="thlp">LP</th>
                                     <th style="width: 5%;" title="Codigo Logro Actitudinal" id="thla">LA</th>
@@ -170,14 +170,14 @@ and open the template in the editor.
                                         <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="{{nombrecompleto_estudiante}}">
                                     </td>
                                     <td> <label>{{nombrecompleto_estudiante}}</label> </td>
-                                    <td name="tdp1" style="display: none !important;"> <label>{{np1}}</label> </td>
-                                    <td name="tdp2" style="display: none !important;"> <label>{{np2}}</label> </td>
-                                    <td name="tdp3" style="display: none !important;"> <label>{{np3}}</label> </td>
-                                    <td name="tdp4" style="display: none !important;"> <label>{{np4}}</label> </td>
-                                    <td name="tdp5" style="display: none !important;"> <label>{{np5}}</label> </td>
-                                    <td name="tdp6" style="display: none !important;"> <label>{{np6}}</label> </td>
-                                    <td name="tdhab"> <label>{{nphab}}</label> </td>
+                                    <td name="tdp1" > <label>{{np1}}</label> </td>
+                                    <td name="tdp2" > <label>{{np2}}</label> </td>
+                                    <td name="tdp3" > <label>{{np3}}</label> </td>
+                                    <td name="tdp4" > <label>{{np4}}</label> </td>
+                                    <td name="tdp5" > <label>{{np5}}</label> </td>
+                                    <td name="tdp6" > <label>{{np6}}</label> </td>
                                     <td name="tddef"> <label>{{def}}</label> </td>
+                                    <td name="tdhab"> <label>{{nphab}}</label> </td>
                                     <td name="logc"> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
                                     <td name="logp"> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
                                     <td name="loga"> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>

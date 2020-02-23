@@ -23,7 +23,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
         $bc->preparePostData();
         $bc->setModel($model);
         $bc->setFindBy($findBy);
-        $bc->setAction($action);
+        if ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1) {
+            $bc->setAction('insertorupdate');
+        } else {
+            $bc->setAction('insert');
+        }
         if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'find') === 0) {
             $bc->setAction('find');
         }
@@ -69,7 +73,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
                     $datos['nombrecompleto_docente'] = $postdata['apellido1_persona'] . ' ' . $postdata['apellido2_persona'] . ' ' . $postdata['nombre1_persona'] . ' ' . $postdata['nombre2_persona'];
                     $datos['status_docente'] = '1';
                     $bc->setModel('DocentesApp');
-                    $bc->setAction($action);
+                    $bc->setAction('insertorupdate');
                     $bc->setPostData($datos);
                     $bc->setFindBy('id_docente');
                     $bc->execute(false);

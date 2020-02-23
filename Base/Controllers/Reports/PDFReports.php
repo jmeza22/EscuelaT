@@ -828,6 +828,7 @@ class PDFReports extends TCPDF {
                                 if ($calificaciones[$j]['np6'] === '0' || $calificaciones[$j]['np6'] === '0.0') {
                                     $calificaciones[$j]['np6'] = '';
                                 }
+                                $this->SetFont($this->fontfamilycontent, '', 10);
                                 $ih = '' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']);
                                 $this->Cell($pageWidth * 42 / 100, 4, strtoupper($calificaciones[$j]['nombre_asignatura']), 1, 0, 'L');
                                 $this->Cell($pageWidth * 6 / 100, 4, $ih, 1, 0, 'C');
@@ -838,9 +839,11 @@ class PDFReports extends TCPDF {
                                 $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np5'], 1, 0, 'C');
                                 $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np6'], 1, 0, 'C');
                                 $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['nphab'], 1, 0, 'C');
+                                $this->SetFont($this->fontfamilycontent, 'B', 10);
                                 $this->Cell($pageWidth * 10 / 100, 4, $calificaciones[$j]['def'], 1, 0, 'C');
                                 $this->Ln();
                                 $comentario = null;
+                                $this->SetFont($this->fontfamilycontent, '', 10);
                                 if (isset($calificaciones[$j]['p' . $corte . '_comentarios_calificacion'])) {
                                     $comentario = $calificaciones[$j]['p' . $corte . '_comentarios_calificacion'];
                                 }
