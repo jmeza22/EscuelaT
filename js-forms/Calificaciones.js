@@ -16,6 +16,8 @@ function setDatosEncabezado() {
     var idasignatura = null;
     var nomasignatura = null;
     var periodo = null;
+    var corte = null;
+    var ncorte = null;
     var grado = null;
     var grupo = null;
     var listalogros = null;
@@ -27,6 +29,8 @@ function setDatosEncabezado() {
     idasignatura = document.getElementById('id_asignatura');
     nomasignatura = document.getElementById('nombre_asignatura');
     periodo = document.getElementById('id_periodo');
+    corte = document.getElementById('id_corte');
+    ncorte = document.getElementById('num_corte');
     grado = document.getElementById('numgrado_programa');
     grupo = document.getElementById('id_grupo');
     listalogros = document.getElementById('lista_id_logro');
@@ -38,6 +42,8 @@ function setDatosEncabezado() {
     idasignatura.value = GET('id_asignatura');
     nomasignatura.value = GET('nombre_asignatura');
     periodo.value = GET('id_periodo');
+    corte.value = GET('id_corte');
+    ncorte.value = GET('num_corte');
     grado.value = GET('numgrado_programa');
     grupo.value = GET('id_grupo');
     listalogros.setAttribute('findby', idasignatura.id);
@@ -81,11 +87,11 @@ function ObtenerDatosCuerpo() {
         getData(formconf).done(function () {
             valaprueba = getElement(formconf, 'valaprueba_configuracion');
             if (valaprueba !== undefined && valaprueba !== null && valaprueba.value !== null && valaprueba.value !== '') {
-                loadTableData(mytable, false);
+                LoadTable();
                 MostrarPeriodos();
-            }else{
+            } else {
                 alert('No existen datos de Configuracion de la Escuela. Contacte al Administrador.');
-                document.getElementById('guardar').setAttribute('disabled','disabled');
+                document.getElementById('guardar').setAttribute('disabled', 'disabled');
             }
         });
     }
@@ -272,9 +278,43 @@ function MostrarPeriodos() {
     }
 }
 
+function OcultarCamposPeriodoFinal() {
+    var numcorte = document.getElementById('num_corte');
+    if (numcorte.value === 'fin' || numcorte.value === 'hab') {
+        var logc = document.getElementsByName('logroc_calificacion[]');
+        var logp = document.getElementsByName('logrop_calificacion[]');
+        var loga = document.getElementsByName('logroa_calificacion[]');
+        var nc = document.getElementsByName('nc_calificacion[]');
+        var np = document.getElementsByName('np_calificacion[]');
+        var na = document.getElementsByName('na_calificacion[]');
+        var i = 0;
+        console.log('Ocultando Campos No Necesarios para Periodo Final.');
+        while (nc[i] !== undefined && nc[i] !== null) {
+            logc[i].value = '';
+            logc[i].setAttribute('disabled', 'disabled');
+            logp[i].value = '';
+            logp[i].setAttribute('disabled', 'disabled');
+            loga[i].value = '';
+            loga[i].setAttribute('disabled', 'disabled');
+            nc[i].value = '';
+            nc[i].setAttribute('disabled', 'disabled');
+            nc[i].removeAttribute('required');
+            np[i].value = '';
+            np[i].setAttribute('disabled', 'disabled');
+            np[i].removeAttribute('required');
+            na[i].value = '';
+            na[i].setAttribute('disabled', 'disabled');
+            na[i].removeAttribute('required');
+            i++;
+        }
+    }
+}
+
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
-    loadTableData(mytable, false);
+    loadTableData(mytable, false).done(function () {
+        OcultarCamposPeriodoFinal();
+    });
 }
 
 function Send(item) {

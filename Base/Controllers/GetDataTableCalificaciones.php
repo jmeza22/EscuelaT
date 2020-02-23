@@ -49,7 +49,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $arraywhere['p_id_grupo'] = $resultCarga['id_grupo'];
     $arraywhere['p_id_periodo'] = $variables->getIdPeriodoAnual();
     $iddocente = $resultCarga['id_docente'];
-    $idcorte= $variables->getIdCortePeriodo();
+    $idcorte = $variables->getIdCortePeriodo();
     $numcorte = $variables->getNumCortePeriodo();
 
     $sqlC = "SELECT @rownum := @rownum +1 AS rownum, "
@@ -62,6 +62,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " ROUND(IFNULL(C.p4_nd_calificacion+0,''),1) AS np4, "
             . " ROUND(IFNULL(C.p5_nd_calificacion+0,''),1) AS np5, "
             . " ROUND(IFNULL(C.p6_nd_calificacion+0,''),1) AS np6, "
+            . " C.phab_nd_calificacion AS nphab, "
             . " ROUND(IFNULL(("
             . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
@@ -69,15 +70,18 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100))"
-            . " ),'0'),1) AS def,"
-            . " IFNULL(C.p" . $numcorte . "_logroc_calificacion,'') AS logroc_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_logrop_calificacion,'') AS logrop_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_logroa_calificacion,'') AS logroa_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_nc_calificacion,'') AS nc_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_np_calificacion,'') AS np_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_na_calificacion,'') AS na_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_nn_calificacion,'') AS nn_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_nd_calificacion,'') AS nd_calificacion, "
+            . " ),'0'),1) AS def,";
+    if ($numcorte !== 'fin') {
+        $sqlC = $sqlC . " IFNULL(C.p" . $numcorte . "_logroc_calificacion,'') AS logroc_calificacion, "
+                . " IFNULL(C.p" . $numcorte . "_logrop_calificacion,'') AS logrop_calificacion, "
+                . " IFNULL(C.p" . $numcorte . "_logroa_calificacion,'') AS logroa_calificacion, "
+                . " IFNULL(C.p" . $numcorte . "_nc_calificacion,'') AS nc_calificacion, "
+                . " IFNULL(C.p" . $numcorte . "_np_calificacion,'') AS np_calificacion, "
+                . " IFNULL(C.p" . $numcorte . "_na_calificacion,'') AS na_calificacion, "
+                . " IFNULL(C.p" . $numcorte . "_nn_calificacion,'') AS nn_calificacion, ";
+    }
+    $sqlC = $sqlC .
+            " IFNULL(C.p" . $numcorte . "_nd_calificacion,'') AS nd_calificacion, "
             . " IFNULL(C.p" . $numcorte . "_ausencias_calificacion,'') AS ausencias_calificacion, "
             . " IFNULL(C.p" . $numcorte . "_comentarios_calificacion,'') AS comentarios_calificacion, "
             . " '" . $idcorte . "' AS id_corte "
@@ -89,7 +93,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
             . " WHERE M.status_matricula=1 "
             . " AND M.estado_matricula!='Retirado' "
-            . " AND M.estado_matricula!='Finalizado' "
+            . " AND M.estado_matricula!='' "
             . " AND MA.status_matriculaasignatura=1 "
             . " AND MA.id_escuela = :p_id_escuela "
             . " AND MA.id_programa = :p_id_programa "

@@ -49,7 +49,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     }
                 }
                 $data = null;
-                $resultdata=$postdata;
+                $resultdata = $postdata;
                 for ($i = 0; $i < $count; $i++) {
                     if (isset($postdata[$i])) {
                         $data = $postdata[$i];
@@ -57,34 +57,36 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                         unset($data["nombrecompleto_estudiante"]);
                         $data["id_escuela"] = $session->getEnterpriseID();
                         $data["p" . $numcorte . "_id_docente"] = $session->getUserID();
-                        unset($data["id_docente"]);
-                        $data["p" . $numcorte . "_nc_calificacion"] = $data["nc_calificacion"];
-                        unset($data["nc_calificacion"]);
-                        $data["p" . $numcorte . "_np_calificacion"] = $data["np_calificacion"];
-                        unset($data["np_calificacion"]);
-                        $data["p" . $numcorte . "_na_calificacion"] = $data["na_calificacion"];
-                        unset($data["na_calificacion"]);
+                        if ($numcorte !== 'fin') {
+                            $data["p" . $numcorte . "_nc_calificacion"] = $data["nc_calificacion"];
+                            $data["p" . $numcorte . "_np_calificacion"] = $data["np_calificacion"];
+                            $data["p" . $numcorte . "_na_calificacion"] = $data["na_calificacion"];
+                            $data["p" . $numcorte . "_logroc_calificacion"] = $data["logroc_calificacion"];
+                            $data["p" . $numcorte . "_logrop_calificacion"] = $data["logrop_calificacion"];
+                            $data["p" . $numcorte . "_logroa_calificacion"] = $data["logroa_calificacion"];
+                        }
                         $data["p" . $numcorte . "_nd_calificacion"] = $data["nd_calificacion"];
-                        unset($data["nd_calificacion"]);
-                        //$data["p" . $numcorte . "_nn_calificacion"] = $data["nn_calificacion"];
+                        unset($data["nc_calificacion"]);
+                        unset($data["np_calificacion"]);
+                        unset($data["na_calificacion"]);
                         unset($data["nn_calificacion"]);
-                        $data["p" . $numcorte . "_logroc_calificacion"] = $data["logroc_calificacion"];
+                        unset($data["nd_calificacion"]);
                         unset($data["logroc_calificacion"]);
-                        $data["p" . $numcorte . "_logrop_calificacion"] = $data["logrop_calificacion"];
                         unset($data["logrop_calificacion"]);
-                        $data["p" . $numcorte . "_logroa_calificacion"] = $data["logroa_calificacion"];
                         unset($data["logroa_calificacion"]);
+                        //$data["p" . $numcorte . "_nn_calificacion"] = $data["nn_calificacion"];
+
                         $data["p" . $numcorte . "_ausencias_calificacion"] = $data["ausencias_calificacion"];
                         unset($data["ausencias_calificacion"]);
                         $data["p" . $numcorte . "_id_corte"] = $data["id_corte"];
                         unset($data["id_corte"]);
-                        if($data[$findBy]===0){
-                            $data["usuariocrea_calificacion"]=$session->getNickname();
-                            $data["fechacrea_calificacion"]=$fecha;
+                        if ($data[$findBy] === 0) {
+                            $data["usuariocrea_calificacion"] = $session->getNickname();
+                            $data["fechacrea_calificacion"] = $fecha;
                         }
-                        if($data[$findBy]!==0){
-                            $data["usuarioedita_calificacion"]=$session->getNickname();
-                            $data["fechaedita_calificacion"]=$fecha;
+                        if ($data[$findBy] !== 0) {
+                            $data["usuarioedita_calificacion"] = $session->getNickname();
+                            $data["fechaedita_calificacion"] = $fecha;
                         }
                         if (isset($data[$findBy]) && $data[$findBy] !== null && $data[$findBy] !== '{{' . $findBy . '}}') {
                             if ($estadocorte === 'A') {
@@ -103,12 +105,12 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                 }
             }
         }
-        
+
         unset($resultdata['action']);
         unset($resultdata['findby']);
         unset($resultdata['model']);
         unset($resultdata['token']);
-        
+
         $result = json_decode($result, true);
         $result['error'] = $errormessage;
         if ($estadocorte !== 'A') {
@@ -118,7 +120,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         if ($rowcount >= 1) {
             $result['status'] = 1;
             $result['message'] = 'Informacion Almacenada!.';
-            $result['data']= json_encode($resultdata);
+            $result['data'] = json_encode($resultdata);
             //$result['data']= json_encode($_POST);
         }
         $result = json_encode($result);
@@ -129,5 +131,4 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
 } else {
     echo $session->getSessionStateJSON();
 }
-
 ?>

@@ -17,6 +17,8 @@ function setDatosEncabezado() {
     var idasignatura = null;
     var nomasignatura = null;
     var periodo = null;
+    var corte = null;
+    var ncorte = null;
     var grado = null;
     var grupo = null;
     var mytable = document.getElementById("dataTable0");
@@ -25,6 +27,8 @@ function setDatosEncabezado() {
     idasignatura = document.getElementById('id_asignatura');
     nomasignatura = document.getElementById('nombre_asignatura');
     periodo = document.getElementById('id_periodo');
+    corte = document.getElementById('id_corte');
+    ncorte = document.getElementById('num_corte');
     grado = document.getElementById('numgrado_programa');
     grupo = document.getElementById('id_grupo');
     nombre.value = getFullnameLogin();
@@ -32,6 +36,8 @@ function setDatosEncabezado() {
     idasignatura.value = GET('id_asignatura');
     nomasignatura.value = GET('nombre_asignatura');
     periodo.value = GET('id_periodo');
+    corte.value = GET('id_corte');
+    ncorte.value = GET('num_corte');
     grado.value = GET('numgrado_programa');
     grupo.value = GET('id_grupo');
     mytable.setAttribute('findby', 'id_programa');

@@ -36,6 +36,7 @@ and open the template in the editor.
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasDocentesApp" findBy="id_carga" mainform="true" >
                     <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
                     <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" name="id_corte" id="id_corte" value="" maxlength="2" required="required" disabled="disabled" title="Periodo">
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -46,7 +47,7 @@ and open the template in the editor.
                             <label>Asignatura</label>
                             <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="200" required="required" disabled="disabled" class="form-control" title="Nombre de Asignatura">
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
@@ -54,14 +55,18 @@ and open the template in the editor.
                             <input type="text" name="id_periodo" id="id_periodo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Año">
                         </div>
                         <div class="col-sm-2">
+                            <label>Periodo</label>
+                            <input type="text" name="num_corte" id="num_corte" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Periodo">
+                        </div>
+                        <div class="col-sm-2">
                             <label>Grado</label>
                             <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grado">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <label>Grupo</label>
                             <input type="text" name="id_grupo" id="id_grupo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grupo">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <label>Fecha</label>
                             <input type="date" id="fecha" name="fecha" required="required" class="form-control" oninput="setFecha();" >
                         </div>
@@ -123,7 +128,7 @@ and open the template in the editor.
                         </table>
                         <div>
                             <center>
-                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="submitForm(this,false);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="submitForm(this, false);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
                             </center>
                         </div>
 

@@ -30,13 +30,14 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 98% !important;">
             <div class="panel-heading">Datos de Planilla</div>
             <div class="panel-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasDocentesApp" findBy="id_carga" mainform="true" >
                     <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
                     <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
-
+                    <input type="hidden" id="id_corte" name="id_corte" value="" required="required" maxlength="22" min="1" disabled="disabled"  /> 
+                    
                     <div class="row">
                         <div class="col-sm-3">
                             <label>Docente</label>
@@ -50,7 +51,11 @@ and open the template in the editor.
                             <label>Año</label>
                             <input type="text" name="id_periodo" id="id_periodo" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Año">
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-1">
+                            <label>Per.</label>
+                            <input type="text" name="num_corte" id="num_corte" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Periodo">
+                        </div>
+                        <div class="col-sm-1">
                             <label>Grado</label>
                             <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" disabled="disabled" class="form-control" title="Grado">
                         </div>
@@ -81,7 +86,7 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 98% !important;">
             <div class="panel-heading">Automatizacion de Logros por Notas</div>
             <div class="panel-body" >
                 <form id="logroauto" name="logroauto">
@@ -120,7 +125,7 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 98% !important;">
             <div class="panel-heading">Planilla de Calificaciones</div>
             <div class="panel-body table-responsive">
 
@@ -137,13 +142,14 @@ and open the template in the editor.
                                     <th style="width: 1%;" title="Cuarto Periodo" id="thp4" style="display: none !important;">P4</th>
                                     <th style="width: 1%;" title="Quinto Periodo" id="thp5" style="display: none !important;">P5</th>
                                     <th style="width: 1%;" title="Sexto Periodo" id="thp6" style="display: none !important;">P6</th>
+                                    <th style="width: 2%;" title="Habilitacion" id="thhab" >Hab</th>
                                     <th style="width: 2%;" title="Definiva Año" id="thdef" >Def</th>
-                                    <th style="width: 5%;" title="Codigo Logro Cognitivo" >LC</th>
-                                    <th style="width: 5%;" title="Codigo Logro Procedimental" >LP</th>
-                                    <th style="width: 5%;" title="Codigo Logro Actitudinal" >LA</th>
-                                    <th style="width: 5%;" title="Nota Logro Cognitivo" >NC</th>
-                                    <th style="width: 5%;" title="Nota Logro Procedimental" >NP</th>
-                                    <th style="width: 5%;" title="Nota Logro Actitudinal" >NA</th>
+                                    <th style="width: 5%;" title="Codigo Logro Cognitivo" id="thlc">LC</th>
+                                    <th style="width: 5%;" title="Codigo Logro Procedimental" id="thlp">LP</th>
+                                    <th style="width: 5%;" title="Codigo Logro Actitudinal" id="thla">LA</th>
+                                    <th style="width: 5%;" title="Nota Logro Cognitivo" id="thnc">NC</th>
+                                    <th style="width: 5%;" title="Nota Logro Procedimental" id="thnp">NP</th>
+                                    <th style="width: 5%;" title="Nota Logro Actitudinal" id="thna">NA</th>
                                     <th style="width: 5%;" title="Nota Definitiva del Periodo" >ND</th>
                                     <th style="width: 5%;" title="Numero de Ausencias (Periodo Actual)" >Aus.</th>
                                 </tr>
@@ -170,13 +176,14 @@ and open the template in the editor.
                                     <td name="tdp4" style="display: none !important;"> <label>{{np4}}</label> </td>
                                     <td name="tdp5" style="display: none !important;"> <label>{{np5}}</label> </td>
                                     <td name="tdp6" style="display: none !important;"> <label>{{np6}}</label> </td>
+                                    <td name="tdhab"> <label>{{nphab}}</label> </td>
                                     <td name="tddef"> <label>{{def}}</label> </td>
-                                    <td> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
-                                    <td> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
-                                    <td> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
-                                    <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones"> </td>
-                                    <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones"> </td>
-                                    <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones"> </td>
+                                    <td name="logc"> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
+                                    <td name="logp"> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
+                                    <td name="loga"> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
+                                    <td name="nc"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones"> </td>
+                                    <td name="np"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones"> </td>
+                                    <td name="na"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones"> </td>
                                     <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" value="{{nd_calificacion}}" onfocus="setRequiredND(this)"> </td>
                                     <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
                                     </td>

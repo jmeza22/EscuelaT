@@ -1,20 +1,23 @@
 <?php
 
-
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 $bc = null;
+$idprograma = null;
 $idplanestudio = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new ReportsBank();
     $bc->connect();
-    if (isset($_POST['findby']) && $_POST['findby'] == 'id_planestudio' && isset($_POST['findbyvalue']) && $_POST['findbyvalue'] !== '') {
-        $idplanestudio = $_POST['findbyvalue'];
+    $arraywhere = $bc->parseFindByToArray($_POST);
+    if (isset($arraywhere['id_programa'])) {
+        $idprograma = $arraywhere['id_programa'];
     }
-    echo $bc->getPlanEstudioDetalle($session->getEnterpriseID(), null, $idplanestudio);
+    if (isset($arraywhere['id_planestudio'])) {
+    $idplanestudio = $arraywhere['id_planestudio'];
+    }
+    echo $bc->getPlanEstudioDetalle($session->getEnterpriseID(), $idprograma, $idplanestudio);
     $bc->disconnect();
     $bc = null;
 }
-
 ?>

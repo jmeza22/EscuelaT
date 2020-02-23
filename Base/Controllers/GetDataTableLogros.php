@@ -10,11 +10,12 @@ $numgrado = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new ReportsBank();
     $bc->connect();
-    if (isset($_POST['findby']) && $_POST['findby'] == 'id_asignatura' && isset($_POST['findbyvalue']) && $_POST['findbyvalue'] !== '') {
-        $idasignatura = $_POST['findbyvalue'];
+    $arraywhere = $bc->parseFindByToArray($_POST);
+    if (isset($arraywhere['id_asignatura'])) {
+        $idasignatura = $arraywhere['id_asignatura'];
     }
-    if (isset($_POST['findby2']) && $_POST['findby2'] == 'numgrado_programa' && isset($_POST['findbyvalue2']) && $_POST['findbyvalue2'] !== '') {
-        $numgrado = $_POST['findbyvalue2'];
+    if (isset($arraywhere['numgrado_programa'])) {
+        $numgrado = $arraywhere['numgrado_programa'];
     }
     echo $bc->getLogrosAsignaturas($session->getEnterpriseID(), $idasignatura, $numgrado);
     $bc->disconnect();
