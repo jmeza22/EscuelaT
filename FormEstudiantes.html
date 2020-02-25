@@ -38,7 +38,7 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-2">
                             <label>Codigo</label>
-                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" onchange="BuscarEstudiante(); CargarFrameFoto();">
+                            <input type="text" name="id_persona" id="id_persona" value="" autofocus="autofocus" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Estudiante" list="lista_id_persona" onchange="BuscarEstudiante(); CargarFrameFoto();">
                         </div>
                         <div class="col-sm-2">
                             <label>Opciones</label>
@@ -53,19 +53,19 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-2">
                             <label>1er Nombre</label>
-                            <input type="text" name="nombre1_persona" id="nombre1_persona" value="" required="required" maxlength="50" class="form-control" title="Primer Nombre">
+                            <input type="text" name="nombre1_persona" id="nombre1_persona" spellcheck="spellcheck" value="" required="required" maxlength="50" class="form-control" title="Primer Nombre">
                         </div>
                         <div class="col-sm-2">
                             <label>2do Nombre</label>
-                            <input type="text" name="nombre2_persona" id="nombre2_persona" value=""  maxlength="50" class="form-control" title="Segundo Nombre">
+                            <input type="text" name="nombre2_persona" id="nombre2_persona" spellcheck="spellcheck" value=""  maxlength="50" class="form-control" title="Segundo Nombre">
                         </div>
                         <div class="col-sm-2">
                             <label>1er Apellido</label>
-                            <input type="text" name="apellido1_persona" id="apellido1_persona" value="" required="required" maxlength="50" class="form-control" title="Primer Apellido">
+                            <input type="text" name="apellido1_persona" id="apellido1_persona" spellcheck="spellcheck" value="" required="required" maxlength="50" class="form-control" title="Primer Apellido">
                         </div>
                         <div class="col-sm-2">
                             <label>2do Apellido</label>
-                            <input type="text" name="apellido2_persona" id="apellido2_persona" value="" required="required" maxlength="50" class="form-control" title="Segundo Apellido">
+                            <input type="text" name="apellido2_persona" id="apellido2_persona" spellcheck="spellcheck" value="" required="required" maxlength="50" class="form-control" title="Segundo Apellido">
                         </div>
 
                     </div>
@@ -489,7 +489,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Codigo</label>
-                                    <input type="text" name="id_anotacion" id="id_anotacion" value="" maxlength="24" required="required" class="form-control" title="Codigo de Anotacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFechaAnotacion();">
+                                    <input type="text" name="id_anotacion" id="id_anotacion" autofocus="autofocus" value="" maxlength="24" required="required" class="form-control" title="Codigo de Anotacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFechaAnotacion();">
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Tipo</label>
@@ -515,7 +515,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Descripcion</label>
-                                    <textarea id="descripcion_anotacion" name="descripcion_anotacion" maxlength="5000" required="required" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                    <textarea id="descripcion_anotacion" name="descripcion_anotacion" spellcheck="spellcheck" autofocus="autofocus" maxlength="5000" required="required" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -567,7 +567,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label>Codigo</label>
-                                    <input type="text" name="id_citacion" id="id_citacion" value="" maxlength="24" required="required" class="form-control" title="Codigo de Citacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFechaCitacion();">
+                                    <input type="text" name="id_citacion" id="id_citacion" autofocus="autofocus" value="" maxlength="24" required="required" class="form-control" title="Codigo de Citacion (Automatico)" readonly="readonly" onfocus="GenerarCodigoFechaCitacion();">
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Estudiante</label>
@@ -582,14 +582,14 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Nombre Acudiente</label>
-                                    <input type="text" name="nombreacudiente_citacion" id="nombreacudiente_citacion" value="" maxlength="200" required="required" class="form-control" title="Nombre del Acudiente Citado" list="lista_acudientes">
+                                    <input type="text" name="nombreacudiente_citacion" id="nombreacudiente_citacion" spellcheck="spellcheck" autofocus="autofocus" value="" maxlength="200" required="required" class="form-control" title="Nombre del Acudiente Citado" list="lista_acudientes">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Descripcion</label>
-                                    <textarea id="motivo_citacion" name="motivo_citacion" maxlength="5000" required="required" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                                    <textarea id="motivo_citacion" name="motivo_citacion" spellcheck="spellcheck" maxlength="5000" required="required" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
                                 </div>
                             </div>
 
