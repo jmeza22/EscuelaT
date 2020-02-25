@@ -12,7 +12,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         if ($session->getStandard() == 1 || $session->getLimited() || $session->getExternal()) {
             unset($_POST['status_docente']);
         }
-        $bc = new BaseController();
+        $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);

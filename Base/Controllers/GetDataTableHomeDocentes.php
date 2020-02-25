@@ -9,7 +9,7 @@ $sql = "SELECT C.*, D.nombrecompleto_docente, A.nombre_asignatura, '" . $variabl
 $where = " WHERE C.status_carga=1 and C.id_escuela = " . $session->getEnterpriseID() . " and C.id_docente = '" . $session->getUserID() . "' and C.id_periodo= '" . $variables->getIdPeriodoAnual() . "'";
 $bc = null;
 if ($session->hasLogin() && isset($_POST) && $_POST !== null && $variables->getIdCortePeriodo() !== null) {
-    $bc = new BaseController();
+    $bc = new BasicController();
     $bc->connect();
     $bc->setAction('findAll');
     $bc->setModel($model);

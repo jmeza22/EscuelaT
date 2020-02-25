@@ -4,7 +4,7 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 if ($session->hasLogin() && $session->checkToken()) {
     if (isset($_POST) && $_POST != null) {
-        $bc = new BaseController();
+        $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $result = null;

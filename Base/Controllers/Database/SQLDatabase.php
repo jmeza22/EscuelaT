@@ -347,7 +347,6 @@ class SQLDatabase {
                     $array[$key] = $this->parseToUTF8($array[$key]);
                 }
             }
-            //print_r($array);
             return $array;
         }
         return null;
@@ -355,7 +354,7 @@ class SQLDatabase {
 
     private function buildInsertString($table, $values) {
         if ($table != null && $values != null) {
-            $sql = 'INSERT INTO ' . $table . ' values(' . $values . ')';
+            $sql = "INSERT INTO " . $table . " values(" . $values . ")";
             return $sql;
         }
         return '';
@@ -363,7 +362,7 @@ class SQLDatabase {
 
     private function buildReplaceString($table, $values) {
         if ($table != null && $values != null) {
-            $sql = 'REPLACE INTO ' . $table . ' values(' . $values . ')';
+            $sql = "REPLACE INTO " . $table . " values(" . $values . ")";
             return $sql;
         }
         return '';
@@ -371,9 +370,9 @@ class SQLDatabase {
 
     private function buildUpdateString($table, $setvalues, $where = NULL) {
         if ($table != null && $setvalues != null) {
-            $sql = 'UPDATE ' . $table . ' SET ' . $setvalues;
+            $sql = "UPDATE " . $table . " SET " . $setvalues;
             if ($where != null && strcmp($where, '') !== 0) {
-                $sql = $sql . ' WHERE ' . $where;
+                $sql = $sql . " WHERE " . $where;
             }
             return $sql;
         }
@@ -382,9 +381,9 @@ class SQLDatabase {
 
     private function buildDeleteString($table, $where = NULL) {
         if ($table != null) {
-            $sql = 'DELETE FROM ' . $table;
+            $sql = "DELETE FROM " . $table;
             if ($where != null && strcmp($where, '') !== 0) {
-                $sql = $sql . ' WHERE ' . $where;
+                $sql = $sql . " WHERE " . $where;
             }
             return $sql;
         }
@@ -393,9 +392,9 @@ class SQLDatabase {
 
     private function buildSelectString($table, $columns, $where = NULL) {
         if ($table != null && $columns != null) {
-            $sql = 'SELECT ' . $columns . ' FROM ' . $table;
+            $sql = "SELECT " . $columns . " FROM " . $table;
             if ($where != null && strcmp($where, '') !== 0) {
-                $sql = $sql . ' WHERE ' . $where;
+                $sql = $sql . " WHERE " . $where;
             }
             return $sql;
         }
@@ -482,14 +481,14 @@ class SQLDatabase {
             }
             $sql = substr($sql, 0, -1);
             if ($arraywhere !== null && is_array($arraywhere)) {
-                $sql = $sql . ' WHERE ';
+                $sql = $sql . " WHERE ";
                 $columnsWhere = $this->getColumns($arraywhere);
                 foreach ($columnsWhere as $column) {
                     $sql = $sql . " " . $column . "= :" . $column . " AND";
                 }
                 $sql = substr($sql, 0, -3);
-            } elseif ($where != null && strcmp($where, '') !== 0) {
-                $sql = $sql . ' WHERE ' . $where;
+            } elseif ($where != null && strcmp($where, "") !== 0) {
+                $sql = $sql . " WHERE " . $where;
             }
             return $sql;
         }
@@ -498,16 +497,16 @@ class SQLDatabase {
 
     private function buildDeleteStmtString($table, $where = NULL, $arraywhere = NULL) {
         if (is_array($arraycolumns)) {
-            $sql = "DELETE  FROM " . $table . " ";
+            $sql = "DELETE FROM " . $table . " ";
             if ($arraywhere !== null && is_array($arraywhere)) {
-                $sql = $sql . ' WHERE ';
+                $sql = $sql . " WHERE ";
                 $columnsWhere = $this->getColumns($arraywhere);
                 foreach ($columnsWhere as $column) {
                     $sql = $sql . " " . $column . "= :" . $column . " AND";
                 }
                 $sql = substr($sql, 0, -3);
-            } elseif ($where != null && strcmp($where, '') !== 0) {
-                $sql = $sql . ' WHERE ' . $where;
+            } elseif ($where != null && strcmp($where, "") !== 0) {
+                $sql = $sql . " WHERE " . $where;
             }
             return $sql;
         }
@@ -516,7 +515,7 @@ class SQLDatabase {
 
     private function buildSelectStmtString($table, $arraycolumns, $where = NULL, $arraywhere = NULL, $groupby = NULL, $orderby = NULL) {
         if ($table != null && $arraycolumns != null) {
-            $sql = 'SELECT';
+            $sql = "SELECT ";
             if (is_array($arraycolumns)) {
                 $columns = $this->getValues($arraycolumns);
                 foreach ($columns as $column) {
@@ -524,29 +523,28 @@ class SQLDatabase {
                 }
                 $sql = substr($sql, 0, -1);
             } else {
-                $sql = $sql . ' ' . $arraycolumns;
+                $sql = $sql . " " . $arraycolumns;
             }
 
-            $sql = $sql . ' FROM ' . $table;
+            $sql = $sql . " FROM " . $table;
 
             if ($arraywhere !== null && is_array($arraywhere)) {
-                $sql = $sql . ' WHERE ';
+                $sql = $sql . " WHERE ";
                 $columnsWhere = $this->getColumns($arraywhere);
                 foreach ($columnsWhere as $column) {
                     $sql = $sql . " " . $column . "= :" . $column . " AND";
                 }
                 $sql = substr($sql, 0, -3);
             } elseif ($where != null && strcmp($where, '') !== 0) {
-                $sql = $sql . ' WHERE ' . $where;
+                $sql = $sql . " WHERE " . $where;
             }
 
             if ($groupby !== null && $groupby !== '') {
-                $sql = $sql . ' GROUP BY ' . $groupby . ' ';
+                $sql = $sql . " GROUP BY " . $groupby . " ";
             }
             if ($orderby !== null && $orderby !== '') {
-                $sql = $sql . ' ORDER BY ' . $orderby . ' ';
+                $sql = $sql . " ORDER BY " . $orderby . " ";
             }
-            //echo $sql;
             return $sql;
         }
         return null;
@@ -694,7 +692,7 @@ class SQLDatabase {
         $resultset = $this->queryStmt($sql, $arraywhere);
         if ($resultset != null) {
             $json = json_encode($resultset);
-            
+
             return $json;
         }
         return null;

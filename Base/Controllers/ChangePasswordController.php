@@ -9,7 +9,7 @@ $findBy = "username_usuario";
 $postdata = null;
 if ($session->hasLogin() && $session->checkToken()) {
     if (isset($_POST) && $_POST != null) {
-        $bc = new BaseController();
+        $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $postdata = $bc->getPostData();

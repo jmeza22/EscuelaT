@@ -18,7 +18,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
             $idtipousuario = $_POST['id_tipousuario'];
             unset($_POST['id_tipousuario']);
         }
-        $bc = new BaseController();
+        $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);

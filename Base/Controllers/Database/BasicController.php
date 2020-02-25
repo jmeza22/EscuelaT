@@ -7,13 +7,13 @@
  */
 
 /**
- * Description of BaseController
+ * Description of BasicController
  *
  * @author JOSEMEZA
  */
 include_once 'SQLDatabase.php';
 
-class BaseController {
+class BasicController {
 
     public $config = null;
     public $db = null;

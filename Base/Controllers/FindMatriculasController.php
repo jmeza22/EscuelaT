@@ -13,7 +13,7 @@ $ahora = getdate();
 $sql = null;
 if ($session->hasLogin()) {
     if (isset($_POST) && $_POST != null) {
-        $bc = new BaseController();
+        $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);

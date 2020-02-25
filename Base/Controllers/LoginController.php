@@ -27,7 +27,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
             $enterprise = $_POST['id_escuela'];
         }
         $result = null;
-        $bc = new BaseController();
+        $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);

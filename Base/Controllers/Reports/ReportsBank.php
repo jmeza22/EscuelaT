@@ -11,7 +11,7 @@
  *
  * @author LISANDRO
  */
-class ReportsBank extends BaseController {
+class ReportsBank extends BasicController {
 
     public $session = null;
     private $enterprieseid = null;

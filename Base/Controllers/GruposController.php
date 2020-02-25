@@ -11,7 +11,7 @@ $action = 'insertorupdate';
 $postdata = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST) && $_POST != null) {
-        $bc = new BaseController();
+        $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);
