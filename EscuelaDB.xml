@@ -583,6 +583,63 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="CandidatosEleccionesApp">
+      <Cm>Candidatos para Elecciones Estudiantiles</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_candidato" nm="pkCandidatosEleccionesApp"/>
+      <Cl au="1" df="" nm="id_candidato" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Candidato</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_eleccion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Configuracion de Eleccion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_cargo" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Cargo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombrecompleto_candidato" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Nombre Completo del Candidato</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numerotarjeton_candidato" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="4" sc="null" sg="1" un="0"/>
+        <Cm>Numero en el Tarjeton Virtual</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="foto_candidato" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Foto del Candidato</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_candidatos" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_CandidatosElecciones_CargosElecciones" prLkCl="id_cargo" upAc="3">
+        <PrTb mn="0" nm="CargosEleccionesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CandidatosEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_cargo" prCl="id_cargo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_CandidatosElecciones_EleccionesEstudiantilesApp" prLkCl="id_eleccion" upAc="3">
+        <PrTb mn="0" nm="EleccionesEstudiantilesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CandidatosEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_eleccion" prCl="id_eleccion"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_CandidatosElecciones_PersonasApp" prLkCl="id_persona" upAc="3">
+        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CandidatosEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_persona" prCl="id_persona"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="CandidatosElecciones_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_persona, id_cargo, id_eleccion</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="CargasDocentesApp">
       <Cm>Cargas Academicas de los Docentes</Cm>
       <TblOpts/>
@@ -663,6 +720,42 @@
         <ClNs>id_docente, id_escuela, id_programa, id_planestudio, id_grupo, id_periodo, id_asignatura, numgrado_programa</ClNs>
         <OptTx/>
       </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="CargosEleccionesApp">
+      <Cm>Lista de Cargos de Elecciones Estudiantiles</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_cargo" nm="pkCargosEleccionesApp"/>
+      <Cl au="0" df="" nm="id_cargo" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Cargo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_cargo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de Cargo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_cargo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion de Cargo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="gradominimo_cargo" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Grado minimo para Aspirar al Cargo</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_cargo" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Registro</Cm>
+      </Cl>
+      <Fk deAc="3" nm="fk_CargosElecciones_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CargosEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -1076,6 +1169,55 @@
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Estado del Registro</Cm>
       </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="EleccionesEstudiantilesApp">
+      <Cm>Configuracion de Votaciones Estudiantiles por Periodo</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_eleccion" nm="pkEleccionesEstudiantilesApp"/>
+      <Cl au="1" df="" nm="id_eleccion" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Configuracion de Eleccion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_periodo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Periodo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechainicio_eleccion" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Inicio de Votaciones</Cm>
+      </Cl>
+      <Cl au="0" df="08:00:00" nm="horainicio_eleccion" nu="1">
+        <DT arr="0" ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Hora Inicio de Votacion</Cm>
+      </Cl>
+      <Cl au="0" df="16:00:00" nm="horafin_eleccion" nu="1">
+        <DT arr="0" ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Hora Fin Votacion</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_eleccion" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_VotacionesEstudiantilesApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="EleccionesEstudiantilesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_VotacionesEstudiantilesApp_PeriodosAnualesApp" prLkCl="id_periodo" upAc="3">
+        <PrTb mn="0" nm="PeriodosAnualesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="EleccionesEstudiantilesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_periodo" prCl="id_periodo"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="VotacionesEstudiantilesApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, id_periodo</ClNs>
+        <OptTx/>
+      </Idx>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -1638,6 +1780,10 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
         <Cm>Enfermedad Cronica del Estudiante</Cm>
       </Cl>
+      <Cl au="0" df="" nm="eps_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de la EPS del Estudiante</Cm>
+      </Cl>
       <Cl au="0" df="" nm="foto_estudiante" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
         <Cm>Foto del Estudiante</Cm>
@@ -2109,6 +2255,45 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="TerminalesEleccionesApp">
+      <Cm>Terminales o Dispositivos Habilitados para Votar</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_terminal" nm="pkTerminalesEleccionesApp"/>
+      <Cl au="0" df="" nm="id_terminal" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Terminal</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="codigo_terminal" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Numero Interno de Terminal</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="password_terminal" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Contraseña para Acceso a la Terminal</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_terminal" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de la Terminal</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_terminal" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TerminalesElecciones_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="TerminalesEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="TerminalesElecciones_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_escuela, codigo_terminal</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="TiposUsuariosApp">
       <Cm>Tipos de Usuario</Cm>
       <TblOpts/>
@@ -2257,6 +2442,55 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="VotosEleccionesApp">
+      <Cm>Registro de Votos (Conteo)</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_voto" nm="pkVotosEleccionesApp"/>
+      <Cl au="1" df="" nm="id_voto" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Voto</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_eleccion" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Configuracion de Eleccion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_candidato" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Candidato</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_terminal" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Terminal</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechahora_voto" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha y Hora del Voto</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_voto" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_VotosElecciones_CandidatosElecciones" prLkCl="id_candidato" upAc="3">
+        <PrTb mn="0" nm="CandidatosEleccionesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="VotosEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_candidato" prCl="id_candidato"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_VotosElecciones_EleccionesEstudiantilesApp" prLkCl="id_eleccion" upAc="3">
+        <PrTb mn="0" nm="EleccionesEstudiantilesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="VotosEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_eleccion" prCl="id_eleccion"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_VotosElecciones_TerminalesElecciones" prLkCl="id_terminal" upAc="3">
+        <PrTb mn="0" nm="TerminalesEleccionesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="VotosEleccionesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_terminal" prCl="id_terminal"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <CustomTypes/>
   </Sch>
   <Dgm nm="EscuelaDB">
@@ -2306,15 +2540,20 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DirectoresGruposApp" x="526" y="1157"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CargasDocentesApp" x="692" y="1419"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DocentesApp" x="223" y="499"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PaisesApp" x="60" y="3695"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DepartamentosEstadosApp" x="610" y="3680"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1406" y="3676"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PaisesApp" x="74" y="4438"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DepartamentosEstadosApp" x="663" y="4415"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1481" y="4415"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PagosRecibidosApp" x="36" y="3369"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ValoresPecuniariosApp" x="537" y="3383"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsistenciaApp" x="1107" y="1703"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CargosEleccionesApp" x="88" y="3874"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CandidatosEleccionesApp" x="441" y="3879"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="VotosEleccionesApp" x="461" y="4058"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="EleccionesEstudiantilesApp" x="380" y="3696"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TerminalesEleccionesApp" x="979" y="3912"/>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1644" y2="1656"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1657" y2="1656"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AreasApp.fk_AreasApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -2362,6 +2601,23 @@
         <positionableLine lineRole="CHILD_LINE" x1="835" x2="835" y1="1916" y2="1399"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.CandidatosEleccionesApp.fk_CandidatosElecciones_CargosElecciones" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="390" x2="418" y1="3918" y2="3918"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CandidatosEleccionesApp.fk_CandidatosElecciones_EleccionesEstudiantilesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="574" x2="574" y1="3837" y2="3856"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CandidatosEleccionesApp.fk_CandidatosElecciones_PersonasApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="180" x2="180" y1="323" y2="3847"/>
+        <positionableLine lineRole="CHILD_LINE" x1="446" x2="446" y1="3856" y2="3855"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="442" x2="184" y1="3851" y2="3851"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_DocentesApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="559" x2="773" y1="596" y2="596"/>
@@ -2385,6 +2641,12 @@
         <positionableLine lineRole="CHILD_LINE" x1="1050" x2="1991" y1="1510" y2="1510"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargosEleccionesApp.fk_CargosElecciones_EscuelasApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="676" x2="208" y1="158" y2="158"/>
+        <positionableLine lineRole="CHILD_LINE" x1="204" x2="204" y1="3851" y2="162"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CitacionesObservadorApp.fk_CitacionesObservadorApp_AnotacionesObservadorApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="202" x2="202" y1="1846" y2="1963"/>
@@ -2392,7 +2654,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CitacionesObservadorApp.fk_CitacionesObservadorApp_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="272" x2="272" y1="1644" y2="1963"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="272" x2="272" y1="1657" y2="1963"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ConfiguracionApp.fk_ConfiguracionApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2408,7 +2670,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.DepartamentosEstadosApp.fk_DepartamentosEstadosApp_PaisesApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="315" x2="587" y1="3709" y2="3709"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="329" x2="640" y1="4443" y2="4443"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_DocentesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2426,6 +2688,18 @@
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="1385" x2="1385" y1="822" y2="1192"/>
         <positionableLine lineRole="CHILD_LINE" x1="911" x2="1381" y1="1196" y2="1196"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.EleccionesEstudiantilesApp.fk_VotacionesEstudiantilesApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="832" x2="832" y1="186" y2="3718"/>
+        <positionableLine lineRole="CHILD_LINE" x1="730" x2="828" y1="3722" y2="3722"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.EleccionesEstudiantilesApp.fk_VotacionesEstudiantilesApp_PeriodosAnualesApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1231" x2="523" y1="740" y2="740"/>
+        <positionableLine lineRole="CHILD_LINE" x1="519" x2="519" y1="3673" y2="744"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.GruposApp.fk_GruposApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2540,7 +2814,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MunicipiosCiudadesApp.fk_MunicipiosCiudadesApp_DepartamentosEstadosApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="922" x2="1383" y1="3707" y2="3707"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="975" x2="1458" y1="4448" y2="4448"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
@@ -2551,7 +2825,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="227" x2="227" y1="1644" y2="3346"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="227" x2="227" y1="1657" y2="3346"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_ValoresPecuniariosApp" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
@@ -2599,6 +2873,12 @@
         <positionableLine lineRole="SINGLE_LINE" x1="852" x2="852" y1="186" y2="730"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.TerminalesEleccionesApp.fk_TerminalesElecciones_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="866" x2="866" y1="186" y2="3954"/>
+        <positionableLine lineRole="CHILD_LINE" x1="956" x2="870" y1="3958" y2="3958"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.UsuariosApp.fk_UsuariosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="832" x2="832" y1="186" y2="399"/>
@@ -2616,10 +2896,27 @@
         <positionableLine lineRole="CHILD_LINE" x1="642" x2="642" y1="3360" y2="162"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.VotosEleccionesApp.fk_VotosElecciones_CandidatosElecciones" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="606" x2="606" y1="4033" y2="4035"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.VotosEleccionesApp.fk_VotosElecciones_EleccionesEstudiantilesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="584" x2="584" y1="3837" y2="4035"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.VotosEleccionesApp.fk_VotosElecciones_TerminalesElecciones" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="984" x2="984" y1="4040" y2="4036"/>
+        <positionableLine lineRole="CHILD_LINE" x1="612" x2="612" y1="4035" y2="4044"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="616" x2="980" y1="4040" y2="4040"/>
+      </positionableLines>
+    </FkGl>
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="129">
+  <RnmMgr NxRnmId="144">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -2955,6 +3252,49 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="AsistenciaApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="128" nNm="fecha_asistencia" oNm="fechahora_asistencia"/>
     </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CargosEleccionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="129" nNm="id_cargo" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="EleccionesEstudiantilesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="136" nNm="id_eleccion" oNm="id_votacion"/>
+      <Rnm id="130" nNm="id_votacion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CandidatosEleccionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="131" nNm="id_candidato" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TerminalesEleccionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="132" nNm="id_terminal" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="VotosEleccionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="133" nNm="id_voto" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TerminalesEleccionesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="134" nNm="codigo_terminal" oNm="numero_terminal"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="135" nNm="EleccionesEstudiantilesApp" oNm="VotacionesEstudiantilesApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="EleccionesEstudiantilesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="137" nNm="fechainicio_eleccion" oNm="fechainicio_votacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="EleccionesEstudiantilesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="138" nNm="horainicio_eleccion" oNm="horainicio_votacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="EleccionesEstudiantilesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="139" nNm="horafin_eleccion" oNm="horafin_votacion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="140" nNm="CargosEleccionesApp" oNm="CargosElecciones"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="141" nNm="CandidatosEleccionesApp" oNm="CandidatosElecciones"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="142" nNm="TerminalesEleccionesApp" oNm="TerminalesElecciones"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="143" nNm="VotosEleccionesApp" oNm="VotosElecciones"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -2978,7 +3318,7 @@
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (31)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (36)</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

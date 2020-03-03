@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Terminales para Votar (Configuracion)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Terminales para Elecciones"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/TerminalesElecciones.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Terminal para Votar</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/TerminalesEleccionesController.php" model="TerminalesEleccionesApp" findBy="id_terminal" mainform="true" >
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Codigo</label>
+                            <input type="number" name="id_terminal" id="id_terminal" value="" maxlength="10" required="required" class="form-control" title="Codigo de Terminal" autofocus="autofocus" >
+                        </div>
+                        <div class="col-sm-4">
+                            <label>NombreTerminal</label>
+                            <input type="text" name="nombre_terminal" id="nombre_terminal" value="" maxlength="50" required="required" class="form-control" title="Nombre de Terminal" >
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Contraseña</label>
+                            <input type="password" name="password_terminal" id="password_terminal" value="" maxlength="50" required="required" class="form-control" title="Contraseña de Terminal" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Num.Terminal</label>
+                            <input type="number" name="codigo_terminal" id="codigo_terminal" value="" maxlength="2" required="required" class="form-control" title="Numero Interno Terminal" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Terminales</div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="TerminalesEleccionesApp" url="Base/Controllers/GetDataTableTerminalesElecciones.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 15%;" title="Codigo">Codigo</th>
+                                <th style="width: 65%;">Nombre</th>
+                                <th style="width: 15%;">Numero</th>
+                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> {{id_terminal}}</td>
+                                <td> {{nombre_terminal}} </td>
+                                <td> {{codigo_terminal}} </td>
+                                <td>
+                                    <form id="Terminal{{id_terminal}}" name="Terminal{{id_terminal}}" method="POST" autocomplete="off" url="Base/Controllers/TerminalesEleccionesController.php"  model="TerminalesEleccionesApp" findBy="id_terminal" statusfield="status_terminal">
+                                        <input type="hidden"  editable="false" name="id_terminal" id="id_terminal" value="{{id_terminal}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_terminal" id="status_terminal" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

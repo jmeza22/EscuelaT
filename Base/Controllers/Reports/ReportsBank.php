@@ -999,4 +999,95 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getElecciones($idescuela = null, $idperiodo = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM EleccionesEstudiantilesApp WHERE status_eleccion=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idperiodo !== null) {
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND id_periodo=:p_id_periodo ";
+        }
+
+        $sql = $sql . " ORDER BY id_periodo DESC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getCargosElecciones($idescuela = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM CargosEleccionesApp WHERE status_cargo=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getTerminalesElecciones($idescuela = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM TerminalesEleccionesApp WHERE status_terminal=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getCandidatosElecciones($idescuela = null, $ideleccion = null, $idperiodo = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM CandidatosEleccionesApp WHERE status_candidato=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($ideleccion !== null) {
+            $arraywhere['p_id_eleccion'] = $ideleccion;
+            $sql = $sql . " AND id_eleccion=:p_id_eleccion ";
+        }
+        if ($idperiodo !== null) {
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND id_periodo=:p_id_periodo ";
+        }
+
+        $sql = $sql . " ORDER BY id_periodo DESC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getVotosElecciones($idescuela = null, $ideleccion = null, $idcandidato = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM VotosEleccionesApp WHERE status_voto=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($ideleccion !== null) {
+            $arraywhere['p_id_eleccion'] = $ideleccion;
+            $sql = $sql . " AND id_eleccion=:p_id_eleccion ";
+        }
+        if ($idcandidato !== null) {
+            $arraywhere['p_id_candidato'] = $idcandidato;
+            $sql = $sql . " AND id_candidato=:p_id_candidato ";
+        }
+
+        $sql = $sql . " ORDER BY id_eleccion, id_candidato DESC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
 }

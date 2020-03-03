@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Cargos para Elecciones Estudiantiles (Configuracion)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Cargos Elecciones"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/CargosElecciones.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Cargo</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargosEleccionesController.php" model="CargosEleccionesApp" findBy="id_cargo" mainform="true" >
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <label>Codigo</label>
+                            <input type="number" name="id_cargo" id="id_cargo" value="" maxlength="10" required="required" class="form-control" title="Codigo de Cargo" autofocus="autofocus" >
+                        </div>
+                        <div class="col-sm-3">
+                            <label>Nombre Cargo</label>
+                            <input type="text" name="nombre_cargo" id="nombre_cargo" value="" maxlength="50" required="required" class="form-control" title="Nombre del Cargo" >
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Descripcion</label>
+                            <input type="text" name="descripcion_cargo" id="descripcion_cargo" value="" maxlength="100" required="required" class="form-control" title="Descripcion del Cargo" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grado.Min</label>
+                            <input type="number" name="gradominimo_cargo" id="gradominimo_cargo" value="11" maxlength="2" required="required" class="form-control" title="Grado Minimo para Postularse" min="0" max="11">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Cargos para Elecciones</div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="CargosEleccionesApp" url="Base/Controllers/GetDataTableCargosElecciones.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 15%;" title="Codigo">Codigo</th>
+                                <th style="width: 65%;">Nombre</th>
+                                <th style="width: 15%;">Grado.Min</th>
+                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> {{id_cargo}}</td>
+                                <td> {{nombre_cargo}} </td>
+                                <td> {{gradominimo_cargo}} </td>
+                                <td>
+                                    <form id="Cargo{{id_cargo}}" name="Cargo{{id_cargo}}" method="POST" autocomplete="off" url="Base/Controllers/CargosEleccionesController.php"  model="CargosEleccionesApp" findBy="id_cargo" statusfield="status_cargo">
+                                        <input type="hidden"  editable="false" name="id_cargo" id="id_cargo" value="{{id_cargo}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_cargo" id="status_cargo" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

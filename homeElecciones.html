@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Portal de Elecciones Estudiantiles - EscuelaT</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Portal de Elecciones Estudiantiles"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/menu.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="menucss">
+                    <ul>
+                        <li><a target="myframe" href="FormElecciones.html">Configurar</a></li>
+                        <li><a target="myframe" href="FormCargosElecciones.html">Cargos</a></li>
+                        <li><a target="myframe" href="FormCandidatosElecciones.html">Candidatos</a></li>
+                        <li><a target="myframe" href="FormTerminalesElecciones.html">Terminales</a></li>
+                        <li><a href="logout.html">Salir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="contentframe">
+            <iframe name="myframe" id="myframe" src="FormElecciones.html" height="900" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);"></iframe> 
+        </div>
+        <footer class="information">
+            <p>
+                Sistema Integral de Gestion Academica - EscuelaT
+            </p>
+        </footer>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    </body>
+</html>
