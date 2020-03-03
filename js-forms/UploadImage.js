@@ -22,7 +22,42 @@ function getParameters() {
     prefixImg = getElement(formUpload, 'prefix_image');
     idImg = getElement(formUpload, 'name_image');
     urlImg = getElement(formUpload, 'imagePhoto');
-    prefixImg.value=prefix;
-    idImg.value=id;
-    urlImg.src='ImageFiles/'+img;
+    prefixImg.value = prefix;
+    idImg.value = id;
+    urlImg.src = 'ImageFiles/' + img;
+}
+
+function validateImage(item) {
+    var validate = true;
+    var formUpload = document.getElementById('formUpload');
+    var prefixImg = getElement(formUpload, 'prefix_image');
+    var idImg = getElement(formUpload, 'name_image');
+    var fileImg = getElement(formUpload, 'imageFile');
+    if (prefixImg === null || prefixImg.value === "") {
+        validate = false;
+    }
+    if (idImg === null || idImg.value === "") {
+        validate = false;
+    }
+    if (validateForm(getForm(item)) === false) {
+        validate = false;
+    }
+    if (fileImg.files.length <= 0) {
+        validate = false;
+    }else{
+        console.log("Se encontró "+fileImg.files.length+" archivos para Subir al Sistema!.");
+    }
+    if (validate === false) {
+        alert("Debe completar los Datos y Seleccionar la Imagen!.");
+    }
+    return validate;
+}
+
+function submitImage(item) {
+    if (validateImage(item) === true) {
+        var myform = getForm(item);
+        if (myform !== undefined && myform !== null) {
+            myform.submit();
+        }
+    }
 }

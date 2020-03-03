@@ -1062,7 +1062,7 @@ class ReportsBank extends BasicController {
             $sql = $sql . " AND id_periodo=:p_id_periodo ";
         }
 
-        $sql = $sql . " ORDER BY id_periodo DESC";
+        $sql = $sql . " ORDER BY id_eleccion DESC";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

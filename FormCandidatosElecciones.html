@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Candidatos para Elecciones</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Candidatos"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/CandidatosElecciones.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Candidato</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CandidatosEleccionesController.php" model="CandidatoEleccionesApp" findBy="id_candidato" mainform="true" >
+                    <input type="hidden" id="gradominimo_cargo" name="gradominimo_cargo" value="0" disabled="disabled" />
+                    <input type="hidden" id="id_periodo" name="id_periodo" value="" disabled="disabled" />
+                    <input type="hidden" id="foto_candidato" name="foto_candidato" value="" />
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Eleccion</label>
+                            <select id="id_eleccion" name="id_eleccion" list="id_eleccion" required="required" selected="NULL" model="EleccionesEstudiantilesApp" colname="id_eleccion" colvalue="id_eleccion" url="Base/Controllers/GetComboboxElecciones.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'id_periodo');" />
+                            <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Cargo</label>
+                            <select id="id_cargo" name="id_cargo" list="id_cargo" required="required" selected="NULL" model="CargosEleccionesApp" colname="id_cargo" colvalue="id_cargo" url="Base/Controllers/GetComboboxCargosElecciones.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'gradominimo_cargo'); LoadPersona();" />
+                            <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Estudiante</label>
+                            <input type="text" name="id_persona" id="id_persona" value="" maxlength="24" required="required" class="form-control" list="lista_id_persona" />
+                            <datalist id="lista_id_persona" name="lista_id_persona" required="required" selected="NULL" model="PersonasApp" colname="id_persona" colvalue="id_persona" url="Base/Controllers/GetComboboxEstudiantesMatriculados.php" style="width: 100%;">
+                                <option selected="selected" value="NULL">Ninguna</option>
+                            </datalist>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Nombre del Estudiante</label>
+                            <input type="text" name="nombrecompleto_candidato" id="nombrecompleto_candidato" value="" maxlength="200" class="form-control" title="Nombre del Estudiante" readonly="readonly" onfocus="CargarFrameFoto();" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <center>
+                                <label>Foto de Candidato</label>
+                                <iframe name="frameFoto" id="frameFoto" src="UploadImageForm.html" style="min-height: 420px !important; min-width: 100% !important;"></iframe>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <center>
+                                <label>Numero Tarjeton</label>
+                                <input type="text" integer="true" id="numerotarjeton_candidato" name="numerotarjeton_candidato" required="required" value="" maxlength="2" style="width: 260px !important; height: 260px !important; text-align: center; font-size: 200px !important;" />
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <label>Codigo Candidato</label>
+                                <input type="text" integer="true" id="id_candidato" name="id_candidato" required="required" value="0" maxlength="2" style="width: 260px !important; height: 260px !important; text-align: center; font-size: 150px !important;" readonly="readonly" />
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Candidatos</div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="CandidatosEleccionesApp" url="Base/Controllers/GetDataTableCandidatosElecciones.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 15%;" title="Codigo">Codigo</th>
+                                <th style="width: 35%;">Nombre.Completo</th>
+                                <th style="width: 10%;">Eleccion</th>
+                                <th style="width: 15%;">Cargo</th>
+                                <th style="width: 15%;">No.Tarjeton</th>
+                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td> {{id_candidato}}</td>
+                                <td> {{nombrecompleto_candidato}} </td>
+                                <td> {{id_eleccion}} </td>
+                                <td> {{id_cargo}} </td>
+                                <td> {{numerotarjeton_candidato}} </td>
+                                <td>
+                                    <form id="Candidato{{id_candidato}}" name="Candidato{{id_candidato}}" method="POST" autocomplete="off" url="Base/Controllers/CandidatosEleccionesController.php"  model="CandidatosEleccionesApp" findBy="id_candidato" statusfield="status_candidato">
+                                        <input type="hidden"  editable="false" name="id_candidato" id="id_candidato" value="{{id_candidato}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_candidato" id="status_candidato" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

@@ -1,19 +1,18 @@
 <?php
 
-
-
 class UploadImage {
 
     private $url = 'ImageFiles/';
     private $prefix = 'Image';
     private $length = 52428800;
-    private $ext = '.jpg';
+    private $ext = '';
     private $filename = '';
     private $newname = '';
     private $name = '';
     private $error = '';
 
     public function __construct() {
+        
     }
 
     public function setURL($url) {
@@ -79,17 +78,19 @@ class UploadImage {
                     ($_FILES[$this->filename]["type"] == "image/gif")) &&
                     ($_FILES[$this->filename]["size"] <= $this->length)) {
 
-                $this->ext = "";
-                if (strcmp($_FILES[$this->filename]["type"], "image/jpeg") == 0 || strcmp($_FILES[$this->filename]["type"], "image/pjpeg") == 0) {
-                    $this->ext = ".jpg";
-                }
+                
+                if ($this->ext == "") {
+                    if (strcmp($_FILES[$this->filename]["type"], "image/jpeg") == 0 || strcmp($_FILES[$this->filename]["type"], "image/pjpeg") == 0) {
+                        $this->ext = ".jpg";
+                    }
 
-                if (strcmp($_FILES[$this->filename]["type"], "image/gif") == 0) {
-                    $this->ext = ".gif";
-                }
+                    if (strcmp($_FILES[$this->filename]["type"], "image/gif") == 0) {
+                        $this->ext = ".gif";
+                    }
 
-                if (strcmp($_FILES[$this->filename]["type"], "image/png") == 0) {
-                    $this->ext = ".png";
+                    if (strcmp($_FILES[$this->filename]["type"], "image/png") == 0) {
+                        $this->ext = ".png";
+                    }
                 }
 
                 if ($_FILES[$this->filename]["error"] > 0) {
@@ -112,6 +113,5 @@ class UploadImage {
     }
 
 }
-
 
 ?>
