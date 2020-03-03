@@ -20,7 +20,7 @@ function SendConfiguracion() {
     var idescuela = getElement(form, 'id_escuela');
     var logo = document.getElementById('logo_configuracion');
     if (validateForm(form) && ValidarPorcentajesPeriodos() && ValidarValoracion()) {
-        logo.value = 'Escuela' + idescuela.value + '.png';
+        logo.value = 'Escuela' + idescuela.value + '.jpg';
         submitForm(form, false);
     }
 }
