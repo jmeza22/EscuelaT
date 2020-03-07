@@ -17,6 +17,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setAction($action);
         $postdata = $bc->getPostData();
         $postdata['id_escuela'] = $session->getEnterpriseID();
+        if ($postdata['password_terminal'] === '') {
+            unset($postdata['password_terminal']);
+        }
         $bc->setPostData($postdata);
         if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'find') === 0) {
             $bc->setAction('find');

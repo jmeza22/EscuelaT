@@ -41,14 +41,14 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-2">
                             <label>Eleccion</label>
-                            <select id="id_eleccion" name="id_eleccion" list="id_eleccion" required="required" selected="NULL" model="EleccionesEstudiantilesApp" colname="id_eleccion" colvalue="id_eleccion" url="Base/Controllers/GetComboboxElecciones.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'id_periodo');" />
-                            <option selected="selected" value="NULL">Ninguna</option>
+                            <select id="id_eleccion" name="id_eleccion" list="id_eleccion" required="required" selected="NULL" model="EleccionesEstudiantilesApp" colname="id_eleccion" colvalue="id_eleccion" url="Base/Controllers/GetComboboxElecciones.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'id_periodo');" >
+                                <option selected="selected" value="NULL">Ninguna</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                             <label>Cargo</label>
-                            <select id="id_cargo" name="id_cargo" list="id_cargo" required="required" selected="NULL" model="CargosEleccionesApp" colname="id_cargo" colvalue="id_cargo" url="Base/Controllers/GetComboboxCargosElecciones.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'gradominimo_cargo'); LoadPersona();" />
-                            <option selected="selected" value="NULL">Ninguna</option>
+                            <select id="id_cargo" name="id_cargo" list="id_cargo" required="required" selected="NULL" model="CargosEleccionesApp" colname="id_cargo" colvalue="id_cargo" url="Base/Controllers/GetComboboxCargosElecciones.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'gradominimo_cargo'); LoadPersona();" >
+                                <option selected="selected" value="NULL">Ninguna</option>
                             </select>
                         </div>
                         <div class="col-sm-2">

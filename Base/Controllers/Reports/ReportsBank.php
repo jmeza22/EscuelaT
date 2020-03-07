@@ -1044,7 +1044,7 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
-    public function getCandidatosElecciones($idescuela = null, $ideleccion = null, $idperiodo = null) {
+    public function getCandidatosElecciones($idescuela = null, $ideleccion = null, $idcargo = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM CandidatosEleccionesApp WHERE status_candidato=1 ";
@@ -1057,9 +1057,9 @@ class ReportsBank extends BasicController {
             $arraywhere['p_id_eleccion'] = $ideleccion;
             $sql = $sql . " AND id_eleccion=:p_id_eleccion ";
         }
-        if ($idperiodo !== null) {
-            $arraywhere['p_id_periodo'] = $idperiodo;
-            $sql = $sql . " AND id_periodo=:p_id_periodo ";
+        if ($idcargo !== null) {
+            $arraywhere['p_id_cargo'] = $idcargo;
+            $sql = $sql . " AND id_cargo=:p_id_cargo ";
         }
 
         $sql = $sql . " ORDER BY id_eleccion DESC";
@@ -1086,6 +1086,35 @@ class ReportsBank extends BasicController {
         }
 
         $sql = $sql . " ORDER BY id_eleccion, id_candidato DESC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getConteoVotosElecciones($idescuela = null, $ideleccion = null, $idcargo = null, $idcandidato = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT COUNT(V.id_voto) conteo, C.id_escuela, C.id_cargo, V.id_candidato, C.nombrecompleto_candidato, C.numerotarjeton_candidato "
+                . " FROM VotosEleccionesApp V INNER JOIN CandidatosEleccionesApp C ON V.id_candidato=C.id_candidato "
+                . " WHERE status_voto=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND C.id_escuela=:p_id_escuela ";
+        }
+        if ($ideleccion !== null) {
+            $arraywhere['p_id_eleccion'] = $ideleccion;
+            $sql = $sql . " AND V.id_eleccion=:p_id_eleccion ";
+        }
+        if ($idcargo !== null) {
+            $arraywhere['p_id_cargo'] = $idcargo;
+            $sql = $sql . " AND C.id_cargo=:p_id_cargo ";
+        }
+        if ($idcandidato !== null) {
+            $arraywhere['p_id_candidato'] = $idcandidato;
+            $sql = $sql . " AND V.id_candidato=:p_id_candidato ";
+        }
+
+        $sql = $sql . " GROUP BY V.id_candidato ORDER BY V.id_eleccion, COUNT(V.id_candidato) DESC, V.id_candidato DESC";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

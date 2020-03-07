@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Votar (Elecciones Estudiantiles)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Votar"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/VotosElecciones.js"></script>
+    </head>
+    <body>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Seleccione Votacion</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off"  >
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Eleccion</label>
+                            <select id="id_eleccion" name="id_eleccion" list="id_eleccion" required="required" selected="NULL" model="EleccionesEstudiantilesApp" colname="id_eleccion" colvalue="id_eleccion" url="Base/Controllers/GetComboboxElecciones.php" class="form-control" style="width: 100%;" onchange="setWhere();" >
+                                <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Cargo</label>
+                            <select id="id_cargo" name="id_cargo" list="id_cargo" required="required" selected="NULL" model="CargosEleccionesApp" colname="id_cargo" colvalue="id_cargo" url="Base/Controllers/GetComboboxCargosElecciones.php" class="form-control" style="width: 100%;" onchange="setWhere();" >
+                                <option selected="selected" value="NULL">Ninguna</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-12">
+                            <center>
+                                <button type="button" id="find" name="find"  action="find" save="true" onclick="filtrar(this);" class="btn btn-default" >Buscar</button>
+                                <button type="button" id="showOk" href="#modal_votook" data-toggle="modal" style="display: none !important;" ></button>
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer" style="text-align: center;">
+                Para Votar solo haga Click sobre la Foto del Candidato!.
+            </div>
+        </div>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Candidatos</div>
+            <div class="panel-body">
+                <div class="table-responsive" >
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="CandidatosApp" findby="id_eleccion" findbyvalue="" url="Base/Controllers/GetDataTableCandidatosElecciones.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 15%;" title="Votaciones - Aspirantes"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="rowsample" rowsample="true" style="display: none;">
+                                <td>
+                                    <form id="Voto{{id_candidato}}" name="Voto{{id_candidato}}" method="POST" autocomplete="off" url="Base/Controllers/VotosEleccionesController.php"  model="VotacionesApp" findBy="id_voto" statusfield="status_voto">
+                                        <center>
+                                            <button type="button" name="Votar" id="Votar" class="btn btn-primary" onclick="EnviarVoto(this);">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <input type="hidden"  editable="false" name="id_voto" id="id_voto" value="0" >
+                                                        <input type="hidden"  editable="false" name="id_eleccion" id="id_eleccion" value="{{id_eleccion}}" >
+                                                        <input type="hidden"  editable="false" name="id_candidato" id="id_candidato" value="{{id_candidato}}" >
+
+                                                        <label>{{nombrecompleto_candidato}}</label>
+                                                        <div class="photoPanel" style="min-width: 200px !important; min-height: 200px !important;">
+                                                            <img id="imgcandidato" class="imagePhoto" src="ImageFiles/{{foto_candidato}}" style="border: 1px; border-radius: 15px; width: 200px !important; height: 200px !important;" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6" style="font-size: 90px; color: white;">
+                                                        <label>{{numerotarjeton_candidato}}</label>
+                                                    </div>
+                                                </div>
+                                            </button>
+
+                                        </center>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>  
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-12">
+                        <center>
+                            <a href="logout.html" id="Logout" class="btn btn-danger">Cerrar Sesion</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_votook">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Resultado</h4>
+                    </div>
+                    <div class="modal-body">
+                        <center>
+                            <h3>Su voto ha sido registrado!</h3>
+                            <h1>Gracias por Votar!</h1>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

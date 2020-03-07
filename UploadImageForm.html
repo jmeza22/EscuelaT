@@ -36,7 +36,7 @@ and open the template in the editor.
     </head>
     <body style="min-height: fit-content !important;">
         <div class="panel panel-primary" style="width: 80% !important;">
-            <div class="panel-heading">Subir Foto</div>
+            <div class="panel-heading">Subir Foto o Imagen</div>
             <div class="panel-body" >
                 <form id="formUpload" action="UploadImageController.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" alphanumeric="true" name="prefix_image" id="prefix_image" value="" required="required" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
@@ -61,6 +61,9 @@ and open the template in the editor.
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="panel-footer" style="text-align: center;">
+                Debe hacer click en el Botón "Guardar Foto" para que la Foto o Imagen se almacene en el Sistema.
             </div>
         </div>
     </body>
