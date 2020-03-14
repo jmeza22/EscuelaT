@@ -325,6 +325,27 @@ function disableElement(element) {
     return false;
 }
 
+function autoValueCheckbox(checkbox) {
+    if (checkbox !== undefined && checkbox !== null) {
+        if (checkbox.tagName === undefined) {
+            checkbox = document.getElementById(checkbox);
+        }
+        console.log('Setting Checkbox Value: ' + checkbox.id);
+        if (checkbox.tagName === 'INPUT' && (checkbox.getAttribute('type') === 'CHECKBOX' || checkbox.getAttribute('type') === 'checkbox')) {
+
+            var checkedValue = checkbox.getAttribute('checkedvalue');
+            var uncheckedValue = checkbox.getAttribute('uncheckedvalue');
+            if (checkbox.checked) {
+                checkbox.value = checkedValue;
+            } else {
+                checkbox.value = uncheckedValue;
+            }
+            return true;
+        }
+        return false;
+    }
+}
+
 function getParent(element, tagname = null) {
     if (element !== null) {
         if (element.parentNode !== null && element.parentNode !== undefined) {
@@ -353,6 +374,12 @@ function getForm(element) {
         }
         if (element.tagName === 'FORM') {
             return element;
+        }
+        if (element.getAttribute('form') !== undefined && element.getAttribute('form') !== null) {
+            var form = document.getElementById(element.getAttribute('form'));
+            if (form !== undefined && form !== null && form.tagName === 'FORM') {
+                return form;
+            }
         }
         found = getParent(element, 'FORM');
         if (found !== null) {
@@ -467,6 +494,72 @@ function resetControls(parent) {
             }
         }
         return true;
+    }
+    return false;
+}
+
+function setControlsAttribute(parent, child = null, name, value) {
+    if (parent !== null && name !== null && value !== null && parent !== undefined && name !== undefined && value !== undefined) {
+        var element = null;
+        if (parent.nodeType === 1 && parent.value !== null && parent.value !== undefined) {
+            if (parent.tagName === 'BUTTON' || parent.tagName === 'INPUT' || parent.tagName === 'SELECT' || parent.tagName === 'TEXTAREA') {
+                parent.setAttribute(name, value);
+            }
+        }
+        if (parent.childNodes !== undefined && parent.childNodes !== null) {
+            for (var i = 0; i < parent.childNodes.length; i++) {
+                if (parent.childNodes[i].nodeType === 1 && parent.tagName === 'BUTTON' || parent.childNodes[i].tagName === 'INPUT' || parent.childNodes[i].tagName === 'SELECT' || parent.childNodes[i].tagName === 'TEXTAREA') {
+                    if (child !== undefined && child !== null) {
+                        if (parent.childNodes[i].getAttribute('name') === child) {
+                            console.log('Setting ' + name + ' to ' + parent.childNodes[i].name);
+                            parent.childNodes[i].setAttribute(name, value);
+                        }
+                    }
+                    if (child === undefined || child === null) {
+                        console.log('Setting ' + name + ' to ' + parent.childNodes[i].name);
+                        parent.childNodes[i].setAttribute(name, value);
+                    }
+                }
+                if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
+                    setControlsAttribute(parent.childNodes[i], null, name, value);
+                }
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+function convertCheckboxesToTexts(form) {
+    if (form !== undefined && form !== null) {
+        if (form.elements.length > 0) {
+            var checkboxarray = Array();
+            var i = 0;
+            for (i = 0; i < form.elements.length; i++) {
+                if (form.elements[i].tagName === 'INPUT' && (form.elements[i].getAttribute('type') === 'CHECKBOX' || form.elements[i].getAttribute('type') === 'checkbox')) {
+                    console.log('Elemento:' + form.elements[i].id);
+                    form.elements[i].setAttribute('type', 'text');
+                    checkboxarray.push(form.elements[i]);
+                    console.log(form.elements[i].id + ' converted to ' + form.elements[i].type);
+                }
+            }
+            return checkboxarray;
+        }
+    }
+    return null;
+}
+
+function convertTextsToCheckboxes(array) {
+    if (array !== undefined && array !== null) {
+        if (array.length > 0) {
+            var i = 0;
+            for (i = 0; i < array.length; i++) {
+                if (array[i].tagName === 'INPUT' && (array[i].getAttribute('type') === 'TEXT' || array[i].getAttribute('type') === 'text')) {
+                    array[i].setAttribute('type', 'checkbox');
+                }
+            }
+            return true;
+        }
     }
     return false;
 }
@@ -959,7 +1052,7 @@ function submitAjax(formData, url, header, reload) {
                         window.location.reload();
                     }
                 } else {
-                    console.error('Hubo error - Submit!.');
+                    console.error('Submit Error!.');
                 }
             } else {
                 showNotification('Result:', 'Null Result. There was an error during the process.');
@@ -973,6 +1066,40 @@ function submitAjax(formData, url, header, reload) {
 
     });
     return promise;
+}
+
+function setValue(element, value) {
+    if (element !== undefined && element !== null && element.tagName !== undefined) {
+        if (element !== null) {
+            element.value = "";
+            element.value = value;
+            if (value === null) {
+                element.value = '';
+            }
+            if (element.value === '[object Object]') {
+                element.value = '';
+            }
+            if (element.getAttribute('type') !== null && element.getAttribute('type') === 'password') {
+                element.value = '';
+            }
+            if (element.getAttribute('type') !== null && element.getAttribute('type') === 'checkbox') {
+                element.value = value;
+                if (value === '0' || value === 'n' || value === 'no') {
+                    element.checked = false;
+                }
+                if (value === '1' || value === 'y' || value === 'yes') {
+                    element.checked = true;
+                }
+            }
+            if (element.tagName === "SELECT") {
+                element.setAttribute('value', value);
+                element.value = value;
+                element.setAttribute('selected', value);
+                element.selected = value;
+            }
+        }
+    }
+    return false;
 }
 
 function setDataForm(myform, json) {
@@ -993,7 +1120,7 @@ function setDataForm(myform, json) {
             }
             for (var aux in values) {
                 if (isNaN(aux)) {
-                    columns.push("" + aux);
+                    columns.push('' + aux);
                 }
             }
 
@@ -1001,36 +1128,8 @@ function setDataForm(myform, json) {
                 col = null;
                 element = null;
                 col = columns[j];
-                element = getElement(myform, "" + col);
-                if (element !== null) {
-                    element.value = "";
-                    element.value = values[col];
-                    if (values[col] === null) {
-                        element.value = '';
-                    }
-                    if (element.value === '[object Object]') {
-                        element.value = '';
-                    }
-                    if (element.getAttribute('type') !== null && element.getAttribute('type') === 'password') {
-                        element.value = '';
-                    }
-                    if (element.getAttribute('type') !== null && element.getAttribute('type') === 'checkbox') {
-                        element.value = values[col];
-                        if (values[col] == '0' || values[col] == 'n' || values[col] == 'no') {
-                            element.removeAttribute('checked');
-                        }
-                        if (values[col] == '1' || values[col] == 'y' || values[col] == 'yes') {
-                            element.setAttribute('checked', 'checked');
-                        }
-                    }
-                    if (element.tagName === "SELECT") {
-                        element.setAttribute('value', values[col]);
-                        element.value = values[col];
-                        element.setAttribute('selected', values[col]);
-                        element.selected = values[col];
-                    }
-
-                }
+                element = getElement(myform, '' + col);
+                setValue(element, values[col]);
             }
             console.log('Set Data Form OK!.');
             return true;
@@ -1264,20 +1363,27 @@ function addNewRowInTable(mytable) {
     var sample = null;
     var newrow = null;
     var tbody = null;
+    var form = null;
     if (mytable !== null && mytable.tagName === undefined) {
         mytable = getElementDocument(mytable);
     }
     if (mytable !== null && mytable.tagName === "TABLE") {
         tbody = getElement(mytable, "tbody_" + mytable.id);
-        sample = getElement(mytable, "rowsample");
+        sample = getElement(mytable, "samplerow");
         if (tbody !== null && tbody.tagName === "TBODY" && sample !== null && sample.tagName === "TR") {
             newrow = sample.cloneNode(true);
         }
         if (newrow !== null && newrow.tagName === "TR") {
             newrow.id = "row" + mytable.id + getDateTimeString();
             newrow.style = "";
-            newrow.removeAttribute("rowsample");
+            form = sample.getAttribute('form');
+            newrow.removeAttribute("samplerow");
+            newrow.removeAttribute("form");
             tbody.appendChild(newrow);
+            console.log(form);
+            if (form !== undefined && form !== null) {
+                setControlsAttribute(newrow, null, 'form', form);
+            }
             removeAttributeDisabled(newrow);
             resetControls(newrow);
             console.log('New Row (TR) added to TABLE: ' + mytable.id);
@@ -1289,7 +1395,6 @@ function addNewRowInTable(mytable) {
 function deleteRowInTable(mytable) {
     var myrow = null;
     var element = null;
-    var foundelement = null;
     if (mytable !== null && mytable.tagName === undefined) {
         mytable = getElementDocument(mytable);
     }
@@ -1297,9 +1402,11 @@ function deleteRowInTable(mytable) {
         if (document.activeElement) {
             element = document.activeElement;
             myrow = getParentTR(element);
-            if (deleteElement(myrow)) {
-                console.log('Row (TR) Deleted!');
-                return true;
+            if (myrow !== undefined && myrow !== null) {
+                if (deleteElement(myrow)) {
+                    console.log('Row (TR) Deleted!');
+                    return true;
+                }
             }
         }
     }
@@ -1326,10 +1433,10 @@ function clearTableData(element) {
             TRs = element.getElementsByTagName('TR');
             for (var i = 0; i < TRs.length; i++) {
                 if (TRs[i] !== null && TRs[i] !== undefined) {
-                    if (TRs[i].getAttribute('rowsample') !== null) {
+                    if (TRs[i].getAttribute('samplerow') !== null) {
                         hideElement(TRs[i]);
                     }
-                    if (TRs[i].getAttribute('rowhead') === null && TRs[i].getAttribute('rowsample') === null) {
+                    if (TRs[i].getAttribute('rowhead') === null && TRs[i].getAttribute('samplerow') === null) {
                         deleteElement(TRs[i]);
                         if (i > 0) {
                             i = i - 1;
@@ -1384,38 +1491,45 @@ function destroyDataTable(element) {
     return result;
 }
 
-function setTableData(element, json, dynamic) {
+function setTableData(table, json, dynamic) {
     var TRs = null;
-    var rowSample = null;
+    var samplerow = null;
+    var form = null;
     var newrow = null;
     var thead = null;
     var tbody = null;
     var values = null;
     var columns = null;
     var col = null;
+    var element = null;
+    var elementsarray = null;
     var xtable = null;
 
-    if (element !== null && element.tagName === "TABLE" && json !== null) {
-        destroyDataTable(element);
-        if (element.getElementsByTagName('THEAD') !== null) {
-            thead = element.getElementsByTagName('THEAD')[0];
-            thead.setAttribute('id', 'thead' + '_' + element.id);
+
+    if (table !== null && table.tagName === "TABLE" && json !== null) {
+        destroyDataTable(table);
+        if (table.getElementsByTagName('THEAD') !== null) {
+            thead = table.getElementsByTagName('THEAD')[0];
+            thead.setAttribute('id', 'thead' + '_' + table.id);
         }
-        if (element.getElementsByTagName('TBODY') !== null) {
-            tbody = element.getElementsByTagName('TBODY')[0];
-            tbody.setAttribute('id', 'tbody' + '_' + element.id);
+        if (table.getElementsByTagName('TBODY') !== null) {
+            tbody = table.getElementsByTagName('TBODY')[0];
+            tbody.setAttribute('id', 'tbody' + '_' + table.id);
         }
-        if (element.getElementsByTagName('TR') !== null) {
-            TRs = element.getElementsByTagName('TR');
+        if (table.getElementsByTagName('TR') !== null) {
+            TRs = table.getElementsByTagName('TR');
         }
         for (var i = 0; i < TRs.length; i++) {
-            if (TRs[i].getAttribute('rowsample') !== null || TRs[i].id === 'rowsample') {
-                rowSample = TRs[i].innerHTML;
+            if (TRs[i].getAttribute('samplerow') !== null || TRs[i].id === 'samplerow') {
+                samplerow = TRs[i].innerHTML;
+                if (TRs[i].getAttribute('form') !== null) {
+                    form = TRs[i].getAttribute('form');
+                }
                 break;
             }
         }
-        clearTableData(element);
-        if (Object.keys(json).length === 1 && Object.keys(json)[0] === getModel(element)) {
+        clearTableData(table);
+        if (Object.keys(json).length === 1 && Object.keys(json)[0] === getModel(table)) {
             for (var child in json) {
                 json = json[child];
                 break;
@@ -1430,24 +1544,47 @@ function setTableData(element, json, dynamic) {
                     columns.push("" + aux);
                 }
             }
-
+            var j1 = 0;
+            var j2 = 0;
             for (var i = 0; i < json.length; i++) {
                 newrow = null;
                 newrow = document.createElement('TR');
-                newrow.setAttribute('rowID', i);
-                newrow.innerHTML = rowSample;
-                for (var j = 0; j < columns.length; j++) {
-                    col = columns[j];
+                newrow.setAttribute('rowid', i);
+                newrow.innerHTML = samplerow;
+                for (j1 = 0; j1 < columns.length; j1++) {
+                    col = columns[j1];
                     newrow.innerHTML = newrow.innerHTML.split('{{' + col + '}}').join(json[i][col]);
                 }
                 tbody.appendChild(newrow);
+                for (j2 = 0; j2 < columns.length; j2++) {
+                    col = columns[j2];
+                    /*
+                     elementsarray = document.getElementsByName(col);
+                     if (elementsarray !== undefined && elementsarray !== null) {
+                     for (var el = 0; el < elementsarray.length; el++) {
+                     elementsarray[el].setAttribute('name', col + '[]');
+                     }
+                     }*/
+                    elementsarray = document.getElementsByName(col + '[]');
+                    if (elementsarray === undefined || elementsarray === null) {
+                        elementsarray = document.getElementsByName(col);
+                    }
+                    element = elementsarray[i + 1];
+                    setValue(element, json[i][col]);
+                    if (form !== undefined && form !== null && element !== undefined) {
+                        console.log('OK' + element.name);
+                        if (element.getAttribute('form') === undefined || element.getAttribute('form') === null) {
+                            element.setAttribute('form', form);
+                        }
+                    }
+                }
             }
 
             if (dynamic === true) {
                 console.log('Dynamic DataTable!.');
-                xtable = createDataTable(element);
+                xtable = createDataTable(table);
             }
-            console.log('Set TABLE data OK!. ' + element.id);
+            console.log('Set TABLE data OK!. ' + table.id);
             return true;
         }
     }
@@ -1915,7 +2052,6 @@ function submitForm(element, reload) {
                 promise = submitAjax(formdata, url, null, reload);
             }
             deleteTemporalElements(form);
-
         } else {
             next = false;
             console.error("Destination URL Null.");

@@ -19,9 +19,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction('insertorupdate');
-        $bc->beginTransaction();
         if (isset($_POST[$findBy])) {
-
             $data = array();
             $postdata = $bc->getPostData();
             $count = count($_POST[$findBy]);
@@ -32,18 +30,8 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                 for ($i = 0; $i < $count; $i++) {
                     $bc->setPostData($postdata[$i]);
                     $result = $bc->execute(false);
-                    if ($bc->getRowCount() > 0) {
-                        $rowcount++;
-                    } else {
-                        break;
-                    }
                 }
             }
-        }
-        if ($rowcount == $count) {
-            $bc->commit();
-        } else {
-            $bc->rollback();
         }
         echo $result;
         $result = null;
@@ -53,5 +41,4 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
 } else {
     echo $session->getSessionStateJSON();
 }
-
 ?>

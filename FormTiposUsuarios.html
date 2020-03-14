@@ -33,50 +33,7 @@ and open the template in the editor.
         <div class="panel panel-primary" style="width: 80% !important;">
             <div class="panel-heading">Tipos de Usuario</div>
             <div class="panel-body">
-
                 <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/TiposUsuariosController.php" action="Base/Controllers/TiposUsuariosController.php" model="TiposUsuariosApp" findBy="id_tipousuario" statusfield="status_tipousuario" mainform="true" > 
-                    <center>
-                        <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewRowInTable('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
-                    </center>
-                    <div class="table-responsive">
-                        <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="TiposUsuariosApp" url="Base/Controllers/GetDataTableTiposUsuarios.php" >
-                            <thead id="thead_dataTable0">
-                                <tr rowhead="true">
-                                    <th style="width: 15%;" title="Codigo">Codigo</th>
-                                    <th style="width: 30%;" title="Nombre del Tipo de Usuario">Nombre</th>
-                                    <th style="width: 8%;" title="SuperAdministrador (Sistema)">S.</th>
-                                    <th style="width: 8%;" title="Administrador (Rector)">A.</th>
-                                    <th style="width: 8%;" title="Gestion (Secretaria)">G.</th>
-                                    <th style="width: 8%;" title="Estandar (Docente)">E.</th>
-                                    <th style="width: 8%;" title="Invitado (Estudiante)">I.</th>
-                                    <th style="width: 8%;" title="Externo (Acudiente)">X.</th>
-                                    <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody_dataTable0">
-                                <tr id="rowsample" rowsample="true" style="display: none;">
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="id_tipousuario[]" id="id_tipousuario" value="{{id_tipousuario}}" list="lista_tipos"></td>
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="nombre_tipousuario[]" id="nombre_tipousuario" value="{{nombre_tipousuario}}"> </td>
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="superadmin_tipousuario[]" id="superadmin_tipousuario" value="{{superadmin_tipousuario}}" maxlength="1" min="0" max="1"> </td>
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="admin_tipousuario[]" id="admin_tipousuario" value="{{admin_tipousuario}}" maxlength="1" min="0" max="1"> </td>
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="management_tipousuario[]" id="management_tipousuario" value="{{management_tipousuario}}" maxlength="1" min="0" max="1"> </td>
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="standard_tipousuario[]" id="standard_tipousuario" value="{{standard_tipousuario}}" maxlength="1" min="0" max="1"> </td>
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="limited_tipousuario[]" id="limited_tipousuario" value="{{limited_tipousuario}}" maxlength="1" min="0" max="1"> </td>
-                                    <td> <input type="text" editable="true" disabled="disabled" required="required" name="external_tipousuario[]" id="external_tipousuario" value="{{external_tipousuario}}" maxlength="1" min="0" max="1"> </td>
-                                    <td>
-                                        <input type="hidden"  editable="false" disabled="disabled" name="status_tipousuario[]" id="status_tipousuario" value="1" >
-                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="editRowInTable(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <center>
-                            <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
-                        </center>
-                    </div>
                     <datalist id="lista_tipos" name="lista_tipos" >
                         <option value="SuperAdmin">SuperAdmin</option>
                         <option value="Admin">Administrador</option>
@@ -85,7 +42,50 @@ and open the template in the editor.
                         <option value="Student">Estudiante</option>
                         <option value="Visitor">Acudiente</option>
                     </datalist>
-                </form>
+                </form>    
+                <center>
+                    <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewRowInTable('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
+                </center>
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="TiposUsuariosApp" url="Base/Controllers/GetDataTableTiposUsuarios.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 15%;" title="Codigo">Codigo</th>
+                                <th style="width: 65%;" title="Nombre del Tipo de Usuario">Nombre</th>
+                                <th style="width: 2%;" title="SuperAdministrador (Sistema)">S.</th>
+                                <th style="width: 2%;" title="Administrador (Rector)">A.</th>
+                                <th style="width: 2%;" title="Gestion (Secretaria)">G.</th>
+                                <th style="width: 2%;" title="Estandar (Docente)">E.</th>
+                                <th style="width: 2%;" title="Invitado (Estudiante)">I.</th>
+                                <th style="width: 2%;" title="Externo (Acudiente)">X.</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="samplerow" samplerow="true" form="formTable" style="display: none;" >
+                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="id_tipousuario[]" id="id_tipousuario" value="" list="lista_tipos" class="form-control"/></td>
+                                <td> <input type="text" editable="true" disabled="disabled" required="required" name="nombre_tipousuario[]" id="nombre_tipousuario" value="" class="form-control"/> </td>
+                                <td> <input type="checkbox" editable="true" disabled="disabled" name="superadmin_tipousuario[]" id="superadmin_tipousuario" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
+                                <td> <input type="checkbox" editable="true" disabled="disabled" name="admin_tipousuario[]" id="admin_tipousuario" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
+                                <td> <input type="checkbox" editable="true" disabled="disabled" name="management_tipousuario[]" id="management_tipousuario" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
+                                <td> <input type="checkbox" editable="true" disabled="disabled" name="standard_tipousuario[]" id="standard_tipousuario" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
+                                <td> <input type="checkbox" editable="true" disabled="disabled" name="limited_tipousuario[]" id="limited_tipousuario" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
+                                <td> <input type="checkbox" editable="true" disabled="disabled" name="external_tipousuario[]" id="external_tipousuario" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
+                                <td>
+                                    <input type="hidden"  editable="false" disabled="disabled" name="status_tipousuario[]" id="status_tipousuario" value="1" >
+                                    <button type="button" form="formTable" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="editRowInTable(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <button type="button" editable="true" disabled="disabled" form="formTable" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <center>
+                        <button type="button" form="formTable" id="guardar" name="guardar" action="insert" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                    </center>
+                </div>
+
 
             </div>
         </div>

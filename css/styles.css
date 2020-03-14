@@ -63,10 +63,12 @@ a:hover{
     text-decoration: none !important;
 }
 
-input[type="button"], input[type="submit"], input[type="reset"], button{
+input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], button{
     margin: 2px !important;
     font-weight: bolder !important;
     font-family: 'Orbitron', sans-serif !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
 }
 
 input{
@@ -244,15 +246,15 @@ td > input[type="text"]  {
 }
 
 
-table > tbody > tr > td > input[type="text"], 
-table > tbody > tr > td > input[type="tel"],
-table > tbody > tr > td > input[type="email"],
-table > tbody > tr > td > input[type="number"],
-table > tbody > tr > td > input[type="date"]{
+table > tbody > tr > td > input{
     border-color: #489cdf !important;
     background-color: inherit !important;
     text-transform: capitalize !important;
-    min-height: 26px !important;
+    min-height: 30px !important;
+}
+
+table > tbody > tr > td > input[disabled="disabled"]{
+    border-color: lightgray !important;
 }
 
 .table-form-control{

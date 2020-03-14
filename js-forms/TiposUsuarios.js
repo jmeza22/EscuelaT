@@ -11,7 +11,10 @@ jQuery(document).ready(function () {
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
-        submitForm(form, false);
+        var checks = convertCheckboxesToTexts(form);
+        submitForm(form, false).done(function () {
+            convertTextsToCheckboxes(checks);
+        });
     }
 }
 
