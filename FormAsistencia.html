@@ -78,6 +78,9 @@ and open the template in the editor.
                 </form>
 
             </div>
+            <div class="panel-footer" style="text-align: center;">
+                Este formulario solo funciona en si la Fecha corresponde al Año y Periodo seleccionado.
+            </div>
         </div>
 
         <div class="panel panel-primary" style="width: 80% !important;">
@@ -85,54 +88,53 @@ and open the template in the editor.
             <div class="panel-body table-responsive">
                 <div class="table-responsive">
                     <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/AsistenciaController.php" model="AsistenciaApp" findBy="id_asistencia" statusfield="status_asistencia" mainform="true" > 
-                        <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="MatriculaAsignaturasApp" url="Base/Controllers/GetDataTableAsistencias.php" >
-                            <thead id="thead_dataTable0">
-                                <tr rowhead="true">
-                                    <th style="width: 2%;">#</th>
-                                    <th style="width: 40%;">NOMBRES COMPLETO</th>
-                                    <th style="width: 10%;">PRESENTE?</th>
-                                    <th style="width: 8%;">TARDE?</th>
-                                    <th style="width: 40%;">OBSERVACIONES</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody_dataTable0">
-                                <tr id="samplerow" samplerow="true" style="display: none;">
-                                    <td>
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_asistencia" name="id_asistencia[]" value="{{id_asistencia}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="fecha_asistencia" name="fecha_asistencia[]" value="{{fecha_asistencia}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante" name="id_estudiante[]" value="{{id_estudiante}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig" name="id_matasig[]" value="{{id_matasig}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_asignatura" name="id_asignatura[]" value="{{id_asignatura}}">
-                                        <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte" name="id_corte[]" value="">
-                                        {{rownum}}
-                                    </td>
-                                    <td>
-                                        <label>{{nombrecompleto_estudiante}}</label> </td>
-                                    <td style="text-align: center !important;">
-                                        <select id="presente_asistencia" name="presente_asistencia[]" class="form-control" selected="{{presente_asistencia}}" >
-                                            <option id="1" value="1">Si</option>
-                                            <option id="0" value="0">No</option>
-                                        </select>
-                                    </td>
-                                    <td style="text-align: center !important;">
-                                        <select id="tarde_asistencia" name="tarde_asistencia[]" class="form-control" selected="{{tarde_asistencia}}" >
-                                            <option id="1" value="1">Si</option>
-                                            <option id="0" value="0">No</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <textarea id="nota_asistencia" name="nota_asistencia[]" required="required" maxlength="200" style="min-width: 100% !important; min-height: 30px !important; height: 30px !important;" class="form-control">{{nota_asistencia}}</textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div>
-                            <center>
-                                <button type="button" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="submitForm(this, false);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
-                            </center>
-                        </div>
-
                     </form>
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="MatriculaAsignaturasApp" url="Base/Controllers/GetDataTableAsistencias.php" >
+                        <thead id="thead_dataTable0">
+                            <tr rowhead="true">
+                                <th style="width: 2%;">#</th>
+                                <th style="width: 40%;">NOMBRES COMPLETO</th>
+                                <th style="width: 10%;">PRESENTE?</th>
+                                <th style="width: 8%;">TARDE?</th>
+                                <th style="width: 40%;">OBSERVACIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="samplerow" samplerow="true" style="display: none;" form="formTable">
+                                <td>
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_asistencia" name="id_asistencia[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="fecha_asistencia" name="fecha_asistencia[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante" name="id_estudiante[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig" name="id_matasig[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_asignatura" name="id_asignatura[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte" name="id_corte[]" value="">
+                                    {{rownum}}
+                                </td>
+                                <td>
+                                    <label>{{nombrecompleto_estudiante}}</label> </td>
+                                <td style="text-align: center !important;">
+                                    <select id="presente_asistencia" name="presente_asistencia[]" class="form-control" >
+                                        <option id="1" value="1">Si</option>
+                                        <option id="0" value="0">No</option>
+                                    </select>
+                                </td>
+                                <td style="text-align: center !important;">
+                                    <select id="tarde_asistencia" name="tarde_asistencia[]" class="form-control" >
+                                        <option id="1" value="1">Si</option>
+                                        <option id="0" value="0">No</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <textarea id="nota_asistencia" name="nota_asistencia[]" required="required" maxlength="200" style="min-width: 100% !important; min-height: 30px !important; height: 30px !important;" class="form-control"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <center>
+                            <button type="button" form="formTable" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="submitForm(this, false);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                        </center>
+                    </div>
                 </div>
 
             </div>

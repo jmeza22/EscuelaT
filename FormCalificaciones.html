@@ -238,48 +238,48 @@ and open the template in the editor.
                                 <th style="width: 1%;" title="Sexto Periodo" id="thp6" >P6</th>
                                 <th style="width: 2%;" title="Acumulado Año (Definitiva Parcial)" id="thdef" >Acu</th>
                                 <th style="width: 2%;" title="Habilitacion" id="thhab" >Hab</th>
-                                <th style="width: 5%;" title="Codigo Logro Cognitivo" id="thlc">LC</th>
-                                <th style="width: 5%;" title="Codigo Logro Procedimental" id="thlp">LP</th>
-                                <th style="width: 5%;" title="Codigo Logro Actitudinal" id="thla">LA</th>
-                                <th style="width: 5%;" title="Nota Logro Cognitivo" id="thnc">NC</th>
-                                <th style="width: 5%;" title="Nota Logro Procedimental" id="thnp">NP</th>
-                                <th style="width: 5%;" title="Nota Logro Actitudinal" id="thna">NA</th>
-                                <th style="width: 5%;" title="Nota Definitiva del Periodo" >ND</th>
-                                <th style="width: 5%;" title="Numero de Ausencias (Periodo Actual)" >Aus.</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Codigo Logro Cognitivo" id="thlc">LC</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Codigo Logro Procedimental" id="thlp">LP</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Codigo Logro Actitudinal" id="thla">LA</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Nota Logro Cognitivo" id="thnc">NC</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Nota Logro Procedimental" id="thnp">NP</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Nota Logro Actitudinal" id="thna">NA</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Nota Definitiva del Periodo" >ND</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Numero de Ausencias (Periodo Actual)" >Aus.</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
                             <tr id="samplerow" samplerow="true" style="display: none;" form="formTable">
                                 <td> {{rownum}}
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante{{rownum}}" name="id_estudiante[]" value="{{id_estudiante}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_calificacion{{rownum}}" name="id_calificacion[]" value="{{id_calificacion}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matricula{{rownum}}" name="id_matricula[]" value="{{id_matricula}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig{{rownum}}" name="id_matasig[]" value="{{id_matasig}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_programa{{rownum}}" name="id_programa[]" value="{{id_programa}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_planestudio{{rownum}}" name="id_planestudio[]" value="{{id_planestudio}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_periodo{{rownum}}" name="id_periodo[]" value="{{id_periodo}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte{{rownum}}" name="id_corte[]" value="{{id_corte}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_grupo{{rownum}}" name="id_grupo[]" value="{{id_grupo}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="numgrado_programa{{rownum}}" name="numgrado_programa[]" value="{{numgrado_programa}}">
-                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="{{nombrecompleto_estudiante}}">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_estudiante{{rownum}}" name="id_estudiante[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_calificacion{{rownum}}" name="id_calificacion[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matricula{{rownum}}" name="id_matricula[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_matasig{{rownum}}" name="id_matasig[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_programa{{rownum}}" name="id_programa[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_planestudio{{rownum}}" name="id_planestudio[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_periodo{{rownum}}" name="id_periodo[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_corte{{rownum}}" name="id_corte[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="id_grupo{{rownum}}" name="id_grupo[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="numgrado_programa{{rownum}}" name="numgrado_programa[]" value="">
+                                    <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="">
                                 </td>
                                 <td> <label>{{nombrecompleto_estudiante}}</label> </td>
-                                <td name="tdp1" > <label>{{np1}}</label> </td>
-                                <td name="tdp2" > <label>{{np2}}</label> </td>
-                                <td name="tdp3" > <label>{{np3}}</label> </td>
-                                <td name="tdp4" > <label>{{np4}}</label> </td>
-                                <td name="tdp5" > <label>{{np5}}</label> </td>
-                                <td name="tdp6" > <label>{{np6}}</label> </td>
+                                <td name="tdp1"> <label>{{np1}}</label> </td>
+                                <td name="tdp2"> <label>{{np2}}</label> </td>
+                                <td name="tdp3"> <label>{{np3}}</label> </td>
+                                <td name="tdp4"> <label>{{np4}}</label> </td>
+                                <td name="tdp5"> <label>{{np5}}</label> </td>
+                                <td name="tdp6"> <label>{{np6}}</label> </td>
                                 <td name="tddef"> <label>{{def}}</label> </td>
                                 <td name="tdhab"> <label>{{nphab}}</label> </td>
-                                <td name="logc"> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="{{logroc_calificacion}}" list="lista_id_logro"> </td>
-                                <td name="logp"> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="{{logrop_calificacion}}" list="lista_id_logro"> </td>
-                                <td name="loga"> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="{{logroa_calificacion}}" list="lista_id_logro"> </td>
-                                <td name="nc"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="{{nc_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones"> </td>
-                                <td name="np"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="{{np_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones"> </td>
-                                <td name="na"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="{{na_calificacion}}" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones"> </td>
-                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" value="{{nd_calificacion}}" onfocus="setRequiredND(this)"> </td>
-                                <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="{{ausencias_calificacion}}"> 
+                                <td name="logc"> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
+                                <td name="logp"> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
+                                <td name="loga"> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
+                                <td name="nc"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
+                                <td name="np"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
+                                <td name="na"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" style="text-align: center;" value="" onfocus="setRequiredND(this)" class="form-control"> </td>
+                                <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="" style="text-align: center;" class="form-control"> 
                                 </td>
                             </tr>
                         </tbody>

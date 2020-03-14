@@ -331,7 +331,7 @@ function autoValueCheckbox(checkbox) {
             checkbox = document.getElementById(checkbox);
         }
         console.log('Setting Checkbox Value: ' + checkbox.id);
-        if (checkbox.tagName === 'INPUT' && (checkbox.getAttribute('type') === 'CHECKBOX' || checkbox.getAttribute('type') === 'checkbox')) {
+        if (checkbox.tagName === 'INPUT' && checkbox.getAttribute('type').toString().toLowerCase() === 'checkbox') {
 
             var checkedValue = checkbox.getAttribute('checkedvalue');
             var uncheckedValue = checkbox.getAttribute('uncheckedvalue');
@@ -536,7 +536,7 @@ function convertCheckboxesToTexts(form) {
             var checkboxarray = Array();
             var i = 0;
             for (i = 0; i < form.elements.length; i++) {
-                if (form.elements[i].tagName === 'INPUT' && (form.elements[i].getAttribute('type') === 'CHECKBOX' || form.elements[i].getAttribute('type') === 'checkbox')) {
+                if (form.elements[i].tagName === 'INPUT' && form.elements[i].getAttribute('type').toString().toLowerCase() === 'checkbox') {
                     console.log('Elemento:' + form.elements[i].id);
                     form.elements[i].setAttribute('type', 'text');
                     checkboxarray.push(form.elements[i]);
@@ -554,7 +554,7 @@ function convertTextsToCheckboxes(array) {
         if (array.length > 0) {
             var i = 0;
             for (i = 0; i < array.length; i++) {
-                if (array[i].tagName === 'INPUT' && (array[i].getAttribute('type') === 'TEXT' || array[i].getAttribute('type') === 'text')) {
+                if (array[i].tagName === 'INPUT' && array[i].getAttribute('type').toString().toLowerCase() === 'text') {
                     array[i].setAttribute('type', 'checkbox');
                 }
             }
@@ -621,9 +621,9 @@ function readOnlyForm(element) {
                     if (form.elements[j].tagName === "BUTTON" ||
                             (form.elements[j].tagName === "INPUT" &&
                                     (
-                                            form.elements[j].getAttribute('type') === 'button' ||
-                                            form.elements[j].getAttribute('type') === 'submit' ||
-                                            form.elements[j].getAttribute('type') === 'reset')
+                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'button' ||
+                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'submit' ||
+                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'reset')
                                     )
                             ) {
                         form.elements[j].setAttribute('disabled', 'disabled');
@@ -1079,10 +1079,10 @@ function setValue(element, value) {
             if (element.value === '[object Object]') {
                 element.value = '';
             }
-            if (element.getAttribute('type') !== null && element.getAttribute('type') === 'password') {
+            if (element.getAttribute('type') !== null && element.getAttribute('type').toString().toLowerCase() === 'password') {
                 element.value = '';
             }
-            if (element.getAttribute('type') !== null && element.getAttribute('type') === 'checkbox') {
+            if (element.getAttribute('type') !== null && element.getAttribute('type').toString().toLowerCase() === 'checkbox') {
                 element.value = value;
                 if (value === '0' || value === 'n' || value === 'no') {
                     element.checked = false;
@@ -1090,6 +1090,9 @@ function setValue(element, value) {
                 if (value === '1' || value === 'y' || value === 'yes') {
                     element.checked = true;
                 }
+            }
+            if (element.tagName === "TEXTAREA") {
+                element.innerHTML = value;
             }
             if (element.tagName === "SELECT") {
                 element.setAttribute('value', value);
