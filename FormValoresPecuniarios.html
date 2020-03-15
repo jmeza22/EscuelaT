@@ -95,11 +95,11 @@ and open the template in the editor.
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="ValoresPecuniariosApp" url="Base/Controllers/GetDataTableValoresPecuniarios.php" >
                         <thead id="thead_dataTable0">
-                            <tr rowhead="true">
-                                <th style="width: 10%;" title="Codigo">Codigo</th>
+                            <tr headrow="true">
+                                <th style="width: 8%;" title="Codigo">Codigo</th>
                                 <th style="width: 50%;">Nombre</th>
                                 <th style="width: 18%;">Tipo</th>
-                                <th style="width: 10%;">Valor</th>
+                                <th style="width: 12%;">Valor</th>
                                 <th style="width: 6%;">Año</th>
                                 <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
@@ -109,7 +109,7 @@ and open the template in the editor.
                                 <td> <label>{{id_pecuniario}}</label></td>
                                 <td> <label>{{nombre_pecuniario}}</label></td>
                                 <td> <label>{{tipo_pecuniario}}</label></td>
-                                <td> <label>${{valor_pecuniario}}</label></td>
+                                <td> <label style="text-align: right;">${{valor_pecuniario}}</label></td>
                                 <td> <label>{{anualidad_pecuniario}}</label></td>
                                 <td>
                                     <form id="Pecuniario{{id_pecuniario}}" name="Pecuniario{{id_pecuniario}}" method="POST" autocomplete="off" url="Base/Controllers/ValoresPecuniariosController.php"  model="ValoresPecuniariosApp" findBy="id_pecuniario" statusfield="status_pecuniario">

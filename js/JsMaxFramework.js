@@ -500,7 +500,6 @@ function resetControls(parent) {
 
 function setControlsAttribute(parent, child = null, name, value) {
     if (parent !== null && name !== null && value !== null && parent !== undefined && name !== undefined && value !== undefined) {
-        var element = null;
         if (parent.nodeType === 1 && parent.value !== null && parent.value !== undefined) {
             if (parent.tagName === 'BUTTON' || parent.tagName === 'INPUT' || parent.tagName === 'SELECT' || parent.tagName === 'TEXTAREA') {
                 parent.setAttribute(name, value);
@@ -1439,7 +1438,7 @@ function clearTableData(element) {
                     if (TRs[i].getAttribute('samplerow') !== null) {
                         hideElement(TRs[i]);
                     }
-                    if (TRs[i].getAttribute('rowhead') === null && TRs[i].getAttribute('samplerow') === null) {
+                    if (TRs[i].getAttribute('headrow') === null && TRs[i].getAttribute('samplerow') === null) {
                         deleteElement(TRs[i]);
                         if (i > 0) {
                             i = i - 1;
@@ -1508,7 +1507,6 @@ function setTableData(table, json, dynamic) {
     var elementsarray = null;
     var xtable = null;
 
-
     if (table !== null && table.tagName === "TABLE" && json !== null) {
         destroyDataTable(table);
         if (table.getElementsByTagName('THEAD') !== null) {
@@ -1561,13 +1559,6 @@ function setTableData(table, json, dynamic) {
                 tbody.appendChild(newrow);
                 for (j2 = 0; j2 < columns.length; j2++) {
                     col = columns[j2];
-                    /*
-                     elementsarray = document.getElementsByName(col);
-                     if (elementsarray !== undefined && elementsarray !== null) {
-                     for (var el = 0; el < elementsarray.length; el++) {
-                     elementsarray[el].setAttribute('name', col + '[]');
-                     }
-                     }*/
                     elementsarray = document.getElementsByName(col + '[]');
                     if (elementsarray === undefined || elementsarray === null) {
                         elementsarray = document.getElementsByName(col);
@@ -1582,7 +1573,6 @@ function setTableData(table, json, dynamic) {
                     }
                 }
             }
-
             if (dynamic === true) {
                 console.log('Dynamic DataTable!.');
                 xtable = createDataTable(table);
@@ -1694,7 +1684,6 @@ function setNameFieldsValue(object, namefield1, namefield2, namefield3) {
             }
         }
     }
-
     if (namefield1 !== null) {
         if (namefield1.tagName === 'INPUT') {
             field1 = namefield1;
@@ -1708,7 +1697,6 @@ function setNameFieldsValue(object, namefield1, namefield2, namefield3) {
             }
         }
     }
-
     if (namefield2 !== null) {
         if (namefield2.tagName === 'INPUT') {
             field2 = namefield2;
@@ -1722,7 +1710,6 @@ function setNameFieldsValue(object, namefield1, namefield2, namefield3) {
             }
         }
     }
-
     if (namefield3 !== null) {
         if (namefield3.tagName === 'INPUT') {
             field3 = namefield3;
@@ -1916,14 +1903,12 @@ function login(element, destinationPage) {
                             window.location.href = destinationPage;
                         }
                     }
-
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
                 showNotification('Connection error:', 'Try again later!');
                 console.error('Error: [' + textStatus + '] --- [' + xhr + '] --- [' + errorThrown + ']');
             }
-
         });
     } else {
         console.error("Form Not Found!");
@@ -2015,9 +2000,7 @@ function submitJSON(url, json, action, model, token) {
                         } catch (e) {
                             console.error("Error de Conversion JSON - submitJSON");
                         }
-
                     }
-
                 } else {
                     console.log('Web Service Fail!.');
                 }

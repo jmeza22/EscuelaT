@@ -82,7 +82,7 @@ and open the template in the editor.
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-bordered table-form" model="PeriodosApp" url="Base/Controllers/GetDataTablePeriodos.php" >
                         <thead id="thead_dataTable0">
-                            <tr rowhead="true">
+                            <tr headrow="true">
                                 <th style="width: 15%;" title="Codigo">Codigo</th>
                                 <th style="width: 15%;">Año</th>
                                 <th style="width: 15%;">F.Inicio</th>
@@ -93,8 +93,8 @@ and open the template in the editor.
                         </thead>
                         <tbody id="tbody_dataTable0">
                             <tr id="samplerow" samplerow="true" style="display: none;">
-                                <td> {{id_periodo}}</td>
-                                <td> {{anualidad_periodo}} </td>
+                                <td> <label>{{id_periodo}}</label> </td>
+                                <td> <label>{{anualidad_periodo}}</label> </td>
                                 <td> {{finicio_periodo}} </td>
                                 <td> {{ffinal_periodo}} </td>
                                 <td> {{cerrado_periodo}} </td>

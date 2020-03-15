@@ -34,7 +34,6 @@ and open the template in the editor.
             <div class="panel-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/PersonasController.php" model="PersonasApp" findBy="id_persona" mainform="true" >
                     <input type="hidden" name="id_persona" id="id_persona" value="" required="required" onhashchange="showID();" oninput="showID();" >
-
                     <div class="row">
                         <div class="col-sm-3">
                             <label>Primer Nombre</label>
@@ -162,13 +161,13 @@ and open the template in the editor.
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-form" model="PersonasApp" url="Base/Controllers/GetDataTablePersonas.php" >
                         <thead id="thead_dataTable0">
-                            <tr rowhead="true">
-                                <th style="width: 12%;" title="Codigo de Persona">Codigo</th>
-                                <th style="width: 20%;" title="Primer Nombre">Nombre</th>
-                                <th style="width: 20%;" title="Primer Apellido">Apellido</th>
-                                <th style="width: 15%;" title="Documento de Identidad">Documento</th>
-                                <th style="width: 10%;" title="Sexo">Sexo</th>
-                                <th style="width: 15%;" title="Fecha de Nacimiento">Fecha.Nac</th>
+                            <tr headrow="true">
+                                <th style="width: 8%;" title="Codigo de Persona">Codigo</th>
+                                <th style="width: 25%;" title="Primer Nombre">Nombre</th>
+                                <th style="width: 25%;" title="Primer Apellido">Apellido</th>
+                                <th style="width: 14%;" title="Documento de Identidad">Documento</th>
+                                <th style="width: 6%;" title="Sexo">Sexo</th>
+                                <th style="width: 16%;" title="Fecha de Nacimiento">Fecha.Nac</th>
                                 <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
