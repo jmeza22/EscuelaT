@@ -5,10 +5,10 @@
  */
 jQuery(document).ready(function () {
     createAjaxLoading();
-    AjaxLoading();
+    ajaxLoading();
     getIdFromGET();
     setTokenForms();
-    RequestNotificationPermission();
+    requestNotificationPermission();
 });
 
 function getMETAElement(name) {
@@ -23,7 +23,7 @@ function getMETAElement(name) {
     return null;
 }
 
-function RequestNotificationPermission() {
+function requestNotificationPermission() {
     if (Notification.permission == "default" || Notification.permission == "denied") {
         Notification.requestPermission();
         //alert('Please enable the Notifications! ');
@@ -183,7 +183,7 @@ function getErrorMessage() {
     return message;
 }
 
-function AjaxLoading() {
+function ajaxLoading() {
     $(document).on("ajaxStart", function () {
         showAjaxLoading();
     }).on("ajaxStop", function () {
@@ -202,17 +202,17 @@ function createAjaxLoading() {
     imgload = document.createElement("img");
     text = document.createElement("p");
 
-    maindiv.setAttribute("id", "AjaxLoading");
-    maindiv.setAttribute("class", "AjaxLoading");
+    maindiv.setAttribute("id", "ajax-loading");
+    maindiv.setAttribute("class", "ajax-loading");
     maindiv.setAttribute("style", "display:none;");
-    subdiv.setAttribute("id", "SubLoading");
-    subdiv.setAttribute("class", "SubLoading");
+    subdiv.setAttribute("id", "subloading");
+    subdiv.setAttribute("class", "subloading");
     subdiv.setAttribute("style", "display: inline-block;");
-    imgload.setAttribute("id", "ImageLoading");
-    imgload.setAttribute("class", "ImageLoading");
+    imgload.setAttribute("id", "image-loading");
+    imgload.setAttribute("class", "image-loading");
     imgload.setAttribute("src", "css/loading.webp");
     imgload.setAttribute("alt", "?");
-    text.setAttribute("class", "TextLoading");
+    text.setAttribute("class", "text-loading");
     text.innerHTML = '...LOADING...';
 
     maindiv.appendChild(subdiv);
@@ -223,7 +223,7 @@ function createAjaxLoading() {
 
 function showAjaxLoading() {
     var loading = null;
-    loading = document.getElementById("AjaxLoading");
+    loading = document.getElementById("ajax-loading");
     if (loading !== null) {
         loading.style = "display: block; text-align: center;";
         return true;
@@ -233,7 +233,7 @@ function showAjaxLoading() {
 
 function hideAjaxLoading() {
     var loading = null;
-    loading = document.getElementById("AjaxLoading");
+    loading = document.getElementById("ajax-loading");
     if (loading !== null) {
         loading.style = "display: none;";
         return true;
