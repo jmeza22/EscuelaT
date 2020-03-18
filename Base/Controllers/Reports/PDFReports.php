@@ -323,39 +323,76 @@ class PDFReports extends TCPDF {
         }
     }
 
+    public function ListadoDetalladoPlanEstudio($idescuela = null, $idprograma, $idplanestudio) {
+        $data = null;
+        $data = $this->bc->getPlanEstudioDetalle($idescuela, $idprograma, $idplanestudio);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
+                $pageWidth = $this->getRealPageWidth();
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
+                $this->Cell(0, 8, 'PLAN DE ESTUDIOS DETALLADO');
+                $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 2));
+                $this->Ln();
+                $this->Cell($pageWidth * 10 / 100, 8, 'GRADO', true);
+                $this->Cell($pageWidth * 12 / 100, 8, 'CODIGO', true);
+                $this->Cell($pageWidth * 46 / 100, 8, 'NOMBRE DE ASIGNATURA', true);
+                $this->Cell($pageWidth * 10 / 100, 8, 'HT', true);
+                $this->Cell($pageWidth * 10 / 100, 8, 'HP', true);
+                $this->Cell($pageWidth * 12 / 100, 8, 'HORAS', true);
+
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['numgrado_programa'] . '°', true);
+                    $this->Cell($pageWidth * 12 / 100, 6, $data[$i]['id_asignatura'], true);
+                    $this->SetFont($this->fontfamilycontent, 'B', $this->fontsizecontent);
+                    $this->Cell($pageWidth * 46 / 100, 6, $data[$i]['nombre_asignatura'], true);
+                    $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['hteoricas_asignatura'], true);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['hpracticas_asignatura'], true);
+                    $this->Cell($pageWidth * 12 / 100, 6, ($data[$i]['hteoricas_asignatura'] + $data[$i]['hpracticas_asignatura']), true);
+                    $this->Ln();
+                }
+            }
+        }
+    }
+
     public function ListadoLogrosAsignaturas($idescuela = null, $idasignatura = null, $grado = null, $tipo = null) {
         $data = null;
         $data = $this->bc->getLogrosAsignaturas($idescuela, $idasignatura, $grado, $tipo);
         if ($data !== null && $data !== '' && $data !== '[]') {
             $data = json_decode($data, true);
             if (is_array($data) && count($data) > 0) {
+                $pageWidth = $this->getRealPageWidth();
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'LISTADO DE LOGROS Y/O COMPETENCIAS');
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 2));
                 $this->Ln();
-                $this->Cell(20, 4, 'CODIGO', 1);
-                $this->Cell(80, 4, 'NOMBRE DE ASIGNATURA', 1);
-                $this->Cell(20, 4, 'TIPO', 1);
-                $this->Cell(20, 4, 'MINIMO', 1);
-                $this->Cell(20, 4, 'MAXIMO', 1);
-                $this->Cell(20, 4, 'GRADO', 1);
-                $this->Cell(20, 4, 'PERIODO', 1);
+                $this->Cell($pageWidth * 10 / 100, 4, 'CODIGO', 1);
+                $this->Cell($pageWidth * 40 / 100, 4, 'NOMBRE DE ASIGNATURA', 1);
+                $this->Cell($pageWidth * 10 / 100, 4, 'TIPO', 1);
+                $this->Cell($pageWidth * 10 / 100, 4, 'MINIMO', 1);
+                $this->Cell($pageWidth * 10 / 100, 4, 'MAXIMO', 1);
+                $this->Cell($pageWidth * 10 / 100, 4, 'GRADO', 1);
+                $this->Cell($pageWidth * 10 / 100, 4, 'PERIODO', 1);
                 $this->Ln();
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
                 for ($i = 0; $i < count($data); $i++) {
                     $this->SetFont($this->fontfamilycontent, 'B', $this->fontsizecontent);
-                    $this->Cell(20, 4, $data[$i]['id_logro'], 1);
-                    $this->Cell(80, 4, $data[$i]['nombre_asignatura'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 4, $data[$i]['id_logro'], 1);
+                    $this->Cell($pageWidth * 40 / 100, 4, $data[$i]['nombre_asignatura'], 1);
                     $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
-                    $this->Cell(20, 4, $data[$i]['tipo_logro'], 1);
-                    $this->Cell(20, 4, $data[$i]['min_logro'], 1);
-                    $this->Cell(20, 4, $data[$i]['max_logro'], 1);
-                    $this->Cell(20, 4, $data[$i]['numgrado_logro'], 1);
-                    $this->Cell(20, 4, $data[$i]['numcorte_logro'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 4, $data[$i]['tipo_logro'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 4, $data[$i]['min_logro'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 4, $data[$i]['max_logro'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 4, $data[$i]['numgrado_logro'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 4, $data[$i]['numcorte_logro'], 1);
                     $this->Ln();
-                    $this->MultiCell(200, 4, $data[$i]['descripcion_logro'], 1, 'L');
+                    $this->MultiCell($pageWidth * 100 / 100, 4, $data[$i]['descripcion_logro'], 1, 'L');
                     $this->Ln();
                 }
             }
@@ -424,24 +461,27 @@ class PDFReports extends TCPDF {
         if ($data !== null && $data !== '' && $data !== '[]') {
             $data = json_decode($data, true);
             if (is_array($data) && count($data) > 0) {
+                $pageWidth = $this->getRealPageWidth();
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
                 $this->Cell(0, 8, 'CARGA ACADEMICA DOCENTE');
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 2));
                 $this->Ln();
-                $this->Cell(80, 8, 'NOMBRE COMPLETO DOCENTE');
-                $this->Cell(40, 8, 'PROGRAMA');
-                $this->Cell(40, 8, 'ASIGNATURA');
-                $this->Cell(20, 8, 'GRUPO');
-                $this->Cell(20, 8, 'AÑO');
+                $this->Cell($pageWidth * 35 / 100, 8, 'NOMBRE COMPLETO DOCENTE', true);
+                $this->Cell($pageWidth * 20 / 100, 8, 'PROGRAMA', true);
+                $this->Cell($pageWidth * 25 / 100, 8, 'ASIGNATURA', true);
+                $this->Cell($pageWidth * 10 / 100, 8, 'GRUPO', true);
+                $this->Cell($pageWidth * 5 / 100, 8, 'HORAS', true);
+                $this->Cell($pageWidth * 5 / 100, 8, 'AÑO', true);
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->Cell(80, 6, $data[$i]['nombrecompleto_docente']);
-                    $this->Cell(40, 6, $data[$i]['nombre_programa']);
-                    $this->Cell(40, 6, $data[$i]['nombre_asignatura']);
-                    $this->Cell(20, 6, $data[$i]['id_grupo']);
-                    $this->Cell(20, 6, $data[$i]['id_periodo']);
+                    $this->Cell($pageWidth * 35 / 100, 6, $data[$i]['nombrecompleto_docente'], true);
+                    $this->Cell($pageWidth * 20 / 100, 6, $data[$i]['nombre_programa'], true);
+                    $this->Cell($pageWidth * 25 / 100, 6, $data[$i]['nombre_asignatura'], true);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['id_grupo'], true);
+                    $this->Cell($pageWidth * 5 / 100, 6, $data[$i]['numhoras_carga'], true);
+                    $this->Cell($pageWidth * 5 / 100, 6, $data[$i]['id_periodo'], true);
                     $this->Ln();
                 }
             }
@@ -555,13 +595,13 @@ class PDFReports extends TCPDF {
                     $html = $html . '<td style="height: 140px !important;">';
                     $html = $html . '<table border="0">';
                     $html = $html . '<tr>';
-                    $html = $html . '<td style="width: 70%;">';
+                    $html = $html . '<td style="width: 70%; text-align: center;">';
                     $html = $html . '<label><b>Código:</b> ' . $data[$i]['id_estudiante'] . '</label>' . '<br>';
-                    $html = $html . '<label><b>Nombres: </b> ' . $data[$i]['nombre1_persona'] . ' ' . $data[$i]['nombre2_persona'] . '</label>' . '<br>';
-                    $html = $html . '<label><b>Apellidos: </b> ' . $data[$i]['apellido1_persona'] . ' ' . $data[$i]['apellido2_persona'] . '</label>' . '<br>';
-                    $html = $html . '<label><b>Documento: </b> ' . $data[$i]['tipodoc_persona'] . ' ' . $data[$i]['documento_persona'] . '</label>' . '<br>';
-                    $html = $html . '<label><b>Programa: </b> ' . $data[$i]['nombre_programa'] . '</label>' . '<br>';
-                    $html = $html . '<label><b>Grado: </b> ' . $this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa']) . '</label>' . '<br>';
+                    $html = $html . '<label><b>Nombres:</b><br> ' . $data[$i]['nombre1_persona'] . ' ' . $data[$i]['nombre2_persona'] . '</label>' . '<br>';
+                    $html = $html . '<label>' . $data[$i]['apellido1_persona'] . ' ' . $data[$i]['apellido2_persona'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>' . $data[$i]['tipodoc_persona'] . ':</b> ' . $data[$i]['documento_persona'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>Programa:</b><br> ' . $data[$i]['nombre_programa'] . '</label>' . '<br>';
+                    $html = $html . '<label><b>Grado:</b> ' . $this->getSpanishOrdinalsNumbers($data[$i]['numgrado_programa']) . '</label>' . '<br>';
                     $html = $html . '</td>';
                     $html = $html . '<td style="width: 30%;">';
                     $html = $html . '<img alt="Foto">';
@@ -1244,9 +1284,9 @@ class PDFReports extends TCPDF {
             $this->Cell($pageWidth, 10, 'DATOS ESTADISTICOS PARA REPORTAR AL GOBIERNO', null, false, 'C');
             $this->SetFont($this->fontfamilycontent, 'B', 12);
             $this->Ln();
-            $this->Cell($pageWidth/3, 10, 'PROGRAMA: '.$idprograma, null, false, 'C');
-            $this->Cell($pageWidth/3, 10, 'GRADO: '.$grado, null, false, 'C');
-            $this->Cell($pageWidth/3, 10, 'GRUPO: '.$idgrupo, null, false, 'C');
+            $this->Cell($pageWidth / 3, 10, 'PROGRAMA: ' . $idprograma, null, false, 'C');
+            $this->Cell($pageWidth / 3, 10, 'GRADO: ' . $grado, null, false, 'C');
+            $this->Cell($pageWidth / 3, 10, 'GRUPO: ' . $idgrupo, null, false, 'C');
             $this->Ln();
             $htmltable = '';
             $htmltable = $htmltable . '<table border="1">';

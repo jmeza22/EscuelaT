@@ -16,6 +16,7 @@ function setRequiredsInputs(tipo) {
     var sede = getElement(form0, 'id_sede');
     var jornada = getElement(form0, 'id_jornada');
     var programa = getElement(form0, 'id_programa');
+    var planestudio = getElement(form0, 'id_planestudio');
     var periodo = getElement(form0, 'id_periodo');
     var corte = getElement(form0, 'id_corte');
     var grado = getElement(form0, 'numgrado_programa');
@@ -24,12 +25,17 @@ function setRequiredsInputs(tipo) {
     sede.removeAttribute('required');
     jornada.removeAttribute('required');
     programa.removeAttribute('required');
+    planestudio.removeAttribute('required');
     periodo.removeAttribute('required');
     corte.removeAttribute('required');
     grado.removeAttribute('required');
     grupo.removeAttribute('required');
     estudiante.removeAttribute('required');
     if (tipo !== undefined && tipo !== null) {
+        if (tipo.value === 'CarnetEstudiantil') {
+            programa.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+        }
         if (tipo.value === 'CertificadoEstudios') {
             programa.setAttribute('required', 'required');
             grado.setAttribute('required', 'required');
@@ -50,6 +56,10 @@ function setRequiredsInputs(tipo) {
             grado.setAttribute('required', 'required');
             grupo.setAttribute('required', 'required');
             estudiante.setAttribute('required', 'required');
+        }
+        if (tipo.value === 'PlanEstudioDetallado') {
+            programa.setAttribute('required', 'required');
+            planestudio.setAttribute('required', 'required');
         }
         if (tipo.value === 'EstadisticosBasicosEstudiante') {
             programa.setAttribute('required', 'required');

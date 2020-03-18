@@ -29,7 +29,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js-forms/Reportes.js"></script>
     </head>
     <body>
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 95% !important;">
             <div class="panel-heading">Generador de Reportes</div>
             <div class="panel-body table-responsive">
                 <form id="form0" method="POST" autocomplete="off" target="_blank" action="Base/Controllers/ReportesController.php" url="Base/Controllers/InformesController.php" model="EscuelasApp" findBy="id_escuela" mainform="true" >
@@ -50,6 +50,7 @@ and open the template in the editor.
                                         <option value="Programas">Listado de Programas</option>
                                         <option value="Areas">Listado de Areas</option>
                                         <option value="Asignaturas">Listado de Asignaturas</option>
+                                        <option value="PlanEstudioDetallado">Plan de Estudios Detallado</option>
                                         <option value="Logros">Listado de Logros o Competencias</option>
                                         <option value="Grupos">Listado de Grupos</option>
                                         <option value="Docentes">Listado de Docentes</option>
@@ -74,35 +75,41 @@ and open the template in the editor.
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label>Jornada</label>
                                     <select id="id_jornada" name="id_jornada" selected="NULL" model="JornadasApp" colname="nombre_jornada" colvalue="id_jornada" url="Base/Controllers/GetComboboxJornadas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_estudiante', this.id, this.value, 1);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <label>Programa</label>
                                     <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_planestudio', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 2);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Año</label>
-                                    <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setFindbyCombobox('id_corte', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 3);">
+                                    <label>Plan Estudios</label>
+                                    <select id="id_planestudio" name="id_planestudio" selected="NULL" required="required" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('numgrado_programa', this.id, this.value);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <label>Periodo</label>
-                                    <select id="id_corte" name="id_corte" selected="NULL" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" class="form-control" style="width: 100%;">
+                                    <label>Año</label>
+                                    <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setFindbyCombobox('id_corte', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 3);">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
+                                    <label>Periodo</label>
+                                    <select id="id_corte" name="id_corte" selected="NULL" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" class="form-control" style="width: 100%;">
+                                        <option selected="selected" value="NULL">Ninguno</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
                                     <label>Grado</label>
-                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value, 2); setFindbyCombobox('id_estudiante', this.id, this.value, 4);">
+                                    <select id="numgrado_programa" name="numgrado_programa" class="form-control" model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value, 2); setFindbyCombobox('id_estudiante', this.id, this.value, 4);">
                                         <option disabled="disabled" selected="selected" value="NULL">Ninguno</option>
                                         <option value="-2">PreJardin</option>
                                         <option value="-1">Jardin</option>
@@ -127,7 +134,7 @@ and open the template in the editor.
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label>Estudiante</label>
                                     <select id="id_estudiante" name="id_estudiante" selected="NULL" model="ObservadorEstudianteApp" colname="nombrecompleto_estudiante" colvalue="id_estudiante" url="Base/Controllers/GetComboboxEstudiantesMatriculados.php" class="form-control" style="width: 100%;">
                                         <option selected="selected" value="NULL">Ninguna</option>
@@ -149,7 +156,7 @@ and open the template in the editor.
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <label>Orientacion Papel</label>
+                                    <label>Orientacion</label>
                                     <select id="orientation_page" name="orientation_page" required="required" class="form-control" style="width: 100%;">
                                         <option value="P">Vertical</option>
                                         <option value="L">Horizontal</option>
@@ -157,19 +164,19 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>M. Superior</label>
-                                    <input type="number" float="true" id="top_margin" name="top_margin" required="required" value="4" class="form-control" maxlength="3" min="3" max="20" required="required" />                                 
+                                    <input type="number" float="true" id="top_margin" name="top_margin" required="required" value="4" class="form-control" maxlength="3" min="4" max="20" required="required" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label>M. Inferior</label>
-                                    <input type="number" float="true" id="bottom_margin" name="bottom_margin" required="required" value="4" class="form-control" maxlength="3" min="3" max="10" required="required" />                                 
+                                    <input type="number" float="true" id="bottom_margin" name="bottom_margin" required="required" value="8" class="form-control" maxlength="3" min="8" max="20" required="required" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label>M. Izquierdo</label>
-                                    <input type="number" float="true" id="left_margin" name="left_margin" required="required" value="4" class="form-control" maxlength="3" min="3" max="10" required="required" />                                 
+                                    <input type="number" float="true" id="left_margin" name="left_margin" required="required" value="4" class="form-control" maxlength="3" min="4" max="15" required="required" />                                 
                                 </div>
                                 <div class="col-sm-2">
                                     <label>M. Derecho</label>
-                                    <input type="number" float="true" id="right_margin" name="right_margin" required="required" value="4" class="form-control" maxlength="3" min="3" max="10" required="required" />                                 
+                                    <input type="number" float="true" id="right_margin" name="right_margin" required="required" value="4" class="form-control" maxlength="3" min="4" max="15" required="required" />                                 
                                 </div>
                             </div>
 

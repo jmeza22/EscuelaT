@@ -12,6 +12,7 @@ $idescuela = null;
 $idsede = null;
 $idjornada = null;
 $idprograma = null;
+$idplanestudio = null;
 $idperiodo = null;
 $idcorte = null;
 $grado = null;
@@ -43,6 +44,9 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         }
         if (isset($_POST['id_programa']) && $_POST['id_programa'] !== '' && $_POST['id_programa'] !== 'NULL') {
             $idprograma = $_POST['id_programa'];
+        }
+        if (isset($_POST['id_planestudio']) && $_POST['id_planestudio'] !== '' && $_POST['id_planestudio'] !== 'NULL') {
+            $idplanestudio = $_POST['id_planestudio'];
         }
         if (isset($_POST['id_periodo']) && $_POST['id_periodo'] !== '' && $_POST['id_periodo'] !== 'NULL') {
             $idperiodo = $_POST['id_periodo'];
@@ -102,9 +106,9 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         $report->setFontContent($family, '', $sizecontent);
         $report->setFontFooter($family, 'I', $sizefooter);
         $report->SetFont($family, $style, $sizecontent);
-        
+
         if ($tipo === 'CarnetEstudiantil') {
-            $report->headertype=-1;
+            $report->headertype = -1;
             $report->AddPage('P', 'Letter', true);
             $report->SetLeftMargin(25);
             $report->SetRightMargin(25);
@@ -166,6 +170,12 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->ListadoAsignaturas($session->getEnterpriseID());
             $report->generatePDFDocument();
         }
+        if ($tipo === 'PlanEstudioDetallado') {
+            $report->AddPage($orientation, $format, true);
+            $report->setReportName('Plan de Estudios Detallado');
+            $report->ListadoDetalladoPlanEstudio($session->getEnterpriseID(), $idprograma, $idplanestudio);
+            $report->generatePDFDocument();
+        }
         if ($tipo === 'Logros') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Logros');
@@ -185,7 +195,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->generatePDFDocument();
         }
         if ($tipo === 'CargasDocentes') {
-            $report->AddPage($orientation, $format, true);
+            $report->AddPage('L', $format, true);
             $report->setReportName('Carga Academica Docente');
             $report->ListadoCargasDocentes($session->getEnterpriseID(), $idperiodo, $idprograma, null, $grupo);
             $report->generatePDFDocument();
@@ -222,7 +232,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         }
         if ($tipo === 'ObservadorEstudiante') {
             $report->AddPage($orientation, $format, true);
-            $report->setReportName('Observador del Estudiante '.$idestudiante);
+            $report->setReportName('Observador del Estudiante ' . $idestudiante);
             $report->ObservadorEstudiante($idestudiante);
             $report->generatePDFDocument();
         }

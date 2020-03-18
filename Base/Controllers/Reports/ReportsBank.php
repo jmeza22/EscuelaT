@@ -111,14 +111,14 @@ class ReportsBank extends BasicController {
     public function getPlanEstudio($idescuela = null, $idprograma = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT * FROM PlanEstudioApp WHERE status_planestudio=1 ";
+        $sql = "SELECT * FROM PlanEstudiosApp WHERE status_planestudio=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;
             $sql = $sql . " AND id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
-            $arraywhere['p_id_prograna'] = $idprograma;
+            $arraywhere['p_id_programa'] = $idprograma;
             $sql = $sql . " AND id_programa=:p_id_programa ";
         }
         $sql = $sql . " ORDER BY id_planestudio ASC";
@@ -129,9 +129,10 @@ class ReportsBank extends BasicController {
     public function getPlanEstudioDetalle($idescuela = null, $idprograma = null, $idplanestudio = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT PED.*, A.nombre_asignatura "
+        $sql = "SELECT PED.*, A.nombre_asignatura, PE.id_programa "
                 . " FROM PlanEstudioDetalleApp PED "
                 . " INNER JOIN AsignaturasApp A ON PED.id_asignatura=A.id_asignatura "
+                . " INNER JOIN PlanEstudiosApp PE ON PED.id_planestudio=PE.id_planestudio "
                 . " WHERE PED.status_planestudiodetalle=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
@@ -139,8 +140,8 @@ class ReportsBank extends BasicController {
             $sql = $sql . " AND PED.id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
-            $arraywhere['p_id_prograna'] = $idprograma;
-            $sql = $sql . " AND PED.id_programa=:p_id_programa ";
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND PE.id_programa=:p_id_programa ";
         }
         if ($idplanestudio !== null) {
             $arraywhere['p_id_planestudio'] = $idplanestudio;
@@ -993,7 +994,7 @@ class ReportsBank extends BasicController {
         $resultarray['total_mujeres'] = $this->selectJSONArray($sql2, $arraywhere);
         $resultarray['rangos_hombres'] = $this->selectJSONArray($sql3, $arraywhere);
         $resultarray['rangos_mujeres'] = $this->selectJSONArray($sql4, $arraywhere);
-        
+
         return $resultarray;
     }
 
