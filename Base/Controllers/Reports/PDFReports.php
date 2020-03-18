@@ -1225,6 +1225,91 @@ class PDFReports extends TCPDF {
         }
     }
 
+    public function DatosEstadisticosEstudiantes($idescuela, $idprograma = null, $grado = null, $idgrupo = null, $idperiodo = null) {
+        $estadisticas = null;
+        $estadisticas = $this->bc->getDatosEstadisticosBasicosEstudiantes($idescuela, $idprograma, $grado, $idgrupo, $idperiodo);
+        if (isset($estadisticas) && $estadisticas !== null && ($estadisticas['total_hombres'] !== '[]' || $estadisticas['total_mujeres'] !== '[]')) {
+            $pageWidth = $this->getRealPageWidth();
+            $totalhombres = $estadisticas['total_hombres'];
+            $totalmujeres = $estadisticas['total_mujeres'];
+            $rangoshombres = $estadisticas['rangos_hombres'];
+            $rangosmujeres = $estadisticas['rangos_mujeres'];
+            $totalhombres = json_decode($totalhombres, true);
+            $totalmujeres = json_decode($totalmujeres, true);
+            $rangoshombres = json_decode($rangoshombres, true);
+            $rangosmujeres = json_decode($rangosmujeres, true);
+            $totalhombres = $totalhombres[0];
+            $totalmujeres = $totalmujeres[0];
+            $this->SetFont($this->fontfamilycontent, 'B', 14);
+            $this->Cell($pageWidth, 10, 'DATOS ESTADISTICOS PARA REPORTAR AL GOBIERNO', null, false, 'C');
+            $this->SetFont($this->fontfamilycontent, 'B', 12);
+            $this->Ln();
+            $this->Cell($pageWidth/3, 10, 'PROGRAMA: '.$idprograma, null, false, 'C');
+            $this->Cell($pageWidth/3, 10, 'GRADO: '.$grado, null, false, 'C');
+            $this->Cell($pageWidth/3, 10, 'GRUPO: '.$idgrupo, null, false, 'C');
+            $this->Ln();
+            $htmltable = '';
+            $htmltable = $htmltable . '<table border="1">';
+            $htmltable = $htmltable . '<tr>';
+            $htmltable = $htmltable . '<th><b>Hombres</b></th>';
+            $htmltable = $htmltable . '<th><b>Mujeres</b></th>';
+            $htmltable = $htmltable . '</tr>';
+            $htmltable = $htmltable . '<tr>';
+
+            $htmltable = $htmltable . '<td>';
+            $htmltable = $htmltable . 'Total: ' . $totalhombres['Total_Hombres'] . ' Hombres <br>';
+            $htmltable = $htmltable . '<table border="0">';
+            $htmltable = $htmltable . '<tr>';
+            $htmltable = $htmltable . '<th><b>Grado </b></th>';
+            $htmltable = $htmltable . '<th><b>Grupo </b></th>';
+            $htmltable = $htmltable . '<th><b>Cantidad </b></th>';
+            $htmltable = $htmltable . '<th><b>Edad </b></th>';
+            $htmltable = $htmltable . '</tr>';
+            if (isset($rangoshombres[0])) {
+                $i1 = 0;
+                for ($i1 = 0; $i1 < count($rangoshombres); $i1++) {
+                    $htmltable = $htmltable . '<tr>';
+                    $htmltable = $htmltable . '<td>' . $this->getSpanishOrdinalsNumbers($rangoshombres[$i1]['numgrado_programa']) . ' </td>';
+                    $htmltable = $htmltable . '<td>' . $rangoshombres[$i1]['id_grupo'] . '</td>';
+                    $htmltable = $htmltable . '<td>' . $rangoshombres[$i1]['Cantidad_Hombres'] . '</td>';
+                    $htmltable = $htmltable . '<td>' . $rangoshombres[$i1]['Edad_Hombres'] . ' Años </td>';
+                    $htmltable = $htmltable . '</tr>';
+                }
+            }
+            $htmltable = $htmltable . '</table>';
+            $htmltable = $htmltable . '</td>';
+
+            $htmltable = $htmltable . '<td>';
+            $htmltable = $htmltable . 'Total: ' . $totalmujeres['Total_Mujeres'] . ' Mujeres <br>';
+            $htmltable = $htmltable . '<table border="0">';
+            $htmltable = $htmltable . '<tr>';
+            $htmltable = $htmltable . '<th><b>Grado </b></th>';
+            $htmltable = $htmltable . '<th><b>Grupo </b></th>';
+            $htmltable = $htmltable . '<th><b>Cantidad </b></th>';
+            $htmltable = $htmltable . '<th><b>Edad </b></th>';
+            $htmltable = $htmltable . '</tr>';
+            if (isset($rangosmujeres[0])) {
+                $i2 = 0;
+                for ($i2 = 0; $i2 < count($rangosmujeres); $i2++) {
+                    $htmltable = $htmltable . '<tr>';
+                    $htmltable = $htmltable . '<td>' . $this->getSpanishOrdinalsNumbers($rangosmujeres[$i2]['numgrado_programa']) . ' </td>';
+                    $htmltable = $htmltable . '<td>' . $rangosmujeres[$i2]['id_grupo'] . '</td>';
+                    $htmltable = $htmltable . '<td>' . $rangosmujeres[$i2]['Cantidad_Mujeres'] . '</td>';
+                    $htmltable = $htmltable . '<td>' . $rangosmujeres[$i2]['Edad_Mujeres'] . ' Años </td>';
+                    $htmltable = $htmltable . '</tr>';
+                }
+            }
+            $htmltable = $htmltable . '</table>';
+            $htmltable = $htmltable . '</td>';
+
+            $htmltable = $htmltable . '</tr>';
+
+            $htmltable = $htmltable . '</table>';
+            $this->SetFont($this->fontfamilycontent, $this->fontstylecontent, 12);
+            $this->writeHTML($htmltable, true, false, false, false, '');
+        }
+    }
+
     public function generatePDFDocument() {
         $ahora = getdate();
         $tiempo = $ahora['year'] . $ahora['mon'] . $ahora['mday'] . $ahora['hours'] . $ahora['minutes'] . $ahora['seconds'];

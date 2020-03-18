@@ -128,6 +128,14 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->CertificadoNotas($idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idestudiante, null);
             $report->generatePDFDocument();
         }
+        if ($tipo === 'EstadisticosBasicosEstudiante') {
+            $report->AddPage($orientation, $format, true);
+            $report->SetLeftMargin(12);
+            $report->SetRightMargin(12);
+            $report->setReportName('Datos Estadisticos Basicos de Estudiantes por Grupo ');
+            $report->DatosEstadisticosEstudiantes($session->getEnterpriseID(), $idprograma, $grado, $grupo, $idperiodo);
+            $report->generatePDFDocument();
+        }
         if ($tipo === 'Escuelas') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Escuelas');

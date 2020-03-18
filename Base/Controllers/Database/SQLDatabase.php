@@ -761,15 +761,16 @@ class SQLDatabase {
     }
 
     public function printArray($myarray) {
-        echo '<table border=0>';
+        $html = '<table border=0>';
         for ($i = 0; $i < count($myarray); $i++) {
-            echo '<tr>';
+            $html = $html . '<tr>';
             for ($j = 0; $j < count($myarray[0]); $j++) {
-                echo '<td>' . $myarray[$i][$j] . '</td>';
+                $html = $html . '<td>' . $myarray[$i][$j] . '</td>';
             }
-            echo '</tr>';
+            $html = $html . '</tr>';
         }
-        echo '</table>';
+        $html = $html . '</table>';
+        return $html;
     }
 
     public function printSelect($table, $columns, $where) {

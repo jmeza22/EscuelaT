@@ -51,6 +51,11 @@ function setRequiredsInputs(tipo) {
             grupo.setAttribute('required', 'required');
             estudiante.setAttribute('required', 'required');
         }
+        if (tipo.value === 'EstadisticosBasicosEstudiante') {
+            programa.setAttribute('required', 'required');
+            grado.setAttribute('required', 'required');
+            grupo.setAttribute('required', 'required');
+        }
         if (tipo.value === 'ObservadorEstudiante') {
             estudiante.setAttribute('required', 'required');
         }

@@ -53,9 +53,9 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $numcorte = $variables->getNumCortePeriodo();
 
     $sqlC = "SELECT @rownum := @rownum +1 AS rownum, "
+            . " OE.nombrecompleto_estudiante, "
             . " IFNULL(C.id_calificacion,0) AS id_calificacion,"
             . " MA.*, "
-            . " OE.nombrecompleto_estudiante, "
             . " IFNULL(C.p1_nd_calificacion,' ') AS np1, "
             . " IFNULL(C.p2_nd_calificacion,' ') AS np2, "
             . " IFNULL(C.p3_nd_calificacion,' ') AS np3, "

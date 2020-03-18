@@ -951,6 +951,52 @@ class ReportsBank extends BasicController {
         return $resultEstudiantes;
     }
 
+    public function getDatosEstadisticosBasicosEstudiantes($idescuela, $idprograma = null, $grado = null, $idgrupo = null, $idperiodo = null) {
+        $sqlw = null;
+        $result = null;
+        $resultarray = Array();
+        $sql1 = "SELECT COUNT(*) AS Total_Hombres, M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona WHERE M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' AND P.sexo_persona='M' ";
+        $sql2 = "SELECT COUNT(*) AS Total_Mujeres, M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona WHERE M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' AND P.sexo_persona='F' ";
+        $sql3 = "SELECT COUNT(*) AS Cantidad_Hombres, IFNULL(DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(P.fechanacimiento_persona)), '%Y')+0,'?') AS Edad_Hombres, M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona WHERE M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' AND P.sexo_persona='M' ";
+        $sql4 = "SELECT COUNT(*) AS Cantidad_Mujeres, IFNULL(DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(P.fechanacimiento_persona)), '%Y')+0,'?') AS Edad_Mujeres, M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona WHERE M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' AND P.sexo_persona='F' ";
+
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sqlw = $sqlw . " AND M.id_escuela=:p_id_escuela ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sqlw = $sqlw . " AND M.id_programa=:p_id_programa ";
+        }
+        if ($grado !== null) {
+            $arraywhere['p_num_grado'] = $grado;
+            $sqlw = $sqlw . " AND M.numgrado_programa=:p_num_grado ";
+        }
+        if ($idgrupo !== null) {
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sqlw = $sqlw . " AND M.id_grupo=:p_id_grupo ";
+        }
+        if ($idperiodo !== null) {
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sqlw = $sqlw . " AND M.id_periodo=:p_id_periodo ";
+        }
+        $sql1 = $sql1 . $sqlw;
+        $sql2 = $sql2 . $sqlw;
+        $sql3 = $sql3 . $sqlw;
+        $sql4 = $sql4 . $sqlw;
+
+        $sql1 = $sql1 . " GROUP BY M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo ORDER BY M.id_escuela, M.id_programa, M.numgrado_programa, M.id_grupo ";
+        $sql2 = $sql2 . " GROUP BY M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo ORDER BY M.id_escuela, M.id_programa, M.numgrado_programa, M.id_grupo ";
+        $sql3 = $sql3 . " GROUP BY Edad_Hombres, M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo ORDER BY M.id_escuela, M.id_programa, M.numgrado_programa, M.id_grupo, Edad_Hombres ";
+        $sql4 = $sql4 . " GROUP BY Edad_Mujeres, M.id_escuela, M.id_programa, M.id_planestudio, M.numgrado_programa, M.id_grupo, M.id_periodo ORDER BY M.id_escuela, M.id_programa, M.numgrado_programa, M.id_grupo, Edad_Mujeres ";
+        $resultarray['total_hombres'] = $this->selectJSONArray($sql1, $arraywhere);
+        $resultarray['total_mujeres'] = $this->selectJSONArray($sql2, $arraywhere);
+        $resultarray['rangos_hombres'] = $this->selectJSONArray($sql3, $arraywhere);
+        $resultarray['rangos_mujeres'] = $this->selectJSONArray($sql4, $arraywhere);
+        
+        return $resultarray;
+    }
+
     public function getValoresPecuniarios($idescuela = null, $idpecuniario = null, $tipopecuniario = null, $anualidad = null) {
         $sql = null;
         $result = null;

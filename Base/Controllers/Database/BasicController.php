@@ -347,6 +347,10 @@ class BasicController {
         }
         return null;
     }
+    
+    public function printArray($array) {
+        $this->db->printArray($array);
+    }
 
     public function parseResults($result = NULL, $message = '', $status = 0) {
         $array = array();
