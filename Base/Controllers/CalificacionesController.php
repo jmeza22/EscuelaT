@@ -61,6 +61,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                             $data["p" . $numcorte . "_nc_calificacion"] = $data["nc_calificacion"];
                             $data["p" . $numcorte . "_np_calificacion"] = $data["np_calificacion"];
                             $data["p" . $numcorte . "_na_calificacion"] = $data["na_calificacion"];
+                            $data["p" . $numcorte . "_nn_calificacion"] = $data["nn_calificacion"];
                             $data["p" . $numcorte . "_logroc_calificacion"] = $data["logroc_calificacion"];
                             $data["p" . $numcorte . "_logrop_calificacion"] = $data["logrop_calificacion"];
                             $data["p" . $numcorte . "_logroa_calificacion"] = $data["logroa_calificacion"];

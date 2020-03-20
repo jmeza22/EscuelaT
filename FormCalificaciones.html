@@ -86,49 +86,63 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-primary" style="width: 98% !important;">
-            <div class="panel-heading">Automatizacion de Logros por Notas</div>
-            <div class="panel-body" >
-                <form id="logroauto" name="logroauto">
-                    <datalist id="lista_id_logro_sup" name="lista_id_logro_sup" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosSuperior.php" >
-                        <option selected="selected" value="">Ninguna</option>
-                    </datalist>
-                    <datalist id="lista_id_logro_alt" name="lista_id_logro_alt" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosAlto.php" >
-                        <option selected="selected" value="">Ninguna</option>
-                    </datalist>
-                    <datalist id="lista_id_logro_bas" name="lista_id_logro_bas" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBasico.php" >
-                        <option selected="selected" value="">Ninguna</option>
-                    </datalist>
-                    <datalist id="lista_id_logro_baj" name="lista_id_logro_baj" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBajo.php" >
-                        <option selected="selected" value="">Ninguna</option>
-                    </datalist>
-                    <div class="row">
-                        <div class="col-sm-3"><label>L.C. Bajo</label><input type="text" id="lcbajo" name="lcbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.C. Basico</label><input type="text" id="lcbasico" name="lcbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.C. Alto</label><input type="text" id="lcalto" name="lcalto" value="" list="lista_id_logro_alt" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.C. Super</label><input type="text" id="lcsuperior" name="lcsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+        <div class="modal fade" id="modal_logroautomatico">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Automatizacion de Logros</h4>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-3"><label>L.P. Bajo</label><input type="text" id="lpbajo" name="lpbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.P. Basico</label><input type="text" id="lpbasico" name="lpbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.P. Alto</label><input type="text" id="lpalto" name="lpalto" value="" list="lista_id_logro_alt" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.P. Super</label><input type="text" id="lpsuperior" name="lpsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                    <div class="modal-body">
+                        <form id="logroauto" name="logroauto">
+                            <datalist id="lista_id_logro_sup" name="lista_id_logro_sup" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosSuperior.php" >
+                                <option selected="selected" value="">Ninguna</option>
+                            </datalist>
+                            <datalist id="lista_id_logro_alt" name="lista_id_logro_alt" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosAlto.php" >
+                                <option selected="selected" value="">Ninguna</option>
+                            </datalist>
+                            <datalist id="lista_id_logro_bas" name="lista_id_logro_bas" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBasico.php" >
+                                <option selected="selected" value="">Ninguna</option>
+                            </datalist>
+                            <datalist id="lista_id_logro_baj" name="lista_id_logro_baj" required="required" selected="NULL" model="LogrosAsignaturasApp" colname="id_logro" colvalue="id_logro" url="Base/Controllers/GetComboboxLogrosBajo.php" >
+                                <option selected="selected" value="">Ninguna</option>
+                            </datalist>
+                            <div class="row">
+                                <div class="col-sm-3"><label>L.C. Bajo</label><input type="text" id="lcbajo" name="lcbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.C. Basico</label><input type="text" id="lcbasico" name="lcbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.C. Alto</label><input type="text" id="lcalto" name="lcalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.C. Super</label><input type="text" id="lcsuperior" name="lcsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><label>L.P. Bajo</label><input type="text" id="lpbajo" name="lpbajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.P. Basico</label><input type="text" id="lpbasico" name="lpbasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.P. Alto</label><input type="text" id="lpalto" name="lpalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.P. Super</label><input type="text" id="lpsuperior" name="lpsuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><label>L.A. Bajo</label><input type="text" id="labajo" name="labajo" value="" list="lista_id_logro_baj" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.A. Basico</label><input type="text" id="labasico" name="labasico" value="" list="lista_id_logro_bas" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.A. Alto</label><input type="text" id="laalto" name="laalto" value="" list="lista_id_logro_alt" class="form-control"></div>
+                                <div class="col-sm-3"><label>L.A. Super</label><input type="text" id="lasuperior" name="lasuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                            </div>
+                            <center>
+                                    <button type="button" id="OK" name="OK" data-dismiss="modal" aria-hidden="true" class="btn btn-default" onclick="" >Aceptar</button> 
+                            </center>
+                        </form>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-3"><label>L.A. Bajo</label><input type="text" id="labajo" name="labajo" value="" list="lista_id_logro_baj" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.A. Basico</label><input type="text" id="labasico" name="labasico" value="" list="lista_id_logro_bas" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.A. Alto</label><input type="text" id="laalto" name="laalto" value="" list="lista_id_logro_alt" class="form-control"></div>
-                        <div class="col-sm-3"><label>L.A. Super</label><input type="text" id="lasuperior" name="lasuperior" value="" list="lista_id_logro_sup" class="form-control"></div>
+                    <div class="modal-footer" style="text-align: justify;">
+                        En este Panel puedes especificar el código del Logro para cada nivel de desempeño (Bajo, Básico, Alto, Superior) según la calificación ingresada en cada componente (Cognitivo, Procedimental, Actitudinal).
                     </div>
-                    </table>
-                </form>
+                </div>
             </div>
         </div>
 
         <div class="panel panel-primary" style="width: 98% !important;">
             <div class="panel-heading">Planilla de Calificaciones</div>
             <div class="panel-body table-responsive">
-
+                <center>
+                    <button type="button" id="btLogros" name="btLogros" href="#modal_logroautomatico" data-toggle="modal" class="btn btn-default" onclick="" >Logros Automaticos</button> 
+                </center>
                 <div class="table-responsive">
                     <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/CalificacionesController.php" model="CalificacionesApp" findBy="id_calificacion" statusfield="status_calificacion" mainform="true" > 
                         <datalist id="lista_calificaciones" name="lista_calificaciones" >
@@ -225,7 +239,7 @@ and open the template in the editor.
                             <option value="10.0">10.0</option>
                         </datalist>
                     </form>
-                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered table-form" model="EscuelasApp" url="Base/Controllers/GetDataTableCalificaciones.php" >
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered" model="EscuelasApp" url="Base/Controllers/GetDataTableCalificaciones.php" >
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
                                 <th style="width: 2%;" title="Numero en Listado" >#</th>
@@ -238,12 +252,13 @@ and open the template in the editor.
                                 <th style="width: 1%;" title="Sexto Periodo" id="thp6" >P6</th>
                                 <th style="width: 2%;" title="Acumulado Año (Definitiva Parcial)" id="thdef" >Acu</th>
                                 <th style="width: 2%;" title="Habilitacion" id="thhab" >Hab</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Calificacion Componente Cognitivo" id="thnc">CCC</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Calificacion Componente Procedimental" id="thnp">CCP</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Calificacion Componente Actitudinal" id="thna">CCA</th>
                                 <th style="width: 5%; min-width: 45px !important;" title="Codigo Logro Cognitivo" id="thlc">LC</th>
                                 <th style="width: 5%; min-width: 45px !important;" title="Codigo Logro Procedimental" id="thlp">LP</th>
                                 <th style="width: 5%; min-width: 45px !important;" title="Codigo Logro Actitudinal" id="thla">LA</th>
-                                <th style="width: 5%; min-width: 45px !important;" title="Nota Logro Cognitivo" id="thnc">NC</th>
-                                <th style="width: 5%; min-width: 45px !important;" title="Nota Logro Procedimental" id="thnp">NP</th>
-                                <th style="width: 5%; min-width: 45px !important;" title="Nota Logro Actitudinal" id="thna">NA</th>
+                                <th style="width: 5%; min-width: 45px !important;" title="Nota de Nivelacion del Periodo (Recuperacion)" >NN</th>
                                 <th style="width: 5%; min-width: 45px !important;" title="Nota Definitiva del Periodo" >ND</th>
                                 <th style="width: 5%; min-width: 45px !important;" title="Numero de Ausencias (Periodo Actual)" >Aus.</th>
                             </tr>
@@ -272,12 +287,13 @@ and open the template in the editor.
                                 <td name="tdp6"> <label>{{np6}}</label> </td>
                                 <td name="tddef"> <label>{{def}}</label> </td>
                                 <td name="tdhab"> <label>{{nphab}}</label> </td>
-                                <td name="logc"> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
-                                <td name="logp"> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
-                                <td name="loga"> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
                                 <td name="nc"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
                                 <td name="np"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
                                 <td name="na"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
+                                <td name="logc"> <input type="text" editable="true" maxlength="24" id="logroc_calificacion{{rownum}}" name="logroc_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
+                                <td name="logp"> <input type="text" editable="true" maxlength="24" id="logrop_calificacion{{rownum}}" name="logrop_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
+                                <td name="loga"> <input type="text" editable="true" maxlength="24" id="logroa_calificacion{{rownum}}" name="logroa_calificacion[]" value="" list="lista_id_logro" class="form-control"> </td>
+                                <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" id="nn_calificacion{{rownum}}" name="nn_calificacion[]" style="text-align: center;" value="" onfocus="" oninput="setNotaDefinitiva(this);" class="form-control"> </td>
                                 <td> <input type="text" editable="true" float="true" min="0" max="10" maxlength="4" readonly="readonly" id="nd_calificacion{{rownum}}" name="nd_calificacion[]" style="text-align: center;" value="" onfocus="setRequiredND(this)" class="form-control"> </td>
                                 <td> <input type="text" editable="true" integer="true" maxlength="2" id="ausencias_calificacion{{rownum}}" name="ausencias_calificacion[]" value="" style="text-align: center;" class="form-control"> 
                                 </td>

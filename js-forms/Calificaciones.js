@@ -157,12 +157,14 @@ function setNotaDefinitiva(item) {
         var nc = null;
         var np = null;
         var na = null;
+        var nn = null;
         var nd = null;
         var valor = null;
         tr = getParentTR(item);
         nc = getElementByName(tr, 'nc_calificacion[]');
         np = getElementByName(tr, 'np_calificacion[]');
         na = getElementByName(tr, 'na_calificacion[]');
+        nn = getElementByName(tr, 'nn_calificacion[]');
         nd = getElementByName(tr, 'nd_calificacion[]');
         setRequiredND(nd);
         if (nc !== undefined && np !== undefined && na !== undefined) {
@@ -176,6 +178,11 @@ function setNotaDefinitiva(item) {
                 na.value = 0;
             }
             valor = (parseFloat(nc.value) + parseFloat(np.value) + parseFloat(na.value)) / 3;
+            if (nn.value !== '' && parseFloat(nn.value) > 0) {
+                valor = nn.value;
+            }else{
+                nn.value='';
+            }
             nd.value = Math.round(valor * Math.pow(10, 1)) / Math.pow(10, 1);
             ;
         }
