@@ -57,6 +57,10 @@ function setRequiredsInputs(tipo) {
             grupo.setAttribute('required', 'required');
             estudiante.setAttribute('required', 'required');
         }
+        if (tipo.value === 'RendimientoBajo') {
+            programa.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+        }
         if (tipo.value === 'PlanEstudioDetallado') {
             programa.setAttribute('required', 'required');
             planestudio.setAttribute('required', 'required');

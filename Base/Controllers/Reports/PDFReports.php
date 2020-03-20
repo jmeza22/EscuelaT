@@ -166,7 +166,7 @@ class PDFReports extends TCPDF {
 
     public function writeDefaultFooter() {
         if ($this->session->hasLogin()) {
-            $this->SetY(-15);
+            $this->SetY(-10);
             $this->SetFont($this->fontfamilyfooter, '', 4);
             $this->Cell(0, 2, 'Sistema Integral de Gestion Academica', 0, 0, 'C');
             $this->Ln();
@@ -1260,6 +1260,79 @@ class PDFReports extends TCPDF {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    public function CalificacionesRendimientoBajo($idescuela, $idprograma, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo, $idestudiante = null, $idmatricula = null) {
+        $rendimiento = null;
+        $rendimiento = $this->bc->getCalificacionesRendimientoBajo($idescuela, $idprograma, $idplanestudio, $grado, $idgrupo, $idperiodo, $idestudiante, $idmatricula);
+        if (isset($rendimiento) && $rendimiento !== null && $rendimiento !== '[]') {
+            $pageWidth = $this->getRealPageWidth();
+            $rendimiento = json_decode($rendimiento, true);
+            if (is_array($rendimiento) && isset($rendimiento[0])) {
+                $this->SetFont($this->fontfamilycontent, 'B', 14);
+                $this->Cell($pageWidth, 6, 'ESTUDIANTES CON BAJO DESEMPEÑO', null, false, 'C');
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, 'B', 12);
+                $this->Cell($pageWidth / 2, 6, 'PROGRAMA: ' . $rendimiento[0]['nombre_programa'], null, false, 'C');
+                $this->Cell($pageWidth / 2, 6, 'AÑO: ' . $idperiodo, null, false, 'C');
+                $this->SetFont($this->fontfamilycontent, 'B', 10);
+                $this->Ln();
+                $i = 0;
+                $this->Cell($pageWidth * 8 / 100, 6, 'CÓDIGO', true);
+                $this->Cell($pageWidth * 34 / 100, 6, 'NOMBRE DEL ESTUDIANTE', true);
+                $this->Cell($pageWidth * 30 / 100, 6, 'ASIGNATURA', true);
+                $this->Cell($pageWidth * 4 / 100, 6, 'P1', true, false, 'C');
+                $this->Cell($pageWidth * 4 / 100, 6, 'P2', true, false, 'C');
+                $this->Cell($pageWidth * 4 / 100, 6, 'P3', true, false, 'C');
+                $this->Cell($pageWidth * 4 / 100, 6, 'P4', true, false, 'C');
+                $this->Cell($pageWidth * 4 / 100, 6, 'P5', true, false, 'C');
+                $this->Cell($pageWidth * 4 / 100, 6, 'P6', true, false, 'C');
+                $this->Cell($pageWidth * 4 / 100, 6, 'DEF', true, false, 'C');
+                $this->Ln();
+
+                $this->SetFont($this->fontfamilycontent, '', 10);
+                $this->SetFillColor(255, 222, 216);
+                for ($i = 0; $i < count($rendimiento); $i++) {
+                    $fillp1 = false;
+                    $fillp2 = false;
+                    $fillp3 = false;
+                    $fillp4 = false;
+                    $fillp5 = false;
+                    $fillp6 = false;
+                    if (is_numeric($rendimiento[$i]['p1_nd_calificacion']) && $rendimiento[$i]['p1_nd_calificacion'] < $rendimiento[$i]['valaprueba_configuracion']) {
+                        $fillp1 = true;
+                    }
+                    if (is_numeric($rendimiento[$i]['p2_nd_calificacion']) && $rendimiento[$i]['p2_nd_calificacion'] < $rendimiento[$i]['valaprueba_configuracion']) {
+                        $fillp2 = true;
+                    }
+                    if (is_numeric($rendimiento[$i]['p3_nd_calificacion']) && $rendimiento[$i]['p3_nd_calificacion'] < $rendimiento[$i]['valaprueba_configuracion']) {
+                        $fillp3 = true;
+                    }
+                    if (is_numeric($rendimiento[$i]['p4_nd_calificacion']) && $rendimiento[$i]['p4_nd_calificacion'] < $rendimiento[$i]['valaprueba_configuracion']) {
+                        $fillp4 = true;
+                    }
+                    if (is_numeric($rendimiento[$i]['p5_nd_calificacion']) && $rendimiento[$i]['p5_nd_calificacion'] < $rendimiento[$i]['valaprueba_configuracion']) {
+                        $fillp5 = true;
+                    }
+                    if (is_numeric($rendimiento[$i]['p6_nd_calificacion']) && $rendimiento[$i]['p6_nd_calificacion'] < $rendimiento[$i]['valaprueba_configuracion']) {
+                        $fillp6 = true;
+                    }
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 8 / 100, 6, $rendimiento[$i]['id_estudiante'], true);
+                    $this->Cell($pageWidth * 34 / 100, 6, $rendimiento[$i]['nombrecompleto_estudiante'], true);
+                    $this->Cell($pageWidth * 30 / 100, 6, $rendimiento[$i]['nombre_asignatura'], true);
+                    $this->SetFont($this->fontfamilycontent, 'B', 10);
+                    $this->Cell($pageWidth * 4 / 100, 6, $rendimiento[$i]['p1_nd_calificacion'], true, false, 'C', $fillp1);
+                    $this->Cell($pageWidth * 4 / 100, 6, $rendimiento[$i]['p2_nd_calificacion'], true, false, 'C', $fillp2);
+                    $this->Cell($pageWidth * 4 / 100, 6, $rendimiento[$i]['p3_nd_calificacion'], true, false, 'C', $fillp3);
+                    $this->Cell($pageWidth * 4 / 100, 6, $rendimiento[$i]['p4_nd_calificacion'], true, false, 'C', $fillp4);
+                    $this->Cell($pageWidth * 4 / 100, 6, $rendimiento[$i]['p5_nd_calificacion'], true, false, 'C', $fillp5);
+                    $this->Cell($pageWidth * 4 / 100, 6, $rendimiento[$i]['p6_nd_calificacion'], true, false, 'C', $fillp6);
+                    $this->Cell($pageWidth * 4 / 100, 6, $rendimiento[$i]['definitiva'], true, false, 'C', false);
+                    $this->Ln();
                 }
             }
         }

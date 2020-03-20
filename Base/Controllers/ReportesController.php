@@ -236,6 +236,12 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->ObservadorEstudiante($idestudiante);
             $report->generatePDFDocument();
         }
+        if ($tipo === 'RendimientoBajo') {
+            $report->AddPage('L', $format, true);
+            $report->setReportName('Estudiantes con Bajo Rendimiento');
+            $report->CalificacionesRendimientoBajo($session->getEnterpriseID(), $idprograma, $idplanestudio, $grado, $grupo, $idperiodo, $idestudiante, null);
+            $report->generatePDFDocument();
+        }
     }
 } else {
     echo $session->getSessionStateJSON();
