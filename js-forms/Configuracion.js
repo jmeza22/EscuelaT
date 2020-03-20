@@ -19,7 +19,7 @@ function SendConfiguracion() {
     var form = document.getElementById('form0');
     var idescuela = getElement(form, 'id_escuela');
     var logo = document.getElementById('logo_configuracion');
-    if (validateForm(form) && ValidarPorcentajesPeriodos() && ValidarValoracion()) {
+    if (validateForm(form) && ValidarPorcentajesCortes() && ValidarValoracion()) {
         logo.value = 'Escuela' + idescuela.value + '.jpg';
         submitForm(form, false);
     }
@@ -171,14 +171,53 @@ function ValidarValoracion() {
     return true;
 }
 
-function ValidarPorcentajesPeriodos() {
+function ValidarPorcentajesCortes() {
+    var numcortes = document.getElementById('numcortes_configuracion');
     var p1 = document.getElementById('p1_porcentaje_configuracion');
     var p2 = document.getElementById('p2_porcentaje_configuracion');
     var p3 = document.getElementById('p3_porcentaje_configuracion');
     var p4 = document.getElementById('p4_porcentaje_configuracion');
     var p5 = document.getElementById('p5_porcentaje_configuracion');
     var p6 = document.getElementById('p6_porcentaje_configuracion');
-    if (p1 !== undefined && p1 !== null && p2 !== undefined && p2 !== null && p3 !== undefined && p3 !== null && p4 !== undefined && p4 !== null && p5 !== undefined && p5 !== null && p6 !== undefined && p6 !== null) {
+    if (numcortes !== undefined && numcortes !== null && p1 !== undefined && p1 !== null && p2 !== undefined && p2 !== null && p3 !== undefined && p3 !== null && p4 !== undefined && p4 !== null && p5 !== undefined && p5 !== null && p6 !== undefined && p6 !== null) {
+        if (!isNaN(numcortes.value)) {
+            if (parseFloat(numcortes.value) >= 1) {
+                p1.removeAttribute('readonly');
+            } else {
+                p1.value = '0';
+                p1.setAttribute('readonly', 'readonly');
+            }
+            if (parseFloat(numcortes.value) >= 2) {
+                p2.removeAttribute('readonly');
+            } else {
+                p2.value = '0';
+                p2.setAttribute('readonly', 'readonly');
+            }
+            if (parseFloat(numcortes.value) >= 3) {
+                p3.removeAttribute('readonly');
+            } else {
+                p3.value = '0';
+                p3.setAttribute('readonly', 'readonly');
+            }
+            if (parseFloat(numcortes.value) >= 4) {
+                p4.removeAttribute('readonly');
+            } else {
+                p4.value = '0';
+                p4.setAttribute('readonly', 'readonly');
+            }
+            if (parseFloat(numcortes.value) >= 5) {
+                p5.removeAttribute('readonly');
+            } else {
+                p5.value = '0';
+                p5.setAttribute('readonly', 'readonly');
+            }
+            if (parseFloat(numcortes.value) === 6) {
+                p6.removeAttribute('readonly');
+            } else {
+                p6.value = '0';
+                p6.setAttribute('readonly', 'readonly');
+            }
+        }
         if (isNaN(p1.value)) {
             alert('Formato Invalido Periodo 1');
             return false;
