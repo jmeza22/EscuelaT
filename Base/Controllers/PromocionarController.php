@@ -22,9 +22,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
     if (isset($_POST) && $_POST != null) {
         $idprograma = null;
         $idperiodo = null;
-        $numgradoprograma = null;
+        $numgrado = null;
         $idgrupo = null;
         $idperiodonew = null;
+        $numgradonew = null;
+        $idgruponew = null;
         $matriculas = null;
         $configuracion = null;
         $programa = null;
@@ -35,35 +37,30 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             $idescuela = $session->getEnterpriseID();
             $idprograma = $_POST['id_programa'];
             $idperiodo = $_POST['id_periodo'];
-            $numgradoprograma = $_POST['numgrado_programa'];
-            $idgrupo = $_POST['id_grupo'];
+            $numgrado = null;
+            $idgrupo = null;
+            if ($_POST['numgrado_programa'] != "" && $_POST['numgrado_programa'] !== "NULL") {
+                $numgrado = $_POST['numgrado_programa'];
+            }
+            if ($_POST['id_grupo'] !== "" && $_POST['id_grupo'] !== "NULL") {
+                $idgrupo = $_POST['id_grupo'];
+            }
             $idperiodonew = $_POST['id_periodo_new'];
+            $numgradonew = $_POST['numgrado_programa_new'];
+            $idgruponew = $_POST['id_grupo_new'];
             $bc = new ReportsBank();
             $bc->connect();
 
-            $sql = "SELECT * FROM ConfiguracionApp WHERE id_escuela='" . $session->getEnterpriseID() . "'";
-            $configuracion = $bc->selectJSONArray($sql, null);
+            $configuracion = $bc->getConfiguracionEscuela($idescuela);
             $configuracion = json_decode($configuracion, true);
             $configuracion = $configuracion[0];
 
-            $sql = "SELECT * FROM ProgramasApp WHERE id_programa='$idprograma'";
-            $programa = $bc->selectJSONArray($sql, null);
+            $programa = $bc->getProgramas($idescuela, $idprograma);
             $programa = json_decode($programa, true);
             $programa = $programa[0];
-            //echo print_r(json_decode($bc->getPromedioAritmetico(),true));
-            $sql = "SELECT M.*, C1.id_matricula AS idmatricula, AVG(C1.pfin_nd_calificacion) AS promedio,"
-                    . " (SELECT COUNT(C2.pfin_nd_calificacion) AS cantidadRep FROM CalificacionesApp C2 INNER JOIN ConfiguracionApp Cn ON C2.id_escuela=Cn.id_escuela WHERE C2.id_matricula=C1.id_matricula AND C2.status_calificacion=1 AND C2.pfin_nd_calificacion < Cn.valaprueba_configuracion ) AS cantidad"
-                    . " FROM CalificacionesApp C1 INNER JOIN MatriculasApp M ON C1.id_matricula=M.id_matricula WHERE C1.status_calificacion=1 "
-                    . " AND C1.id_escuela=:p_id_escuela AND C1.id_periodo=:p_id_periodo AND C1.id_programa=:p_id_programa AND C1.numgrado_programa=:p_numgrado_programa AND C1.id_grupo=:p_id_grupo "
-                    . " GROUP BY C1.id_estudiante, C1.id_matricula ORDER BY C1.id_matricula "
-                    . "";
-            $arraywhere = array();
-            $arraywhere['p_id_escuela'] = $idescuela;
-            $arraywhere['p_id_programa'] = $idprograma;
-            $arraywhere['p_id_periodo'] = $idperiodo;
-            $arraywhere['p_numgrado_programa'] = $numgradoprograma;
-            $arraywhere['p_id_grupo'] = $idgrupo;
-            $matriculas = $bc->selectJSONArray($sql, $arraywhere);
+            $matriculas = null;
+            $matriculas = $bc->getPromedio($idescuela, $idprograma, null, $numgrado, $idgrupo, $idperiodo, null, null);
+
             $bc->setModel('MatriculasApp');
 
             $arraywhere = array();
@@ -99,19 +96,36 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $postdata['usuarioedita_matricula'] = $session->getNickname();
                     $postdata['fechacrea_matricula'] = date('Y-m-d H:i:s');
                     $postdata['fechaedita_matricula'] = date('Y-m-d H:i:s');
-                    if ($matriculas[$i]['promedio'] >= 1) {
-                        if ($matriculas[$i]['promedio'] >= $configuracion['valaprueba_configuracion'] && ($matriculas[$i]['cantidad'] < $configuracion['maxasigrep_configuracion'])) {
-                            $numgradoprogramanew = ($matriculas[$i]['numgrado_programa'] + 1);
+                    $nombre = $matriculas[$i]['nombrecompleto_estudiante'];
+                    
+                    $cantReprobadas = $bc->getCantidadAsignaturasReprobadas($matriculas[$i]['id_escuela'], $matriculas[$i]['id_programa'], $matriculas[$i]['id_planestudio'], $matriculas[$i]['numgrado_programa'], $matriculas[$i]['id_grupo'], $matriculas[$i]['id_periodo'], $matriculas[$i]['id_estudiante'], $matriculas[$i]['id_matricula']);
+                    if ($cantReprobadas !== null && $cantReprobadas !== '[]') {
+                        $cantReprobadas = json_decode($cantReprobadas, true);
+                        if (is_array($cantReprobadas) && isset($cantReprobadas[0])) {
+                            $cantReprobadas = $cantReprobadas[0]['CantidadReprobadas'];
+                        }
+                    }
+                    if ($matriculas[$i]['Promedio'] >= 1) {
+                        if (($matriculas[$i]['Promedio'] >= $configuracion['valaprueba_configuracion']) && ($cantReprobadas < $configuracion['maxasigrep_configuracion'])) {
+                            $numgradonew = ($matriculas[$i]['numgrado_programa'] + 1);
                             $grados = ($programa['ngrados_programa'] + 0);
-                            $gradoviejo = $matriculas[$i]['numgrado_programa'];
-                            $grupoviejo = $matriculas[$i]['id_grupo'];
-                            $n = 1;
-                            $idgruponew = str_replace("" . $gradoviejo, "" . $numgradoprogramanew, "" . $grupoviejo, $n);
-                            $grupos = $bc->getGrupos(null, null, null, $idgruponew);
-                            if ($numgradoprogramanew <= $grados) {
-                                $postdata['numgrado_programa'] = $numgradoprogramanew;
+                            if ($numgradonew <= $grados) {
+                                $postdata['numgrado_programa'] = $numgradonew;
                             }
-                            if ($grupos !== null && $grupos !== '[]' && is_array(json_decode($grupos, true)[0])) {
+                            $grupoAnt = $bc->getGrupos($matriculas[$i]['id_escuela'], $matriculas[$i]['id_programa'], $matriculas[$i]['numgrado_programa'], $matriculas[$i]['id_grupo']);
+                            if ($grupoAnt !== null && $grupoAnt !== '[]') {
+                                $grupoAnt = json_decode($grupoAnt, true);
+                                $grupoAnt = $grupoAnt[0];
+                            }
+                            if (is_array($grupoAnt)) {
+                                $grupoNuevo = $bc->getGrupos($grupoAnt['id_escuela'], $grupoAnt['id_programa'], $postdata['numgrado_programa'], null, $grupoAnt['num_grupo']);
+                                if ($grupoNuevo !== null && $grupoNuevo !== '[]') {
+                                    $grupoNuevo = json_decode($grupoNuevo, true);
+                                    $grupoNuevo = $grupoNuevo[0];
+                                    $postdata['id_grupo'] = $grupoNuevo['id_grupo'];
+                                }
+                            }
+                            if ($idgruponew !== null && $idgruponew !== '' && $idgruponew !== 'NULL') {
                                 $postdata['id_grupo'] = $idgruponew;
                             }
                         } else {

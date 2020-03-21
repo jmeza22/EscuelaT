@@ -22,7 +22,6 @@ function setFindbyTable() {
     mytable.setAttribute("findbyvalue3", getUserIdLogin());
     mytable.setAttribute("findby4", 'fecha_matricula');
     mytable.setAttribute("findbyvalue4", getCurrentDate());
-
 }
 
 function LoadPeriodo() {
@@ -45,8 +44,18 @@ function LoadPeriodoSiguiente() {
     periodo = document.getElementById("id_periodo_new");
     periodo.setAttribute('findby', 'anualidad_periodo_old');
     periodo.setAttribute('findbyvalue', anualidadAnt.value);
-    periodo.innerHTML = '<option value="">Ninguna</option>';
+    periodo.innerHTML = '<option value="" disabled="disabled">Ninguna</option>';
     loadComboboxData(periodo);
+}
+
+function LoadGrupoSiguiente() {
+    var grupo = null;
+    var gradonew = document.getElementById("numgrado_programa_new");
+    grupo = document.getElementById("id_grupo_new");
+    grupo.setAttribute('findby', 'numgrado_programa');
+    grupo.setAttribute('findbyvalue', gradonew.value);
+    grupo.innerHTML = '<option value="" >Ninguna</option>';
+    loadComboboxData(grupo);
 }
 
 function LoadTable() {

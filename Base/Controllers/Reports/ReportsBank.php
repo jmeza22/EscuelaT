@@ -94,7 +94,7 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
-    public function getProgramas($idescuela = null) {
+    public function getProgramas($idescuela = null, $idprograma = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM ProgramasApp WHERE status_programa=1 ";
@@ -102,6 +102,10 @@ class ReportsBank extends BasicController {
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;
             $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND id_programa=:p_id_programa ";
         }
         $sql = $sql . " ORDER BY nombre_programa ASC";
         $result = $this->selectJSONArray($sql, $arraywhere);
@@ -225,7 +229,7 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
-    public function getGrupos($idescuela = null, $idprograma = null, $numgrado = null, $idgrupo = null) {
+    public function getGrupos($idescuela = null, $idprograma = null, $numgrado = null, $idgrupo = null, $diferenciador = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT G.*, Pr.nombre_programa "
@@ -248,6 +252,10 @@ class ReportsBank extends BasicController {
         if ($idgrupo !== null) {
             $arraywhere['p_id_grupo'] = $idgrupo;
             $sql = $sql . " AND G.id_grupo=:p_id_grupo ";
+        }
+        if ($diferenciador !== null) {
+            $arraywhere['p_num_grupo'] = $diferenciador;
+            $sql = $sql . " AND G.num_grupo=:p_num_grupo ";
         }
         $sql = $sql . " ORDER BY CAST(G.numgrado_programa AS DECIMAL), G.num_grupo ASC";
         $result = $this->selectJSONArray($sql, $arraywhere);
@@ -676,17 +684,41 @@ class ReportsBank extends BasicController {
                 . "IFNULL(M.id_periodo,'') AS id_periodo, "
                 . "IFNULL(Pe.anualidad_periodo,'') AS anualidad_periodo, "
                 . "IFNULL(M.fecha_matricula,'') AS fecha_matricula, "
-                . "IFNULL(DG.nombrecompleto_docente,'') AS nombre_director "
+                . "IFNULL(DG.nombrecompleto_docente,'') AS nombre_director, "
+                . " CASE Cn.tipopromedio_configuracion "
+                . " WHEN 'PONDERADO' THEN "
+                . " ROUND("
+                . " SUM(("
+                . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p3_nd_calificacion,0)*(IFNULL(Cn.p3_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100)) "
+                . " ) * A.numcreditos_asignatura) / SUM(IFNULL(A.numcreditos_asignatura,0)),3) "
+                . " WHEN 'ARITMETICO' THEN "
+                . " ROUND(AVG("
+                . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p3_nd_calificacion,0)*(IFNULL(Cn.p3_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100)) "
+                . "),3) END AS Promedio, "
+                . " (SELECT COUNT(C0.pfin_nd_calificacion) AS cantidadRep FROM CalificacionesApp C0 INNER JOIN ConfiguracionApp Cn ON C0.id_escuela=Cn.id_escuela WHERE C0.id_matricula=C.id_matricula AND C0.status_calificacion=1 AND C0.pfin_nd_calificacion < Cn.valaprueba_configuracion ) AS CantidadReprobadas "
                 . " FROM "
                 . " ObservadorEstudianteApp OE "
-                . " LEFT JOIN PersonasApp P ON OE.id_estudiante=P.id_persona "
-                . " LEFT JOIN MatriculasApp M ON OE.id_estudiante=M.id_estudiante "
-                . " LEFT JOIN PeriodosAnualesApp Pe ON M.id_periodo=Pe.id_periodo "
+                . " INNER JOIN PersonasApp P ON OE.id_estudiante=P.id_persona "
+                . " INNER JOIN MatriculasApp M ON OE.id_estudiante=M.id_estudiante "
+                . " INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa "
+                . " INNER JOIN PeriodosAnualesApp Pe ON M.id_periodo=Pe.id_periodo "
+                . " INNER JOIN GruposApp G ON M.id_grupo=G.id_grupo "
+                . " INNER JOIN ConfiguracionApp Cn ON M.id_escuela=Cn.id_escuela "
+                . " LEFT JOIN CalificacionesApp C ON C.id_matricula=M.id_matricula "
+                . " LEFT JOIN AsignaturasApp A ON C.id_asignatura=A.id_asignatura "
                 . " LEFT JOIN SedesApp S ON M.id_sede=S.id_sede "
                 . " LEFT JOIN JornadasApp J ON M.id_jornada=J.id_jornada "
-                . " LEFT JOIN GruposApp G ON M.id_grupo=G.id_grupo "
                 . " LEFT JOIN DirectoresGruposApp DG ON M.id_grupo=DG.id_grupo "
-                . " INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa "
                 . " WHERE OE.status_estudiante=1 AND M.status_matricula=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
@@ -729,7 +761,7 @@ class ReportsBank extends BasicController {
             $arraywhere['p_id_matricula'] = $idmatricula;
             $sql = $sql . " AND M.id_matricula=:p_id_matricula ";
         }
-        $sql = $sql . " ORDER BY CAST(M.numgrado_programa AS DECIMAL), OE.nombrecompleto_estudiante ASC";
+        $sql = $sql . " GROUP BY M.id_estudiante, M.id_matricula ORDER BY M.id_programa, CAST(M.numgrado_programa AS DECIMAL), M.id_grupo, Promedio DESC, M.nombrecompleto_estudiante ASC";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -737,23 +769,22 @@ class ReportsBank extends BasicController {
     public function getCalificaciones($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $sql = null;
         $result = null;
-
         $sql = "SELECT @rownum := @rownum +1 AS rownum, "
+                . " M.nombrecompleto_estudiante, "
                 . " C.id_calificacion AS id_calificacion,"
                 . " MA.*, "
                 . " A.nombre_asignatura, "
-                . " M.nombrecompleto_estudiante, "
                 . " AR.nombre_area, "
                 . " PED.hteoricas_asignatura AS hteoricas_asignatura, "
                 . " PED.hpracticas_asignatura AS hpracticas_asignatura, "
-                . " IFNULL(C.p1_nd_calificacion,'') AS np1, "
-                . " IFNULL(C.p2_nd_calificacion,'') AS np2, "
-                . " IFNULL(C.p3_nd_calificacion,'') AS np3, "
-                . " IFNULL(C.p4_nd_calificacion,'') AS np4, "
-                . " IFNULL(C.p5_nd_calificacion,'') AS np5, "
-                . " IFNULL(C.p6_nd_calificacion,'') AS np6, "
-                . " IFNULL(C.phab_nd_calificacion,'') AS nphab, "
-                . " ROUND(IFNULL(C.pfin_nd_calificacion,''),1) AS npfin, "
+                . " IFNULL(C.p1_nd_calificacion,'') AS p1_nd_calificacion, "
+                . " IFNULL(C.p2_nd_calificacion,'') AS p2_nd_calificacion, "
+                . " IFNULL(C.p3_nd_calificacion,'') AS p3_nd_calificacion, "
+                . " IFNULL(C.p4_nd_calificacion,'') AS p4_nd_calificacion, "
+                . " IFNULL(C.p5_nd_calificacion,'') AS p5_nd_calificacion, "
+                . " IFNULL(C.p6_nd_calificacion,'') AS p6_nd_calificacion, "
+                . " IFNULL(C.phab_nd_calificacion,'') AS phab_nd_calificacion, "
+                . " ROUND(IFNULL(C.pfin_nd_calificacion,''),1) AS pfin_nd_calificacion, "
                 . " IFNULL(C.p1_ausencias_calificacion,'') AS p1_ausencias_calificacion, "
                 . " IFNULL(C.p2_ausencias_calificacion,'') AS p2_ausencias_calificacion, "
                 . " IFNULL(C.p3_ausencias_calificacion,'') AS p3_ausencias_calificacion, "
@@ -790,12 +821,6 @@ class ReportsBank extends BasicController {
                 . " IFNULL((SELECT lcphab.descripcion_logro FROM LogrosAsignaturasApp lcphab WHERE lcphab.id_logro=C.phab_logroc_calificacion),'') AS phab_descripcion_logroc, "
                 . " IFNULL((SELECT lpphab.descripcion_logro FROM LogrosAsignaturasApp lpphab WHERE lpphab.id_logro=C.phab_logrop_calificacion),'') AS phab_descripcion_logrop, "
                 . " IFNULL((SELECT laphab.descripcion_logro FROM LogrosAsignaturasApp laphab WHERE laphab.id_logro=C.phab_logroa_calificacion),'') AS phab_descripcion_logroa, "
-                . " ((IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100))) AS rndp1,"
-                . " ((IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100))) AS rndp2,"
-                . " ((IFNULL(C.p3_nd_calificacion,0)*(IFNULL(Cn.p3_porcentaje_configuracion,0)/100))) AS rndp3,"
-                . " ((IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100))) AS rndp4,"
-                . " ((IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100))) AS rndp5,"
-                . " ((IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100))) AS rndp6,"
                 . " ROUND(IFNULL(("
                 . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
                 . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
@@ -803,7 +828,7 @@ class ReportsBank extends BasicController {
                 . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
                 . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
                 . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100)) "
-                . " ),'0'),1) AS def"
+                . " ),'0'),1) AS def "
                 . " FROM (SELECT @rownum :=0) R, "
                 . " MatriculaAsignaturasApp MA "
                 . " INNER JOIN ConfiguracionApp Cn ON MA.id_escuela=Cn.id_escuela "
@@ -859,7 +884,7 @@ class ReportsBank extends BasicController {
             $arraywhere['p_id_matricula'] = $idmatricula;
             $sql = $sql . " AND MA.id_matricula=:p_id_matricula ";
         }
-        $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante, AR.nombre_area ";
+        $sql = $sql . " ORDER BY M.id_escuela, M.id_programa, M.numgrado_programa, M.id_grupo, M.nombrecompleto_estudiante, AR.nombre_area, A.nombre_asignatura ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -937,47 +962,119 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
-    public function getPromedioAritmetico($idescuela = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
+    public function getCantidadAsignaturasReprobadas($idescuela = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $sql = null;
         $result = null;
-
-        $sql = "SELECT M.*, C1.id_matricula AS idmatricula, AVG(C1.pfin_nd_calificacion) AS promedio,"
-                . " (SELECT COUNT(C2.pfin_nd_calificacion) AS cantidadRep FROM CalificacionesApp C2 INNER JOIN ConfiguracionApp Cn ON C2.id_escuela=Cn.id_escuela WHERE C2.id_matricula=C1.id_matricula AND C2.status_calificacion=1 AND C2.pfin_nd_calificacion < Cn.valaprueba_configuracion ) AS cantidad"
-                . " FROM CalificacionesApp C1 INNER JOIN MatriculasApp M ON C1.id_matricula=M.id_matricula WHERE C1.status_calificacion=1 ";
+        $sql = "SELECT M.*, Pr.nombre_programa, OE.foto_estudiante, "
+                . " (SELECT COUNT(C0.pfin_nd_calificacion) AS cantidadRep FROM CalificacionesApp C0 INNER JOIN ConfiguracionApp Cn ON C0.id_escuela=Cn.id_escuela WHERE C0.id_matricula=C.id_matricula AND C0.status_calificacion=1 AND C0.pfin_nd_calificacion < Cn.valaprueba_configuracion ) AS CantidadReprobadas "
+                . " FROM CalificacionesApp C "
+                . " INNER JOIN ConfiguracionApp Cn ON C.id_escuela=Cn.id_escuela "
+                . " INNER JOIN ObservadorEstudianteApp OE ON C.id_estudiante=OE.id_estudiante "
+                . " INNER JOIN MatriculasApp M ON C.id_matricula=M.id_matricula "
+                . " INNER JOIN ProgramasApp Pr ON C.id_programa=Pr.id_programa "
+                . " WHERE C.status_calificacion=1 AND M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' ";
         $arraywhere = Array();
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;
-            $sql = $sql . " AND C1.id_escuela=:p_id_escuela ";
+            $sql = $sql . " AND C.id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
             $arraywhere['p_id_programa'] = $idprograma;
-            $sql = $sql . " AND C1.id_programa=:p_id_programa ";
+            $sql = $sql . " AND C.id_programa=:p_id_programa ";
         }
         if ($idplanestudio !== null) {
             $arraywhere['p_id_planestudio'] = $idplanestudio;
-            $sql = $sql . " AND C1.id_planestudio=:p_id_planestudio ";
+            $sql = $sql . " AND C.id_planestudio=:p_id_planestudio ";
         }
         if ($grado !== null) {
             $arraywhere['p_num_grado'] = $grado;
-            $sql = $sql . " AND C1.numgrado_programa=:p_num_grado ";
+            $sql = $sql . " AND C.numgrado_programa=:p_num_grado ";
         }
         if ($idgrupo !== null) {
             $arraywhere['p_id_grupo'] = $idgrupo;
-            $sql = $sql . " AND C1.id_grupo=:p_id_grupo ";
+            $sql = $sql . " AND C.id_grupo=:p_id_grupo ";
         }
         if ($idperiodo !== null) {
             $arraywhere['p_id_periodo'] = $idperiodo;
-            $sql = $sql . " AND C1.id_periodo=:p_id_periodo ";
+            $sql = $sql . " AND C.id_periodo=:p_id_periodo ";
         }
         if ($idestudiante !== null) {
             $arraywhere['p_id_estudiante'] = $idestudiante;
-            $sql = $sql . " AND C1.id_estudiante=:p_id_estudiante ";
+            $sql = $sql . " AND C.id_estudiante=:p_id_estudiante ";
         }
         if ($idmatricula !== null) {
             $arraywhere['p_id_matricula'] = $idmatricula;
-            $sql = $sql . " AND C1.id_matricula=:p_id_matricula ";
+            $sql = $sql . " AND C.id_matricula=:p_id_matricula ";
         }
-        $sql = $sql . " GROUP BY C1.id_estudiante, C1.id_matricula ORDER BY C1.id_matricula ";
+        $sql = $sql . " GROUP BY C.id_estudiante, C.id_matricula ORDER BY C.id_programa, C.numgrado_programa, C.id_grupo, OE.nombrecompleto_estudiante ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getPromedio($idescuela = null, $idprograma = null, $idplanestudio = null, $grado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
+        $sql = "SELECT M.*, Pr.nombre_programa, OE.foto_estudiante, "
+                . " CASE IFNULL(Cn.tipopromedio_configuracion, 'ARITMETICO') "
+                . " WHEN 'PONDERADO' THEN "
+                . " ROUND("
+                . " SUM(("
+                . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p3_nd_calificacion,0)*(IFNULL(Cn.p3_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100)) "
+                . " ) * A.numcreditos_asignatura) / SUM(IFNULL(A.numcreditos_asignatura,0)),3) "
+                . " WHEN 'ARITMETICO' THEN "
+                . " ROUND(AVG("
+                . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p3_nd_calificacion,0)*(IFNULL(Cn.p3_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
+                . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100)) "
+                . "),3) END AS Promedio "
+                . " FROM CalificacionesApp C "
+                . " INNER JOIN ConfiguracionApp Cn ON C.id_escuela=Cn.id_escuela "
+                . " INNER JOIN ObservadorEstudianteApp OE ON C.id_estudiante=OE.id_estudiante "
+                . " INNER JOIN AsignaturasApp A ON C.id_asignatura=A.id_asignatura "
+                . " INNER JOIN ProgramasApp Pr ON C.id_programa=Pr.id_programa "
+                . " INNER JOIN MatriculasApp M ON C.id_matricula=M.id_matricula "
+                . " WHERE C.status_calificacion=1 AND A.status_asignatura=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' "
+        ;
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND M.id_escuela=:p_id_escuela ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND M.id_programa=:p_id_programa ";
+        }
+        if ($idplanestudio !== null) {
+            $arraywhere['p_id_planestudio'] = $idplanestudio;
+            $sql = $sql . " AND M.id_planestudio=:p_id_planestudio ";
+        }
+        if ($grado !== null) {
+            $arraywhere['p_num_grado'] = $grado;
+            $sql = $sql . " AND M.numgrado_programa=:p_num_grado ";
+        }
+        if ($idgrupo !== null) {
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND M.id_grupo=:p_id_grupo ";
+        }
+        if ($idperiodo !== null) {
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND M.id_periodo=:p_id_periodo ";
+        }
+        if ($idestudiante !== null) {
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND M.id_estudiante=:p_id_estudiante ";
+        }
+        if ($idmatricula !== null) {
+            $arraywhere['p_id_matricula'] = $idmatricula;
+            $sql = $sql . " AND M.id_matricula=:p_id_matricula ";
+        }
+        $sql = $sql . " GROUP BY M.id_estudiante, M.id_matricula ORDER BY M.id_programa, M.numgrado_programa, M.id_grupo, OE.nombrecompleto_estudiante ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -992,7 +1089,7 @@ class ReportsBank extends BasicController {
         if ($resultEstudiantes !== null && is_array($resultEstudiantes)) {
             for ($i = 0; $i < count($resultEstudiantes); $i++) {
                 $resultCalificaciones = $this->getCalificaciones($resultEstudiantes[$i]['id_escuela'], $resultEstudiantes[$i]['id_sede'], $resultEstudiantes[$i]['id_jornada'], $resultEstudiantes[$i]['id_programa'], $resultEstudiantes[$i]['id_planestudio'], $resultEstudiantes[$i]['numgrado_programa'], $resultEstudiantes[$i]['id_grupo'], $resultEstudiantes[$i]['id_periodo'], $resultEstudiantes[$i]['id_estudiante'], $resultEstudiantes[$i]['id_matricula']);
-                if ($resultCalificaciones !== null) {
+                if ($resultCalificaciones !== null && $resultCalificaciones !== '[]') {
                     $resultEstudiantes[$i]['calificaciones'] = $resultCalificaciones;
                 }
             }

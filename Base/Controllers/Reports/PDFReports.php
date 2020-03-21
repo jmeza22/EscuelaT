@@ -517,6 +517,7 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoEstudiantes($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null) {
+        $this->bc->getCantidadAsignaturasReprobadas();
         $data = null;
         $data = $this->bc->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, null, $numgrado, $idgrupo, $idperiodo);
         if ($data !== null && $data !== '' && $data !== '[]') {
@@ -753,12 +754,12 @@ class PDFReports extends TCPDF {
                 if (is_array($calificaciones) && count($calificaciones) > 0) {
                     for ($j = 0; $j < count($calificaciones); $j++) {
                         $this->Cell($pageWidth * 42 / 100, 4, $calificaciones[$j]['nombre_asignatura'], 1, 0, 'L');
-                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['np1'], 1, 0, 'C');
-                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['np2'], 1, 0, 'C');
-                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['np3'], 1, 0, 'C');
-                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['np4'], 1, 0, 'C');
-                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['np5'], 1, 0, 'C');
-                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['np6'], 1, 0, 'C');
+                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['p1_nd_calificacion'], 1, 0, 'C');
+                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['p2_nd_calificacion'], 1, 0, 'C');
+                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['p3_nd_calificacion'], 1, 0, 'C');
+                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['p4_nd_calificacion'], 1, 0, 'C');
+                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['p5_nd_calificacion'], 1, 0, 'C');
+                        $this->Cell($pageWidth * 7 / 100, 4, $calificaciones[$j]['p6_nd_calificacion'], 1, 0, 'C');
                         $this->Cell($pageWidth * 16 / 100, 4, $calificaciones[$j]['def'], 1, 0, 'C');
                         $this->Ln();
                     }
@@ -803,13 +804,15 @@ class PDFReports extends TCPDF {
                     }
                     if ($calificaciones !== null && is_array($calificaciones)) {
                         $this->SetFont($this->fontfamilycontent, 'B', 16);
-                        $this->Cell(0, 6, 'INFORME DE NOTAS', 0, 1, 'C');
+                        $this->Cell(0, 6, 'INFORME DE CALIFICACIONES', 0, 1, 'C');
                         $this->Ln(2);
                         $this->SetFont($this->fontfamilycontent, '', 12);
-                        $this->Cell($pageWidth, 4, 'ESTUDIANTE', 0, 0, 'C');
+                        $this->Cell($pageWidth * 66.6 / 100, 4, 'ESTUDIANTE', 0, 0, 'C');
+                        $this->Cell($pageWidth * 33.3 / 100, 4, 'PROMEDIO', 0, 0, 'C');
                         $this->Ln(4);
                         $this->SetFont($this->fontfamilycontent, 'B', 14);
-                        $this->Cell($pageWidth, 4, strtoupper($data[$i]['nombrecompleto_estudiante']), 0, 0, 'C');
+                        $this->Cell($pageWidth * 66.6 / 100, 4, strtoupper($data[$i]['nombrecompleto_estudiante']), 0, 0, 'C');
+                        $this->Cell($pageWidth * 33.3 / 100, 4, strtoupper($data[$i]['Promedio']), 0, 0, 'C');
                         $this->Ln(6);
                         $this->SetFont($this->fontfamilycontent, 'B', 12);
                         $this->Cell($pageWidth * 33.333 / 100, 4, 'PROGRAMA', 0, 0, 'C');
@@ -850,35 +853,36 @@ class PDFReports extends TCPDF {
                         $observaciones = '';
                         if (is_array($calificaciones) && count($calificaciones) > 0) {
                             for ($j = 0; $j < count($calificaciones); $j++) {
-                                if ($calificaciones[$j]['np1'] === '0' || $calificaciones[$j]['np1'] === '0.0') {
-                                    $calificaciones[$j]['np1'] = '';
+                                if ($calificaciones[$j]['p1_nd_calificacion'] === '0' || $calificaciones[$j]['p1_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p1_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np2'] === '0' || $calificaciones[$j]['np2'] === '0.0') {
-                                    $calificaciones[$j]['np2'] = '';
+                                if ($calificaciones[$j]['p2_nd_calificacion'] === '0' || $calificaciones[$j]['p2_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p2_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np3'] === '0' || $calificaciones[$j]['np3'] === '0.0') {
-                                    $calificaciones[$j]['np3'] = '';
+                                if ($calificaciones[$j]['p3_nd_calificacion'] === '0' || $calificaciones[$j]['p3_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p3_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np4'] === '0' || $calificaciones[$j]['np4'] === '0.0') {
-                                    $calificaciones[$j]['np4'] = '';
+                                if ($calificaciones[$j]['p4_nd_calificacion'] === '0' || $calificaciones[$j]['p4_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p4_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np5'] === '0' || $calificaciones[$j]['np5'] === '0.0') {
-                                    $calificaciones[$j]['np5'] = '';
+                                if ($calificaciones[$j]['p5_nd_calificacion'] === '0' || $calificaciones[$j]['p5_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p5_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np6'] === '0' || $calificaciones[$j]['np6'] === '0.0') {
-                                    $calificaciones[$j]['np6'] = '';
+                                if ($calificaciones[$j]['p6_nd_calificacion'] === '0' || $calificaciones[$j]['p6_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p6_nd_calificacion'] = '';
                                 }
+
                                 $this->SetFont($this->fontfamilycontent, '', 10);
                                 $ih = '' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']);
                                 $this->Cell($pageWidth * 42 / 100, 4, strtoupper($calificaciones[$j]['nombre_asignatura']), 1, 0, 'L');
                                 $this->Cell($pageWidth * 6 / 100, 4, $ih, 1, 0, 'C');
-                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np1'], 1, 0, 'C');
-                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np2'], 1, 0, 'C');
-                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np3'], 1, 0, 'C');
-                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np4'], 1, 0, 'C');
-                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np5'], 1, 0, 'C');
-                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['np6'], 1, 0, 'C');
-                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['nphab'], 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['p1_nd_calificacion'], 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['p2_nd_calificacion'], 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['p3_nd_calificacion'], 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['p4_nd_calificacion'], 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['p5_nd_calificacion'], 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['p6_nd_calificacion'], 1, 0, 'C');
+                                $this->Cell($pageWidth * 6 / 100, 4, $calificaciones[$j]['phab_nd_calificacion'], 1, 0, 'C');
                                 $this->SetFont($this->fontfamilycontent, 'B', 10);
                                 $this->Cell($pageWidth * 10 / 100, 4, $calificaciones[$j]['def'], 1, 0, 'C');
                                 $this->Ln();
@@ -990,34 +994,34 @@ class PDFReports extends TCPDF {
 
                         if ($calificaciones !== null && is_array($calificaciones)) {
                             for ($j = 0; $j < count($calificaciones); $j++) {
-                                if ($calificaciones[$j]['np1'] === '0' || $calificaciones[$j]['np1'] === '0.0') {
-                                    $calificaciones[$j]['np1'] = '';
+                                if ($calificaciones[$j]['p1_nd_calificacion'] === '0' || $calificaciones[$j]['p1_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p1_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np2'] === '0' || $calificaciones[$j]['np2'] === '0.0') {
-                                    $calificaciones[$j]['np2'] = '';
+                                if ($calificaciones[$j]['p2_nd_calificacion'] === '0' || $calificaciones[$j]['p2_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p2_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np3'] === '0' || $calificaciones[$j]['np3'] === '0.0') {
-                                    $calificaciones[$j]['np3'] = '';
+                                if ($calificaciones[$j]['p3_nd_calificacion'] === '0' || $calificaciones[$j]['p3_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p3_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np4'] === '0' || $calificaciones[$j]['np4'] === '0.0') {
-                                    $calificaciones[$j]['np4'] = '';
+                                if ($calificaciones[$j]['p4_nd_calificacion'] === '0' || $calificaciones[$j]['p4_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p4_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np5'] === '0' || $calificaciones[$j]['np5'] === '0.0') {
-                                    $calificaciones[$j]['np5'] = '';
+                                if ($calificaciones[$j]['p5_nd_calificacion'] === '0' || $calificaciones[$j]['p5_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p5_nd_calificacion'] = '';
                                 }
-                                if ($calificaciones[$j]['np6'] === '0' || $calificaciones[$j]['np6'] === '0.0') {
-                                    $calificaciones[$j]['np6'] = '';
+                                if ($calificaciones[$j]['p6_nd_calificacion'] === '0' || $calificaciones[$j]['p6_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['p6_nd_calificacion'] = '';
                                 }
                                 $htmltable = $htmltable . '<tr>';
                                 $htmltable = $htmltable . '<td><label style="font-size: 4pt; padding-top: 0px;">' . strtoupper($calificaciones[$j]['nombre_area']) . '</label> <br>'
                                         . '<b>' . strtoupper($calificaciones[$j]['nombre_asignatura']) . '</b></td>';
                                 $htmltable = $htmltable . '<td style="text-align: center;">' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']) . '</td>';
-                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['np1'] . '</td>';
-                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['np2'] . '</td>';
-                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['np3'] . '</td>';
-                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['np4'] . '</td>';
-                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['np5'] . '</td>';
-                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['np6'] . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['p1_nd_calificacion'] . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['p2_nd_calificacion'] . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['p3_nd_calificacion'] . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['p4_nd_calificacion'] . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['p5_nd_calificacion'] . '</td>';
+                                $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['p6_nd_calificacion'] . '</td>';
                                 $htmltable = $htmltable . '<td style="text-align: center;">' . $calificaciones[$j]['def'] . '</td>';
                                 $htmltable = $htmltable . '<td style="text-align: center;">';
                                 if ($corte !== null) {

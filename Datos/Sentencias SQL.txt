@@ -1,0 +1,2 @@
+Actualizar Nombre del Estudiante a Matriculas
+UPDATE matriculasapp M SET M.nombrecompleto_estudiante=(SELECT CONCAT(P.apellido1_persona,' ',P.apellido2_persona,' ', P.nombre1_persona, ' ', P.nombre2_persona) FROM personasapp P WHERE P.id_persona=M.id_estudiante);

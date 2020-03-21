@@ -36,10 +36,10 @@ and open the template in the editor.
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/PromocionarController.php" model="MatriculasApp" findBy="id_matricula" mainform="true" oninput="setFindbyTable()">
                     <input type="hidden" id="anualidad_periodo" name="anualidad_periodo" value="" />
                     <div class="row">
-                        <div class="col-sm-4">
-                            <label>Programa</label>
-                            <select id="id_programa" name="id_programa" required="required" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('numgrado_programa', this.id, this.value);">
-                                <option selected="selected" value="NULL">Ninguna</option>
+                        <div class="col-sm-6">
+                            <label>Programa.Actual</label>
+                            <select id="id_programa" name="id_programa" list="id_programa" required="required" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('numgrado_programa', this.id, this.value); setNameFromDataList(this, 'nombre_programa_new')">
+                                <option selected="selected" value="">Ninguna</option>
                             </select>
                         </div>
                         <div class="col-sm-2">
@@ -49,16 +49,23 @@ and open the template in the editor.
                             </select>
                         </div>
                         <div class="col-sm-2">
-                            <label>Grado</label>
-                            <select id="numgrado_programa" name="numgrado_programa"  model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value);">
+                            <label>Grado.Actual</label>
+                            <select id="numgrado_programa" name="numgrado_programa" model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value); document.getElementById('numgrado_programa_new').value = parseFloat(this.value) + 1; LoadGrupoSiguiente();">
                                 <option disabled="disabled" selected="selected" value="">Ninguno</option>
                             </select>
                         </div>
                         <div class="col-sm-2">
-                            <label>Grupo</label>
+                            <label>Grupo.Actual</label>
                             <select id="id_grupo" name="id_grupo" selected="NULL" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
-                                <option selected="selected" value="NULL">Ninguna</option>
+                                <option selected="selected" value="">Ninguna</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Programa.Siguiente</label>
+                            <input type="text" id="nombre_programa_new" name="nombre_programa_new" value="" readonly="readonly" class="form-control" />
                         </div>
                         <div class="col-sm-2">
                             <label>Año.Siguiente</label>
@@ -66,7 +73,16 @@ and open the template in the editor.
                                 <option selected="selected" value="">Ninguna</option>
                             </select>
                         </div>
-
+                        <div class="col-sm-2">
+                            <label>Grado.Siguiente</label>
+                            <input type="number" integer="true" id="numgrado_programa_new" name="numgrado_programa_new" value="" readonly="readonly"  min="-2" max="12" class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grupo.Siguiente</label>
+                            <select id="id_grupo_new" name="id_grupo_new" selected="NULL" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
+                                <option selected="selected" value="">Ninguna</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="row" style="margin-top: 20px;">
