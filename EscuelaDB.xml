@@ -981,6 +981,18 @@
         <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Porcentaje 6to Periodo</Cm>
       </Cl>
+      <Cl au="0" df="30" nm="porcentajecognitivo_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje Componente Cognitivo (Saber)</Cm>
+      </Cl>
+      <Cl au="0" df="40" nm="porcentajeprocedimental_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje Componente Procedimental (Hacer)</Cm>
+      </Cl>
+      <Cl au="0" df="30" nm="porcentajeactitudinal_configuracion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Porcentaje Componente Actitudinal (Ser)</Cm>
+      </Cl>
       <Cl au="0" df="" nm="status_configuracion" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
@@ -1049,6 +1061,61 @@
         <ClNs>id_escuela, id_periodo, numero_corte</ClNs>
         <OptTx/>
       </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="CuestionariosApp">
+      <Cm>Datos Generales de los Cuestionarios tipo ICFES</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_cuestionario" nm="pkCuestionariosApp"/>
+      <Cl au="0" df="" nm="id_cuestionario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_cuestionario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechainicio_cuestionario" nu="0">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Inicio (Activo Desde)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechafin_cuestionario" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Finalizacion (Activo Hasta)</Cm>
+      </Cl>
+      <Cl au="0" df="60" nm="duracionminutos_cuestionario" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Duracion (en Minutos) del Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="numintentos_cuestionario" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero de Intentos Maximos Por Estudiantes</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="activo_cuestionario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado del Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuario_crea" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Docente que Crea el Cuestinario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechahoraedita_cuestionario" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha y Hora de Modificacion</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_cuestionario" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_CuestionariosApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="CuestionariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -1318,6 +1385,94 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="GruposCuestionariosApp">
+      <Cm>Grupos Asociados A Cuestionarios</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_gruposcuestionarios" nm="pkGruposCuestionariosApp"/>
+      <Cl au="1" df="" nm="id_gruposcuestionarios" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Asociacion Grupo-Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_grupo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Grupo</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_cuestionario" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_gruposcuestionarios" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_GruposCuestionariosApp_CuestionariosApp" prLkCl="id_cuestionario" upAc="3">
+        <PrTb mn="0" nm="CuestionariosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="GruposCuestionariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_cuestionario" prCl="id_cuestionario"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_GruposCuestionariosApp_GruposApp" prLkCl="id_grupo" upAc="3">
+        <PrTb mn="0" nm="GruposApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="GruposCuestionariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_grupo" prCl="id_grupo"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="GruposCuestionariosApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_grupo, id_cuestionario</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="IntentosCuestionariosApp">
+      <Cm>Datos Generales  de los Intentos Realizados</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_intento" nm="pkIntentosCuestionariosApp"/>
+      <Cl au="1" df="" nm="id_intento" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Intento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_cuestionario" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_persona" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechainicio_intento" nu="0">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Inicio de Intento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="horainicio_intento" nu="0">
+        <DT arr="0" ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Hora de Inicio de Intento</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="tiemposegundos_intento" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Tiempo Transcurrido en Segundos</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="finalizado_intento" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Finalizado</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_intento" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_IntentosCuestionarios_CuestionariosApp" prLkCl="id_cuestionario" upAc="3">
+        <PrTb mn="0" nm="CuestionariosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="IntentosCuestionariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_cuestionario" prCl="id_cuestionario"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_IntentosCuestionarios_PersonasApp" prLkCl="id_persona" upAc="3">
+        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="IntentosCuestionariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_persona" prCl="id_persona"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="IntentosCuestionariosApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_intento</ClNs>
+        <OptTx/>
+      </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="JornadasApp">
       <Cm>Jornadas de la Escuela</Cm>
       <TblOpts/>
@@ -1363,6 +1518,56 @@
         <ClNs>id_escuela, id_sede, nombre_jornada</ClNs>
         <OptTx/>
       </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="LecturasApp">
+      <Cm>Lecturas para dar Contexto a las Preguntas </Cm>
+      <TblOpts/>
+      <Pk ClNs="id_lectura" nm="pkLecturasApp"/>
+      <Cl au="1" df="" nm="id_lectura" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_area" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Area del Saber</Cm>
+      </Cl>
+      <Cl au="0" df="Lectura" nm="titulo_lectura" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Titulo de la Lectura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="contenido_lectura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Contenido</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="imagen_lectura" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Imagen Complementaria a la Lectura (Opcional)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="bibliografia_lectura" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Bibliografia del Texto</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="usuario_crea" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Usuario Creador</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechahoraedita_lectura" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha y Hora de Edicion de la Lectura</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_lectura" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_LecturasPreguntasApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="LecturasApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -1591,6 +1796,14 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Periodo Anterior</Cm>
       </Cl>
+      <Cl au="0" df="" nm="comentarios_matricula" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Comentarios al Momento de la Matricula</Cm>
+      </Cl>
+      <Cl au="0" df="Ninguna" nm="asignaturasperdidas_matricula" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Asignaturas Perdidas al Finalizar el Año</Cm>
+      </Cl>
       <Cl au="0" df="" nm="usuariocrea_matricula" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
         <Cm>Usuario que crea la matricula.</Cm>
@@ -1805,6 +2018,49 @@
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Estado del Registro</Cm>
       </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="OpcionesRespuestaApp">
+      <Cm>Opciones de Respuesta </Cm>
+      <TblOpts/>
+      <Pk ClNs="id_opcionrespuesta" nm="pkOpcionesRespuestaApp"/>
+      <Cl au="0" df="" nm="id_opcionrespuesta" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Opcion de Respuesta</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_pregunta" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Pregunta</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="texto_opcionrespuesta" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="300" sc="null" sg="1" un="0"/>
+        <Cm>Texto de la Opcion de Respuesta</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="imagen_opcionrespuesta" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Imagen de la Opcion de Respuesta (Opcional)</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="activo_opcionrespuesta" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Activar Opcion de Respuesta</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="correcta_opcionrespuesta" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Respuesta Correcta</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_opcionrespuesta" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_OpcionesRespuestaApp_PreguntasCuestionariosApp" prLkCl="id_pregunta" upAc="3">
+        <PrTb mn="0" nm="PreguntasCuestionariosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="OpcionesRespuestaApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_pregunta" prCl="id_pregunta"/>
+      </Fk>
+      <Idx clu="0" ftx="0" nm="OpcionesRespuestaApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_opcionrespuesta</ClNs>
+        <OptTx/>
+      </Idx>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -2166,6 +2422,53 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="PreguntasCuestionariosApp">
+      <Cm>Preguntas</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_pregunta" nm="pkPreguntasCuestionariosApp"/>
+      <Cl au="1" df="" nm="id_pregunta" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Pregunta</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_cuestionario" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_lectura" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="enunciado_pregunta" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="300" sc="null" sg="1" un="0"/>
+        <Cm>Enunciado de la Pregunta</Cm>
+      </Cl>
+      <Cl au="0" df="SelMultipleUnicaRespuesta" nm="tipo_pregunta" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Tipo de Pregunta</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="puntos_pregunta" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Puntos Posibles</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="activo_pregunta" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Activar Pregunta</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_pregunta" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_PreguntasCuestionariosApp_CuestionariosApp" prLkCl="id_cuestionario" upAc="3">
+        <PrTb mn="0" nm="CuestionariosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PreguntasCuestionariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_cuestionario" prCl="id_cuestionario"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_PreguntasCuestionariosApp_LecturasApp" prLkCl="id_lectura" upAc="3">
+        <PrTb mn="0" nm="LecturasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="PreguntasCuestionariosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_lectura" prCl="id_lectura"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="ProgramasApp">
       <Cm>Programas que ofrece la Escuela</Cm>
       <TblOpts/>
@@ -2218,6 +2521,71 @@
         <ClNs>id_escuela, id_programa</ClNs>
         <OptTx/>
       </Idx>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="RespuestasIntentosApp">
+      <Cm>Respuestas de los Participantes</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_respuesta" nm="pkRespuestasIntentosApp"/>
+      <Cl au="1" df="" nm="id_respuesta" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Respuesta</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_intento" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Intento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_cuestionario" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Cuestionario</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_persona" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_pregunta" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Pregunta</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_opcionrespuesta" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Opcion Elegida (Seleccion Mutiple)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="texto_respuesta" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <Cm>Respuesta para Preguntas Abiertas</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="falsoverdadero_respuesta" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1" sc="null" sg="1" un="0"/>
+        <Cm>Respuesta Para Tipo Falso - Verdadero (F o V)</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="puntosobtenidos_respuesta" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Puntos Obtenidos despues de Calificar</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechahora_respuesta" nu="0">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha y Hora de Respuesta</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_respuesta" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_RespuestasIntentosApp_IntentosCuestionariosApp" prLkCl="id_intento" upAc="3">
+        <PrTb mn="0" nm="IntentosCuestionariosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="RespuestasIntentosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_intento" prCl="id_intento"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_RespuestasIntentosApp_OpcionesRespuestaApp" prLkCl="id_opcionrespuesta" upAc="3">
+        <PrTb mn="0" nm="OpcionesRespuestaApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="RespuestasIntentosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_opcionrespuesta" prCl="id_opcionrespuesta"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_RespuestasIntentosApp_PreguntasCuestionariosApp" prLkCl="id_pregunta" upAc="3">
+        <PrTb mn="0" nm="PreguntasCuestionariosApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="RespuestasIntentosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_pregunta" prCl="id_pregunta"/>
+      </Fk>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -2549,9 +2917,9 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DirectoresGruposApp" x="526" y="1157"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CargasDocentesApp" x="692" y="1419"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DocentesApp" x="223" y="499"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PaisesApp" x="74" y="4438"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DepartamentosEstadosApp" x="663" y="4415"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1481" y="4415"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PaisesApp" x="141" y="4831"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="DepartamentosEstadosApp" x="700" y="4854"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1346" y="4752"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PagosRecibidosApp" x="36" y="3369"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ValoresPecuniariosApp" x="537" y="3383"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsistenciaApp" x="1107" y="1703"/>
@@ -2560,6 +2928,13 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="VotosEleccionesApp" x="461" y="4058"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="EleccionesEstudiantilesApp" x="380" y="3696"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TerminalesEleccionesApp" x="979" y="3912"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CuestionariosApp" x="222" y="4231"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="LecturasApp" x="644" y="4238"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PreguntasCuestionariosApp" x="438" y="4452"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="OpcionesRespuestaApp" x="948" y="4464"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="GruposCuestionariosApp" x="26" y="4473"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="IntentosCuestionariosApp" x="236" y="4665"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="RespuestasIntentosApp" x="704" y="4671"/>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1657" y2="1656"/>
@@ -2599,7 +2974,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculasApp" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="417" x2="419" y1="1209" y2="1209"/>
+        <positionableLine lineRole="PARENT_LINE" x1="430" x2="419" y1="1209" y2="1209"/>
         <positionableLine lineRole="CHILD_LINE" x1="625" x2="427" y1="2524" y2="2524"/>
         <positionableLine lineRole="MIDDLE_LINE" x1="423" x2="423" y1="2520" y2="1213"/>
       </positionableLines>
@@ -2680,9 +3055,15 @@
         <positionableLine lineRole="CHILD_LINE" x1="1342" x2="1436" y1="1237" y2="1237"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CuestionariosApp.fk_CuestionariosApp_EscuelasApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="676" x2="406" y1="158" y2="158"/>
+        <positionableLine lineRole="CHILD_LINE" x1="402" x2="402" y1="4208" y2="162"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.DepartamentosEstadosApp.fk_DepartamentosEstadosApp_PaisesApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="329" x2="640" y1="4443" y2="4443"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="396" x2="677" y1="4877" y2="4877"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_DocentesApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2731,6 +3112,27 @@
         <positionableLine lineRole="CHILD_LINE" x1="603" x2="603" y1="876" y2="822"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.GruposCuestionariosApp.fk_GruposCuestionariosApp_CuestionariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="296" x2="296" y1="4424" y2="4450"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.GruposCuestionariosApp.fk_GruposCuestionariosApp_GruposApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="603" x2="603" y1="1040" y2="4495"/>
+        <positionableLine lineRole="CHILD_LINE" x1="418" x2="599" y1="4499" y2="4499"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.IntentosCuestionariosApp.fk_IntentosCuestionarios_CuestionariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="386" x2="386" y1="4424" y2="4642"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.IntentosCuestionariosApp.fk_IntentosCuestionarios_PersonasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="298" x2="298" y1="323" y2="4642"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.JornadasApp.fk_JornadasApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="717" x2="717" y1="186" y2="642"/>
@@ -2743,6 +3145,11 @@
         <positionableLine lineRole="CHILD_LINE" x1="606" x2="606" y1="776" y2="826"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.LecturasApp.fk_LecturasPreguntasApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="820" x2="820" y1="186" y2="4215"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.LogrosAsignaturasApp.fk_LogrosAsignaturasApp_AsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="2430" x2="2430" y1="718" y2="1079"/>
@@ -2750,7 +3157,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MatriculaAsignaturasApp.fk_AsignaturasMatriculadasApp_MatriculasApp" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="417" x2="482" y1="1157" y2="1157"/>
+        <positionableLine lineRole="PARENT_LINE" x1="430" x2="482" y1="1157" y2="1157"/>
         <positionableLine lineRole="CHILD_LINE" x1="672" x2="490" y1="1763" y2="1763"/>
         <positionableLine lineRole="MIDDLE_LINE" x1="486" x2="486" y1="1759" y2="1161"/>
       </positionableLines>
@@ -2785,7 +3192,7 @@
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_GruposApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="469" x2="469" y1="1040" y2="1048"/>
-        <positionableLine lineRole="CHILD_LINE" x1="417" x2="465" y1="1052" y2="1052"/>
+        <positionableLine lineRole="CHILD_LINE" x1="430" x2="465" y1="1052" y2="1052"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_JornadasApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
@@ -2796,7 +3203,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ObservadorEstudianteApp" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1289"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="207" x2="207" y1="1272" y2="1315"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PeriodosApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
@@ -2808,7 +3215,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_PlanEstudiosApp" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="1511" x2="417" y1="984" y2="984"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="1511" x2="430" y1="984" y2="984"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_ProgramasApp" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
@@ -2824,9 +3231,15 @@
         <positionableLine lineRole="CHILD_LINE" x1="224" x2="224" y1="943" y2="883"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.MunicipiosCiudadesApp.fk_MunicipiosCiudadesApp_DepartamentosEstadosApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="EscuelaDB.MunicipiosCiudadesApp.fk_MunicipiosCiudadesApp_DepartamentosEstadosApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="975" x2="1458" y1="4448" y2="4448"/>
+        <positionableLine lineRole="PARENT_LINE" x1="1012" x2="1347" y1="4896" y2="4896"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1351" x2="1351" y1="4867" y2="4892"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.OpcionesRespuestaApp.fk_OpcionesRespuestaApp_PreguntasCuestionariosApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="791" x2="925" y1="4505" y2="4505"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
@@ -2874,10 +3287,35 @@
         <positionableLine lineRole="SINGLE_LINE" x1="1629" x2="1629" y1="593" y2="861"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PreguntasCuestionariosApp.fk_PreguntasCuestionariosApp_CuestionariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="479" x2="479" y1="4424" y2="4429"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PreguntasCuestionariosApp.fk_PreguntasCuestionariosApp_LecturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="691" x2="691" y1="4418" y2="4429"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ProgramasApp.fk_Programa_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="988" x2="1535" y1="122" y2="122"/>
         <positionableLine lineRole="CHILD_LINE" x1="1539" x2="1539" y1="403" y2="126"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.RespuestasIntentosApp.fk_RespuestasIntentosApp_IntentosCuestionariosApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="612" x2="681" y1="4733" y2="4733"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.RespuestasIntentosApp.fk_RespuestasIntentosApp_OpcionesRespuestaApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1007" x2="1007" y1="4605" y2="4648"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.RespuestasIntentosApp.fk_RespuestasIntentosApp_PreguntasCuestionariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="736" x2="736" y1="4606" y2="4648"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.SedesApp.fk_SedesApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -2928,7 +3366,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="145">
+  <RnmMgr NxRnmId="157">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -3310,6 +3748,42 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="CandidatosEleccionesApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="144" nNm="status_candidato" oNm="status_candidatos"/>
     </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="145" nNm="CuestionariosApp" oNm="CuestionarioApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CuestionariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="146" nNm="id_cuestionario" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="LecturasApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="147" nNm="id_lectura" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="148" nNm="LecturasApp" oNm="LecturasPreguntasApp"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="PreguntasCuestionariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="149" nNm="id_pregunta" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="OpcionesRespuestaApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="150" nNm="id_opcionrespuesta" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="GruposCuestionariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="151" nNm="id_gruposcuestionarios" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="IntentosCuestionariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="152" nNm="id_intento" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="RespuestasIntentosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="153" nNm="id_respuesta" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="154" nNm="IntentosCuestionariosApp" oNm="IntentosCuestionarios"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="CuestionariosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="155" nNm="usuario_crea" oNm="id_creador"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
+      <Rnm id="156" nNm="RespuestasIntentosApp" oNm="RespuestasIntentoApp"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -3327,13 +3801,13 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (36)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (43)</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>
