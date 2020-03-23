@@ -19,11 +19,23 @@ function getParameters() {
     var prefixImg = null;
     var idImg = null;
     var urlImg = null;
+    var fullname = null;
     prefixImg = getElement(formUpload, 'prefix_image');
     idImg = getElement(formUpload, 'name_image');
     urlImg = getElement(formUpload, 'imagePhoto');
-    prefixImg.value = prefix;
-    idImg.value = id;
+    fullname = getElement(formUpload, 'fullname_image');
+    console.log('Image: '+prefix+id);
+    if (prefix !== null && prefix !== '') {
+        prefixImg.value = prefix;
+    }else{
+        prefixImg.value = 'NULL';
+    }
+    if (id !== null && id !== '') {
+        idImg.value = id;
+    }else{
+        idImg.value = 'NULL';
+    }
+    fullname.value = img;
     urlImg.src = 'ImageFiles/' + img;
 }
 
@@ -44,8 +56,8 @@ function validateImage(item) {
     }
     if (fileImg.files.length <= 0) {
         validate = false;
-    }else{
-        console.log("Se encontró "+fileImg.files.length+" archivos para Subir al Sistema!.");
+    } else {
+        console.log("Se encontró " + fileImg.files.length + " archivos para Subir al Sistema!.");
     }
     if (validate === false) {
         alert("Debe completar los Datos y Seleccionar la Imagen!.");

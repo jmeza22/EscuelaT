@@ -22,15 +22,22 @@
                 $session = new SessionManager();
                 $upload = null;
                 $result = null;
-                if ($session->hasLogin() && isset($_POST['prefix_image'])  && isset($_POST['name_image'])) {
+                if ($session->hasLogin() && isset($_POST['prefix_image']) && isset($_POST['name_image'])) {
 
                     $result = $session->getSessionStateJSON();
                     $result = json_decode($result, true);
                     $upload = new UploadImage();
                     $upload->setFileName('imageFile');
-                    $upload->setPrefix($_POST['prefix_image']);
-                    $upload->setNewName($_POST['name_image']);
-                    $upload->setExtension('.jpg');
+                    if (isset($_POST['prefix_image']) && isset($_POST['name_image'])) {
+                        if ($_POST['prefix_image'] !== 'NULL' && $_POST['name_image'] !== 'NULL') {
+                            $upload->setPrefix($_POST['prefix_image']);
+                            $upload->setNewName($_POST['name_image']);
+                            $upload->setExtension('.jpg');
+                        }
+                    }
+                    if (isset($_POST['fullname_image'])) {
+                        $upload->setFullName($_POST['fullname_image']);
+                    }
                     if ($upload->Upload()) {
                         $result['message'] = 'La Imagen se ha Cargado con Exito!.';
                         $result['status'] = 1;

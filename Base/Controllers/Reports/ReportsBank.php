@@ -1336,4 +1336,26 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getLecturas($idescuela = null, $idarea = null, $idlectura = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM LecturasApp WHERE status_lectura=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idarea !== null) {
+            $arraywhere['p_id_area'] = $idarea;
+            $sql = $sql . " AND id_area=:p_id_area ";
+        }
+        if ($idlectura !== null) {
+            $arraywhere['p_id_lectura'] = $idlectura;
+            $sql = $sql . " AND id_lectura=:p_id_lectura ";
+        }
+        $sql = $sql . " ORDER BY titulo_lectura ASC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
 }
