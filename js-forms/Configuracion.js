@@ -15,23 +15,6 @@ jQuery(document).ready(function () {
     }
 });
 
-function SendConfiguracion() {
-    var form = document.getElementById('form0');
-    var idescuela = getElement(form, 'id_escuela');
-    var logo = document.getElementById('logo_configuracion');
-    if (validateForm(form) && ValidarPorcentajesCortes() && ValidarValoracion()) {
-        logo.value = 'Escuela' + idescuela.value + '.jpg';
-        submitForm(form, false);
-    }
-}
-
-function Send(item) {
-    var form = getForm(item);
-    if (validateForm(form)) {
-        submitForm(form, false);
-    }
-}
-
 function setIdEscuela() {
     var item = null;
     item = document.getElementById('id_escuela');
@@ -289,6 +272,21 @@ function ValidarPorcentajesCortes() {
     return false;
 }
 
+function ValidarPorcentajesComponentes() {
+    var cog = document.getElementById('porcentajecognitivo_configuracion');
+    var pro = document.getElementById('porcentajeprocedimental_configuracion');
+    var act = document.getElementById('porcentajeactitudinal_configuracion');
+    cog=parseFloat(cog.value);
+    pro=parseFloat(pro.value);
+    act=parseFloat(act.value);
+    if (parseFloat(cog + pro + act) !== 100) {
+        alert('La Suma de los Porcentajes de los Componentes debe ser Igual a 100%.');
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function MostrarLogo() {
     var idescuela = null;
     var logo = null;
@@ -298,4 +296,14 @@ function MostrarLogo() {
     logo = document.getElementById('logo_configuracion');
     logo.value = 'Escuela' + idescuela.value + '.png';
     window.open("UploadImageForm.html?prefix=Escuela" + "&id=" + idescuela.value + "&img=" + logo.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
+}
+
+function SendConfiguracion() {
+    var form = document.getElementById('form0');
+    var idescuela = getElement(form, 'id_escuela');
+    var logo = document.getElementById('logo_configuracion');
+    if (validateForm(form) && ValidarPorcentajesCortes() && ValidarPorcentajesComponentes() && ValidarValoracion()) {
+        logo.value = 'Escuela' + idescuela.value + '.jpg';
+        submitForm(form, false);
+    }
 }

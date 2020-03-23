@@ -480,15 +480,16 @@ class SQLDatabase {
                 $sql = $sql . " " . $column . "= :" . $column . ",";
             }
             $sql = substr($sql, 0, -1);
+            $sql = $sql . " WHERE 0=0 ";
             if ($arraywhere !== null && is_array($arraywhere)) {
-                $sql = $sql . " WHERE ";
+                $sql = $sql . " ";
                 $columnsWhere = $this->getColumns($arraywhere);
                 foreach ($columnsWhere as $column) {
-                    $sql = $sql . " " . $column . "= :" . $column . " AND";
+                    $sql = $sql . " AND " . $column . "= :" . $column . " ";
                 }
-                $sql = substr($sql, 0, -3);
-            } elseif ($where != null && strcmp($where, "") !== 0) {
-                $sql = $sql . " WHERE " . $where;
+            }
+            if ($where != null && strcmp($where, "") !== 0) {
+                $sql = $sql . " AND " . $where;
             }
             return $sql;
         }
@@ -498,15 +499,15 @@ class SQLDatabase {
     private function buildDeleteStmtString($table, $where = NULL, $arraywhere = NULL) {
         if (is_array($arraycolumns)) {
             $sql = "DELETE FROM " . $table . " ";
+            $sql = $sql . " WHERE 0=0 ";
             if ($arraywhere !== null && is_array($arraywhere)) {
-                $sql = $sql . " WHERE ";
                 $columnsWhere = $this->getColumns($arraywhere);
                 foreach ($columnsWhere as $column) {
-                    $sql = $sql . " " . $column . "= :" . $column . " AND";
+                    $sql = $sql . " AND " . $column . "= :" . $column . " ";
                 }
-                $sql = substr($sql, 0, -3);
-            } elseif ($where != null && strcmp($where, "") !== 0) {
-                $sql = $sql . " WHERE " . $where;
+            }
+            if ($where != null && strcmp($where, "") !== 0) {
+                $sql = $sql . " AND " . $where;
             }
             return $sql;
         }
@@ -527,16 +528,15 @@ class SQLDatabase {
             }
 
             $sql = $sql . " FROM " . $table;
-
+            $sql = $sql . " WHERE 0=0 ";
             if ($arraywhere !== null && is_array($arraywhere)) {
-                $sql = $sql . " WHERE ";
                 $columnsWhere = $this->getColumns($arraywhere);
                 foreach ($columnsWhere as $column) {
-                    $sql = $sql . " " . $column . "= :" . $column . " AND";
+                    $sql = $sql . " AND " . $column . "= :" . $column . " ";
                 }
-                $sql = substr($sql, 0, -3);
-            } elseif ($where != null && strcmp($where, '') !== 0) {
-                $sql = $sql . " WHERE " . $where;
+            }
+            if ($where != null && strcmp($where, '') !== 0) {
+                $sql = $sql . " AND " . $where;
             }
 
             if ($groupby !== null && $groupby !== '') {
@@ -547,6 +547,7 @@ class SQLDatabase {
             }
             return $sql;
         }
+
         return null;
     }
 
@@ -760,12 +761,17 @@ class SQLDatabase {
         return $result;
     }
 
-    public function printArray($myarray) {
-        $html = '<table border=0>';
-        for ($i = 0; $i < count($myarray); $i++) {
+    public function printArrayToHTML($myarray, $onlyassoc = true) {
+        $html = '<table border=0 >';
+        for ($row = 0; $row < count($myarray); $row++) {
             $html = $html . '<tr>';
-            for ($j = 0; $j < count($myarray[0]); $j++) {
-                $html = $html . '<td>' . $myarray[$i][$j] . '</td>';
+            foreach ($myarray[$row] as $column => $value) {
+                if ($onlyassoc === true && !is_numeric($column.'')) {
+                    $html = $html . '<td>' . $myarray[$row][$column] . '</td>';
+                }
+                if ($onlyassoc === false && is_numeric($column.'')) {
+                    $html = $html . '<td>' . $myarray[$row][$column] . '</td>';
+                }
             }
             $html = $html . '</tr>';
         }
@@ -775,7 +781,7 @@ class SQLDatabase {
 
     public function printSelect($table, $columns, $where) {
         $myarray = $this->select($table, $columns, $where);
-        $this->printArray($myarray);
+        $this->printArrayToHTML($myarray);
     }
 
     public function getTableInfoJSON($table) {

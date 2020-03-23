@@ -962,6 +962,7 @@ function getFindByValue(element, num = "") {
 function setFindbyField(fieldname, findby, findbyvalue, num = "") {
     if (fieldname !== null && fieldname !== '' && findby !== null && findby !== '' && findbyvalue !== null && findbyvalue !== '') {
         var field = document.getElementById(fieldname);
+        console.log('Setting Findby'+num+' '+findby+'='+findbyvalue+' TO '+field.id);
         if (field !== null && field !== undefined) {
             if (field !== null && (field.tagName === "INPUT" || field.tagName === "SELECT" || field.tagName === "DATALIST" || field.tagName === "TABLE" || field.tagName === "FORM")) {
                 field.setAttribute('findby' + num, findby);
@@ -1208,9 +1209,9 @@ function setFindbyCombobox(fieldname, findby, findbyvalue, num = "") {
     myfield = document.getElementById(fieldname);
     if (myfield !== null && (myfield.tagName === 'SELECT' || myfield.tagName === 'DATALIST')) {
         setFindbyField(fieldname, findby, findbyvalue, num);
-        myfield.innerHTML = '<option value="">Ninguna</option>';
-        loadComboboxData(myfield);
-}
+        return loadComboboxData(myfield);
+    }
+    return null;
 }
 
 function setComboboxValue(element) {
@@ -1239,7 +1240,9 @@ function setComboboxOptions(element, json) {
                 break;
             }
         }
+        
         selected = element.getAttribute("selected");
+        element.innerHTML='<option value=""></option>';
         for (var i = 0; i < json.length; i++) {
             option = document.createElement('option');
             option.setAttribute('id', json[i]['ivalue']);

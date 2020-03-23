@@ -166,6 +166,9 @@ function setNotaDefinitiva(item) {
         na = getElementByName(tr, 'na_calificacion[]');
         nn = getElementByName(tr, 'nn_calificacion[]');
         nd = getElementByName(tr, 'nd_calificacion[]');
+        var porcCog=document.getElementById('porcentajecognitivo_configuracion');
+        var porcPro=document.getElementById('porcentajeprocedimental_configuracion');
+        var porcAct=document.getElementById('porcentajeactitudinal_configuracion');
         setRequiredND(nd);
         if (nc !== undefined && np !== undefined && na !== undefined) {
             if (item !== nc && (nc.value === '' || isNaN(nc.value))) {
@@ -177,7 +180,7 @@ function setNotaDefinitiva(item) {
             if (item !== na && (na.value === '' || isNaN(na.value))) {
                 na.value = 0;
             }
-            valor = (parseFloat(nc.value) + parseFloat(np.value) + parseFloat(na.value)) / 3;
+            valor = ((parseFloat(nc.value)*parseFloat(porcCog.value)/100) + (parseFloat(np.value)*parseFloat(porcPro.value)/100) + (parseFloat(na.value)*parseFloat(porcAct.value)/100));
             if (nn.value !== '' && parseFloat(nn.value) > 0) {
                 valor = nn.value;
             }else{

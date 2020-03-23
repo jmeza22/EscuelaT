@@ -35,6 +35,14 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $result = $bc->execute(false);
                     if ($bc->getRowCount() > 0) {
                         $rowcount++;
+                        $sql = "UPDATE MatriculaAsignaturasApp "
+                                . " SET id_sede=:id_sede, id_grupo=:id_grupo "
+                                . " WHERE id_matricula=:id_matricula ";
+                        $bc->query($sql, $subdata);
+                        $sql = "UPDATE CalificacionesApp "
+                                . " SET id_sede=:id_sede, id_grupo=:id_grupo "
+                                . " WHERE id_matricula=:id_matricula ";
+                        $bc->query($sql, $subdata);
                     } else {
                         break;
                     }
@@ -50,11 +58,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             $result = json_decode($result, true);
             $result['rowCount'] = $rowcount;
             $result = json_encode($result);
-        }else{
-            $result=array();
-            $result['data']=null;
-            $result['rowcount']=0;
-            $result['message']='No ha seleccionado ningun Estudiante';
+        } else {
+            $result = array();
+            $result['data'] = null;
+            $result['rowcount'] = 0;
+            $result['message'] = 'No ha seleccionado ningun Estudiante';
             $result = json_encode($result);
         }
         echo $result;

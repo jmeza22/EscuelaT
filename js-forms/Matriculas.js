@@ -7,12 +7,8 @@ jQuery(document).ready(function () {
     showNotification('Espere...', 'Espere a que se carguen todos los elementos. Tenga paciencia. No recargue la pagina.')
     autoLoadNameFromId('id_estudiante', 'nombrecompleto_estudiante', null, null);
     LoadSede();
-    LoadJornada();
     LoadPrograma();
-    LoadPlanEstudios();
     LoadPeriodo();
-    LoadGrado();
-    LoadGrupo();
     LoadTable();
 });
 
@@ -72,6 +68,32 @@ function LoadPeriodo() {
     loadComboboxData(periodo);
 }
 
+function onChangeSede() {
+    var sede = null;
+    sede = document.getElementById("id_sede");
+    setFindbyCombobox('id_jornada', sede.id, sede.value, 1);
+    setFindbyField('id_grupo', sede.id, sede.selected, 1);
+}
+
+function onChangePrograma() {
+    var programa = null;
+    programa = document.getElementById("id_programa");
+    setFindbyCombobox('id_planestudio', programa.id, programa.value, 1);
+    setFindbyField('id_grupo', programa.id, programa.selected, 2);
+}
+
+function onChangePlanEstudios() {
+    var plan = null;
+    plan = document.getElementById("id_planestudio");
+    setFindbyCombobox('numgrado_programa', plan.id, plan.selected, 1);
+}
+
+function onChangeGrado() {
+    var grado = null;
+    grado = document.getElementById("numgrado_programa");
+    setFindbyCombobox('id_grupo', grado.id, grado.selected, 3);
+}
+
 function GrabarMatricula() {
     var form0 = null;
     form0 = document.getElementById('form0');
@@ -116,6 +138,11 @@ function Edit(item) {
     sendValue(item, null, myform, null);
     getData(myform).done(function () {
         setTimeout(function () {
+            onChangeSede();
+            onChangePrograma();
+            onChangePlanEstudios();
+            onChangeGrado();
+            LoadGrupo();
             getData(myform, 'Base/Controllers/FindValorTotalPagadoController.php').done(function () {
                 CalcularValores();
             });

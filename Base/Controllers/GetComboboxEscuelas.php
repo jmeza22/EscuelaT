@@ -17,6 +17,7 @@ if ($_REQUEST != null && isset($_REQUEST)) {
     $othervalue = "id_escuela";
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, 'status_escuela=1');
     $bc->disconnect();
+    
 }
 
 ?>
