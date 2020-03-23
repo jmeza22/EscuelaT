@@ -1358,4 +1358,22 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getCuestionarios($idescuela = null, $idcuestionario = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM CuestionariosApp WHERE status_cuestionario=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idcuestionario !== null) {
+            $arraywhere['p_id_cuestionario'] = $idcuestionario;
+            $sql = $sql . " AND id_cuestionario=:p_id_cuestionario ";
+        }
+        $sql = $sql . " ORDER BY nombre_cuestionario ASC, activo_cuestionario DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
 }

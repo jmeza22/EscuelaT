@@ -4,8 +4,8 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'LecturasApp';
-$findBy = 'id_lectura';
+$model = 'CuestionariosApp';
+$findBy = 'id_cuestionario';
 $action = 'insertorupdate';
 $postdata = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() || $session->getStandard())) {
@@ -18,11 +18,12 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setAction($action);
         $postdata = $bc->getPostData();
         $postdata['id_escuela'] = $session->getEnterpriseID();
+        $bc->setPostData($postdata);
         if ($postdata[$findBy] === '' || $postdata[$findBy] === '0') {
+            $postdata[$findBy]='CU'.date('YmdHis'). rand(10, 99);
             $postdata['usuario_crea'] = $session->getNickname();
         }
-        $postdata['fechahoraedita_lectura'] = date('Y-m-d H:i:s');
-        $bc->setPostData($postdata);
+        $postdata['fechahoraedita_cuestionario'] = date('Y-m-d H:i:s');
         if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'find') === 0) {
             $bc->setAction('find');
         }

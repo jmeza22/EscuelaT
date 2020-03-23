@@ -4,32 +4,15 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    loadComboboxData(document.getElementById("id_area"));
     LoadTable();
 });
 
-function setImagenLectura() {
-    var item = null;
-    item = document.getElementById('imagen_lectura');
-    if (item !== null && item !== undefined && item.value === '') {
-        console.log('Seteando Nombre de Imagen.');
-        if (getEnterpriseID() !== null) {
-            var fecha = new Date();
-            item.value = 'Lectura' + getEnterpriseID() + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + (getRandomNumber(1, 9) * getRandomNumber(1, 9)) + '.jpg';
-            console.log('Value: ' + item.value);
-        }
+function setIdCuestionario() {
+    var idcuestionario = document.getElementById("id_cuestionario");
+    var fecha = new Date();
+    if (idcuestionario.value === null || idcuestionario.value === '' || idcuestionario.value === '0') {
+        idcuestionario.value = 'C' + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + (getRandomNumber(1, 9) * getRandomNumber(1, 9));
     }
-}
-
-function MostrarImagen() {
-    var prefix = '';
-    var id = ''
-    var idlectura = null;
-    var nameimage = null;
-    idlectura = document.getElementById('id_lectura');
-    nameimage = document.getElementById('imagen_lectura');
-    
-    window.open("UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + nameimage.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
 }
 
 function LoadTable() {
@@ -40,8 +23,11 @@ function LoadTable() {
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
-        submitForm(item, false).done(function () {
+        submitForm(form, false).done(function () {
             LoadTable();
+            if (getRowCount() !== '' && getRowCount() !== '0') {
+                document.getElementById('reset').click();
+            }
         });
     }
 }

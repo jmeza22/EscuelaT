@@ -1085,7 +1085,7 @@
         <Cm>Fecha de Inicio (Activo Desde)</Cm>
       </Cl>
       <Cl au="0" df="" nm="fechafin_cuestionario" nu="0">
-        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Fecha de Finalizacion (Activo Hasta)</Cm>
       </Cl>
       <Cl au="0" df="60" nm="duracionminutos_cuestionario" nu="1">
