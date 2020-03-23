@@ -42,6 +42,9 @@ function Send(item) {
     if (validateForm(form)) {
         submitForm(item, false).done(function () {
             LoadTable();
+            if (getRowCount() !== '' && getRowCount() !== '0') {
+                document.getElementById('reset').click();
+            }
         });
     }
 }

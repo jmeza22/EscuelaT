@@ -77,6 +77,10 @@ function setRequiredsInputs(tipo) {
             sede.setAttribute('required', 'required');
             jornada.setAttribute('required', 'required');
         }
+        if (tipo.value === 'ContactosEstudiantes') {
+            programa.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+        }
         if (tipo.value === 'DirectoresGrupos') {
             programa.setAttribute('required', 'required');
             periodo.setAttribute('required', 'required');

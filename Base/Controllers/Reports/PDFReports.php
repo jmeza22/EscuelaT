@@ -517,7 +517,6 @@ class PDFReports extends TCPDF {
     }
 
     public function ListadoEstudiantes($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null) {
-        $this->bc->getCantidadAsignaturasReprobadas();
         $data = null;
         $data = $this->bc->getEstudiantesMatriculas($idescuela, $idsede, $idjornada, $idprograma, null, $numgrado, $idgrupo, $idperiodo);
         if ($data !== null && $data !== '' && $data !== '[]') {
@@ -543,6 +542,41 @@ class PDFReports extends TCPDF {
                     $this->Cell(40, 6, $data[$i]['nombre_programa']);
                     $this->Cell(20, 6, $data[$i]['numgrado_programa'] . '°');
                     $this->Cell(20, 6, $data[$i]['nombre_grupo']);
+                    $this->Ln();
+                }
+            }
+        }
+    }
+
+    public function ListadoContactosEstudiantes($idescuela, $idprograma, $idperiodo, $numgrado = null, $idgrupo = null, $idestudiante = null) {
+        $data = null;
+        $data = $this->bc->getContactosEstudiantesMatriculas($idescuela, $idprograma, $numgrado, $idgrupo, $idperiodo, $idestudiante);
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
+                $pageWidth = $this->getRealPageWidth();
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, 'B', 14);
+                $this->Cell(0, 8, 'DATOS DE CONTACTO DE ESTUDIANTES');
+                $this->SetFont($this->fontfamilycontent, 'B', 8);
+                $this->Ln();
+                $this->Cell($pageWidth * 35 / 100, 6, 'NOMBRE COMPLETO', 1);
+                $this->Cell($pageWidth * 6 / 100, 6, 'AÑO', 1);
+                $this->Cell($pageWidth * 6 / 100, 6, 'PROG.', 1);
+                $this->Cell($pageWidth * 6 / 100, 6, 'GRADO', 1);
+                $this->Cell($pageWidth * 6 / 100, 6, 'GRUPO', 1);
+                $this->Cell($pageWidth * 30 / 100, 6, 'EMAIL', 1);
+                $this->Cell($pageWidth * 11 / 100, 6, 'CELULAR', 1);
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, '', 8);
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->Cell($pageWidth * 35 / 100, 5, $data[$i]['nombrecompleto_estudiante'], 1);
+                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['id_periodo'], 1);
+                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['id_programa'], 1);
+                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['numgrado_programa'] . '°', 1);
+                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['id_grupo'], 1);
+                    $this->Cell($pageWidth * 30 / 100, 5, $data[$i]['email_persona'], 1);
+                    $this->Cell($pageWidth * 11 / 100, 5, $data[$i]['telefono_persona'], 1);
                     $this->Ln();
                 }
             }
@@ -1249,15 +1283,15 @@ class PDFReports extends TCPDF {
                                         }
                                         $this->SetFont($this->fontfamilycontent, '', 10);
                                         $this->Cell($pageWidth * 42 / 100, 4, $calificaciones[$k]['nombre_asignatura'], 1, 0, 'L');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np1']), 1, 0, 'C');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np2']), 1, 0, 'C');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np3']), 1, 0, 'C');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np4']), 1, 0, 'C');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np5']), 1, 0, 'C');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['np6']), 1, 0, 'C');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['nphab']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p1_nd_calificacion']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p2_nd_calificacion']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p3_nd_calificacion']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p4_nd_calificacion']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p5_nd_calificacion']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p6_nd_calificacion']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['phab_nd_calificacion']), 1, 0, 'C');
                                         $this->SetFont($this->fontfamilycontent, 'B', 10);
-                                        $this->Cell($pageWidth * 9 / 100, 4, $calificaciones[$k]['npfin'], 1, 0, 'C');
+                                        $this->Cell($pageWidth * 9 / 100, 4, $calificaciones[$k]['pfin_nd_calificacion'], 1, 0, 'C');
                                         $this->Ln();
                                     }
                                 }

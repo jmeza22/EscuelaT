@@ -33,7 +33,7 @@ $sizeheader = 8;
 $sizefooter = 6;
 //print_r($_POST);
 if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1)) {
-    $idescuela = $session->getEnterpriseID();
+    $idescuela = $idescuela;
     if (isset($_POST) && isset($_POST['tipo_reporte'])) {
         $tipo = $_POST['tipo_reporte'];
         if (isset($_POST['id_sede']) && $_POST['id_sede'] !== '' && $_POST['id_sede'] !== 'NULL') {
@@ -137,7 +137,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->SetLeftMargin(12);
             $report->SetRightMargin(12);
             $report->setReportName('Datos Estadisticos Basicos de Estudiantes por Grupo ');
-            $report->DatosEstadisticosEstudiantes($session->getEnterpriseID(), $idprograma, $grado, $grupo, $idperiodo);
+            $report->DatosEstadisticosEstudiantes($idescuela, $idprograma, $grado, $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Escuelas') {
@@ -149,31 +149,31 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         if ($tipo === 'Sedes') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Sedes');
-            $report->ListadoSedes($session->getEnterpriseID());
+            $report->ListadoSedes($idescuela);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Programas') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Programas');
-            $report->ListadoProgramas($session->getEnterpriseID());
+            $report->ListadoProgramas($idescuela);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Areas') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Areas');
-            $report->ListadoAreas($session->getEnterpriseID());
+            $report->ListadoAreas($idescuela);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Asignaturas') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Asignaturas');
-            $report->ListadoAsignaturas($session->getEnterpriseID());
+            $report->ListadoAsignaturas($idescuela);
             $report->generatePDFDocument();
         }
         if ($tipo === 'PlanEstudioDetallado') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Plan de Estudios Detallado');
-            $report->ListadoDetalladoPlanEstudio($session->getEnterpriseID(), $idprograma, $idplanestudio);
+            $report->ListadoDetalladoPlanEstudio($idescuela, $idprograma, $idplanestudio);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Logros') {
@@ -185,7 +185,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         if ($tipo === 'Grupos') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Grupos');
-            $report->ListadoGrupos($session->getEnterpriseID(), $idprograma, $grado);
+            $report->ListadoGrupos($idescuela, $idprograma, $grado);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Docentes') {
@@ -197,13 +197,13 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         if ($tipo === 'CargasDocentes') {
             $report->AddPage('L', $format, true);
             $report->setReportName('Carga Academica Docente');
-            $report->ListadoCargasDocentes($session->getEnterpriseID(), $idperiodo, $idprograma, null, $grupo);
+            $report->ListadoCargasDocentes($idescuela, $idperiodo, $idprograma, null, $grupo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'DirectoresGrupos') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Directores de Grupos');
-            $report->ListadoDirectoresGrupos($session->getEnterpriseID(), $grupo, $idperiodo);
+            $report->ListadoDirectoresGrupos($idescuela, $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'Estudiantes') {
@@ -212,22 +212,28 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->ListadoEstudiantes($idescuela, $idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
+        if ($tipo === 'ContactosEstudiantes') {
+            $report->AddPage($orientation, $format, true);
+            $report->setReportName('Datos de Contacto de Estudiantes');
+            $report->ListadoContactosEstudiantes($idescuela, $idprograma, $idperiodo, $grado, $grupo, $idestudiante);
+            $report->generatePDFDocument();
+        }
         if ($tipo === 'UsuariosDocentes') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Usuarios de Docentes');
-            $report->ListadoUsuarios($session->getEnterpriseID(), 'Teacher');
+            $report->ListadoUsuarios($idescuela, 'Teacher');
             $report->generatePDFDocument();
         }
         if ($tipo === 'UsuariosEstudiantes') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Usuarios de Estudiantes');
-            $report->ListadoUsuarios($session->getEnterpriseID(), 'Student');
+            $report->ListadoUsuarios($idescuela, 'Student');
             $report->generatePDFDocument();
         }
         if ($tipo === 'UsuariosAcudientes') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Usuarios de Acudientes');
-            $report->ListadoUsuarios($session->getEnterpriseID(), 'Visitor');
+            $report->ListadoUsuarios($idescuela, 'Visitor');
             $report->generatePDFDocument();
         }
         if ($tipo === 'ObservadorEstudiante') {
@@ -239,7 +245,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         if ($tipo === 'RendimientoBajo') {
             $report->AddPage('L', $format, true);
             $report->setReportName('Estudiantes con Bajo Rendimiento');
-            $report->CalificacionesRendimientoBajo($session->getEnterpriseID(), $idprograma, $idplanestudio, $grado, $grupo, $idperiodo, $idestudiante, null);
+            $report->CalificacionesRendimientoBajo($idescuela, $idprograma, $idplanestudio, $grado, $grupo, $idperiodo, $idestudiante, null);
             $report->generatePDFDocument();
         }
     }

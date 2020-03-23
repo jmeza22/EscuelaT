@@ -566,6 +566,42 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getContactosEstudiantesMatriculas($idescuela = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT M.id_periodo, M.id_programa, Pr.nombre_programa, M.numgrado_programa, M.id_grupo, M.id_estudiante, M.nombrecompleto_estudiante, P.telefono_persona, P.email_persona "
+                . " FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa "
+                . " WHERE M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' AND M.estado_matricula!='Finalizado' ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND M.id_escuela=:p_id_escuela ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND M.id_programa=:p_id_programa ";
+        }
+        if ($numgrado !== null) {
+            $arraywhere['p_num_grado'] = $numgrado;
+            $sql = $sql . " AND M.numgrado_programa=:p_num_grado ";
+        }
+        if ($idgrupo !== null) {
+            $arraywhere['p_id_grupo'] = $idgrupo;
+            $sql = $sql . " AND M.id_grupo=:p_id_grupo ";
+        }
+        if ($idperiodo !== null) {
+            $arraywhere['p_id_periodo'] = $idperiodo;
+            $sql = $sql . " AND M.id_periodo=:p_id_periodo ";
+        }
+        if ($idestudiante !== null) {
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND M.id_estudiante=:p_id_estudiante ";
+        }
+        $sql = $sql . " ORDER BY CAST(M.numgrado_programa AS DECIMAL), M.nombrecompleto_estudiante ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
     public function getAsignaturasMatriculadas($idescuela = null, $idmatricula = null, $idestudiante = null, $idprograma = null, $idasignatura = null, $idperiodo = null, $grado = null, $idgrupo = null) {
         $sql = null;
         $result = null;
