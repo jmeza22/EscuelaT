@@ -962,7 +962,7 @@ function getFindByValue(element, num = "") {
 function setFindbyField(fieldname, findby, findbyvalue, num = "") {
     if (fieldname !== null && fieldname !== '' && findby !== null && findby !== '' && findbyvalue !== null && findbyvalue !== '') {
         var field = document.getElementById(fieldname);
-        console.log('Setting Findby'+num+' '+findby+'='+findbyvalue+' TO '+field.id);
+        console.log('Setting Findby' + num + ' ' + findby + '=' + findbyvalue + ' TO ' + field.id);
         if (field !== null && field !== undefined) {
             if (field !== null && (field.tagName === "INPUT" || field.tagName === "SELECT" || field.tagName === "DATALIST" || field.tagName === "TABLE" || field.tagName === "FORM")) {
                 field.setAttribute('findby' + num, findby);
@@ -1061,6 +1061,7 @@ function submitAjax(formData, url, header, reload) {
         },
         error: function (xhr, textStatus, errorThrown) {
             console.error('Error: [' + textStatus + '] --- [' + xhr + '] --- [' + errorThrown + ']');
+            console.log(Object.values(xhr));
             showNotification('Connection error:', 'Try again later!');
         }
 
@@ -1240,9 +1241,9 @@ function setComboboxOptions(element, json) {
                 break;
             }
         }
-        
+
         selected = element.getAttribute("selected");
-        element.innerHTML='<option value=""></option>';
+        element.innerHTML = '<option value=""></option>';
         for (var i = 0; i < json.length; i++) {
             option = document.createElement('option');
             option.setAttribute('id', json[i]['ivalue']);
@@ -1569,7 +1570,6 @@ function setTableData(table, json, dynamic) {
                     element = elementsarray[i + 1];
                     setValue(element, json[i][col]);
                     if (form !== undefined && form !== null && element !== undefined) {
-                        console.log('OK' + element.name);
                         if (element.getAttribute('form') === undefined || element.getAttribute('form') === null) {
                             element.setAttribute('form', form);
                         }
