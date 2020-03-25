@@ -7,7 +7,7 @@ $model = "UsuariosApp";
 $action = "insertorupdate";
 $postdata = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST['username_usuario']) && $_POST['username_usuario'] != null) {
         $bc = new BasicController();
         $bc->connect();
         if (strcmp($_POST['action'], 'find') === 0) {
@@ -27,11 +27,12 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()
         $bc->setPostData($postdata);
         $result = null;
         $result = $bc->execute(true);
-        $result = null;
         $bc->disconnect();
     }
-} else {
+} 
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;
 ?>
 

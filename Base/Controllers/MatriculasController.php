@@ -11,7 +11,7 @@ $postdata = null;
 $ahora = getdate();
 $sql = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
@@ -22,13 +22,13 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $postdata['id_escuela'] = $session->getEnterpriseID();
         $postdata['fecha_matricula'] = $ahora['year'] . '-' . $ahora['mon'] . '-' . $ahora['mday'] . ' ' . $ahora['hours'] . ':' . $ahora['minutes'] . ':' . $ahora['seconds'];
         $bc->setPostData($postdata);
-        if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'find') === 0) {
+        if (isset($_POST['action']) && $_POST['action'] === 'find') {
             $bc->setAction('find');
         }
         $result = null;
         $result = $bc->execute(true);
         $result = null;
-        if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'insertorupdate') === 0 && $bc->getRowCount() > 0) {
+        if (isset($_POST['action']) && $_POST['action'] === 'insertorupdate' && $bc->getRowCount() > 0) {
             $array = Array();
             $array['id_programa'] = $postdata['id_programa'];
             $array['id_periodo'] = $postdata['id_periodo'];

@@ -13,7 +13,7 @@ $date = date("Y-m-d");
 $time = date("G:i:s");
 $lastdate = date("Y-m-d G:i:s");
 if ($session->hasLogin() && ( $session->getLimited() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
@@ -41,11 +41,12 @@ if ($session->hasLogin() && ( $session->getLimited() == 1)) {
         } else {
             $result = $session->getSessionStateJSON();
         }
-        $result = null;
         $bc->disconnect();
     }
-} else {
+}
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;
 ob_end_flush();
 ?>

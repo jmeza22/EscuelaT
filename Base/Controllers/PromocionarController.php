@@ -6,8 +6,8 @@ $session = new SessionManager();
 $variables = new SystemVariableManager();
 $bc = null;
 $result = null;
-$model = "AsistenciaApp";
-$findBy = "id_asistencia";
+$model = "MatriculasApp";
+$findBy = "id_matricula";
 $rowcount = 0;
 $data = null;
 $postdata = null;
@@ -19,7 +19,7 @@ $fechaf = null;
 $result = $session->getSessionStateJSON();
 $resultdata = array();
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST['id_programa']) && $_POST['id_programa'] != null) {
         $idprograma = null;
         $idperiodo = null;
         $numgrado = null;
@@ -97,7 +97,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $postdata['fechacrea_matricula'] = date('Y-m-d H:i:s');
                     $postdata['fechaedita_matricula'] = date('Y-m-d H:i:s');
                     $nombre = $matriculas[$i]['nombrecompleto_estudiante'];
-                    
+
                     $cantReprobadas = $bc->getCantidadAsignaturasReprobadas($matriculas[$i]['id_escuela'], $matriculas[$i]['id_programa'], $matriculas[$i]['id_planestudio'], $matriculas[$i]['numgrado_programa'], $matriculas[$i]['id_grupo'], $matriculas[$i]['id_periodo'], $matriculas[$i]['id_estudiante'], $matriculas[$i]['id_matricula']);
                     if ($cantReprobadas !== null && $cantReprobadas !== '[]') {
                         $cantReprobadas = json_decode($cantReprobadas, true);
@@ -162,8 +162,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
     }
     $result = json_encode($result);
     echo $result;
-    $result = null;
-} else {
+}
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;
 ?>

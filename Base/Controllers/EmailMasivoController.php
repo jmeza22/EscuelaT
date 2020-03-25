@@ -40,7 +40,9 @@ if ($session->hasLogin()) {
     }
     $array = json_encode($array);
     echo $array;
-} else {
+} 
+if ($array === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;
 ?>

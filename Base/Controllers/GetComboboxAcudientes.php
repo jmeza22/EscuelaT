@@ -9,7 +9,7 @@ $where = null;
 $array1 = null;
 $array2 = null;
 $arraymerge = null;
-if ($session->hasLogin() && isset($_REQUEST) && $_REQUEST !== null) {
+if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $bc = new ReportsBank();
     $bc->connect();
     $bc->preparePostData();

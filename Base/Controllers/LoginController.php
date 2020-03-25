@@ -16,6 +16,7 @@ $tipousuario = null;
 $idpersona = null;
 $crypt = new MyCrypt();
 $sql = null;
+$array = null;
 //pw admin 92042202128fb12b1241f0dce1e6fe8c56c9fb6911c527e063aabcd
 if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token'] != null) {
     if (!$session->hasLogin()) {
@@ -84,12 +85,14 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
         $array = json_encode($array);
         echo $array;
 
-        $result = null;
-        $array = null;
         $bc->disconnect();
-    } else {
+    }
+
+    if ($session->hasLogin()) {
         echo $session->getSessionStateJSON();
     }
+    $array = null;
+    $result = null;
     exit();
 }
 ?>

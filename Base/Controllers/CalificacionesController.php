@@ -22,7 +22,7 @@ $nombre = '';
 $errormessage = '';
 $fecha = date('Y-m-d H:i:s');
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
@@ -75,7 +75,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                         unset($data["logroc_calificacion"]);
                         unset($data["logrop_calificacion"]);
                         unset($data["logroa_calificacion"]);
-                        //$data["p" . $numcorte . "_nn_calificacion"] = $data["nn_calificacion"];
 
                         $data["p" . $numcorte . "_ausencias_calificacion"] = $data["ausencias_calificacion"];
                         unset($data["ausencias_calificacion"]);
@@ -126,10 +125,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         }
         $result = json_encode($result);
         echo $result;
-        $result = null;
         $bc->disconnect();
     }
-} else {
+}
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;        
 ?>

@@ -13,7 +13,7 @@ $idpersona = null;
 $idtipousuario = null;
 $datos = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         if (isset($_POST['id_tipousuario']) && $_POST['id_tipousuario'] !== null) {
             $idtipousuario = $_POST['id_tipousuario'];
             unset($_POST['id_tipousuario']);
@@ -28,11 +28,10 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
         } else {
             $bc->setAction('insert');
         }
-        if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'find') === 0) {
+        if (isset($_POST['action']) && $_POST['action'] === 'find') {
             $bc->setAction('find');
         }
         $result = $bc->execute(true);
-        $result = null;
         $postdata = $bc->getPostData();
         if ($bc->getRowCount() > 0) {
             $idpersona = $bc->getLastInsertId();
@@ -82,7 +81,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
         }
         $bc->disconnect();
     }
-} else {
+}
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;
 ?>

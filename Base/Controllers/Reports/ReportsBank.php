@@ -1412,4 +1412,40 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getPreguntas($idcuestionario = null, $idpregunta = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM PreguntasCuestionariosApp WHERE status_pregunta=1 ";
+        $arraywhere = Array();
+        if ($idcuestionario !== null) {
+            $arraywhere['p_id_cuestionario'] = $idcuestionario;
+            $sql = $sql . " AND id_cuestionario=:p_id_cuestionario ";
+        }
+        if ($idpregunta !== null) {
+            $arraywhere['p_id_pregunta'] = $idpregunta;
+            $sql = $sql . " AND id_pregunta=:p_id_pregunta ";
+        }
+        $sql = $sql . " ORDER BY nombrecorto_pregunta ASC, activo_pregunta DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getOpcionesRespuesta($idpregunta = null, $idopcion = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM OpcionesRespuestaApp WHERE status_opcionrespuesta=1 ";
+        $arraywhere = Array();
+        if ($idpregunta !== null) {
+            $arraywhere['p_id_pregunta'] = $idpregunta;
+            $sql = $sql . " AND id_pregunta=:p_id_pregunta ";
+        }
+        if ($idopcion !== null) {
+            $arraywhere['p_id_opcionrespuesta'] = $idopcion;
+            $sql = $sql . " AND id_opcionrespuesta=:p_id_opcionrespuesta ";
+        }
+        $sql = $sql . " ORDER BY id_pregunta DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
 }

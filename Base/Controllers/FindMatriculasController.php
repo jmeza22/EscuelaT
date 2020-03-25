@@ -12,7 +12,7 @@ $postdata = null;
 $ahora = getdate();
 $sql = null;
 if ($session->hasLogin()) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
@@ -21,11 +21,11 @@ if ($session->hasLogin()) {
         $bc->setAction($action);
         $result = null;
         $result = $bc->execute(true);
-        $result = null;
         $bc->disconnect();
     }
-} else {
+} 
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
-
+$result = null;
 ?>

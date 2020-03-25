@@ -15,7 +15,7 @@ $i = 0;
 $fachai = null;
 $fechaf = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
@@ -60,11 +60,12 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
             }
         }
         echo $result;
-        $result = null;
         $bc->executeSQL("DELETE FROM $model WHERE status_asistencia=0 ");
         $bc->disconnect();
     }
-} else {
+}
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;
 ?>

@@ -8,7 +8,7 @@ $action = "update";
 $findBy = "username_usuario";
 $postdata = null;
 if ($session->hasLogin() && $session->checkToken()) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();

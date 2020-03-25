@@ -8,7 +8,7 @@ $model = 'CitacionesObservadorApp';
 $findBy = 'id_citacion';
 $action = 'insertorupdate';
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         if ($session->getStandard() == 1 || $session->getLimited() || $session->getExternal()) {
             unset($_POST['status_citacion']);
         }
@@ -18,7 +18,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction($action);
-        if (isset($_POST['action']) && strcmp($_POST['action'], 'find') === 0) {
+        if (isset($_POST['action']) && $_POST['action'] === 'find') {
             $bc->setAction('find');
         }
         $result = null;

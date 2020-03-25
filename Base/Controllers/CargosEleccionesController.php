@@ -8,7 +8,7 @@ $model = 'CargosEleccionesApp';
 $findBy = 'id_cargo';
 $action = 'insertorupdate';
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getManagement() == 1 )) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
@@ -18,7 +18,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $postdata = $bc->getPostData();
         $postdata['id_escuela'] = $session->getEnterpriseID();
         $bc->setPostData($postdata);
-        if (isset($_POST['action']) && $_POST['action'] !== null && strcmp($_POST['action'], 'find') === 0) {
+        if (isset($_POST['action']) && $_POST['action'] === 'find') {
             $bc->setAction('find');
         }
         $result = $bc->execute(true);

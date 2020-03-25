@@ -2437,11 +2437,15 @@
       <Cl au="0" df="" nm="id_lectura" nu="1">
         <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
+      <Cl au="0" df="" nm="nombrecorto_pregunta" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre corto de Pregunta</Cm>
+      </Cl>
       <Cl au="0" df="" nm="enunciado_pregunta" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="300" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
         <Cm>Enunciado de la Pregunta</Cm>
       </Cl>
-      <Cl au="0" df="SelMultipleUnicaRespuesta" nm="tipo_pregunta" nu="1">
+      <Cl au="0" df="MultipleUnicaRespuesta" nm="tipo_pregunta" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
         <Cm>Tipo de Pregunta</Cm>
       </Cl>
@@ -2930,7 +2934,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="TerminalesEleccionesApp" x="979" y="3912"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CuestionariosApp" x="222" y="4231"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="LecturasApp" x="644" y="4238"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PreguntasCuestionariosApp" x="438" y="4452"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PreguntasCuestionariosApp" x="454" y="4478"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="OpcionesRespuestaApp" x="948" y="4464"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="GruposCuestionariosApp" x="26" y="4473"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="IntentosCuestionariosApp" x="236" y="4665"/>
@@ -3239,7 +3243,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.OpcionesRespuestaApp.fk_OpcionesRespuestaApp_PreguntasCuestionariosApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="791" x2="925" y1="4505" y2="4505"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="822" x2="925" y1="4531" y2="4531"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
@@ -3289,12 +3293,12 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PreguntasCuestionariosApp.fk_PreguntasCuestionariosApp_CuestionariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="479" x2="479" y1="4424" y2="4429"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="478" x2="478" y1="4424" y2="4455"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PreguntasCuestionariosApp.fk_PreguntasCuestionariosApp_LecturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="691" x2="691" y1="4418" y2="4429"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="691" x2="691" y1="4418" y2="4455"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ProgramasApp.fk_Programa_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -3315,7 +3319,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.RespuestasIntentosApp.fk_RespuestasIntentosApp_PreguntasCuestionariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="736" x2="736" y1="4606" y2="4648"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="752" x2="752" y1="4645" y2="4648"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.SedesApp.fk_SedesApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -3801,13 +3805,14 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB/Tables (43)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (43)/AreasApp</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

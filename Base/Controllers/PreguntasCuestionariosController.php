@@ -4,25 +4,26 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'CandidatosEleccionesApp';
-$findBy = 'id_candidato';
+$model = 'PreguntasCuestionariosApp';
+$findBy = 'id_pregunta';
 $action = 'insertorupdate';
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getManagement() == 1 )) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
+        if (isset($_POST['id_lectura']) && $_POST['id_lectura'] === '') {
+            unset($_POST['id_lectura']);
+        }
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction($action);
-        $postdata = $bc->getPostData();
-        $postdata['id_escuela'] = $session->getEnterpriseID();
-        $bc->setPostData($postdata);
         if (isset($_POST['action']) && $_POST['action'] === 'find') {
             $bc->setAction('find');
         }
+        $result = null;
         $result = $bc->execute(true);
-        $bc->executeSQL("DELETE FROM $model WHERE status_candidato=0 ");
+
         $bc->disconnect();
     }
 }

@@ -12,7 +12,7 @@ $postdata = null;
 $count = 0;
 $i = 0;
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST['id_programa']) && $_POST['id_programa'] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
@@ -66,10 +66,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             $result = json_encode($result);
         }
         echo $result;
-        $result = null;
         $bc->disconnect();
     }
-} else {
+}
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
+$result = null;
 ?>

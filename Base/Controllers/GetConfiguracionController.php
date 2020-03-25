@@ -10,14 +10,14 @@ $model = 'ConfiguracionApp';
 $findBy = 'id_escuela';
 $action = 'find';
 if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new ReportsBank();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);
         $bc->setFindBy($findBy);
         $bc->setAction($action);
-        if (isset($_POST['action']) && strcmp($_POST['action'], 'find') === 0) {
+        if (isset($_POST['action']) && $_POST['action'] === 'find') {
             $bc->setAction('find');
         }
         $result = null;

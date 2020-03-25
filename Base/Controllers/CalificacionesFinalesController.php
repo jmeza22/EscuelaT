@@ -11,7 +11,7 @@ $postdata = null;
 $configuracion = null;
 $sql = "";
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1)) {
-    if (isset($_POST) && $_POST != null) {
+    if (isset($_POST['id_programa']) && $_POST['id_programa'] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->setModel($model);
@@ -91,7 +91,8 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         }
         $bc->disconnect();
     }
-} else {
+}
+if ($result === null) {
     echo $session->getSessionStateJSON();
 }
 ?>
