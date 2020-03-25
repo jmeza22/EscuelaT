@@ -22,13 +22,11 @@ function setImagenLectura() {
 }
 
 function MostrarImagen() {
+    setImagenLectura();
     var prefix = '';
     var id = ''
-    var idlectura = null;
     var nameimage = null;
-    idlectura = document.getElementById('id_lectura');
     nameimage = document.getElementById('imagen_lectura');
-    
     window.open("UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + nameimage.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
 }
 

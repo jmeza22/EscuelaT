@@ -870,7 +870,7 @@
         <Cm>Membrete para documentos y reportes oficiales.</Cm>
       </Cl>
       <Cl au="0" df="" nm="logo_configuracion" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
         <Cm>Logo de la Escuela</Cm>
       </Cl>
       <Cl au="0" df="1" nm="numperiodos_configuracion" nu="1">
@@ -2445,6 +2445,10 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
         <Cm>Enunciado de la Pregunta</Cm>
       </Cl>
+      <Cl au="0" df="" nm="imagen_pregunta" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Imagen de Pregunta</Cm>
+      </Cl>
       <Cl au="0" df="MultipleUnicaRespuesta" nm="tipo_pregunta" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
         <Cm>Tipo de Pregunta</Cm>
@@ -3319,7 +3323,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.RespuestasIntentosApp.fk_RespuestasIntentosApp_PreguntasCuestionariosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="752" x2="752" y1="4645" y2="4648"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="752" x2="752" y1="4658" y2="4648"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.SedesApp.fk_SedesApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">

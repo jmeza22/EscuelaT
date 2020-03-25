@@ -88,11 +88,11 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
         $bc->disconnect();
     }
 
-    if ($session->hasLogin()) {
-        echo $session->getSessionStateJSON();
-    }
     $array = null;
     $result = null;
     exit();
+}
+if ($session->hasLogin()) {
+    echo $session->getSessionStateJSON();
 }
 ?>

@@ -10,6 +10,11 @@ $findBy = 'id_estudiante';
 $action = 'insertorupdate';
 if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
+        if (isset($_POST['foto_estudiante']) && $_POST['foto_estudiante'] !== '') {
+            if (!file_exists('../../ImageFiles/'.$_POST['foto_estudiante'])) {
+                $_POST['foto_estudiante']='';
+            }
+        }
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();

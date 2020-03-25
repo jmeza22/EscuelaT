@@ -9,6 +9,11 @@ $findBy = 'id_opcionrespuesta';
 $action = 'insertorupdate';
 if ($session->hasLogin() && $session->checkToken() && ($session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
+        if (isset($_POST['imagen_opcionrespuesta']) && $_POST['imagen_opcionrespuesta'] !== '') {
+            if (!file_exists('../../ImageFiles/'.$_POST['imagen_opcionrespuesta'])) {
+                $_POST['imagen_opcionrespuesta'] = '';
+            }
+        }
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();

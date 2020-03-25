@@ -40,13 +40,13 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Seleccione el Cuestionario</label>
-                                    <select id="select_id_cuestionario" name="select_id_cuestionario" required="required" model="CuestionariosApp" colname="nombre_cuestionario" colvalue="id_cuestionario" url="Base/Controllers/GetComboboxCuestionarios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('select_id_pregunta', 'id_cuestionario', this.value, 1);">
+                                    <select id="select_id_cuestionario" name="select_id_cuestionario" required="required" model="CuestionariosApp" colname="nombre_cuestionario" colvalue="id_cuestionario" url="Base/Controllers/GetComboboxCuestionarios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('select_id_pregunta', 'id_cuestionario', this.value, 1); setIdCuestionarioToPregunta();">
                                         <option selected="selected" value="">Ninguna</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-12">
                                     <label>Seleccione Pregunta</label>
-                                    <select id="select_id_pregunta" name="select_id_pregunta" required="required" model="PreguntasCuestionariosApp" colname="nombrecorto_pregunto" colvalue="id_pregunta" url="Base/Controllers/GetComboboxPreguntasCuestionarios.php" class="form-control" style="width: 100%;" onchange="RefreshFormAndTable(this);">
+                                    <select id="select_id_pregunta" name="select_id_pregunta" required="required" model="PreguntasCuestionariosApp" colname="nombrecorto_pregunto" colvalue="id_pregunta" url="Base/Controllers/GetComboboxPreguntasCuestionarios.php" class="form-control" style="width: 100%;" onchange="setIdPreguntaToOpcionRespuesta();">
                                         <option selected="selected" value="">Ninguna</option>
                                     </select>
                                 </div>
@@ -62,13 +62,13 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Codigo</label>
-                                    <input type="number" id="id_pregunta" name="id_pregunta" value="0" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" /> 
+                                    <input type="number" id="id_pregunta" name="id_pregunta" list="select_id_pregunta" value="0" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" /> 
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <label>Cuestionario</label>
-                                    <input type="number" id="id_cuestionario" name="id_cuestionario" value="0" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" /> 
+                                    <input type="text" id="id_cuestionario" name="id_cuestionario" value="0" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" /> 
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-7">
                                     <label>Nombre Corto</label>
                                     <input type="text" name="nombrecorto_pregunta" id="nombrecorto_pregunta" spellcheck="spellcheck" value="" required="required" maxlength="100" class="form-control">
                                 </div>
@@ -90,7 +90,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Imagen</label>
-                                    <input type="hidden" id="imagen_pregunta" name="imagen_pregunta" maxlength="100" value="" required="required" />
+                                    <input type="hidden" id="imagen_pregunta" name="imagen_pregunta" maxlength="100" value="" />
                                     <button id="VerImagePregunta" name="VerImagenPregunta" type="button" class="btn btn-default btn-block" onclick="MostrarImagenPregunta();" title="Ver o Cambiar Imagen"> <i class="glyphicon glyphicon-picture"></i> </button>
                                 </div>
                                 <div class="col-sm-6">
@@ -103,7 +103,7 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Puntos</label>
-                                    <input type="number" id="puntosposibles_pregunta" name="puntosposibles_pregunta" value="1" min="1" max="10" class="form-control" required="required"  maxlength="22" /> 
+                                    <input type="number" id="puntos_pregunta" name="puntos_pregunta" value="1" min="1" max="10" class="form-control" required="required"  maxlength="22" /> 
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Estado</label>
@@ -115,9 +115,14 @@ and open the template in the editor.
                             </div>
 
                             <div class="row" style="margin-top: 20px;">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <center>
-                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar Pregunta </button>        
+                                        <button type="button" id="save" name="save" action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" title="Grabar Pregunta"> Grabar </button>        
+                                    </center>
+                                </div>
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="reset" id="reset" name="reset" onclick="resetForm(this); setIdCuestionarioToPregunta();" class="btn btn-success">Nuevo</button> 
                                     </center>
                                 </div>
                             </div>
@@ -133,7 +138,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Codigo</label>
-                                    <input type="number" id="id_opcionrespuesta" name="id_opcionrespuesta" value="0" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" /> 
+                                    <input type="number" id="id_opcionrespuesta" name="id_opcionrespuesta" value="" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" onfocus="setIdOpcionRespuesta();" /> 
                                 </div>
                                 <div class="col-sm-10">
                                     <label>Texto</label>
@@ -144,7 +149,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Imagen</label>
-                                    <input type="hidden" id="imagen_opcionrespuesta" name="imagen_opcionrespuesta" maxlength="100" value="" required="required" />
+                                    <input type="hidden" id="imagen_opcionrespuesta" name="imagen_opcionrespuesta" maxlength="100" value="" />
                                     <button id="VerImageOpcionRespuesta" name="VerImageOpcionRespuesta" type="button" class="btn btn-default btn-block" onclick="MostrarImagenOpcionRespuesta();" title="Ver o Cambiar Imagen"> <i class="glyphicon glyphicon-picture"></i> </button>
                                 </div>
                                 <div class="col-sm-2">
@@ -163,17 +168,24 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Pregunta</label>
-                                    <input type="number" id="id_pregunta" name="id_pregunta" value="0" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" /> 
+                                    <input type="number" id="id_pregunta" name="id_pregunta" list="select_id_pregunta" value="0" class="form-control" required="required" readonly="readonly" maxlength="22" min="0" /> 
                                 </div>
                                 <div class="col-sm-4">
                                     <label>Nombre Pregunta</label>
                                     <input type="text" id="nombre_pregunta" name="nombre_pregunta" value="" class="form-control" required="required" disabled="disabled" maxlength="200" /> 
                                 </div>
                             </div>
-                            <div>
-                                <center>
-                                    <button type="button" id="guardar" name="guardar" action="insert" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar Opcion </button>
-                                </center>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="setIdOpcionRespuesta(); Send(this);" class="btn btn-primary" title="Grabar Opcion de Respuesta"> Grabar </button>        
+                                    </center>
+                                </div>
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="reset" id="reset" name="reset" onclick="resetForm(this); setIdPreguntaToOpcionRespuesta();" class="btn btn-success">Nuevo</button> 
+                                    </center>
+                                </div>
                             </div>
 
                         </form>
@@ -199,7 +211,7 @@ and open the template in the editor.
                                     <tr id="samplerow" samplerow="true" style="display: none;">
                                         <td> <b>{{texto_opcionrespuesta}}</b> </td>
                                         <td> <b>{{correcta_opcionrespuesta}}</b> </td>
-                                        <td> <b>{{activa_opcionrespuesta}}</b> </td>
+                                        <td> <b>{{activo_opcionrespuesta}}</b> </td>
                                         <td> <b>{{id_opcionrespuesta}}</b> </td>
                                         <td> <b>{{id_pregunta}}</b> </td>
                                         <td>

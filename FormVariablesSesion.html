@@ -66,13 +66,13 @@ and open the template in the editor.
                         <div class="col-sm-4">
                             <label>Año Academico</label>
                             <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setFindbyCombobox('id_corte', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 3);">
-                                <option selected="selected" value="NULL">Ninguna</option>
+                                <option selected="selected" value="">Ninguna</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                             <label>Cod.Periodo</label>
                             <select id="id_corte" name="id_corte" list="id_corte" selected="NULL" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'numero_corte');">
-                                <option selected="selected" value="NULL">Ninguna</option>
+                                <option selected="selected" value="">Ninguna</option>
                             </select>
                         </div>
                         <div class="col-sm-4">

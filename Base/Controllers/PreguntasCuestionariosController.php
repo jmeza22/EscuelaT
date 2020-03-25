@@ -12,6 +12,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getAdmin() == 1
         if (isset($_POST['id_lectura']) && $_POST['id_lectura'] === '') {
             unset($_POST['id_lectura']);
         }
+        if (isset($_POST['imagen_pregunta']) && $_POST['imagen_pregunta'] !== '') {
+            if (!file_exists('../../ImageFiles/'.$_POST['imagen_pregunta'])) {
+                $_POST['imagen_pregunta']='';
+            }
+        }
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
