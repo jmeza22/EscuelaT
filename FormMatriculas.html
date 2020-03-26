@@ -58,26 +58,26 @@ and open the template in the editor.
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label>Sede</label>
-                                        <select id="id_sede" name="id_sede" selected="NULL" required="required" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="onChangeSede();">
-                                            <option selected="selected" value="NULL">Ninguna</option>
+                                        <select id="id_sede" name="id_sede" required="required" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="onChangeSede();">
+                                            <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Jornada</label>
-                                        <select id="id_jornada" name="id_jornada" selected="NULL" required="required" model="JornadasApp" colname="nombre_jornada" colvalue="id_jornada" url="Base/Controllers/GetComboboxJornadas.php" class="form-control" style="width: 100%;">
-                                            <option selected="selected" value="NULL">Ninguna</option>
+                                        <select id="id_jornada" name="id_jornada" required="required" model="JornadasApp" colname="nombre_jornada" colvalue="id_jornada" url="Base/Controllers/GetComboboxJornadas.php" class="form-control" style="width: 100%;">
+                                            <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Programa</label>
-                                        <select id="id_programa" name="id_programa" list="id_programa" selected="NULL" required="required" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="onChangePrograma(); setNameFromDataList(this, null, 'valor_matricula'); CalcularValores();">
-                                            <option selected="selected" value="NULL">Ninguna</option>
+                                        <select id="id_programa" name="id_programa" list="id_programa" required="required" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="onChangePrograma(); setNameFromDataList(this, null, 'valor_matricula'); CalcularValores();">
+                                            <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Plan Estudios</label>
-                                        <select id="id_planestudio" name="id_planestudio" selected="NULL" required="required" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="onChangePlanEstudios();">
-                                            <option selected="selected" value="NULL">Ninguna</option>
+                                        <select id="id_planestudio" name="id_planestudio" required="required" model="PlanEstudiosApp" colname="id_planestudio" colvalue="nombre_planestudio" url="Base/Controllers/GetComboboxPlanEstudios.php" class="form-control" style="width: 100%;" onchange="onChangePlanEstudios();">
+                                            <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
 
@@ -85,19 +85,19 @@ and open the template in the editor.
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label>Año</label>
-                                        <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;">
+                                        <select id="id_periodo" name="id_periodo" required="required" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;">
                                             <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Grado</label>
                                         <select id="numgrado_programa" name="numgrado_programa"  required="required"  model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" class="form-control" style="width: 100%;" onchange="onChangeGrado();">
-                                            <option disabled="disabled" value="">Ninguno</option>
+                                            <option selected="selected" value="">Ninguno</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Grupo</label>
-                                        <select id="id_grupo" name="id_grupo" selected="NULL" required="required" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
+                                        <select id="id_grupo" name="id_grupo" required="required" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
                                             <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
@@ -108,8 +108,6 @@ and open the template in the editor.
                                             <option value="Normal">Normal</option>
                                             <option value="Condicionado">Condicionada</option>
                                             <option value="Suspendido">Suspendida</option>
-                                            <option value="Retirado">Retirada</option>
-                                            <option value="Finalizado">Finalizada</option>
                                         </select>
                                     </div>
                                 </div>

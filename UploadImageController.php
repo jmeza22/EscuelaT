@@ -52,7 +52,7 @@
                 }
                 ?>
                 <center>
-                    <button type="button" onclick="history.back()" class="btn btn-default">Volver</button>
+                    <button type="button" onclick="window.close()" class="btn btn-default">Volver</button>
                 </center>
             </div>
         </div>

@@ -33,7 +33,7 @@ function requestNotificationPermission() {
     }
 }
 
-function showNotification(mytitle, mytext) {
+function showNotification(mytitle, mytext, time = 5000) {
     if (Notification) {
         if (Notification.permission === "granted") {
             if (mytitle !== null && mytext !== null) {
@@ -45,7 +45,7 @@ function showNotification(mytitle, mytext) {
                 message = new Notification(title, extra);
                 setTimeout(function () {
                     message.close();
-                }, 5000);
+                }, time);
                 return true;
             }
         } else {
@@ -241,19 +241,20 @@ function hideAjaxLoading() {
     return false;
 }
 
-function setWSPath() {
-    var path = null;
+function setWSPath(path = null) {
     var project = null;
     if (LocalStorageStatus()) {
         project = getMETAElement('ProjectName').content;
-        path = prompt('Enter the Web Service path:', '');
+        if (path === null || path === '') {
+            path = prompt('Enter the Web Service path:', '');
+        }
         if (path !== null && path !== "") {
             localStorage.setItem("WebServicePath" + project, path);
             return true;
         } else {
             return setWSPath();
         }
-    }
+}
 }
 
 function getWSPath() {
@@ -327,7 +328,7 @@ function disableElement(element) {
 
 function autoValueCheckbox(checkbox) {
     if (checkbox !== undefined && checkbox !== null) {
-        if (checkbox.tagName.toString().toUpperCase() === undefined) {
+        if (checkbox.tagName === undefined) {
             checkbox = document.getElementById(checkbox);
         }
         console.log('Setting Checkbox Value: ' + checkbox.id);
@@ -366,7 +367,7 @@ function getParent(element, tagname = null) {
 function getForm(element) {
     if (element !== null) {
         var found = null;
-        if (element.tagName.toString().toUpperCase() === undefined) {
+        if (element.tagName === undefined) {
             var element0 = document.getElementById(element);
             if (element0 !== undefined && element0 !== null && element0.tagName.toString().toUpperCase() === 'FORM') {
                 return element0;
@@ -464,7 +465,7 @@ function resetForm(element) {
             if (form === document.forms[i]) {
                 form = document.forms[i];
                 for (var j = 0; j < form.elements.length; j++) {
-                    console.log('Element:'+form.elements[j].id+' OK');
+                    console.log('Element:' + form.elements[j].id + ' OK');
                     if (form.elements[j].tagName.toString().toUpperCase() !== "BUTTON") {
                         form.elements[j].value = "";
                     }
@@ -868,7 +869,19 @@ function getTD(element) {
     return null;
 }
 
-function getColNameCombobox(element) {
+function getComboboxValue(element) {
+    if (element !== undefined && element !== null && element.tagName !== undefined && (element.tagName === 'SELECT' || element.tagName === 'DATALIST')) {
+        if (element.selected !== undefined) {
+            return element.selected;
+        }
+        if (element.value !== undefined) {
+            return element.value;
+        }
+    }
+    return null;
+}
+
+function getComboboxColName(element) {
     if (element !== null && (element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST")) {
         if (element.getAttribute("colname") !== null && element.getAttribute("colname") !== '') {
             return element.getAttribute("colname");
@@ -877,7 +890,7 @@ function getColNameCombobox(element) {
     return null;
 }
 
-function getColValueCombobox(element) {
+function getComboboxColValue(element) {
     if (element !== null && (element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST")) {
         if (element.getAttribute("colvalue") !== null && element.getAttribute("colvalue") !== '') {
             return element.getAttribute("colvalue");
@@ -886,7 +899,7 @@ function getColValueCombobox(element) {
     return null;
 }
 
-function getOtherValueCombobox(element) {
+function getComboboxOtherValue(element) {
     if (element !== null && (element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST")) {
         if (element.getAttribute("othervalue") !== null && element.getAttribute("othervalue") !== '') {
             return element.getAttribute("othervalue");
@@ -1074,7 +1087,7 @@ function submitAjax(formData, url, header, reload) {
 }
 
 function setValue(element, value) {
-    if (element !== undefined && element !== null && element.tagName.toString().toUpperCase() !== undefined) {
+    if (element !== undefined && element !== null && element.tagName !== undefined) {
         if (element !== null) {
             element.value = "";
             element.value = value;
@@ -1293,9 +1306,9 @@ function loadComboboxData(element) {
 
     url = getURL(element);
     model = getModel(element);
-    colname = getColNameCombobox(element);
-    colvalue = getColValueCombobox(element);
-    othervalue = getOtherValueCombobox(element);
+    colname = getComboboxColName(element);
+    colvalue = getComboboxColValue(element);
+    othervalue = getComboboxOtherValue(element);
     findby = getFindBy(element);
     findbyvalue = getFindByValue(element);
     findby1 = getFindBy(element, 1);
@@ -1374,7 +1387,7 @@ function addNewRowInTable(mytable) {
     var newrow = null;
     var tbody = null;
     var form = null;
-    if (mytable !== null && mytable.tagName.toString().toUpperCase() === undefined) {
+    if (mytable !== null && mytable.tagName === undefined) {
         mytable = getElementDocument(mytable);
     }
     if (mytable !== null && mytable.tagName.toString().toUpperCase() === "TABLE") {
@@ -1405,7 +1418,7 @@ function addNewRowInTable(mytable) {
 function deleteRowInTable(mytable) {
     var myrow = null;
     var element = null;
-    if (mytable !== null && mytable.tagName.toString().toUpperCase() === undefined) {
+    if (mytable !== null && mytable.tagName === undefined) {
         mytable = getElementDocument(mytable);
     }
     if (mytable !== null && mytable.tagName.toString().toUpperCase() === "TABLE") {
@@ -1743,7 +1756,7 @@ function loadNameFromId(field, namefield1, namefield2, namefield3) {
     var vals = null;
     var object = null;
     if (field !== null) {
-        if (field.tagName.toString().toUpperCase() === null || field.tagName.toString().toUpperCase() === undefined) {
+        if (field.tagName === null || field.tagName === undefined) {
             field = document.getElementById(field);
         }
         url = getURL(field);
@@ -2110,7 +2123,7 @@ function setNameFromDataList(idfield, idfieldname, idothervalue) {
         var valuefield = null;
         var selected = null;
 
-        if (idfield.tagName.toString().toUpperCase() === undefined && document.getElementById(idfield) !== undefined) {
+        if (idfield.tagName === undefined && document.getElementById(idfield) !== undefined) {
             field = document.getElementById(idfield);
         } else {
             field = idfield;
@@ -2134,10 +2147,10 @@ function setNameFromDataList(idfield, idfieldname, idothervalue) {
         }
 
         if (selected !== null) {
-            if (fieldTarget !== null && fieldTarget.tagName.toString().toUpperCase() !== undefined && selected.innerHTML !== null && selected.innerHTML !== '') {
+            if (fieldTarget !== null && fieldTarget.tagName !== undefined && selected.innerHTML !== null && selected.innerHTML !== '') {
                 fieldTarget.value = selected.innerHTML;
             }
-            if (fieldOther !== null && fieldOther.tagName.toString().toUpperCase() !== undefined && selected.getAttribute('othervalue') !== null) {
+            if (fieldOther !== null && fieldOther.tagName !== undefined && selected.getAttribute('othervalue') !== null) {
                 fieldOther.value = selected.getAttribute('othervalue');
             }
         }
@@ -2152,7 +2165,7 @@ function setNameFromDataList(idfield, idfieldname, idothervalue) {
 function autoNameFromDataList(idfield, idfieldname, idothervalue) {
     var field = null;
     if (idfield !== null) {
-        if (idfield.tagName.toString().toUpperCase() === undefined || idfield.tagName.toString().toUpperCase() === null) {
+        if (idfield.tagName === undefined || idfield.tagName === null) {
             field = document.getElementById(idfield);
         } else {
             field = idfield;
