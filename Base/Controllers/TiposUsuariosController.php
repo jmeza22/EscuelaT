@@ -22,22 +22,27 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         if (isset($_POST[$findBy])) {
             $data = array();
             $postdata = $bc->getPostData();
-            $count = count($_POST[$findBy]);
-
-            if ($count >= 1) {
+            $count = count($postdata[$findBy]);
+            if (is_array($postdata[$findBy]) && $count > 0) {
                 $postdata = $bc->parseMultiRows($postdata);
                 $count = count($postdata);
                 for ($i = 0; $i < $count; $i++) {
                     $bc->setPostData($postdata[$i]);
-                    $result = $bc->execute(false);
+                    $temp = $bc->execute(false);
+                    if ($bc->getRowCount() > 0) {
+                        $result = $temp;
+                        $rowcount++;
+                    }
                 }
             }
         }
-        echo $result;
+        if ($rowcount > 0) {
+            echo $result;
+        }
         $bc->executeSQL("DELETE FROM $model WHERE status_tipousuario=0 ");
         $bc->disconnect();
     }
-} 
+}
 if ($result === null) {
     echo $session->getSessionStateJSON();
 }

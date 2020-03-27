@@ -94,8 +94,8 @@ and open the template in the editor.
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <label>Telefono</label>
-                            <input type="tel" name="telefono_persona" id="telefono_persona" value="" maxlength="20" class="form-control" title="Fijo o Celular" >
+                            <label>Celular</label>
+                            <input type="tel" integer="true" name="telefono_persona" id="telefono_persona" value="" maxlength="10" class="form-control" title="Fijo o Celular" >
                         </div>
                         <div class="col-sm-3">
                             <label>Email</label>
@@ -184,7 +184,7 @@ and open the template in the editor.
                                         <input type="hidden"  editable="false" name="id_persona" id="id_persona" value="{{id_persona}}" >
                                         <input type="hidden"  editable="false" name="status_persona" id="status_persona" value="1" >
                                         <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" action="update" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
                                     </form>
                                 </td>
                             </tr>

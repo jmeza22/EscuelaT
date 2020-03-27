@@ -243,11 +243,11 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Ocupacion</label>
-                                    <input type="text" name="ocupacionacudiente1_estudiante" id="ocupacionacudiente1_estudiante" value="Ninguno" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                    <input type="text" name="ocupacionacudiente1_estudiante" id="ocupacionacudiente1_estudiante" value="Ninguno" maxlength="50" required="required" class="form-control" title="Ocupacion del Acudiente 1" list="lista_ocupacion">
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Telefono</label>
-                                    <input type="text" name="telefonoacudiente1_estudiante" id="telefonoacudiente1_estudiante" value="Ninguno" maxlength="50" required="required" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                    <input type="tel" name="telefonoacudiente1_estudiante" id="telefonoacudiente1_estudiante" value="Ninguno" maxlength="10" required="required" class="form-control" title="Parentesco con el Estudiante">
                                 </div>
                             </div>
                         </div>
@@ -271,11 +271,11 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Ocupacion</label>
-                                    <input type="text" name="ocupacionacudiente2_estudiante" id="ocupacionacudiente2_estudiante" value="Ninguno" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                    <input type="text" name="ocupacionacudiente2_estudiante" id="ocupacionacudiente2_estudiante" value="Ninguna" maxlength="10" class="form-control" title="Ocupacion del Acudiente 2" list="lista_ocupacion">
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Telefono</label>
-                                    <input type="text" name="telefonoacudiente2_estudiante" id="telefonoacudiente2_estudiante" value="Ninguno" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                    <input type="text" name="telefonoacudiente2_estudiante" id="telefonoacudiente2_estudiante" value="0" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
                                 </div>
                             </div>
                         </div>
@@ -285,7 +285,7 @@ and open the template in the editor.
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
                             <center>
-                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante(this);" class="btn btn-primary" style="width: 140px;">Grabar</button>        
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante(this);" class="btn btn-primary" style="width: 200px;">Grabar</button>        
                             </center>
                         </div>
                     </div>
@@ -293,7 +293,7 @@ and open the template in the editor.
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
                             <center>
-                                <button type="button" id="btMatriculas" name="btMatriculas" onclick="VerHistorialMatriculas();" class="btn btn-default" style="min-width: 140px;">Historial Matriculas</button>        
+                                <button type="button" id="btMatriculas" name="btMatriculas" onclick="VerHistorialMatriculas();" class="btn btn-default" style="width: 200px;">Historial Matriculas</button>        
                             </center>
                         </div>
                     </div>
@@ -320,6 +320,38 @@ and open the template in the editor.
                         <option value="Otro">Otro</option>
                     </datalist>
 
+                    <datalist id="lista_ocupacion" name="lista_ocupacion">
+                        <option value="Desempleado">Desempleado</option>
+                        <option value="Comerciante">Comerciante</option>
+                        <option value="Ama de Casa">Ama de Casa</option>
+                        <option value="Empleada Domestica">Empleada Domestica</option>
+                        <option value="Estudiante">Estudiante</option>
+                        <option value="Conductor">Conductor</option>
+                        <option value="Vendedor">Vendedor</option>
+                        <option value="Chef">Chef</option>
+                        <option value="Mesero">Mesero</option>
+                        <option value="Aux. Oficina">Aux. Oficina</option>
+                        <option value="Secretaria">Secretaria</option>
+                        <option value="Policia/Soldado">Policia/Soldado</option>
+                        <option value="Funcionario Publico">Funcionario Publico</option>
+                        <option value="Agricultor">Agricultor</option>
+                        <option value="Pescador">Pescador</option>
+                        <option value="Ganadero">Ganadero</option>
+                        <option value="Carpintero">Carpintero</option>
+                        <option value="Arquitecto">Arquitecto</option>
+                        <option value="Ingeniero">Ingeniero</option>
+                        <option value="Enfermera">Enfermera</option>
+                        <option value="Medico">Medico</option>
+                        <option value="Dentista">Dentista</option>
+                        <option value="Psicologo">Psicologo</option>
+                        <option value="Abogado">Abogado</option>
+                        <option value="Economista">Economista</option>
+                        <option value="Contador Publico">Contador Publico</option>
+                        <option value="Docente">Docente</option>
+                        <option value="Empresario">Empresario</option>
+                        <option value="Otro">Otro</option>
+                    </datalist>
+
                 </form>
 
                 <div class="row" style="margin-top: 20px;">
@@ -328,7 +360,7 @@ and open the template in the editor.
                             <form id="formRep" method="POST" autocomplete="off" target="_blank" action="Base/Controllers/ReportesController.php" url="Base/Controllers/InformesController.php" model="EscuelasApp" findBy="id_escuela" mainform="true" >
                                 <input type="hidden" id="tipo_reporte" name="tipo_reporte" required="required" value="ObservadorEstudiante" />
                                 <input type="hidden" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
-                                <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-default" >PDF</button>        
+                                <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-default" >Observador PDF</button>        
                             </form>
                         </center>
                     </div>

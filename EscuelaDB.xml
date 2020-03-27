@@ -2253,7 +2253,7 @@
         <Cm>Sexo de la Persona</Cm>
       </Cl>
       <Cl au="0" df="" nm="telefono_persona" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="25" sc="null" sg="1" un="0"/>
         <Cm>Telefono</Cm>
       </Cl>
       <Cl au="0" df="" nm="pais_persona" nu="1">

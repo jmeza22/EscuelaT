@@ -1,85 +1,42 @@
 <?php
 
 include_once 'Libraries/Controllers.php';
+include_once 'Libraries/Reports.php';
+include_once 'Classes/Personas.php';
 $session = new SessionManager();
-$crypt = new MyCrypt();
 $bc = null;
 $result = null;
 $model = 'PersonasApp';
 $findBy = 'id_persona';
-$action = 'insertorupdate';
-$postdata = null;
-$idpersona = null;
-$idtipousuario = null;
-$datos = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
+        $persona = new Personas();
+        $persona->setArray($_POST);
+        $idtipousuario = null;
         if (isset($_POST['id_tipousuario']) && $_POST['id_tipousuario'] !== null) {
             $idtipousuario = $_POST['id_tipousuario'];
             unset($_POST['id_tipousuario']);
         }
-        $bc = new BasicController();
-        $bc->connect();
-        $bc->preparePostData();
-        $bc->setModel($model);
-        $bc->setFindBy($findBy);
-        if ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1) {
-            $bc->setAction('insertorupdate');
-        } else {
-            $bc->setAction('insert');
-        }
         if (isset($_POST['action']) && $_POST['action'] === 'find') {
-            $bc->setAction('find');
+            $result = $persona->findPersona();
         }
-        $result = $bc->execute(true);
-        $postdata = $bc->getPostData();
-        if ($bc->getRowCount() > 0) {
-            $idpersona = $bc->getLastInsertId();
-            $sql = "UPDATE $model SET id_persona=CONCAT('P',num_persona) WHERE id_persona='" . $bc->getPostData()[$findBy] . "' ";
-            $bc->executeSQL($sql);
-            $sql = "DELETE FROM $model WHERE status_persona=0 ";
-            $bc->executeSQL($sql);
-            if ($idpersona !== null && $idpersona !== 0 && $idpersona !== '') {
-                if ($idtipousuario !== null) {
-                    $datos = array();
-                    $datos['id_escuela'] = $session->getEnterpriseID();
-                    $datos['id_persona'] = 'P' . $idpersona;
-                    $datos['nombrecompleto_persona'] = $postdata['apellido1_persona'] . ' ' . $postdata['apellido2_persona'] . ' ' . $postdata['nombre1_persona'] . ' ' . $postdata['nombre2_persona'];
-                    $datos['username_usuario'] = strtoupper(str_replace(" ", "", $postdata['nombre1_persona'])) . $idpersona;
-                    $datos['password_usuario'] = $crypt->crypt($postdata['documento_persona']);
-                    $datos['id_tipousuario'] = $idtipousuario;
-                    $datos['status_usuario'] = '1';
-                    $bc->setModel('UsuariosApp');
-                    $bc->setAction('insert');
-                    $bc->setPostData($datos);
-                    $bc->setFindBy('username_usuario');
-                    $bc->execute(false);
+        if (isset($_POST['action']) && $_POST['action'] === 'insertorupdate') {
+            $result = $persona->insertPersona();
+            if ($persona->getRowCount() > 0 && isset($idtipousuario) && $idtipousuario !== '') {
+                $persona->insertUsuario();
+                if ($idtipousuario === 'Student') {
+                    $persona->insertEstudiante();
                 }
-                if ($idtipousuario == 'Student') {
-                    $datos = array();
-                    $datos['id_estudiante'] = 'P' . $idpersona;
-                    $datos['nombrecompleto_estudiante'] = $postdata['apellido1_persona'] . ' ' . $postdata['apellido2_persona'] . ' ' . $postdata['nombre1_persona'] . ' ' . $postdata['nombre2_persona'];
-                    $datos['status_estudiante'] = '1';
-                    $bc->setModel('ObservadorEstudianteApp');
-                    $bc->setAction('insertorupdate');
-                    $bc->setPostData($datos);
-                    $bc->setFindBy('id_estudiante');
-                    $bc->execute(false);
-                }
-                if ($idtipousuario == 'Teacher') {
-                    $datos = array();
-                    $datos['id_docente'] = 'P' . $idpersona;
-                    $datos['nombrecompleto_docente'] = $postdata['apellido1_persona'] . ' ' . $postdata['apellido2_persona'] . ' ' . $postdata['nombre1_persona'] . ' ' . $postdata['nombre2_persona'];
-                    $datos['status_docente'] = '1';
-                    $bc->setModel('DocentesApp');
-                    $bc->setAction('insertorupdate');
-                    $bc->setPostData($datos);
-                    $bc->setFindBy('id_docente');
-                    $bc->execute(false);
+                if ($idtipousuario === 'Teacher') {
+                    $persona->insertDocente();
                 }
             }
         }
-        $bc->disconnect();
+        if (isset($_POST['action']) && ($_POST['action'] === 'update' || $_POST['action'] === 'delete')) {
+            $result = $persona->updatePersona();
+        }
+        echo $result;
+        $persona->disconnect();
     }
 }
 if ($result === null) {
