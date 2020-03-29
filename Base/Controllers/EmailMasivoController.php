@@ -5,7 +5,7 @@ $session = new SessionManager();
 $email = null;
 $result = false;
 $array = null;
-if ($session->hasLogin()) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     $email = new SendEmail();
     if (isset($_POST['server_email']) && isset($_POST['username_email']) && isset($_POST['password_email']) && isset($_POST['asunto_email']) && isset($_POST['mensaje_email'])) {
         if ($_POST['server_email'] !== '' && $_POST['username_email'] !== '' && $_POST['password_email'] !== '' && $_POST['asunto_email'] !== '' && $_POST['mensaje_email'] !== '') {
@@ -40,7 +40,7 @@ if ($session->hasLogin()) {
     }
     $array = json_encode($array);
     echo $array;
-} 
+}
 if ($array === null) {
     echo $session->getSessionStateJSON();
 }

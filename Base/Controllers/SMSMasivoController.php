@@ -5,7 +5,7 @@ $session = new SessionManager();
 $sms = null;
 $result = false;
 $array = null;
-if ($session->hasLogin() && $session->checkToken()) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1)) {
     $sms = new SendSMS();
     if (isset($_POST['server_sms']) && isset($_POST['username_sms']) && isset($_POST['password_sms']) && isset($_POST['mensaje_sms'])) {
         if ($_POST['server_sms'] !== '' && $_POST['username_sms'] !== '' && $_POST['password_sms'] !== '' && $_POST['mensaje_sms'] !== '') {
