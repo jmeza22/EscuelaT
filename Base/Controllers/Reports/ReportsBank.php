@@ -569,8 +569,8 @@ class ReportsBank extends BasicController {
     public function getContactosEstudiantesMatriculas($idescuela = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT M.id_periodo, M.id_programa, Pr.nombre_programa, M.numgrado_programa, M.id_grupo, M.id_estudiante, M.nombrecompleto_estudiante, P.telefono_persona, P.email_persona "
-                . " FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa "
+        $sql = "SELECT M.id_periodo, M.id_programa, Pr.nombre_programa, M.numgrado_programa, M.id_grupo, M.id_estudiante, M.nombrecompleto_estudiante, P.email_persona, P.telefono_persona, OE.telefonoacudiente1_estudiante, OE.telefonoacudiente2_estudiante "
+                . " FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona INNER JOIN ObservadorEstudianteApp OE ON M.id_estudiante=OE.id_estudiante INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa "
                 . " WHERE M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' AND M.estado_matricula!='Finalizado' ";
         $arraywhere = Array();
         if ($idescuela !== null) {

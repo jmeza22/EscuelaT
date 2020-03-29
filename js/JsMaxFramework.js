@@ -1040,12 +1040,15 @@ function submitAjax(formData, url, header, reload) {
                 if (result.error !== null && result.error !== undefined && result.error !== '') {
                     console.error(result.error);
                     showNotification('Error:', result.error);
+                    sessionStorage.setItem('error', result.error);
                 }
                 if (result.message !== null && result.message !== undefined && result.message !== '') {
                     showNotification('Result:', result.message);
+                    sessionStorage.setItem('textMessage', result.message);
                 }
                 if (result.data !== null && result.data !== undefined && result.data !== '') {
                     console.log('Data: ' + result.data);
+                    sessionStorage.setItem('data', result.data);
                 }
                 if (result.lastInsertId !== null && result.lastInsertId !== undefined && result.lastInsertId !== '') {
                     try {
@@ -1557,8 +1560,8 @@ function setTableData(table, json, dynamic) {
                 break;
             }
         }
-
-        if (json.length > 0) {
+        
+        if (json.length) {
             values = json[0];
             columns = Array();
             for (var aux in values) {

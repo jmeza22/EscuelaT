@@ -16,8 +16,10 @@ class SendSMS {
     private $user = null;
     private $password = null;
     private $from = 'SMS';
+    private $to = null;
+    private $message = null;
 
-    public function setUser($user) {
+    public function setUSERNAME($user) {
         if ($user !== null && $user !== '') {
             $this->user = $user;
             return true;
@@ -25,7 +27,7 @@ class SendSMS {
         return false;
     }
 
-    public function setPassword($password) {
+    public function setPASSWORD($password) {
         if ($password !== null && $password !== '') {
             $this->password = $password;
             return true;
@@ -33,7 +35,7 @@ class SendSMS {
         return false;
     }
 
-    public function setFrom($from) {
+    public function setFROM($from) {
         if ($from !== null && $from !== '') {
             $this->from = $from;
             return true;
@@ -41,18 +43,39 @@ class SendSMS {
         return false;
     }
 
-    public function SendWauSMS($to, $message) {
-        $arrayTO = Array();
+    public function setTO($to) {
         if (is_array($to) && count($to) > 0 && !is_array($to[0])) {
-            $arrayTO = $to;
-        } else {
-            if (!is_array($to) && is_numeric($to)) {
-                $arrayTO[0] = $to;
+            $arrayTO = array();
+            foreach ($to as $row => $value) {
+                if ($value !== null && $value !== '') {
+                    $arrayTO[] = $value;
+                }
+            }
+            if (count($arrayTO) > 0) {
+                $this->to = $arrayTO;
+                return true;
             }
         }
-        if (is_array($arrayTO) && count($arrayTO) > 0 && $message !== null && $message !== '') {
-            $post['to'] = $arrayTO;
-            $post['text'] = $message;
+        return false;
+    }
+
+    public function setMESSAGE($message) {
+        if ($message !== null && $message !== '') {
+            $this->message = $message;
+            return true;
+        }
+        return false;
+    }
+
+    public function getTO() {
+        return $this->to;
+    }
+
+    public function SendWauSMS($message) {
+        $this->setMESSAGE($message);
+        if (is_array($this->to) && count($this->to) > 0 && $this->from !== null && $this->from !== '' && $this->message !== null && $this->message !== '') {
+            $post['to'] = $this->to;
+            $post['text'] = $this->message;
             $post['from'] = $this->from;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://dashboard.wausms.com/Api/rest/message");
