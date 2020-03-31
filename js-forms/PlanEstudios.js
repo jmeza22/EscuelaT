@@ -36,7 +36,7 @@ function Edit(item) {
     myform = document.getElementById('form1');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
         }, 1);
     });
@@ -63,7 +63,7 @@ function DeleteItem(item) {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
-                    deleteRowInTable(mytable);
+                    deleteTableRow(mytable);
                 } else {
                     status.value = '1';
                 }
@@ -160,7 +160,7 @@ function RefreshFormAndTable(item) {
     if (item !== null && item !== undefined) {
         form0 = document.getElementById('form0');
         sendValue(item, 'select_id_planestudio', form0, 'id_planestudio');
-        getData(form0).done(function () {
+        getFormData(form0).done(function () {
             setIdEscuelaForm1();
             setIdProgramaForm1();
             setIdPlanEstudioForm1();

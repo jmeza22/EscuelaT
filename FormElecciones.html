@@ -37,7 +37,7 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-3">
                             <label>Año</label>
-                            <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setFindbyCombobox('id_corte', this.id, this.value); setFindbyCombobox('id_estudiante', this.id, this.value, 3);">
+                            <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setComboboxFindby('id_corte', this.id, this.value); setComboboxFindby('id_estudiante', this.id, this.value, 3);">
                                 <option selected="selected" value="NULL">Ninguna</option>
                             </select>
                         </div>

@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
     var idescuela = document.getElementById('id_escuela');
     if (idescuela !== undefined && idescuela !== null && idescuela.value !== '') {
         console.log('Buscando Datos de Configuracion.');
-        getData(idescuela);
+        getFormData(idescuela);
     }
 });
 

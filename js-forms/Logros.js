@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
     setIdEscuela();
     var idlogro = document.getElementById("id_logro");
     if (idlogro !== undefined && idlogro !== null && idlogro.value !== '' && idlogro.value !== 0) {
-        getData(idlogro);
+        getFormData(idlogro);
     }
     ObtenerConfiguracion();
     LoadTable();
@@ -62,7 +62,7 @@ function ObtenerConfiguracion() {
         idescuela = getElement(formconf, 'id_escuela');
         idescuela.value = getEnterpriseID();
         if (idescuela.value !== null && idescuela.value !== '') {
-            getData(formconf).done(function () {
+            getFormData(formconf).done(function () {
             });
         }else{
             showNotification('Error','Error al obtener la Configuracion de la Escuela.');
@@ -149,7 +149,7 @@ function Edit(item) {
     myform = document.getElementById('form0');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
         }, 1);
     });
@@ -176,7 +176,7 @@ function DeleteItem(item) {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
-                    deleteRowInTable(mytable);
+                    deleteTableRow(mytable);
                 } else {
                     status.value = '1';
                 }

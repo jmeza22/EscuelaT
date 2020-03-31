@@ -57,8 +57,8 @@ function BuscarEstudiante() {
             idpersona.value = idaux;
             idestudiante.value = idaux;
             document.getElementById('id_tipousuario').value = 'Student';
-            getData(formP);
-            getData(form0);
+            getFormData(formP);
+            getFormData(form0);
             LoadTableAnotaciones();
             LoadTableCitaciones();
             CopiarCodigoEstudianteAnotacion();
@@ -77,7 +77,7 @@ function BuscarEstudianteActivo() {
             idestudiante.value = getUserIdLogin();
             idestudiante.setAttribute('readonly', 'readonly');
             if (idestudiante.value !== '') {
-                getData(form0).done(function () {
+                getFormData(form0).done(function () {
                     CopiarCodigoEstudianteAnotacion();
                     LoadTableAnotaciones();
                     LoadTableCitaciones();
@@ -114,7 +114,7 @@ function EditAnotacion(item) {
     myform = document.getElementById('formAN');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
         }, 1);
     });
@@ -125,7 +125,7 @@ function EditCitacion(item) {
     myform = document.getElementById('formCI');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
         }, 1);
     });
@@ -148,7 +148,7 @@ function DeleteItem(item) {
             removeAttributeDisabled(tr);
             status.value = '0';
             Send(item);
-            deleteRowInTable(mytable);
+            deleteTableRow(mytable);
         }
     }
 }

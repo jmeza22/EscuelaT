@@ -70,27 +70,27 @@ function LoadPeriodo() {
 function onChangeSede() {
     var sede = null;
     sede = document.getElementById("id_sede");
-    setFindbyCombobox('id_jornada', sede.id, sede.value, 1);
+    setComboboxFindby('id_jornada', sede.id, sede.value, 1);
     setFindbyField('id_grupo', sede.id, getComboboxValue(sede), 1);
 }
 
 function onChangePrograma() {
     var programa = null;
     programa = document.getElementById("id_programa");
-    setFindbyCombobox('id_planestudio', programa.id, programa.value, 1);
+    setComboboxFindby('id_planestudio', programa.id, programa.value, 1);
     setFindbyField('id_grupo', programa.id, getComboboxValue(programa), 2);
 }
 
 function onChangePlanEstudios() {
     var plan = null;
     plan = document.getElementById("id_planestudio");
-    setFindbyCombobox('numgrado_programa', plan.id, getComboboxValue(plan), 1);
+    setComboboxFindby('numgrado_programa', plan.id, getComboboxValue(plan), 1);
 }
 
 function onChangeGrado() {
     var grado = null;
     grado = document.getElementById("numgrado_programa");
-    setFindbyCombobox('id_grupo', grado.id, getComboboxValue(grado), 3);
+    setComboboxFindby('id_grupo', grado.id, getComboboxValue(grado), 3);
 }
 
 function GrabarMatricula() {
@@ -135,14 +135,14 @@ function Edit(item) {
     myform = document.getElementById('form0');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
             onChangeSede();
             onChangePrograma();
             onChangePlanEstudios();
             onChangeGrado();
             LoadGrupo();
-            getData(myform, 'Base/Controllers/FindValorTotalPagadoController.php').done(function () {
+            getFormData(myform, 'Base/Controllers/FindValorTotalPagadoController.php').done(function () {
                 CalcularValores();
             });
         }, 1);
@@ -170,7 +170,7 @@ function DeleteItem(item) {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
-                    deleteRowInTable(mytable);
+                    deleteTableRow(mytable);
                 } else {
                     status.value = '1';
                 }

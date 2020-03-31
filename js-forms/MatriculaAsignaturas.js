@@ -27,7 +27,7 @@ function setIdMatricula() {
 
 function getMatricula() {
     var form = document.getElementById('form0');
-    getData(form);
+    getFormData(form);
 }
 
 function LoadTable() {

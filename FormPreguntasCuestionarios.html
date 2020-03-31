@@ -40,7 +40,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Seleccione el Cuestionario</label>
-                                    <select id="select_id_cuestionario" name="select_id_cuestionario" required="required" model="CuestionariosApp" colname="nombre_cuestionario" colvalue="id_cuestionario" url="Base/Controllers/GetComboboxCuestionarios.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('select_id_pregunta', 'id_cuestionario', this.value, 1); setIdCuestionarioToPregunta();">
+                                    <select id="select_id_cuestionario" name="select_id_cuestionario" required="required" model="CuestionariosApp" colname="nombre_cuestionario" colvalue="id_cuestionario" url="Base/Controllers/GetComboboxCuestionarios.php" class="form-control" style="width: 100%;" onchange="setComboboxFindby('select_id_pregunta', 'id_cuestionario', this.value, 1); setIdCuestionarioToPregunta();">
                                         <option selected="selected" value="">Ninguna</option>
                                     </select>
                                 </div>

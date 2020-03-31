@@ -40,7 +40,7 @@ function Edit(item) {
     itemform=getForm(item);
     resetForm(myform);
     sendValue(itemform, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
         }, 1);
     });
@@ -67,7 +67,7 @@ function DeleteItem(item) {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
-                    deleteRowInTable(mytable);
+                    deleteTableRow(mytable);
                 } else {
                     status.value = '1';
                 }

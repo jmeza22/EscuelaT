@@ -83,7 +83,7 @@ function ObtenerDatosCuerpo() {
     if (formconf !== undefined && formconf !== null) {
         idescuela = getElement(formconf, 'id_escuela');
         idescuela.value = getEnterpriseID();
-        getData(formconf).done(function () {
+        getFormData(formconf).done(function () {
             valaprueba = getElement(formconf, 'valaprueba_configuracion');
             if (valaprueba !== undefined && valaprueba !== null && valaprueba.value !== null && valaprueba.value !== '') {
                 LoadTable();

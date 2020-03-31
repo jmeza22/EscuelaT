@@ -6,7 +6,7 @@
 jQuery(document).ready(function () {
     var idprograma = document.getElementById("id_programa");
     if (idprograma !== undefined && idprograma !== null && idprograma.value !== '') {
-        getData(idprograma);
+        getFormData(idprograma);
     }
     LoadTable();
 });
@@ -35,7 +35,7 @@ function Edit(item) {
     myform = document.getElementById('form0');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
             myform.focus();
         }, 100);
@@ -63,7 +63,7 @@ function DeleteItem(item) {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
-                    deleteRowInTable(mytable);
+                    deleteTableRow(mytable);
                 } else {
                     status.value = '1';
                 }

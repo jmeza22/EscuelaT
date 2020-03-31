@@ -44,13 +44,13 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-4">
                             <label>Programa</label>
-                            <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('numgrado_programa', this.id, this.value);">
+                            <select id="id_programa" name="id_programa" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="setComboboxFindby('numgrado_programa', this.id, this.value);">
                                 <option selected="selected" value="NULL">Ninguna</option>
                             </select>
                         </div>
                         <div class="col-sm-3">
                             <label>Grado</label>
-                            <select id="numgrado_programa" name="numgrado_programa"  model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" class="form-control" style="width: 100%;" onchange="setFindbyCombobox('id_grupo', this.id, this.value);">
+                            <select id="numgrado_programa" name="numgrado_programa"  model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" class="form-control" style="width: 100%;" onchange="setComboboxFindby('id_grupo', this.id, this.value);">
                                 <option disabled="disabled" selected="selected" value="0">Ninguno</option>
                             </select>
                         </div>

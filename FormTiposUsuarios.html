@@ -44,7 +44,7 @@ and open the template in the editor.
                     </datalist>
                 </form>    
                 <center>
-                    <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewRowInTable('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
+                    <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewTableRow('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
                 </center>
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="TiposUsuariosApp" url="Base/Controllers/GetDataTableTiposUsuarios.php" >
@@ -73,7 +73,7 @@ and open the template in the editor.
                                 <td> <input type="checkbox" editable="true" disabled="disabled" name="external_tipousuario[]" id="external_tipousuario" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
                                 <td>
                                     <input type="hidden"  editable="false" disabled="disabled" name="status_tipousuario[]" id="status_tipousuario" value="1" >
-                                    <button type="button" form="formTable" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="editRowInTable(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                    <button type="button" form="formTable" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="editTableRow(this);"><i class="glyphicon glyphicon-edit"></i></button>
                                     <button type="button" editable="true" disabled="disabled" form="formTable" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
                                 </td>
                             </tr>

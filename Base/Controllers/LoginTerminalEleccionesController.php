@@ -58,7 +58,7 @@ if (isset($_POST) && $_POST != null && isset($_POST['token']) && $_POST['token']
             $login = json_decode($result, true);
             $login = $login[0];
             if (isset($login['userid'])) {
-                $session->setLogin($login['userid'], $login['user'], 'Student', $login['fullname'], $enterprise);
+                $session->setLoginData($login['userid'], $login['user'], 'Student', $login['fullname'], $enterprise);
                 $session->setEnterpriseNameForm($login['enterprisename']);
                 $array['token'] = $session->getToken();
                 $array['data'] = json_encode($login);

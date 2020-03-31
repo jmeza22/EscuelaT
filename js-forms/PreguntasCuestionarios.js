@@ -65,7 +65,7 @@ function setIdPreguntaToOpcionRespuesta() {
         idpregunta = getElement(formOpcion, 'id_pregunta');
         idpregunta.value = pregunta.value;
         setFindbyField(mytable.id, idpregunta.id, idpregunta.value);
-        getData(formPregunta).done(function () {
+        getFormData(formPregunta).done(function () {
             idpregunta.value = pregunta.value;
             document.getElementById('nombre_pregunta').value = document.getElementById('nombrecorto_pregunta').value;
         });
@@ -115,7 +115,7 @@ function Edit(item) {
     myform = document.getElementById('form1');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
         }, 1);
     });
@@ -142,7 +142,7 @@ function DeleteItem(item) {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
-                    deleteRowInTable(mytable);
+                    deleteTableRow(mytable);
                 } else {
                     status.value = '1';
                 }

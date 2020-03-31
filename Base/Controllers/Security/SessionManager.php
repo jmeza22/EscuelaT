@@ -157,7 +157,7 @@ class SessionManager {
         $_SESSION['tokensingup'] = null;
     }
 
-    function setLogin($iduser, $user, $type = null, $fullname = null, $identerprise = null, $super = null, $admin = null, $management = null, $standard = null, $limited = null, $external = null) {
+    function setLoginData($iduser, $user, $type = null, $fullname = null, $identerprise = null, $super = null, $admin = null, $management = null, $standard = null, $limited = null, $external = null) {
         if ($user != null) {
             $_SESSION[$this->index_time] = time();
             $_SESSION[$this->index_userid] = $iduser;

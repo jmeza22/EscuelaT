@@ -158,11 +158,6 @@ function delay(milliseconds) {
     }
     return 1;
 }
-function clearForm(form) {
-    if (form !== null && form.tagName.toString().toUpperCase() === "FORM") {
-        form.reset();
-    }
-}
 
 function GET(key) {
     key = key.replace(/[\[]/, '\\[');
@@ -254,7 +249,8 @@ function setWSPath(path = null) {
         } else {
             return setWSPath();
         }
-}
+    }
+    return false;
 }
 
 function getWSPath() {
@@ -310,6 +306,16 @@ function getPlaceholder(Obj) {
     return '';
 }
 
+function deleteElement(element) {
+    var parent = null;
+    if (element !== null) {
+        parent = element.parentNode;
+        parent.removeChild(element);
+        return true;
+    }
+    return false;
+}
+
 function hideElement(element) {
     if (element !== null) {
         element.style = 'visibility: hidden; display: none;';
@@ -320,323 +326,8 @@ function hideElement(element) {
 
 function disableElement(element) {
     if (element !== null) {
-        element.setAttribute('disable', 'true');
+        element.setAttribute('disabled', 'disabled');
         return true;
-    }
-    return false;
-}
-
-function autoValueCheckbox(checkbox) {
-    if (checkbox !== undefined && checkbox !== null) {
-        if (checkbox.tagName === undefined) {
-            checkbox = document.getElementById(checkbox);
-        }
-        console.log('Setting Checkbox Value: ' + checkbox.id);
-        if (checkbox.tagName.toString().toUpperCase() === 'INPUT' && checkbox.getAttribute('type').toString().toLowerCase() === 'checkbox') {
-
-            var checkedValue = checkbox.getAttribute('checkedvalue');
-            var uncheckedValue = checkbox.getAttribute('uncheckedvalue');
-            if (checkbox.checked) {
-                checkbox.value = checkedValue;
-            } else {
-                checkbox.value = uncheckedValue;
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-function getParent(element, tagname = null) {
-    if (element !== null) {
-        if (element.parentNode !== null && element.parentNode !== undefined) {
-            if (tagname !== null && tagname !== undefined && tagname !== '') {
-                if (element.parentNode.tagName.toString().toUpperCase() === tagname) {
-                    return element.parentNode;
-                } else {
-                    return getParent(element.parentNode, tagname);
-                }
-            } else {
-                return element.parentNode;
-            }
-        }
-    }
-    return null;
-}
-
-function getForm(element) {
-    if (element !== null) {
-        var found = null;
-        if (element.tagName === undefined) {
-            var element0 = document.getElementById(element);
-            if (element0 !== undefined && element0 !== null && element0.tagName.toString().toUpperCase() === 'FORM') {
-                return element0;
-            }
-        }
-        if (element.tagName.toString().toUpperCase() === 'FORM') {
-            return element;
-        }
-        if (element.getAttribute('form') !== undefined && element.getAttribute('form') !== null) {
-            var form = document.getElementById(element.getAttribute('form'));
-            if (form !== undefined && form !== null && form.tagName.toString().toUpperCase() === 'FORM') {
-                return form;
-            }
-        }
-        found = getParent(element, 'FORM');
-        if (found !== null) {
-            console.log('FORM Found: ' + found.id);
-            return found;
-        }
-    }
-    console.log('FORM not found!.');
-    return null;
-}
-
-function getParentTable(element) {
-    if (element !== null) {
-        var found = null;
-        if (element.tagName.toString().toUpperCase() === 'TABLE') {
-            return element;
-        }
-        found = getParent(element, 'TABLE');
-        if (found !== null) {
-            console.log('Parent (HTML TABLE) Found: ' + found.id);
-            return found;
-        }
-    }
-    console.log('Parent (HTML TABLE) Not Found!.');
-    return null;
-}
-
-function getParentTR(element) {
-    if (element !== null) {
-        var found = null;
-        if (element.tagName.toString().toUpperCase() === 'TR') {
-            return element;
-        }
-        found = getParent(element, 'TR');
-        if (found !== null) {
-            console.log('Parent (HTML TR) Found: ' + found.id);
-            return found;
-        }
-    }
-    console.log('Parent (HTML TR) Not Found!.');
-    return null;
-}
-
-function getParentTD(element) {
-    if (element !== null) {
-        var found = null;
-        if (element.tagName.toString().toUpperCase() === 'TD') {
-            return element;
-        }
-        found = getParent(element, 'TD');
-        if (found !== null) {
-            console.log('Parent (HTML TD) Found: ' + found.id);
-            return found;
-        }
-    }
-    console.log('Parent (HTML TD) Not Found!.');
-    return null;
-}
-
-function disabledForm(element) {
-    var form = null;
-    if (element !== null) {
-        form = getForm(element);
-        for (var i = 0; i < document.forms.length; i++) {
-            if (form === document.forms[i]) {
-                form = document.forms[i];
-                for (var j = 0; j < form.elements.length; j++) {
-                    form.elements[j].setAttribute('disabled', 'disabled');
-                }
-            }
-        }
-        return true;
-    }
-    return false;
-}
-
-function resetForm(element) {
-    var form = null;
-    if (element !== null) {
-        form = getForm(element);
-        for (var i = 0; i < document.forms.length; i++) {
-            if (form === document.forms[i]) {
-                form = document.forms[i];
-                for (var j = 0; j < form.elements.length; j++) {
-                    console.log('Element:' + form.elements[j].id + ' OK');
-                    if (form.elements[j].tagName.toString().toUpperCase() !== "BUTTON") {
-                        form.elements[j].value = "";
-                    }
-                    if (form.elements[j].tagName.toString().toUpperCase() === "TEXTAREA") {
-                        form.elements[j].innerHTML = "";
-                    }
-                }
-            }
-        }
-        return true;
-    }
-    return false;
-}
-
-function resetControls(parent) {
-    if (parent.nodeType === 1 && parent.value !== null && parent.value !== undefined && parent.getAttribute('editable') !== null && parent.getAttribute('editable') === 'true') {
-        console.log('Setting Empty Value to: ' + parent.id);
-        parent.value = '';
-    }
-    if (parent !== null && parent.childNodes !== null && parent.childNodes !== undefined) {
-        for (var i = 0; i < parent.childNodes.length; i++) {
-            if (parent.childNodes[i].nodeType === 1 && parent.childNodes[i].getAttribute('editable') !== null && parent.childNodes[i].getAttribute('editable') === 'true') {
-                if (parent.childNodes[i].value !== null && parent.childNodes[i].value !== undefined) {
-                    console.log('Setting Empty Value to: ' + parent.childNodes[i].id);
-                    parent.childNodes[i].value = "";
-                    parent.childNodes[i].removeAttribute("selected");
-                }
-            }
-            if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
-                resetControls(parent.childNodes[i]);
-            }
-        }
-        return true;
-    }
-    return false;
-}
-
-function setControlsAttribute(parent, child = null, name, value) {
-    if (parent !== null && name !== null && value !== null && parent !== undefined && name !== undefined && value !== undefined) {
-        if (parent.nodeType === 1 && parent.value !== null && parent.value !== undefined) {
-            if (parent.tagName.toString().toUpperCase() === 'BUTTON' || parent.tagName.toString().toUpperCase() === 'INPUT' || parent.tagName.toString().toUpperCase() === 'SELECT' || parent.tagName.toString().toUpperCase() === 'TEXTAREA') {
-                parent.setAttribute(name, value);
-            }
-        }
-        if (parent.childNodes !== undefined && parent.childNodes !== null) {
-            for (var i = 0; i < parent.childNodes.length; i++) {
-                if (parent.childNodes[i].nodeType === 1 && parent.tagName.toString().toUpperCase() === 'BUTTON' || parent.childNodes[i].tagName.toString().toUpperCase() === 'INPUT' || parent.childNodes[i].tagName.toString().toUpperCase() === 'SELECT' || parent.childNodes[i].tagName.toString().toUpperCase() === 'TEXTAREA') {
-                    if (child !== undefined && child !== null) {
-                        if (parent.childNodes[i].getAttribute('name') === child) {
-                            console.log('Setting ' + name + ' to ' + parent.childNodes[i].name);
-                            parent.childNodes[i].setAttribute(name, value);
-                        }
-                    }
-                    if (child === undefined || child === null) {
-                        console.log('Setting ' + name + ' to ' + parent.childNodes[i].name);
-                        parent.childNodes[i].setAttribute(name, value);
-                    }
-                }
-                if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
-                    setControlsAttribute(parent.childNodes[i], null, name, value);
-                }
-            }
-            return true;
-        }
-    }
-    return false;
-}
-
-function convertCheckboxesToTexts(form) {
-    if (form !== undefined && form !== null) {
-        if (form.elements.length > 0) {
-            var checkboxarray = Array();
-            var i = 0;
-            for (i = 0; i < form.elements.length; i++) {
-                if (form.elements[i].tagName.toString().toUpperCase() === 'INPUT' && form.elements[i].getAttribute('type').toString().toLowerCase() === 'checkbox') {
-                    console.log('Elemento:' + form.elements[i].id);
-                    form.elements[i].setAttribute('type', 'text');
-                    checkboxarray.push(form.elements[i]);
-                    console.log(form.elements[i].id + ' converted to ' + form.elements[i].type);
-                }
-            }
-            return checkboxarray;
-        }
-    }
-    return null;
-}
-
-function convertTextsToCheckboxes(array) {
-    if (array !== undefined && array !== null) {
-        if (array.length > 0) {
-            var i = 0;
-            for (i = 0; i < array.length; i++) {
-                if (array[i].tagName.toString().toUpperCase() === 'INPUT' && array[i].getAttribute('type').toString().toLowerCase() === 'text') {
-                    array[i].setAttribute('type', 'checkbox');
-                }
-            }
-            return true;
-        }
-    }
-    return false;
-}
-
-function removeAttributeDisabled(parent) {
-    if (parent !== null && parent.childNodes !== null && parent.childNodes !== undefined) {
-        for (var i = 0; i < parent.childNodes.length; i++) {
-            if (parent.childNodes[i].nodeType === 1 && parent.childNodes[i].disabled !== null && parent.childNodes[i].disabled !== undefined) {
-                if (parent.childNodes[i].getAttribute('editable') !== null && parent.childNodes[i].getAttribute('editable') !== undefined) {
-                    console.log('Removing [Disabled] Attribute: ' + parent.childNodes[i].id);
-                    parent.childNodes[i].removeAttribute("disabled");
-                }
-            }
-            if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
-                removeAttributeDisabled(parent.childNodes[i]);
-            }
-        }
-    }
-    return false;
-}
-
-function addAttributeDisabled(parent) {
-    if (parent !== null && parent.childNodes !== null && parent.childNodes !== undefined) {
-        for (var i = 0; i < parent.childNodes.length; i++) {
-            if (parent.childNodes[i] !== null && parent.childNodes[i] !== undefined && parent.childNodes[i].nodeType === 1) {
-                if (parent.childNodes[i].getAttribute('editable') !== null && parent.childNodes[i].getAttribute('editable') !== undefined) {
-                    console.log('Adding [Disabled] Attribute: ' + parent.childNodes[i].id);
-                    parent.childNodes[i].setAttribute("disabled", "disabled");
-                }
-            }
-            if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
-                addAttributeDisabled(parent.childNodes[i]);
-            }
-        }
-    }
-    return false;
-}
-
-function readOnlyForm(element) {
-    var form = null;
-    if (element !== null) {
-        form = getForm(element);
-        for (var i = 0; i < document.forms.length; i++) {
-            if (form === document.forms[i]) {
-                form = document.forms[i];
-                for (var j = 0; j < form.elements.length; j++) {
-                    form.elements[j].setAttribute('readonly', 'readonly');
-                    console.log(form.elements[j].tagName);
-                    if (form.elements[j].tagName.toString().toUpperCase() === "SELECT") {
-                        var newelement = document.createElement('INPUT');
-                        newelement.setAttribute('type', 'hidden');
-                        newelement.setAttribute('id', form.elements[j].getAttribute('id'));
-                        newelement.setAttribute('name', form.elements[j].getAttribute('name'));
-                        newelement.setAttribute('value', form.elements[j].getAttribute('value'));
-                        newelement.value = form.elements[j].value;
-                        form.appendChild(newelement);
-                        form.elements[j].setAttribute('disabled', 'disabled');
-                    }
-                    if (form.elements[j].tagName.toString().toUpperCase() === "BUTTON" ||
-                            (form.elements[j].tagName.toString().toUpperCase() === "INPUT" &&
-                                    (
-                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'button' ||
-                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'submit' ||
-                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'reset')
-                                    )
-                            ) {
-                        form.elements[j].setAttribute('disabled', 'disabled');
-                    }
-                }
-                break;
-                return true;
-            }
-        }
     }
     return false;
 }
@@ -704,27 +395,6 @@ function getElementByName(parent, name) {
     return result;
 }
 
-
-function getOptionByValue(parent, value) {
-    var j = 0;
-    var elements = null;
-
-    if (parent !== null && value !== null && value !== '') {
-        if (parent.tagName.toString().toUpperCase() === "SELECT" || parent.tagName.toString().toUpperCase() === "DATALIST") {
-            elements = parent.childNodes;
-            if (elements.length > 0) {
-                for (j = 0; j < elements.length; j++) {
-                    if (elements[j].value === value) {
-                        console.log("Element (OPTION) Found: " + elements[j].getAttribute("id"));
-                        return elements[j];
-                    }
-                }
-            }
-        }
-    }
-    return null;
-}
-
 function createInputHidden(form, name, value) {
     var element = null;
     if (form !== null && form.tagName.toString().toUpperCase() === "FORM" && name !== null) {
@@ -734,7 +404,7 @@ function createInputHidden(form, name, value) {
         element.setAttribute('name', name);
         element.setAttribute('value', value);
         form.appendChild(element);
-        console.log('Creating Input: ' + name);
+        console.log('Hidden Input: ' + name);
         return true;
     }
     return false;
@@ -749,16 +419,6 @@ function createInputHiddenTemp(form, name, value) {
             console.log('Setting Hidden Input: ' + name);
             return true;
         }
-    }
-    return false;
-}
-
-function deleteElement(element) {
-    var parent = null;
-    if (element !== null) {
-        parent = element.parentNode;
-        parent.removeChild(element);
-        return true;
     }
     return false;
 }
@@ -797,7 +457,6 @@ function getActionButton(element) {
     }
     return null;
 }
-
 
 function getActionFromButton(button) {
     var form = null;
@@ -856,6 +515,356 @@ function createTempInputs(form) {
     if (getElement(form, 'findBy') === null && getFindBy(form) !== null && getFindBy(form) !== '') {
         createInputHiddenTemp(form, 'findBy', getFindBy(form));
     }
+}
+
+function autoValueCheckbox(checkbox) {
+    if (checkbox !== undefined && checkbox !== null) {
+        if (checkbox.tagName === undefined) {
+            checkbox = document.getElementById(checkbox);
+        }
+        console.log('Setting Checkbox Value: ' + checkbox.id);
+        if (checkbox.tagName.toString().toUpperCase() === 'INPUT' && checkbox.getAttribute('type').toString().toLowerCase() === 'checkbox') {
+
+            var checkedValue = checkbox.getAttribute('checkedvalue');
+            var uncheckedValue = checkbox.getAttribute('uncheckedvalue');
+            if (checkbox.checked) {
+                checkbox.value = checkedValue;
+            } else {
+                checkbox.value = uncheckedValue;
+            }
+            return true;
+        }
+        return false;
+    }
+}
+
+function convertCheckboxesToTexts(form) {
+    if (form !== undefined && form !== null) {
+        if (form.elements.length > 0) {
+            var checkboxarray = Array();
+            var i = 0;
+            for (i = 0; i < form.elements.length; i++) {
+                if (form.elements[i].tagName.toString().toUpperCase() === 'INPUT' && form.elements[i].getAttribute('type').toString().toLowerCase() === 'checkbox') {
+                    console.log('Elemento:' + form.elements[i].id);
+                    form.elements[i].setAttribute('type', 'text');
+                    checkboxarray.push(form.elements[i]);
+                    console.log(form.elements[i].id + ' converted to ' + form.elements[i].type);
+                }
+            }
+            return checkboxarray;
+        }
+    }
+    return null;
+}
+
+function convertTextsToCheckboxes(array) {
+    if (array !== undefined && array !== null) {
+        if (array.length > 0) {
+            var i = 0;
+            for (i = 0; i < array.length; i++) {
+                if (array[i].tagName.toString().toUpperCase() === 'INPUT' && array[i].getAttribute('type').toString().toLowerCase() === 'text') {
+                    array[i].setAttribute('type', 'checkbox');
+                }
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+function getParent(element, tagname = null) {
+    if (element !== null) {
+        if (element.parentNode !== null && element.parentNode !== undefined) {
+            if (tagname !== null && tagname !== undefined && tagname !== '') {
+                if (element.parentNode.tagName.toString().toUpperCase() === tagname) {
+                    return element.parentNode;
+                } else {
+                    return getParent(element.parentNode, tagname);
+                }
+            } else {
+                return element.parentNode;
+            }
+        }
+    }
+    return null;
+}
+
+function clearForm(form) {
+    if (form !== null && form.tagName !== undefined && form.tagName.toString().toUpperCase() === "FORM") {
+        form.reset();
+    }
+}
+
+function resetForm(element) {
+    var form = null;
+    if (element !== null) {
+        form = getForm(element);
+        for (var i = 0; i < document.forms.length; i++) {
+            if (form === document.forms[i]) {
+                form = document.forms[i];
+                for (var j = 0; j < form.elements.length; j++) {
+                    if (form.elements[j].tagName.toString().toUpperCase() !== "BUTTON") {
+                        form.elements[j].value = "";
+                    }
+                    if (form.elements[j].tagName.toString().toUpperCase() === "TEXTAREA") {
+                        form.elements[j].innerHTML = "";
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
+function disableForm(element) {
+    var form = null;
+    if (element !== null) {
+        form = getForm(element);
+        for (var i = 0; i < document.forms.length; i++) {
+            if (form === document.forms[i]) {
+                form = document.forms[i];
+                for (var j = 0; j < form.elements.length; j++) {
+                    disableElement(form.elements[j]);
+                }
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
+function getForm(element) {
+    if (element !== null) {
+        var found = null;
+        if (element.tagName === undefined) {
+            var element0 = document.getElementById(element);
+            if (element0 !== undefined && element0 !== null && element0.tagName.toString().toUpperCase() === 'FORM') {
+                return element0;
+            }
+        }
+        if (element.tagName !== undefined) {
+            if (element.tagName.toString().toUpperCase() === 'FORM') {
+                return element;
+            }
+            if (element.getAttribute('form') !== undefined && element.getAttribute('form') !== null) {
+                var form = document.getElementById(element.getAttribute('form'));
+                if (form !== undefined && form !== null && form.tagName.toString().toUpperCase() === 'FORM') {
+                    return form;
+                }
+            }
+            found = getParent(element, 'FORM');
+            if (found !== null) {
+                console.log('FORM Found: ' + found.id);
+                return found;
+            }
+        }
+    }
+    console.log('FORM not Found!.');
+    return null;
+}
+
+function getParentTable(element) {
+    if (element !== null) {
+        var found = null;
+        if (element.tagName.toString().toUpperCase() === 'TABLE') {
+            return element;
+        }
+        found = getParent(element, 'TABLE');
+        if (found !== null) {
+            console.log('Parent (HTML TABLE) Found: ' + found.id);
+            return found;
+        }
+    }
+    console.log('Parent (HTML TABLE) Not Found!.');
+    return null;
+}
+
+function getParentTR(element) {
+    if (element !== null) {
+        var found = null;
+        if (element.tagName.toString().toUpperCase() === 'TR') {
+            return element;
+        }
+        found = getParent(element, 'TR');
+        if (found !== null) {
+            console.log('Parent (HTML TR) Found: ' + found.id);
+            return found;
+        }
+    }
+    console.log('Parent (HTML TR) Not Found!.');
+    return null;
+}
+
+function getParentTD(element) {
+    if (element !== null) {
+        var found = null;
+        if (element.tagName.toString().toUpperCase() === 'TD') {
+            return element;
+        }
+        found = getParent(element, 'TD');
+        if (found !== null) {
+            console.log('Parent (HTML TD) Found: ' + found.id);
+            return found;
+        }
+    }
+    console.log('Parent (HTML TD) Not Found!.');
+    return null;
+}
+
+function resetControls(parent) {
+    if (parent.nodeType === 1 && parent.value !== null && parent.value !== undefined && parent.getAttribute('editable') !== null && parent.getAttribute('editable') === 'true') {
+        console.log('Setting Empty Value to: ' + parent.id);
+        parent.value = '';
+    }
+    if (parent !== null && parent.childNodes !== null && parent.childNodes !== undefined) {
+        for (var i = 0; i < parent.childNodes.length; i++) {
+            if (parent.childNodes[i].nodeType === 1) {
+                if (parent.childNodes[i].getAttribute('editable') !== null && parent.childNodes[i].getAttribute('editable') === 'true') {
+                    if (parent.childNodes[i].value !== null && parent.childNodes[i].value !== undefined) {
+                        console.log('Setting Empty Value to: ' + parent.childNodes[i].id);
+                        parent.childNodes[i].value = "";
+                        parent.childNodes[i].removeAttribute("selected");
+                    }
+                }
+            }
+            if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
+                resetControls(parent.childNodes[i]);
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
+function setControlsAttribute(parent, child = null, name, value) {
+    if (parent !== null && name !== null && value !== null && parent !== undefined && name !== undefined && value !== undefined) {
+        if (parent.nodeType === 1 && parent.value !== null && parent.value !== undefined) {
+            if (parent.tagName !== undefined && parent.tagName.toString().toUpperCase() === 'BUTTON' || parent.tagName.toString().toUpperCase() === 'INPUT' || parent.tagName.toString().toUpperCase() === 'SELECT' || parent.tagName.toString().toUpperCase() === 'TEXTAREA') {
+                parent.setAttribute(name, value);
+            }
+        }
+        if (parent.childNodes !== undefined && parent.childNodes !== null) {
+            for (var i = 0; i < parent.childNodes.length; i++) {
+                if (parent.childNodes[i].nodeType === 1) {
+                    if (parent.childNodes[i].tagName !== undefined && parent.childNodes[i].tagName.toString().toUpperCase() === 'BUTTON' || parent.childNodes[i].tagName.toString().toUpperCase() === 'INPUT' || parent.childNodes[i].tagName.toString().toUpperCase() === 'SELECT' || parent.childNodes[i].tagName.toString().toUpperCase() === 'TEXTAREA') {
+                        if (child !== undefined && child !== null) {
+                            if (parent.childNodes[i].getAttribute('name') === child) {
+                                console.log('Setting ' + name + ' to ' + parent.childNodes[i].name);
+                                parent.childNodes[i].setAttribute(name, value);
+                            }
+                        }
+                        if (child === undefined || child === null) {
+                            console.log('Setting ' + name + ' to ' + parent.childNodes[i].name);
+                            parent.childNodes[i].setAttribute(name, value);
+                        }
+                    }
+                }
+                if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
+                    setControlsAttribute(parent.childNodes[i], null, name, value);
+                }
+            }
+            return true;
+        }
+    }
+    return false;                           
+}
+
+function removeAttributeDisabled(parent) {
+    if (parent !== null && parent.childNodes !== null && parent.childNodes !== undefined) {
+        for (var i = 0; i < parent.childNodes.length; i++) {
+            if (parent.childNodes[i].nodeType === 1) {
+                if (parent.childNodes[i].disabled !== undefined && parent.childNodes[i].disabled !== null) {
+                    if (parent.childNodes[i].getAttribute('editable') !== undefined && parent.childNodes[i].getAttribute('editable') !== null) {
+                        console.log('Removing [Disabled] Attribute: ' + parent.childNodes[i].id);
+                        parent.childNodes[i].removeAttribute("disabled");
+                    }
+                }
+            }
+            if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
+                removeAttributeDisabled(parent.childNodes[i]);
+            }
+        }
+    }
+    return false;
+}
+
+function addAttributeDisabled(parent) {
+    if (parent !== null && parent.childNodes !== null && parent.childNodes !== undefined) {
+        for (var i = 0; i < parent.childNodes.length; i++) {
+            if (parent.childNodes[i].nodeType === 1) {
+                if (parent.childNodes[i] !== undefined && parent.childNodes[i] !== null) {
+                    if (parent.childNodes[i].getAttribute('editable') !== undefined && parent.childNodes[i].getAttribute('editable') !== null) {
+                        console.log('Adding [Disabled] Attribute: ' + parent.childNodes[i].id);
+                        parent.childNodes[i].setAttribute("disabled", "disabled");
+                    }
+                }
+            }
+            if (parent.childNodes[i].childNodes !== null && parent.childNodes[i].childNodes !== undefined) {
+                addAttributeDisabled(parent.childNodes[i]);
+            }
+        }
+    }
+    return false;
+}
+
+function readOnlyForm(element) {
+    var form = null;
+    if (element !== null) {
+        form = getForm(element);
+        for (var i = 0; i < document.forms.length; i++) {
+            if (form === document.forms[i]) {
+                form = document.forms[i];
+                for (var j = 0; j < form.elements.length; j++) {
+                    form.elements[j].setAttribute('readonly', 'readonly');
+                    console.log(form.elements[j].tagName);
+                    if (form.elements[j].tagName.toString().toUpperCase() === "SELECT") {
+                        var newelement = document.createElement('INPUT');
+                        newelement.setAttribute('type', 'hidden');
+                        newelement.setAttribute('id', form.elements[j].getAttribute('id'));
+                        newelement.setAttribute('name', form.elements[j].getAttribute('name'));
+                        newelement.setAttribute('value', form.elements[j].getAttribute('value'));
+                        newelement.value = form.elements[j].value;
+                        form.appendChild(newelement);
+                        form.elements[j].setAttribute('disabled', 'disabled');
+                    }
+                    if (form.elements[j].tagName.toString().toUpperCase() === "BUTTON" ||
+                            (form.elements[j].tagName.toString().toUpperCase() === "INPUT" &&
+                                    (
+                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'button' ||
+                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'submit' ||
+                                            form.elements[j].getAttribute('type').toString().toLowerCase() === 'reset')
+                                    )
+                            ) {
+                        form.elements[j].setAttribute('disabled', 'disabled');
+                    }
+                }
+                break;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function getOptionByValue(parent, value) {
+    var j = 0;
+    var elements = null;
+
+    if (parent !== null && value !== null && value !== '') {
+        if (parent.tagName.toString().toUpperCase() === "SELECT" || parent.tagName.toString().toUpperCase() === "DATALIST") {
+            elements = parent.childNodes;
+            if (elements.length > 0) {
+                for (j = 0; j < elements.length; j++) {
+                    if (elements[j].value === value) {
+                        console.log("Element (OPTION) Found: " + elements[j].getAttribute("id"));
+                        return elements[j];
+                    }
+                }
+            }
+        }
+    }
+    return null;
 }
 
 function getTD(element) {
@@ -1019,6 +1028,9 @@ function getSelectedOption(element) {
 function submitAjax(formData, url, header, reload) {
     var promise = null;
     console.log('Trying Submit!. ' + Object.keys(formData));
+    sessionStorage.removeItem('error');
+    sessionStorage.removeItem('textMessage');
+    sessionStorage.removeItem('data');
     sessionStorage.removeItem('rowCount');
     sessionStorage.removeItem('lastInsertId');
     promise = $.ajax({
@@ -1126,9 +1138,9 @@ function setValue(element, value) {
     return false;
 }
 
-function setDataForm(myform, json) {
+function setFormData(myform, json) {
     var columns = null, values = null, col = null, element = null;
-    if (json !== null && myform !== null && myform.tagName.toString().toUpperCase() === "FORM") {
+    if (json !== null && myform !== null && myform.tagName !== undefined && myform.tagName.toString().toUpperCase() === "FORM") {
         console.log('Setting Data to Form!');
         columns = Array();
         if (Object.keys(json).length === 1 && Object.keys(json)[0] === getModel(myform)) {
@@ -1163,7 +1175,7 @@ function setDataForm(myform, json) {
     return false;
 }
 
-function getData(element, myurl = null) {
+function getFormData(element, myurl = null) {
     var promise = null;
     var myform = null, object = null, url = null, formData = null;
     myform = getForm(element);
@@ -1205,12 +1217,11 @@ function getData(element, myurl = null) {
                         object = result.data;
                         try {
                             object = JSON.parse(object);
-                            setDataForm(myform, object);
+                            setFormData(myform, object);
                         } catch (e) {
                             console.error("Parse DATA to JSON (Failed) - getData!.");
                         }
                     }
-
                 } else {
                     showNotification('Error:', 'Web Service Fail!');
                 }
@@ -1225,7 +1236,7 @@ function getData(element, myurl = null) {
     return promise;
 }
 
-function setFindbyCombobox(fieldname, findby, findbyvalue, num = "") {
+function setComboboxFindby(fieldname, findby, findbyvalue, num = "") {
     var myfield = null;
     myfield = document.getElementById(fieldname);
     if (myfield !== null && (myfield.tagName.toString().toUpperCase() === 'SELECT' || myfield.tagName.toString().toUpperCase() === 'DATALIST')) {
@@ -1385,7 +1396,7 @@ function loadComboboxData(element) {
     return promise;
 }
 
-function addNewRowInTable(mytable) {
+function addNewTableRow(mytable) {
     var sample = null;
     var newrow = null;
     var tbody = null;
@@ -1418,7 +1429,7 @@ function addNewRowInTable(mytable) {
     return newrow;
 }
 
-function deleteRowInTable(mytable) {
+function deleteTableRow(mytable) {
     var myrow = null;
     var element = null;
     if (mytable !== null && mytable.tagName === undefined) {
@@ -1439,7 +1450,7 @@ function deleteRowInTable(mytable) {
     return false;
 }
 
-function editRowInTable(item) {
+function editTableRow(item) {
     if (item !== null && item !== undefined) {
         var tr = null;
         tr = getParentTR(item);
@@ -1560,7 +1571,7 @@ function setTableData(table, json, dynamic) {
                 break;
             }
         }
-        
+
         if (json.length) {
             values = json[0];
             columns = Array();
@@ -1825,7 +1836,7 @@ function autoLoadNameFromId(idfield, namefield1, namefield2, namefield3) {
     return null;
 }
 
-function setLogin(data) {
+function setLoginData(data) {
     if (data !== undefined) {
         try {
             if (data !== null && data['user'] !== null) {
@@ -1918,7 +1929,7 @@ function login(element, destinationPage) {
                         } catch (e) {
                             console.error("Parse to JSON (Failed) - Login!");
                         }
-                        setLogin(object);
+                        setLoginData(object);
                         if (result.token !== null && result.token !== '') {
                             setToken(result.token);
                         }
@@ -1970,7 +1981,7 @@ function logout(url, destinationPage, token) {
                         } catch (e) {
                             console.error("Error de Conversion JSON - Logout!");
                         }
-                        setLogin(object);
+                        setLoginData(object);
                         setToken(null);
                         if (destinationPage !== null) {
                             window.location.href = destinationPage;
@@ -2219,6 +2230,5 @@ function getIdFromGET() {
             }
         }
     }
-
     return result;
 }

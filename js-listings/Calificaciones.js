@@ -25,7 +25,7 @@ function ObtenerEncabezado() {
     var table0=null;
     idmatricula = document.getElementById('id_matricula');
     table0 = document.getElementById('dataTable0');
-    getData(idmatricula).done(function () {
+    getFormData(idmatricula).done(function () {
         if(table0!==undefined && table0!==null){
             table0.setAttribute('findby',idmatricula.id);
             table0.setAttribute('findbyvalue',idmatricula.value);

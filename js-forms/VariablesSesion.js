@@ -16,9 +16,9 @@ jQuery(document).ready(function () {
     VisibilidadSecciones();
 
     console.log('Buscando Datos de Configuracion.');
-    getData(idescuela).done(function () {
+    getFormData(idescuela).done(function () {
         var listacorte = document.getElementById("lista_id_corte");
-        setFindbyCombobox(listacorte.id, periodo.id, periodo.value);
+        setComboboxFindby(listacorte.id, periodo.id, periodo.value);
         autoNameFromDataList('id_corte', 'numero_corte', 'estado_corte');
     });
 

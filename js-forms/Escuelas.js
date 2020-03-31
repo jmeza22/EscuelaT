@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
     idescuela = document.getElementById('id_escuela');
     if (idescuela !== undefined && idescuela !== null && idescuela.value !== '') {
         console.log('Buscando Datos de Configuracion.');
-        getData(idescuela);
+        getFormData(idescuela);
     }
 });
 
@@ -46,7 +46,7 @@ function Edit(item) {
     myform = document.getElementById('form0');
     resetForm(myform);
     sendValue(item, null, myform, null);
-    getData(myform).done(function () {
+    getFormData(myform).done(function () {
         setTimeout(function () {
         }, 1);
     });
@@ -73,7 +73,7 @@ function DeleteItem(item) {
                 rowcount = window.sessionStorage.getItem('rowCount');
                 rowcount = parseFloat(rowcount);
                 if (rowcount !== undefined && rowcount !== null && rowcount > 0) {
-                    deleteRowInTable(mytable);
+                    deleteTableRow(mytable);
                 } else {
                     status.value = '1';
                 }
