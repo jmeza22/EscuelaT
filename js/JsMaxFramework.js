@@ -767,7 +767,7 @@ function setControlsAttribute(parent, child = null, name, value) {
             return true;
         }
     }
-    return false;                           
+    return false;
 }
 
 function removeAttributeDisabled(parent) {
@@ -1011,6 +1011,24 @@ function getOrderTable(element) {
     if (element.tagName.toString().toUpperCase() === "TABLE") {
         if (element.getAttribute("ordertable") !== null && element.getAttribute("ordertable") !== '') {
             return element.getAttribute("ordertable");
+        }
+    }
+    return null;
+}
+
+function getTableOrderBy(element) {
+    if (element.tagName.toString().toUpperCase() === "TABLE") {
+        if (element.getAttribute("tableorderby") !== null && element.getAttribute("tableorderby") !== '') {
+            return element.getAttribute("tableorderby");
+        }
+    }
+    return null;
+}
+
+function getTableOrdering(element) {
+    if (element.tagName.toString().toUpperCase() === "TABLE") {
+        if (element.getAttribute("tableordering") !== null && element.getAttribute("tableordering") !== '') {
+            return element.getAttribute("tableordering");
         }
     }
     return null;
@@ -1487,16 +1505,53 @@ function clearTableData(element) {
     return false;
 }
 
+function getDataTableColumnsTypes(table) {
+    if (table !== null && table.tagName !== undefined && table.tagName.toString().toUpperCase() === "TABLE") {
+        var headrow = null;
+        var tr = null;
+        headrow = getElement(table, 'thead_' + table.id);
+        if (headrow !== null && headrow.tagName !== undefined && headrow.tagName.toString().toUpperCase() === "THEAD") {
+            for (var i = 0; i < headrow.childNodes.length; i++) {
+                if (headrow.childNodes[i].tagName !== undefined && headrow.childNodes[i].tagName.toString().toUpperCase() === "TR") {
+                    tr = headrow.childNodes[i];
+                    break;
+                }
+            }
+        }
+        var array = Array();
+        var sub = new Array();
+        if (tr !== null && tr.tagName !== undefined && tr.tagName.toString().toUpperCase() === "TR") {
+            for (var i = 0; i < tr.childNodes.length; i++) {
+                if (tr.childNodes[i].tagName !== undefined && (tr.childNodes[i].tagName.toString().toUpperCase() === "TH" || tr.childNodes[i].tagName.toString().toUpperCase() === "TD") && tr.childNodes[i].getAttribute('columntype') !== undefined) {
+                    array.push({"type": tr.childNodes[i].getAttribute('columntype')});
+                }
+            }
+        }
+        return array;
+    }
+    return null;
+}
+
 function createDataTable(element) {
     var xtable = null;
     var tableId = null;
     var ordertable = getOrderTable(element);
+    var orderby = getTableOrderBy(element);
+    var ordering = getTableOrdering(element);
     if (element !== null && element.tagName.toString().toUpperCase() === "TABLE") {
         tableId = '#' + element.getAttribute('id');
         try {
-            if (ordertable !== null && isNaN(ordertable) === false) {
+            if (ordertable !== undefined && ordertable === 'true') {
+                if (orderby === null) {
+                    orderby = 0;
+                }
+                if (ordering === null) {
+                    ordering = 'desc';
+                }
                 xtable = $(tableId).DataTable({
-                    "order": [[ordertable, "desc"]]
+                    "columns": getDataTableColumnsTypes(element),
+                    "order": [[orderby, ordering]],
+                    "bFilter": true
                 });
             } else {
                 xtable = $(tableId).DataTable();

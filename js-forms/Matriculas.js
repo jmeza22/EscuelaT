@@ -13,7 +13,7 @@ jQuery(document).ready(function () {
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
-    loadTableData(mytable, false).done(function () {
+    loadTableData(mytable, true).done(function () {
     });
     return mytable;
 }

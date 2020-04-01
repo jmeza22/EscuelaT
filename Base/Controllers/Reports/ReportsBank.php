@@ -441,7 +441,7 @@ class ReportsBank extends BasicController {
             $arraywhere['p_id_carga'] = $idcarga;
             $sql = $sql . " AND C.id_carga=:p_id_carga ";
         }
-        $sql = $sql . " ORDER BY D.nombrecompleto_docente, CAST(C.numgrado_programa AS DECIMAL), A.nombre_asignatura ";
+        $sql = $sql . " ORDER BY C.id_periodo DESC, D.nombrecompleto_docente, CAST(C.numgrado_programa AS DECIMAL), A.nombre_asignatura ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

@@ -108,15 +108,15 @@ and open the template in the editor.
             <div class="panel-heading">Listado de Usuarios</div>
             <div class="panel-body">
                 <div class="table-responsive" >
-                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="UsuariosApp" findby="username_usuario" findbyvalue="" url="Base/Controllers/GetDataTableUsuarios.php" >
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="UsuariosApp" findby="username_usuario" findbyvalue="" url="Base/Controllers/GetDataTableUsuarios.php" ordertable="true" tableorderby="1" tableordering="desc" >
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
-                                <th style="width: 10%;">Escuela</th>
-                                <th style="width: 15%;" title="Usuario">Usuario</th>
-                                <th style="width: 10%;" title="Codigo de Persona">Codigo</th>
-                                <th style="width: 45%;">Nombre Completo</th>
-                                <th style="width: 10%;">TipoUsuario</th>
-                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 10%;">Escuela</th>
+                                <th columntype="html" style="width: 15%;" title="Usuario">Usuario</th>
+                                <th columntype="html" style="width: 10%;" title="Codigo de Persona">Codigo</th>
+                                <th columntype="html" style="width: 45%;">Nombre Completo</th>
+                                <th columntype="html" style="width: 10%;">TipoUsuario</th>
+                                <th columntype="html" style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -141,6 +141,8 @@ and open the template in the editor.
                 </div>  
             </div>
         </div>
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
 
     </body>
 </html>

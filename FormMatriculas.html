@@ -156,19 +156,19 @@ and open the template in the editor.
             <div class="panel-heading">Listado de Matriculas</div>
             <div class="panel-body">
                 <div class="table-responsive" >
-                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="MatriculasApp" url="Base/Controllers/GetDataTableMatriculas.php" >
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="MatriculasApp" url="Base/Controllers/GetDataTableMatriculas.php" ordertable="true" tableorderby="0" tableordering="desc" >
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
-                                <th style="width: 10%;" title="Codigo de Matricula">Codigo</th>
-                                <th style="width: 50%;">Nombre Estudiante</th>
-                                <th style="width: 5%;" title="Escuela">Esc.</th>
-                                <th style="width: 5%;" title="Sede">Sed.</th>
-                                <th style="width: 5%;" title="Jornada">Jor.</th>
-                                <th style="width: 5%;" title="Programa">Pro.</th>
-                                <th style="width: 5%;" title="Grado">Gra.</th>
-                                <th style="width: 5%;" title="Grupo">Gru.</th>
-                                <th style="width: 5%;" title="Año Academico">Año</th>
-                                <th style="width: 5%; min-width: 96px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 10%;" title="Codigo de Matricula">Codigo</th>
+                                <th columntype="html" style="min-width: 50% !important;">Nombre Estudiante</th>
+                                <th columntype="html" style="width: 5%;" title="Escuela">Esc.</th>
+                                <th columntype="html" style="width: 5%;" title="Sede">Sed.</th>
+                                <th columntype="html" style="width: 5%;" title="Jornada">Jor.</th>
+                                <th columntype="html" style="width: 5%;" title="Programa">Pro.</th>
+                                <th columntype="html-num" style="width: 5%;" title="Grado">Gra.</th>
+                                <th columntype="html" style="width: 5%;" title="Grupo">Gru.</th>
+                                <th columntype="html-num" style="width: 5%;" title="Año Academico">Año</th>
+                                <th columntype="html" style="width: 5%; min-width: 90px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">

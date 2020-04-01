@@ -35,7 +35,7 @@ and open the template in the editor.
             <div class="panel-body">
                 <div class="">
                     <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/LogrosController.php"  model="LogrosAsignaturasApp" findBy="id_logro" statusfield="status_logro" mainform="true" > 
-                        
+
                         <div>
                             <div class="row">
                                 <div class="col-sm-3">
@@ -153,16 +153,16 @@ and open the template in the editor.
             <div class="panel-heading">Listado de Logros</div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="LogrosApp" findby="id_asignatura" findbyvalue="" url="Base/Controllers/GetDataTableLogros.php" >
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="LogrosApp" findby="id_asignatura" findbyvalue="" url="Base/Controllers/GetDataTableLogros.php" ordertable="true" tableorderby="0" tableordering="desc" >
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
-                                <th style="width: 10%;" title="Codigo">#</th>
-                                <th style="width: 50%;">Descripcion</th>
-                                <th style="width: 10%;">Asignatura</th>
-                                <th style="width: 6%;">Tipo</th>
-                                <th style="width: 8%;">Grado</th>
-                                <th style="width: 8%;">Periodo</th>
-                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 10%;" title="Codigo">#</th>
+                                <th columntype="html" style="width: 50%;">Descripcion</th>
+                                <th columntype="html" style="width: 10%;">Asignatura</th>
+                                <th columntype="html" style="width: 6%;">Tipo</th>
+                                <th columntype="html-num" style="width: 8%;">Grado</th>
+                                <th columntype="html" style="width: 8%;">Periodo</th>
+                                <th columntype="html" style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">

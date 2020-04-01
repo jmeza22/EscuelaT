@@ -93,9 +93,17 @@ and open the template in the editor.
                             <input type="text" alphanumeric="true" name="expediciondoc_persona" id="expediciondoc_persona" value="" maxlength="60" class="form-control" title="Lugar de Expedicion del Documento">
                         </div>
                         <div class="col-sm-2">
-                            <label>F.Nacimiento</label>
-                            <input type="date" date="true" name="fechanacimiento_persona" id="fechanacimiento_persona" value="" placeholder="1992-04-22" maxlength="10" class="form-control">
+                            <label>F.Expedicion</label>
+                            <input type="date" date="true" name="fechaexpdoc_persona" id="fechaexpdoc_persona" value="" placeholder="Ej: 2010-04-22" maxlength="10" class="form-control">
                         </div>
+                        <div class="col-sm-2">
+                            <label>F.Nacimiento</label>
+                            <input type="date" date="true" name="fechanacimiento_persona" id="fechanacimiento_persona" value="" placeholder="Ej: 1992-04-22" maxlength="10" class="form-control">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
                         <div class="col-sm-2">
                             <label>Sexo</label>
                             <select name="sexo_persona" id="sexo_persona" selected="I" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;">
@@ -105,10 +113,7 @@ and open the template in the editor.
                                 <option value="F" >Femenino</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <label>Telefono</label>
                             <input type="tel" name="telefono_persona" id="telefono_persona" value="" maxlength="20" class="form-control" title="Fijo o Celular" >
                         </div>
@@ -474,7 +479,7 @@ and open the template in the editor.
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive">
-                            <table style="width: 100% !Important;" name="dataTableE" id="dataTableE" border="1" class="table table-striped table-hover table-form" model="ObservadorEstudiantesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableEstudiantes.php" >
+                            <table style="width: 100% !Important;" name="dataTableE" id="dataTableE" border="1" class="table table-striped table-hover table-form" model="ObservadorEstudiantesApp" findby="id_estudiante" findbyvalue="" url="Base/Controllers/GetDataTableEstudiantes.php" ordertable="true" tableorderby="0" tableordering="desc" >
                                 <thead id="thead_dataTable0">
                                     <tr headrow="true">
                                         <th style="width: 20% !important;" title="Codigo de Estudiante">Codigo</th>
