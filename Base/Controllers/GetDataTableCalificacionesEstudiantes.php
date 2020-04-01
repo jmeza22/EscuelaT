@@ -5,7 +5,7 @@ include_once 'Libraries/Reports.php';
 $session = new SessionManager();
 $variables = new SystemVariableManager();
 $bc = null;
-if ($session->hasLogin() && isset($_POST) && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
+if ($session->hasLogin() && isset($_POST)) {
     $bc = new ReportsBank();
     $bc->connect();
     $arraywhere = $bc->parseFindByToArray($_POST);
@@ -32,8 +32,6 @@ if ($session->hasLogin() && isset($_POST) && ($session->getSuperAdmin() == 1 || 
     $idperiodo = null;
     if (isset($arraywhere['id_periodo'])) {
         $idperiodo = $arraywhere['id_periodo'];
-    } else {
-        $idperiodo = $variables->getIdPeriodoAnual();
     }
 
     $grado = null;
@@ -45,7 +43,7 @@ if ($session->hasLogin() && isset($_POST) && ($session->getSuperAdmin() == 1 || 
     if (isset($arraywhere['id_grupo'])) {
         $idgrupo = $arraywhere['id_grupo'];
     }
-
+    
     echo $bc->getCalificaciones($session->getEnterpriseID(), null, null, $idprograma, null, $grado, $idgrupo, $idperiodo, $idestudiante, $idmatricula);
     $bc->disconnect();
     $bc = null;

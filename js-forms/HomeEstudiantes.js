@@ -31,7 +31,7 @@ function setIdEstudiante() {
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
-    loadTableData(mytable, false);
+    loadTableData(mytable, true);
 }
 
 function VerEstudiante(item) {

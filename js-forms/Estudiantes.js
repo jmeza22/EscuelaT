@@ -80,10 +80,15 @@ function BuscarEstudianteActivo() {
                 getFormData(form0).done(function () {
                     CopiarCodigoEstudianteAnotacion();
                     LoadTableAnotaciones();
-                    LoadTableCitaciones();
-                    document.getElementById("save").setAttribute('disabled', 'disabled');
-                    document.getElementById("reset").setAttribute('disabled', 'disabled');
+                    CargarFrameFoto();
+                    document.getElementById("panelPersona").setAttribute('style', 'display: none;');
+                    document.getElementById("panelCitaciones").setAttribute('style', 'display: none;');
+                    document.getElementById("panelAnotaciones").setAttribute('style', 'display: none;');
+                    document.getElementById("save").setAttribute('style', 'display: none;');
+                    document.getElementById("reset").setAttribute('style', 'display: none;');
+                    document.getElementById("generate").setAttribute('style', 'display: none;');
                     document.getElementById("btAnotacion").setAttribute('disabled', 'disabled');
+                    document.getElementById("btCitacion").setAttribute('disabled', 'disabled');
                 });
             }
         }

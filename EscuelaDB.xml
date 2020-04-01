@@ -2006,6 +2006,10 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
         <Cm>Nombre de la EPS del Estudiante</Cm>
       </Cl>
+      <Cl au="0" df="1" nm="estrato_estudiante" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estrato Socioeconomico del Estudiante</Cm>
+      </Cl>
       <Cl au="0" df="" nm="foto_estudiante" nu="1">
         <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
         <Cm>Foto del Estudiante</Cm>
@@ -2945,7 +2949,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="RespuestasIntentosApp" x="704" y="4671"/>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1657" y2="1656"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1670" y2="1656"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AreasApp.fk_AreasApp_EscuelasApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
@@ -3049,7 +3053,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CitacionesObservadorApp.fk_CitacionesObservadorApp_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="272" x2="272" y1="1657" y2="1963"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="272" x2="272" y1="1670" y2="1963"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ConfiguracionApp.fk_ConfiguracionApp_EscuelasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -3258,7 +3262,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="227" x2="227" y1="1657" y2="3346"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="227" x2="227" y1="1670" y2="3346"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_ValoresPecuniariosApp" parentEdge="WEST" positioner="OneLineUserLinkPositioner">

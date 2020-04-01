@@ -30,7 +30,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
+        <div id="panelPersona" class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Datos Basicos del Estudiante (Persona)</div>
             <div class="panel-body table-responsive" >
                 <form id="formP" method="POST" autocomplete="off" url="Base/Controllers/PersonasController.php" model="PersonasApp" findBy="id_persona" mainform="true" >
@@ -100,7 +100,7 @@ and open the template in the editor.
                             <label>F.Nacimiento</label>
                             <input type="date" date="true" name="fechanacimiento_persona" id="fechanacimiento_persona" value="" placeholder="Ej: 1992-04-22" maxlength="10" class="form-control">
                         </div>
-                        
+
                     </div>
 
                     <div class="row">
@@ -132,7 +132,7 @@ and open the template in the editor.
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
                             <center>
-                                <button type="button" id="save" name="save" action="update" save="true" onclick="GrabarPersona(this);" class="btn btn-primary" >Grabar</button>        
+                                <button type="button" id="saveP" name="saveP" action="update" save="true" onclick="GrabarPersona(this);" class="btn btn-primary" >Grabar</button>        
                             </center>
                         </div>
                         <div class="col-sm-6">
@@ -146,7 +146,7 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
+        <div id="panelEstudiante" class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Observador del Estudiante</div>
             <div class="panel-body table-responsive" >
 
@@ -199,6 +199,16 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Enf. Cronica</label>
+                                            <input type="text" name="enfermedadcronica_estudiante" id="enfermedadcronica_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Enfermedad Cronica del Estudiante">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Alergias</label>
+                                            <input type="text" name="alergias_estudiante" id="alergias_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Alergias del Estudiante">
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-3">
                                             <label>Def. Visual</label>
                                             <select id="deficienciavisual_estudiante" name="deficienciavisual_estudiante" class="form-control" style="width: 100%;" title="Deficiencia Visual?">
@@ -214,19 +224,19 @@ and open the template in the editor.
                                             </select>
                                         </div>
                                         <div class="col-sm-3">
-                                            <label>Alergias</label>
-                                            <input type="text" name="alergias_estudiante" id="alergias_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Alergias del Estudiante">
+                                            <label>E.P.S</label>
+                                            <input type="text" name="eps_estudiante" id="eps_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="EPS o IPS (Salud)">
                                         </div>
                                         <div class="col-sm-3">
-                                            <label>Enf. Cronica</label>
-                                            <input type="text" name="enfermedadcronica_estudiante" id="enfermedadcronica_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Enfermedad Cronica del Estudiante">
+                                            <label>Estrato</label>
+                                            <input type="number" min="0" max="8" name="alergias_estudiante" id="alergias_estudiante" value="1" maxlength="100" required="required" class="form-control" title="Estrato SocioEconomico">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <iframe name="frameFoto" id="frameFoto" src="UploadImageForm.html" style="min-height: 370px !important; min-width: 100% !important;"></iframe>
+                            <iframe name="frameFoto" id="frameFoto" src="UploadImageForm.html" style="min-height: 430px !important; min-width: 100% !important;"></iframe>
                         </div>
                     </div>
 
@@ -375,10 +385,9 @@ and open the template in the editor.
         </div>
 
 
-        <div class="panel panel-primary" style="width: 90% !important;">
+        <div id="panelAnotaciones" class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Anotaciones al Observador</div>
             <div class="panel-body table-responsive" >
-
                 <div class="panel panel-default">
                     <div class="panel-heading">Listado de Anotaciones</div>
                     <div class="panel-body">
@@ -422,7 +431,7 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
+        <div id="panelCitaciones" class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Citaciones del Estudiante</div>
             <div class="panel-body table-responsive" >
 
