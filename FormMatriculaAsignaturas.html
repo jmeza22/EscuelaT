@@ -39,6 +39,7 @@ and open the template in the editor.
                     </div>
                     <div class="modal-body">
                         <form id="formAuto" method="POST" autocomplete="off" url="Base/Controllers/MatriculaAsignaturasController.php" model="MatriculaAsignaturasApp" findBy="id_matasig" mainform="true" >
+                            <input type="hidden" id="automatic" name="automatic" value="true" maxlength="5" /> 
                             <input type="hidden" id="id_matasig" name="id_matasig" value="0" maxlength="30" /> 
                             <input type="hidden" id="id_matricula" name="id_matricula" value="0" maxlength="30" /> 
                             <div class="row">
@@ -80,7 +81,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label title="Codigo del Matricula">Matricula</label>
-                                    <input type="text" id="id_matricula" name="id_matricula" value="0" class="form-control" maxlength="24" onfocus="getMatricula();" /> 
+                                    <input type="text" id="id_matricula" name="id_matricula" required="required" value="" class="form-control" maxlength="24" onfocus="getMatricula();" /> 
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Escuela</label>
@@ -98,7 +99,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Codigo</label>
-                                    <input type="text" name="id_estudiante" id="id_estudiante" readonly="readonly" value="" maxlength="24" required="required" class="form-control" >
+                                    <input type="text" name="id_estudiante" id="id_estudiante" readonly="readonly" value="" maxlength="24" class="form-control" >
                                 </div>
                                 <div class="col-sm-9">
                                     <label>Nombre Completo</label>
@@ -130,7 +131,6 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                 </div>
-
 
                             </div>
                         </form>

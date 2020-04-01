@@ -6,10 +6,11 @@ include_once 'Classes/Personas.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'PersonasApp';
+$action = 'insertorupdate';
 $findBy = 'id_persona';
 if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
+        $action = $_POST['action'];
         $persona = new Personas();
         $persona->setArray($_POST);
         $idtipousuario = null;
@@ -17,10 +18,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
             $idtipousuario = $_POST['id_tipousuario'];
             unset($_POST['id_tipousuario']);
         }
-        if (isset($_POST['action']) && $_POST['action'] === 'find') {
-            $result = $persona->findPersona();
-        }
-        if (isset($_POST['action']) && $_POST['action'] === 'insertorupdate') {
+        if ($action === 'insertorupdate') {
             $result = $persona->insertPersona();
             if ($persona->getRowCount() > 0 && isset($idtipousuario) && $idtipousuario !== '') {
                 $persona->insertUsuario();
@@ -32,7 +30,10 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
                 }
             }
         }
-        if (isset($_POST['action']) && ($_POST['action'] === 'update' || $_POST['action'] === 'delete')) {
+        if ($action === 'find') {
+            $result = $persona->findPersona();
+        }
+        if ($action === 'update' || $action === 'delete') {
             $result = $persona->updatePersona();
         }
         echo $result;

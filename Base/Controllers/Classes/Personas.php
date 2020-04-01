@@ -47,6 +47,7 @@ class Personas extends ReportsBank {
         $this->setFindBy($this->findby);
         $this->setPostData($this->postdata);
         $this->preparePostData();
+        $this->postdata = $this->getPostData();
     }
 
     public function insertPersona() {

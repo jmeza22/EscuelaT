@@ -5,7 +5,6 @@
  */
 
 jQuery(document).ready(function () {
-    showNotification('Espere...', 'Espere a que se carguen todos los elementos. Tenga paciencia. No recargue la pagina.')
     setIdMatricula();
     getMatricula();
     RefreshTable();
@@ -27,7 +26,9 @@ function setIdMatricula() {
 
 function getMatricula() {
     var form = document.getElementById('form0');
-    getFormData(form);
+    if (validateForm(form)) {
+        getFormData(form);
+    }
 }
 
 function LoadTable() {

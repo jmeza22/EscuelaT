@@ -2,6 +2,8 @@
 
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
+include_once 'Classes/Matriculas.php';
+include_once 'Classes/MatriculaAsignaturas.php';
 $session = new SessionManager();
 $variables = new SystemVariableManager();
 $bc = null;
@@ -48,9 +50,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             $idperiodonew = $_POST['id_periodo_new'];
             $numgradonew = $_POST['numgrado_programa_new'];
             $idgruponew = $_POST['id_grupo_new'];
-            $bc = new ReportsBank();
-            $bc->connect();
-
+            $bc = new Matriculas();
             $configuracion = $bc->getConfiguracionEscuela($idescuela);
             $configuracion = json_decode($configuracion, true);
             $configuracion = $configuracion[0];
@@ -60,8 +60,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             $programa = $programa[0];
             $matriculas = null;
             $matriculas = $bc->getPromedio($idescuela, $idprograma, null, $numgrado, $idgrupo, $idperiodo, null, null);
-
-            $bc->setModel('MatriculasApp');
 
             $arraywhere = array();
             if ($matriculas !== null && is_array(json_decode($matriculas, true)) && $configuracion !== null && is_array($configuracion) && $programa !== null && is_array($programa)) {
@@ -105,7 +103,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                             $cantReprobadas = $cantReprobadas[0]['CantidadReprobadas'];
                         }
                     }
-                    if ($matriculas[$i]['Promedio'] >= 1) {
+                    if ($matriculas[$i]['Promedio'] >= 0) {
                         if (($matriculas[$i]['Promedio'] >= $configuracion['valaprueba_configuracion']) && ($cantReprobadas < $configuracion['maxasigrep_configuracion'])) {
                             $numgradonew = ($matriculas[$i]['numgrado_programa'] + 1);
                             $grados = ($programa['ngrados_programa'] + 0);
@@ -133,11 +131,15 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                             $postdata['id_grupo'] = $matriculas[$i]['id_grupo'];
                         }
                     }
-                    $bc->setAction('insert');
-                    $bc->setPostData($postdata);
-                    $result = $bc->execute(false);
+                    $bc->setArray($postdata);
+                    $result = $bc->insertMatricula();
                     if ($bc->getRowCount() > 0) {
                         $rowcount++;
+                        $postdata['id_matasig'] = '0';
+                        $MA = new MatriculaAsignaturas();
+                        $MA->setArray($postdata);
+                        $MA->setAction('insertorupdate');
+                        $MA->insertAuto();
                     } else {
                         if ($bc->getErrorMessage() !== null && $bc->getErrorMessage() !== '') {
                             $errormessage = $errormessage . '' . $nombre . ': ' . $bc->getErrorMessage() . '<br>';

@@ -146,6 +146,7 @@ and open the template in the editor.
                     </div>
                 </form>
                 <form id="FormMatAsignatura" method="POST" autocomplete="off" url="Base/Controllers/MatriculaAsignaturasController.php" model="MatriculaAsignaturasApp" do="insertorupdate">
+                    <input type="hidden" id="automatic" name="automatic" value="true" maxlength="5" /> 
                     <input type="hidden" name="id_matricula" id="id_matricula" value="" required="required">
                     <button type="button" id="save" name="save" style="display: none; visibility: hidden;" action="insertorupdate" save="true" onclick="GrabarMatricula(this);" class="btn btn-primary" >Grabar</button>        
                 </form>
@@ -187,7 +188,7 @@ and open the template in the editor.
                                         <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
                                         <input type="hidden"  editable="false" name="status_matricula" id="status_matricula" value="1" >
                                         <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
                                         <button type="button" name="MatriculasAsignaturas" id="MatriculasAsignaturas" class="btn btn-xs btn-default icon-button" onclick="FormMatriculaAsignaturas(this);"  title="Matricular Asignaturas"><i class="glyphicon glyphicon-check"></i></button>
                                     </form>
                                 </td>
