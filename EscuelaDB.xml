@@ -4,6 +4,79 @@
   <DefTblOpts/>
   <DocFolder>C:\Users\LISANDRO\Documents</DocFolder>
   <Sch Cm="" nm="EscuelaDB">
+    <Tbl UsSo="1" nm="ActividadesVirtualesApp">
+      <Cm>Actividades Virtuales (Mini AulaVirtual)</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_actividad" nm="pkActividadesVirtualesApp"/>
+      <Cl au="1" df="" nm="id_actividad" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Actividad</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numgrado_programa" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_docente" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_actividad" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre de la Actividad</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_actividad" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion de la actividad</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="documento_actividad" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Archivo o documento (Guia)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechadesde_actividad" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Inicio</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechahasta_actividad" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha Final</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="activo_actividad" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Estado (Activo o Inactivo)</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_actividad" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_ActividadesVirtualesApp_AsignaturasApp" prLkCl="id_asignatura" upAc="3">
+        <PrTb mn="0" nm="AsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="ActividadesVirtualesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_ActividadesVirtualesApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="ActividadesVirtualesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_ActividadesVirtualesApp_ProgramasApp" prLkCl="id_programa" upAc="3">
+        <PrTb mn="0" nm="ProgramasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="ActividadesVirtualesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="AnotacionesObservadorApp">
       <Cm>Anotaciones del Observador</Cm>
       <TblOpts/>
@@ -1541,7 +1614,7 @@
         <Cm>Titulo de la Lectura</Cm>
       </Cl>
       <Cl au="0" df="" nm="contenido_lectura" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="5000" sc="null" sg="1" un="0"/>
         <Cm>Contenido</Cm>
       </Cl>
       <Cl au="0" df="" nm="imagen_lectura" nu="1">
@@ -2644,6 +2717,52 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="SolucionesActividadesVirtualesApp">
+      <Cm>Soluciones de las Actividades (cargadas por los Estudiantes)</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_solucion" nm="pkSolucionesActividadesVirtualesApp"/>
+      <Cl au="0" df="" nm="id_solucion" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Solucion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_actividad" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Actividad</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_estudiante" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Estudiante</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechahora_solucion" nu="0">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="documento_solucion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Archivo con la solucion de la actividad</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="retroalimentacion_solucion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+        <Cm>Retroalimentacion hecha por el docente</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="calificacion_solucion" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="1" nm="status_solucion" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_SolucionesActividadesVirtualesApp_ActividadesVirtualesApp" prLkCl="id_actividad" upAc="3">
+        <PrTb mn="0" nm="ActividadesVirtualesApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="SolucionesActividadesVirtualesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_actividad" prCl="id_actividad"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_SolucionesActividadesVirtualesApp_ObservadorEstudianteApp" prLkCl="id_estudiante" upAc="3">
+        <PrTb mn="0" nm="ObservadorEstudianteApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="SolucionesActividadesVirtualesApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="TerminalesEleccionesApp">
       <Cm>Terminales o Dispositivos Habilitados para Votar</Cm>
       <TblOpts/>
@@ -2947,6 +3066,25 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="GruposCuestionariosApp" x="26" y="4473"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="IntentosCuestionariosApp" x="236" y="4665"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="RespuestasIntentosApp" x="704" y="4671"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ActividadesVirtualesApp" x="1435" y="4486"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SolucionesActividadesVirtualesApp" x="1924" y="4638"/>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.ActividadesVirtualesApp.fk_ActividadesVirtualesApp_AsignaturasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2327" x2="2327" y1="718" y2="4534"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1795" x2="2323" y1="4538" y2="4538"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.ActividadesVirtualesApp.fk_ActividadesVirtualesApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="879" x2="879" y1="175" y2="4528"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1412" x2="883" y1="4532" y2="4532"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.ActividadesVirtualesApp.fk_ActividadesVirtualesApp_ProgramasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1581" x2="1581" y1="593" y2="4463"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AnotacionesObservadorApp.fk_AnotacionesObservador_ObservadorEstudianteApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="200" x2="200" y1="1670" y2="1656"/>
@@ -3336,6 +3474,18 @@
         <positionableLine lineRole="SINGLE_LINE" x1="899" x2="899" y1="175" y2="730"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.SolucionesActividadesVirtualesApp.fk_SolucionesActividadesVirtualesApp_ActividadesVirtualesApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1795" x2="2052" y1="4571" y2="4571"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2056" x2="2056" y1="4615" y2="4575"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.SolucionesActividadesVirtualesApp.fk_SolucionesActividadesVirtualesApp_ObservadorEstudianteApp" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="434" x2="2054" y1="1471" y2="1471"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2058" x2="2058" y1="4615" y2="1475"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.TerminalesEleccionesApp.fk_TerminalesElecciones_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="913" x2="913" y1="175" y2="3954"/>
@@ -3379,7 +3529,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="157">
+  <RnmMgr NxRnmId="160">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -3797,6 +3947,15 @@
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="156" nNm="RespuestasIntentosApp" oNm="RespuestasIntentoApp"/>
     </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ActividadesVirtualesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="157" nNm="id_actividad" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="ActividadesVirtualesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="158" nNm="id_docente" oNm="id_docente_creador"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="SolucionesActividadesVirtualesApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="159" nNm="id_solucion" oNm="Id"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -3820,8 +3979,8 @@
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (43)</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (43)/AreasApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (45)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (45)/AreasApp</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

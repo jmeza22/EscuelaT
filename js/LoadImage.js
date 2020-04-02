@@ -5,10 +5,10 @@
  */
 
 function clickButton() {
-    document.getElementById('imageFile').click();
-    $('#imagePhoto').click(function () {
-        $('#imageFile').click();
-    });
+    document.getElementById('image-file').click();
+    document.getElementById('image').onclick = function () {
+        document.getElementById('image-file').click();
+    };
 }
 
 function showMyImage(fileInput) {
@@ -19,7 +19,7 @@ function showMyImage(fileInput) {
         if (!file.type.match(imageType)) {
             continue;
         }
-        var img = document.getElementById("imagePhoto");
+        var img = document.getElementById('image');
         img.file = file;
         var reader = new FileReader();
         reader.onload = (function (aImg) {

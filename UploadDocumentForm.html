@@ -7,14 +7,14 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Subir Imagen al Servidor</title>
+        <title>Subir Documento al Servidor</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="Pruebas"/>
         <meta name="author" content="Jose Meza"/>
         <meta name="ProjectName" content="EscuelaT"/>
-        <link rel="icon" type="image/png" href="css/IconPage.png" />
-        <link rel="shortcut icon" type="image/png" href="css/IconPage.png" />
+        <link rel="icon" type="document/png" href="css/IconPage.png" />
+        <link rel="shortcut icon" type="document/png" href="css/IconPage.png" />
 
         <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'/>
         <link href='https://fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'/>
@@ -27,27 +27,26 @@ and open the template in the editor.
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/Validator.js"></script>
-        <script type="text/javascript" src="js/LoadImage.js"></script>
+        <script type="text/javascript" src="js/LoadDocument.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
-        <script type="text/javascript" src="js-forms/UploadImage.js"></script>
+        <script type="text/javascript" src="js-forms/UploadDocument.js"></script>
 
     </head>
     <body style="min-height: fit-content !important;">
         <div class="panel panel-primary" style="width: 80% !important;">
-            <div class="panel-heading">Subir Foto o Imagen</div>
+            <div class="panel-heading">Subir Documento</div>
             <div class="panel-body" >
-                <form id="formUpload" action="UploadImageController.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="prefix_image" id="prefix_image" value="NULL" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
-                    <input type="hidden" name="name_image" id="name_image" value="NULL" readonly="readonly" maxlength="100" class="form-control" title="Nombre Imagen">
+                <form id="formUpload" action="UploadDocumentController.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" alphanumeric="true" name="prefix_document" id="prefix_document" value="" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
+                    <input type="hidden" alphanumeric="true" name="name_document" id="name_document" value="" readonly="readonly" maxlength="100" class="form-control" title="Nombre Documento">
                     <div class="row">
                         <div class="col-sm-12">
                             <center>
-                                <div class="photo-panel">
+                                <div class="">
                                     <center>
-                                        <img name="image" id="image" class="image-photo" onclick="clickButton();" alt="Subir Foto" title="Click para Cambiar Foto." style="min-width: 180px !important; max-width: 600px !important;" />
-                                        <input type="file" name="image-file" id="image-file" class="image-file" accept="image/*" required="required" onchange="showMyImage(this)" title="Click para Cambiar Foto." />
+                                        <input type="file" name="document-file" id="document-file" class="document-file" accept=".pdf, .txt, .doc, .docx, .ppt, .pptx, .xls, .xlsx" required="required" onchange="" title="Click para Cambiar Documento." />
                                     </center>
                                 </div>
                             </center>
@@ -57,21 +56,21 @@ and open the template in the editor.
                         <div class="col-sm-12">
                             <center>
                                 <label>Nuevo Nombre de Archivo</label>
-                                <input type="text" name="fullname_image" id="fullname_image" value="" required="required" maxlength="100" class="form-control" title="Nombre Completo de Imagen" style="text-align: center;">
+                                <input type="text" name="fullname_document" id="fullname_document" value="" required="required" maxlength="100" class="form-control" title="Nombre Completo de Documento" style="text-align: center;">
                             </center>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <center>
-                                <button id="submitThis" name="submitThis" type="button" onclick="submitImage(this);" class="btn btn-primary" >Guardar Foto</button>
+                                <button id="Guardar" name="save" type="button" onclick="submitDocument(this);" class="btn btn-primary" >Guardar Documento</button>
                             </center>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="panel-footer" style="text-align: center;">
-                Debe hacer click en el Botón "Guardar Foto" para que la Foto o Imagen se almacene en el Sistema.
+                Debe hacer click en el Botón "Guardar Documento" para que el Documento se almacene en el Sistema.
             </div>
         </div>
     </body>

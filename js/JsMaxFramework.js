@@ -1045,12 +1045,6 @@ function getSelectedOption(element) {
 
 function submitAjax(formData, url, header, reload) {
     var promise = null;
-    console.log('Trying Submit!. ' + Object.keys(formData));
-    sessionStorage.removeItem('error');
-    sessionStorage.removeItem('textMessage');
-    sessionStorage.removeItem('data');
-    sessionStorage.removeItem('rowCount');
-    sessionStorage.removeItem('lastInsertId');
     promise = $.ajax({
         method: "POST",
         url: url,
@@ -1059,6 +1053,11 @@ function submitAjax(formData, url, header, reload) {
         contentType: false,
         processData: false,
         success: function (result, status) {
+            sessionStorage.removeItem('error');
+            sessionStorage.removeItem('textMessage');
+            sessionStorage.removeItem('data');
+            sessionStorage.removeItem('rowCount');
+            sessionStorage.removeItem('lastInsertId');
             if (result !== null && result !== '') {
                 try {
                     result = JSON.parse(result);
