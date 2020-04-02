@@ -6,10 +6,10 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Portal de Configuracion de Cuestionarios - EscuelaT</title>
+        <title>Portal de Educacion Virtual - EscuelaT</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Portal de Configuracion de Cuestionarios"/>
+        <meta name="description" content="Portal de Educacion Virtual"/>
         <meta name="author" content="Jose Meza"/>
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
@@ -23,9 +23,18 @@ and open the template in the editor.
             <div class="container">
                 <div class="menucss">
                     <ul>
-                        <li><a target="myframe" href="FormCuestionarios.html">Cuestionarios</a></li>
-                        <li><a target="myframe" href="FormLecturas.html">Lecturas</a></li>
-                        <li><a target="myframe" href="FormPreguntasCuestionarios.html">Preguntas & Opciones</a></li>
+                        <li>Cuestionarios <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormCuestionarios.html">Cuestionarios</a></li>
+                                <li><a target="myframe" href="FormLecturas.html">Lecturas</a></li>
+                                <li><a target="myframe" href="FormPreguntasCuestionarios.html">Preguntas & Opciones</a></li>
+                            </ul>
+                        </li>
+                        <li>Actividades <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormActividadesVirtuales.html">Actividades</a></li>
+                            </ul>
+                        </li>
                         <li><a href="home.html">Sistema</a></li>
                         <li><a href="logout.html">Salir</a></li>
                     </ul>
@@ -33,7 +42,7 @@ and open the template in the editor.
             </div>
         </header>
         <div class="contentframe">
-            <iframe name="myframe" id="myframe" src="FormElecciones.html" height="900" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);"></iframe> 
+            <iframe name="myframe" id="myframe" src="FormCuestionarios.html" height="900" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);"></iframe> 
         </div>
         <footer class="information">
             <p>

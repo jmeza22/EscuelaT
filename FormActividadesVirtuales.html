@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Actividades Virtuales</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Actividades Virtuales"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/ActividadesVirtuales.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Actividad Virtual</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/ActividadesVirtualesController.php" model="ActividadesVirtualesApp" findBy="id_actividad" mainform="true" enctype="multipart/form-data" >
+                    <input type="hidden" id="id_programa" name="id_programa" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="id_docente" name="id_docente" value="" required="required" maxlength="22" min="1"  /> 
+                    <input type="hidden" id="documento_actividad" name="documento_actividad" value="" maxlength="22" min="1"  /> 
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Nombre de Actividad</label>
+                            <input type="text" name="nombre_actividad" id="nombre_actividad" value="" maxlength="100" required="required" class="form-control" title="Nombre o Titulo de la Actividad" >
+                        </div>
+                        <div class="col-sm-12">
+                            <label>Descripcion de Actividad</label>
+                            <textarea id="descripcion_actividad" name="descripcion_actividad" spellcheck="spellcheck" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Cargar Archivo (Guia)</label>
+                            <input type="file" form="form0" name="document-file" id="document-file" class="form-control" title="Cargar Archivo que sirve de Guia para el Estudiante.">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Activo desde</label>
+                            <input type="date" name="fechadesde_actividad" id="fechadesde_actividad" value="" maxlength="21" required="required" class="form-control" title="La Actividad estará disponible desde esta fecha.">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Activo hasta</label>
+                            <input type="date" name="fechahasta_actividad" id="fechahasta_actividad" value="" maxlength="21" required="required" class="form-control" title="La Actividad estará disponible hasta esta fecha.">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Estado</label>
+                            <select id="activo_actividad" name="activo_actividad" class="form-control" required="required" style="width: 100%;">
+                                <option value="1">Activa</option>
+                                <option value="0">Inactiva</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Docente</label>
+                            <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" disabled="disabled" class="form-control" title="Nombre del Docente Activo">
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Asignatura</label>
+                            <input type="text" name="nombre_asignatura" id="nombre_asignatura" value="" maxlength="200" disabled="disabled" class="form-control" title="Nombre de Asignatura">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grado</label>
+                            <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" class="form-control" title="Grado">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Codigo</label>
+                            <input type="number" name="id_actividad" id="id_actividad" value="0" readonly="readonly" maxlength="10" required="required" class="form-control" title="Codigo de Actividad" >
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendActividad();" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Actividades Virtuales</div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered" model="ActividadesVirtualesApp" url="Base/Controllers/GetDataTableActividadesVirtuales.php" >
+                        <thead id="thead_dataTable0">
+                            <tr headrow="true">
+                                <th style="width: 5%;" title="Codigo">Codigo</th>
+                                <th style="width: 45%;">Nombre.Actividad</th>
+                                <th style="width: 10%;">Fecha.Inicio</th>
+                                <th style="width: 10%;">Fecha.Final</th>
+                                <th style="width: 10%;">Grado</th>
+                                <th style="width: 10%;">Estado</th>
+                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="samplerow" samplerow="true" style="display: none;">
+                                <td> {{id_actividad}}</td>
+                                <td> {{nombre_actividad}} </td>
+                                <td> {{fechadesde_actividad}} </td>
+                                <td> {{fechahasta_actividad}} </td>
+                                <td> {{numgrado_programa}} </td>
+                                <td> {{activo_actividad}} </td>
+                                <td>
+                                    <form id="Actividad{{id_actividad}}" name="Actividad{{id_actividad}}" method="POST" autocomplete="off" url="Base/Controllers/ActividadesController.php"  model="ActividadesApp" findBy="id_actividad" statusfield="status_actividad">
+                                        <input type="hidden"  editable="false" name="id_actividad" id="id_actividad" value="{{id_actividad}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_actividad" id="status_actividad" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>
