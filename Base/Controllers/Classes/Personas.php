@@ -34,6 +34,9 @@ class Personas extends ReportsBank {
                 $this->idtipousuario = $this->postdata['id_tipousuario'];
                 unset($this->postdata['id_tipousuario']);
             }
+            if (isset($this->postdata['fechaexpdoc_persona']) && ($this->postdata['fechaexpdoc_persona'] === '' || $this->postdata['fechaexpdoc_persona'] === '0000/00/00')) {
+                unset($this->postdata['fechaexpdoc_persona']);
+            }
             $this->idpersona = $this->postdata['id_persona'];
             $this->setData();
         }
@@ -88,7 +91,7 @@ class Personas extends ReportsBank {
         }
         return null;
     }
-    
+
     public function deletePersona() {
         if (isset($this->postdata[$this->findby])) {
             $this->setData();

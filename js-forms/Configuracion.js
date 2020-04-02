@@ -276,9 +276,9 @@ function ValidarPorcentajesComponentes() {
     var cog = document.getElementById('porcentajecognitivo_configuracion');
     var pro = document.getElementById('porcentajeprocedimental_configuracion');
     var act = document.getElementById('porcentajeactitudinal_configuracion');
-    cog=parseFloat(cog.value);
-    pro=parseFloat(pro.value);
-    act=parseFloat(act.value);
+    cog = parseFloat(cog.value);
+    pro = parseFloat(pro.value);
+    act = parseFloat(act.value);
     if (parseFloat(cog + pro + act) !== 100) {
         alert('La Suma de los Porcentajes de los Componentes debe ser Igual a 100%.');
         return false;
@@ -295,7 +295,7 @@ function MostrarLogo() {
     idescuela = document.getElementById('id_escuela');
     logo = document.getElementById('logo_configuracion');
     logo.value = 'Escuela' + idescuela.value + '.png';
-    window.open("UploadImageForm.html?prefix=Escuela" + "&id=" + idescuela.value + "&img=" + logo.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
+    window.open(getWSPath() + "UploadImageForm.html?prefix=Escuela" + "&id=" + idescuela.value + "&img=" + logo.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
 }
 
 function SendConfiguracion() {

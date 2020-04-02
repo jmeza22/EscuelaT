@@ -27,7 +27,7 @@ function MostrarImagen() {
     var id = ''
     var nameimage = null;
     nameimage = document.getElementById('imagen_lectura');
-    window.open("UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + nameimage.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
+    window.open(getWSPath() + "UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + nameimage.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
 }
 
 function LoadTable() {

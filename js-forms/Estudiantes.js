@@ -96,13 +96,13 @@ function BuscarEstudianteActivo() {
 }
 
 function CargarFrameFoto() {
-    var prefix="Estudiante";
+    var prefix = "Estudiante";
     var form0 = document.getElementById("form0");
     var idestudiante = getElement(form0, "id_estudiante");
     var frameFoto = document.getElementById("frameFoto");
     var foto = document.getElementById("foto_estudiante");
     foto.value = prefix + idestudiante.value + ".jpg";
-    frameFoto.src = "UploadImageForm.html?prefix="+prefix+"&id=" + idestudiante.value + "&img=" + foto.value;
+    frameFoto.src = getWSPath() + "UploadImageForm.html?prefix=" + prefix + "&id=" + idestudiante.value + "&img=" + foto.value;
 }
 
 function EditPersona(item) {

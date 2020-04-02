@@ -32,13 +32,13 @@ function LoadPersona() {
     persona = document.getElementById("lista_id_persona");
     periodo = document.getElementById("id_periodo");
     gradominimo = document.getElementById("gradominimo_cargo");
-    
+
     persona.innerHTML = '<option value="">Ninguna</option>';
-    persona.setAttribute('findby1','id_periodo');
-    persona.setAttribute('findbyvalue1',periodo.value);
-    persona.setAttribute('findby2','numgrado_programa');
-    persona.setAttribute('findbyvalue2',gradominimo.value);
-    
+    persona.setAttribute('findby1', 'id_periodo');
+    persona.setAttribute('findbyvalue1', periodo.value);
+    persona.setAttribute('findby2', 'numgrado_programa');
+    persona.setAttribute('findbyvalue2', gradominimo.value);
+
     loadComboboxData(persona);
 }
 
@@ -49,13 +49,13 @@ function LoadTable() {
 
 function CargarFrameFoto() {
     console.log('Cargando Margo de Foto!.');
-    var prefix="Candidato";
+    var prefix = "Candidato";
     var form0 = document.getElementById("form0");
     var idestudiante = getElement(form0, "id_persona");
     var frameFoto = document.getElementById("frameFoto");
     var foto = document.getElementById("foto_candidato");
     foto.value = prefix + idestudiante.value + ".jpg";
-    frameFoto.src = "UploadImageForm.html?prefix="+prefix+"&id=" + idestudiante.value + "&img=" + foto.value;
+    frameFoto.src = getWSPath() + "UploadImageForm.html?prefix=" + prefix + "&id=" + idestudiante.value + "&img=" + foto.value;
 }
 
 function Send(item) {

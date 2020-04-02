@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
+    var imgcandidato = document.getElementById("imgcandidato");
+    imgcandidato.src = getWSPath() + "ImageFiles/{{foto_candidato}}";
     LoadEleccion();
     LoadCargo();
 });

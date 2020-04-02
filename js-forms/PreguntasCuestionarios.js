@@ -93,7 +93,7 @@ function MostrarImagenPregunta() {
         if (imagen.value === '') {
             imagen.value = 'Pregunta' + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + '.jpg';
         }
-        window.open("UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + imagen.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
+        window.open(getWSPath() + "UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + imagen.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
     }
 }
 
@@ -106,7 +106,7 @@ function MostrarImagenOpcionRespuesta() {
         if (imagen.value === '') {
             imagen.value = 'OpcionRespuesta' + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + '.jpg';
         }
-        window.open("UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + imagen.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
+        window.open(getWSPath() + "UploadImageForm.html?prefix=" + prefix + "&id=" + id + "&img=" + imagen.value + "", "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
     }
 }
 
