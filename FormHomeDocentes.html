@@ -56,50 +56,50 @@ and open the template in the editor.
                                 <td> {{id_periodo}} </td>
                                 <td>
                                     <form id="Carga{{id_carga}}" name="Carga{{id_carga}}" method="GET" autocomplete="off" action="FormCalificaciones.html" model="CalificacionesApp">
-                                        <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
-                                        <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
-                                        <input type="hidden"  editable="false" name="id_corte" id="id_corte" value="{{id_corte}}" >
-                                        <input type="hidden"  editable="false" name="num_corte" id="num_corte" value="{{num_corte}}" >
-                                        <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
-                                        <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
-                                        <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
-                                        <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
+                                        <input type="hidden" name="id_carga" id="id_carga" value="{{id_carga}}" >
+                                        <input type="hidden" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
+                                        <input type="hidden" name="id_corte" id="id_corte" value="{{id_corte}}" >
+                                        <input type="hidden" name="num_corte" id="num_corte" value="{{num_corte}}" >
+                                        <input type="hidden" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <input type="hidden" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
+                                        <input type="hidden" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
+                                        <input type="hidden" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
                                         <button type="submit" name="VerPlanilla" id="VerPlanilla" class="btn btn-xs btn-info" title="Planilla de Calificaciones para Periodo Seleccionado.">Planilla</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form id="Asistencia{{id_carga}}" name="Asistencia{{id_carga}}" method="GET" autocomplete="off" action="FormAsistencia.html" model="AsistenciaApp">
-                                        <input type="hidden"  editable="false" name="id_carga" id="id_carga" value="{{id_carga}}" >
-                                        <input type="hidden"  editable="false" name="id_programa" id="id_programa" value="{{id_programa}}" >
-                                        <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
-                                        <input type="hidden"  editable="false" name="id_corte" id="id_corte" value="{{id_corte}}" >
-                                        <input type="hidden"  editable="false" name="num_corte" id="num_corte" value="{{num_corte}}" >
-                                        <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
-                                        <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
-                                        <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
-                                        <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
+                                        <input type="hidden" name="id_carga" id="id_carga" value="{{id_carga}}" >
+                                        <input type="hidden" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
+                                        <input type="hidden" name="id_corte" id="id_corte" value="{{id_corte}}" >
+                                        <input type="hidden" name="num_corte" id="num_corte" value="{{num_corte}}" >
+                                        <input type="hidden" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <input type="hidden" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
+                                        <input type="hidden" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
+                                        <input type="hidden" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
                                         <button type="submit" name="VerAsistencia" id="VerAsistencia" class="btn btn-xs btn-default" title="Planilla de Asistencia Diaria">Asistencia</button>
                                     </form>
                                 </td>
                                 <td>  
                                     <form id="Informes{{id_carga}}" name="Informes{{id_carga}}" method="POST" autocomplete="off" action="Base/Controllers/InformesController.php" url="Base/Controllers/InformesController.php" model="CalificacionesApp" target="_blank">
-                                        <input type="hidden"  editable="false" name="tipo_informe" id="tipo_informe" value="Completo" >
-                                        <input type="hidden"  editable="false" name="id_programa" id="id_programa" value="{{id_programa}}" >
-                                        <input type="hidden"  editable="false" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
-                                        <input type="hidden"  editable="false" name="id_corte" id="id_corte" value="{{id_corte}}" >
-                                        <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
-                                        <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
+                                        <input type="hidden" name="tipo_informe" id="tipo_informe" value="Completo" >
+                                        <input type="hidden" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
+                                        <input type="hidden" name="id_corte" id="id_corte" value="{{id_corte}}" >
+                                        <input type="hidden" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <input type="hidden" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >
                                         <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-xs btn-primary" title="Boletines de Calificaciones en PDF." >Generar PDF</button>        
                                     </form>
                                 </td>
                                 <td>  
                                     <form id="Actividad{{id_carga}}" name="Actividad{{id_carga}}" method="GET" autocomplete="off" action="FormActividadesVirtuales.html" url="FormActividadesVirtuales.html" model="" >
-                                        <input type="hidden"  editable="false" name="id_docente" id="id_docente" value="{{id_docente}}" >
-                                        <input type="hidden"  editable="false" name="nombrecompleto_docente" id="nombrecompleto_docente" value="{{nombrecompleto_docente}}" >
-                                        <input type="hidden"  editable="false" name="id_programa" id="id_programa" value="{{id_programa}}" >
-                                        <input type="hidden"  editable="false" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
-                                        <input type="hidden"  editable="false" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
-                                        <input type="hidden"  editable="false" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
+                                        <input type="hidden" name="id_docente" id="id_docente" value="{{id_docente}}" >
+                                        <input type="hidden" name="nombrecompleto_docente" id="nombrecompleto_docente" value="{{nombrecompleto_docente}}" >
+                                        <input type="hidden" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <input type="hidden" name="id_asignatura" id="id_asignatura" value="{{id_asignatura}}" >
+                                        <input type="hidden" name="nombre_asignatura" id="nombre_asignatura" value="{{nombre_asignatura}}" >
                                         <button type="submit" name="VerActividades" id="VerActividades" class="btn btn-xs btn-default" title="Actividades Virtuales para este Grupo.">Actividades</button>
                                     </form>
                                 </td>

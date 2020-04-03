@@ -5,11 +5,12 @@ include_once 'Others/UploadDocument.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'ActividadesVirtualesApp';
-$findBy = 'id_actividad';
+$model = 'SolucionesActividadesVirtualesApp';
+$findBy = 'id_solucion';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() == 1)) {
+$fecha = date('Y-m-d H:i:s');
+if ($session->hasLogin() && $session->checkToken() && ($session->getUserType() === 'Student')) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
@@ -18,11 +19,10 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setFindBy($findBy);
         $bc->setAction($action);
         $postdata = $bc->getPostData();
-        $postdata['fechadesde_actividad'] = str_replace('00:00:00', '00:00:01', $postdata['fechadesde_actividad']);
-        $postdata['fechahasta_actividad'] = str_replace('00:00:00', '23:59:59', $postdata['fechahasta_actividad']);
-        if ($_POST['id_actividad'] === '' || $_POST['id_actividad'] === '0') {
-            $postdata['id_escuela'] = $session->getEnterpriseID();
-            $postdata['id_docente'] = $session->getUserID();
+        $postdata['fechahora_solucion'] = $fecha;
+        $postdata['id_escuela'] = $session->getEnterpriseID();
+        if ($_POST['id_estudiante'] === '' || $_POST['id_estudiante'] === '0') {
+            $postdata['id_estudiante'] = $session->getUserID();
         }
         $bc->setPostData($postdata);
         if (isset($_POST['action']) && $_POST['action'] === 'find') {
@@ -34,7 +34,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             $upload = new UploadDocument();
             $upload->setURL('../../DocumentFiles/');
             $upload->setFileName('document-file');
-            $upload->setFullName($_POST['documento_actividad']);
+            $upload->setFullName($_POST['documento_solucion']);
             $upload->Upload();
         }
         $bc->disconnect();

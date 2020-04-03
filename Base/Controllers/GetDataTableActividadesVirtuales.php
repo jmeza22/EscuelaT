@@ -20,12 +20,16 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     if (isset($arraywhere['id_asignatura'])) {
         $idasignatura = $arraywhere['id_asignatura'];
     }
-    
+
     $iddocente = null;
     if (isset($arraywhere['id_docente'])) {
         $iddocente = $arraywhere['id_docente'];
+    } else {
+        if ($session->getUserType() === 'Teacher') {
+            $iddocente = $session->getUserID();
+        }
     }
-    
+
     $numgrado = null;
     if (isset($arraywhere['numgrado_programa'])) {
         $grado = $arraywhere['numgrado_programa'];

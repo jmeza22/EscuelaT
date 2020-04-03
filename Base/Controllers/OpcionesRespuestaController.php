@@ -7,10 +7,10 @@ $result = null;
 $model = 'OpcionesRespuestaApp';
 $findBy = 'id_opcionrespuesta';
 $action = 'insertorupdate';
-if ($session->hasLogin() && $session->checkToken() && ($session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1 || $session->getUserType() === 'Teacher')) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         if (isset($_POST['imagen_opcionrespuesta']) && $_POST['imagen_opcionrespuesta'] !== '') {
-            if (!file_exists('../../ImageFiles/'.$_POST['imagen_opcionrespuesta'])) {
+            if (!file_exists('../../ImageFiles/' . $_POST['imagen_opcionrespuesta'])) {
                 $_POST['imagen_opcionrespuesta'] = '';
             }
         }

@@ -43,8 +43,9 @@ and open the template in the editor.
                                 <th columntype="html-num" style="width: 5%;" title="Grado">Grado</th>
                                 <th columntype="html" style="width: 5%;" title="Codigo de Grupo">Grupo</th>
                                 <th columntype="html" style="width: 5%;" title="Año">Año</th>
-                                <th columntype="html" style="width: 70%;" title="Nombre del Estudiante">Nombre Completo</th>
+                                <th columntype="html" style="width: 65%;" title="Nombre del Estudiante">Nombre Completo</th>
                                 <th columntype="html" style="width: 5%; min-width: 32px !important;">Calificaciones</th>
+                                <th columntype="html" style="width: 5%; min-width: 32px !important;">A. Virtuales</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -57,11 +58,22 @@ and open the template in the editor.
                                 <td> <label>{{nombrecompleto_estudiante}}</label> </td>
                                 <td>
                                     <form id="Matriculas{{id_matricula}}" name="Matriculas{{id_matricula}}" method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php"  model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula">
-                                        <input type="hidden"  editable="false" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
-                                        <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
-                                        <button type="button" name="VerNot" id="VerNot" class="btn btn-xs btn-warning icon-button" onclick="VerNotas(this);"><i class="glyphicon glyphicon-search"></i></button>
+                                        <input type="hidden" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
+                                        <input type="hidden" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
+                                        <button type="button" name="VerNot" id="VerNot" class="btn btn-xs btn-info icon-button" onclick="VerNotas(this);"><i class="glyphicon glyphicon-search"></i></button>
                                     </form>
                                 </td>
+                                <td>
+                                    <form id="Virtuales{{id_matricula}}" name="Virtuales{{id_matricula}}" method="GET" autocomplete="off" action="ListingActividadesVirtuales.html" >
+                                        <input type="hidden" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
+                                        <input type="hidden" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
+                                        <input type="hidden" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden" name="nombre_programa" id="nombre_programa" value="{{nombre_programa}}" >
+                                        <input type="hidden" name="numgrado_programa" id="numgrado_programa" value="{{numgrado_programa}}" >
+                                        <button type="submit" name="VerActividades" id="VerActividades" class="btn btn-xs btn-default icon-button" ><i class="glyphicon glyphicon-dashboard"></i></button>
+                                    </form>
+                                </td>
+
                             </tr>
                         </tbody>
                     </table>

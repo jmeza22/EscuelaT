@@ -42,29 +42,31 @@ function Send(item) {
 }
 
 function BuscarEstudiante() {
-    CopiarCodigo();
-    var formP = document.getElementById("formP");
-    var formE = document.getElementById("formE");
-    var idpersona = null;
-    var idestudiante = null;
-    var idaux = null;
-    if (formE !== undefined && formE !== null) {
-        idpersona = getElement(formP, 'id_persona');
-        idestudiante = getElement(formE, 'id_estudiante');
-        if (idpersona !== undefined && idpersona.value !== '') {
-            idaux = idpersona.value;
-            resetForm(formE);
-            idpersona.value = idaux;
-            idestudiante.value = idaux;
-            document.getElementById('id_tipousuario').value = 'Student';
-            getFormData(formP);
-            getFormData(formE).done(function () {
-                CopiarCodigoEstudianteAnotacion();
-                CopiarCodigoEstudianteCitacion();
-                LoadTableAnotaciones();
-                LoadTableCitaciones();
-                CargarFrameFoto();
-            });
+    if (getUserRoleLogin() !== null && getUserRoleLogin() !== 'Student') {
+        CopiarCodigo();
+        var formP = document.getElementById("formP");
+        var formE = document.getElementById("formE");
+        var idpersona = null;
+        var idestudiante = null;
+        var idaux = null;
+        if (formE !== undefined && formE !== null) {
+            idpersona = getElement(formP, 'id_persona');
+            idestudiante = getElement(formE, 'id_estudiante');
+            if (idpersona !== undefined && idpersona.value !== '') {
+                idaux = idpersona.value;
+                resetForm(formE);
+                idpersona.value = idaux;
+                idestudiante.value = idaux;
+                document.getElementById('id_tipousuario').value = 'Student';
+                getFormData(formP);
+                getFormData(formE).done(function () {
+                    CopiarCodigoEstudianteAnotacion();
+                    CopiarCodigoEstudianteCitacion();
+                    LoadTableAnotaciones();
+                    LoadTableCitaciones();
+                    CargarFrameFoto();
+                });
+            }
         }
     }
 }

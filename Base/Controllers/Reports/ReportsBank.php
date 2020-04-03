@@ -515,53 +515,55 @@ class ReportsBank extends BasicController {
     public function getMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null, $fechamatricula = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT * FROM MatriculasApp WHERE status_matricula=1 ";
+        $sql = "SELECT M.*, Pr.nombre_programa FROM MatriculasApp M "
+                . " INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa"
+                . " WHERE status_matricula=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;
-            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+            $sql = $sql . " AND M.id_escuela=:p_id_escuela ";
         }
         if ($idsede !== null) {
             $arraywhere['p_id_sede'] = $idsede;
-            $sql = $sql . " AND id_sede=:p_id_sede ";
+            $sql = $sql . " AND M.id_sede=:p_id_sede ";
         }
         if ($idjornada !== null) {
             $arraywhere['p_id_jornada'] = $idjornada;
-            $sql = $sql . " AND id_jornada=:p_id_jornada ";
+            $sql = $sql . " AND M.id_jornada=:p_id_jornada ";
         }
         if ($idprograma !== null) {
             $arraywhere['p_id_programa'] = $idprograma;
-            $sql = $sql . " AND id_programa=:p_id_programa ";
+            $sql = $sql . " AND M.id_programa=:p_id_programa ";
         }
         if ($idplanestudio !== null) {
             $arraywhere['p_id_planestudio'] = $idplanestudio;
-            $sql = $sql . " AND id_planestudio=:p_id_planestudio ";
+            $sql = $sql . " AND M.id_planestudio=:p_id_planestudio ";
         }
         if ($numgrado !== null) {
             $arraywhere['p_num_grado'] = $numgrado;
-            $sql = $sql . " AND numgrado_programa=:p_num_grado ";
+            $sql = $sql . " AND M.numgrado_programa=:p_num_grado ";
         }
         if ($idgrupo !== null) {
             $arraywhere['p_id_grupo'] = $idgrupo;
-            $sql = $sql . " AND id_grupo=:p_id_grupo ";
+            $sql = $sql . " AND M.id_grupo=:p_id_grupo ";
         }
         if ($idperiodo !== null) {
             $arraywhere['p_id_periodo'] = $idperiodo;
-            $sql = $sql . " AND id_periodo=:p_id_periodo ";
+            $sql = $sql . " AND M.id_periodo=:p_id_periodo ";
         }
         if ($idestudiante !== null) {
             $arraywhere['p_id_estudiante'] = $idestudiante;
-            $sql = $sql . " AND id_estudiante=:p_id_estudiante ";
+            $sql = $sql . " AND M.id_estudiante=:p_id_estudiante ";
         }
         if ($idmatricula !== null) {
             $arraywhere['p_id_matricula'] = $idmatricula;
-            $sql = $sql . " AND id_matricula=:p_id_matricula ";
+            $sql = $sql . " AND M.id_matricula=:p_id_matricula ";
         }
         if ($fechamatricula !== null) {
             $arraywhere['p_fecha_matricula'] = $fechamatricula;
             $sql = $sql . " AND fecha_matricula=:p_fecha_matricula ";
         }
-        $sql = $sql . " ORDER BY fecha_matricula DESC, CAST(numgrado_programa AS DECIMAL) ";
+        $sql = $sql . " ORDER BY M.fecha_matricula DESC, CAST(M.numgrado_programa AS DECIMAL) ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -1451,33 +1453,63 @@ class ReportsBank extends BasicController {
     public function getActividadesVirtuales($idescuela = null, $idprograma = null, $idasignatura = null, $iddocente = null, $numgrado = null, $idactividad = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT * FROM ActividadesVirtualesApp WHERE status_actividad=1 ";
+        $sql = "SELECT AV.*, Pr.nombre_programa, A.nombre_asignatura "
+                . " FROM ActividadesVirtualesApp AV "
+                . " INNER JOIN ProgramasApp Pr ON AV.id_programa=Pr.id_programa "
+                . " INNER JOIN AsignaturasApp A ON AV.id_asignatura=A.id_asignatura "
+                . " WHERE status_actividad=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;
-            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+            $sql = $sql . " AND AV.id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
             $arraywhere['p_id_programa'] = $idprograma;
-            $sql = $sql . " AND id_programa=:p_id_programa ";
+            $sql = $sql . " AND AV.id_programa=:p_id_programa ";
         }
         if ($idasignatura !== null) {
             $arraywhere['p_id_asignatura'] = $idasignatura;
-            $sql = $sql . " AND id_asignatura=:p_id_asignatura ";
+            $sql = $sql . " AND AV.id_asignatura=:p_id_asignatura ";
         }
         if ($iddocente !== null) {
             $arraywhere['p_id_docente'] = $iddocente;
-            $sql = $sql . " AND id_docente=:p_id_docente ";
+            $sql = $sql . " AND AV.id_docente=:p_id_docente ";
         }
         if ($numgrado !== null) {
             $arraywhere['p_num_grado'] = $numgrado;
-            $sql = $sql . " AND numgrado_programa=:p_num_grado ";
+            $sql = $sql . " AND AV.numgrado_programa=:p_num_grado ";
         }
         if ($idactividad !== null) {
             $arraywhere['p_id_actividad'] = $idactividad;
-            $sql = $sql . " AND id_actividad=:p_id_actividad ";
+            $sql = $sql . " AND AV.id_actividad=:p_id_actividad ";
         }
         $sql = $sql . " ORDER BY id_escuela, id_programa, id_actividad DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getSolucionesActividadesVirtuales($idactividad = null, $idestudiante = null, $idsolucion = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT OE.nombrecompleto_estudiante, SA.*, AV.* "
+                . " FROM SolucionesActividadesVirtualesApp SA "
+                . " INNER JOIN ActividadesVirtualesApp AV ON SA.id_actividad=AV.id_actividad "
+                . " INNER JOIN ObervadorEstudianteApp OE ON SA.id_estudiante=OE.id_estudiante "
+                . " WHERE SA.status_solucion=1";
+        $arraywhere = Array();
+        if ($idactividad !== null) {
+            $arraywhere['p_id_actividad'] = $idactividad;
+            $sql = $sql . " AND SA.id_actividad=:p_id_actividad ";
+        }
+        if ($idestudiante !== null) {
+            $arraywhere['p_id_estudiante'] = $idestudiante;
+            $sql = $sql . " AND SA.id_estudiante=:p_id_estudiante ";
+        }
+        if ($idsolucion !== null) {
+            $arraywhere['p_id_solucion'] = $idsolucion;
+            $sql = $sql . " AND SA.id_solucion=:p_id_solucion ";
+        }
+        $sql = $sql . " ORDER BY SA.id_actividad, SA.id_estudiante, SA.id_solucion DESC ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

@@ -1,6 +1,5 @@
 <?php
 
-
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -21,9 +20,11 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $arraywhere = $bc->parseFindByToArray($_POST);
     $arraywhere['status_cuestionario'] = '1';
     $arraywhere['activo_cuestionario'] = '1';
-    $arraywhere['id_escuela'] = ''.$session->getEnterpriseID();
+    $arraywhere['id_escuela'] = '' . $session->getEnterpriseID();
+    if ($session->getUserType() === 'Teacher') {
+        $arraywhere['usuario_crea'] = $session->getNickname();
+    }
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, null, $arraywhere);
     $bc->disconnect();
 }
-
 ?>

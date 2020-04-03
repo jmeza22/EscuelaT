@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Actividades Virtuales</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Actividades Virtuales"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-listings/ActividadesVirtuales.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 90% !important;">
+            <div class="panel-heading">Parametros Actividades Virtuales</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" model="ActividadesVirtualesApp" findBy="id_actividad" mainform="true" enctype="multipart/form-data" >
+                    <input type="hidden" name="id_programa" id="id_programa" value="" >
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <label>Programa</label>
+                            <input type="text" name="nombre_programa" id="nombre_programa" value="0" readonly="readonly" maxlength="24" required="required" class="form-control" title="Codigo de Programa" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grado</label>
+                            <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" readonly="readonly" class="form-control" title="Grado">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="panel panel-primary" style="width: 90% !important;">
+            <div class="panel-heading">Listado de Actividades Virtuales</div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered" model="ActividadesVirtualesApp" url="Base/Controllers/GetDataTableActividadesVirtuales.php" >
+                        <thead id="thead_dataTable0">
+                            <tr headrow="true">
+                                <th style="width: 26%;" title="Asignatura">Asignatura</th>
+                                <th style="width: 4%;" title="Codigo">Codigo</th>
+                                <th style="width: 34%;">Nombre.Actividad</th>
+                                <th style="width: 14%;">Fecha.Desde</th>
+                                <th style="width: 14%;">Fecha.Hasta</th>
+                                <th style="width: 6%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="samplerow" samplerow="true" style="display: none;">
+                                <td> <b>{{nombre_asignatura}}</b> </td>
+                                <td> {{id_actividad}}</td>
+                                <td> <b>{{nombre_actividad}}</b> </td>
+                                <td> {{fechadesde_actividad}} </td>
+                                <td> {{fechahasta_actividad}} </td>
+                                <td>
+                                    <form id="Actividad{{id_actividad}}" name="Actividad{{id_actividad}}" method="GET" autocomplete="off" action="">
+                                        <input type="hidden" name="id_estudiante" id="id_estudiante" value="" >
+                                        <input type="hidden"  editable="false" name="id_actividad" id="id_actividad" value="{{id_actividad}}" >
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

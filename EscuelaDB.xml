@@ -2733,6 +2733,10 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
         <Cm>Codigo de Estudiante</Cm>
       </Cl>
+      <Cl au="0" df="" nm="texto_solucion" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+        <Cm>Solucion en Texto plano</Cm>
+      </Cl>
       <Cl au="0" df="" nm="fechahora_solucion" nu="0">
         <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
@@ -2760,6 +2764,10 @@
         <CdTb mn="1" nm="SolucionesActividadesVirtualesApp" oe="0" sch="EscuelaDB" zr="1"/>
         <ClPr cdCl="id_estudiante" prCl="id_estudiante"/>
       </Fk>
+      <Idx clu="0" ftx="0" nm="SolucionesActividadesVirtualesApp_Unique_Idx" spa="0" unq="1">
+        <ClNs>id_actividad, id_estudiante</ClNs>
+        <OptTx/>
+      </Idx>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>

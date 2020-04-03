@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
+    var link = document.getElementById("linkDocumento");
+    var oldhref = link.href;
+    link.href = getWSPath() + 'DocumentFiles/{{documento_actividad}}';
     setDatosEncabezado();
     LoadTable();
 });
