@@ -9,23 +9,25 @@ $model = 'ActividadesVirtualesApp';
 $findBy = 'id_actividad';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() == 1)) {
-    if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
+if ($session->hasLogin() && $session->checkToken()) {
+    if (isset($_POST['action']) && isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();
         $bc->setModel($model);
         $bc->setFindBy($findBy);
-        $bc->setAction($action);
         $postdata = $bc->getPostData();
-        $postdata['fechadesde_actividad'] = str_replace('00:00:00', '00:00:01', $postdata['fechadesde_actividad']);
-        $postdata['fechahasta_actividad'] = str_replace('00:00:00', '23:59:59', $postdata['fechahasta_actividad']);
-        if ($_POST['id_actividad'] === '' || $_POST['id_actividad'] === '0') {
-            $postdata['id_escuela'] = $session->getEnterpriseID();
-            $postdata['id_docente'] = $session->getUserID();
+        if ($_POST['action'] === 'insertorupdate' && ($session->getUserType() === 'Teacher' || $session->getStandard() === 1 || $session->getSuperAdmin() === 1)) {
+            $bc->setAction($action);
+            $postdata['fechadesde_actividad'] = str_replace('00:00:00', '00:00:01', $postdata['fechadesde_actividad']);
+            $postdata['fechahasta_actividad'] = str_replace('00:00:00', '23:59:59', $postdata['fechahasta_actividad']);
+            if ($_POST['id_actividad'] === '' || $_POST['id_actividad'] === '0') {
+                $postdata['id_escuela'] = $session->getEnterpriseID();
+                $postdata['id_docente'] = $session->getUserID();
+            }
         }
         $bc->setPostData($postdata);
-        if (isset($_POST['action']) && $_POST['action'] === 'find') {
+        if ($_POST['action'] === 'find') {
             $bc->setAction('find');
         }
         $result = null;

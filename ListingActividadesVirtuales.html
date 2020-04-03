@@ -48,7 +48,7 @@ and open the template in the editor.
                 </form>
             </div>
         </div>
-        
+
         <div class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Listado de Actividades Virtuales</div>
             <div class="panel-body">
@@ -73,9 +73,10 @@ and open the template in the editor.
                                 <td> {{fechadesde_actividad}} </td>
                                 <td> {{fechahasta_actividad}} </td>
                                 <td>
-                                    <form id="Actividad{{id_actividad}}" name="Actividad{{id_actividad}}" method="GET" autocomplete="off" action="">
+                                    <form id="Actividad{{id_actividad}}" name="Actividad{{id_actividad}}" method="GET" autocomplete="off" action="FormSolucionesActividadesVirtuales.html">
                                         <input type="hidden" name="id_estudiante" id="id_estudiante" value="" >
                                         <input type="hidden"  editable="false" name="id_actividad" id="id_actividad" value="{{id_actividad}}" >
+                                        <button type="submit" name="VerSolucion" id="VerSolucion" class="btn btn-xs btn-default" title="Solucion">Resolver</button>
                                     </form>
                                 </td>
                             </tr>

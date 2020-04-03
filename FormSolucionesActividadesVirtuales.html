@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Actividades Virtuales</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Actividades Virtuales"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/SolucionesActividadesVirtuales.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 90% !important;">
+            <div class="panel-heading">Actividad Virtual</div>
+            <div class="panel-body" >
+                <form id="formActividades" method="POST" autocomplete="off" url="Base/Controllers/ActividadesVirtualesController.php" model="ActividadesVirtualesApp" findBy="id_actividad" >
+                    <input type="hidden" id="id_actividad" name="id_actividad" required="required">
+                    <input type="hidden" id="documento_actividad" name="documento_actividad" value="">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Nombre de Actividad</label>
+                            <input type="text" name="nombre_actividad" id="nombre_actividad" disabled="disabled" value="" maxlength="100" required="required" class="form-control" title="Nombre o Titulo de la Actividad" >
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Asignatura</label>
+                            <input type="text" name="id_asignatura" id="id_asignatura" disabled="disabled" value="" maxlength="200" class="form-control" title="Nombre de Asignatura">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grado</label>
+                            <input type="text" name="numgrado_programa" id="numgrado_programa" disabled="disabled" value="" maxlength="2" required="required" readonly="readonly" class="form-control" title="Grado">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Activo hasta</label>
+                            <input type="datetime" name="fechahasta_actividad" id="fechahasta_actividad" disabled="disabled" value="" maxlength="19" required="required" class="form-control" title="La Actividad estará disponible hasta esta fecha.">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <label>Descripcion de Actividad</label>
+                            <textarea id="descripcion_actividad" name="descripcion_actividad" readonly="readonly" spellcheck="spellcheck" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                        </div>
+                        <div class="col-sm-2">
+                            <center>
+                                <label>Documento</label>
+                                <a id="linkDocumento" href="" target="_blank" title="Descargar Archivo Guia de la Actividad">
+                                    <button type="button" id="VerDocumento" class="btn btn-lg btn-success" style="font-size: 42pt;">
+                                        <i class="glyphicon glyphicon-file"></i>
+                                    </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="width: 90% !important;">
+            <div class="panel-heading">Solucion</div>
+            <div class="panel-body" >
+                <form id="formSoluciones" method="POST" autocomplete="off" url="Base/Controllers/SolucionesActividadesVirtualesController.php" model="SolucionesActividadesVirtualesApp" findBy="id_solucion" >
+                    <input type="hidden" id="id_solucion" name="id_solucion" value="">
+                    <input type="hidden" id="id_actividad" name="id_actividad" required="required">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>Estudiante</label>
+                            <input type="text" id="id_estudiante" name="id_estudiante" required="required" readonly="readonly" value="" class="form-control">
+                        </div>
+                        <div class="col-sm-8">
+                            <label>Mensaje al Docente</label>
+                            <textarea id="texto_solucion" name="texto_solucion" spellcheck="spellcheck" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 30px !important;"></textarea>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Fecha</label>
+                            <input type="datetime" id="fechahora_solucion" name="fechahora_solucion" readonly="readonly" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Retroalimentacion hecha por Docente</label>
+                            <textarea id="retroalimentacion_solucion" name="retroalimentacion_solucion" readonly="readonly" spellcheck="spellcheck" maxlength="500" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

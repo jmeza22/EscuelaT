@@ -68,12 +68,12 @@ class UploadDocument {
         return $this->name;
     }
 
-    public function Delete($image = null) {
+    public function Delete($document = null) {
         $result = false;
-        if ($image == null) {
+        if ($document == null) {
             $output_path = $this->url . $this->name;
         } else {
-            $output_path = $this->url . $image;
+            $output_path = $this->url . $document;
         }
         if (file_exists($output_path)) {
             $result = unlink($output_path);
