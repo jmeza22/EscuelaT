@@ -38,7 +38,7 @@ and open the template in the editor.
         <div class="panel panel-primary" style="width: 80% !important;">
             <div class="panel-heading">Subir Documento</div>
             <div class="panel-body" >
-                <form id="formUpload" action="UploadDocumentController.php" method="POST" enctype="multipart/form-data">
+                <form id="formUpload" url="Base/Controllers/UploadDocumentController.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" alphanumeric="true" name="prefix_document" id="prefix_document" value="" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
                     <input type="hidden" alphanumeric="true" name="name_document" id="name_document" value="" readonly="readonly" maxlength="100" class="form-control" title="Nombre Documento">
                     <div class="row">
@@ -46,7 +46,7 @@ and open the template in the editor.
                             <center>
                                 <div class="">
                                     <center>
-                                        <input type="file" name="document-file" id="document-file" class="document-file" accept=".pdf, .txt, .doc, .docx, .ppt, .pptx, .xls, .xlsx" required="required" onchange="" title="Click para Cambiar Documento." />
+                                        <input type="file" form="formUpload" name="document-file" id="document-file" class="document-file" accept=".pdf, .txt, .doc, .docx, .ppt, .pptx, .xls, .xlsx" required="required" onchange="" title="Click para Cambiar Documento." />
                                     </center>
                                 </div>
                             </center>

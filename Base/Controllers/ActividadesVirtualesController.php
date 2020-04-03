@@ -28,7 +28,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         }
         $result = null;
         $result = $bc->execute(true);
-        if (isset($_FILES['document-file']) && $_POST['action'] === 'insertorupdate' && $bc->getRowCount() > 0) {
+        if (isset($_FILES['document-file']) && $_POST['action'] === 'insertorupdate') {
             $upload = new UploadDocument();
             $upload->setURL('../../DocumentFiles/');
             $upload->setFileName('document-file');

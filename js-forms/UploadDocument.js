@@ -57,10 +57,11 @@ function validateImage(item) {
 }
 
 function submitDocument(item) {
-    if (validateImage(item) === true) {
-        var myform = getForm(item);
+    var myform = getForm(item);
+    if (validateImage(myform) === true) {
         if (myform !== undefined && myform !== null) {
-            myform.submit();
+            submitForm(myform, false).done(function () {
+            });
         }
     }
 }

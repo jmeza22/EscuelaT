@@ -38,7 +38,7 @@ and open the template in the editor.
         <div class="panel panel-primary" style="width: 80% !important;">
             <div class="panel-heading">Subir Foto o Imagen</div>
             <div class="panel-body" >
-                <form id="formUpload" action="UploadImageController.php" method="POST" enctype="multipart/form-data">
+                <form id="formUpload" url="Base/Controllers/UploadImageController.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="prefix_image" id="prefix_image" value="NULL" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
                     <input type="hidden" name="name_image" id="name_image" value="NULL" readonly="readonly" maxlength="100" class="form-control" title="Nombre Imagen">
                     <div class="row">
@@ -47,7 +47,7 @@ and open the template in the editor.
                                 <div class="photo-panel">
                                     <center>
                                         <img name="image" id="image" class="image-photo" onclick="clickButton();" alt="Subir Foto" title="Click para Cambiar Foto." style="min-width: 180px !important; max-width: 600px !important;" />
-                                        <input type="file" name="image-file" id="image-file" class="image-file" accept="image/*" required="required" onchange="showMyImage(this)" title="Click para Cambiar Foto." />
+                                        <input type="file" form="formUpload" name="image-file" id="image-file" class="image-file" accept="image/*" required="required" onchange="showMyImage(this)" title="Click para Cambiar Foto." />
                                     </center>
                                 </div>
                             </center>

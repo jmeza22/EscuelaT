@@ -23,6 +23,7 @@ and open the template in the editor.
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/LoadImage.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
@@ -150,9 +151,9 @@ and open the template in the editor.
             <div class="panel-heading">Observador del Estudiante</div>
             <div class="panel-body table-responsive" >
 
-                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php" model="ObservadorEstudianteApp" findBy="id_estudiante" >
+                <form id="formE" method="POST" autocomplete="off" url="Base/Controllers/EstudiantesController.php" model="ObservadorEstudianteApp" findBy="id_estudiante" enctype="multipart/form-data" >
                     <input type="hidden" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
-                    <input type="hidden" name="foto_estudiante" id="foto_estudiante" value="" maxlength="200" required="required"  title="Fotografia de Estudiante" >
+                    <input type="hidden" name="foto_estudiante" id="foto_estudiante" value="" maxlength="200"  title="Fotografia de Estudiante" >
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="panel panel-default">
@@ -225,20 +226,33 @@ and open the template in the editor.
                                         </div>
                                         <div class="col-sm-3">
                                             <label>E.P.S</label>
-                                            <input type="text" name="eps_estudiante" id="eps_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="EPS o IPS (Salud)">
+                                            <input type="text" name="eps_estudiante" id="eps_estudiante" value="NO" maxlength="100" class="form-control" title="EPS o IPS (Salud)">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Estrato</label>
-                                            <input type="number" min="0" max="8" name="alergias_estudiante" id="alergias_estudiante" value="1" maxlength="100" required="required" class="form-control" title="Estrato SocioEconomico">
+                                            <input type="number" min="0" max="8" name="estrato_estudiante" id="estrato_estudiante" value="1" maxlength="100" class="form-control" title="Estrato SocioEconomico">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <iframe name="frameFoto" id="frameFoto" src="UploadImageForm.html" style="min-height: 430px !important; min-width: 100% !important;"></iframe>
+                        <div class="col-sm-4" style="min-height: available !important;">
+                            <div class="panel panel-default" style="min-height: 410px !important;">
+                                <div class="panel-heading">Foto de Perfil</div>
+                                <div class="panel-body" >
+                                    <center>
+                                        <div class="photo-panel">
+                                            <center>
+                                                <img name="image" id="image" class="image-photo" onclick="clickButton();" alt="Subir Foto" title="Click para Cambiar Foto." style="min-width: 180px !important; max-width: 600px !important;" />
+                                                <input type="file" form="formE" name="image-file" id="image-file" class="image-file" accept="image/*" required="required" onchange="showMyImage(this)" title="Click para Cambiar Foto." />
+                                            </center>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
 
                     <div class="panel panel-default">
                         <div class="panel-heading">Acudiente 1</div>
@@ -300,7 +314,7 @@ and open the template in the editor.
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
                             <center>
-                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante(this);" class="btn btn-primary" style="width: 200px;">Grabar</button>        
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante();" class="btn btn-primary" style="width: 200px;">Grabar</button>        
                             </center>
                         </div>
                     </div>

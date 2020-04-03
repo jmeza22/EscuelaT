@@ -1448,4 +1448,38 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getActividadesVirtuales($idescuela = null, $idprograma = null, $idasignatura = null, $iddocente = null, $numgrado = null, $idactividad = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM ActividadesVirtualesApp WHERE status_actividad=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND id_programa=:p_id_programa ";
+        }
+        if ($idasignatura !== null) {
+            $arraywhere['p_id_asignatura'] = $idasignatura;
+            $sql = $sql . " AND id_asignatura=:p_id_asignatura ";
+        }
+        if ($iddocente !== null) {
+            $arraywhere['p_id_docente'] = $iddocente;
+            $sql = $sql . " AND id_docente=:p_id_docente ";
+        }
+        if ($numgrado !== null) {
+            $arraywhere['p_num_grado'] = $numgrado;
+            $sql = $sql . " AND numgrado_programa=:p_num_grado ";
+        }
+        if ($idactividad !== null) {
+            $arraywhere['p_id_actividad'] = $idactividad;
+            $sql = $sql . " AND id_actividad=:p_id_actividad ";
+        }
+        $sql = $sql . " ORDER BY id_escuela, id_programa, id_actividad DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
 }

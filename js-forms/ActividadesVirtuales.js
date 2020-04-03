@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    LoadTable();
     setDatosEncabezado();
+    LoadTable();
 });
 
 function setDatosEncabezado() {
@@ -15,7 +15,6 @@ function setDatosEncabezado() {
     var idasignatura = null;
     var nomasignatura = null;
     var grado = null;
-    var table = document.getElementById("dataTable0");
     nombre = document.getElementById('nombrecompleto_docente');
     iddocente = document.getElementById('id_docente');
     idprograma = document.getElementById('id_programa');
@@ -28,15 +27,31 @@ function setDatosEncabezado() {
     idasignatura.value = GET('id_asignatura');
     nomasignatura.value = GET('nombre_asignatura');
     grado.value = GET('numgrado_programa');
-    setFindBy(table, iddocente.id, 1);
-    setFindByValue(table, iddocente.value, 1);
-    setFindBy(table, idasignatura.id, 2);
-    setFindByValue(table, idasignatura.value, 2);
-    setFindBy(table, grado.id, 3);
-    setFindByValue(table, grado.value, 3);
+    setFindBy();
+}
+
+function setFindBy() {
+    var iddocente = null;
+    var idprograma = null;
+    var idasignatura = null;
+    var grado = null;
+    var table = document.getElementById("dataTable0");
+    iddocente = document.getElementById('id_docente');
+    idprograma = document.getElementById('id_programa');
+    idasignatura = document.getElementById('id_asignatura');
+    grado = document.getElementById('numgrado_programa');
+    table.setAttribute('findby1', iddocente.id);
+    table.setAttribute('findbyvalue1', iddocente.value);
+    table.setAttribute('findby2', idprograma.id);
+    table.setAttribute('findbyvalue2', idprograma.value);
+    table.setAttribute('findby3', idasignatura.id);
+    table.setAttribute('findbyvalue3', idasignatura.value);
+    table.setAttribute('findby4', grado.id);
+    table.setAttribute('findbyvalue4', grado.value);
 }
 
 function LoadTable() {
+    setFindBy();
     var mytable = document.getElementById("dataTable0");
     loadTableData(mytable, false);
 }
@@ -48,7 +63,7 @@ function SendActividad() {
     var fecha = null;
     if (file.files.length > 0) {
         fecha = new Date();
-        doc.value = "A" + fecha.getFullYear() + (fecha.getMonth() + 1) + fecha.getDate() + "_" + file.files[0].name;
+        doc.value = "A" + fecha.getFullYear() + (fecha.getMonth() + 1) + fecha.getDate() + fecha.getHours() + fecha.getMinutes() + fecha.getMilliseconds() + "_" + file.files[0].name;
         console.log(doc.value);
     }
     if (validateForm(form)) {

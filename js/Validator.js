@@ -150,7 +150,20 @@ function validateDateDDMMYYYY(text) {
 }
 
 function validateDateYYYYMMDD(text) {
-    var pattern = /^(19|20)\d{2}\-(0[1-9]|1[0-2])\-(0[1-9]|[12]\d|3[01])$/;
+    var pattern = /^(19|20|21)\d{2}\-(0[1-9]|1[0-2])\-(0[1-9]|[12]\d|3[01])$/;
+    if (/^\s+$/.test(text)) {
+        return false;
+    }
+    if (!text.search(pattern)) {
+        return true;
+    } else {
+        return false;
+    }
+    return false;
+}
+
+function validateDateTimeYYYYMMDD(text) {
+    var pattern = /^(19|20|21)\d{2}\-(0[1-9]|1[0-2])\-(0[1-9]|[12]\d|3[01]) (00|[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])$/;
     if (/^\s+$/.test(text)) {
         return false;
     }
@@ -193,7 +206,7 @@ function validateForm(form) {
             for (j = 0; j < elements.length; j++) {
                 item = null;
                 item = elements[j];
-                if ((item.getAttribute('required') === 'true' || item.getAttribute('required') === 'required') && item.getAttribute('disabled') === null) {
+                if (item.getAttribute('required') !== undefined && (item.getAttribute('required') === 'true' || item.getAttribute('required') === 'required')) {
                     if (item.value === null || item.value === '') {
                         item.focus();
                         requireElement(item);
@@ -201,7 +214,7 @@ function validateForm(form) {
                         showAlert('Campo Vacio (' + item.id + '): Obligatorio');
                         break;
                     }
-                    if (item.getAttribute('type') === 'text') {
+                    if (item.getAttribute('type') !== undefined && item.getAttribute('type') !== undefined && item.getAttribute('type') !== undefined && item.getAttribute('type') === 'text') {
                         if (!validateText(item.value)) {
                             item.focus();
                             next = false;
@@ -209,31 +222,7 @@ function validateForm(form) {
                             break;
                         }
                     }
-                    if (item.getAttribute("alphabetic") === 'true') {
-                        if (!validateAlphabetic(item.value)) {
-                            item.focus();
-                            next = false;
-                            showAlert('Formato Invalido: Texto Alfabetico');
-                            break;
-                        }
-                    }
-                    if (item.getAttribute("alphanumeric") === 'true') {
-                        if (!validateOnlyTextAlphanumeric(item.value)) {
-                            item.focus();
-                            next = false;
-                            showAlert('Formato Invalido: Texto Alfanumerico');
-                            break;
-                        }
-                    }
-                    if (item.getAttribute("integer") === 'true') {
-                        if (!validateOnlyNumeric(item.value)) {
-                            item.focus();
-                            next = false;
-                            showAlert('Formato Invalido: Número Entero');
-                            break;
-                        }
-                    }
-                    if (item.type === 'date' || item.getAttribute('date') === 'true') {
+                    if (item.getAttribute('type') !== undefined && item.getAttribute('type') === 'date' || item.getAttribute('date') === 'true') {
                         if (!isDate(item.value) || !validateDateYYYYMMDD(item.value)) {
                             item.focus();
                             next = false;
@@ -241,7 +230,16 @@ function validateForm(form) {
                             break;
                         }
                     }
-                    if (item.type === 'email' || item.getAttribute('email') === 'true') {
+                    if (item.getAttribute('type') !== undefined && item.getAttribute('type') === 'datetime' || item.getAttribute('datetime') === 'true') {
+                        console.log('OK DT');
+                        if (!validateDateTimeYYYYMMDD(item.value)) {
+                            item.focus();
+                            next = false;
+                            showAlert('Formato Invalido: Fecha Hora');
+                            break;
+                        }
+                    }
+                    if (item.getAttribute('type') !== undefined && item.getAttribute('type') === 'email' || item.getAttribute('email') === 'true') {
                         if (!validateEmail(item.value)) {
                             item.focus();
                             next = false;
@@ -249,7 +247,7 @@ function validateForm(form) {
                             break;
                         }
                     }
-                    if (item.getAttribute("type") === 'password') {
+                    if (item.getAttribute('type') !== undefined && item.getAttribute('type') === 'password') {
                         if (!validatePassword(item.value)) {
                             item.focus();
                             next = false;
@@ -257,7 +255,7 @@ function validateForm(form) {
                             break;
                         }
                     }
-                    if (item.getAttribute("username") === 'true') {
+                    if (item.getAttribute("username") !== undefined && item.getAttribute("username") === 'true') {
                         if (!validateUser(item.value)) {
                             item.focus();
                             next = false;
@@ -265,7 +263,7 @@ function validateForm(form) {
                             break;
                         }
                     }
-                    if (item.getAttribute("type") === 'tel') {
+                    if (item.getAttribute('type') !== undefined && item.getAttribute('type') === 'tel') {
                         if (!validateOnlyNumeric(item.value)) {
                             item.focus();
                             next = false;
@@ -273,7 +271,7 @@ function validateForm(form) {
                             break;
                         }
                     }
-                    if (item.getAttribute("float") === 'true') {
+                    if (item.getAttribute("float") !== undefined && item.getAttribute("float") === 'true') {
                         if (!validateNumber(item.value)) {
                             item.focus();
                             next = false;
@@ -281,10 +279,34 @@ function validateForm(form) {
                             break;
                         }
                     }
+                    if (item.getAttribute("alphabetic") !== undefined && item.getAttribute("alphabetic") === 'true') {
+                        if (!validateAlphabetic(item.value)) {
+                            item.focus();
+                            next = false;
+                            showAlert('Formato Invalido: Texto Alfabetico');
+                            break;
+                        }
+                    }
+                    if (item.getAttribute("alphanumeric") !== undefined && item.getAttribute("alphanumeric") === 'true') {
+                        if (!validateOnlyTextAlphanumeric(item.value)) {
+                            item.focus();
+                            next = false;
+                            showAlert('Formato Invalido: Texto Alfanumerico');
+                            break;
+                        }
+                    }
+                    if (item.getAttribute("integer") !== undefined && item.getAttribute("integer") === 'true') {
+                        if (!validateOnlyNumeric(item.value)) {
+                            item.focus();
+                            next = false;
+                            showAlert('Formato Invalido: Número Entero');
+                            break;
+                        }
+                    }
                 }
             }
         }
-    }else{
+    } else {
         return false;
     }
 

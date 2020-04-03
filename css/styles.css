@@ -288,7 +288,7 @@ table > tbody > tr > td > input[disabled="disabled"]{
 }
 
 .photo-panel{
-    margin-top: 40px;
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 .ajax-loading{

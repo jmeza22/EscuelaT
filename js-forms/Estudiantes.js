@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
 
 function CopiarCodigo() {
     var formP = document.getElementById("formP");
-    var formE = document.getElementById("form0");
+    var formE = document.getElementById("formE");
     var formR = document.getElementById("formRep");
     var idpersona = getElement(formP, 'id_persona');
     var idestudiante = getElement(formE, 'id_estudiante');
@@ -22,10 +22,10 @@ function CopiarCodigo() {
 }
 
 function CargarNombres() {
-    var form0 = document.getElementById("form0");
+    var formE = document.getElementById("formE");
     var idestudiante = null;
-    if (form0 !== undefined && form0 !== null) {
-        idestudiante = getElement(form0, 'id_estudiante');
+    if (formE !== undefined && formE !== null) {
+        idestudiante = getElement(formE, 'id_estudiante');
         if (idestudiante !== undefined && idestudiante !== null) {
             loadComboboxData(document.getElementById("lista_acudientes"));
             autoNameFromDataList('idacudiente1_estudiante', 'nombreacudiente1_estudiante', null);
@@ -44,42 +44,43 @@ function Send(item) {
 function BuscarEstudiante() {
     CopiarCodigo();
     var formP = document.getElementById("formP");
-    var form0 = document.getElementById("form0");
+    var formE = document.getElementById("formE");
     var idpersona = null;
     var idestudiante = null;
     var idaux = null;
-    if (form0 !== undefined && form0 !== null) {
+    if (formE !== undefined && formE !== null) {
         idpersona = getElement(formP, 'id_persona');
-        idestudiante = getElement(form0, 'id_estudiante');
+        idestudiante = getElement(formE, 'id_estudiante');
         if (idpersona !== undefined && idpersona.value !== '') {
             idaux = idpersona.value;
-            resetForm(form0);
+            resetForm(formE);
             idpersona.value = idaux;
             idestudiante.value = idaux;
             document.getElementById('id_tipousuario').value = 'Student';
             getFormData(formP);
-            getFormData(form0);
-            LoadTableAnotaciones();
-            LoadTableCitaciones();
-            CopiarCodigoEstudianteAnotacion();
+            getFormData(formE).done(function () {
+                CopiarCodigoEstudianteAnotacion();
+                CopiarCodigoEstudianteCitacion();
+                LoadTableAnotaciones();
+                LoadTableCitaciones();
+                CargarFrameFoto();
+            });
         }
     }
 }
 
 function BuscarEstudianteActivo() {
-    var form0 = document.getElementById("form0");
+    var formE = document.getElementById("formE");
     var idestudiante = null;
     console.log('Tipo de Usuario: ' + getUserRoleLogin());
     if (getUserRoleLogin() !== null && getUserRoleLogin() === 'Student') {
-        form0.setAttribute('url', 'Base/Controllers/FindEstudiantesController.php');
-        idestudiante = getElement(form0, 'id_estudiante');
+        formE.setAttribute('url', 'Base/Controllers/FindEstudiantesController.php');
+        idestudiante = getElement(formE, 'id_estudiante');
         if (idestudiante !== undefined && idestudiante !== null) {
             idestudiante.value = getUserIdLogin();
             idestudiante.setAttribute('readonly', 'readonly');
             if (idestudiante.value !== '') {
-                getFormData(form0).done(function () {
-                    CopiarCodigoEstudianteAnotacion();
-                    LoadTableAnotaciones();
+                getFormData(formE).done(function () {
                     CargarFrameFoto();
                     document.getElementById("panelPersona").setAttribute('style', 'display: none;');
                     document.getElementById("panelCitaciones").setAttribute('style', 'display: none;');
@@ -96,13 +97,12 @@ function BuscarEstudianteActivo() {
 }
 
 function CargarFrameFoto() {
-    var prefix = "Estudiante";
-    var form0 = document.getElementById("form0");
-    var idestudiante = getElement(form0, "id_estudiante");
-    var frameFoto = document.getElementById("frameFoto");
     var foto = document.getElementById("foto_estudiante");
-    foto.value = prefix + idestudiante.value + ".jpg";
-    frameFoto.src = getWSPath() + "UploadImageForm.html?prefix=" + prefix + "&id=" + idestudiante.value + "&img=" + foto.value;
+    var image = document.getElementById("image");
+    if (foto !== undefined && foto.value !== '') {
+        console.log('Cargando Foto.');
+        image.src = getWSPath() + 'ImageFiles/' + foto.value;
+    }
 }
 
 function EditPersona(item) {
@@ -160,7 +160,7 @@ function DeleteItem(item) {
 
 function LoadTableAnotaciones() {
     var mytable = document.getElementById("dataTableAN");
-    var idestudiante = getElement(getForm('form0'), 'id_estudiante');
+    var idestudiante = getElement(getForm('formE'), 'id_estudiante');
     clearTableData(mytable);
     mytable.setAttribute('findby', 'id_estudiante');
     mytable.setAttribute('findbyvalue', idestudiante.value);
@@ -170,7 +170,7 @@ function LoadTableAnotaciones() {
 
 function LoadTableCitaciones() {
     var mytable = document.getElementById("dataTableCI");
-    var idestudiante = getElement(getForm('form0'), 'id_estudiante');
+    var idestudiante = getElement(getForm('formE'), 'id_estudiante');
     clearTableData(mytable);
     mytable.setAttribute('findby', 'id_estudiante');
     mytable.setAttribute('findbyvalue', idestudiante.value);
@@ -195,14 +195,14 @@ function ClearTableCitaciones() {
 }
 
 function CopiarCodigoEstudianteAnotacion() {
-    var form0 = null;
+    var formE = null;
     var formAN = null;
     var idestudiante = null;
     var idestudianteanotacion = null;
     var mytable = document.getElementById("dataTableAN");
-    form0 = document.getElementById('form0');
+    formE = document.getElementById('formE');
     formAN = document.getElementById('formAN');
-    idestudiante = getElement(form0, "id_estudiante");
+    idestudiante = getElement(formE, "id_estudiante");
     idestudianteanotacion = getElement(formAN, "id_estudiante");
     if (idestudianteanotacion !== undefined && idestudianteanotacion !== null) {
         console.log('Copiando Datos de Estudiante a Panel de Anotacion.');
@@ -213,14 +213,14 @@ function CopiarCodigoEstudianteAnotacion() {
 }
 
 function CopiarCodigoEstudianteCitacion() {
-    var form0 = null;
+    var formE = null;
     var formCI = null;
     var idestudiante = null;
     var idestudiantecitacion = null;
     var mytable = document.getElementById("dataTableCI");
-    form0 = document.getElementById('form0');
+    formE = document.getElementById('formE');
     formCI = document.getElementById('formCI');
-    idestudiante = getElement(form0, "id_estudiante");
+    idestudiante = getElement(formE, "id_estudiante");
     idestudiantecitacion = getElement(formCI, "id_estudiante");
     if (idestudiantecitacion !== undefined && idestudiantecitacion !== null) {
         console.log('Copiando Datos de Estudiante a Panel de Citacion.');
@@ -335,11 +335,12 @@ function GenerarIdPersona() {
 }
 
 
-function GrabarAnotacion(item) {
+function GrabarAnotacion() {
+    var form = document.getElementById("formAN");
     GenerarFechaAnotacion();
     GenerarCodigoAnotacion();
-    if (validateForm(getForm(item))) {
-        submitForm(item, false).done(function () {
+    if (validateForm(getForm(form))) {
+        submitForm(form, false).done(function () {
             LoadTableAnotaciones();
         });
     } else {
@@ -347,11 +348,12 @@ function GrabarAnotacion(item) {
     }
 }
 
-function GrabarCitacion(item) {
+function GrabarCitacion() {
+    var form = document.getElementById("formCI");
     GenerarFechaCitacion();
     GenerarCodigoCitacion();
-    if (validateForm(getForm(item))) {
-        submitForm(item, false).done(function () {
+    if (validateForm(getForm(form))) {
+        submitForm(form, false).done(function () {
             LoadTableCitaciones();
         });
     } else {
@@ -359,9 +361,15 @@ function GrabarCitacion(item) {
     }
 }
 
-function GrabarEstudiante(item) {
-    var form = getForm(item);
+function GrabarEstudiante() {
+    var form = document.getElementById("formE");
+    var idestudiante = getElement(form, 'id_estudiante');
+    var file = document.getElementById("image-file");
+    var foto = document.getElementById("foto_estudiante");
     if (validateForm(form)) {
+        if (file.files.length > 0) {
+            foto.value = "Estudiante" + idestudiante.value + ".jpg";
+        }
         submitForm(form, false).done(function () {
             if (getLastInsertId() !== null) {
                 alert('El Codigo del Estudiante es: ' + getLastInsertId());
@@ -371,9 +379,9 @@ function GrabarEstudiante(item) {
     }
 }
 
-function GrabarPersona(item) {
-    var formP = getForm(item);
-    var formE = document.getElementById('form0');
+function GrabarPersona() {
+    var formP = document.getElementById('formP');
+    var formE = document.getElementById('formE');
     var idpersona = getElement(formP, 'id_persona');
     var idestudiante = getElement(formE, 'id_estudiante');
     if (idpersona.value === '0' || idpersona.value === '') {
@@ -392,7 +400,7 @@ function GrabarPersona(item) {
 }
 
 function resetEstudiante() {
-    var formE = document.getElementById('form0');
+    var formE = document.getElementById('formE');
     resetForm(formE);
     ClearTableAnotaciones();
     ClearTableCitaciones();
@@ -403,7 +411,7 @@ function resetAnoacion() {
 }
 
 function VerHistorialMatriculas() {
-    var formE = document.getElementById('form0');
+    var formE = document.getElementById('formE');
     var idestudiante = getElement(formE, 'id_estudiante');
     if (idestudiante !== null) {
         window.location.href = 'FormHomeEstudiantes.html?id_estudiante=' + idestudiante.value;

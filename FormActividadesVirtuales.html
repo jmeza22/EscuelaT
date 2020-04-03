@@ -30,7 +30,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 85% !important;">
             <div class="panel-heading">Actividad Virtual</div>
             <div class="panel-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/ActividadesVirtualesController.php" model="ActividadesVirtualesApp" findBy="id_actividad" mainform="true" enctype="multipart/form-data" >
@@ -55,11 +55,11 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-2">
                             <label>Activo desde</label>
-                            <input type="date" name="fechadesde_actividad" id="fechadesde_actividad" value="" maxlength="21" required="required" class="form-control" title="La Actividad estará disponible desde esta fecha.">
+                            <input type="datetime" name="fechadesde_actividad" id="fechadesde_actividad" value="" maxlength="19" required="required" class="form-control" title="La Actividad estará disponible desde esta fecha.">
                         </div>
                         <div class="col-sm-2">
                             <label>Activo hasta</label>
-                            <input type="date" name="fechahasta_actividad" id="fechahasta_actividad" value="" maxlength="21" required="required" class="form-control" title="La Actividad estará disponible hasta esta fecha.">
+                            <input type="datetime" name="fechahasta_actividad" id="fechahasta_actividad" value="" maxlength="19" required="required" class="form-control" title="La Actividad estará disponible hasta esta fecha.">
                         </div>
                         <div class="col-sm-2">
                             <label>Estado</label>
@@ -80,7 +80,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-2">
                             <label>Grado</label>
-                            <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" class="form-control" title="Grado">
+                            <input type="text" name="numgrado_programa" id="numgrado_programa" value="" maxlength="2" required="required" readonly="readonly" class="form-control" title="Grado">
                         </div>
                         <div class="col-sm-2">
                             <label>Codigo</label>
@@ -102,7 +102,7 @@ and open the template in the editor.
                 </form>
             </div>
         </div>
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 85% !important;">
             <div class="panel-heading">Listado de Actividades Virtuales</div>
             <div class="panel-body">
 
@@ -112,10 +112,10 @@ and open the template in the editor.
                             <tr headrow="true">
                                 <th style="width: 5%;" title="Codigo">Codigo</th>
                                 <th style="width: 45%;">Nombre.Actividad</th>
-                                <th style="width: 10%;">Fecha.Inicio</th>
-                                <th style="width: 10%;">Fecha.Final</th>
-                                <th style="width: 10%;">Grado</th>
-                                <th style="width: 10%;">Estado</th>
+                                <th style="width: 14%;">Fecha.Inicio</th>
+                                <th style="width: 14%;">Fecha.Final</th>
+                                <th style="width: 6%;">Grado</th>
+                                <th style="width: 6%;">Estado</th>
                                 <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
