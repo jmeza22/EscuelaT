@@ -68,24 +68,18 @@ class Matriculas extends ReportsBank {
     public function updateOtrasTablas() {
         if ($this->postdata !== null && $this->postdata[$this->findby] !== '' && $this->getAction() === 'insertorupdate') {
             $array = Array();
-            $array['id_programa'] = $this->postdata['id_programa'];
-            $array['id_periodo'] = $this->postdata['id_periodo'];
             $array['id_planestudio'] = $this->postdata['id_planestudio'];
             $array['numgrado_programa'] = $this->postdata['numgrado_programa'];
             $array['id_grupo'] = $this->postdata['id_grupo'];
             $array['id_matricula'] = $this->postdata['id_matricula'];
             $sql = "UPDATE MatriculaAsignaturasApp "
-                    . " SET id_programa=:id_programa,"
-                    . " id_periodo=:id_periodo,"
-                    . " id_planestudio=:id_planestudio,"
+                    . " SET id_planestudio=:id_planestudio,"
                     . " numgrado_programa=:numgrado_programa, "
                     . " id_grupo=:id_grupo "
                     . " WHERE id_matricula=:id_matricula ";
             $this->query($sql, $array);
             $sql = "UPDATE CalificacionesApp "
-                    . " SET id_programa=:id_programa,"
-                    . " id_periodo=:id_periodo,"
-                    . " id_planestudio=:id_planestudio,"
+                    . " SET id_planestudio=:id_planestudio,"
                     . " numgrado_programa=:numgrado_programa, "
                     . " id_grupo=:id_grupo "
                     . " WHERE id_matricula=:id_matricula ";

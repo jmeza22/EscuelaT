@@ -52,10 +52,9 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $idcorte = $variables->getIdCortePeriodo();
     $numcorte = $variables->getNumCortePeriodo();
 
-    $sqlC = "SELECT @rownum := @rownum +1 AS rownum, "
-            . " OE.nombrecompleto_estudiante, "
-            . " IFNULL(C.id_calificacion,0) AS id_calificacion,"
+    $sqlC = "SELECT @rownum := @rownum +1 AS rownum, M.nombrecompleto_estudiante,  "
             . " MA.*, "
+            . " IFNULL(C.id_calificacion,0) AS id_calificacion,"
             . " IFNULL(C.p1_nd_calificacion,' ') AS np1, "
             . " IFNULL(C.p2_nd_calificacion,' ') AS np2, "
             . " IFNULL(C.p3_nd_calificacion,' ') AS np3, "
@@ -70,7 +69,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100))"
-            . " ),'0'),1) AS def,";
+            . " ),'0'),2) AS def,";
     if ($numcorte !== 'fin') {
         $sqlC = $sqlC . " IFNULL(C.p" . $numcorte . "_logroc_calificacion,'') AS logroc_calificacion, "
                 . " IFNULL(C.p" . $numcorte . "_logrop_calificacion,'') AS logrop_calificacion, "
@@ -85,12 +84,13 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " IFNULL(C.p" . $numcorte . "_ausencias_calificacion,'') AS ausencias_calificacion, "
             . " IFNULL(C.p" . $numcorte . "_comentarios_calificacion,'') AS comentarios_calificacion, "
             . " '" . $idcorte . "' AS id_corte "
-            . " FROM (SELECT @rownum :=0) R, "
-            . " MatriculaAsignaturasApp MA "
-            . " INNER JOIN ConfiguracionApp Cn ON MA.id_escuela=Cn.id_escuela "
-            . " INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
-            . " LEFT JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
+            . " FROM "
+            . " ObservadorEstudianteApp OE "
+            . " INNER JOIN MatriculasApp M ON OE.id_estudiante=M.id_estudiante "
+            . " INNER JOIN MatriculaAsignaturasApp MA ON MA.id_matricula=M.id_matricula "
             . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
+            . " INNER JOIN ConfiguracionApp Cn ON MA.id_escuela=Cn.id_escuela,"
+            . " (SELECT @rownum :=0) R "
             . " WHERE M.status_matricula=1 "
             . " AND M.estado_matricula!='Retirado' "
             . " AND M.estado_matricula!='' "
@@ -102,7 +102,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " AND MA.numgrado_programa = :p_numgrado_programa "
             . " AND MA.id_grupo = :p_id_grupo "
             . " AND MA.id_periodo = :p_id_periodo "
-            . " ORDER BY OE.nombrecompleto_estudiante ASC "
+            . " ORDER BY M.nombrecompleto_estudiante   "
     ;
     $resultMatasig = $bc->selectJSONArray($sqlC, $arraywhere);
     print_r($resultMatasig);

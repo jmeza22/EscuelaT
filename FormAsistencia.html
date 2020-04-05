@@ -33,7 +33,7 @@ and open the template in the editor.
         <div class="panel panel-primary" style="width: 80% !important;">
             <div class="panel-heading">Datos de Planilla</div>
             <div class="panel-body table-responsive" >
-                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/CargasDocentesController.php" model="CargasDocentesApp" findBy="id_carga" mainform="true" >
+                <form id="form0" method="POST" autocomplete="off" >
                     <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
                     <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
                     <input type="hidden" name="id_corte" id="id_corte" value="" maxlength="2" required="required" disabled="disabled" title="Periodo">
@@ -72,7 +72,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-2">
                             <label>Buscar</label>
-                            <button id="consulta" class="btn btn-default" onclick="LoadTable();" style="width: 100% !important;">Consultar</button>
+                            <button type="button" id="consulta" class="btn btn-default" onclick="LoadTable();" style="width: 100% !important;">Consultar</button>
                         </div>
                     </div>
                 </form>
@@ -111,7 +111,7 @@ and open the template in the editor.
                                     {{rownum}}
                                 </td>
                                 <td>
-                                    <label>{{nombrecompleto_estudiante}}</label> </td>
+                                    <label>{{nombrecompleto_estudiante}} </label> </td>
                                 <td style="text-align: center !important;">
                                     <select id="presente_asistencia" name="presente_asistencia[]" class="form-control" >
                                         <option id="1" value="1">Si</option>

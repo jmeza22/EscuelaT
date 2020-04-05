@@ -652,11 +652,10 @@ class ReportsBank extends BasicController {
     public function getAsistencias($idescuela = null, $idmatricula = null, $idestudiante = null, $idprograma = null, $idasignatura = null, $idperiodo = null, $grado = null, $idgrupo = null, $fecha = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT @rownum := @rownum +1 AS rownum, MA.*, A.nombre_asignatura, OE.nombrecompleto_estudiante, "
-                . "Asi.id_asistencia, Asi.presente_asistencia, Asi.tarde_asistencia, Asi.fecha_asistencia, Asi.nota_asistencia, Asi.id_corte "
+        $sql = "SELECT @rownum := @rownum +1 AS rownum, MA.*, A.nombre_asignatura, M.nombrecompleto_estudiante, Asi.* "
                 . "FROM (SELECT @rownum :=0) R, MatriculaAsignaturasApp MA "
+                . "INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
                 . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
-                . "INNER JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
                 . "INNER JOIN AsistenciaApp Asi ON MA.id_matasig=Asi.id_matasig "
                 . "WHERE MA.status_matriculaasignatura=1 AND A.status_asignatura=1 ";
         $arraywhere = Array();
@@ -694,8 +693,9 @@ class ReportsBank extends BasicController {
         }
         if ($fecha !== null) {
             $arraywhere['p_fecha_asistencia'] = $fecha;
-            $sql = $sql . " AND IFNULL(Asi.fecha_asistencia,:p_fecha_asistencia)=:p_fecha_asistencia ";
+            $sql = $sql . " AND Asi.fecha_asistencia=:p_fecha_asistencia ";
         }
+        $sql = $sql . " ORDER BY M.nombrecompleto_estudiante";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -1112,7 +1112,7 @@ class ReportsBank extends BasicController {
             $arraywhere['p_id_matricula'] = $idmatricula;
             $sql = $sql . " AND M.id_matricula=:p_id_matricula ";
         }
-        $sql = $sql . " GROUP BY M.id_estudiante, M.id_matricula ORDER BY M.id_programa, M.numgrado_programa, M.id_grupo, OE.nombrecompleto_estudiante ";
+        $sql = $sql . " GROUP BY M.id_estudiante, M.id_matricula ORDER BY M.id_programa, M.numgrado_programa, M.id_grupo, M.nombrecompleto_estudiante ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

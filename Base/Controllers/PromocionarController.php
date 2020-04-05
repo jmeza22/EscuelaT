@@ -21,7 +21,7 @@ $fechaf = null;
 $result = $session->getSessionStateJSON();
 $resultdata = array();
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1)) {
-    if (isset($_POST['id_programa']) && $_POST['id_programa'] != null) {
+    if (isset($_POST['id_programa']) && $_POST['id_programa'] != '') {
         $idprograma = null;
         $idperiodo = null;
         $numgrado = null;
@@ -62,7 +62,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             $matriculas = $bc->getPromedio($idescuela, $idprograma, null, $numgrado, $idgrupo, $idperiodo, null, null);
 
             $arraywhere = array();
-            if ($matriculas !== null && is_array(json_decode($matriculas, true)) && $configuracion !== null && is_array($configuracion) && $programa !== null && is_array($programa)) {
+            if ($idgruponew !== null && $idgruponew !== '' && $matriculas !== null && is_array(json_decode($matriculas, true)) && $configuracion !== null && is_array($configuracion) && $programa !== null && is_array($programa)) {
                 $matriculas = json_decode($matriculas, true);
                 for ($i = 0; $i < count($matriculas); $i++) {
                     $bc->setAction('update');
@@ -72,11 +72,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $postdata['estado_matricula'] = 'Finalizado';
                     $bc->setPostData($postdata);
                     $bc->execute(false);
-                    $idmatriculanew = 'M' . $fecha . rand(1, 99) . $matriculas[$i]['id_estudiante'];
                     $postdata = array();
                     $postdata['id_matricula_ant'] = $matriculas[$i]['id_matricula'];
                     $postdata['id_periodo_ant'] = $matriculas[$i]['id_periodo'];
-                    $postdata['id_matricula'] = $idmatriculanew;
                     $postdata['id_periodo'] = $idperiodonew;
                     $postdata['id_escuela'] = $matriculas[$i]['id_escuela'];
                     $postdata['id_estudiante'] = $matriculas[$i]['id_estudiante'];
@@ -94,7 +92,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
                     $postdata['usuarioedita_matricula'] = $session->getNickname();
                     $postdata['fechacrea_matricula'] = date('Y-m-d H:i:s');
                     $postdata['fechaedita_matricula'] = date('Y-m-d H:i:s');
-                    $nombre = $matriculas[$i]['nombrecompleto_estudiante'];
+                    $idmatriculanew = 'M' . $postdata['id_escuela'] . $postdata['id_periodo'] . $postdata['id_programa'] . $postdata['id_estudiante'];
+                    $postdata['id_matricula'] = $idmatriculanew;
+                    $nombre = $postdata['nombrecompleto_estudiante'];
 
                     $cantReprobadas = $bc->getCantidadAsignaturasReprobadas($matriculas[$i]['id_escuela'], $matriculas[$i]['id_programa'], $matriculas[$i]['id_planestudio'], $matriculas[$i]['numgrado_programa'], $matriculas[$i]['id_grupo'], $matriculas[$i]['id_periodo'], $matriculas[$i]['id_estudiante'], $matriculas[$i]['id_matricula']);
                     if ($cantReprobadas !== null && $cantReprobadas !== '[]') {

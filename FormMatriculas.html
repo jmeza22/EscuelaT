@@ -40,11 +40,11 @@ and open the template in the editor.
                             <div class="panel-heading">Estudiante</div>
                             <div class="panel-body" >
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label>Codigo</label>
                                         <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" url="Base/Controllers/FindEstudiantesController.php" model="ObservadorEstudianteApp">
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-9">
                                         <label>Nombre del Estudiante</label>
                                         <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" class="form-control" title="Nombre del Estudiante" readonly="readonly" >
                                     </div>
@@ -114,19 +114,19 @@ and open the template in the editor.
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label>Valor Matricula</label>
-                                        <input type="number" name="valor_matricula" id="valor_matricula" value="0" maxlength="24" required="required" class="form-control" readonly="readonly">
+                                        <input type="number" name="valor_matricula" id="valor_matricula" value="0" maxlength="24" class="form-control" readonly="readonly">
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Valor Pagado</label>
-                                        <input type="number" name="valorpagado_matricula" id="valorpagado_matricula" value="0" maxlength="24" required="required" class="form-control" disabled="disabled" >
+                                        <input type="number" name="valorpagado_matricula" id="valorpagado_matricula" value="0" maxlength="24" class="form-control" disabled="disabled" >
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Valor Deuda</label>
-                                        <input type="number" name="valordeuda_matricula" id="valordeuda_matricula" value="0" maxlength="24" required="required" class="form-control" disabled="disabled" >
+                                        <input type="number" name="valordeuda_matricula" id="valordeuda_matricula" value="0" maxlength="24" class="form-control" disabled="disabled" >
                                     </div>
                                     <div class="col-sm-3">
                                         <label title="Codigo del Matricula">Codigo</label>
-                                        <input type="text" id="id_matricula" name="id_matricula" readonly="readonly" value="" class="form-control" maxlength="30" onfocus="setIdMatricula();" /> 
+                                        <input type="text" id="id_matricula" name="id_matricula" readonly="readonly" value="" class="form-control" maxlength="30" onfocus="" /> 
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@ and open the template in the editor.
                             </div>
                             <div class="col-sm-6">
                                 <center>
-                                    <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                                    <button type="reset" id="reset" name="reset" class="btn btn-success" onclick="resetMatricula(this);">Nuevo</button> 
                                 </center>
                             </div>
                         </div>

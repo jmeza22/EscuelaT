@@ -31,15 +31,14 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     if (!isset($arraywhere['fecha_asistencia'])) {
         $arraywhere['fecha_asistencia'] = null;
     }
-
     $result = $bc->getAsistencias($session->getEnterpriseID(), null, null, $arraywhere['id_programa'], $arraywhere['id_asignatura'], $arraywhere['id_periodo'], $arraywhere['numgrado_programa'], $arraywhere['id_grupo'], $arraywhere['fecha_asistencia']);
     if ($result === null || $result === '' || $result === '[]') {
-        $sql = "SELECT @rownum := @rownum +1 AS rownum, MA.*, A.nombre_asignatura, OE.nombrecompleto_estudiante, "
-                . "'0' AS id_asistencia, '1' AS presente_asistencia, '0' AS tarde_asistencia, '" . $arraywhere['fecha_asistencia'] . "' AS fecha_asistencia, '' AS nota_asistencia, '" . $variables->getIdCortePeriodo() . "' AS id_corte "
+        $sql = "SELECT M.nombrecompleto_estudiante, MA.*, A.nombre_asignatura,  "
+                . "'0' AS id_asistencia, '1' AS presente_asistencia, '0' AS tarde_asistencia, '" . $arraywhere['fecha_asistencia'] . "' AS fecha_asistencia, '' AS nota_asistencia, '" . $variables->getIdCortePeriodo() . "' AS id_corte, @rownum := @rownum +1 AS rownum "
                 . "FROM (SELECT @rownum :=0) R, MatriculaAsignaturasApp MA "
+                . "INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
                 . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
-                . "INNER JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
-                . "WHERE MA.status_matriculaasignatura=1 AND A.status_asignatura=1 ";
+                . "WHERE M.status_matricula=1 AND MA.status_matriculaasignatura=1 AND A.status_asignatura=1 ";
         unset($arraywhere['fecha_asistencia']);
         if (isset($arraywhere['id_escuela'])) {
             $sql = $sql . " AND MA.id_escuela=:id_escuela ";
@@ -59,7 +58,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
         if (isset($arraywhere['id_grupo'])) {
             $sql = $sql . " AND MA.id_grupo=:id_grupo ";
         }
-        $sql = $sql . " ORDER BY OE.nombrecompleto_estudiante";
+        $sql = $sql . " ORDER BY M.nombrecompleto_estudiante";
         $result = $bc->selectJSONArray($sql, $arraywhere);
     }
     echo $result;

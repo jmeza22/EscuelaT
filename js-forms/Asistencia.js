@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    var idescuela = null;
-    idescuela = document.getElementById('id_escuela');
     setDatosEncabezado();
     setFecha();
     LoadTable();
@@ -56,8 +54,8 @@ function setDatosEncabezado() {
 function setFecha() {
     var fecha = document.getElementById("fecha");
     var mytable = document.getElementById("dataTable0");
-    mytable.setAttribute('findby6', 'fecha_asistencia');
-    mytable.setAttribute('findbyvalue6', fecha.value);   
+    mytable.setAttribute('findby', 'fecha_asistencia');
+    mytable.setAttribute('findbyvalue', fecha.value);   
 }
 
 function LoadTable() {

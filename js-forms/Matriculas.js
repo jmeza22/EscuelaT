@@ -93,9 +93,41 @@ function onChangeGrado() {
     setComboboxFindby('id_grupo', grado.id, getComboboxValue(grado), 3);
 }
 
+function setIdMatricula() {
+    var form0 = null;
+    var idescuela = getEnterpriseID();
+    var idmatricula = null;
+    var idestudiante = null;
+    var idperiodo = null;
+    var idprograma = null;
+    var fecha = null;
+    form0 = document.getElementById('form0');
+    idmatricula = getElement(form0, 'id_matricula');
+    idestudiante = getElement(form0, 'id_estudiante');
+    idperiodo = getElement(form0, 'id_periodo');
+    idprograma = getElement(form0, 'id_programa');
+    if (idmatricula !== null && idmatricula !== undefined && idmatricula.value === '') {
+        fecha = new Date();
+        idmatricula.value = 'M' + idescuela + idperiodo.value + idprograma.value + idestudiante.value;
+    }
+}
+
+function resetMatricula(item) {
+    var form0 = getForm(item);
+    var idestudiante = getElement(form0, 'id_estudiante');
+    var idperiodo = getElement(form0, 'id_periodo');
+    var idprograma = getElement(form0, 'id_programa');
+    idestudiante.removeAttribute('disabled');
+    idperiodo.removeAttribute('disabled');
+    idprograma.removeAttribute('disabled');
+    form0.reset();
+}
+
 function GrabarMatricula() {
     var form0 = null;
+    var idmat = null;
     form0 = document.getElementById('form0');
+    idmat = getElement(form0, 'id_matricula');
     setIdMatricula();
     if (validateForm(form0)) {
         submitForm(form0, false).done(function () {
@@ -105,6 +137,8 @@ function GrabarMatricula() {
                 if (isNaN(rowcount) === false && rowcount > 0) {
                     LoadTable();
                     MatriculaAsignaturasAutomatica(getElement(form0, 'id_matricula'));
+                } else {
+                    idmat.value = "";
                 }
             }
         });
@@ -132,6 +166,9 @@ function CalcularValores() {
 
 function Edit(item) {
     var myform = null;
+    var idestudiante = null;
+    var idprograma = null;
+    var idperiodo = null;
     myform = document.getElementById('form0');
     resetForm(myform);
     sendValue(item, null, myform, null);
@@ -144,6 +181,12 @@ function Edit(item) {
             LoadGrupo();
             getFormData(myform, 'Base/Controllers/FindValorTotalPagadoController.php').done(function () {
                 CalcularValores();
+                idestudiante = getElement(myform, 'id_estudiante');
+                idprograma = getElement(myform, 'id_programa');
+                idperiodo = getElement(myform, 'id_periodo');
+                idestudiante.setAttribute('disabled', 'disabled');
+                idprograma.setAttribute('disabled', 'disabled');
+                idperiodo.setAttribute('disabled', 'disabled');
             });
         }, 1);
     });
@@ -176,22 +219,6 @@ function DeleteItem(item) {
                 }
             });
         }
-    }
-}
-
-function setIdMatricula() {
-    var form0 = null;
-    var idmatricula = null;
-    var idescuela = null;
-    var idestudiante = null;
-    var fecha = null;
-    form0 = document.getElementById('form0');
-    idmatricula = getElement(form0, 'id_matricula');
-    idescuela = getElement(form0, 'id_escuela');
-    idestudiante = getElement(form0, 'id_estudiante');
-    if (idmatricula !== null && idmatricula !== undefined && idmatricula.value === '') {
-        fecha = new Date();
-        idmatricula.value = 'M' + fecha.getFullYear() + '' + (fecha.getMonth() + 1) + '' + fecha.getDate() + '' + fecha.getHours() + '' + fecha.getMinutes() + '' + fecha.getSeconds() + '' + (getRandomNumber(1, 9) * getRandomNumber(1, 9)) + idestudiante.value;
     }
 }
 
