@@ -1,6 +1,5 @@
 <?php
 
-
 include_once 'Libraries/Controllers.php';
 include_once 'Libraries/Reports.php';
 $session = new SessionManager();
@@ -19,13 +18,13 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     $colname = "nombre_asignatura";
     $othervalue = "(hteoricas_asignatura + hpracticas_asignatura)";
     $where = "status_asignatura=1 and id_escuela='" . $session->getEnterpriseID() . "' ";
+    $arraywhere = $bc->parseFindByToArray($_POST);
     if (
-            isset($_REQUEST['findby']) && strcmp($_REQUEST['findby'], 'id_planestudio') === 0 && isset($_REQUEST['findby2']) && strcmp($_REQUEST['findby2'], 'numgrado_programa') === 0 && isset($_REQUEST['findbyvalue']) && strcmp($_REQUEST['findbyvalue'], '') !== 0 && isset($_REQUEST['findbyvalue2']) && strcmp($_REQUEST['findbyvalue2'], '') !== 0
+            isset($arraywhere['id_planestudio']) && isset($arraywhere['numgrado_programa'])
     ) {
-        $where = $where . "  and id_asignatura IN (SELECT PED.id_asignatura FROM PlanEstudioDetalleApp PED WHERE PED.id_planestudio=" . $_REQUEST['findbyvalue'] . " and PED.numgrado_programa=" . $_REQUEST['findbyvalue2'] . " and PED.status_planestudiodetalle = 1 GROUP BY PED.id_asignatura)";
+        $where = $where . "  and id_asignatura IN (SELECT PED.id_asignatura FROM PlanEstudioDetalleApp PED WHERE PED.id_planestudio='" . $arraywhere['id_planestudio'] . "' and PED.numgrado_programa=" . $arraywhere['numgrado_programa'] . " and PED.status_planestudiodetalle = 1 GROUP BY PED.id_asignatura)";
     }
     echo $bc->getComboboxData($colname, $colvalue, $othervalue, $where);
     $bc->disconnect();
 }
-
 ?>

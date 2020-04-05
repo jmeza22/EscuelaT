@@ -2372,6 +2372,10 @@
       <Cl au="0" df="1" nm="status_persona" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
+      <Idx clu="0" ftx="0" nm="PersonasApp_Documento_Idx" spa="0" unq="1">
+        <ClNs>documento_persona, tipodoc_persona</ClNs>
+        <OptTx/>
+      </Idx>
       <Idx clu="0" ftx="0" nm="PersonasApp_id_persona_Idx" spa="0" unq="1">
         <ClNs>id_persona</ClNs>
         <OptTx/>
@@ -3981,7 +3985,7 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
