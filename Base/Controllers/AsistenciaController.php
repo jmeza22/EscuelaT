@@ -14,7 +14,7 @@ $count = 0;
 $i = 0;
 $fachai = null;
 $fechaf = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getUserType() === 'Teacher')) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();

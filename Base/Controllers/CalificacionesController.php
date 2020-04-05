@@ -21,7 +21,7 @@ $estadocorte = null;
 $nombre = '';
 $errormessage = '';
 $fecha = date('Y-m-d H:i:s');
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getStandard() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getUserType() === 'Teacher')) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
@@ -131,5 +131,5 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
 if ($result === null) {
     echo $session->getSessionStateJSON();
 }
-$result = null;        
+$result = null;
 ?>

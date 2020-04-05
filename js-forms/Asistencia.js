@@ -40,8 +40,8 @@ function setDatosEncabezado() {
     ncorte.value = GET('num_corte');
     grado.value = GET('numgrado_programa');
     grupo.value = GET('id_grupo');
-    mytable.setAttribute('findby', 'id_programa');
-    mytable.setAttribute('findbyvalue', idprograma);
+    mytable.setAttribute('findby1', 'id_programa');
+    mytable.setAttribute('findbyvalue1', idprograma);
     mytable.setAttribute('findby2', 'id_asignatura');
     mytable.setAttribute('findbyvalue2', idasignatura.value);
     mytable.setAttribute('findby3', 'numgrado_programa');
@@ -56,9 +56,8 @@ function setDatosEncabezado() {
 function setFecha() {
     var fecha = document.getElementById("fecha");
     var mytable = document.getElementById("dataTable0");
-    mytable.setAttribute('findby1', 'fecha_asistencia');
-    mytable.setAttribute('findbyvalue1', fecha.value);
-    
+    mytable.setAttribute('findby6', 'fecha_asistencia');
+    mytable.setAttribute('findbyvalue6', fecha.value);   
 }
 
 function LoadTable() {
