@@ -1494,7 +1494,7 @@ class ReportsBank extends BasicController {
         $sql = "SELECT OE.nombrecompleto_estudiante, SA.*, AV.* "
                 . " FROM SolucionesActividadesVirtualesApp SA "
                 . " INNER JOIN ActividadesVirtualesApp AV ON SA.id_actividad=AV.id_actividad "
-                . " INNER JOIN ObervadorEstudianteApp OE ON SA.id_estudiante=OE.id_estudiante "
+                . " INNER JOIN ObservadorEstudianteApp OE ON SA.id_estudiante=OE.id_estudiante "
                 . " WHERE SA.status_solucion=1";
         $arraywhere = Array();
         if ($idactividad !== null) {

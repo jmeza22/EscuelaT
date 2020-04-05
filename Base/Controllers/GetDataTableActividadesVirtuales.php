@@ -32,9 +32,8 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
 
     $numgrado = null;
     if (isset($arraywhere['numgrado_programa'])) {
-        $grado = $arraywhere['numgrado_programa'];
+        $numgrado = $arraywhere['numgrado_programa'];
     }
-
 
     echo $bc->getActividadesVirtuales($session->getEnterpriseID(), $idprograma, $idasignatura, $iddocente, $numgrado, null);
     $bc->disconnect();

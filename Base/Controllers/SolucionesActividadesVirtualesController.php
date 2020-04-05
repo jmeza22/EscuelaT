@@ -29,12 +29,15 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getUserType() =
         }
         if ($_POST['action'] === 'insertorupdate') {
             $postdata['fechahora_solucion'] = $fecha;
-            $postdata['id_escuela'] = $session->getEnterpriseID();
             if ($postdata['id_solucion'] === '' || $postdata['id_solucion'] === '0') {
                 $postdata['id_solucion'] = $postdata['id_actividad'] + date('YmdHis') + rand(0, 30);
             }
             if ($postdata['id_estudiante'] === '' || $postdata['id_estudiante'] === '0') {
                 $postdata['id_estudiante'] = $session->getUserID();
+            }
+            if ($session->getUserType() === 'Student') {
+                unset($postdata['retroalimentacion_solucion']);
+                unset($postdata['calificacion_solucion']);
             }
             $bc->setPostData($postdata);
             $bc->setAction('insertorupdate');
@@ -45,8 +48,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getUserType() =
         if ($_POST['action'] === 'delete') {
             if ($postdata['id_solucion'] !== '' && $postdata['id_solucion'] !== '0') {
                 $upload->Delete($postdata['documento_solucion']);
-                $postdata['documento_solucion']='';
-                $postdata['texto_solucion']='';
+                $postdata['documento_solucion'] = '';
+                $postdata['texto_solucion'] = '';
+                $bc->setPostData($postdata);
                 $bc->setAction('insertorupdate');
                 $result = $bc->execute(false);
             }

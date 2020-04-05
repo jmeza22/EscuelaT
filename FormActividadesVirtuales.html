@@ -132,11 +132,12 @@ and open the template in the editor.
                                 <td> {{numgrado_programa}} </td>
                                 <td> {{activo_actividad}} </td>
                                 <td>
-                                    <form id="Actividad{{id_actividad}}" name="Actividad{{id_actividad}}" method="POST" autocomplete="off" url="Base/Controllers/ActividadesController.php"  model="ActividadesApp" findBy="id_actividad" statusfield="status_actividad">
+                                    <form id="Actividad{{id_actividad}}" name="Actividad{{id_actividad}}" method="GET" autocomplete="off" action="ListingSolucionesActividadesVirtuales.html" url="Base/Controllers/ActividadesController.php"  model="ActividadesApp" findBy="id_actividad" statusfield="status_actividad">
                                         <input type="hidden"  editable="false" name="id_actividad" id="id_actividad" value="{{id_actividad}}" >
                                         <input type="hidden"  editable="false" disabled="disabled" name="status_actividad" id="status_actividad" value="1" >
                                         <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
                                         <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="submit" name="VerSolucion" id="VerSolucion" class="btn btn-xs btn-default" title="Soluciones"><i class="glyphicon glyphicon-search"></i></button>
                                     </form>
                                 </td>
                             </tr>

@@ -938,6 +938,7 @@ function getModel(element) {
 function getURL(element) {
     if (element !== null && (element.tagName.toString().toUpperCase() === "INPUT" || element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST" || element.tagName.toString().toUpperCase() === "TABLE" || element.tagName.toString().toUpperCase() === "FORM")) {
         if (element.getAttribute("url") !== null && element.getAttribute("url") !== '') {
+            console.log('Getting URL: '+element.getAttribute("url"));
             return getWSPath() + element.getAttribute("url");
         }
     }
@@ -1204,7 +1205,7 @@ function getFormData(element, myurl = null) {
     if (myurl !== null) {
         url = myurl;
     }
-    console.log('Getting Data to Form!');
+    console.log('Getting Form Data: ' + myform.id + ' !');
     if (formData !== null && url !== null && url !== '') {
         promise = $.ajax({
             method: "POST",
@@ -1213,6 +1214,7 @@ function getFormData(element, myurl = null) {
             processData: false,
             contentType: false,
             success: function (result, status) {
+                console.log('Status: '+status);
                 if (result !== null && result !== '') {
                     try {
                         result = JSON.parse(result);
