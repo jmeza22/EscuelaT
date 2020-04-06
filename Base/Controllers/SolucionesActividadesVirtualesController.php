@@ -35,6 +35,11 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getUserType() =
             if ($postdata['id_estudiante'] === '' || $postdata['id_estudiante'] === '0') {
                 $postdata['id_estudiante'] = $session->getUserID();
             }
+            if ($session->getUserType() === 'Teacher'){
+                if(isset($postdata['calificacion_solucion']) && $postdata['calificacion_solucion']===''){
+                    unset($postdata['calificacion_solucion']);
+                }
+            }
             if ($session->getUserType() === 'Student') {
                 unset($postdata['retroalimentacion_solucion']);
                 unset($postdata['calificacion_solucion']);

@@ -76,6 +76,7 @@ and open the template in the editor.
                                 <td> <b>{{nombre_actividad}}</b> </td>
                                 <td>
                                     <form id="Solucion{{id_solucion}}" name="Solucion{{id_solucion}}" method="GET" autocomplete="off" action="FormSolucionesActividadesVirtuales.html">
+                                        <input type="hidden" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="{{nombrecompleto_estudiante}}" >
                                         <input type="hidden" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
                                         <input type="hidden" name="id_actividad" id="id_actividad" value="{{id_actividad}}" >
                                         <input type="hidden" name="id_solucion" id="id_solucion" value="{{id_solucion}}" >

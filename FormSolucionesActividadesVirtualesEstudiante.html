@@ -26,7 +26,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
-        <script type="text/javascript" src="js-forms/SolucionesActividadesVirtuales.js"></script>
+        <script type="text/javascript" src="js-forms/SolucionesActividadesVirtualesEstudiante.js"></script>
     </head>
     <body>
 
@@ -35,6 +35,7 @@ and open the template in the editor.
             <div class="panel-body" >
                 <form id="formActividades" method="POST" autocomplete="off" do="find" url="Base/Controllers/ActividadesVirtualesController.php" model="ActividadesVirtualesApp" findBy="id_actividad" >
                     <input type="hidden" id="id_actividad" name="id_actividad" required="required">
+                    <input type="hidden" id="documento_actividad" name="documento_actividad" value="">
                     <div class="row">
                         <div class="col-sm-6">
                             <label>Nombre de Actividad</label>
@@ -53,6 +54,22 @@ and open the template in the editor.
                             <input type="datetime" name="fechahasta_actividad" id="fechahasta_actividad" disabled="disabled" value="" maxlength="19" required="required" class="form-control" title="La Actividad estará disponible hasta esta fecha.">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <label>Descripcion de Actividad</label>
+                            <textarea id="descripcion_actividad" name="descripcion_actividad" readonly="readonly" spellcheck="spellcheck" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                        </div>
+                        <div class="col-sm-2">
+                            <center>
+                                <label>Documento</label>
+                                <a id="linkDocumento" href="" target="_blank" disabled="disabled" title="Descargar Archivo Guia de la Actividad">
+                                    <button type="button" id="VerDocumento" class="btn btn-lg default" disabled="disabled" style="font-size: 42pt;">
+                                        <i class="glyphicon glyphicon-download"></i>
+                                    </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -69,7 +86,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-8">
                             <label>Comentario al Docente</label>
-                            <input type="text" id="nombrecompleto_estudiante" name="nombrecompleto_estudiante" disabled="disabled" readonly="readonly" value="" class="form-control">
+                            <textarea id="texto_solucion" name="texto_solucion" spellcheck="spellcheck" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 30px !important;"></textarea>
                         </div>
                         <div class="col-sm-2">
                             <label>Fecha</label>
@@ -79,10 +96,11 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-2">
                             <input type="hidden" id="documento_solucion" name="documento_solucion" value="">
+                            <input type="file" form="formSoluciones" name="document-file" id="document-file" onchange="showSelectedFile();" accept=".pdf, .txt, .doc, .docx, .ppt, .pptx, .xls, .xlsx" class="form-control" title="Cargar Archivo que contiene la Solucion de la actividad." style="display: none !important;">
                             <center>
                                 <label>Documento</label>
                                 <a id="linkSolucion" href="" target="_blank" title="Archivo de Solucion Cargado." style="display: none !important;">Descargar</a>
-                                <button type="button" id="VerSolucion" onclick="viewFile();" class="btn btn-default btn-block">
+                                <button type="button" id="VerSolucion" onclick="viewFile(); selectFile();" class="btn btn-default btn-block">
                                     <i class="glyphicon glyphicon-upload"></i> Cargar
                                 </button>
 
@@ -92,18 +110,13 @@ and open the template in the editor.
                                 </button>
                             </center>
                         </div>
-                        <div class="col-sm-4">
-                            <label>Comentario del Estudiante</label>
-                            <textarea id="texto_solucion" name="texto_solucion" readonly="readonly" spellcheck="spellcheck" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
-                        </div>
-                        
-                        <div class="col-sm-4">
+                        <div class="col-sm-8">
                             <label>Retroalimentacion hecha por Docente</label>
-                            <textarea id="retroalimentacion_solucion" name="retroalimentacion_solucion" spellcheck="spellcheck" maxlength="500" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                            <textarea id="retroalimentacion_solucion" name="retroalimentacion_solucion" readonly="readonly" spellcheck="spellcheck" maxlength="500" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
                         </div>
                         <div class="col-sm-2">
                             <label>Calificacion</label>
-                            <input type="number" id="calificacion_solucion" name="calificacion_solucion" value="" min="0" max="10" maxlength="3" class="form-control" style="font-size: 56pt; text-align: center !important; min-height: 100px;">
+                            <input type="number" id="calificacion_solucion" name="calificacion_solucion" disabled="disabled" value="" min="0" max="10" class="form-control" style="font-size: 56pt; text-align: center !important; min-height: 100px;">
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
@@ -116,8 +129,10 @@ and open the template in the editor.
                 </form>
             </div>
             <div class="panel-footer" style="text-align: center;">
-                * Puede pedir correciones al Estudiante escribiendo en la Retroalimentacion. <br>
-                * Puede eliminar el archivo que cargue el Estudiante.<br>
+                * Antes de Guardar asegurese de haber seleccionado un Documento. <br>
+                * Puede enviar un comentario al Docente.<br>
+                * Debe revisar diariamente para ver si el Docente le pide una correccion.<br>
+                * Si el Docente le pide una correccion debe dar Click al boton "Eliminar" y luego "Cargar" el nuevo Documento Corregido.<br>
             </div>
         </div>
 
