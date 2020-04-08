@@ -1400,6 +1400,58 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="EventosApp">
+      <Cm>Calendario de Eventos</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_evento" nm="pkEventosApp"/>
+      <Cl au="1" df="" nm="id_evento" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Evento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_programa" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Programa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="nombre_evento" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+        <Cm>Nombre del Evento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="descripcion_evento" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2000" sc="null" sg="1" un="0"/>
+        <Cm>Descripcion del Evento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechainicio_evento" nu="0">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha de Inicio del Evento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fechafin_evento" nu="0">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Fecha Final del Evento</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="visible_evento" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Visible?</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_evento" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_EventosApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="EventosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_EventosApp_ProgramasApp" prLkCl="id_programa" upAc="3">
+        <PrTb mn="0" nm="ProgramasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="EventosApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_programa" prCl="id_programa"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="GruposApp">
       <Cm>Grupos de Estudiantes</Cm>
       <TblOpts/>
@@ -3080,6 +3132,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="RespuestasIntentosApp" x="704" y="4671"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ActividadesVirtualesApp" x="1435" y="4486"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SolucionesActividadesVirtualesApp" x="1924" y="4638"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="EventosApp" x="2333" y="4592"/>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.ActividadesVirtualesApp.fk_ActividadesVirtualesApp_AsignaturasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="2327" x2="2327" y1="718" y2="4534"/>
@@ -3256,6 +3309,12 @@
         <positionableLine lineRole="PARENT_LINE" x1="1231" x2="523" y1="740" y2="740"/>
         <positionableLine lineRole="CHILD_LINE" x1="519" x2="519" y1="3673" y2="744"/>
       </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="EscuelaDB.EventosApp.fk_EventosApp_EscuelasApp" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="EscuelaDB.EventosApp.fk_EventosApp_ProgramasApp" parentEdge="" positioner="">
+      <positionableLines/>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.GruposApp.fk_GruposApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
@@ -3541,7 +3600,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="160">
+  <RnmMgr NxRnmId="161">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -3968,6 +4027,9 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="SolucionesActividadesVirtualesApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="159" nNm="id_solucion" oNm="Id"/>
     </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="EventosApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="160" nNm="id_evento" oNm="Id"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -3991,8 +4053,8 @@
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (45)</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (45)/AreasApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/AreasApp</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

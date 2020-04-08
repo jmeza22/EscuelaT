@@ -938,7 +938,6 @@ function getModel(element) {
 function getURL(element) {
     if (element !== null && (element.tagName.toString().toUpperCase() === "INPUT" || element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST" || element.tagName.toString().toUpperCase() === "TABLE" || element.tagName.toString().toUpperCase() === "FORM")) {
         if (element.getAttribute("url") !== null && element.getAttribute("url") !== '') {
-            console.log('Getting URL: '+element.getAttribute("url"));
             return getWSPath() + element.getAttribute("url");
         }
     }
@@ -969,7 +968,7 @@ function setFindByValue(element, findbyvalue, num = "") {
 }
 
 function getFindBy(element, num = "") {
-    if (element !== null && (element.tagName.toString().toUpperCase() === "INPUT" || element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST" || element.tagName.toString().toUpperCase() === "TABLE" || element.tagName.toString().toUpperCase() === "FORM")) {
+    if (element !== null && element.tagName !== undefined && (element.tagName.toString().toUpperCase() === "INPUT" || element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST" || element.tagName.toString().toUpperCase() === "TABLE" || element.tagName.toString().toUpperCase() === "FORM")) {
         if (element.getAttribute("findby" + num) !== null && element.getAttribute("findby" + num) !== '') {
             return element.getAttribute("findby" + num);
         }
@@ -978,7 +977,7 @@ function getFindBy(element, num = "") {
 }
 
 function getFindByValue(element, num = "") {
-    if (element !== null && (element.tagName.toString().toUpperCase() === "INPUT" || element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST" || element.tagName.toString().toUpperCase() === "TABLE" || element.tagName.toString().toUpperCase() === "FORM")) {
+    if (element !== null && element.tagName !== undefined && (element.tagName.toString().toUpperCase() === "INPUT" || element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST" || element.tagName.toString().toUpperCase() === "TABLE" || element.tagName.toString().toUpperCase() === "FORM")) {
         if (element.getAttribute("findbyvalue" + num) !== null && element.getAttribute("findbyvalue" + num) !== '') {
             return element.getAttribute("findbyvalue" + num);
         }
@@ -986,17 +985,35 @@ function getFindByValue(element, num = "") {
     return null;
 }
 
-function setFindbyField(fieldname, findby, findbyvalue, num = "") {
+function setFindByField(fieldname, findby, findbyvalue, num = "") {
     if (fieldname !== null && fieldname !== '' && findby !== null && findby !== '' && findbyvalue !== null && findbyvalue !== '') {
         var field = document.getElementById(fieldname);
-        console.log('Setting Findby' + num + ' ' + findby + '=' + findbyvalue + ' TO ' + field.id);
         if (field !== null && field !== undefined) {
             if (field !== null && (field.tagName.toString().toUpperCase() === "INPUT" || field.tagName.toString().toUpperCase() === "SELECT" || field.tagName.toString().toUpperCase() === "DATALIST" || field.tagName.toString().toUpperCase() === "TABLE" || field.tagName.toString().toUpperCase() === "FORM")) {
+                console.log('Setting Findby' + num + ' ' + findby + '=' + findbyvalue + ' TO ' + field.id);
                 field.setAttribute('findby' + num, findby);
                 field.setAttribute('findbyvalue' + num, findbyvalue);
             }
         }
 }
+}
+
+function getFindbyArray(element) {
+    if (element !== null && element.tagName !== undefined) {
+        var findbyarray = Array();
+        if (getFindBy(element) !== null) {
+            findbyarray['findby'] = getFindBy(element);
+            findbyarray['findbyvalue'] = getFindByValue(element);
+        }
+        for (var i = 0; i < 100; i++) {
+            if (getFindBy(element, i) !== null) {
+                findbyarray['findby' + i] = getFindBy(element, i);
+                findbyarray['findbyvalue' + i] = getFindByValue(element, i);
+            }
+        }
+        return findbyarray;
+    }
+    return null;
 }
 
 function getStatusFieldName(element) {
@@ -1151,6 +1168,10 @@ function setValue(element, value) {
                 element.setAttribute('selected', value);
                 element.selected = value;
             }
+            if (element.tagName.toString().toUpperCase() === "DIV" || element.tagName.toString().toUpperCase() === "LABEL" || element.tagName.toString().toUpperCase() === "P" || element.tagName.toString().toUpperCase() === "A" || element.tagName.toString().toUpperCase() === "UL" || element.tagName.toString().toUpperCase() === "LI"
+                    || element.tagName.toString().toUpperCase() === "H1" || element.tagName.toString().toUpperCase() === "H2" || element.tagName.toString().toUpperCase() === "H3" || element.tagName.toString().toUpperCase() === "H4" || element.tagName.toString().toUpperCase() === "H5" || element.tagName.toString().toUpperCase() === "H6") {
+                element.innerHTML = value;
+            }
         }
     }
     return false;
@@ -1159,7 +1180,6 @@ function setValue(element, value) {
 function setFormData(myform, json) {
     var columns = null, values = null, col = null, element = null;
     if (json !== null && myform !== null && myform.tagName !== undefined && myform.tagName.toString().toUpperCase() === "FORM") {
-        console.log('Setting Data to Form!');
         columns = Array();
         if (Object.keys(json).length === 1 && Object.keys(json)[0] === getModel(myform)) {
             for (var child in json) {
@@ -1177,7 +1197,6 @@ function setFormData(myform, json) {
                     columns.push('' + aux);
                 }
             }
-
             for (var j = 0; j < columns.length; j++) {
                 col = null;
                 element = null;
@@ -1185,7 +1204,7 @@ function setFormData(myform, json) {
                 element = getElement(myform, '' + col);
                 setValue(element, values[col]);
             }
-            console.log('Set Data Form OK!.');
+            console.log('Set Form Data OK!.');
             return true;
         }
 
@@ -1214,7 +1233,7 @@ function getFormData(element, myurl = null) {
             processData: false,
             contentType: false,
             success: function (result, status) {
-                console.log('Status: '+status);
+                console.log('Status: ' + status);
                 if (result !== null && result !== '') {
                     try {
                         result = JSON.parse(result);
@@ -1259,7 +1278,7 @@ function setComboboxFindby(fieldname, findby, findbyvalue, num = "") {
     var myfield = null;
     myfield = document.getElementById(fieldname);
     if (myfield !== null && (myfield.tagName.toString().toUpperCase() === 'SELECT' || myfield.tagName.toString().toUpperCase() === 'DATALIST')) {
-        setFindbyField(fieldname, findby, findbyvalue, num);
+        setFindByField(fieldname, findby, findbyvalue, num);
         return loadComboboxData(myfield);
     }
     return null;
@@ -1320,66 +1339,28 @@ function loadComboboxData(element) {
     var colname = null;
     var colvalue = null;
     var othervalue = null;
-    var findby = null;
-    var findbyvalue = null;
-    var findby1 = null;
-    var findbyvalue1 = null;
-    var findby2 = null;
-    var findbyvalue2 = null;
-    var findby3 = null;
-    var findbyvalue3 = null;
-    var findby4 = null;
-    var findbyvalue4 = null;
-    var findby5 = null;
-    var findbyvalue5 = null;
-    var findby6 = null;
-    var findbyvalue6 = null;
     var object = null;
-    var vals = null;
+    var dataarray = null;
 
     url = getURL(element);
     model = getModel(element);
     colname = getComboboxColName(element);
     colvalue = getComboboxColValue(element);
     othervalue = getComboboxOtherValue(element);
-    findby = getFindBy(element);
-    findbyvalue = getFindByValue(element);
-    findby1 = getFindBy(element, 1);
-    findbyvalue1 = getFindByValue(element, 1);
-    findby2 = getFindBy(element, 2);
-    findbyvalue2 = getFindByValue(element, 2);
-    findby3 = getFindBy(element, 3);
-    findbyvalue3 = getFindByValue(element, 3);
-    findby4 = getFindBy(element, 4);
-    findbyvalue4 = getFindByValue(element, 4);
-    findby5 = getFindBy(element, 5);
-    findbyvalue5 = getFindByValue(element, 5);
-    findby6 = getFindBy(element, 6);
-    findbyvalue6 = getFindByValue(element, 6);
-    vals = {
-        "model": model,
-        "action": 'findAll',
-        "colname": colname,
-        "colvalue": colvalue,
-        "othervalue": othervalue,
-        "findby": findby,
-        "findbyvalue": findbyvalue,
-        "findby1": findby1,
-        "findbyvalue1": findbyvalue1,
-        "findby2": findby2,
-        "findbyvalue2": findbyvalue2,
-        "findby3": findby3,
-        "findbyvalue3": findbyvalue3,
-        "findby4": findby4,
-        "findbyvalue4": findbyvalue4,
-        "findby5": findby5,
-        "findbyvalue5": findbyvalue5,
-        "findby6": findby6,
-        "findbyvalue6": findbyvalue6
-    };
+    dataarray = getFindbyArray(element);
+    if (dataarray === null) {
+        dataarray = Array();
+    }
+    dataarray['model'] = model;
+    dataarray['action'] = 'findAll';
+    dataarray['colname'] = colname;
+    dataarray['colvalue'] = colvalue;
+    dataarray['othervalue'] = othervalue;
+    dataarray = Object.assign({}, dataarray);
+
     console.log('Getting Data for SELECT: ' + element.id);
     if (element !== null &&
-            (element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST") &&
+            (element.tagName !== undefined && element.tagName.toString().toUpperCase() === "SELECT" || element.tagName.toString().toUpperCase() === "DATALIST") &&
             url !== null && url !== '' &&
             model !== null && model !== '' &&
             colname !== null && colname !== '' &&
@@ -1387,7 +1368,7 @@ function loadComboboxData(element) {
         promise = $.ajax({
             method: "POST",
             url: url,
-            data: vals,
+            data: dataarray,
             success: function (result, status) {
                 if (result !== null && result !== '') {
                     try {
@@ -1678,58 +1659,24 @@ function loadTableData(element, dynamic) {
     var promise = null;
     var url = null;
     var model = null;
-    var findby = null;
-    var findbyvalue = null;
-    var findby1 = null;
-    var findbyvalue1 = null;
-    var findby2 = null;
-    var findbyvalue2 = null;
-    var findby3 = null;
-    var findbyvalue3 = null;
-    var findby4 = null;
-    var findbyvalue4 = null;
-    var findby5 = null;
-    var findbyvalue5 = null;
-    var vals = null;
+    var dataarray = null;
     var object = null;
     url = getURL(element);
     model = getModel(element);
-    findby = getFindBy(element);
-    findbyvalue = getFindByValue(element);
-    findby1 = getFindBy(element, 1);
-    findbyvalue1 = getFindByValue(element, 1);
-    findby2 = getFindBy(element, 2);
-    findbyvalue2 = getFindByValue(element, 2);
-    findby3 = getFindBy(element, 3);
-    findbyvalue3 = getFindByValue(element, 3);
-    findby4 = getFindBy(element, 4);
-    findbyvalue4 = getFindByValue(element, 4);
-    findby5 = getFindBy(element, 5);
-    findbyvalue5 = getFindByValue(element, 5);
-    vals = {
-        "model": model,
-        "action": 'findAll',
-        "findby": findby,
-        "findbyvalue": findbyvalue,
-        "findby1": findby1,
-        "findbyvalue1": findbyvalue1,
-        "findby2": findby2,
-        "findbyvalue2": findbyvalue2,
-        "findby3": findby3,
-        "findbyvalue3": findbyvalue3,
-        "findby4": findby4,
-        "findbyvalue4": findbyvalue4,
-        "findby5": findby5,
-        "findbyvalue5": findbyvalue5
-    };
-
+    dataarray = getFindbyArray(element);
+    if (dataarray === null) {
+        dataarray = Array();
+    }
+    dataarray['model'] = model;
+    dataarray['action'] = 'findAll';
+    dataarray = Object.assign({}, dataarray);
     console.log('Getting Data for TABLE: ' + element.id);
 
-    if (element !== null && element.tagName.toString().toUpperCase() === "TABLE") {
+    if (element !== null && element.tagName !== undefined && element.tagName.toString().toUpperCase() === "TABLE") {
         promise = $.ajax({
             method: "POST",
             url: url,
-            data: vals,
+            data: dataarray,
             success: function (result, status) {
                 if (result !== null && result !== '') {
                     try {

@@ -64,7 +64,7 @@ function setIdPreguntaToOpcionRespuesta() {
         idpregunta.value = pregunta.value;
         idpregunta = getElement(formOpcion, 'id_pregunta');
         idpregunta.value = pregunta.value;
-        setFindbyField(mytable.id, idpregunta.id, idpregunta.value);
+        setFindByField(mytable.id, idpregunta.id, idpregunta.value);
         getFormData(formPregunta).done(function () {
             idpregunta.value = pregunta.value;
             document.getElementById('nombre_pregunta').value = document.getElementById('nombrecorto_pregunta').value;

@@ -14,10 +14,10 @@ function setFindby() {
     var grupo = document.getElementById('id_grupo');
     var periodo = document.getElementById('id_periodo');
     var mytable = document.getElementById("dataTable0");
-    setFindbyField(mytable.id, programa.id, programa.value, 1);
-    setFindbyField(mytable.id, grado.id, grado.value, 2);
-    setFindbyField(mytable.id, grupo.id, grupo.value, 3);
-    setFindbyField(mytable.id, periodo.id, periodo.value, 4);
+    setFindByField(mytable.id, programa.id, programa.value, 1);
+    setFindByField(mytable.id, grado.id, grado.value, 2);
+    setFindByField(mytable.id, grupo.id, grupo.value, 3);
+    setFindByField(mytable.id, periodo.id, periodo.value, 4);
     LoadTable();
 }
 

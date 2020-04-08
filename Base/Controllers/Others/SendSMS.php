@@ -113,9 +113,13 @@ class SendSMS {
     public function SendLabsMobile($message) {
         $this->setMESSAGE($message);
         if (is_array($this->to) && count($this->to) > 0 && $this->message !== null && $this->message !== '') {
+            $from = str_replace(' ', '', strtoupper($this->from));
+            if (strlen($from) > 11) {
+                $from = str_split($from, 11)[0];
+            }
             $this->setMSISDN($this->to);
             $post['message'] = $this->message;
-            $post['tpoa'] = "Sender";
+            $post['tpoa'] = $from;
             $post['recipient'] = $this->to;
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -136,7 +140,7 @@ class SendSMS {
 
             $result = curl_exec($curl);
             $err = curl_error($curl);
-            if($err){
+            if ($err) {
                 echo $err;
             }
             curl_close($curl);
