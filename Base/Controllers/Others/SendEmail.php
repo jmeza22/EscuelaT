@@ -98,7 +98,13 @@ class SendEmail {
         }
         return false;
     }
-
+    
+    public function setHostingerCO() {
+        $this->secure = "tls";
+        $this->host = "smtp.hostinger.co";
+        $this->port = 587;
+    }
+    
     public function setHotmail() {
         $this->secure = "tls";
         $this->host = "smtp.live.com";
@@ -138,6 +144,9 @@ class SendEmail {
     public function prepareSMPT($server = 'Gmail') {
         $this->smtp->isSMTP();
         $this->smtp->SMTPAuth = true;
+        if ($server === 'HostingerCO') {
+            $this->setHostingerCO();
+        }
         if ($server === 'Gmail') {
             $this->setGmail();
         }

@@ -40,16 +40,29 @@ function MarcarContacto(item) {
 
 function setResultadosWauSMS(data) {
     var tableR = document.getElementById('dataTableResultados');
-    if (tableR !== undefined && tableR !== null) {
+    if (data !== undefined && data !== null) {
         clearTableData(tableR);
         data = JSON.parse(data);
         if (data.error !== undefined && data.error.description !== undefined && data.error.description !== '') {
             alert('Codigo: ' + data.error.code + ' - Error: ' + data.error.description);
         } else {
-            alert('Se ha enviado el Mensaje!.');
+            alert('Se ha enviado el Mensaje por medio de WauSMS!.');
         }
         setTableData(tableR, data, false);
         document.getElementById('resultadoWauSMS').click();
+    }
+}
+
+function setResultadosLabsMobile(data) {
+    if (data !== undefined && data !== null) {
+        data = JSON.parse(data);
+        if (data.code !== undefined && data.subid !== undefined) {
+            if (data.code === 0 || data.code === '0') {
+                alert('Se ha enviado el Mensaje por medio de LabsMobile!.');
+            }else{
+                alert('Codigo: ' + data.code + ' - Error: ' + data.message);
+            }
+        }
     }
 }
 
@@ -62,6 +75,9 @@ function Send(item) {
             if (data !== undefined && data !== null) {
                 if (getComboboxValue(server) === 'WauSMS') {
                     setResultadosWauSMS(sessionStorage.getItem('data'));
+                }
+                if (getComboboxValue(server) === 'LabsMobile') {
+                    setResultadosLabsMobile(sessionStorage.getItem('data'));
                 }
             } else {
                 alert(getErrorMessage());

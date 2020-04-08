@@ -33,6 +33,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             if (isset($_POST['server_sms']) && $_POST['server_sms'] === 'WauSMS') {
                 $result = $sms->SendWauSMS($_POST['mensaje_sms']);
             }
+            if (isset($_POST['server_sms']) && $_POST['server_sms'] === 'LabsMobile') {
+                $result = $sms->SendLabsMobile($_POST['mensaje_sms']);
+            }
         }
     }
     if ($result !== null) {

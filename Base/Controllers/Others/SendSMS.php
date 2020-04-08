@@ -59,6 +59,24 @@ class SendSMS {
         return false;
     }
 
+    public function setMSISDN($to) {
+        if (is_array($to) && count($to) > 0 && !is_array($to[0])) {
+            $arrayTO = array();
+            $i = 0;
+            foreach ($to as $row => $value) {
+                if ($value !== null && $value !== '') {
+                    $arrayTO[]['msisdn'] = $value;
+                    $i++;
+                }
+            }
+            if (count($arrayTO) > 0) {
+                $this->to = $arrayTO;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function setMESSAGE($message) {
         if ($message !== null && $message !== '') {
             $this->message = $message;
@@ -86,6 +104,42 @@ class SendSMS {
                 "Accept: application/json",
                 "Authorization: Basic " . base64_encode($this->user . ":" . $this->password)));
             $result = curl_exec($ch);
+            curl_close($ch);
+            return $result;
+        }
+        return null;
+    }
+
+    public function SendLabsMobile($message) {
+        $this->setMESSAGE($message);
+        if (is_array($this->to) && count($this->to) > 0 && $this->message !== null && $this->message !== '') {
+            $this->setMSISDN($this->to);
+            $post['message'] = $this->message;
+            $post['tpoa'] = "Sender";
+            $post['recipient'] = $this->to;
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.labsmobile.com/json/send",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode($post),
+                CURLOPT_HTTPHEADER => array(
+                    "Authorization: Basic " . base64_encode($this->user . ":" . $this->password),
+                    "Cache-Control: no-cache",
+                    "Content-Type: application/json"
+                ),
+            ));
+
+            $result = curl_exec($curl);
+            $err = curl_error($curl);
+            if($err){
+                echo $err;
+            }
+            curl_close($curl);
             return $result;
         }
         return null;
