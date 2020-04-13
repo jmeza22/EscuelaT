@@ -30,9 +30,8 @@ class Personas extends ReportsBank {
     public function setArray($postdata) {
         if ($postdata !== null && is_array($postdata)) {
             $this->postdata = $postdata;
-            if (isset($this->postdata['id_tipousuario']) && $this->postdata['id_tipousuario'] !== null) {
-                $this->idtipousuario = $this->postdata['id_tipousuario'];
-                unset($this->postdata['id_tipousuario']);
+            if (isset($this->postdata['tipo_persona']) && $this->postdata['tipo_persona'] !== null) {
+                $this->idtipousuario = $this->postdata['tipo_persona'];
             }
             if (isset($this->postdata['fechaexpdoc_persona']) && ($this->postdata['fechaexpdoc_persona'] === '' || $this->postdata['fechaexpdoc_persona'] === '0000/00/00')) {
                 unset($this->postdata['fechaexpdoc_persona']);
@@ -115,7 +114,7 @@ class Personas extends ReportsBank {
             $datos['nombrecompleto_persona'] = $this->postdata['apellido1_persona'] . ' ' . $this->postdata['apellido2_persona'] . ' ' . $this->postdata['nombre1_persona'] . ' ' . $this->postdata['nombre2_persona'];
             $datos['username_usuario'] = strtoupper(str_replace(" ", "", $this->postdata['nombre1_persona'])) . $this->idpersona;
             $datos['password_usuario'] = $this->crypt->crypt($datos['username_usuario']);
-            $datos['id_tipousuario'] = $this->idtipousuario;
+            $datos['tipo_persona'] = $this->idtipousuario;
             $datos['status_usuario'] = '1';
             $this->setModel('UsuariosApp');
             $this->setAction('insert');

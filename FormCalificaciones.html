@@ -284,14 +284,14 @@ and open the template in the editor.
                                     <input type="hidden" editable="true" required="required" readonly="readonly" maxlength="24" id="nombrecompleto_estudiante{{rownum}}" name="nombrecompleto_estudiante[]" value="">
                                 </td>
                                 <td> <label>{{nombrecompleto_estudiante}}</label> </td>
-                                <td name="tdp1"> <label>{{np1}}</label> </td>
-                                <td name="tdp2"> <label>{{np2}}</label> </td>
-                                <td name="tdp3"> <label>{{np3}}</label> </td>
-                                <td name="tdp4"> <label>{{np4}}</label> </td>
-                                <td name="tdp5"> <label>{{np5}}</label> </td>
-                                <td name="tdp6"> <label>{{np6}}</label> </td>
+                                <td name="tdp1"> <label>{{p1_nd_calificacion}}</label> </td>
+                                <td name="tdp2"> <label>{{p2_nd_calificacion}}</label> </td>
+                                <td name="tdp3"> <label>{{p3_nd_calificacion}}</label> </td>
+                                <td name="tdp4"> <label>{{p4_nd_calificacion}}</label> </td>
+                                <td name="tdp5"> <label>{{p5_nd_calificacion}}</label> </td>
+                                <td name="tdp6"> <label>{{p6_nd_calificacion}}</label> </td>
                                 <td name="tddef"> <label>{{def}}</label> </td>
-                                <td name="tdhab"> <label>{{nphab}}</label> </td>
+                                <td name="tdhab"> <label>{{phab_nd_calificacion}}</label> </td>
                                 <td name="nc"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="nc_calificacion{{rownum}}" name="nc_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroCAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
                                 <td name="np"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="np_calificacion{{rownum}}" name="np_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroPAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>
                                 <td name="na"> <input type="text" editable="true" float="true" min="0" max="10" maxlength="3" id="na_calificacion{{rownum}}" name="na_calificacion[]" value="" style="text-align: center;" oninput="setNotaDefinitiva(this);ValidarNotasPorFila(this);setLogroAAutomatico(this);" list="lista_calificaciones" class="form-control"> </td>

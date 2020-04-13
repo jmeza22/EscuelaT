@@ -148,9 +148,11 @@ class MatriculaAsignaturas extends ReportsBank {
                     $planestudio[$i]['id_matricula'] = $this->idmatricula;
                     $planestudio[$i]['id_matasig'] = $planestudio[$i]['id_matricula'] . $planestudio[$i]['id_asignatura'];
                     $planestudio[$i]['id_estudiante'] = $datosmatricula['id_estudiante'];
-                    $planestudio[$i]['id_grupo'] = $datosmatricula['id_grupo'];
                     $planestudio[$i]['id_periodo'] = $datosmatricula['id_periodo'];
-                    $planestudio[$i]['numgrado_programa'] = $datosmatricula['numgrado_programa'];
+                    unset($planestudio[$i]['id_escuela']);
+                    unset($planestudio[$i]['id_programa']);
+                    unset($planestudio[$i]['id_planestudio']);
+                    unset($planestudio[$i]['numgrado_programa']);
                     unset($planestudio[$i]['hteoricas_asignatura']);
                     unset($planestudio[$i]['hpracticas_asignatura']);
                     unset($planestudio[$i]['status_planestudiodetalle']);

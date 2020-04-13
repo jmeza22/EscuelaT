@@ -32,8 +32,9 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $bc->setAction('findAll');
     $bc->setModel($model);
 
-    if (isset($_POST['findby']) && isset($_POST['findbyvalue']) && strcmp($_POST['findby'], '') !== 0 && strcmp($_POST['findbyvalue'], '') !== 0 && strcmp($_POST['findby'], 'id_carga') === 0) {
-        $idcarga = $_POST['findbyvalue'];
+    $params = $bc->parseFindByToArray($_POST);
+    if (isset($params['id_carga']) && $params['id_carga'] !== '') {
+        $idcarga = $params['id_carga'];
     }
 
     $resultCarga = $bc->getCargasDocentes($session->getEnterpriseID(), null, null, null, null, $idcarga);
@@ -51,17 +52,16 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $iddocente = $resultCarga['id_docente'];
     $idcorte = $variables->getIdCortePeriodo();
     $numcorte = $variables->getNumCortePeriodo();
-
     $sqlC = "SELECT @rownum := @rownum +1 AS rownum, M.nombrecompleto_estudiante,  "
-            . " MA.*, "
+            . " M.*, MA.id_asignatura, MA.id_matasig, "
             . " IFNULL(C.id_calificacion,0) AS id_calificacion,"
-            . " IFNULL(C.p1_nd_calificacion,' ') AS np1, "
-            . " IFNULL(C.p2_nd_calificacion,' ') AS np2, "
-            . " IFNULL(C.p3_nd_calificacion,' ') AS np3, "
-            . " IFNULL(C.p4_nd_calificacion,' ') AS np4, "
-            . " IFNULL(C.p5_nd_calificacion,' ') AS np5, "
-            . " IFNULL(C.p6_nd_calificacion,' ') AS np6, "
-            . " IFNULL(C.phab_nd_calificacion,'NO') AS nphab, "
+            . " IFNULL(C.p1_nd_calificacion,' ') AS p1_nd_calificacion, "
+            . " IFNULL(C.p2_nd_calificacion,' ') AS p2_nd_calificacion, "
+            . " IFNULL(C.p3_nd_calificacion,' ') AS p3_nd_calificacion, "
+            . " IFNULL(C.p4_nd_calificacion,' ') AS p4_nd_calificacion, "
+            . " IFNULL(C.p5_nd_calificacion,' ') AS p5_nd_calificacion, "
+            . " IFNULL(C.p6_nd_calificacion,' ') AS p6_nd_calificacion, "
+            . " IFNULL(C.phab_nd_calificacion,'NO') AS phab_nd_calificacion, "
             . " ROUND(IFNULL(("
             . " (IFNULL(C.p1_nd_calificacion,0)*(IFNULL(Cn.p1_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p2_nd_calificacion,0)*(IFNULL(Cn.p2_porcentaje_configuracion,0)/100)) + "
@@ -88,20 +88,20 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " ObservadorEstudianteApp OE "
             . " INNER JOIN MatriculasApp M ON OE.id_estudiante=M.id_estudiante "
             . " INNER JOIN MatriculaAsignaturasApp MA ON MA.id_matricula=M.id_matricula "
-            . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
-            . " INNER JOIN ConfiguracionApp Cn ON MA.id_escuela=Cn.id_escuela,"
+            . " INNER JOIN ConfiguracionApp Cn ON M.id_escuela=Cn.id_escuela "
+            . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig, "
             . " (SELECT @rownum :=0) R "
             . " WHERE M.status_matricula=1 "
             . " AND M.estado_matricula!='Retirado' "
             . " AND M.estado_matricula!='' "
             . " AND MA.status_matriculaasignatura=1 "
-            . " AND MA.id_escuela = :p_id_escuela "
-            . " AND MA.id_programa = :p_id_programa "
-            . " AND MA.id_planestudio = :p_id_planestudio "
+            . " AND M.id_escuela = :p_id_escuela "
+            . " AND M.id_programa = :p_id_programa "
+            . " AND M.id_planestudio = :p_id_planestudio "
+            . " AND M.numgrado_programa = :p_numgrado_programa "
+            . " AND M.id_grupo = :p_id_grupo "
+            . " AND M.id_periodo = :p_id_periodo "
             . " AND MA.id_asignatura = :p_id_asignatura "
-            . " AND MA.numgrado_programa = :p_numgrado_programa "
-            . " AND MA.id_grupo = :p_id_grupo "
-            . " AND MA.id_periodo = :p_id_periodo "
             . " ORDER BY M.nombrecompleto_estudiante   "
     ;
     $resultMatasig = $bc->selectJSONArray($sqlC, $arraywhere);

@@ -85,7 +85,7 @@ class PDFReports extends TCPDF {
     }
 
     private function getSpanishOrdinalsNumbers($number) {
-        $ordinals = array("Transicion", "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Septimo", "Octavo", "Noveno", "Décimo", "Undecimo", "Duodecimo");
+        $ordinals = array("TRANSICION", "PRIMERO", "SEGUNDO", "TERCERO", "CUARTO", "QUINTO", "SEXTO", "SEPTIMO", "OCTAVO", "NOVENO", "DÉCIMO", "UNDECIMO", "DUODECIMO");
         if (isset($ordinals[$number])) {
             return $ordinals[$number];
         }
@@ -905,6 +905,9 @@ class PDFReports extends TCPDF {
                                 if ($calificaciones[$j]['p6_nd_calificacion'] === '0' || $calificaciones[$j]['p6_nd_calificacion'] === '0.0') {
                                     $calificaciones[$j]['p6_nd_calificacion'] = '';
                                 }
+                                if ($calificaciones[$j]['phab_nd_calificacion'] === '0' || $calificaciones[$j]['phab_nd_calificacion'] === '0.0') {
+                                    $calificaciones[$j]['phab_nd_calificacion'] = '';
+                                }
 
                                 $this->SetFont($this->fontfamilycontent, '', 10);
                                 $ih = '' . ($calificaciones[$j]['hteoricas_asignatura'] + $calificaciones[$j]['hpracticas_asignatura']);
@@ -1289,7 +1292,7 @@ class PDFReports extends TCPDF {
                                         $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p4_nd_calificacion']), 1, 0, 'C');
                                         $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p5_nd_calificacion']), 1, 0, 'C');
                                         $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['p6_nd_calificacion']), 1, 0, 'C');
-                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0.0', '', $calificaciones[$k]['phab_nd_calificacion']), 1, 0, 'C');
+                                        $this->Cell($pageWidth * 7 / 100, 4, str_replace('0', '', $calificaciones[$k]['phab_nd_calificacion']), 1, 0, 'C');
                                         $this->SetFont($this->fontfamilycontent, 'B', 10);
                                         $this->Cell($pageWidth * 9 / 100, 4, $calificaciones[$k]['pfin_nd_calificacion'], 1, 0, 'C');
                                         $this->Ln();

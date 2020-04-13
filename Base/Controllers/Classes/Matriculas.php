@@ -72,12 +72,6 @@ class Matriculas extends ReportsBank {
             $array['numgrado_programa'] = $this->postdata['numgrado_programa'];
             $array['id_grupo'] = $this->postdata['id_grupo'];
             $array['id_matricula'] = $this->postdata['id_matricula'];
-            $sql = "UPDATE MatriculaAsignaturasApp "
-                    . " SET id_planestudio=:id_planestudio,"
-                    . " numgrado_programa=:numgrado_programa, "
-                    . " id_grupo=:id_grupo "
-                    . " WHERE id_matricula=:id_matricula ";
-            $this->query($sql, $array);
             $sql = "UPDATE CalificacionesApp "
                     . " SET id_planestudio=:id_planestudio,"
                     . " numgrado_programa=:numgrado_programa, "
