@@ -37,8 +37,9 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-4">
                             <label>Servidor</label>
-                            <select id="server_email" name="server_email" required="required" class="form-control" style="width: 100%;">
+                            <select id="server_email" name="server_email" required="required" class="form-control" onchange="setRequireds()" style="width: 100%;">
                                 <option selected="selected" value="">Ninguno</option>
+                                <option value="PHPMail">Sin Servidor</option>
                                 <option value="Gmail">Gmail</option>
                                 <option value="Hotmail">Hotmail / Outlook</option>
                                 <option value="Yahoo">Yahoo</option>
@@ -47,11 +48,11 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-4">
                             <label>Email</label>
-                            <input type="email" alphanumeric="true" id="username_email" name="username_email" value="" class="form-control" maxlength="64" required="required" placeholder="Su Email Personal" />
+                            <input type="email" alphanumeric="true" id="username_email" name="username_email" value="info@escuelat.site" class="form-control" maxlength="64" required="required" placeholder="Su Email Personal" />
                         </div>
                         <div class="col-sm-4">
                             <label>Contraseña</label>
-                            <input type="password" id="password_email" name="password_email" value="" class="form-control" maxlength="64" required="required" placeholder="Contraseña de su Email" />
+                            <input type="password" id="password_email" name="password_email" value="" class="form-control" maxlength="64" placeholder="Contraseña de su Email" />
                         </div>
                     </div>
                     <div class="row">

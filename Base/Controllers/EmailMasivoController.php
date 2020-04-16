@@ -7,8 +7,8 @@ $result = false;
 $array = null;
 if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     $email = new SendEmail();
-    if (isset($_POST['server_email']) && isset($_POST['username_email']) && isset($_POST['password_email']) && isset($_POST['asunto_email']) && isset($_POST['mensaje_email'])) {
-        if ($_POST['server_email'] !== '' && $_POST['username_email'] !== '' && $_POST['password_email'] !== '' && $_POST['asunto_email'] !== '' && $_POST['mensaje_email'] !== '') {
+    if (isset($_POST['server_email']) && isset($_POST['username_email']) && isset($_POST['asunto_email']) && isset($_POST['mensaje_email'])) {
+        if ($_POST['server_email'] !== '' && $_POST['username_email'] !== '' && $_POST['asunto_email'] !== '' && $_POST['mensaje_email'] !== '') {
             $email->setUSERNAME($_POST['username_email']);
             $email->setPASSWORD($_POST['password_email']);
             $email->setFROM($_POST['username_email']);
@@ -27,8 +27,13 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
             }
             $email->setTO($to);
             $email->setMESSAGE($_POST['mensaje_email']);
-            $email->prepareSMPT($_POST['server_email']);
-            $result = $email->sendMailSMTP();
+            if ($_POST['server_email'] !== 'PHPMail') {
+                $email->prepareSMPT($_POST['server_email']);
+                $result = $email->sendMailSMTP();
+            }
+            if ($_POST['server_email'] === 'PHPMail') {
+                $result = $email->htmlMAIL();
+            }
         }
     }
     if ($result === true) {

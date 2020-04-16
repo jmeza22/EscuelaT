@@ -21,6 +21,35 @@ function setFindby() {
     LoadTable();
 }
 
+function setRequireds() {
+    var server = document.getElementById('server_email');
+    if (server !== null && server !== undefined && server.tagName === 'SELECT') {
+        var username = document.getElementById('username_email');
+        var password = document.getElementById('password_email');
+        username.removeAttribute('required');
+        password.removeAttribute('required');
+        if (getComboboxValue(server) === 'PHPMail') {
+            username.setAttribute('required', 'required');
+        }
+        if (getComboboxValue(server) === 'Gmail') {
+            username.setAttribute('required', 'required');
+            password.setAttribute('required', 'required');
+        }
+        if (getComboboxValue(server) === 'Hotmail') {
+            username.setAttribute('required', 'required');
+            password.setAttribute('required', 'required');
+        }
+        if (getComboboxValue(server) === 'Yahoo') {
+            username.setAttribute('required', 'required');
+            password.setAttribute('required', 'required');
+        }
+        if (getComboboxValue(server) === 'HostingerCO') {
+            username.setAttribute('required', 'required');
+            password.setAttribute('required', 'required');
+        }
+    }
+}
+
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
     loadTableData(mytable, false);

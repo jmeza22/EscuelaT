@@ -134,10 +134,10 @@ and open the template in the editor.
                             <tr id="samplerow" samplerow="true" form="formTable"  style="display: none;">
                                 <td> <label>{{id_estudiante}}</label></td>
                                 <td> <label>{{nombrecompleto_estudiante}}</label></td>
-                                <td> <label>{{telefonoacudiente1_estudiante}}</label></td>
+                                <td> <label><a href="tel:{{telefonoacudiente1_estudiante}}">{{telefonoacudiente1_estudiante}}</a></label></td>
                                 <td> <label>{{telefono_persona}}</label></td>
                                 <td>
-                                    <input type="checkbox" name="check[]" id="check" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this); MarcarContacto(this);" class="form-control" title="Seleccionar"/>
+                                    <input type="checkbox" name="check[]" id="check" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this); MarcarContacto(this);" class="form-control" title="Seleccionar este Estudiante"/>
                                     <input disabled="disabled" editable="true" type="hidden" name="nombrecompleto_estudiante[]" id="nombrecompleto_estudiante" value="" >
                                     <input disabled="disabled" editable="true" type="hidden" name="telefonoacudiente1_estudiante[]" id="telefonoacudiente1_estudiante" value="" >
                                     <input disabled="disabled" editable="true" type="hidden" name="telefono_persona[]" id="telefono_persona" value="" >

@@ -98,13 +98,13 @@ class SendEmail {
         }
         return false;
     }
-    
+
     public function setHostingerCO() {
         $this->secure = "tls";
         $this->host = "smtp.hostinger.co";
         $this->port = 587;
     }
-    
+
     public function setHotmail() {
         $this->secure = "tls";
         $this->host = "smtp.live.com";
@@ -134,11 +134,26 @@ class SendEmail {
             $this->smtp->ErrorInfo;
         }
     }
-    
+
     public function getAllAddress() {
         if ($this->smtp !== null) {
             $this->smtp->getAllRecipientAddresses();
         }
+    }
+
+    public function parseTOtoString($to) {
+        $string = '';
+        if (is_array($to) && count($to) > 0) {
+            foreach ($to as $key => $value) {
+                $string = $string . $value . ',';
+            }
+            $string = substr($string, 0, -1);
+            return $string;
+        }
+        if (is_string($to)) {
+            return $to;
+        }
+        return null;
     }
 
     public function prepareSMPT($server = 'Gmail') {
@@ -184,7 +199,8 @@ class SendEmail {
         $this->setMESSAGE($message);
         if ($this->from !== null && $this->subject !== null && $this->to !== null && $this->message !== null) {
             $this->headers = 'From:' . $this->from;
-            $result = mail($this->to, $this->subject, $this->message, $this->headers);
+            $to = $this->parseTOtoString($this->to);
+            $result = mail($to, $this->subject, $this->message, $this->headers);
             return $result;
         }
         return false;
@@ -196,7 +212,8 @@ class SendEmail {
             $this->headers = 'MIME-Version: 1.0' . "\r\n";
             $this->headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
             $this->headers .= 'From: EMAIL <' . $this->from . '>' . "\r\n";
-            $result = mail($this->to, $this->subject, $this->message, $this->headers);
+            $to = $this->parseTOtoString($this->to);
+            $result = mail($to, $this->subject, $this->message, $this->headers);
             return $result;
         }
         return false;

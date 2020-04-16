@@ -1142,11 +1142,11 @@ function submitAjax(formData, url, header, reload) {
 function setValue(element, value) {
     if (element !== undefined && element !== null && element.tagName !== undefined) {
         if (element !== null) {
+            if (value === null || value === 'null' || value === 'NULL') {
+                value = '';
+            }
             element.value = "";
             element.value = value;
-            if (value === null) {
-                element.value = '';
-            }
             if (element.value === '[object Object]') {
                 element.value = '';
             }
@@ -1629,6 +1629,9 @@ function setTableData(table, json, dynamic) {
                 newrow.innerHTML = samplerow;
                 for (j1 = 0; j1 < columns.length; j1++) {
                     col = columns[j1];
+                    if (json[i][col] === null || json[i][col] === 'null' || json[i][col] === 'NULL') {
+                        json[i][col] = '';
+                    }
                     newrow.innerHTML = newrow.innerHTML.split('{{' + col + '}}').join(json[i][col]);
                 }
                 tbody.appendChild(newrow);
