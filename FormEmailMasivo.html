@@ -149,9 +149,18 @@ and open the template in the editor.
                     </table>
                 </div>
                 <div>
-                    <center>
-                        <button type="button" form="formTable" id="guardar" name="guardar" action="insert" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Enviar Correos </button>
-                    </center>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="selectall" name="selectall" class="btn btn-default" onclick="selectAllEmails();" style="width: 200px;" title="Seleccionar todos los contactos."><i class="glyphicon glyphicon-list-alt"></i> Seleccionar Todos</button>
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save" form="formTable" action="insert" save="true" class="btn btn-primary" onclick="Send(this);" style="width: 200px;"><i class="glyphicon glyphicon-send"></i> Enviar Correos </button>        
+                            </center>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

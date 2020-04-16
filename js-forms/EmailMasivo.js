@@ -67,6 +67,21 @@ function MarcarContacto(item) {
     }
 }
 
+function selectAllEmails() {
+    var check = document.getElementsByName('check[]');
+    if (check !== undefined && check !== null) {
+        console.log('Selecting all Contascts');
+        var i = null;
+        i = 0;
+        while (check[i] !== undefined && check[i] !== null) {
+            if (check[i].getAttribute('uncheckedvalue') !== undefined && check[i].getAttribute('uncheckedvalue') !== null && check[i].value === check[i].getAttribute('uncheckedvalue')) {
+                check[i].click();
+            }
+            i++;
+        }
+    }
+}
+
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
