@@ -26,9 +26,8 @@ and open the template in the editor.
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
-        <script type="text/javascript" src="js/sendSMS.js"></script>
         <script type="text/javascript" src="js-forms/SMSMasivo.js"></script>
-        
+
     </head>
     <body>
 
@@ -41,9 +40,9 @@ and open the template in the editor.
                             <label>Servicio SMS</label>
                             <select id="server_sms" name="server_sms" required="required" class="form-control" style="width: 100%;" onchange="setRequireds();" >
                                 <option selected="selected" value="">Ninguno</option>
-                                <option value="MyDevice">Mi Dispositivo</option>
                                 <option value="WauSMS">WauSMS</option>
                                 <option value="LabsMobile">LabsMobile</option>
+                                <option value="MyDevice">Mi Dispositivo</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
@@ -58,7 +57,7 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-4">
                             <label>Indicativo</label>
-                            <input type="text" alphanumeric="true" id="indicativo_sms" name="indicativo_sms" value="57" class="form-control" maxlength="4" placeholder="Indicativo del Pais" required="required" />
+                            <input type="text" alphanumeric="true" id="indicativo_sms" name="indicativo_sms" value="57" list="lista_indicativos" class="form-control" maxlength="4" placeholder="Indicativo del Pais" required="required" />
                             <label>Telefono</label>
                             <input type="tel" alphanumeric="true" id="destino_sms" name="destino_sms" value="" class="form-control" maxlength="10" placeholder="Telefono del Destinatario" />
                         </div>
@@ -113,6 +112,16 @@ and open the template in the editor.
                         </div>
 
                     </div>
+                    <datalist id="lista_indicativos" name="lista_indicativos">
+                        <option value="57">Colombia</option>
+                        <option value="58">Venezuela</option>
+                        <option value="593">Ecuador</option>
+                        <option value="51">Perú</option>
+                        <option value="55">Brasil</option>
+                        <option value="54">Argentina</option>
+                        <option value="34">España</option>
+                        <option value="1">Estados Unidos</option>
+                    </datalist>
                 </form>
             </div>
         </div>
@@ -135,7 +144,7 @@ and open the template in the editor.
                                 <td> <label>{{id_estudiante}}</label></td>
                                 <td> <label>{{nombrecompleto_estudiante}}</label></td>
                                 <td> <label><a href="tel:{{telefonoacudiente1_estudiante}}">{{telefonoacudiente1_estudiante}}</a></label></td>
-                                <td> <label>{{telefono_persona}}</label></td>
+                                <td> <label><a href="tel:{{telefono_persona}}">{{telefono_persona}}</a></label></td>
                                 <td>
                                     <input type="checkbox" name="check[]" id="check" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this); MarcarContacto(this);" class="form-control" title="Seleccionar este Estudiante"/>
                                     <input disabled="disabled" editable="true" type="hidden" name="nombrecompleto_estudiante[]" id="nombrecompleto_estudiante" value="" >
@@ -148,9 +157,20 @@ and open the template in the editor.
                     </table>
                 </div>
                 <div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="selectall" name="selectall" class="btn btn-default" onclick="selectAllPhones();" style="width: 200px;" title="Seleccionar todos los contactos."><i class="glyphicon glyphicon-list-alt"></i> Seleccionar Todos</button>
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save" form="formTable" action="insert" save="true" class="btn btn-primary" onclick="Send(this);" style="width: 200px;"><i class="glyphicon glyphicon-send"></i> Enviar Mensajes</button>        
+                            </center>
+                        </div>
+                    </div>
                     <center>
-                        <button type="button" form="formTable" id="guardar" name="guardar" action="insert" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Enviar SMS </button>
-                        <button type="button" form="formTable" id="resultadoWauSMS" name="resultadoWauSMS"  class="btn btn-primary" href="#modal_resultados_WauSMS" data-toggle="modal" style="display: none;"><i class="glyphicon glyphicon-alert"></i> Resultados WauSMS </button>
+                        <button type="button" form="formTable" id="resultadoWauSMS" name="resultadoWauSMS"  class="btn btn-primary" href="#modal_resultados_WauSMS" data-toggle="modal" style="display: none;"> Resultados WauSMS </button>
                     </center>
                 </div>
             </div>

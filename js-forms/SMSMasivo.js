@@ -29,15 +29,17 @@ function setRequireds() {
         username.removeAttribute('required');
         password.removeAttribute('required');
         if (getComboboxValue(server) === 'MyDevice') {
-
+            showNotification('Telefono', 'Esta opcion requiere conectarse a tu Telefono y requiere tener saldo o SMS Ilimitado en tu Plan Movil.', 8000);
         }
         if (getComboboxValue(server) === 'WauSMS') {
             username.setAttribute('required', 'required');
             password.setAttribute('required', 'required');
+            showNotification('WauSMS', 'Esta opcion requiere que usted tenga Cuenta y Saldo en WauSMS.', 8000);
         }
         if (getComboboxValue(server) === 'LabsMobile') {
             username.setAttribute('required', 'required');
             password.setAttribute('required', 'required');
+            showNotification('LabsMobile', 'Esta opcion requiere que usted tenga Cuenta y Saldo en LabsMobile.', 8000);
         }
     }
 }
@@ -90,25 +92,74 @@ function setResultadosLabsMobile(data) {
 function validatePhoneNumber(number) {
     if (number !== null && number !== '') {
         if (number.toString().length >= 7 && parseInt(number) > 0) {
-            console.log('Numero Valido: '+number);
+            console.log('Numero Valido: ' + number);
             return true;
         }
     }
-    console.log('Numero Invalido: '+number);
+    console.log('Numero Invalido: ' + number);
     return false;
 }
 
+function openSMSLink(to, message) {
+    if (to !== null && to !== '' && message !== null && message !== '') {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        var href = '';
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            console.log('IPhone');
+            href = 'sms:' + to + ';body=' + message;
+            window.open(href, '_self');
+        } else {
+            console.log('Android/WindowsPhone');
+            href = 'sms:' + to + '?body=' + message;
+            window.open(href, '_self');
+        }
+    }
+}
+
 function sendMyDevice() {
-    var myform = document.getElementById('formTable');
     var message = document.getElementById('mensaje_sms');
     var indicativo = document.getElementById('indicativo_sms');
     var destino = document.getElementById('destino_sms');
     var telefono1 = document.getElementsByName('telefono_persona[]');
     var telefono2 = document.getElementsByName('telefonoacudiente1_estudiante[]');
     if (message !== undefined && message.value !== '') {
+        console.log('Construyendo Mensaje.');
+        var i = null;
+        var tels = '';
         if (validatePhoneNumber(destino.value)) {
-            console.log('Enviando Mensaje.');
-            sendSMS(indicativo.value.toString() + destino.value.toString(), message.value.toString());
+            tels = tels + indicativo.value + destino.value + ',';
+        }
+        i = 0;
+        while (telefono1[i] !== undefined && telefono1[i] !== null) {
+            if ((telefono1[i].getAttribute('disabled') === null || telefono1[i].getAttribute('disabled') === undefined) && validatePhoneNumber(telefono1[i].value)) {
+                tels = tels + indicativo.value + telefono1[i].value + ',';
+            }
+            i++;
+        }
+        i = 0;
+        while (telefono2[i] !== undefined && telefono2[i] !== null) {
+            if ((telefono2[i].getAttribute('disabled') === null || telefono2[i].getAttribute('disabled') === undefined) && validatePhoneNumber(telefono2[i].value)) {
+                tels = tels + indicativo.value + telefono2[i].value + ',';
+            }
+            i++;
+        }
+        tels = tels.toString().substring(0, tels.toString().length - 1);
+        console.log('Destino: ' + tels);
+        openSMSLink(tels, message.value);
+    }
+}
+
+function selectAllPhones() {
+    var check = document.getElementsByName('check[]');
+    if (check !== undefined && check !== null) {
+        console.log('Selecting all Contascts');
+        var i = null;
+        i = 0;
+        while (check[i] !== undefined && check[i] !== null) {
+            if (check[i].getAttribute('uncheckedvalue') !== undefined && check[i].getAttribute('uncheckedvalue') !== null && check[i].value === check[i].getAttribute('uncheckedvalue')) {
+                check[i].click();
+            }
+            i++;
         }
     }
 }
@@ -133,7 +184,7 @@ function Send(item) {
             });
         }
         if (getComboboxValue(server) === 'MyDevice') {
-            if (confirm('¿Desea enviar el SMS por medio de su Dispositivo?')) {
+            if (confirm('¿Desea enviar el SMS por medio de su Telefono?')) {
                 sendMyDevice();
             }
         }
