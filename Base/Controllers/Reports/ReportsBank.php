@@ -344,13 +344,18 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
-    public function getPersonas() {
+    public function getPersonas($tipopersona) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM PersonasApp "
-                . "WHERE status_persona=1 "
-                . "ORDER BY num_persona DESC";
-        $result = $this->selectJSONArray($sql);
+                . "WHERE status_persona=1 ";
+        $arraywhere = Array();
+        if ($tipopersona !== null) {
+            $arraywhere['p_tipo_persona'] = $tipopersona;
+            $sql = $sql . " AND tipo_persona=:p_tipo_persona ";
+        }
+        $sql = $sql . "ORDER BY num_persona DESC";
+        $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
 
@@ -1511,6 +1516,32 @@ class ReportsBank extends BasicController {
             $sql = $sql . " AND SA.id_solucion=:p_id_solucion ";
         }
         $sql = $sql . " ORDER BY SA.id_actividad, SA.id_estudiante, SA.id_solucion DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getEventos($idescuela = null, $idprograma = null, $visible = null, $idevento = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT * FROM EventosApp WHERE status_evento=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND id_escuela=:p_id_escuela ";
+        }
+        if ($idprograma !== null) {
+            $arraywhere['p_id_programa'] = $idprograma;
+            $sql = $sql . " AND id_programa=:p_id_programa ";
+        }
+        if ($visible !== null) {
+            $arraywhere['p_visible'] = $visible;
+            $sql = $sql . " AND visible_evento=:p_visible ";
+        }
+        if ($idevento !== null) {
+            $arraywhere['p_id_evento'] = $idevento;
+            $sql = $sql . " AND id_evento=:p_id_evento ";
+        }
+        $sql = $sql . " ORDER BY fechainicio_evento DESC ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

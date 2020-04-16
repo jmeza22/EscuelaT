@@ -44,10 +44,11 @@ function showMyImageAndGetName(fileInput, elementid) {
     }
     if (element !== null && filename !== null) {
         element.value = filename;
+        if (element.tagName === 'INPUT' || element.tagName === 'LABEL' || element.tagName === 'DIV') {
+            element.innerHTML = filename;
+        }
+        console.log('Image Selected: '+filename);
         return true;
     }
     return false;
 }
-
-
-

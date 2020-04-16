@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Eventos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Eventos"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Eventos.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Eventos</div>
+            <div class="panel-body table-responsive" >
+                <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EventosController.php" model="EventosApp" findBy="id_evento" mainform="true" >
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Nombre de Evento</label>
+                            <input type="text" name="nombre_evento" id="nombre_evento" spellcheck="spellcheck" value="" maxlength="100" required="required" class="form-control" title="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Descripcion</label>
+                            <textarea id="descripcion_evento" name="descripcion_evento" spellcheck="spellcheck" maxlength="2000" class="form-control" style="width:  100% !important; min-height: 100px !important;"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Programa</label>
+                            <select id="id_programa" name="id_programa" list="id_programa" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="">
+                                <option selected="selected" value="">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Fecha.Inicio</label>
+                            <input type="datetime" name="fechainicio_evento" id="fechainicio_evento" value="" maxlength="19" required="required" class="form-control" title="Fecha de Activacion del Evento. (Activo desde) ">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Fecha.Final</label>
+                            <input type="datetime" name="fechafin_evento" id="fechafin_evento" value="" maxlength="19" required="required" class="form-control" title="Fecha de Desactivacion del Evento. (Activo hasta) ">
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Visible</label>
+                            <select id="visible_evento" name="visible_evento" class="form-control" style="width: 100%;" >
+                                <option id="1" value="1">Si</option>
+                                <option id="0" value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Codigo</label>
+                            <input type="text" name="id_evento" id="id_evento" value="0" maxlength="24" required="required" readonly="readonly" class="form-control" title="Codigo del Evento" onfocus="">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
+                            </center>
+                        </div>
+                        <div class="col-sm-6">
+                            <center>
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary" style="width: 80% !important;">
+            <div class="panel-heading">Listado de Eventos</div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered" model="EventosApp" url="Base/Controllers/GetDataTableEventos.php" >
+                        <thead id="thead_dataTable0">
+                            <tr headrow="true">
+                                <th style="width: 8%;" title="Codigo">#</th>
+                                <th style="width: 40%;">Nombre</th>
+                                <th style="width: 15%;">Fecha.Inicio</th>
+                                <th style="width: 15%;">Fecha.Fin</th>
+                                <th style="width: 10%;">Programa</th>
+                                <th style="width: 10%;">Activo</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="samplerow" samplerow="true" style="display: none;">
+                                <td> {{id_evento}}</td>
+                                <td> <b>{{nombre_evento}}</b> </td>
+                                <td> {{fechainicio_evento}} </td>
+                                <td> {{fechafin_evento}} </td>
+                                <td> {{id_programa}} </td>
+                                <td> <b>{{visible_evento}}</b> </td>
+                                <td>
+                                    <form id="Evento{{id_evento}}" name="Evento{{id_evento}}" method="POST" autocomplete="off" url="Base/Controllers/EventosController.php"  model="EventosApp" findBy="id_evento" statusfield="status_evento">
+                                        <input type="hidden"  editable="false" name="id_evento" id="id_evento" value="{{id_evento}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_evento[]" id="status_evento" value="1" >
+                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

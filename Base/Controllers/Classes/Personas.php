@@ -33,6 +33,9 @@ class Personas extends ReportsBank {
             if (isset($this->postdata['tipo_persona']) && $this->postdata['tipo_persona'] !== null) {
                 $this->idtipousuario = $this->postdata['tipo_persona'];
             }
+            if (isset($this->postdata['fechanacimiento_persona']) && ($this->postdata['fechanacimiento_persona'] === '' || $this->postdata['fechanacimiento_persona'] === '0000/00/00')) {
+                unset($this->postdata['fechanacimiento_persona']);
+            }
             if (isset($this->postdata['fechaexpdoc_persona']) && ($this->postdata['fechaexpdoc_persona'] === '' || $this->postdata['fechaexpdoc_persona'] === '0000/00/00')) {
                 unset($this->postdata['fechaexpdoc_persona']);
             }

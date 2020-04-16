@@ -23,49 +23,113 @@ and open the template in the editor.
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/LoadImage.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
         <script type="text/javascript" src="js-forms/Docentes.js"></script>
     </head>
     <body>
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Docentes</div>
             <div class="panel-body table-responsive" >
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Datos Basicos</div>
                     <div class="panel-body" >
-                        <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/DocentesController.php" model="DocentesApp" findBy="id_docente" mainform="true" >
-                            <input type="hidden" id="status_docente" name="status_docente" value="0" maxlength="22" min="1"  /> 
+                        <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/DocentesController.php" model="DocentesApp" findBy="id_docente" mainform="true" enctype="multipart/form-data">
+                            <input type="hidden" id="foto_docente" name="foto_docente" value="" maxlength="100" /> 
+                            <input type="hidden" id="firma_docente" name="firma_docente" value="" maxlength="100" /> 
                             <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label>Codigo</label>
+                                            <input type="text" name="id_docente" id="id_docente" autofocus="autofocus" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Docente" list="lista_id_persona">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label>Nombre de Docente</label>
+                                            <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" class="form-control" title="Nombre del Docente" readonly="readonly" >
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Buscar</label>
+                                            <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="Buscar();" style="width: 100% !important;">Buscar</button> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <label>TituloUniversitario</label>
+                                            <input type="text" name="ultimotitulo_docente" id="ultimotitulo_docente" spellcheck="spellcheck" value="" maxlength="200" required="required" class="form-control" title="Ultimo Titulo Obtenido (Educacion)" list="lista_titulos" >
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <label>Institucion</label>
+                                            <input type="text" name="instituciontitulo_docente" id="instituciontitulo_docente" spellcheck="spellcheck" value="" maxlength="200" required="required" class="form-control" title="Nombre de la Institucion donde obtuvo el Titulo." >
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Año Grado</label>
+                                            <input type="number" name="anogradotitulo_docente" id="anogradotitulo_docente" value="" min="1950" max="2100" maxlength="4" required="required" class="form-control" title="Año en que obtuvo el Titulo." >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label>Anotaciones</label>
+                                            <textarea id="anotaciones_docente" name="anotaciones_docente" spellcheck="spellcheck" maxlength="1000" class="form-control" style="width:  100% !important; min-height: 60px !important;"></textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Escalafon</label>
+                                            <input type="text" name="escalafon_docente" id="escalafon_docente" value="" maxlength="8" required="required" class="form-control" list="lista_escalafon" title="Grado Escalafon." >
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Salario</label>
+                                            <input type="number" name="salario_docente" id="salario_docente" min="0" value="" maxlength="8" required="required" class="form-control" title="Salario Base del Docente" >
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Foto</label>
+                                            <label id="temp-name-photo" class="form-control">Foto</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Firma</label>
+                                            <label id="temp-name-sign" class="form-control">Firma</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3">
-                                    <label>Codigo</label>
-                                    <input type="text" name="id_docente" id="id_docente" autofocus="autofocus" value="" maxlength="24" required="required" class="form-control" title="Codigo Asignado al Docente" list="lista_id_persona">
-                                </div>
-                                <div class="col-sm-7">
-                                    <label>Nombre de Docente</label>
-                                    <input type="text" name="nombrecompleto_docente" id="nombrecompleto_docente" value="" maxlength="200" required="required" class="form-control" title="Nombre del Docente" readonly="readonly" >
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Buscar</label>
-                                    <button type="button" id="buscar" name="buscar" class="btn btn-default" onclick="Buscar();" style="width: 100% !important;">Buscar</button> 
+                                    <center>
+                                        <div style="min-height: 260px !important;">
+                                            <label>Vista Previa</label>
+                                            <div class="photo-panel">
+                                                <img name="image" id="image" class="image-photo" alt="Vista Previa" title="Vita Previa de la Imagen Seleccionada." style="max-width: 150px !important; max-height: 150px !important;" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>Foto</label>
+                                                <input type="file" name="image-file-photo" id="image-file-photo" accept="image/*" onchange="showMyImageAndGetName(this, 'temp-name-photo')" title="Click para Cambiar Foto." class="image-file" />
+                                                <button type="button" title="Click para Cambiar Foto." onclick="document.getElementById('image-file-photo').click();" class="btn btn-xs btn-default" style="display: inline-block !important;"><i class="glyphicon glyphicon-upload"></i> Cargar Foto </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Firma</label>
+                                                <input type="file" name="image-file-sign" id="image-file-sign" accept="image/*" onchange="showMyImageAndGetName(this, 'temp-name-sign')" title="Click para Cambiar Firma." class="image-file" />
+                                                <button type="button" title="Click para Cambiar Firma." onclick="document.getElementById('image-file-sign').click();" class="btn btn-xs btn-default" style="display: inline-block !important;"><i class="glyphicon glyphicon-upload"></i> Cargar Firma </button>
+                                            </div>
+                                        </div>
+                                    </center>
                                 </div>
                             </div>
-                            <div class="row">
+
+                            <div class="row" style="margin-top: 20px;">
                                 <div class="col-sm-6">
-                                    <label>Titulo Obtenido</label>
-                                    <input type="text" name="ultimotitulo_docente" id="ultimotitulo_docente" spellcheck="spellcheck" value="" maxlength="200" required="required" class="form-control" title="Ultimo Titulo Obtenido (Educacion)" list="lista_titulos" >
+                                    <center>
+                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarDocente();" class="btn btn-primary" >Grabar</button>        
+                                    </center>
                                 </div>
-                                <div class="col-sm-4">
-                                    <label>Institucion</label>
-                                    <input type="text" name="instituciontitulo_docente" id="instituciontitulo_docente" spellcheck="spellcheck" value="" maxlength="200" required="required" class="form-control" title="Nombre de la Institucion donde obtuvo el Titulo." >
-                                </div>
-                                <div class="col-sm-2">
-                                    <label>Año Grado</label>
-                                    <input type="number" name="anogradotitulo_docente" id="anogradotitulo_docente" value="" maxlength="4" required="required" class="form-control" title="Año en que obtuvo el Titulo." >
+                                <div class="col-sm-6">
+                                    <center>
+                                        <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
+                                    </center>
                                 </div>
                             </div>
+
 
                             <datalist id="lista_titulos" name="lista_titulos" >
                                 <option value="LICENCIADO">LICENCIADO</option>
@@ -90,22 +154,56 @@ and open the template in the editor.
                                 <option value="ADMINISTRADOR DE EMPRESAS">ADMINISTRADOR DE EMPRESAS</option>
                             </datalist>
 
-                            <datalist id="lista_id_persona" name="lista_id_persona" model="PersonasApp" colname="nombrecompleto_persona" colvalue="id_persona" url="Base/Controllers/GetComboboxPersonas.php">
+                            <datalist id="lista_escalafon" name="lista_escalafon" >
+                                <option value="1-2277">1 2277</option>
+                                <option value="2-2277">2 2277</option>
+                                <option value="3-2277">3 2277</option>
+                                <option value="4-2277">4 2277</option>
+                                <option value="5-2277">5 2277</option>
+                                <option value="6-2277">6 2277</option>
+                                <option value="7-2277">7 2277</option>
+                                <option value="8-2277">8 2277</option>
+                                <option value="9-2277">9 2277</option>
+                                <option value="10-2277">10 2277</option>
+                                <option value="11-2277">11 2277</option>
+                                <option value="12-2277">12 2277</option>
+                                <option value="13-2277">13 2277</option>
+                                <option value="14-2277">14 2277</option>
+                                <option value="1A-1278">1A 1278</option>
+                                <option value="1B-1278">1B 1278</option>
+                                <option value="1C-1278">1C 1278</option>
+                                <option value="1D-1278">1D 1278</option>
+                                <option value="2A-1278">2A 1278</option>
+                                <option value="2B-1278">2B 1278</option>
+                                <option value="2C-1278">2C 1278</option>
+                                <option value="2D-1278">2D 1278</option>
+                                <option value="2AE-1278">2AE 1278</option>
+                                <option value="2BE-1278">2BE 1278</option>
+                                <option value="2CE-1278">2CE 1278</option>
+                                <option value="2DE-1278">2DE 1278</option>
+                                <option value="2AM-1278">2AM 1278</option>
+                                <option value="2BM-1278">2BM 1278</option>
+                                <option value="2CM-1278">2CM 1278</option>
+                                <option value="2DM-1278">2DM 1278</option>
+                                <option value="2AD-1278">2AD 1278</option>
+                                <option value="2BD-1278">2BD 1278</option>
+                                <option value="2CD-1278">2CD 1278</option>
+                                <option value="2DD-1278">2DD 1278</option>
+                                <option value="3AM-1278">3AM 1278</option>
+                                <option value="3BM-1278">3BM 1278</option>
+                                <option value="3CM-1278">3CM 1278</option>
+                                <option value="3DM-1278">3DM 1278</option>
+                                <option value="3AD-1278">3AD 1278</option>
+                                <option value="3BD-1278">3BD 1278</option>
+                                <option value="3CD-1278">3CD 1278</option>
+                                <option value="3DD-1278">3DD 1278</option>
+                            </datalist>
+
+                            <datalist id="lista_id_persona" name="lista_id_persona" model="PersonasApp" colname="nombrecompleto_persona" colvalue="id_persona" url="Base/Controllers/GetComboboxPersonas.php" findby1="tipo_persona" findbyvalue1="Teacher">
                                 <option value="">Ninguno</option>
                             </datalist>
 
-                            <div class="row" style="margin-top: 20px;">
-                                <div class="col-sm-6">
-                                    <center>
-                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="Send(this);" class="btn btn-primary" >Grabar</button>        
-                                    </center>
-                                </div>
-                                <div class="col-sm-6">
-                                    <center>
-                                        <button type="reset" id="reset" name="reset" class="btn btn-success">Nuevo</button> 
-                                    </center>
-                                </div>
-                            </div>
+
                         </form>
                     </div>
                 </div>

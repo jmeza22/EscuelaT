@@ -101,6 +101,7 @@ function BuscarEstudianteActivo() {
 function CargarFrameFoto() {
     var foto = document.getElementById("foto_estudiante");
     var image = document.getElementById("image");
+    image.src = "";
     if (foto !== undefined && foto.value !== '') {
         console.log('Cargando Foto.');
         image.src = getWSPath() + 'ImageFiles/' + foto.value;

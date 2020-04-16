@@ -21,6 +21,27 @@ function setFindby() {
     LoadTable();
 }
 
+function setRequireds() {
+    var server = document.getElementById('server_sms');
+    if (server !== null && server !== undefined && server.tagName === 'SELECT') {
+        var username = document.getElementById('username_sms');
+        var password = document.getElementById('password_sms');
+        username.removeAttribute('required');
+        password.removeAttribute('required');
+        if (getComboboxValue(server) === 'MyDevice') {
+
+        }
+        if (getComboboxValue(server) === 'WauSMS') {
+            username.setAttribute('required', 'required');
+            password.setAttribute('required', 'required');
+        }
+        if (getComboboxValue(server) === 'LabsMobile') {
+            username.setAttribute('required', 'required');
+            password.setAttribute('required', 'required');
+        }
+    }
+}
+
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
     loadTableData(mytable, false);
@@ -59,9 +80,35 @@ function setResultadosLabsMobile(data) {
         if (data.code !== undefined && data.subid !== undefined) {
             if (data.code === 0 || data.code === '0') {
                 alert('Se ha enviado el Mensaje por medio de LabsMobile!.');
-            }else{
+            } else {
                 alert('Codigo: ' + data.code + ' - Error: ' + data.message);
             }
+        }
+    }
+}
+
+function validatePhoneNumber(number) {
+    if (number !== null && number !== '') {
+        if (number.toString().length >= 7 && parseInt(number) > 0) {
+            console.log('Numero Valido: '+number);
+            return true;
+        }
+    }
+    console.log('Numero Invalido: '+number);
+    return false;
+}
+
+function sendMyDevice() {
+    var myform = document.getElementById('formTable');
+    var message = document.getElementById('mensaje_sms');
+    var indicativo = document.getElementById('indicativo_sms');
+    var destino = document.getElementById('destino_sms');
+    var telefono1 = document.getElementsByName('telefono_persona[]');
+    var telefono2 = document.getElementsByName('telefonoacudiente1_estudiante[]');
+    if (message !== undefined && message.value !== '') {
+        if (validatePhoneNumber(destino.value)) {
+            console.log('Enviando Mensaje.');
+            sendSMS(indicativo.value.toString() + destino.value.toString(), message.value.toString());
         }
     }
 }
@@ -69,20 +116,27 @@ function setResultadosLabsMobile(data) {
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
-        submitForm(form, false).done(function () {
-            var server = document.getElementById('server_sms');
-            var data = sessionStorage.getItem('data');
-            if (data !== undefined && data !== null) {
-                if (getComboboxValue(server) === 'WauSMS') {
-                    setResultadosWauSMS(sessionStorage.getItem('data'));
+        var server = document.getElementById('server_sms');
+        if (getComboboxValue(server) !== 'MyDevice') {
+            submitForm(form, false).done(function () {
+                var data = sessionStorage.getItem('data');
+                if (data !== undefined && data !== null) {
+                    if (getComboboxValue(server) === 'WauSMS') {
+                        setResultadosWauSMS(sessionStorage.getItem('data'));
+                    }
+                    if (getComboboxValue(server) === 'LabsMobile') {
+                        setResultadosLabsMobile(sessionStorage.getItem('data'));
+                    }
+                } else {
+                    alert(getErrorMessage());
                 }
-                if (getComboboxValue(server) === 'LabsMobile') {
-                    setResultadosLabsMobile(sessionStorage.getItem('data'));
-                }
-            } else {
-                alert(getErrorMessage());
+            });
+        }
+        if (getComboboxValue(server) === 'MyDevice') {
+            if (confirm('¿Desea enviar el SMS por medio de su Dispositivo?')) {
+                sendMyDevice();
             }
-        });
+        }
     }
 }
 

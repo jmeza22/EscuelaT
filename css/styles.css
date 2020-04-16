@@ -273,10 +273,13 @@ table > tbody > tr > td > input[disabled="disabled"]{
     max-height: 320px !important;
     background-color: #58ACFA;
     border: 2px solid #2E9AFE;
+    cursor: pointer !important;
+}
+
+.image-circle{
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
-    cursor: pointer !important;
 }
 
 .image-file{
@@ -288,8 +291,7 @@ table > tbody > tr > td > input[disabled="disabled"]{
 }
 
 .photo-panel{
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin: 5px !important;
 }
 .ajax-loading{
     background-color: black !important;

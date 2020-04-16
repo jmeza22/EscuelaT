@@ -609,6 +609,9 @@ function resetForm(element) {
                     if (form.elements[j].tagName.toString().toUpperCase() === "TEXTAREA") {
                         form.elements[j].innerHTML = "";
                     }
+                    if (form.elements[j].tagName.toString().toUpperCase() === "IMG") {
+                        form.elements[j].src = "";
+                    }
                 }
             }
         }

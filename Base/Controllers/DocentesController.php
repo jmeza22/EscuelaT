@@ -12,6 +12,30 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         if ($session->getStandard() == 1 || $session->getLimited() || $session->getExternal()) {
             unset($_POST['status_docente']);
         }
+        if (isset($_POST['foto_docente']) && $_POST['foto_docente'] !== '') {
+            if (isset($_FILES['image-file-photo']) && $_POST['action'] === 'insertorupdate') {
+                $upload = new UploadImage();
+                $upload->setURL('../../ImageFiles/');
+                $upload->setFileName('image-file-photo');
+                $upload->setFullName($_POST['foto_docente']);
+                $upload->Upload();
+            }
+            if (!file_exists('../../ImageFiles/' . $_POST['foto_docente'])) {
+                $_POST['foto_docente'] = '';
+            }
+        }
+        if (isset($_POST['firma_docente']) && $_POST['firma_docente'] !== '') {
+            if (isset($_FILES['image-file-sign']) && $_POST['action'] === 'insertorupdate') {
+                $upload = new UploadImage();
+                $upload->setURL('../../ImageFiles/');
+                $upload->setFileName('image-file-sign');
+                $upload->setFullName($_POST['firma_docente']);
+                $upload->Upload();
+            }
+            if (!file_exists('../../ImageFiles/' . $_POST['firma_docente'])) {
+                $_POST['firma_docente'] = '';
+            }
+        }
         $bc = new BasicController();
         $bc->connect();
         $bc->preparePostData();

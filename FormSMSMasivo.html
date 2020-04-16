@@ -26,7 +26,9 @@ and open the template in the editor.
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js/sendSMS.js"></script>
         <script type="text/javascript" src="js-forms/SMSMasivo.js"></script>
+        
     </head>
     <body>
 
@@ -37,19 +39,20 @@ and open the template in the editor.
                     <div class="row">
                         <div class="col-sm-4">
                             <label>Servicio SMS</label>
-                            <select id="server_sms" name="server_sms" required="required" class="form-control" style="width: 100%;">
+                            <select id="server_sms" name="server_sms" required="required" class="form-control" style="width: 100%;" onchange="setRequireds();" >
                                 <option selected="selected" value="">Ninguno</option>
+                                <option value="MyDevice">Mi Dispositivo</option>
                                 <option value="WauSMS">WauSMS</option>
                                 <option value="LabsMobile">LabsMobile</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                             <label>Usuario</label>
-                            <input type="text" alphanumeric="true" id="username_sms" name="username_sms" value="" class="form-control" maxlength="64" required="required" placeholder="Usuario (Servicio SMS)" />
+                            <input type="text" alphanumeric="true" id="username_sms" name="username_sms" value="" class="form-control" maxlength="64" placeholder="Usuario (Servicio SMS)" />
                         </div>
                         <div class="col-sm-4">
                             <label>Contraseña</label>
-                            <input type="text" id="password_sms" name="password_sms" value="" class="form-control" maxlength="64" required="required" placeholder="Contraseña" />
+                            <input type="password" id="password_sms" name="password_sms" value="" class="form-control" maxlength="64" placeholder="Contraseña" />
                         </div>
                     </div>
                     <div class="row">
@@ -61,7 +64,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-8">
                             <label>Mensaje</label>
-                            <textarea id="mensaje_sms" name="mensaje_sms" spellcheck="spellcheck" maxlength="160" class="form-control" style="width:  100% !important; min-height: 90px !important;"></textarea>
+                            <textarea id="mensaje_sms" name="mensaje_sms" required="required" spellcheck="spellcheck" maxlength="160" class="form-control" style="width:  100% !important; min-height: 90px !important;"></textarea>
                         </div>
                     </div>
                     <div class="row">

@@ -4,11 +4,11 @@ include_once 'Libraries/Controllers.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
-$model = 'CuestionariosApp';
-$findBy = 'id_cuestionario';
+$model = 'EventosApp';
+$findBy = 'id_evento';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
@@ -18,11 +18,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->setAction($action);
         $postdata = $bc->getPostData();
         $postdata['id_escuela'] = $session->getEnterpriseID();
-        if ($postdata[$findBy] === '' || $postdata[$findBy] === '0') {
-            $postdata[$findBy] = 'CU' . date('YmdHis') . rand(10, 99);
-            $postdata['usuario_crea'] = $session->getNickname();
+        if (isset($postdata['id_programa']) && $postdata['id_programa'] === '') {
+            unset($postdata['id_programa']);
         }
-        $postdata['fechahoraedita_cuestionario'] = date('Y-m-d H:i:s');
         if (isset($_POST['action']) && $_POST['action'] === 'find') {
             $bc->setAction('find');
         }
