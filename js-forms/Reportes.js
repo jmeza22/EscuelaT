@@ -70,6 +70,14 @@ function setRequiredsInputs(tipo) {
             grado.setAttribute('required', 'required');
             grupo.setAttribute('required', 'required');
         }
+        if (tipo.value === 'PlanillasCalificaciones') {
+            programa.setAttribute('required', 'required');
+            planestudio.setAttribute('required', 'required');
+            grado.setAttribute('required', 'required');
+            grupo.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+            corte.setAttribute('required', 'required');
+        }
         if (tipo.value === 'ObservadorEstudiante') {
             estudiante.setAttribute('required', 'required');
         }

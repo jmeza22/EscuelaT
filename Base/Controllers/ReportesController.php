@@ -140,6 +140,14 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->DatosEstadisticosEstudiantes($idescuela, $idprograma, $grado, $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
+        if ($tipo === 'PlanillasCalificaciones') {
+            $report->AddPage('L', $format, true);
+            $report->SetLeftMargin(12);
+            $report->SetRightMargin(12);
+            $report->setReportName('Planillas Auxiliares de Calificaciones ' . $idprograma . $grupo);
+            $report->ListadoPlanillaEstudiantes($idescuela, $idprograma, $idplanestudio, $idperiodo, $idcorte, $grado, $grupo);
+            $report->generatePDFDocument();
+        }
         if ($tipo === 'Escuelas') {
             $report->AddPage($orientation, $format, true);
             $report->setReportName('Listado de Escuelas');

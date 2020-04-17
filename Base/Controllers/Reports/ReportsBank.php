@@ -130,22 +130,27 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
-    public function getPlanEstudioDetalle($idescuela = null, $idprograma = null, $idplanestudio = null) {
+    public function getPlanEstudioDetalle($idescuela = null, $idprograma = null, $numgrado = null, $idplanestudio = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT PED.*, A.nombre_asignatura, PE.id_programa "
+        $sql = "SELECT PED.*, A.nombre_asignatura, PE.id_programa, P.nombre_programa "
                 . " FROM PlanEstudioDetalleApp PED "
-                . " INNER JOIN AsignaturasApp A ON PED.id_asignatura=A.id_asignatura "
                 . " INNER JOIN PlanEstudiosApp PE ON PED.id_planestudio=PE.id_planestudio "
+                . " INNER JOIN AsignaturasApp A ON PED.id_asignatura=A.id_asignatura "
+                . " INNER JOIN ProgramasApp P ON PE.id_programa=P.id_programa "
                 . " WHERE PED.status_planestudiodetalle=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;
-            $sql = $sql . " AND PED.id_escuela=:p_id_escuela ";
+            $sql = $sql . " AND PE.id_escuela=:p_id_escuela ";
         }
         if ($idprograma !== null) {
             $arraywhere['p_id_programa'] = $idprograma;
             $sql = $sql . " AND PE.id_programa=:p_id_programa ";
+        }
+        if ($numgrado !== null) {
+            $arraywhere['p_numgrado_programa'] = $numgrado;
+            $sql = $sql . " AND PED.numgrado_programa=:p_numgrado_programa ";
         }
         if ($idplanestudio !== null) {
             $arraywhere['p_id_planestudio'] = $idplanestudio;
@@ -162,7 +167,7 @@ class ReportsBank extends BasicController {
             $plan = json_decode($plan, true);
             if ($plan !== null && is_array($plan)) {
                 for ($i = 0; $i < count($plan); $i++) {
-                    $plan[$i]['detalle'] = $this->getPlanEstudioDetalle($plan['id_escuela'], $plan['id_programa'], $plan['id_planestudio']);
+                    $plan[$i]['detalle'] = $this->getPlanEstudioDetalle($plan['id_escuela'], $plan['id_programa'], null, $plan['id_planestudio']);
                 }
             }
         }
@@ -612,11 +617,11 @@ class ReportsBank extends BasicController {
     public function getAsignaturasMatriculadas($idescuela = null, $idmatricula = null, $idestudiante = null, $idprograma = null, $idasignatura = null, $idperiodo = null, $grado = null, $idgrupo = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT MA.*, A.nombre_asignatura, OE.nombrecompleto_estudiante "
+        $sql = "SELECT MA.*, A.nombre_asignatura, M.nombrecompleto_estudiante "
                 . "FROM MatriculaAsignaturasApp MA "
                 . "INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
+                . "INNER JOIN ObservadorEstudianteApp OE ON M.id_estudiante=OE.id_estudiante "
                 . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
-                . "INNER JOIN ObservadorEstudianteApp OE ON MA.id_estudiante=OE.id_estudiante "
                 . "WHERE MA.status_matriculaasignatura=1 AND M.status_matricula=1 AND A.status_asignatura=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
@@ -651,6 +656,7 @@ class ReportsBank extends BasicController {
             $arraywhere['p_id_grupo'] = $idgrupo;
             $sql = $sql . " AND M.id_grupo=:p_id_grupo ";
         }
+        $sql = $sql . " ORDER BY M.nombrecompleto_estudiante, MA.id_asignatura";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

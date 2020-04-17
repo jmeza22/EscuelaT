@@ -548,6 +548,133 @@ class PDFReports extends TCPDF {
         }
     }
 
+    public function ListadoPlanillaEstudiantes($idescuela, $idprograma, $idplanestudio, $idperiodo, $idcorte, $numgrado = null, $idgrupo = null) {
+        $pageWidth = $this->getRealPageWidth();
+        $asignaturas = $this->bc->getPlanEstudioDetalle($idescuela, $idprograma, $numgrado, $idplanestudio);
+        if ($asignaturas !== null && $asignaturas !== '' && $asignaturas !== '[]') {
+            $asignaturas = json_decode($asignaturas, true);
+            for ($i = 0; $i < count($asignaturas); $i++) {
+                $data = $this->bc->getAsignaturasMatriculadas($idescuela, null, null, $idprograma, $asignaturas[$i]['id_asignatura'], $idperiodo, $asignaturas[$i]['numgrado_programa'], $idgrupo);
+                if ($data !== null && $data !== '' && $data !== '[]') {
+                    $data = json_decode($data, true);
+                    if (is_array($data) && count($data) > 0) {
+                        $this->SetFont($this->fontfamilycontent, 'B', 14);
+                        $this->Cell(0, 8, 'PLANILLA DE CALIFICACIONES', 0, 0, 'C');
+                        $this->SetFont($this->fontfamilycontent, 'B', 12);
+                        $this->Ln();
+                        $this->Cell($pageWidth * 55 / 100, 6, $asignaturas[$i]['nombre_programa'], 0, 0, 'C');
+                        $this->Cell($pageWidth * 15 / 100, 6, $asignaturas[$i]['numgrado_programa'].'° GRADO', 0, 0, 'C');
+                        $this->Cell($pageWidth * 15 / 100, 6, $idgrupo, 0, 0, 'C');
+                        $this->Cell($pageWidth * 15 / 100, 6, $idcorte, 0, 0, 'C');
+                        $this->SetFont($this->fontfamilycontent, 'B', 10);
+                        $this->Ln();
+                        $this->Cell($pageWidth * 33.5 / 100, 6, '' . $asignaturas[$i]['nombre_asignatura'], 1, 0, 'C');
+                        $this->Cell($pageWidth * 25 / 100, 6, 'CALIFICACIONES', 1, 0, 'C');
+                        $this->Cell($pageWidth * 42 / 100, 6, 'ASISTENCIA', 1, 0, 'C');
+                        $this->SetFont($this->fontfamilycontent, 'B', 8);
+                        $this->Ln();
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '#', 1);
+                        $this->Cell($pageWidth * 32 / 100, 5, 'NOMBRE DE ESTUDIANTE', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CC1', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CC2', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CC3', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CP1', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CP2', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CP3', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CA1', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CA2', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'CA3', 1);
+                        $this->Cell($pageWidth * 2.5 / 100, 5, 'DEF', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '1', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '2', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '3', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '4', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '5', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '6', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '7', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '8', 1);
+                        $this->Cell($pageWidth * 1 / 100, 5, '9', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '10', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '11', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '12', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '13', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '14', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '15', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '16', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '17', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '18', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '19', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '20', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '21', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '22', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '23', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '24', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '25', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '26', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '27', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '28', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '29', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '30', 1);
+                        $this->Cell($pageWidth * 1.5 / 100, 5, '31', 1);
+                        $this->Ln();
+                        $this->SetFont($this->fontfamilycontent, '', 8);
+                        for ($j = 0; $j < count($data); $j++) {
+                            $this->SetFont($this->fontfamilycontent, '', 8);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, $j + 1, 1);
+                            $this->Cell($pageWidth * 32 / 100, 5, $data[$j]['nombrecompleto_estudiante'], 1);
+                            $this->SetFont($this->fontfamilycontent, '', 6);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 2.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Cell($pageWidth * 1.5 / 100, 5, '', 1);
+                            $this->Ln();
+                        }
+                        if ($i < count($asignaturas) - 1) {
+                            $this->AddPage();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public function ListadoContactosEstudiantes($idescuela, $idprograma, $idperiodo, $numgrado = null, $idgrupo = null, $idestudiante = null) {
         $data = null;
         $data = $this->bc->getContactosEstudiantesMatriculas($idescuela, $idprograma, $numgrado, $idgrupo, $idperiodo, $idestudiante);
