@@ -525,9 +525,14 @@ class ReportsBank extends BasicController {
     public function getMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null, $fechamatricula = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT M.*, Pr.nombre_programa FROM MatriculasApp M "
-                . " INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa"
-                . " WHERE status_matricula=1 ";
+        $sql = "SELECT M.*, E.nombre_escuela, S.nombre_sede, J.nombre_jornada, Pr.nombre_programa, PE.descripcion_planestudio "
+                . " FROM MatriculasApp M "
+                . " INNER JOIN EscuelasApp E ON E.id_escuela=M.id_escuela"
+                . " INNER JOIN SedesApp S ON S.id_sede=M.id_sede"
+                . " INNER JOIN JornadasApp J ON J.id_jornada=M.id_jornada"
+                . " INNER JOIN ProgramasApp Pr ON Pr.id_programa=M.id_programa"
+                . " INNER JOIN PlanEstudiosApp PE ON PE.id_programa=M.id_programa"
+                . " WHERE M.status_matricula=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;
@@ -617,12 +622,15 @@ class ReportsBank extends BasicController {
     public function getAsignaturasMatriculadas($idescuela = null, $idmatricula = null, $idestudiante = null, $idprograma = null, $idasignatura = null, $idperiodo = null, $grado = null, $idgrupo = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT MA.*, A.nombre_asignatura, M.nombrecompleto_estudiante "
-                . "FROM MatriculaAsignaturasApp MA "
-                . "INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
-                . "INNER JOIN ObservadorEstudianteApp OE ON M.id_estudiante=OE.id_estudiante "
-                . "INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
-                . "WHERE MA.status_matriculaasignatura=1 AND M.status_matricula=1 AND A.status_asignatura=1 ";
+        $sql = "SELECT MA.*, A.nombre_asignatura, M.nombrecompleto_estudiante, PED.hteoricas_asignatura, PED.hpracticas_asignatura "
+                . " FROM MatriculaAsignaturasApp MA "
+                . " INNER JOIN MatriculasApp M ON MA.id_matricula=M.id_matricula "
+                . " INNER JOIN ObservadorEstudianteApp OE ON M.id_estudiante=OE.id_estudiante "
+                . " INNER JOIN PlanEstudiosApp PE ON M.id_planestudio=PE.id_planestudio "
+                . " INNER JOIN PlanEstudioDetalleApp PED ON PE.id_planestudio=PED.id_planestudio "
+                . " INNER JOIN AsignaturasApp A ON MA.id_asignatura=A.id_asignatura "
+                . " WHERE MA.id_asignatura=PED.id_asignatura AND M.numgrado_programa=PED.numgrado_programa "
+                . " AND MA.status_matriculaasignatura=1 AND M.status_matricula=1 AND A.status_asignatura=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
             $arraywhere['p_id_escuela'] = $idescuela;

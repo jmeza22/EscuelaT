@@ -36,6 +36,12 @@ function setRequiredsInputs(tipo) {
             programa.setAttribute('required', 'required');
             periodo.setAttribute('required', 'required');
         }
+        if (tipo.value === 'RecibosMatriculas') {
+            programa.setAttribute('required', 'required');
+            grado.setAttribute('required', 'required');
+            grupo.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
+        }
         if (tipo.value === 'CertificadoEstudios') {
             programa.setAttribute('required', 'required');
             grado.setAttribute('required', 'required');
@@ -43,10 +49,10 @@ function setRequiredsInputs(tipo) {
         }
         if (tipo.value === 'CertificadoEstudios') {
             sede.setAttribute('required', 'required');
-            jornada.setAttribute('required', 'required');
             programa.setAttribute('required', 'required');
             grado.setAttribute('required', 'required');
             grupo.setAttribute('required', 'required');
+            periodo.setAttribute('required', 'required');
             estudiante.setAttribute('required', 'required');
         }
         if (tipo.value === 'CertificadoNotas') {

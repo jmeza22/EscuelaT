@@ -109,41 +109,49 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
 
         if ($tipo === 'CarnetEstudiantil') {
             $report->headertype = -1;
-            $report->AddPage('P', 'Letter', true);
             $report->SetLeftMargin(25);
             $report->SetRightMargin(25);
+            $report->AddPage('P', 'Letter', true);
             $report->setReportName('Carnet Estudiantil');
             $report->CarnetsEstudiantiles($idescuela, $idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idestudiante);
             $report->generatePDFDocument();
         }
-        if ($tipo === 'CertificadoEstudios') {
-            $report->AddPage($orientation, $format, true);
+        if ($tipo === 'RecibosMatriculas') {
             $report->SetLeftMargin(14);
             $report->SetRightMargin(14);
+            $report->AddPage('P', $format, true);
+            $report->setReportName('Recibo de Matricula ' . $idprograma . $grado . $grupo . $idperiodo . $idestudiante);
+            $report->Matriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $grupo, $idperiodo, $idestudiante);
+            $report->generatePDFDocument();
+        }
+        if ($tipo === 'CertificadoEstudios') {
+            $report->SetLeftMargin(14);
+            $report->SetRightMargin(14);
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Certificado de Estudios');
             $report->CertificadoEstudios($idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idestudiante, null);
             $report->generatePDFDocument();
         }
         if ($tipo === 'CertificadoNotas') {
-            $report->AddPage($orientation, $format, true);
             $report->SetLeftMargin(12);
             $report->SetRightMargin(12);
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Certificado de Notas');
             $report->CertificadoNotas($idsede, $idjornada, $idprograma, $grado, $grupo, $idperiodo, $idestudiante, null);
             $report->generatePDFDocument();
         }
         if ($tipo === 'EstadisticosBasicosEstudiante') {
-            $report->AddPage($orientation, $format, true);
             $report->SetLeftMargin(12);
             $report->SetRightMargin(12);
+            $report->AddPage($orientation, $format, true);
             $report->setReportName('Datos Estadisticos Basicos de Estudiantes por Grupo ');
             $report->DatosEstadisticosEstudiantes($idescuela, $idprograma, $grado, $grupo, $idperiodo);
             $report->generatePDFDocument();
         }
         if ($tipo === 'PlanillasCalificaciones') {
-            $report->AddPage('L', $format, true);
             $report->SetLeftMargin(12);
             $report->SetRightMargin(12);
+            $report->AddPage('L', $format, true);
             $report->setReportName('Planillas Auxiliares de Calificaciones ' . $idprograma . $grupo);
             $report->ListadoPlanillaEstudiantes($idescuela, $idprograma, $idplanestudio, $idperiodo, $idcorte, $grado, $grupo);
             $report->generatePDFDocument();
