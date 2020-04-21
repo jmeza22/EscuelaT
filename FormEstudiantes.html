@@ -76,9 +76,9 @@ and open the template in the editor.
                             <label>Tipo</label>
                             <select name="tipodoc_persona" id="tipodoc_persona" selected="NN" alphabetic="true" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
                                 <option id="NN" value="NN" disabled="disabled">Desconocido</option>
-                                <option id="CC" value="CC" >Cédula de Ciudadanía</option>
                                 <option id="TI" value="TI" >Tarjeta de Identidad</option>
                                 <option id="RC" value="RC" >Registro Civil</option>
+                                <option id="CC" value="CC" >Cédula de Ciudadanía</option>
                                 <option id="CE" value="CE" >Cédula de Extranjeria</option>
                                 <option id="PP" value="PP" >Pasaporte</option>
                                 <option id="NES" value="NES" >Num. Establecido Secretaria</option>
@@ -155,6 +155,43 @@ and open the template in the editor.
                     <input type="hidden" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
                     <input type="hidden" name="foto_estudiante" id="foto_estudiante" value="" maxlength="200"  title="Fotografia de Estudiante" >
                     <div class="row">
+                        <div class="col-sm-4" style="min-height: available !important;">
+                            <div class="panel panel-default" style="min-height: 410px !important;">
+                                <div class="panel-heading">Foto de Perfil</div>
+                                <div class="panel-body" >
+                                    <center>
+                                        <div class="photo-panel">
+                                            <center>
+                                                <img name="image" id="image" class="image-photo" onclick="clickButton();" alt="Subir Foto" title="Click para Cambiar Foto." style="min-width: 180px !important; max-width: 600px !important;" />
+                                                <input type="file" form="formE" name="image-file" id="image-file" class="image-file" accept="image/*" onchange="showMyImage(this)" title="Click para Cambiar Foto." />
+                                            </center>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Documento de Identidad</div>
+                                <div class="panel-body" >
+                                    <div class="row">
+                                        <input type="hidden" id="imgdocumento_estudiante" name="imgdocumento_estudiante" value="">
+                                        <input type="file" form="formE" name="document-file" id="document-file" onchange="showSelectedFile();" accept=".pdf" class="form-control" title="Cargar Archivo." style="display: none !important;">
+                                        <div class="col-sm-6">
+                                            <label>Documento</label>
+                                            <a id="linkDocumento" href="" target="_blank" title="Archivo de Documento Cargado." style="display: none !important;">Descargar</a>
+                                            <button type="button" id="VerDocumento" onclick="viewFile(); selectFile();" class="btn btn-default btn-block">
+                                                <i class="glyphicon glyphicon-upload"></i> Cargar
+                                            </button>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Accion</label>
+                                            <button type="button" id="EliminarDocumento" onclick="deleteFile();" class="btn btn-danger btn-block" title="Eliminar Archivo Cargado.">
+                                                <i class="glyphicon glyphicon-erase"></i> Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-sm-8">
                             <div class="panel panel-default">
                                 <div class="panel-heading">Estudiante</div>
@@ -181,8 +218,8 @@ and open the template in the editor.
                                             <input type="number" name="estaturam_estudiante" id="estaturam_estudiante" value="60" maxlength="6" min="60" max="2" required="required" class="form-control" title="Estatura en Centimetros">
                                         </div>
                                         <div class="col-sm-3">
-                                            <label>Grupo Sanguineo</label>
-                                            <select id="grupotiposangre_estudiante" name="grupotiposangre_estudiante" class="form-control" style="width: 100%;">
+                                            <label>G. Sanguineo</label>
+                                            <select id="grupotiposangre_estudiante" name="grupotiposangre_estudiante" title="Grupo Sanguineo" class="form-control" style="width: 100%;">
                                                 <option value=" ">Desconocido</option>
                                                 <option value="O">Grupo O</option>
                                                 <option value="A">Grupo A</option>
@@ -200,7 +237,14 @@ and open the template in the editor.
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
+                                            <label>PAE</label>
+                                            <select id="alimentacionescolar_estudiante" name="alimentacionescolar_estudiante" class="form-control" style="width: 100%;" title="Recibe Alimentacion Escolar o PAE?">
+                                                <option value="0">NO</option>
+                                                <option value="1">SI</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
                                             <label>Enf. Cronica</label>
                                             <input type="text" name="enfermedadcronica_estudiante" id="enfermedadcronica_estudiante" value="NO" maxlength="100" required="required" class="form-control" title="Enfermedad Cronica del Estudiante">
                                         </div>
@@ -235,22 +279,47 @@ and open the template in the editor.
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4" style="min-height: available !important;">
-                            <div class="panel panel-default" style="min-height: 410px !important;">
-                                <div class="panel-heading">Foto de Perfil</div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">TIC'S en CASA</div>
                                 <div class="panel-body" >
-                                    <center>
-                                        <div class="photo-panel">
-                                            <center>
-                                                <img name="image" id="image" class="image-photo" onclick="clickButton();" alt="Subir Foto" title="Click para Cambiar Foto." style="min-width: 180px !important; max-width: 600px !important;" />
-                                                <input type="file" form="formE" name="image-file" id="image-file" class="image-file" accept="image/*" required="required" onchange="showMyImage(this)" title="Click para Cambiar Foto." />
-                                            </center>
-                                        </div>
-                                    </center>
+                                    <div class="col-sm-3">
+                                        <label>Smartphone</label>
+                                        <select id="smartphone_estudiante" name="smartphone_estudiante" class="form-control" style="width: 100%;" title="Tiene Smartphone?">
+                                            <option value="NO">No tiene</option>
+                                            <option value="Android">Android</option>
+                                            <option value="IOS">Iphone/IOS</option>
+                                            <option value="SI">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Tableta</label>
+                                        <select id="tablet_estudiante" name="tablet_estudiante" class="form-control" style="width: 100%;" title="Tiene Tableta?">
+                                            <option value="NO">No tiene</option>
+                                            <option value="Android">Android</option>
+                                            <option value="IOS">IPad/IOS</option>
+                                            <option value="SI">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Computador</label>
+                                        <select id="computador_estudiante" name="computador_estudiante" class="form-control" style="width: 100%;" title="Tiene Computador?">
+                                            <option value="NO">No tiene</option>
+                                            <option value="Portatil">Portatil</option>
+                                            <option value="Escritorio">Escritorio</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Internet</label>
+                                        <select id="internet_estudiante" name="internet_estudiante" class="form-control" style="width: 100%;" title="Tiene Internet en Casa?">
+                                            <option value="NO">No tiene</option>
+                                            <option value="Movil">Plan de Datos</option>
+                                            <option value="Hogar">Internet Hogar</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
 
@@ -304,29 +373,11 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Telefono</label>
-                                    <input type="text" name="telefonoacudiente2_estudiante" id="telefonoacudiente2_estudiante" value="0" maxlength="50" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
+                                    <input type="tel" name="telefonoacudiente2_estudiante" id="telefonoacudiente2_estudiante" value="0" maxlength="10" class="form-control" title="Parentesco con el Estudiante" list="lista_parentesco">
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-12">
-                            <center>
-                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante();" class="btn btn-primary" style="width: 200px;">Grabar</button>        
-                            </center>
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-12">
-                            <center>
-                                <button type="button" id="btMatriculas" name="btMatriculas" onclick="VerHistorialMatriculas();" class="btn btn-default" style="width: 200px;">Historial Matriculas</button>        
-                            </center>
-                        </div>
-                    </div>
-
 
                     <datalist id="lista_parentesco" name="lista_parentesco" >
                         <option value="Ninguno">Ninguno</option>
@@ -380,21 +431,28 @@ and open the template in the editor.
                         <option value="Empresario">Empresario</option>
                         <option value="Otro">Otro</option>
                     </datalist>
-
                 </form>
-
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <center>
+                            <button type="button" form="formE" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarEstudiante();" class="btn btn-primary" style="width: 200px;">Grabar</button>        
+                        </center>
+                    </div>
+                    <div class="col-sm-4">
+                        <center>
+                            <button type="button" id="btMatriculas" name="btMatriculas" onclick="VerHistorialMatriculas();" class="btn btn-default" style="width: 200px;">Historial Matriculas</button>        
+                        </center>
+                    </div>
+                    <div class="col-sm-4">
                         <center>
                             <form id="formRep" method="POST" autocomplete="off" target="_blank" action="Base/Controllers/ReportesController.php" url="Base/Controllers/InformesController.php" model="EscuelasApp" findBy="id_escuela" mainform="true" >
-                                <input type="hidden" id="tipo_reporte" name="tipo_reporte" required="required" value="ObservadorEstudiante" />
-                                <input type="hidden" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
-                                <button type="submit" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-default" >Observador PDF</button>        
+                                <input type="hidden" form="formRep" id="tipo_reporte" name="tipo_reporte" required="required" value="ObservadorEstudiante" />
+                                <input type="hidden" form="formRep" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required"  title="Codigo Asignado al Estudiante" >
+                                <button type="submit" form="formRep" id="generate" name="generate"  action="findall" save="true" onclick="validateForm(getForm(this));" class="btn btn-default" style="width: 200px;">Observador PDF</button>        
                             </form>
                         </center>
                     </div>
                 </div>
-
             </div>
         </div>
 

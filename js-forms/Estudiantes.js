@@ -62,9 +62,10 @@ function BuscarEstudiante() {
                 getFormData(formE).done(function () {
                     CopiarCodigoEstudianteAnotacion();
                     CopiarCodigoEstudianteCitacion();
+                    DocumentoIdentidad();
+                    CargarFrameFoto();
                     LoadTableAnotaciones();
                     LoadTableCitaciones();
-                    CargarFrameFoto();
                 });
             }
         }
@@ -84,6 +85,7 @@ function BuscarEstudianteActivo() {
             if (idestudiante.value !== '') {
                 getFormData(formE).done(function () {
                     CargarFrameFoto();
+                    DocumentoIdentidad();
                     document.getElementById("panelPersona").setAttribute('style', 'display: none;');
                     document.getElementById("panelCitaciones").setAttribute('style', 'display: none;');
                     document.getElementById("panelAnotaciones").setAttribute('style', 'display: none;');
@@ -95,6 +97,69 @@ function BuscarEstudianteActivo() {
                 });
             }
         }
+    }
+}
+
+function DocumentoIdentidad() {
+    var file = document.getElementById("document-file");
+    var documento = document.getElementById("imgdocumento_estudiante");
+    var link = document.getElementById("linkDocumento");
+    var btn = document.getElementById("VerDocumento");
+    if (documento.value !== '') {
+        console.log('Tiene documento');
+        link.href = getWSPath() + "IDFiles/" + documento.value;
+        btn.setAttribute('title', 'Ha cargado una copia del Documento de Identidad. Haga click para verlo.');
+        btn.setAttribute('class', 'btn btn-block btn-success');
+        btn.innerHTML = '<i class="glyphicon glyphicon-download"></i> Descargar';
+        file.setAttribute('disabled', 'disabled');
+        link.setAttribute('disabled', 'disabled');
+    } else {
+        console.log('No tiene documento');
+        btn.setAttribute('title', 'No ha cargado copia del Documento de Identidad. Haga click para seleccionarlo.');
+        btn.setAttribute('class', 'btn btn-block btn-default');
+        btn.innerHTML = '<i class="glyphicon glyphicon-upload"></i> Cargar';
+        file.removeAttribute('disabled');
+        link.removeAttribute('disabled');
+    }
+}
+
+function viewFile() {
+    var link = document.getElementById("linkDocumento");
+    var documento = document.getElementById("imgdocumento_estudiante");
+    if (link.href !== undefined && link.href !== '' && documento.value !== '') {
+        console.log('Descargar Archivo');
+        link.click();
+    }
+}
+
+function selectFile() {
+    var file = document.getElementById("document-file");
+    console.log('Seleccionar Archivo');
+    file.click();
+}
+
+function deleteFile() {
+    var documento = document.getElementById("imgdocumento_estudiante");
+    var file = document.getElementById("document-file");
+    if (documento !== null && documento.value !== undefined && documento.value !== '') {
+        console.log('Eliminar Archivo');
+        file.files = null;
+        documento.value = "";
+        GrabarEstudiante();
+    }
+}
+
+function showSelectedFile() {
+    var file = document.getElementById("document-file");
+    var btn = document.getElementById("VerDocumento");
+    if (file !== null && file.files !== undefined && file.files.length > 0) {
+        var text = "";
+        text = "Archivo: " + file.files[0].name + "\r\n";
+        text = text + "Tipo: " + file.files[0].type + "\r\n";
+        showNotification('Archivo Seleccionado:', text, 10000);
+        btn.setAttribute('class', 'btn btn-block btn-info');
+        btn.setAttribute('title', 'Archivo: ' + file.files[0].name);
+        btn.innerHTML = '<i class="glyphicon glyphicon-file"></i> Seleccionado';
     }
 }
 
@@ -367,17 +432,29 @@ function GrabarCitacion() {
 function GrabarEstudiante() {
     var form = document.getElementById("formE");
     var idestudiante = getElement(form, 'id_estudiante');
-    var file = document.getElementById("image-file");
+    var fileI = document.getElementById("image-file");
+    var fileD = document.getElementById("document-file");
     var foto = document.getElementById("foto_estudiante");
+    var documento = document.getElementById("imgdocumento_estudiante");
+    var auxF = foto.value;
+    var auxD = documento.value;
     if (validateForm(form)) {
-        if (file.files.length > 0) {
+        if (fileI.files.length > 0) {
             foto.value = "Estudiante" + idestudiante.value + ".jpg";
         }
+        if (fileD.files.length > 0) {
+            documento.value = "DocId" + idestudiante.value + ".pdf";
+        }
         submitForm(form, false).done(function () {
-            if (getLastInsertId() !== null) {
-                alert('El Codigo del Estudiante es: ' + getLastInsertId());
+            if (parseInt(getRowCount()) > 0) {
+                if (getLastInsertId() !== null) {
+                    alert('El Codigo del Estudiante es: ' + getLastInsertId());
+                }
+                BuscarEstudiante();
+            } else {
+                foto.value = auxF;
+                documento.value = auxD;
             }
-            LoadTableEstudiantes();
         });
     }
 }

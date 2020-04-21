@@ -1,6 +1,7 @@
 <?php
 
 include_once 'Libraries/Controllers.php';
+include_once 'Others/UploadDocument.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;
@@ -19,6 +20,18 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             }
             if (!file_exists('../../ImageFiles/' . $_POST['foto_estudiante'])) {
                 $_POST['foto_estudiante'] = '';
+            }
+        }
+        if (isset($_POST['imgdocumento_estudiante']) && $_POST['imgdocumento_estudiante'] !== '') {
+            if (isset($_FILES['document-file']) && $_POST['action'] === 'insertorupdate') {
+                $upload = new UploadDocument();
+                $upload->setURL('../../IDFiles/');
+                $upload->setFileName('document-file');
+                $upload->setFullName($_POST['imgdocumento_estudiante']);
+                $upload->Upload();
+            }
+            if (!file_exists('../../IDFiles/' . $_POST['imgdocumento_estudiante'])) {
+                $_POST['imgdocumento_estudiante'] = '';
             }
         }
         $bc = new BasicController();
