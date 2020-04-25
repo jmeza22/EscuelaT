@@ -55,13 +55,13 @@ function setFecha() {
     var fecha = document.getElementById("fecha");
     var mytable = document.getElementById("dataTable0");
     mytable.setAttribute('findby', 'fecha_asistencia');
-    mytable.setAttribute('findbyvalue', fecha.value);   
+    mytable.setAttribute('findbyvalue', fecha.value);
 }
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
     loadTableData(mytable, false).done(function () {
-        
+
     });
 }
 
@@ -76,5 +76,31 @@ function Send(item) {
                 LoadTable();
             }
         });
+    }
+}
+
+function validarInsigniasSanciones(item) {
+    if (item !== null) {
+        var row = getParentTR(item);
+        var icomp = getElementByName(row, 'insigniacomportamiento_asistencia[]');
+        var scomp = getElementByName(row, 'sancionmalcomportamiento_asistencia[]');
+        var iresp = getElementByName(row, 'insigniaresponsabilidad_asistencia[]');
+        var sresp = getElementByName(row, 'sancionirresponsabilidad_asistencia[]');
+        var iequi = getElementByName(row, 'insigniaequipo_asistencia[]');
+        var sequi = getElementByName(row, 'sancionegocentrismo_asistencia[]');
+        var iexe = getElementByName(row, 'insigniaexelencia_asistencia[]');
+        var sexe = getElementByName(row, 'sancionbajorendimiento_asistencia[]');
+        if (icomp.value === '1' && scomp.value === '1') {
+            icomp.click();
+        }
+        if (iresp.value === '1' && sresp.value === '1') {
+            iresp.click();
+        }
+        if (iequi.value === '1' && sequi.value === '1') {
+            iequi.click();
+        }
+        if (iexe.value === '1' && sexe.value === '1') {
+            iexe.click();
+        }
     }
 }

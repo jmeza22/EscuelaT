@@ -99,7 +99,14 @@ and open the template in the editor.
                                     <label>Nombre Completo</label>
                                     <input type="text" name="nombrerector_configuracion" id="nombrerector_configuracion" spellcheck="spellcheck" value="" maxlength="100" required="required" class="form-control" title="Nombre del Rector">
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
+                                    <label>Sexo</label>
+                                    <select name="sexorector_configuracion" id="sexorector_configuracion" selected="I" alphabetic="true" class="form-control" style="width: 100%; min-width: 100%;"  >
+                                        <option value="M" >Masculino</option>
+                                        <option value="F" >Femenino</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
                                     <label>Tipo</label>
                                     <select name="tipodocrector_configuracion" id="tipodocrector_configuracion" selected="NN" alphabetic="true" required="required" class="form-control" style="width: 100%; min-width: 100%;" title="Tipo de Documento"  >
                                         <option id="NN" value="NN" >Desconocido</option>
@@ -108,7 +115,7 @@ and open the template in the editor.
                                         <option id="PP" value="PP" >Pasaporte</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label>Documento</label>
                                     <input type="text" name="documentorector_configuracion" id="documentorector_configuracion" value="" maxlength="24" required="required" class="form-control" title="Numero de Documento">
                                 </div>
@@ -218,113 +225,113 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-sm-4">
                                     <label title="Porcentaje para Componente Actitudinal">Actitudinal<label>
-                                    <input type="number" float="true" id="porcentajeactitudinal_configuracion" name="porcentajeactitudinal_configuracion" value="33" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 panel panel-default">
-                            <label class="panel-heading">Desempeño Superior</label>
-                            <div class="row panel-body">
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Minima Desempeño Superior">Val.Min.Sup</label>
-                                    <input type="number" id="valsupmin_configuracion" name="valsupmin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Maxima Desempeño Superior">Val.Max.Sup</label>
-                                    <input type="number" id="valsupmax_configuracion" name="valsupmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 panel panel-default">
-                            <label class="panel-heading">Desempeño Alto</label>
-                            <div class="row panel-body">
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Minima Desempeño Alto">Val.Min.Alto</label>
-                                    <input type="number" id="valaltomin_configuracion" name="valaltomin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Maxima Desempeño Alto">Val.Max.Alto</label>
-                                    <input type="number" id="valaltomax_configuracion" name="valaltomax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 panel panel-default">
-                            <label class="panel-heading">Desempeño Basico</label>
-                            <div class="row panel-body">
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Minima Desempeño Basico">Val.Min.Bas</label>
-                                    <input type="number" id="valbasmin_configuracion" name="valbasmin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Maxima Desempeño Basico">Val.Max.Bas</label>
-                                    <input type="number" id="valbasmax_configuracion" name="valbasmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 panel panel-default">
-                            <label class="panel-heading">Desempeño Bajo</label>
-                            <div class="row panel-body">
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Minima Desempeño Bajo">Val.Min.Bajo</label>
-                                    <input type="number" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                                <div class="col-sm-6">
-                                    <label title="Valor Calificacion Maxima Desempeño Bajo">Val.Max.Bajo</label>
-                                    <input type="number" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 panel panel-default">
-                            <label class="panel-heading">Peso Porcentual por Periodos</label>
-                            <div class="row panel-body">
-                                <div class="col-sm-2">
-                                    <label title="Peso Porcentual del Primer Periodo">Primer Periodo</label>
-                                    <input type="number" float="true" id="p1_porcentaje_configuracion" name="p1_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
-                                </div>
-                                <div class="col-sm-2">
-                                    <label title="Peso Porcentual del Segundo Periodo">Segundo Periodo</label>
-                                    <input type="number" float="true" id="p2_porcentaje_configuracion" name="p2_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
-                                </div>
-                                <div class="col-sm-2">
-                                    <label title="Peso Porcentual del Tercer Periodo">Tercer Periodo</label>
-                                    <input type="number" float="true" id="p3_porcentaje_configuracion" name="p3_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
-                                </div>
-                                <div class="col-sm-2">
-                                    <label title="Peso Porcentual del Cuarto Periodo">Cuarto Periodo</label>
-                                    <input type="number" float="true" id="p4_porcentaje_configuracion" name="p4_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
-                                </div>
-                                <div class="col-sm-2">
-                                    <label title="Peso Porcentual del Quinto Periodo">Quinto Periodo</label>
-                                    <input type="number" float="true" id="p5_porcentaje_configuracion" name="p5_porcentaje_configuracion" value="0" class="form-control" maxlength="3" min="0" max="100" placeholder="0%" />                                 
-                                </div>
-                                <div class="col-sm-2">
-                                    <label title="Peso Porcentual del Sexto Periodo">Sexto Periodo</label>
-                                    <input type="number" float="true" id="p6_porcentaje_configuracion" name="p6_porcentaje_configuracion" value="0" class="form-control" maxlength="3" min="0" max="100" placeholder="0%" />                                 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                            <input type="number" float="true" id="porcentajeactitudinal_configuracion" name="porcentajeactitudinal_configuracion" value="33" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6 panel panel-default">
+                                                    <label class="panel-heading">Desempeño Superior</label>
+                                                    <div class="row panel-body">
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Minima Desempeño Superior">Val.Min.Sup</label>
+                                                            <input type="number" id="valsupmin_configuracion" name="valsupmin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Maxima Desempeño Superior">Val.Max.Sup</label>
+                                                            <input type="number" id="valsupmax_configuracion" name="valsupmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 panel panel-default">
+                                                    <label class="panel-heading">Desempeño Alto</label>
+                                                    <div class="row panel-body">
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Minima Desempeño Alto">Val.Min.Alto</label>
+                                                            <input type="number" id="valaltomin_configuracion" name="valaltomin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Maxima Desempeño Alto">Val.Max.Alto</label>
+                                                            <input type="number" id="valaltomax_configuracion" name="valaltomax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6 panel panel-default">
+                                                    <label class="panel-heading">Desempeño Basico</label>
+                                                    <div class="row panel-body">
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Minima Desempeño Basico">Val.Min.Bas</label>
+                                                            <input type="number" id="valbasmin_configuracion" name="valbasmin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Maxima Desempeño Basico">Val.Max.Bas</label>
+                                                            <input type="number" id="valbasmax_configuracion" name="valbasmax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 panel panel-default">
+                                                    <label class="panel-heading">Desempeño Bajo</label>
+                                                    <div class="row panel-body">
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Minima Desempeño Bajo">Val.Min.Bajo</label>
+                                                            <input type="number" id="valbajomin_configuracion" name="valbajomin_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label title="Valor Calificacion Maxima Desempeño Bajo">Val.Max.Bajo</label>
+                                                            <input type="number" id="valbajomax_configuracion" name="valbajomax_configuracion" value="" class="form-control" maxlength="2" min="1" max="10" />                                 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 panel panel-default">
+                                                    <label class="panel-heading">Peso Porcentual por Periodos</label>
+                                                    <div class="row panel-body">
+                                                        <div class="col-sm-2">
+                                                            <label title="Peso Porcentual del Primer Periodo">Primer Periodo</label>
+                                                            <input type="number" float="true" id="p1_porcentaje_configuracion" name="p1_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label title="Peso Porcentual del Segundo Periodo">Segundo Periodo</label>
+                                                            <input type="number" float="true" id="p2_porcentaje_configuracion" name="p2_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label title="Peso Porcentual del Tercer Periodo">Tercer Periodo</label>
+                                                            <input type="number" float="true" id="p3_porcentaje_configuracion" name="p3_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label title="Peso Porcentual del Cuarto Periodo">Cuarto Periodo</label>
+                                                            <input type="number" float="true" id="p4_porcentaje_configuracion" name="p4_porcentaje_configuracion" value="25" class="form-control" maxlength="3" min="0" max="100" required="required" placeholder="%" />                                 
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label title="Peso Porcentual del Quinto Periodo">Quinto Periodo</label>
+                                                            <input type="number" float="true" id="p5_porcentaje_configuracion" name="p5_porcentaje_configuracion" value="0" class="form-control" maxlength="3" min="0" max="100" placeholder="0%" />                                 
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label title="Peso Porcentual del Sexto Periodo">Sexto Periodo</label>
+                                                            <input type="number" float="true" id="p6_porcentaje_configuracion" name="p6_porcentaje_configuracion" value="0" class="form-control" maxlength="3" min="0" max="100" placeholder="0%" />                                 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <center>
-                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendConfiguracion();" class="btn btn-primary" >Grabar Configuracion</button>        
-                    </center>
-                </div>
-            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <center>
+                                                        <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="SendConfiguracion();" class="btn btn-primary" >Grabar Configuracion</button>        
+                                                    </center>
+                                                </div>
+                                            </div>
 
-            <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php">
-                <option value="">Ninguno</option>
-            </datalist>
-        </form>
+                                            <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php">
+                                                <option value="">Ninguno</option>
+                                            </datalist>
+                                            </form>
 
-    </body>
-</html>
+                                            </body>
+                                            </html>
