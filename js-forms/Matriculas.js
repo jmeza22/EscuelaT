@@ -8,11 +8,41 @@ jQuery(document).ready(function () {
     LoadSede();
     LoadPrograma();
     LoadPeriodo();
-    LoadTable();
 });
+
+function setFindbyTable() {
+    var myform = document.getElementById('form0');
+    var mytable = document.getElementById("dataTable0");
+    var idprograma = getElement(myform, 'id_programa');
+    var idplanestudio = getElement(myform, 'id_planestudio');
+    var idperiodo = getElement(myform, 'id_periodo');
+    var numgrado = getElement(myform, 'numgrado_programa');
+    var idgrupo = getElement(myform, 'id_grupo');
+    if (idprograma !== null && idprograma.value !== '') {
+        mytable.setAttribute('findby1', idprograma.id);
+        mytable.setAttribute('findbyvalue1', idprograma.value);
+    }
+    if (idplanestudio !== null && idplanestudio.value !== '') {
+        mytable.setAttribute('findby2', idplanestudio.id);
+        mytable.setAttribute('findbyvalue2', idplanestudio.value);
+    }
+    if (idperiodo !== null && idperiodo.value !== '') {
+        mytable.setAttribute('findby3', idperiodo.id);
+        mytable.setAttribute('findbyvalue3', idperiodo.value);
+    }
+    if (numgrado !== null && numgrado.value !== '') {
+        mytable.setAttribute('findby4', numgrado.id);
+        mytable.setAttribute('findbyvalue4', numgrado.value);
+    }
+    if (idgrupo !== null && idgrupo.value !== '') {
+        mytable.setAttribute('findby5', idgrupo.id);
+        mytable.setAttribute('findbyvalue5', idgrupo.value);
+    }
+}
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
+    clearTableData(mytable);
     loadTableData(mytable, true).done(function () {
     });
     return mytable;
@@ -79,18 +109,21 @@ function onChangePrograma() {
     programa = document.getElementById("id_programa");
     setComboboxFindby('id_planestudio', programa.id, programa.value, 1);
     setFindByField('id_grupo', programa.id, getComboboxValue(programa), 2);
+    setFindbyTable();
 }
 
 function onChangePlanEstudios() {
     var plan = null;
     plan = document.getElementById("id_planestudio");
     setComboboxFindby('numgrado_programa', plan.id, getComboboxValue(plan), 1);
+    setFindbyTable();
 }
 
 function onChangeGrado() {
     var grado = null;
     grado = document.getElementById("numgrado_programa");
     setComboboxFindby('id_grupo', grado.id, getComboboxValue(grado), 3);
+    setFindbyTable();
 }
 
 function setIdMatricula() {
@@ -112,8 +145,8 @@ function setIdMatricula() {
     }
 }
 
-function resetMatricula(item) {
-    var form0 = getForm(item);
+function resetMatricula() {
+    var form0 = document.getElementById('form0');
     var idestudiante = getElement(form0, 'id_estudiante');
     var idperiodo = getElement(form0, 'id_periodo');
     var idprograma = getElement(form0, 'id_programa');
@@ -131,15 +164,14 @@ function GrabarMatricula() {
     setIdMatricula();
     if (validateForm(form0)) {
         submitForm(form0, false).done(function () {
-            if (getLastInsertId() !== null && getLastInsertId() !== '') {
-                var rowcount = sessionStorage.getItem('rowCount');
-                rowcount = parseInt(rowcount);
-                if (isNaN(rowcount) === false && rowcount > 0) {
-                    LoadTable();
-                    MatriculaAsignaturasAutomatica(getElement(form0, 'id_matricula'));
-                } else {
-                    idmat.value = "";
-                }
+            setFindbyTable();
+            LoadTable();
+            var rowcount = sessionStorage.getItem('rowCount');
+            rowcount = parseInt(rowcount);
+            if (isNaN(rowcount) === false && rowcount > 0) {
+                MatriculaAsignaturasAutomatica(getElement(form0, 'id_matricula'));
+            } else {
+                idmat.value = "";
             }
         });
     }
@@ -197,7 +229,7 @@ function GenerarReciboMatricula(item) {
     var form = null;
     if (item !== null) {
         form = getForm(item);
-        form.setAttribute('action',''+getWSPath()+'Base/Controllers/ReportesController.php');
+        form.setAttribute('action', '' + getWSPath() + 'Base/Controllers/ReportesController.php');
         var tiporep = getElement(form, 'tipo_reporte');
         tiporep.removeAttribute('disabled');
         form.submit();

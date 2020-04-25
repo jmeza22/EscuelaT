@@ -85,7 +85,7 @@ and open the template in the editor.
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label>Año</label>
-                                        <select id="id_periodo" name="id_periodo" required="required" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;">
+                                        <select id="id_periodo" name="id_periodo" required="required" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;" onchange="setFindbyTable();">
                                             <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
@@ -97,7 +97,7 @@ and open the template in the editor.
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Grupo</label>
-                                        <select id="id_grupo" name="id_grupo" required="required" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;">
+                                        <select id="id_grupo" name="id_grupo" required="required" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;" onchange="setFindbyTable();">
                                             <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
@@ -132,14 +132,19 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div class="row" style="margin-top: 20px;">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <center>
-                                    <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarMatricula(this);" class="btn btn-primary" >Grabar</button>        
+                                    <button type="button" id="save" name="save"  action="insertorupdate" save="true" class="btn btn-primary" onclick="GrabarMatricula();" style="width: 100px;">Grabar</button>        
                                 </center>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <center>
-                                    <button type="reset" id="reset" name="reset" class="btn btn-success" onclick="resetMatricula(this);">Nuevo</button> 
+                                    <button type="reset" id="reset" name="reset" class="btn btn-success" onclick="resetMatricula();" style="width: 100px;">Nuevo</button> 
+                                </center>
+                            </div>
+                            <div class="col-sm-4">
+                                <center>
+                                    <button type="button" id="listing" name="listing" class="btn btn-default" onclick="LoadTable();" style="width: 100px;">Listar</button> 
                                 </center>
                             </div>
                         </div>
@@ -161,7 +166,7 @@ and open the template in the editor.
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
                                 <th columntype="html" style="width: 10%;" title="Codigo de Matricula">Codigo</th>
-                                <th columntype="html" style="min-width: 48% !important;">Nombre Estudiante</th>
+                                <th columntype="html" style="width: 48% !important; min-width: 400px !important;">Nombre Estudiante</th>
                                 <th columntype="html" style="width: 5%;" title="Escuela">Esc.</th>
                                 <th columntype="html" style="width: 5%;" title="Sede">Sed.</th>
                                 <th columntype="html" style="width: 5%;" title="Jornada">Jor.</th>
