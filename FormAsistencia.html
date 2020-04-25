@@ -18,6 +18,8 @@ and open the template in the editor.
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
         <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="css-forms/Asistencia.css" rel="stylesheet" type="text/css"/>
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -30,7 +32,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Datos de Planilla</div>
             <div class="panel-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" >
@@ -83,7 +85,7 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-primary" style="width: 80% !important;">
+        <div class="panel panel-primary" style="width: 90% !important;">
             <div class="panel-heading">Planilla de Asistencia</div>
             <div class="panel-body table-responsive">
                 <div class="table-responsive">
@@ -93,10 +95,18 @@ and open the template in the editor.
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
                                 <th style="width: 2%;">#</th>
-                                <th style="width: 40%;">NOMBRES COMPLETO</th>
-                                <th style="width: 10%;">PRESENTE?</th>
-                                <th style="width: 8%;">TARDE?</th>
-                                <th style="width: 40%;">OBSERVACIONES</th>
+                                <th style="width: 38%;">NOMBRES COMPLETO</th>
+                                <th style="width: 3%; text-align: center; color: green;" title="¿Presente?"><i class="glyphicon glyphicon-check"></i></th>
+                                <th style="width: 3%; text-align: center; color: red;" title="¿Llegó Tarde?"><i class="fa fa-clock-o"></i></th>
+                                <th style="width: 30%;">OBSERVACIONES</th>
+                                <th style="width: 3%; text-align: center; color: gold;" title="Insignia ¿Buen Comportamiento?"><i class="fa fa-thumbs-up"></i></th>
+                                <th style="width: 3%; text-align: center; color: gold;" title="Insignia ¿Responsabilidad?"><i class="fa fa-smile-o"></i></th>
+                                <th style="width: 3%; text-align: center; color: gold;" title="Insignia ¿Trabajo en Equipo?"><i class="fa fa-users"></i></th>
+                                <th style="width: 3%; text-align: center; color: gold;" title="Insignia ¿Excelencia?"><i class="fa fa-star"></i></th>
+                                <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿Mal Comportamiento?"><i class="fa fa-thumbs-down"></i></th>
+                                <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿Irresponsabilidad?"><i class="fa fa-meh-o"></i></th>
+                                <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿No Trabaja en Equipo?"><i class="fa fa-user"></i></th>
+                                <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿Bajo Rendimiento?"><i class="fa fa-level-down"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -112,27 +122,25 @@ and open the template in the editor.
                                 </td>
                                 <td>
                                     <label>{{nombrecompleto_estudiante}} </label> </td>
-                                <td style="text-align: center !important;">
-                                    <select id="presente_asistencia" name="presente_asistencia[]" class="form-control" >
-                                        <option id="1" value="1">Si</option>
-                                        <option id="0" value="0">No</option>
-                                    </select>
-                                </td>
-                                <td style="text-align: center !important;">
-                                    <select id="tarde_asistencia" name="tarde_asistencia[]" class="form-control" >
-                                        <option id="1" value="1">Si</option>
-                                        <option id="0" value="0">No</option>
-                                    </select>
-                                </td>
+                                <td style="text-align: center !important;" title="¿Presente?"> <input type="checkbox" name="presente_asistencia[]" id="presente_asistencia" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> </td>
+                                <td style="text-align: center !important;" title="¿Llegó Tarde?" class="checkbox-clock"> <input type="checkbox" name="tarde_asistencia[]" id="tarde_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="tarde_asistencia{{rownum}}"></label></td>
                                 <td>
-                                    <textarea id="nota_asistencia" name="nota_asistencia[]" required="required" maxlength="200" style="min-width: 100% !important; min-height: 30px !important; height: 30px !important;" class="form-control"></textarea>
+                                    <textarea id="nota_asistencia" name="nota_asistencia[]" maxlength="200" style="min-width: 100% !important; min-height: 30px !important; height: 30px !important;" class="form-control"></textarea>
                                 </td>
+                                <td style="text-align: center !important;" title="Insignia ¿Buen Comportamiento?" class="checkbox-thumbs-up"> <input type="checkbox" name="insigniacomportamiento_asistencia[]" id="insigniacomportamiento_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control" /> <label for="insigniacomportamiento_asistencia{{rownum}}"></label> </td>
+                                <td style="text-align: center !important;" title="Insignia ¿Responsabilidad?" class="checkbox-smile"> <input type="checkbox" name="insigniaresponsabilidad_asistencia[]" id="insigniaresponsabilidad_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="insigniaresponsabilidad_asistencia{{rownum}}"></label></td>
+                                <td style="text-align: center !important;" title="Insignia ¿Trabajo en Equipo?" class="checkbox-users"> <input type="checkbox" name="insigniaequipo_asistencia[]" id="insigniaequipo_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="insigniaequipo_asistencia{{rownum}}"></label></td>
+                                <td style="text-align: center !important;" title="Insignia ¿Excelencia?" class="checkbox-star"> <input type="checkbox" name="insigniaexelencia_asistencia[]" id="insigniaexelencia_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="insigniaexelencia_asistencia{{rownum}}"></label></td>
+                                <td style="text-align: center !important;" title="Sancion ¿Mal Comportamiento?" class="checkbox-thumbs-down"> <input type="checkbox" name="sancionmalcomportamiento_asistencia[]" id="sancionmalcomportamiento_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="sancionmalcomportamiento_asistencia{{rownum}}"></label></td>
+                                <td style="text-align: center !important;" title="Sancion ¿Irresponsabilidad?" class="checkbox-meh"> <input type="checkbox" name="sancionirresponsabilidad_asistencia[]" id="sancionirresponsabilidad_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="sancionirresponsabilidad_asistencia{{rownum}}"></label></td>
+                                <td style="text-align: center !important;" title="Sancion ¿No Trabaja en Equipo?" class="checkbox-user"> <input type="checkbox" name="sancionegocentrismo_asistencia[]" id="sancionegocentrismo_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="sancionegocentrismo_asistencia{{rownum}}"></label></td>
+                                <td style="text-align: center !important;" title="Sancion ¿Bajo Rendimiento?" class="checkbox-level-down"> <input type="checkbox" name="sancionbajorendimiento_asistencia[]" id="sancionbajorendimiento_asistencia{{rownum}}" value="0" checkedvalue="1" uncheckedvalue="0" onclick="autoValueCheckbox(this);" class="form-control"/> <label for="sancionbajorendimiento_asistencia{{rownum}}"></label></td>
                             </tr>
                         </tbody>
                     </table>
                     <div>
                         <center>
-                            <button type="button" form="formTable" id="guardar" name="guardar" action="replace" class="btn btn-primary" onclick="submitForm(this, false);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                            <button type="button" form="formTable" id="guardar" name="guardar" action="insertorupdate" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
                         </center>
                     </div>
                 </div>

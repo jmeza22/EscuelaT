@@ -236,6 +236,14 @@
         <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Fecha y Hora de Asistencia</Cm>
       </Cl>
+      <Cl au="0" df="" nm="id_matasig" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="64" sc="null" sg="1" un="0"/>
+        <Cm>Codigo Asignatura Matriculada</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_corte" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Codigo del Corte</Cm>
+      </Cl>
       <Cl au="0" df="1" nm="presente_asistencia" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Asistio a Clases?</Cm>
@@ -248,13 +256,37 @@
         <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
         <Cm>Observaciones</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_matasig" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="64" sc="null" sg="1" un="0"/>
-        <Cm>Codigo Asignatura Matriculada</Cm>
+      <Cl au="0" df="0" nm="insigniacomportamiento_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Insignia por Buen Comportamiento</Cm>
       </Cl>
-      <Cl au="0" df="" nm="id_corte" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
-        <Cm>Codigo del Corte</Cm>
+      <Cl au="0" df="0" nm="insigniaresponsabilidad_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Insignia por Responsabilidad</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="insigniaequipo_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Insignia por Trabajo en Equipo</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="insigniaexelencia_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Insignia por Excelencia</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="sancionmalcomportamiento_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Sancion por Mal Comportamiento</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="sancionirresponsabilidad_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Sancion por Irresponsabilidad</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="sancionegocentrismo_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Sancion por Egocentrismo</Cm>
+      </Cl>
+      <Cl au="0" df="0" nm="sancionbajorendimiento_asistencia" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Sancion por Bajo Rendimiento</Cm>
       </Cl>
       <Cl au="0" df="1" nm="status_asistencia" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
@@ -1498,6 +1530,10 @@
       <Cl au="0" df="A" nm="num_grupo" nu="0">
         <DT arr="0" ds="VarChar" en="" id="12" ln="4" sc="null" sg="1" un="0"/>
         <Cm>Numero del Grupo (1, 2, 3,... o A, B, C,...)</Cm>
+      </Cl>
+      <Cl au="0" df="50" nm="numcupos_grupo" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Numero Maximo de Estudiantes</Cm>
       </Cl>
       <Cl au="0" df="1" nm="status_grupo" nu="1">
         <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
@@ -3124,7 +3160,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="MunicipiosCiudadesApp" x="1304" y="5061"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="PagosRecibidosApp" x="36" y="3369"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ValoresPecuniariosApp" x="537" y="3383"/>
-    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsistenciaApp" x="1107" y="1703"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="AsistenciaApp" x="1106" y="1702"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CargosEleccionesApp" x="88" y="3874"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="CandidatosEleccionesApp" x="441" y="3879"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="VotosEleccionesApp" x="461" y="4058"/>
@@ -3181,12 +3217,12 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.AsistenciaApp.fk_AsistenciaApp_CortesPeriodosApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="1213" x2="1213" y1="1412" y2="1680"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="1213" x2="1213" y1="1412" y2="1679"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.AsistenciaApp.fk_AsistenciaApp_MatriculaAsignaturasApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="1004" x2="1084" y1="1783" y2="1783"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="1004" x2="1083" y1="1783" y2="1783"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CalificacionesApp.fk_CalificacionesApp_MatriculaAsignaturasApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
@@ -3235,7 +3271,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_GruposApp" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="728" x2="728" y1="1040" y2="1396"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="728" x2="728" y1="1053" y2="1396"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="EscuelaDB.CargasDocentesApp.fk_CargasDocentesApp_PeriodosApp" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
@@ -3296,7 +3332,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.DirectoresGruposApp.fk_DirectoresGrupo_GruposApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="488" x2="488" y1="1040" y2="1158"/>
+        <positionableLine lineRole="PARENT_LINE" x1="488" x2="488" y1="1053" y2="1158"/>
         <positionableLine lineRole="CHILD_LINE" x1="503" x2="492" y1="1162" y2="1162"/>
       </positionableLines>
     </FkGl>
@@ -3348,7 +3384,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.GruposCuestionariosApp.fk_GruposCuestionariosApp_GruposApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="603" x2="603" y1="1040" y2="4495"/>
+        <positionableLine lineRole="PARENT_LINE" x1="603" x2="603" y1="1053" y2="4495"/>
         <positionableLine lineRole="CHILD_LINE" x1="418" x2="599" y1="4499" y2="4499"/>
       </positionableLines>
     </FkGl>
@@ -3409,7 +3445,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.MatriculasApp.fk_MatriculasApp_GruposApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="469" x2="469" y1="1040" y2="1048"/>
+        <positionableLine lineRole="PARENT_LINE" x1="469" x2="469" y1="1053" y2="1048"/>
         <positionableLine lineRole="CHILD_LINE" x1="430" x2="465" y1="1052" y2="1052"/>
       </positionableLines>
     </FkGl>
@@ -4047,6 +4083,9 @@
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB/Tables (46)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/AreasApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/AsistenciaApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/SedesApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/SedesApp/Columns (8)</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

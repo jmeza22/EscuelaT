@@ -83,6 +83,14 @@ input[type="number"], input[numeric="true"], input[double="true"]{
     text-align: right !important;
 }
 
+table input[type=checkbox]{
+    -ms-transform: scale(1.8); /* IE */
+    -moz-transform: scale(1.8); /* FF */
+    -webkit-transform: scale(1.8); /* Safari y Chrome */
+    -o-transform: scale(1.8); /* Opera */
+    padding: 2px;
+}
+
 select{
     font-family: 'Voltaire', sans-serif !important;
 }

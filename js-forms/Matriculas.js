@@ -188,8 +188,21 @@ function Edit(item) {
                 idprograma.setAttribute('disabled', 'disabled');
                 idperiodo.setAttribute('disabled', 'disabled');
             });
+
         }, 1);
     });
+}
+
+function GenerarReciboMatricula(item) {
+    var form = null;
+    if (item !== null) {
+        form = getForm(item);
+        form.setAttribute('action',''+getWSPath()+'Base/Controllers/ReportesController.php');
+        var tiporep = getElement(form, 'tipo_reporte');
+        tiporep.removeAttribute('disabled');
+        form.submit();
+        tiporep.setAttribute('disabled', 'disabled');
+    }
 }
 
 function DeleteItem(item) {

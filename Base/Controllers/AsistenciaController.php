@@ -36,7 +36,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
             }
         }
         if (isset($_POST[$findBy])) {
-
+            $bc->beginTransaction();
             $data = array();
             $postdata = $bc->getPostData();
             $count = count($_POST[$findBy]);
@@ -52,8 +52,6 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
                         $result = $bc->execute(false);
                         if ($bc->getRowCount() > 0) {
                             $rowcount++;
-                        } else {
-                            break;
                         }
                     }
                 }
@@ -61,6 +59,9 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() =
         }
         echo $result;
         $bc->executeSQL("DELETE FROM $model WHERE status_asistencia=0 ");
+        if ($rowcount > 0) {
+            $bc->commit();
+        }
         $bc->disconnect();
     }
 }

@@ -524,11 +524,12 @@ function autoValueCheckbox(checkbox) {
         }
         console.log('Setting Checkbox Value: ' + checkbox.id);
         if (checkbox.tagName.toString().toUpperCase() === 'INPUT' && checkbox.getAttribute('type').toString().toLowerCase() === 'checkbox') {
-
             var checkedValue = checkbox.getAttribute('checkedvalue');
             var uncheckedValue = checkbox.getAttribute('uncheckedvalue');
+            checkbox.removeAttribute('checked');
             if (checkbox.checked) {
                 checkbox.value = checkedValue;
+                checkbox.setAttribute('checked', 'checked');
             } else {
                 checkbox.value = uncheckedValue;
             }
@@ -1204,7 +1205,7 @@ function setFormData(myform, json) {
                 col = null;
                 element = null;
                 col = columns[j];
-                element = getElement(myform, '' + col);
+                element = getElementByName(myform, '' + col);
                 setValue(element, values[col]);
             }
             console.log('Set Form Data OK!.');

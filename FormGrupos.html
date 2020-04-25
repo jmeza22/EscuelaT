@@ -38,13 +38,13 @@ and open the template in the editor.
 
                         <div>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label>Sede</label>
                                     <select id="id_sede" name="id_sede" selected="NULL" model="SedesApp" colname="nombre_sede" colvalue="id_sede" url="Base/Controllers/GetComboboxSedes.php" class="form-control" style="width: 100%;" onchange="">
                                         <option selected="selected" value="NULL">Ninguna</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label>Programa</label>
                                     <select id="id_programa" name="id_programa" required="required" selected="NULL" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="GenerarCodigo();">
                                         <option selected="selected" value="NULL">Ninguna</option>
@@ -74,6 +74,10 @@ and open the template in the editor.
                                 <div class="col-sm-2">
                                     <label>Diferenciador</label>
                                     <input type="text" id="num_grupo" name="num_grupo" required="required" value="" class="form-control" maxlength="2" oninput="GenerarCodigo();"/> 
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Cupos</label>
+                                    <input type="number" integer="true" id="numcupos_grupo" name="numcupos_grupo" required="required" value="40" class="form-control" min="2" max="99" maxlength="2" /> 
                                 </div>
                                 <div class="col-sm-2">
                                     <label title="Codigo del Grupo">Codigo</label>
@@ -110,10 +114,11 @@ and open the template in the editor.
                                 <th style="width: 10%;" title="Codigo de Grupo">Codigo</th>
                                 <th style="width: 10%;" title="Codigo Escuela">Esc.</th>
                                 <th style="width: 10%;" title="Codigo Sede">Sede</th>
-                                <th style="width: 40%;" title="Nombre del Programa">Programa</th>
-                                <th style="width: 10%;" title="Numero de Grado">Grado</th>
+                                <th style="width: 45%;" title="Nombre del Programa">Programa</th>
+                                <th style="width: 5%;" title="Numero de Grado">Grado</th>
                                 <th style="width: 10%;" title="Diferenciador">Cod.Dif.</th>
-                                <th style="width: 10%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th style="width: 5%;" title="Maximo de Estudiantes">Cupos</th>
+                                <th style="width: 5%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -122,8 +127,9 @@ and open the template in the editor.
                                 <td> <label>{{id_escuela}}</label> </td>
                                 <td> <label>{{id_sede}}</label> </td>
                                 <td> <label>{{nombre_programa}}</label> </td>
-                                <td> <label>{{numgrado_programa}}</label> </td>
+                                <td> <label>{{numgrado_programa}}°</label> </td>
                                 <td> <label>{{num_grupo}}</label> </td>
+                                <td> <label>{{numcupos_grupo}}</label> </td>
                                 <td>
                                     <form id="Grupo{{id_grupo}}" name="Grupo{{id_grupo}}" method="POST" autocomplete="off" url="Base/Controllers/GruposController.php"  model="GruposApp" findBy="id_grupo" statusfield="status_grupo">
                                         <input type="hidden"  editable="false" name="id_grupo" id="id_grupo" value="{{id_grupo}}" >

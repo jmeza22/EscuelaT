@@ -34,7 +34,7 @@ and open the template in the editor.
             <div class="panel-heading">Matricula Manual</div>
             <div class="panel-body">
 
-                <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php"  model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" mainform="true" > 
+                <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php" model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" mainform="true" > 
                     <div>
                         <div class="panel panel-default">
                             <div class="panel-heading">Estudiante</div>
@@ -161,7 +161,7 @@ and open the template in the editor.
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
                                 <th columntype="html" style="width: 10%;" title="Codigo de Matricula">Codigo</th>
-                                <th columntype="html" style="min-width: 50% !important;">Nombre Estudiante</th>
+                                <th columntype="html" style="min-width: 48% !important;">Nombre Estudiante</th>
                                 <th columntype="html" style="width: 5%;" title="Escuela">Esc.</th>
                                 <th columntype="html" style="width: 5%;" title="Sede">Sed.</th>
                                 <th columntype="html" style="width: 5%;" title="Jornada">Jor.</th>
@@ -169,7 +169,7 @@ and open the template in the editor.
                                 <th columntype="html-num" style="width: 5%;" title="Grado">Gra.</th>
                                 <th columntype="html" style="width: 5%;" title="Grupo">Gru.</th>
                                 <th columntype="html-num" style="width: 5%;" title="Año Academico">Año</th>
-                                <th columntype="html" style="width: 5%; min-width: 90px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 7%; min-width: 120px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -184,12 +184,17 @@ and open the template in the editor.
                                 <td> <label>{{id_grupo}}</label> </td>
                                 <td> <label>{{id_periodo}}</label> </td>
                                 <td>
-                                    <form id="Matricula{{id_matricula}}" name="Matricula{{id_matricula}}" method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php"  model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula">
-                                        <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
-                                        <input type="hidden"  editable="false" name="status_matricula" id="status_matricula" value="1" >
+                                    <form id="Matricula{{id_matricula}}" name="Matricula{{id_matricula}}" method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php" action="Base/Controllers/ReportesController.php" model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" target="_blank">
+                                        <input type="hidden" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
+                                        <input type="hidden" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
+                                        <input type="hidden" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
+                                        <input type="hidden" name="id_programa" id="id_programa" value="{{id_programa}}" >
+                                        <input type="hidden" name="tipo_reporte" id="tipo_reporte" value="RecibosMatriculas" dusabled="disabled">
+                                        <input type="hidden" name="status_matricula" id="status_matricula" value="1" >
                                         <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
                                         <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button type="button" name="MatriculasAsignaturas" id="MatriculasAsignaturas" class="btn btn-xs btn-default icon-button" onclick="FormMatriculaAsignaturas(this);"  title="Matricular Asignaturas"><i class="glyphicon glyphicon-check"></i></button>
+                                        <button type="button" name="MatriculasAsignaturas" id="MatriculasAsignaturas" class="btn btn-xs btn-info icon-button" onclick="FormMatriculaAsignaturas(this);"  title="Matricular Asignaturas"><i class="glyphicon glyphicon-check"></i></button>
+                                        <button type="button" name="ReporteMatricula" id="ReporteMatricula" class="btn btn-xs btn-default icon-button" onclick="GenerarReciboMatricula(this);"  title="Ver Recibo de Matricula"><i class="glyphicon glyphicon-file"></i></button>
                                     </form>
                                 </td>
                             </tr>

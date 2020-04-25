@@ -1,0 +1,105 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/04/2020, 12:18:09 AM
+    Author     : LENOVO
+*/
+
+.checkbox-thumbs-up > input[type="checkbox"], .checkbox-thumbs-down > input[type="checkbox"], 
+.checkbox-smile > input[type="checkbox"], .checkbox-meh > input[type="checkbox"],
+.checkbox-users > input[type="checkbox"], .checkbox-user > input[type="checkbox"],
+.checkbox-star > input[type="checkbox"], .checkbox-level-down > input[type="checkbox"],
+.checkbox-clock> input[type="checkbox"]{
+    display: none;
+}
+label:before {
+    font-family: 'FontAwesome' !important;
+    width: 1.25em;
+    display: inline-block;
+    font-size: 14pt;
+    font-weight: bolder;
+}
+
+.checkbox-thumbs-up > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f164"; /* check-empty */
+}
+.checkbox-thumbs-up > input[type="checkbox"]:checked + label:before {
+    color: gold !important;
+    content: "\f164";
+}
+
+.checkbox-thumbs-down > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f165";
+}
+.checkbox-thumbs-down > input[type="checkbox"]:checked + label:before {
+    color: red !important;
+    content: "\f165";
+}
+
+.checkbox-smile > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f118";
+}
+.checkbox-smile > input[type="checkbox"]:checked + label:before {
+    color: gold !important;
+    content: "\f118";
+}
+
+.checkbox-meh > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f11a";
+}
+.checkbox-meh > input[type="checkbox"]:checked + label:before {
+    color: red !important;
+    content: "\f11a";
+}
+
+.checkbox-users > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f0c0";
+}
+.checkbox-users > input[type="checkbox"]:checked + label:before {
+    color: gold !important;
+    content: "\f0c0";
+}
+
+.checkbox-user > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f007";
+}
+.checkbox-user > input[type="checkbox"]:checked + label:before {
+    color: red !important;
+    content: "\f007";
+}
+
+.checkbox-star > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f005";
+}
+.checkbox-star > input[type="checkbox"]:checked + label:before {
+    color: gold !important;
+    content: "\f005";
+}
+
+.checkbox-level-down > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f149";
+}
+.checkbox-level-down > input[type="checkbox"]:checked + label:before {
+    color: red !important;
+    content: "\f149";
+}
+
+.checkbox-clock > input[type="checkbox"] + label:before {
+    color: lightgray;
+    content: "\f017";
+}
+.checkbox-clock > input[type="checkbox"]:checked + label:before {
+    color: red !important;
+    content: "\f017";
+}

@@ -60,21 +60,18 @@ function setFecha() {
 
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
-    var formTable = document.getElementById("formTable");
     loadTableData(mytable, false).done(function () {
-        for (var i = 0; i < formTable.elements.length; i++) {
-            if (formTable.elements[i].tagName === 'SELECT') {
-                console.log(formTable.elements[i].name);
-                setComboboxValue(formTable.elements[i]);
-            }
-        }
+        
     });
 }
 
 function Send(item) {
     var form = getForm(item);
     if (validateForm(form)) {
+        var checks = convertCheckboxesToTexts(form);
+        console.log(checks);
         submitForm(form, false).done(function () {
+            convertTextsToCheckboxes(checks);
             if (parseInt(getRowCount()) > 0) {
                 LoadTable();
             }
