@@ -49,10 +49,11 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     $arraywhere['p_numgrado_programa'] = $resultCarga['numgrado_programa'];
     $arraywhere['p_id_grupo'] = $resultCarga['id_grupo'];
     $arraywhere['p_id_periodo'] = $variables->getIdPeriodoAnual();
+    $arraywhere['p_id_corte'] = $variables->getIdCortePeriodo();
     $iddocente = $resultCarga['id_docente'];
     $idcorte = $variables->getIdCortePeriodo();
     $numcorte = $variables->getNumCortePeriodo();
-    $sqlC = "SELECT @rownum := @rownum +1 AS rownum, M.nombrecompleto_estudiante,  "
+    $sqlC = "SELECT M.nombrecompleto_estudiante,  "
             . " M.*, MA.id_asignatura, MA.id_matasig, "
             . " IFNULL(C.id_calificacion,0) AS id_calificacion,"
             . " IFNULL(C.p1_nd_calificacion,' ') AS p1_nd_calificacion, "
@@ -69,7 +70,9 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
             . " (IFNULL(C.p4_nd_calificacion,0)*(IFNULL(Cn.p4_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p5_nd_calificacion,0)*(IFNULL(Cn.p5_porcentaje_configuracion,0)/100)) + "
             . " (IFNULL(C.p6_nd_calificacion,0)*(IFNULL(Cn.p6_porcentaje_configuracion,0)/100))"
-            . " ),'0'),2) AS def,";
+            . " ),'0'),2) AS def,"
+            . " :p_id_corte AS id_corte, "
+            ;
     if ($numcorte !== 'fin') {
         $sqlC = $sqlC . " IFNULL(C.p" . $numcorte . "_logroc_calificacion,'') AS logroc_calificacion, "
                 . " IFNULL(C.p" . $numcorte . "_logrop_calificacion,'') AS logrop_calificacion, "
@@ -81,16 +84,14 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null && ($session->getSu
     }
     $sqlC = $sqlC .
             " IFNULL(C.p" . $numcorte . "_nd_calificacion,'') AS nd_calificacion, "
-            . " IFNULL(C.p" . $numcorte . "_ausencias_calificacion,'') AS ausencias_calificacion, "
             . " IFNULL(C.p" . $numcorte . "_comentarios_calificacion,'') AS comentarios_calificacion, "
-            . " '" . $idcorte . "' AS id_corte "
+            . " IFNULL((SELECT COUNT(Au.id_asistencia) FROM AsistenciaApp Au WHERE Au.presente_asistencia=0 AND Au.status_asistencia=1 AND Au.id_matasig=MA.id_matasig AND Au.id_corte=:p_id_corte ),'0') AS ausencias_calificacion "
             . " FROM "
             . " ObservadorEstudianteApp OE "
             . " INNER JOIN MatriculasApp M ON OE.id_estudiante=M.id_estudiante "
             . " INNER JOIN MatriculaAsignaturasApp MA ON MA.id_matricula=M.id_matricula "
             . " INNER JOIN ConfiguracionApp Cn ON M.id_escuela=Cn.id_escuela "
-            . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig, "
-            . " (SELECT @rownum :=0) R "
+            . " LEFT JOIN CalificacionesApp C ON MA.id_matasig=C.id_matasig "
             . " WHERE M.status_matricula=1 "
             . " AND M.estado_matricula!='Retirado' "
             . " AND M.estado_matricula!='' "

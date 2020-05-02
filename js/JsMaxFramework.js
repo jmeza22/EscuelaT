@@ -1628,6 +1628,7 @@ function setTableData(table, json, dynamic) {
                 newrow = document.createElement('TR');
                 newrow.setAttribute('rowid', i);
                 newrow.innerHTML = samplerow;
+                newrow.innerHTML = newrow.innerHTML.split('{{i}}').join(i+1);
                 for (j1 = 0; j1 < columns.length; j1++) {
                     col = columns[j1];
                     if (json[i][col] === null || json[i][col] === 'null' || json[i][col] === 'NULL') {
