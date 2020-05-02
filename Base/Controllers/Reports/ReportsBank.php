@@ -385,14 +385,16 @@ class ReportsBank extends BasicController {
     public function getDocentes($iddocente = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT * FROM DocentesApp "
-                . "WHERE status_docente=1 ";
+        $sql = "SELECT D.*, IFNULL(DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(P.fechanacimiento_persona)), '%Y')+0,'?') AS edad_persona, "
+                . " P.tipodoc_persona, P.documento_persona, P.fechanacimiento_persona, P.sexo_persona "
+                . " FROM DocentesApp D INNER JOIN PersonasApp P ON D.id_docente=P.id_persona "
+                . " WHERE D.status_docente=1 ";
         $arraywhere = Array();
         if ($iddocente !== null) {
             $arraywhere['p_id_docente'] = $iddocente;
-            $sql = $sql . " AND id_docente=:p_id_docente ";
+            $sql = $sql . " AND D.id_docente=:p_id_docente ";
         }
-        $sql = $sql . "ORDER BY nombrecompleto_docente ASC";
+        $sql = $sql . "ORDER BY D.nombrecompleto_docente ASC";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -583,10 +585,26 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getContactosDocentes($iddocente = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT D.id_docente, D.nombrecompleto_docente, P.nombre1_persona, P.apellido1_persona, P.tipodoc_persona, P.documento_persona, P.telefono_persona, P.email_persona, P.direccion_persona, P.ciudad_persona "
+                . " FROM DocentesApp D INNER JOIN PersonasApp P ON D.id_docente=P.id_persona "
+                . " WHERE D.status_docente=1 ";
+        $arraywhere = Array();
+        if ($iddocente !== null) {
+            $arraywhere['p_id_docente'] = $iddocente;
+            $sql = $sql . " AND D.id_docente=:p_id_docente ";
+        }
+        $sql = $sql . " ORDER BY D.nombrecompleto_docente ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
     public function getContactosEstudiantesMatriculas($idescuela = null, $idprograma = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT M.id_periodo, M.id_programa, Pr.nombre_programa, M.numgrado_programa, M.id_grupo, M.id_estudiante, M.nombrecompleto_estudiante, P.email_persona, P.telefono_persona, OE.telefonoacudiente1_estudiante, OE.telefonoacudiente2_estudiante "
+        $sql = "SELECT M.id_periodo, M.id_programa, Pr.nombre_programa, M.numgrado_programa, M.id_grupo, M.id_estudiante, M.nombrecompleto_estudiante, P.email_persona, P.telefono_persona, P.direccion_persona, P.ciudad_persona, OE.telefonoacudiente1_estudiante, OE.telefonoacudiente2_estudiante "
                 . " FROM MatriculasApp M INNER JOIN PersonasApp P ON M.id_estudiante=P.id_persona INNER JOIN ObservadorEstudianteApp OE ON M.id_estudiante=OE.id_estudiante INNER JOIN ProgramasApp Pr ON M.id_programa=Pr.id_programa "
                 . " WHERE M.status_matricula=1 AND M.estado_matricula!='Retirado' AND M.estado_matricula!='Anulado' AND M.estado_matricula!='Finalizado' ";
         $arraywhere = Array();

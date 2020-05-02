@@ -205,9 +205,15 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->generatePDFDocument();
         }
         if ($tipo === 'Docentes') {
-            $report->AddPage($orientation, $format, true);
+            $report->AddPage('L', $format, true);
             $report->setReportName('Listado de Docentes');
             $report->ListadoDocentes();
+            $report->generatePDFDocument();
+        }
+        if ($tipo === 'ContactosDocentes') {
+            $report->AddPage('L', $format, true);
+            $report->setReportName('Datos de Contacto Docentes');
+            $report->ListadoContactosDocentes();
             $report->generatePDFDocument();
         }
         if ($tipo === 'CargasDocentes') {
@@ -229,7 +235,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->generatePDFDocument();
         }
         if ($tipo === 'ContactosEstudiantes') {
-            $report->AddPage($orientation, $format, true);
+            $report->AddPage('L', $format, true);
             $report->setReportName('Datos de Contacto de Estudiantes');
             $report->ListadoContactosEstudiantes($idescuela, $idprograma, $idperiodo, $grado, $grupo, $idestudiante);
             $report->generatePDFDocument();

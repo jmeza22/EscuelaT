@@ -442,19 +442,57 @@ class PDFReports extends TCPDF {
             $data = json_decode($data, true);
             if (is_array($data) && count($data) > 0) {
                 $this->Ln();
-                $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 4));
-                $this->Cell(0, 8, 'LISTADO DE DOCENTES');
-                $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 2));
+                $this->SetFont($this->fontfamilycontent, 'B', 14);
+                $this->Cell(0, 8, 'LISTADO DE DOCENTES', 0, 0, 'C');
+                $this->SetFont($this->fontfamilycontent, 'B', 10);
                 $this->Ln();
-                $this->Cell($pageWidth * 10 / 100, 8, 'CODIGO');
-                $this->Cell($pageWidth * 50 / 100, 8, 'NOMBRE COMPLETO DOCENTE');
-                $this->Cell($pageWidth * 40 / 100, 8, 'TITULO ACADEMICO');
+                $this->Cell($pageWidth * 40 / 100, 6, 'NOMBRE COMPLETO', 1);
+                $this->Cell($pageWidth * 10 / 100, 6, 'DOCUMENTO', 1);
+                $this->Cell($pageWidth * 4 / 100, 6, 'SEXO', 1);
+                $this->Cell($pageWidth * 4 / 100, 6, 'EDAD', 1);
+                $this->Cell($pageWidth * 32 / 100, 6, 'TITULO ACADEMICO', 1);
+                $this->Cell($pageWidth * 10 / 100, 6, 'ESCALAFON', 1);
                 $this->Ln();
-                $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
+                $this->SetFont($this->fontfamilycontent, '', 10);
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['id_docente']);
-                    $this->Cell($pageWidth * 50 / 100, 6, $data[$i]['nombrecompleto_docente']);
-                    $this->Cell($pageWidth * 40 / 100, 6, $data[$i]['ultimotitulo_docente']);
+                    $this->Cell($pageWidth * 40 / 100, 6, $data[$i]['nombrecompleto_docente'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['tipodoc_persona'] . ' ' . $data[$i]['documento_persona'], 1);
+                    $this->Cell($pageWidth * 4 / 100, 6, $data[$i]['sexo_persona'], 1);
+                    $this->Cell($pageWidth * 4 / 100, 6, $data[$i]['edad_persona'], 1);
+                    $this->Cell($pageWidth * 32 / 100, 6, $data[$i]['ultimotitulo_docente'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['escalafon_docente'], 1);
+                    $this->Ln();
+                }
+            }
+        }
+    }
+
+    public function ListadoContactosDocentes() {
+        $pageWidth = $this->getRealPageWidth();
+        $data = null;
+        $data = $this->bc->getContactosDocentes();
+        if ($data !== null && $data !== '' && $data !== '[]') {
+            $data = json_decode($data, true);
+            if (is_array($data) && count($data) > 0) {
+                $this->Ln();
+                $this->SetFont($this->fontfamilycontent, 'B', 14);
+                $this->Cell(0, 8, 'DATOS DE CONTACTO DE DOCENTES', 0, 0, 'C');
+                $this->SetFont($this->fontfamilycontent, 'B', 10);
+                $this->Ln();
+                $this->Cell($pageWidth * 8 / 100, 6, 'CODIGO', 1);
+                $this->Cell($pageWidth * 32 / 100, 6, 'NOMBRE Y APELLIDO', 1);
+                $this->Cell($pageWidth * 8 / 100, 6, 'TELEFONO', 1);
+                $this->Cell($pageWidth * 28 / 100, 6, 'DIRECCION', 1);
+                $this->Cell($pageWidth * 24 / 100, 6, 'EMAIL', 1);
+                $this->Ln();
+                for ($i = 0; $i < count($data); $i++) {
+                    $this->SetFont($this->fontfamilycontent, '', 10);
+                    $this->Cell($pageWidth * 8 / 100, 6, $data[$i]['id_docente'], 1);
+                    $this->Cell($pageWidth * 32 / 100, 6, $data[$i]['nombre1_persona'] . ' ' . $data[$i]['apellido1_persona'], 1);
+                    $this->Cell($pageWidth * 8 / 100, 6, $data[$i]['telefono_persona'], 1);
+                    $this->Cell($pageWidth * 28 / 100, 6, $data[$i]['direccion_persona'] . ' ' . $data[$i]['ciudad_persona'], 1);
+                    $this->SetFont($this->fontfamilycontent, '', 8);
+                    $this->Cell($pageWidth * 24 / 100, 6, $data[$i]['email_persona'], 1);
                     $this->Ln();
                 }
             }
@@ -504,17 +542,17 @@ class PDFReports extends TCPDF {
                 $this->Cell(0, 8, 'LISTADO DE DIRECTORES DE GRUPOS');
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 2));
                 $this->Ln();
-                $this->Cell($pageWidth * 10 / 100, 8, 'CODIGO');
-                $this->Cell($pageWidth * 50 / 100, 8, 'NOMBRE COMPLETO DOCENTE');
-                $this->Cell($pageWidth * 20 / 100, 8, 'GRUPO');
-                $this->Cell($pageWidth * 20 / 100, 8, 'PERIODO');
+                $this->Cell($pageWidth * 10 / 100, 8, 'CODIGO', 1);
+                $this->Cell($pageWidth * 50 / 100, 8, 'NOMBRE COMPLETO', 1);
+                $this->Cell($pageWidth * 20 / 100, 8, 'GRUPO', 1);
+                $this->Cell($pageWidth * 20 / 100, 8, 'PERIODO', 1);
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['id_docente']);
-                    $this->Cell($pageWidth * 50 / 100, 6, $data[$i]['nombrecompleto_docente']);
-                    $this->Cell($pageWidth * 20 / 100, 6, $data[$i]['id_grupo']);
-                    $this->Cell($pageWidth * 20 / 100, 6, $data[$i]['id_periodo']);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['id_docente'], 1);
+                    $this->Cell($pageWidth * 50 / 100, 6, $data[$i]['nombrecompleto_docente'], 1);
+                    $this->Cell($pageWidth * 20 / 100, 6, $data[$i]['id_grupo'], 1);
+                    $this->Cell($pageWidth * 20 / 100, 6, $data[$i]['id_periodo'], 1);
                     $this->Ln();
                 }
             }
@@ -532,21 +570,21 @@ class PDFReports extends TCPDF {
                 $this->Cell(0, 8, 'LISTADO DE ESTUDIANTES');
                 $this->SetFont($this->fontfamilycontent, 'B', ($this->fontsizecontent + 2));
                 $this->Ln();
-                $this->Cell($pageWidth * 10 / 100, 8, 'CODIGO');
-                $this->Cell($pageWidth * 40 / 100, 8, 'NOMBRE COMPLETO ESTUDIANTE');
-                $this->Cell($pageWidth * 10 / 100, 8, 'AÑO');
-                $this->Cell($pageWidth * 20 / 100, 8, 'PROGRAMA');
-                $this->Cell($pageWidth * 10 / 100, 8, 'GRADO');
-                $this->Cell($pageWidth * 10 / 100, 8, 'GRUPO');
+                $this->Cell($pageWidth * 10 / 100, 8, 'CODIGO', 1);
+                $this->Cell($pageWidth * 40 / 100, 8, 'NOMBRE COMPLETO ESTUDIANTE', 1);
+                $this->Cell($pageWidth * 10 / 100, 8, 'AÑO', 1);
+                $this->Cell($pageWidth * 20 / 100, 8, 'PROGRAMA', 1);
+                $this->Cell($pageWidth * 10 / 100, 8, 'GRADO', 1);
+                $this->Cell($pageWidth * 10 / 100, 8, 'GRUPO', 1);
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', $this->fontsizecontent);
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['id_estudiante']);
-                    $this->Cell($pageWidth * 40 / 100, 6, $data[$i]['nombrecompleto_estudiante']);
-                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['anualidad_periodo']);
-                    $this->Cell($pageWidth * 20 / 100, 6, $data[$i]['nombre_programa']);
-                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['numgrado_programa'] . '°');
-                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['nombre_grupo']);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['id_estudiante'], 1);
+                    $this->Cell($pageWidth * 40 / 100, 6, $data[$i]['nombrecompleto_estudiante'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['anualidad_periodo'], 1);
+                    $this->Cell($pageWidth * 20 / 100, 6, $data[$i]['nombre_programa'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['numgrado_programa'] . '°', 1);
+                    $this->Cell($pageWidth * 10 / 100, 6, $data[$i]['nombre_grupo'], 1);
                     $this->Ln();
                 }
             }
@@ -567,7 +605,7 @@ class PDFReports extends TCPDF {
                     $this->Cell($pageWidth, 8, $data[$i]['id_matricula'], 0, 0, 'C');
                     $this->SetFont($this->fontfamilycontent, 'B', 14);
                     $this->Ln();
-                    $this->Cell($pageWidth, 8, $data[$i]['nombrecompleto_estudiante'] . ' (' . $data[$i]['id_estudiante'].')', 0, 0, 'C');
+                    $this->Cell($pageWidth, 8, $data[$i]['nombrecompleto_estudiante'] . ' (' . $data[$i]['id_estudiante'] . ')', 0, 0, 'C');
                     $this->SetFont($this->fontfamilycontent, 'B', 12);
                     $this->Ln();
                     $this->Cell($pageWidth * 50 / 100, 8, 'ESCUELA', 0, 0, 'C');
@@ -783,26 +821,24 @@ class PDFReports extends TCPDF {
                 $pageWidth = $this->getRealPageWidth();
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, 'B', 14);
-                $this->Cell(0, 8, 'DATOS DE CONTACTO DE ESTUDIANTES');
+                $this->Cell(0, 8, 'DATOS DE CONTACTO DE ESTUDIANTES', 0, 0, 'C');
                 $this->SetFont($this->fontfamilycontent, 'B', 8);
                 $this->Ln();
-                $this->Cell($pageWidth * 35 / 100, 6, 'NOMBRE COMPLETO', 1);
-                $this->Cell($pageWidth * 6 / 100, 6, 'AÑO', 1);
-                $this->Cell($pageWidth * 6 / 100, 6, 'PROG.', 1);
-                $this->Cell($pageWidth * 6 / 100, 6, 'GRADO', 1);
-                $this->Cell($pageWidth * 6 / 100, 6, 'GRUPO', 1);
-                $this->Cell($pageWidth * 30 / 100, 6, 'EMAIL', 1);
-                $this->Cell($pageWidth * 11 / 100, 6, 'CELULAR', 1);
+                $this->Cell($pageWidth * 30 / 100, 6, 'NOMBRE COMPLETO', 1);
+                $this->Cell($pageWidth * 5 / 100, 6, 'AÑO', 1);
+                $this->Cell($pageWidth * 5 / 100, 6, 'GRUPO', 1);
+                $this->Cell($pageWidth * 30 / 100, 6, 'DIRECCION', 1);
+                $this->Cell($pageWidth * 20 / 100, 6, 'EMAIL', 1);
+                $this->Cell($pageWidth * 10 / 100, 6, 'TELEFONO', 1);
                 $this->Ln();
                 $this->SetFont($this->fontfamilycontent, '', 8);
                 for ($i = 0; $i < count($data); $i++) {
-                    $this->Cell($pageWidth * 35 / 100, 5, $data[$i]['nombrecompleto_estudiante'], 1);
-                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['id_periodo'], 1);
-                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['id_programa'], 1);
-                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['numgrado_programa'] . '°', 1);
-                    $this->Cell($pageWidth * 6 / 100, 5, $data[$i]['id_grupo'], 1);
-                    $this->Cell($pageWidth * 30 / 100, 5, $data[$i]['email_persona'], 1);
-                    $this->Cell($pageWidth * 11 / 100, 5, $data[$i]['telefono_persona'], 1);
+                    $this->Cell($pageWidth * 30 / 100, 5, $data[$i]['nombrecompleto_estudiante'], 1);
+                    $this->Cell($pageWidth * 5 / 100, 5, $data[$i]['id_periodo'], 1);
+                    $this->Cell($pageWidth * 5 / 100, 5, $data[$i]['id_grupo'], 1);
+                    $this->Cell($pageWidth * 30 / 100, 5, $data[$i]['direccion_persona'].' '.$data[$i]['ciudad_persona'], 1);
+                    $this->Cell($pageWidth * 20 / 100, 5, $data[$i]['email_persona'], 1);
+                    $this->Cell($pageWidth * 10 / 100, 5, $data[$i]['telefono_persona'], 1);
                     $this->Ln();
                 }
             }
