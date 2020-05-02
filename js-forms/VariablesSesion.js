@@ -9,7 +9,6 @@ jQuery(document).ready(function () {
     loadComboboxData(document.getElementById("lista_id_escuela")).done(function () {
         autoNameFromDataList('enterpriseid', 'enterprisename', null);
     });
-    setIdEscuela();
     setDatosUsuario();
 
     loadComboboxData(periodo);
@@ -17,10 +16,11 @@ jQuery(document).ready(function () {
 
     console.log('Buscando Datos de Configuracion.');
     getFormData(idescuela).done(function () {
-        var listacorte = document.getElementById("lista_id_corte");
-        setComboboxFindby(listacorte.id, periodo.id, periodo.value);
-        autoNameFromDataList('id_corte', 'numero_corte', 'estado_corte');
+        setComboboxFindby('id_corte', periodo.id, periodo.value);
+        setComboboxValue(corte);
+        loadComboboxData(corte);
     });
+    autoNameFromDataList('id_corte', 'numero_corte', 'estado_corte');
 
 });
 
@@ -42,23 +42,6 @@ function Send(item) {
                 }
             }
         });
-    }
-}
-
-function setIdEscuela() {
-    var item = null;
-    item = document.getElementById('enterpriseid');
-    var item2 = null;
-    item2 = document.getElementById('enterprisename');
-    if (item !== null && item !== undefined && item.value === '') {
-        console.log('Seteando Id Escuela.');
-        if (getEnterpriseID() !== null) {
-            item.value = getEnterpriseID();
-        }
-        if (getEnterpriseName() !== null) {
-            item2.value = getEnterpriseName();
-        }
-        item.focus();
     }
 }
 
@@ -86,10 +69,10 @@ function VisibilidadSecciones() {
     }
 }
 
-function VerSesion(item){
-    if(getUserRoleLogin()==='SuperAdmin'){
-        window.open('Base/Controllers/ShowSessionDataController.php', "Subir una Imagen al Servidor - EscuelaT", "width=600,height=600,scrollbars=NO");
-    }else{
+function VerSesion(item) {
+    if (getUserRoleLogin() === 'SuperAdmin') {
+        window.open('Base/Controllers/ShowSessionDataController.php', "Datos de Sesion - EscuelaT", "width=600,height=600,scrollbars=NO");
+    } else {
         alert('Operacion No Permitida!');
     }
 }

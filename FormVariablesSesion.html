@@ -65,7 +65,7 @@ and open the template in the editor.
                     <div class="row" id="seccionanoperiodo">
                         <div class="col-sm-4">
                             <label>Año Academico</label>
-                            <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setComboboxFindby('id_corte', this.id, this.value); setComboboxFindby('id_estudiante', this.id, this.value, 3);">
+                            <select id="id_periodo" name="id_periodo" required="required" selected="NULL" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="setComboboxFindby('id_corte', this.id, this.value);">
                                 <option selected="selected" value="">Ninguna</option>
                             </select>
                         </div>
@@ -91,9 +91,6 @@ and open the template in the editor.
                             <button type="button" id="versesion" name="versesion" action="insertorupdate" class="btn btn-default" onclick="VerSesion(this);" > Sesion </button>
                         </center>
                     </div>
-                    <datalist id="lista_id_corte" name="lista_id_corte" model="CortesPeriodosApp" colname="id_corte" colvalue="id_corte" url="Base/Controllers/GetComboboxCortes.php" >
-                        <option selected="selected" value="">Ninguna</option>
-                    </datalist>
                     <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" onchange="setComboboxFindby('id_periodo', this.id, this.value);">
                         <option value="">Ninguno</option>
                     </datalist>
