@@ -63,7 +63,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-4">
                             <label>Asignatura</label>
-                            <select id="id_asignatura" name="id_asignatura" selected="NULL" model="AsignaturasApp" colname="id_asignatura" colvalue="nombre_asignatura" url="Base/Controllers/GetComboboxAsignaturasPlanEstudio.php" class="form-control" style="width: 100%;" onchange="" >
+                            <select id="id_asignatura" name="id_asignatura" list="id_asignatura" selected="NULL" model="AsignaturasApp" colname="id_asignatura" colvalue="nombre_asignatura" url="Base/Controllers/GetComboboxAsignaturasPlanEstudio.php" class="form-control" style="width: 100%;" onchange="setNameFromDataList(this, null, 'numhoras_carga');" >
                                 <option selected="selected" value="NULL">Ninguna</option>
                             </select>
                         </div>

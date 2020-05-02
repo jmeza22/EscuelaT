@@ -16,7 +16,7 @@ if ($session->hasLogin() && isset($_POST) && $_POST !== null) {
     if (isset($arraywhere['id_planestudio'])) {
     $idplanestudio = $arraywhere['id_planestudio'];
     }
-    echo $bc->getPlanEstudioDetalle($session->getEnterpriseID(), $idprograma, $idplanestudio);
+    echo $bc->getPlanEstudioDetalle($session->getEnterpriseID(), $idprograma, null, $idplanestudio);
     $bc->disconnect();
     $bc = null;
 }

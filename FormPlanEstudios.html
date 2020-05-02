@@ -103,7 +103,7 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col-sm-5">
                                     <label>Asignatura</label>
-                                    <select id="id_asignatura" name="id_asignatura" class="form-control" model="AsignaturasApp" colname="nombre_asignatura" colvalue="id_asignatura" url="Base/Controllers/GetComboboxAsignaturas.php" style="min-width: 100% !important;" onchange="setIds();">
+                                    <select id="id_asignatura" name="id_asignatura" list="id_asignatura" class="form-control" model="AsignaturasApp" colname="nombre_asignatura" colvalue="id_asignatura" url="Base/Controllers/GetComboboxAsignaturas.php" style="min-width: 100% !important;" onchange="setIds(); setNameFromDataList(this, null, 'hteoricas_asignatura');">
                                         <option value="">Ninguno</option>
                                     </select>
                                 </div>

@@ -89,9 +89,9 @@ function setIdEscuelaForm1() {
     form1 = document.getElementById('form1');
     idorigen = getElement(form0, 'id_escuela');
     iddestino = getElement(form1, idorigen.id);
-    if (idorigen !== null && idorigen !== undefined && iddestino !== null && iddestino !== undefined ) {
+    if (idorigen !== null && idorigen !== undefined && iddestino !== null && iddestino !== undefined) {
         iddestino.value = idorigen.value;
-        console.log('Copiado '+iddestino.id+'='+iddestino.value);
+        console.log('Copiado ' + iddestino.id + '=' + iddestino.value);
     }
 }
 
@@ -104,9 +104,9 @@ function setIdPlanEstudioForm1() {
     form1 = document.getElementById('form1');
     idorigen = getElement(form0, 'id_planestudio');
     iddestino = getElement(form1, idorigen.id);
-    if (idorigen !== null && idorigen !== undefined && iddestino !== null && iddestino !== undefined ) {
+    if (idorigen !== null && idorigen !== undefined && iddestino !== null && iddestino !== undefined) {
         iddestino.value = idorigen.value;
-        console.log('Copiado '+iddestino.id+'='+iddestino.value);
+        console.log('Copiado ' + iddestino.id + '=' + iddestino.value);
     }
 }
 
@@ -119,9 +119,9 @@ function setIdProgramaForm1() {
     form1 = document.getElementById('form1');
     idorigen = getElement(form0, 'id_programa');
     iddestino = getElement(form1, idorigen.id);
-    if (idorigen !== null && idorigen !== undefined && iddestino !== null && iddestino !== undefined ) {
+    if (idorigen !== null && idorigen !== undefined && iddestino !== null && iddestino !== undefined) {
         iddestino.value = idorigen.value;
-        console.log('Copiado '+iddestino.id+'='+iddestino.value);
+        console.log('Copiado ' + iddestino.id + '=' + iddestino.value);
     }
 }
 
