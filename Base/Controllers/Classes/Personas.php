@@ -57,7 +57,6 @@ class Personas extends ReportsBank {
 
     public function insertPersona() {
         if (isset($this->postdata[$this->findby])) {
-            $this->setData();
             if ($this->session->getManagement() == 1 || $this->session->getAdmin() == 1 || $this->session->getSuperAdmin() == 1) {
                 $this->setAction('insertorupdate');
             } else if ($this->session->getStandard()) {
@@ -65,11 +64,16 @@ class Personas extends ReportsBank {
             } else {
                 $this->setAction('');
             }
+            if ($this->postdata[$this->findby] === '' || $this->postdata[$this->findby] === '0') {
+                $this->postdata['fechacrea_persona'] = date('Y-m-d');
+            }
+            $this->postdata['fechaedita_persona'] = date('Y-m-d');
+            $this->setData();
             $result = $this->execute(false);
             if ($this->getRowCount() > 0 && $this->postdata[$this->findby] !== '') {
                 $sql = "UPDATE PersonasApp SET id_persona = CONCAT('P',num_persona) WHERE id_persona = '" . $this->postdata[$this->findby] . "' ";
                 $this->executeSQL($sql);
-                if ($this->getLastInsertId() !== '0') {
+                if ($this->getLastInsertId() > 0) {
                     $this->idpersona = 'P' . $this->getLastInsertId();
                 } else {
                     $this->idpersona = $this->postdata['id_persona'];
@@ -82,12 +86,12 @@ class Personas extends ReportsBank {
 
     public function updatePersona() {
         if (isset($this->postdata[$this->findby])) {
-            $this->setData();
             if ($this->session->getManagement() == 1 || $this->session->getAdmin() == 1 || $this->session->getSuperAdmin() == 1) {
                 $this->setAction('update');
             } else {
                 $this->setAction('');
             }
+            $this->setData();
             $result = $this->execute(false);
             return $result;
         }
@@ -96,12 +100,12 @@ class Personas extends ReportsBank {
 
     public function deletePersona() {
         if (isset($this->postdata[$this->findby])) {
-            $this->setData();
             if ($this->session->getManagement() == 1 || $this->session->getAdmin() == 1 || $this->session->getSuperAdmin() == 1) {
                 $this->setAction('delete');
             } else {
                 $this->setAction('');
             }
+            $this->setData();
             $result = $this->execute(false);
             return $result;
         }
@@ -165,7 +169,6 @@ class Personas extends ReportsBank {
 
     public function findPersona() {
         $result = null;
-        $this->setData();
         if ($this->postdata !== null) {
             $this->setAction('find');
             $data = array();

@@ -83,12 +83,12 @@ class Matriculas extends ReportsBank {
 
     public function updateMatricula() {
         if (isset($this->postdata[$this->findby])) {
-            $this->setData();
             if ($this->session->getManagement() == 1 || $this->session->getAdmin() == 1 || $this->session->getSuperAdmin() == 1) {
                 $this->setAction('update');
             } else {
                 $this->setAction('');
             }
+            $this->setData();
             $result = $this->execute(false);
             return $result;
         }
@@ -98,12 +98,12 @@ class Matriculas extends ReportsBank {
     public function deleteMatricula() {
         if (isset($this->postdata[$this->findby])) {
             $this->updateMatricula();
-            $this->setData();
             if ($this->session->getManagement() == 1 || $this->session->getAdmin() == 1 || $this->session->getSuperAdmin() == 1) {
                 $this->setAction('delete');
             } else {
                 $this->setAction('');
             }
+            $this->setData();
             $result = $this->execute(false);
             return $result;
         }

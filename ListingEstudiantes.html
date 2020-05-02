@@ -33,21 +33,68 @@ and open the template in the editor.
         <div class="panel panel-default" style="width: 95% !important;">
             <div class="panel-heading">Listado de Estudiantes</div>
             <div class="panel-body">
+                <form id="form0">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Programa</label>
+                            <select id="id_programa" name="id_programa" required="required" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="">
+                                <option selected="selected" value="">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Año</label>
+                            <select id="id_periodo" name="id_periodo" required="required" model="PeriodosAnualesApp" colname="id_periodo" colvalue="id_periodo" url="Base/Controllers/GetComboboxPeriodos.php" class="form-control" style="width: 100%;"  onchange="">
+                                <option selected="selected" value="">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grado</label>
+                            <select id="numgrado_programa" name="numgrado_programa" class="form-control" model="PlanEstudioDetalleApp" colname="numgrado_programa" colvalue="numgrado_programa" url="Base/Controllers/GetComboboxGrados.php" style="width: 100%;" onchange="setComboboxFindby('id_grupo', this.id, this.value);">
+                                <option disabled="disabled" selected="selected" value="">Ninguno</option>
+                                <option value="-2">PreJardin</option>
+                                <option value="-1">Jardin</option>
+                                <option value="0">Transicion</option>
+                                <option value="1">Primero</option>
+                                <option value="2">Segundo</option>
+                                <option value="3">Tercero</option>
+                                <option value="4">Cuarto</option>
+                                <option value="5">Quinto</option>
+                                <option value="6">Sexto</option>
+                                <option value="7">Septimo</option>
+                                <option value="8">Octavo</option>
+                                <option value="9">Noveno</option>
+                                <option value="10">Decimo</option>
+                                <option value="11">Undecimo</option>
+                                <option value="12">Duodecimo</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Grupo</label>
+                            <select id="id_grupo" name="id_grupo" model="GruposApp" colname="id_grupo" colvalue="id_grupo" url="Base/Controllers/GetComboboxGrupos.php" class="form-control" style="width: 100%;" onchange="">
+                                <option selected="selected" value="">Ninguna</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Filtrar</label>
+                            <button type="button" id="filtrar" class="btn btn-block btn-default" onclick="LoadTable();"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="ObservadorEstudiantesApp" findby="id_asignatura" findbyvalue="" url="Base/Controllers/GetDataTableEstudiantes.php" ordertable="true" tableorderby="0" tableordering="desc" >
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
                                 <th columntype="html-num" style="width: 8%;" title="Codigo de Estudiante">Codigo</th>
                                 <th columntype="html" style="width: 10%;" title="Documento de Identidad">Doc.Identidad </th>
-                                <th columntype="html" style="width: 40%;" title="Nombre del Estudiante">Nombre Completo</th>
+                                <th columntype="html" style="width: 40%; min-width: 300px !important;" title="Nombre del Estudiante">Nombre Completo</th>
                                 <th columntype="html" style="width: 4%;" title="Sexo del Estudiante">Sexo</th>
                                 <th columntype="html-num" style="width: 4%;" title="Edad del Estudiante">Edad</th>
                                 <th columntype="html" style="width: 6%;" title="Fecha de Nacimiento">FechaNac</th>
-                                <th columntype="html" style="width: 14%;" title="Nombre de Programa">Programa</th>
+                                <th columntype="html" style="width: 16%; min-width: 200px !important;" title="Nombre de Programa">Programa</th>
                                 <th columntype="html" style="width: 4%;" title="Codigo Plan Estudios">P.E.</th>
                                 <th columntype="html-num" style="width: 4%;" title="Grado">Gra.</th>
                                 <th columntype="html" style="width: 4%;" title="Grupo">Gru.</th>
-                                <th columntype="html" style="width: 6%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 4%; min-width: 66px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">

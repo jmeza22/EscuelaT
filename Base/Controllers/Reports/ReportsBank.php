@@ -479,18 +479,12 @@ class ReportsBank extends BasicController {
         $sql = null;
         $result = null;
         $arraywhere = Array();
-        $sql = "SELECT A1.nombreacudiente1_estudiante, A1.idacudiente1_estudiante FROM ObservadorEstudianteApp A1 "
-                . "WHERE A1.status_estudiante=1 ";
+        $sql = "SELECT P.*, IFNULL(DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(P.fechanacimiento_persona)), '%Y')+0,'?') AS edad_persona  "
+                . " FROM PersonasApp P "
+                . " WHERE P.status_persona=1 AND P.tipo_persona='Attendant' ";
         if ($idestudiante !== null) {
             $arraywhere['p_id_estudiante'] = $idestudiante;
-            $sql = $sql . " AND A1.id_estudiante=:p_id_estudiante ";
-        }
-        $sql = $sql . " UNION ";
-        $sql = $sql . "SELECT A2.nombreacudiente2_estudiante, A2.idacudiente2_estudiante FROM ObservadorEstudianteApp A2 "
-                . "WHERE A2.status_estudiante=1 ";
-        if ($idestudiante !== null) {
-            $arraywhere['p_id_estudiante'] = $idestudiante;
-            $sql = $sql . " AND A2.id_estudiante=:p_id_estudiante ";
+            $sql = $sql . " AND P.id_estudiante=:p_id_estudiante ";
         }
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
