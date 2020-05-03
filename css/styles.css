@@ -84,10 +84,10 @@ input[type="number"], input[numeric="true"], input[double="true"]{
 }
 
 table input[type=checkbox]{
-    -ms-transform: scale(1.8); /* IE */
-    -moz-transform: scale(1.8); /* FF */
-    -webkit-transform: scale(1.8); /* Safari y Chrome */
-    -o-transform: scale(1.8); /* Opera */
+    -ms-transform: scale(1.6); /* IE */
+    -moz-transform: scale(1.6); /* FF */
+    -webkit-transform: scale(1.6); /* Safari y Chrome */
+    -o-transform: scale(1.6); /* Opera */
     padding: 2px;
 }
 
@@ -171,7 +171,7 @@ td > input[type="text"]  {
     -moz-opacity:0.85;
     -khtml-opacity:0.85;
     filter: aplha(opacity=85);
-    min-width: 260px;
+    min-width: 240px !important;
 }
 
 .panel-heading{
@@ -263,13 +263,6 @@ table > tbody > tr > td > input{
 
 table > tbody > tr > td > input[disabled="disabled"]{
     border-color: lightgray !important;
-}
-
-.table-form-control{
-    height: 30px !important;
-    min-width: 30px !important;
-    border: 1px !important;
-    border-color: black !important;
 }
 
 .image-photo{
@@ -399,7 +392,8 @@ table > tbody > tr > td > input[disabled="disabled"]{
     }
 
     .panel{
-        min-width: 320px !important;
+        width: 95% !important;
+        min-width: 260px !important;
     }
 
 }

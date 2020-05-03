@@ -8,11 +8,12 @@ and open the template in the editor.
     <head>
         <title>Login - EscuelaT</title>
         <meta charset="UTF-8">
+        <link rel="icon" type="image/png" href="icon/logo72.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="Iniciar Sesion"/>
         <meta name="author" content="Jose Meza"/>
         <meta name="ProjectName" content="EscuelaT"/>
-        <link href="css/login.css" rel="stylesheet" />
+        <link href="css-forms/login.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -29,11 +30,12 @@ and open the template in the editor.
         <script type="text/javascript" src="js-forms/login.js"></script>
     </head>
     <body>
-        <div class="panel panel-primary" style="width: 80% !important; max-width: 430px !important;">
-            <div class="panel-heading">Iniciar Sesion</div>
+        <div class="panel panel-primary" style="width: 80% !important; max-width: 330px !important;">
+            <div class="panel-heading">Acceso al Sistema</div>
             <div class="panel-body" >
                 <form id="FormLogin" method="POST" autocomplete="off" url="Base/Controllers/LoginController.php" model="UsuariosApp" findBy="id_persona" mainform="true" >
                     <input type="hidden" name="token" id="token" value="92a04b22c02d12e8" required="required" >
+                    <center><img src="icon/logo.png" alt="EscuelaT!" width="200" /></center>
                     <div class="row">
                         <div class="col-sm-12">
                             <label>Usuario</label>
