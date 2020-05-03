@@ -63,6 +63,10 @@ a:hover{
     text-decoration: none !important;
 }
 
+a:visited {
+    text-decoration: none !important;
+}
+
 input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], button{
     margin: 2px !important;
     font-weight: bolder !important;
@@ -127,6 +131,7 @@ td{
     padding-right: 4px !important;
     padding-top: 3px !important;
     padding-bottom: 3px !important;
+    white-space: nowrap !important;
 }
 
 hr{
@@ -171,7 +176,10 @@ td > input[type="text"]  {
     -moz-opacity:0.85;
     -khtml-opacity:0.85;
     filter: aplha(opacity=85);
-    min-width: 240px !important;
+}
+
+body > .panel{
+    width: 90% !important;
 }
 
 .panel-heading{
@@ -391,9 +399,9 @@ table > tbody > tr > td > input[disabled="disabled"]{
         margin-top: 10px !important;
     }
 
-    .panel{
-        width: 95% !important;
-        min-width: 260px !important;
+    body .panel{
+        width: 96% !important;
+        min-width: 240px !important;
     }
 
 }
