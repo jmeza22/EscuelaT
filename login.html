@@ -30,28 +30,24 @@ and open the template in the editor.
         <script type="text/javascript" src="js-forms/login.js"></script>
     </head>
     <body>
-        <div class="panel panel-primary" style="width: 80% !important; max-width: 330px !important;">
+        <div class="panel panel-primary" style="width: 80% !important; max-width: 530px !important;">
             <div class="panel-heading">Acceso al Sistema</div>
             <div class="panel-body" >
                 <form id="FormLogin" method="POST" autocomplete="off" url="Base/Controllers/LoginController.php" model="UsuariosApp" findBy="id_persona" mainform="true" >
                     <input type="hidden" name="token" id="token" value="92a04b22c02d12e8" required="required" >
                     <center><img src="icon/logo.png" alt="EscuelaT!" width="200" /></center>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label>Usuario</label>
                             <input type="text" username="true" name="mynickname" id="mynickname" autofocus="autofocus" value="" required="required" maxlength="50" class="form-control" title="Usuario">
-                        </div>
-                        <div class="col-sm-12">
                             <label>Contraseña</label>
                             <input type="password" alphanumeric="true" name="mypassword" id="mypassword" value="" required="required" maxlength="32" class="form-control" title="Contraseña">
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <label>Tipo de Usuario</label>
                             <select id="id_tipousuario" name="id_tipousuario" selected="NN" required="required" model="TiposUsuariosApp" colname="nombre_tipousuario" colvalue="id_tipousuario" url="Base/Controllers/GetComboboxTiposUsuarios.php" class="form-control" style="width: 100%;">
                                 <option disabled="disabled" selected="selected" value="NN">Ninguno</option>
                             </select>
-                        </div>
-                        <div class="col-sm-12">
                             <label>Escuela o Empresa</label>
                             <select id="id_escuela" name="id_escuela" selected="NN" required="required" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" class="form-control" style="width: 100%;">
                                 <option selected="selected" value="-1">Ninguna</option>
