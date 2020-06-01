@@ -8,11 +8,11 @@ $model = 'LecturasApp';
 $findBy = 'id_lectura';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() || $session->getStandard())) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         if (isset($_POST['imagen_lectura']) && $_POST['imagen_lectura'] !== '') {
-            if (!file_exists('../../ImageFiles/'.$_POST['imagen_lectura'])) {
-                $_POST['imagen_lectura']='';
+            if (!file_exists('../../ImageFiles/' . $_POST['imagen_lectura'])) {
+                $_POST['imagen_lectura'] = '';
             }
         }
         $bc = new BasicController();

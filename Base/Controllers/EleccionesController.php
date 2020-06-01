@@ -7,7 +7,7 @@ $result = null;
 $model = 'EleccionesEstudiantilesApp';
 $findBy = 'id_eleccion';
 $action = 'insertorupdate';
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getManagement() == 1 )) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 )) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
@@ -25,7 +25,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $bc->executeSQL("DELETE FROM $model WHERE status_eleccion=0 ");
         $bc->disconnect();
     }
-} 
+}
 if ($result === null) {
     echo $session->getSessionStateJSON();
 }

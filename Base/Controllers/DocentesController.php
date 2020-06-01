@@ -49,7 +49,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin()
         $result = $bc->execute(true);
         $bc->disconnect();
     }
-} 
+}
 if ($result === null) {
     echo $session->getSessionStateJSON();
 }

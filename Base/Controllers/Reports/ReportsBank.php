@@ -1482,6 +1482,31 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
+    public function getIntentosCuestionarios($idcuestionario = null, $idpersona = null, $idintento = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT I.*, P.nombre1_persona, P.apellido1_persona "
+                . " FROM IntentosCuestionariosApp I "
+                . " INNER JOIN PersonasApp P ON I.id_persona=P.id_persona"
+                . " WHERE status_intento=1 ";
+        $arraywhere = Array();
+        if ($idcuestionario !== null) {
+            $arraywhere['p_id_cuestionario'] = $idcuestionario;
+            $sql = $sql . " AND I.id_cuestionario=:p_id_cuestionario ";
+        }
+        if ($idpersona !== null) {
+            $arraywhere['p_id_persona'] = $idpersona;
+            $sql = $sql . " AND I.id_persona=:p_id_persona ";
+        }
+        if ($idintento !== null) {
+            $arraywhere['p_id_intento'] = $idintento;
+            $sql = $sql . " AND I.id_intento=:p_id_intento ";
+        }
+        $sql = $sql . " ORDER BY I.id_intento DESC, I.id_persona";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
     public function getActividadesVirtuales($idescuela = null, $idprograma = null, $idasignatura = null, $iddocente = null, $numgrado = null, $idactividad = null) {
         $sql = null;
         $result = null;

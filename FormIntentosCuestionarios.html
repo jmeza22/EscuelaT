@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Intento</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Registro de Intentos"/>
+        <meta name="author" content="Jose Meza"/>
+        <meta name="ProjectName" content="EscuelaT"/>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/Validator.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
+        <script type="text/javascript" src="js/setWebServicePath.js"></script>
+        <script type="text/javascript" src="js/JsMaxFramework.js"></script>
+        <script type="text/javascript" src="js-forms/Intentos.js"></script>
+    </head>
+    <body>
+
+        <div class="panel panel-primary" style="">
+            <div class="panel-heading">Cuestionario</div>
+            <div class="panel-body table-responsive" >
+                <form id="formCuestionario" method="POST" autocomplete="off" url="Base/Controllers/CuestionariosController.php" model="CuestionariosApp" findBy="id_cuestionario" mainform="true" do="find" >
+                    <input type="hidden" name="id_cuestionario" id="id_cuestionario" value="0" maxlength="24" required="required" >
+                    <center>
+                        <h3 id="nombre_cuestionario" name="nombre_cuestionario">Nombre del Cuestionario</h3>
+                        Este cuestionario tiene una duración de <label name="duracionminutos_cuestionario" style="display: inline-block !important;"></label> minuto(s)<br>
+                        Disponible desde el <label name="fechainicio_cuestionario" style="display: inline-block !important;"></label>.<br>
+                        Este cuestionario se cierra el <label name="fechafin_cuestionario" style="display: inline-block !important;"></label>.<br>
+                        Intentos Permitidos: <label name="numintentos_cuestionario" style="display: inline-block !important;"></label><br>
+                    </center>
+                </form>
+                <form id="formIntento" method="POST" autocomplete="off" url="Base/Controllers/IntentosCuestionariosController.php" model="IntentosApp" findBy="id_intento" mainform="true" >
+                    <input type="hidden" name="id_intento" id="id_intento" value="0" maxlength="24" required="required" >
+                    <input type="hidden" name="id_cuestionario" id="id_cuestionario" value="0" maxlength="24" required="required" >
+                    <center>
+                        <button type="button" id="save" name="save"  action="insert" save="true" onclick="Send(this);" class="btn btn-primary" >Resolver Cuestionario</button>        
+                    </center>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default" style="">
+            <div class="panel-heading">Historial de Intentos</div>
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered table-form" model="IntentosApp" url="Base/Controllers/GetDataTableIntentosCuestionarios.php" >
+                        <thead id="thead_dataTable0">
+                            <tr headrow="true">
+                                <th style="width: 8%;" title="Codigo">#</th>
+                                <th style="width: 50%;">Participante</th>
+                                <th style="width: 12%;">Fecha</th>
+                                <th style="width: 12%;">Transcurrido</th>
+                                <th style="width: 10%;">Finalizado</th>
+                                <th style="width: 8%;">Continuar</th>
+                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_dataTable0">
+                            <tr id="samplerow" samplerow="true" style="display: none;">
+                                <td> {{id_intento}}</td>
+                                <td> <b>{{nombre1_persona}} {{apellido1_persona}}</b> </td>
+                                <td> {{fechainicio_intento}} </td>
+                                <td> {{tiemposegundos_intento}} seguntos</td>
+                                <td> {{finalizado_intento}} </td>
+                                <td>
+                                    <form id="ResIntento{{id_intento}}" name="ResIntento{{id_intento}}" method="GET" autocomplete="off" action="FormRespuestasIntentos.html" >
+                                        <input type="hidden"  editable="false" name="id_intento" id="id_intento" value="{{id_intento}}" >
+                                        <button type="submit" name="Resolver" id="Resolver" class="btn btn-xs btn-default" title="Continuar Intento">Continuar</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form id="Intento{{id_intento}}" name="Intento{{id_intento}}" method="GET" autocomplete="off" action="ListingRespuestasIntentos.html" url="Base/Controllers/IntentosCuestionariosController.php"  model="IntentosApp" findBy="id_intento" statusfield="status_intento">
+                                        <input type="hidden"  editable="false" name="id_intento" id="id_intento" value="{{id_intento}}" >
+                                        <input type="hidden"  editable="false" disabled="disabled" name="status_intento" id="status_intento" value="1" >
+                                        <button type="submit" name="VerIntento" id="VerIntento" class="btn btn-xs btn-default icon-button" title="Ver Respuestas"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
+
+    </body>
+</html>

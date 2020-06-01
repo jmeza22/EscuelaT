@@ -8,7 +8,7 @@ $model = 'CuestionariosApp';
 $findBy = 'id_cuestionario';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 || $session->getManagement() == 1 || $session->getStandard() == 1)) {
+if ($session->hasLogin() && $session->checkToken()) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();

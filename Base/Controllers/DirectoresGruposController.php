@@ -8,7 +8,7 @@ $model = 'DirectoresGruposApp';
 $findBy = 'id_director';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()==1 || $session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
@@ -25,7 +25,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()
         $bc->executeSQL("DELETE FROM $model WHERE status_director=0 ");
         $bc->disconnect();
     }
-} 
+}
 if ($result === null) {
     echo $session->getSessionStateJSON();
 }

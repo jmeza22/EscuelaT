@@ -7,7 +7,7 @@ $result = null;
 $model = 'PreguntasCuestionariosApp';
 $findBy = 'id_pregunta';
 $action = 'insertorupdate';
-if ($session->hasLogin() && $session->checkToken() && ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1 || $session->getUserType() === 'Teacher')) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1 || $session->getUserType() === 'Teacher')) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         if (isset($_POST['id_lectura']) && $_POST['id_lectura'] === '') {
             unset($_POST['id_lectura']);

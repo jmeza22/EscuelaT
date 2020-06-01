@@ -8,21 +8,7 @@ jQuery(document).ready(function () {
     loadComboboxData(document.getElementById("select_id_planestudio"));
     loadComboboxData(document.getElementById("id_programa"));
     loadComboboxData(document.getElementById("id_asignatura"));
-    setIdEscuela();
-    LoadTable();
 });
-
-function setIdEscuela() {
-    var item = null;
-    item = document.getElementById('id_escuela');
-    if (item !== null && item !== undefined && item.value === '') {
-        console.log('Seteando Id Escuela.');
-        if (getEnterpriseID() !== null) {
-            item.value = getEnterpriseID();
-        }
-        item.focus();
-    }
-}
 
 function Send(item) {
     var form = getForm(item);
@@ -80,21 +66,6 @@ function LoadTable() {
     return mytable;
 }
 
-function setIdEscuelaForm1() {
-    var form0 = null;
-    var form1 = null;
-    var idorigen = null;
-    var iddestino = null;
-    form0 = document.getElementById('form0');
-    form1 = document.getElementById('form1');
-    idorigen = getElement(form0, 'id_escuela');
-    iddestino = getElement(form1, idorigen.id);
-    if (idorigen !== null && idorigen !== undefined && iddestino !== null && iddestino !== undefined) {
-        iddestino.value = idorigen.value;
-        console.log('Copiado ' + iddestino.id + '=' + iddestino.value);
-    }
-}
-
 function setIdPlanEstudioForm1() {
     var form0 = null;
     var form1 = null;
@@ -136,7 +107,6 @@ function setIdDetalleForm1() {
 }
 
 function setIds() {
-    setIdEscuelaForm1();
     setIdProgramaForm1();
     setIdPlanEstudioForm1();
     setIdDetalleForm1();
@@ -161,7 +131,6 @@ function RefreshFormAndTable(item) {
         form0 = document.getElementById('form0');
         sendValue(item, 'select_id_planestudio', form0, 'id_planestudio');
         getFormData(form0).done(function () {
-            setIdEscuelaForm1();
             setIdProgramaForm1();
             setIdPlanEstudioForm1();
         });

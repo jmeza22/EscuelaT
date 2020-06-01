@@ -7,7 +7,7 @@ $result = null;
 $model = 'ConfiguracionApp';
 $findBy = 'id_escuela';
 $action = 'insertorupdate';
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 )) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         if (isset($_POST['logo_configuracion']) && $_POST['logo_configuracion'] !== '') {
             if (!file_exists('../../ImageFiles/'.$_POST['logo_configuracion'])) {

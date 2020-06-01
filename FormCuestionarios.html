@@ -98,7 +98,7 @@ and open the template in the editor.
                                 <th style="width: 15%;">Fecha.Fin</th>
                                 <th style="width: 10%;">Intentos</th>
                                 <th style="width: 10%;">Activo</th>
-                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th style="width: 8%; min-width: 96px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -110,9 +110,10 @@ and open the template in the editor.
                                 <td> {{numintentos_cuestionario}} </td>
                                 <td> <b>{{activo_cuestionario}}</b> </td>
                                 <td>
-                                    <form id="Cuestionario{{id_cuestionario}}" name="Cuestionario{{id_cuestionario}}" method="POST" autocomplete="off" url="Base/Controllers/CuestionariosController.php"  model="CuestionariosApp" findBy="id_cuestionario" statusfield="status_cuestionario">
+                                    <form id="Cuestionario{{id_cuestionario}}" name="Cuestionario{{id_cuestionario}}" method="GET" autocomplete="off" action="FormIntentosCuestionarios.html" url="Base/Controllers/CuestionariosController.php"  model="CuestionariosApp" findBy="id_cuestionario" statusfield="status_cuestionario">
                                         <input type="hidden"  editable="false" name="id_cuestionario" id="id_cuestionario" value="{{id_cuestionario}}" >
                                         <input type="hidden"  editable="false" disabled="disabled" name="status_cuestionario[]" id="status_cuestionario" value="1" >
+                                        <button type="submit" name="VerIntentos" id="VerIntentos" class="btn btn-xs btn-default icon-button"><i class="glyphicon glyphicon-search"></i></button>
                                         <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
                                         <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
                                     </form>

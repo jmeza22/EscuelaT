@@ -9,7 +9,7 @@ $model = 'ActividadesVirtualesApp';
 $findBy = 'id_actividad';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken()) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getStandard() == 1 || $session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1 || $session->getUserType() === 'Teacher')) {
     if (isset($_POST['action']) && isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();

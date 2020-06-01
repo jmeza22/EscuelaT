@@ -372,14 +372,21 @@ function getElementByName(parent, name) {
     var j = 0;
     var elements = null;
     var result = null;
-    if (parent !== null && parent.childNodes !== null && parent.childNodes !== undefined && name !== null && name !== '') {
+    if (parent !== null && parent.childNodes !== undefined && parent.childNodes !== null && name !== null && name !== '') {
         elements = parent.childNodes;
         if (elements.length > 0) {
             for (j = 0; j < elements.length; j++) {
-                if (elements[j].name === name) {
-                    console.log("Element Found: " + elements[j].name);
-                    result = elements[j];
-                    break;
+                if (elements[j].nodeType === 1) {
+                    if (elements[j].name === name) {
+                        console.log("Element Found: " + elements[j].name);
+                        result = elements[j];
+                        break;
+                    }
+                    if (elements[j].getAttribute('name') !== undefined && elements[j].getAttribute('name') === name) {
+                        console.log("Element Found: " + elements[j].name);
+                        result = elements[j];
+                        break;
+                    }
                 }
                 if (elements.childNodes !== null && result === null) {
                     result = getElementByName(elements[j], name);
@@ -1172,7 +1179,7 @@ function setValue(element, value) {
                 element.setAttribute('selected', value);
                 element.selected = value;
             }
-            if (element.tagName.toString().toUpperCase() === "DIV" || element.tagName.toString().toUpperCase() === "LABEL" || element.tagName.toString().toUpperCase() === "P" || element.tagName.toString().toUpperCase() === "A" || element.tagName.toString().toUpperCase() === "UL" || element.tagName.toString().toUpperCase() === "LI"
+            if (element.tagName.toString().toUpperCase() === "DIV" || element.tagName.toString().toUpperCase() === "LABEL" || element.tagName.toString().toUpperCase() === "P" || element.tagName.toString().toUpperCase() === "A"
                     || element.tagName.toString().toUpperCase() === "H1" || element.tagName.toString().toUpperCase() === "H2" || element.tagName.toString().toUpperCase() === "H3" || element.tagName.toString().toUpperCase() === "H4" || element.tagName.toString().toUpperCase() === "H5" || element.tagName.toString().toUpperCase() === "H6") {
                 element.innerHTML = value;
             }
@@ -1628,7 +1635,7 @@ function setTableData(table, json, dynamic) {
                 newrow = document.createElement('TR');
                 newrow.setAttribute('rowid', i);
                 newrow.innerHTML = samplerow;
-                newrow.innerHTML = newrow.innerHTML.split('{{i}}').join(i+1);
+                newrow.innerHTML = newrow.innerHTML.split('{{i}}').join(i + 1);
                 for (j1 = 0; j1 < columns.length; j1++) {
                     col = columns[j1];
                     if (json[i][col] === null || json[i][col] === 'null' || json[i][col] === 'NULL') {

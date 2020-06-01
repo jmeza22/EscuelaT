@@ -8,7 +8,7 @@ $model = 'CortesPeriodosApp';
 $findBy = 'id_corte';
 $action = 'insertorupdate';
 $postdata = null;
-if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()==1 || $session->getAdmin()==1 || $session->getSuperAdmin()==1)) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getManagement() == 1 || $session->getAdmin() == 1 || $session->getSuperAdmin() == 1)) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
@@ -17,7 +17,7 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()
         $bc->setFindBy($findBy);
         $bc->setAction($action);
         $postdata = $bc->getPostData();
-        $postdata['id_escuela']=$session->getEnterpriseID();
+        $postdata['id_escuela'] = $session->getEnterpriseID();
         $bc->setPostData($postdata);
         if (strcmp($_POST['action'], 'find') === 0) {
             $bc->setAction('find');
@@ -31,5 +31,4 @@ if ($session->hasLogin() && $session->checkToken() && ($session->getManagement()
 } else {
     echo $session->getSessionStateJSON();
 }
-
 ?>

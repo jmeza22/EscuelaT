@@ -7,7 +7,7 @@ $result = null;
 $model = 'PeriodosAnualesApp';
 $findBy = 'id_periodo';
 $action = 'insertorupdate';
-if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 )) {
+if ($session->hasLogin() && $session->checkToken() && ($session->getSuperAdmin() == 1 || $session->getAdmin() == 1 )) {
     if (isset($_POST[$findBy]) && $_POST[$findBy] != null) {
         $bc = new BasicController();
         $bc->connect();
