@@ -5,7 +5,7 @@
  */
 
 
-function clickImageButton(inputFile) {
+function clickAudioButton(inputFile) {
     if (inputFile !== null && inputFile !== '') {
         if (inputFile.tagName === undefined) {
             inputFile = document.getElementById(inputFile);
@@ -14,44 +14,44 @@ function clickImageButton(inputFile) {
     inputFile.click();
 }
 
-function showMyImage(inputFile, imageTag = null) {
+function showMyAudio(inputFile, audioTag = null) {
     var files = inputFile.files;
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
-        var imageType = /image.*/;
-        if (!file.type.match(imageType)) {
+        var audioType = /audio.*/;
+        if (!file.type.match(audioType)) {
             continue;
         }
         console.log('File Type: '+file.type);
-        if (imageTag === null || imageTag === '') {
-            imageTag = document.getElementById('image');
+        if (audioTag === null || audioTag === '') {
+            audioTag = document.getElementById('audio');
         }
-        if (imageTag !== null || imageTag !== '') {
-            if (imageTag.tagName !== undefined) {
-                if (imageTag.tagName !== 'IMG' || imageTag.tagName !== 'IMAGE') {
+        if (audioTag !== null || audioTag !== '') {
+            if (audioTag.tagName !== undefined) {
+                if (audioTag.tagName !== 'AUDIO') {
                     return null;
                 }
             } else {
-                imageTag = document.getElementById(imageTag);
+                audioTag = document.getElementById(audioTag);
             }
         }
-        imageTag.file = file;
+        audioTag.file = file;
         var reader = new FileReader();
-        reader.onload = (function (aImg) {
+        reader.onload = (function (aAud) {
             return function (e) {
-                aImg.src = e.target.result;
+                aAud.src = e.target.result;
             };
-        })(imageTag);
+        })(audioTag);
         reader.readAsDataURL(file);
         return file.name;
     }
     return null;
 }
 
-function showMyImageAndGetName(inputFile, elementid) {
+function showMyAudioAndGetName(inputFile, elementid) {
     var filename = null;
-    if (showMyImage(inputFile) !== null) {
-        var filename = showMyImage(inputFile);
+    if (showMyAudio(inputFile) !== null) {
+        var filename = showMyAudio(inputFile);
     }
     var element = null;
     if (elementid !== null && elementid !== '') {
@@ -62,7 +62,7 @@ function showMyImageAndGetName(inputFile, elementid) {
         if (element.tagName === 'INPUT' || element.tagName === 'LABEL' || element.tagName === 'DIV') {
             element.innerHTML = filename;
         }
-        console.log('Image Selected: ' + filename);
+        console.log('Audio Selected: ' + filename);
         return true;
     }
     return false;

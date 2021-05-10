@@ -1,7 +1,6 @@
 <?php
 
 include_once 'Libraries/Controllers.php';
-include_once 'Others/UploadDocument.php';
 $session = new SessionManager();
 $bc = null;
 $result = null;

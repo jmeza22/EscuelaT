@@ -27,16 +27,21 @@ and open the template in the editor.
                 <input type="checkbox" id="showmenu"/> <label for="showmenu" class="buttonmenu" title="Menú Principal"><i class="glyphicon glyphicon-menu-hamburger"></i> </label> <label class="menutitle">Sistema Escuelat!</label> 
                 <div class="menucss">
                     <ul>
-                        <li>Cuestionarios <i class="fa fa-angle-down"></i>
+                        <li title="Examenes o Evaluaciones">Cuestionarios <i class="fa fa-angle-down"></i>
                             <ul>
                                 <li><a target="myframe" href="FormCuestionarios.html">Cuestionarios</a></li>
                                 <li><a target="myframe" href="FormLecturas.html">Lecturas</a></li>
                                 <li><a target="myframe" href="FormPreguntasCuestionarios.html">Preguntas & Opciones</a></li>
                             </ul>
                         </li>
-                        <li>Actividades <i class="fa fa-angle-down"></i>
+                        <li title="Tareas o Talleres">Actividades <i class="fa fa-angle-down"></i>
                             <ul>
                                 <li><a target="myframe" href="FormActividadesVirtuales.html">Actividades</a></li>
+                            </ul>
+                        </li>
+                        <li title="Objetos Virtuales de Aprendizaje">OVA's <i class="fa fa-angle-down"></i>
+                            <ul>
+                                <li><a target="myframe" href="FormOVAs.html">Objetos de Aprendizaje</a></li>
                             </ul>
                         </li>
                         <li><a href="home.html">Sistema</a></li>
@@ -46,7 +51,7 @@ and open the template in the editor.
             </div>
         </header>
         <div class="contentframe">
-            <iframe name="myframe" id="myframe" src="FormCuestionarios.html" height="900" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);"></iframe> 
+            <iframe name="myframe" id="myframe" src="FormCuestionarios.html" height="900" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);" style="min-height: 840px !important;"></iframe> 
         </div>
         <footer class="information">
             <p>

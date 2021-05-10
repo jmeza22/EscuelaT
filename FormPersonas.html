@@ -93,6 +93,7 @@ and open the template in the editor.
                         <div class="col-sm-3">
                             <label>Sexo</label>
                             <select name="sexo_persona" id="sexo_persona" selected="I" alphabetic="true" class="form-control" style="width: 100%; min-width: 100%;"  >
+                                <option value="" ></option>
                                 <option value="I" >Indefinido</option>
                                 <option value="M" >Masculino</option>
                                 <option value="F" >Femenino</option>
@@ -145,14 +146,19 @@ and open the template in the editor.
                     </div>
 
                     <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <center>
-                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarPersona(this);" class="btn btn-primary" >Grabar</button>        
+                                <button type="button" id="save" name="save"  action="insertorupdate" save="true" onclick="GrabarPersona(this);" class="btn btn-primary" style="min-width: 150px !important;">Grabar</button>        
                             </center>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <center>
-                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success">Nuevo</button> 
+                                <button type="reset" id="reset" name="reset" onclick="resetForm(this)" class="btn btn-success" style="min-width: 150px !important;">Nuevo</button> 
+                            </center>
+                        </div>
+                        <div class="col-sm-4">
+                            <center>
+                                <button type="button" id="list" name="list" onclick="LoadTable();" class="btn btn-default" style="min-width: 150px !important;" title="Busca y Filtra usando Codigo, Nombre 1, Apellido 1, Sexo, Tipo, para saber si el estudiante ya existe.">Buscar</button> 
                             </center>
                         </div>
                     </div>

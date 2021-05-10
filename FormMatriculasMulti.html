@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Matricula Manual</title>
+        <title>Matricula Multiple</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="Registro de Matriculas"/>
@@ -26,36 +26,21 @@ and open the template in the editor.
         <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/setWebServicePath.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
-        <script type="text/javascript" src="js-forms/Matriculas.js"></script>
+        <script type="text/javascript" src="js-forms/MatriculasMulti.js"></script>
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Matricula Manual</div>
+        <div class="panel panel-primary" style="width: 98% !important;">
+            <div class="panel-heading">Matricula Multiple</div>
             <div class="panel-body">
 
-                <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php" model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" mainform="true" > 
-                    <input type="hidden" name="status_matricula" id="status_matricula" value="1" >
+                <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/MatriculasMultiController.php" action="Base/Controllers/MatriculasMultiController.php" model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" mainform="true" > 
                     <div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Estudiante</div>
-                            <div class="panel-body" >
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label>Codigo</label>
-                                        <input type="text" name="id_estudiante" id="id_estudiante" value="" maxlength="24" required="required" class="form-control" url="Base/Controllers/FindEstudiantesController.php" model="ObservadorEstudianteApp">
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <label>Nombre del Estudiante</label>
-                                        <input type="text" name="nombrecompleto_estudiante" id="nombrecompleto_estudiante" value="" maxlength="200" class="form-control" title="Nombre del Estudiante" readonly="readonly" >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">Datos de Matricula</div>
                             <div class="panel-body" >
+
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label>Sede</label>
@@ -71,7 +56,7 @@ and open the template in the editor.
                                     </div>
                                     <div class="col-sm-3">
                                         <label>Programa</label>
-                                        <select id="id_programa" name="id_programa" list="id_programa" required="required" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="onChangePrograma(); setNameFromDataList(this, null, 'valor_matricula'); CalcularValores();">
+                                        <select id="id_programa" name="id_programa" list="id_programa" required="required" model="ProgramasApp" colname="nombre_programa" colvalue="id_programa" url="Base/Controllers/GetComboboxProgramas.php" class="form-control" style="width: 100%;" onchange="onChangePrograma(); setNameFromDataList(this, null, 'valor_matricula');">
                                             <option selected="selected" value="">Ninguna</option>
                                         </select>
                                     </div>
@@ -112,44 +97,39 @@ and open the template in the editor.
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label>Valor Matricula</label>
-                                        <input type="number" name="valor_matricula" id="valor_matricula" value="0" maxlength="24" class="form-control" readonly="readonly">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label>Valor Pagado</label>
-                                        <input type="number" name="valorpagado_matricula" id="valorpagado_matricula" value="0" maxlength="24" class="form-control" disabled="disabled" >
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label>Valor Deuda</label>
-                                        <input type="number" name="valordeuda_matricula" id="valordeuda_matricula" value="0" maxlength="24" class="form-control" disabled="disabled" >
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label title="Codigo del Matricula">Codigo</label>
-                                        <input type="text" id="id_matricula" name="id_matricula" readonly="readonly" value="" class="form-control" maxlength="30" onfocus="" /> 
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                         <div class="row" style="margin-top: 20px;">
-                            <div class="col-sm-4">
-                                <center>
-                                    <button type="button" id="save" name="save"  action="insertorupdate" save="true" class="btn btn-primary" onclick="GrabarMatricula();" style="width: 100px;">Grabar</button>        
-                                </center>
-                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <center>
                                     <button type="reset" id="reset" name="reset" class="btn btn-success" onclick="resetMatricula();" style="width: 100px;">Nuevo</button> 
                                 </center>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <center>
                                     <button type="button" id="listing" name="listing" class="btn btn-default" onclick="LoadTable();" style="width: 100px;">Listar</button> 
                                 </center>
                             </div>
                         </div>
                     </div>
+
+                    <datalist id="lista_tipodoc" name="lista_tipodoc" >
+                        <option id="NN" value="NN" disabled="disabled">Desconocido</option>
+                        <option id="TI" value="TI" >Tarjeta de Identidad</option>
+                        <option id="RC" value="RC" >Registro Civil</option>
+                        <option id="CC" value="CC" >Cédula de Ciudadanía</option>
+                        <option id="CE" value="CE" >Cédula de Extranjeria</option>
+                        <option id="PP" value="PP" >Pasaporte</option>
+                        <option id="NES" value="NES" >Num. Establecido Secretaria</option>
+                        <option id="OO" value="OO" >Otro</option>
+                    </datalist>
+                    <datalist id="lista_sexo" name="lista_sexo" >
+                        <option value="M" >Masculino</option>
+                        <option value="F" >Femenino</option>
+                        <option value="I" >Indefinido</option>
+                    </datalist>
+
                 </form>
                 <form id="FormMatAsignatura" method="POST" autocomplete="off" url="Base/Controllers/MatriculaAsignaturasController.php" model="MatriculaAsignaturasApp" do="insertorupdate">
                     <input type="hidden" id="automatic" name="automatic" value="true" maxlength="5" /> 
@@ -159,53 +139,62 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-default" style="width: 90% !important;">
+        <div class="panel panel-default" style="width: 98% !important;">
             <div class="panel-heading">Listado de Matriculas</div>
             <div class="panel-body">
+                <center>
+                    <button type="button" name="nuevaFila" id="nuevaFila" class="btn btn-default" onclick="addNewTableRow('dataTable0');"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</button>
+                </center>
                 <div class="table-responsive" >
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="MatriculasApp" url="Base/Controllers/GetDataTableMatriculas.php" ordertable="true" tableorderby="0" tableordering="desc" >
                         <thead id="thead_dataTable0">
                             <tr headrow="true">
-                                <th columntype="html" style="width: 10%;" title="Codigo de Matricula">Codigo</th>
-                                <th columntype="html" style="width: 48% !important; min-width: 400px !important;">Nombre Estudiante</th>
-                                <th columntype="html" style="width: 5%;" title="Escuela">Esc.</th>
-                                <th columntype="html" style="width: 5%;" title="Sede">Sed.</th>
-                                <th columntype="html" style="width: 5%;" title="Jornada">Jor.</th>
-                                <th columntype="html" style="width: 5%;" title="Programa">Pro.</th>
-                                <th columntype="html-num" style="width: 5%;" title="Grado">Gra.</th>
-                                <th columntype="html" style="width: 5%;" title="Grupo">Gru.</th>
-                                <th columntype="html-num" style="width: 5%;" title="Año Academico">Año</th>
-                                <th columntype="html" style="width: 7%; min-width: 120px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 8%;" title="Codigo de Estudiante (Dejar en blanco si es nuevo)">Codigo</th>
+                                <th columntype="html" style="width: 15% !important; min-width: 100px !important;" title="Primer Apellido">Apellido 1</th>
+                                <th columntype="html" style="width: 15% !important; min-width: 100px !important;" title="Segundo Apellido">Apellido 2</th>
+                                <th columntype="html" style="width: 15% !important; min-width: 100px !important;" title="Primer Nombre">Nombre 1</th>
+                                <th columntype="html" style="width: 15% !important; min-width: 100px !important;" title="Segundo Nombre">Nombre 2</th>
+                                <th columntype="html" style="width: 3%;" title="Sexo">Sx</th>
+                                <th columntype="html" style="width: 3%;" title="Fecha Nacimiento">Nacimiento</th>
+                                <th columntype="html" style="width: 3%;" title="Tipo Documento">Doc</th>
+                                <th columntype="html" style="width: 10%;" title="Numero Documento">Num.Doc</th>
+                                <th columntype="html" style="width: 9%;" title="Telefono / Celular">Telefono</th>
+                                <th columntype="html" style="width: 5%; min-width: 96px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
-                            <tr id="samplerow" samplerow="true" style="display: none;">
-                                <td> <label>{{id_matricula}}</label> </td>
-                                <td> <label>{{nombrecompleto_estudiante}}</label> </td>
-                                <td> <label>{{id_escuela}}</label> </td>
-                                <td> <label>{{id_sede}}</label> </td>
-                                <td> <label>{{id_jornada}}</label> </td>
-                                <td> <label>{{id_programa}}</label> </td>
-                                <td> <label>{{numgrado_programa}}</label> </td>
-                                <td> <label>{{id_grupo}}</label> </td>
-                                <td> <label>{{id_periodo}}</label> </td>
+                            <tr id="samplerow" samplerow="true" form="form0" style="display: none;" >
+
+                                <td> 
+                                    <input type="text" editable="true" name="id_estudiante[]" id="id_estudiante" value="0" class="form-control" maxlength="25"  style="min-width: 90px !important;" title="Deje en Blanco si va a Ingresar un Estudiante nuevo en la Institucion." />
+                                </td>
+                                <td> <input type="text" editable="true"  required="required" name="apellido1_persona[]" id="apellido1_persona" value="" class="form-control" placeholder="Apellido 1" style="min-width: 140px !important;" maxlength="25" /></td>
+                                <td> <input type="text" editable="true"  name="apellido2_persona[]" id="apellido2_persona" value="" class="form-control" placeholder="Apellido 2" style="min-width: 140px !important;" maxlength="25" /></td>
+                                <td> <input type="text" editable="true"  required="required" name="nombre1_persona[]" id="nombre1_persona" value="" class="form-control" placeholder="Nombre 1" style="min-width: 140px !important;" maxlength="25" /></td>
+                                <td> <input type="text" editable="true"  name="nombre2_persona[]" id="nombre2_persona" value="" class="form-control" placeholder="Nombre 2" style="min-width: 140px !important;" maxlength="25" /></td>
+                                <td> <input type="text" editable="true"  required="required" name="sexo_persona[]" id="sexo_persona" value="" class="form-control" placeholder="F/M" title="Sexo" list="lista_sexo" style="min-width: 20px !important;" maxlength="1" /></td>
+                                <td> <input type="date" editable="true"  name="fechanacimiento_persona[]" id="fechanacimiento_persona" value="" class="form-control" placeholder="Nacimiento" title="Fecha de Nacimiento" style="width: 120px !important;" maxlength="12" /></td>
+                                <td> <input type="text" editable="true"  name="tipodoc_persona[]" id="tipodoc_persona" value="TI" class="form-control" placeholder="Tipo" title="Tipo de Documento" list="lista_tipodoc" style="min-width: 30px !important;" maxlength="3" /></td>
+                                <td> <input type="text" editable="true"  name="documento_persona[]" id="documento_persona" value="" class="form-control" placeholder="Numero" title="Numero de Documento" style="min-width: 103px !important;" maxlength="14" /></td>
+                                <td> <input type="text" editable="true"  name="telefono_persona[]" id="telefono_persona" value="" class="form-control" placeholder="Celular" title="Telefono / Celular" style="min-width: 103px !important;" maxlength="13" /></td>
                                 <td>
                                     <form id="Matricula{{id_matricula}}" name="Matricula{{id_matricula}}" method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php" action="Base/Controllers/ReportesController.php" model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" target="_blank">
-                                        <input type="hidden" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
-                                        <input type="hidden" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
-                                        <input type="hidden" name="id_periodo" id="id_periodo" value="{{id_periodo}}" >
-                                        <input type="hidden" name="id_programa" id="id_programa" value="{{id_programa}}" >
-                                        <input type="hidden" name="tipo_reporte" id="tipo_reporte" value="RecibosMatriculas" dusabled="disabled">
-                                        <input type="hidden" name="status_matricula" id="status_matricula" value="1" >
-                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
-                                        <button type="button" name="MatriculasAsignaturas" id="MatriculasAsignaturas" class="btn btn-xs btn-info icon-button" onclick="FormMatriculaAsignaturas(this);"  title="Matricular Asignaturas"><i class="glyphicon glyphicon-check"></i></button>
-                                        <button type="button" name="ReporteMatricula" id="ReporteMatricula" class="btn btn-xs btn-default icon-button" onclick="GenerarReciboMatricula(this);"  title="Ver Recibo de Matricula"><i class="glyphicon glyphicon-file"></i></button>
+                                        <input type="hidden" form="Matricula{{id_matricula}}" name="id_matricula" id="id_matricula" value="{{id_matricula}}" />
+                                        <input type="hidden" form="Matricula{{id_matricula}}" name="tipo_reporte" id="tipo_reporte" value="RecibosMatriculas" >
+                                        <input type="hidden" form="Matricula{{id_matricula}}" name="status_matricula" id="status_matricula" value="1" />
+                                        <button type="button" form="Matricula{{id_matricula}}" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="button" form="Matricula{{id_matricula}}" name="MatriculasAsignaturas" id="MatriculasAsignaturas" class="btn btn-xs btn-info icon-button" onclick="MatriculaAsignaturasAutomatica(getElement(getForm(this), 'id_matricula'));"  title="Matricular Asignaturas"><i class="glyphicon glyphicon-check"></i></button>
+                                        <button type="button" form="Matricula{{id_matricula}}" name="ReporteMatricula" id="ReporteMatricula" class="btn btn-xs btn-default icon-button" onclick="GenerarReciboMatricula(this);"  title="Ver Recibo de Matricula"><i class="glyphicon glyphicon-file"></i></button>
                                     </form>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    <center>
+                        <button type="button" form="form0" id="guardar" name="guardar" action="insert" class="btn btn-primary" onclick="Send(this);" ><i class="glyphicon glyphicon-floppy-save"></i> Grabar</button>
+                    </center>
                 </div>
             </div>
         </div>

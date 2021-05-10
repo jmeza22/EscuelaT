@@ -18,6 +18,7 @@ $idcorte = null;
 $grado = null;
 $grupo = null;
 $idestudiante = null;
+$idmatricula = null;
 
 $format = 'Legal';
 $orientation = 'P';
@@ -62,6 +63,9 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
         }
         if (isset($_POST['id_estudiante']) && $_POST['id_estudiante'] !== '' && $_POST['id_estudiante'] !== 'NULL') {
             $idestudiante = $_POST['id_estudiante'];
+        }
+        if (isset($_POST['id_matricula']) && $_POST['id_matricula'] !== '' && $_POST['id_matricula'] !== 'NULL') {
+            $idmatricula = $_POST['id_matricula'];
         }
     }
     if (isset($_POST) && isset($_POST['format_page'])) {
@@ -121,7 +125,7 @@ if ($session->hasLogin() && ($session->getSuperAdmin() == 1 || $session->getAdmi
             $report->SetRightMargin(14);
             $report->AddPage('P', $format, true);
             $report->setReportName('Recibo de Matricula ' . $idprograma . $grado . $grupo . $idperiodo . $idestudiante);
-            $report->Matriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $grupo, $idperiodo, $idestudiante);
+            $report->Matriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $grado, $grupo, $idperiodo, $idestudiante, $idmatricula);
             $report->generatePDFDocument();
         }
         if ($tipo === 'CertificadoEstudios') {

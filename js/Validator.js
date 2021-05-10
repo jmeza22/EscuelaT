@@ -207,11 +207,16 @@ function validateForm(form) {
                 item = null;
                 item = elements[j];
                 if (item.getAttribute('required') !== undefined && (item.getAttribute('required') === 'true' || item.getAttribute('required') === 'required')) {
+                    //console.log('Item:'+item.id);
                     if (item.value === null || item.value === '') {
                         item.focus();
                         requireElement(item);
                         next = false;
-                        showAlert('Campo Vacio (' + item.id + '): Obligatorio');
+                        if (item.title !== undefined && item.title !== null && item.title !== '') {
+                            showAlert('Campo Vacio (' + item.title + '): Obligatorio');
+                        } else {
+                            showAlert('Campo Vacio (' + item.id + '): Obligatorio');
+                        }
                         break;
                     }
                     if (item.getAttribute('type') !== undefined && item.getAttribute('type') !== undefined && item.getAttribute('type') !== undefined && item.getAttribute('type') === 'text') {

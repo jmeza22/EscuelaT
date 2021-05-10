@@ -591,9 +591,9 @@ class PDFReports extends TCPDF {
         }
     }
 
-    public function Matriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null) {
+    public function Matriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null) {
         $pageWidth = $this->getRealPageWidth();
-        $data = $this->bc->getMatriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $numgrado, $idgrupo, $idperiodo, $idestudiante);
+        $data = $this->bc->getMatriculas($idescuela, $idsede, $idjornada, $idprograma, $idplanestudio, $numgrado, $idgrupo, $idperiodo, $idestudiante, $idmatricula);
         if ($data !== null && $data !== '' && $data !== '[]') {
             $data = json_decode($data, true);
             if (is_array($data) && count($data) > 0) {
@@ -836,7 +836,7 @@ class PDFReports extends TCPDF {
                     $this->Cell($pageWidth * 30 / 100, 5, $data[$i]['nombrecompleto_estudiante'], 1);
                     $this->Cell($pageWidth * 5 / 100, 5, $data[$i]['id_periodo'], 1);
                     $this->Cell($pageWidth * 5 / 100, 5, $data[$i]['id_grupo'], 1);
-                    $this->Cell($pageWidth * 30 / 100, 5, $data[$i]['direccion_persona'].' '.$data[$i]['ciudad_persona'], 1);
+                    $this->Cell($pageWidth * 30 / 100, 5, $data[$i]['direccion_persona'] . ' ' . $data[$i]['ciudad_persona'], 1);
                     $this->Cell($pageWidth * 20 / 100, 5, $data[$i]['email_persona'], 1);
                     $this->Cell($pageWidth * 10 / 100, 5, $data[$i]['telefono_persona'], 1);
                     $this->Ln();

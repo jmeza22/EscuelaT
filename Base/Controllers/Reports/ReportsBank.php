@@ -349,7 +349,7 @@ class ReportsBank extends BasicController {
         return $result;
     }
 
-    public function getPersonas($tipopersona) {
+    public function getPersonas($tipopersona, $nombre1 = null, $apellido1 = null, $sexo = null, $idpersona = null) {
         $sql = null;
         $result = null;
         $sql = "SELECT * FROM PersonasApp "
@@ -358,6 +358,22 @@ class ReportsBank extends BasicController {
         if ($tipopersona !== null) {
             $arraywhere['p_tipo_persona'] = $tipopersona;
             $sql = $sql . " AND tipo_persona=:p_tipo_persona ";
+        }
+        if ($nombre1 !== null) {
+            $arraywhere['p_nombre1_persona'] = $nombre1;
+            $sql = $sql . " AND nombre1_persona=:p_nombre1_persona ";
+        }
+        if ($apellido1 !== null) {
+            $arraywhere['p_apellido1_persona'] = $apellido1;
+            $sql = $sql . " AND apellido1_persona=:p_apellido1_persona ";
+        }
+        if ($sexo !== null) {
+            $arraywhere['p_sexo_persona'] = $sexo;
+            $sql = $sql . " AND sexo_persona=:p_sexo_persona ";
+        }
+        if ($idpersona !== null) {
+            $arraywhere['p_id_persona'] = $idpersona;
+            $sql = $sql . " AND id_persona=:p_id_persona ";
         }
         $sql = $sql . "ORDER BY num_persona DESC";
         $result = $this->selectJSONArray($sql, $arraywhere);
@@ -521,13 +537,14 @@ class ReportsBank extends BasicController {
     public function getMatriculas($idescuela = null, $idsede = null, $idjornada = null, $idprograma = null, $idplanestudio = null, $numgrado = null, $idgrupo = null, $idperiodo = null, $idestudiante = null, $idmatricula = null, $fechamatricula = null) {
         $sql = null;
         $result = null;
-        $sql = "SELECT M.*, E.nombre_escuela, S.nombre_sede, J.nombre_jornada, Pr.nombre_programa, PE.descripcion_planestudio "
+        $sql = "SELECT M.*, P.*, E.nombre_escuela, S.nombre_sede, J.nombre_jornada, Pr.nombre_programa, PE.descripcion_planestudio "
                 . " FROM MatriculasApp M "
                 . " INNER JOIN EscuelasApp E ON E.id_escuela=M.id_escuela"
                 . " INNER JOIN SedesApp S ON S.id_sede=M.id_sede"
                 . " INNER JOIN JornadasApp J ON J.id_jornada=M.id_jornada"
                 . " INNER JOIN ProgramasApp Pr ON Pr.id_programa=M.id_programa"
                 . " INNER JOIN PlanEstudiosApp PE ON PE.id_programa=M.id_programa"
+                . " INNER JOIN PersonasApp P ON P.id_persona=M.id_estudiante"
                 . " WHERE M.status_matricula=1 ";
         $arraywhere = Array();
         if ($idescuela !== null) {
@@ -574,7 +591,7 @@ class ReportsBank extends BasicController {
             $arraywhere['p_fecha_matricula'] = $fechamatricula;
             $sql = $sql . " AND fecha_matricula=:p_fecha_matricula ";
         }
-        $sql = $sql . " ORDER BY M.fecha_matricula DESC, CAST(M.numgrado_programa AS DECIMAL) ";
+        $sql = $sql . " ORDER BY M.id_programa, CAST(M.numgrado_programa AS DECIMAL), M.id_grupo, M.nombrecompleto_estudiante, M.fecha_matricula DESC  ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }
@@ -1593,6 +1610,35 @@ class ReportsBank extends BasicController {
             $sql = $sql . " AND id_evento=:p_id_evento ";
         }
         $sql = $sql . " ORDER BY fechainicio_evento DESC ";
+        $result = $this->selectJSONArray($sql, $arraywhere);
+        return $result;
+    }
+
+    public function getOVAS($idescuela = null, $idasignatura = null, $idautor = null, $numgrado = null) {
+        $sql = null;
+        $result = null;
+        $sql = "SELECT O.*, A.nombre_asignatura, P.nombre1_persona, P.apellido1_persona FROM OVASApp O "
+                . "INNER JOIN AsignaturasApp A ON O.id_asignatura=A.id_asignatura "
+                . "INNER JOIN PersonasApp P ON O.id_autor=P.id_persona WHERE "
+                . "O.status_ova=1 ";
+        $arraywhere = Array();
+        if ($idescuela !== null) {
+            $arraywhere['p_id_escuela'] = $idescuela;
+            $sql = $sql . " AND O.id_escuela=:p_id_escuela ";
+        }
+        if ($idasignatura !== null) {
+            $arraywhere['p_id_asignatura'] = $idasignatura;
+            $sql = $sql . " AND O.id_asignatura=:p_id_asignatura ";
+        }
+        if ($idautor !== null) {
+            $arraywhere['p_id_autor'] = $idautor;
+            $sql = $sql . " AND O.id_autor=:p_id_autor ";
+        }
+        if ($numgrado !== null) {
+            $arraywhere['p_numgrado_ova'] = $numgrado;
+            $sql = $sql . " AND O.numgrado_ova=:p_numgrado_ova ";
+        }
+        $sql = $sql . " ORDER BY O.id_ova DESC, O.id_asignatura ";
         $result = $this->selectJSONArray($sql, $arraywhere);
         return $result;
     }

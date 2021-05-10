@@ -27,6 +27,10 @@ class Personas extends ReportsBank {
         $this->connect();
     }
 
+    public function getIdPersona() {
+        return $this->idpersona;
+    }
+
     public function setArray($postdata) {
         if ($postdata !== null && is_array($postdata)) {
             $this->postdata = $postdata;
@@ -71,13 +75,13 @@ class Personas extends ReportsBank {
             $this->setData();
             $result = $this->execute(false);
             if ($this->getRowCount() > 0 && $this->postdata[$this->findby] !== '') {
-                $sql = "UPDATE PersonasApp SET id_persona = CONCAT('P',num_persona) WHERE id_persona = '" . $this->postdata[$this->findby] . "' ";
-                $this->executeSQL($sql);
                 if ($this->getLastInsertId() > 0) {
                     $this->idpersona = 'P' . $this->getLastInsertId();
                 } else {
                     $this->idpersona = $this->postdata['id_persona'];
                 }
+                $sql = "UPDATE PersonasApp SET id_persona = CONCAT('P',num_persona) WHERE id_persona = '" . $this->postdata[$this->findby] . "' ";
+                $this->executeSQL($sql);
             }
             return $result;
         }

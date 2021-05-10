@@ -7,6 +7,7 @@
 jQuery(document).ready(function () {
     setIdEstudiante();
     LoadTable();
+    
 });
 
 function setIdEstudiante() {

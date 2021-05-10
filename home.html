@@ -19,13 +19,14 @@ and open the template in the editor.
         <link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
         <script type="text/javascript" src="js-forms/Home.js"></script>
     </head>
     <body>
         <header>
             <div class="menucontainer">
-                <input type="checkbox" id="showmenu"/> <label for="showmenu" class="buttonmenu" title="Menú Principal"><i class="glyphicon glyphicon-menu-hamburger"></i> </label> <label class="menutitle">Sistema Escuelat!</label> 
+                <input type="checkbox" id="showmenu"/> <label for="showmenu" class="buttonmenu" title="Menú Principal"><i class="glyphicon glyphicon-menu-hamburger"></i> </label> <label class="menutitle"><b>MENU PRINCIPAL</b></label> 
                 <nav class="menucss">
                     <ul>
                         <li>Registro <i class="fa fa-angle-down"></i>
@@ -37,7 +38,8 @@ and open the template in the editor.
                             <ul>
                                 <li><a target="myframe" href="ListingEstudiantes.html">Listado de Estudiantes</a></li>
                                 <li><a target="myframe" href="FormEstudiantes.html">Observador</a></li>
-                                <li><a target="myframe" href="FormMatriculas.html">Matriculas</a></li>
+                                <li><a target="myframe" href="FormMatriculas.html">Matricula</a></li>
+                                <li><a target="myframe" href="FormMatriculasMulti.html">Matricula Multiple</a></li>
                                 <li><a target="myframe" href="FormCalificacionesFinales.html">Informe Final</a></li>
                                 <li><a target="myframe" href="FormPromocionar.html">Promover</a></li>
                                 <li><a target="myframe" href="FormTrasladosEstudiantes.html">Trasladar</a></li>
@@ -100,7 +102,7 @@ and open the template in the editor.
                                 <li><a href="homeEstudiantes.html">Portal Estudiantes</a></li>
                                 <li><a href="homeAcudientes.html">Portal Acudientes</a></li>
                                 <li><a href="homeElecciones.html" title="Modulo de Elecciones Estudiantiles">Portal Elecciones</a></li>
-                                <li><a href="homeCuestionarios.html" title="Modulo de Educacion Virtuales">Educacion Virtual</a></li>
+                                <li><a href="homeVirtual.html" title="Modulo de Educacion Virtuales">Educacion Virtual</a></li>
                             </ul>
                         </li>
                         <li><a href="logout.html">Salir</a></li>
@@ -109,7 +111,7 @@ and open the template in the editor.
             </div>
         </header>
         <div class="contentframe">
-            <iframe name="myframe" id="myframe" src="FormVariablesSesion.html" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);" style="min-height: fit-content !important;"></iframe> 
+            <iframe name="myframe" id="myframe" src="FormVariablesSesion.html" onchange="automaticSize(this);" onmouseenter="automaticSize(this);" style="min-height: 840px !important;"></iframe> 
         </div>
         <footer class="information">
             <p>

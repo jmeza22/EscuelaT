@@ -19,8 +19,18 @@ and open the template in the editor.
         <link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/localStorageData.js"></script>
         <script type="text/javascript" src="js/JsMaxFramework.js"></script>
     </head>
+    <script language="javascript">
+        jQuery(document).ready(function () {
+            var myframe = document.getElementById("myframe");
+            myframe.onload = function () {
+                automaticSize(myframe);
+                document.title = "" + myframe.contentWindow.document.title + " ::: " + getEnterpriseName() + " ::: Portal Docentes ::: EscuelaT!";
+            };
+        });
+    </script>
     <body>
         <header>
             <div class="menucontainer">
@@ -70,7 +80,7 @@ and open the template in the editor.
             </div>
         </header>
         <div class="contentframe">
-            <iframe name="myframe" id="myframe" src="FormVariablesSesion.html" onload="automaticSize(this);" onchange="automaticSize(this);" onmouseenter="automaticSize(this);"></iframe> 
+            <iframe name="myframe" id="myframe" src="FormVariablesSesion.html" onchange="automaticSize(this);" onmouseenter="automaticSize(this);" style="min-height: 840px !important;"></iframe> 
         </div>
         <footer class="information">
             <p>

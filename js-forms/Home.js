@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
+    document.title = "" + getEnterpriseName() + " ::: Portal Administrativo ::: EscuelaT!";
+    var myframe = document.getElementById("myframe");
+    myframe.onload = function () {
+        automaticSize(myframe);
+        document.title = "" + myframe.contentWindow.document.title + " ::: " + getEnterpriseName() + " ::: Portal Administrativo ::: EscuelaT!";
+    };
 });
 
 function logoutSystem() {

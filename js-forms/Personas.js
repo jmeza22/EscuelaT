@@ -4,12 +4,59 @@
  * and open the template in the editor.
  */
 jQuery(document).ready(function () {
-    LoadTable();
+
     showID();
 });
 
+function setFindbyTable() {
+    var myform = document.getElementById('form0');
+    var mytable = document.getElementById("dataTable0");
+    var idpersona = getElement(myform, 'id_persona');
+    var nombre1 = getElement(myform, 'nombre1_persona');
+    var apellido1 = getElement(myform, 'apellido1_persona');
+    var sexo = getElement(myform, 'sexo_persona');
+    var tipo = getElement(myform, 'tipo_persona');
+    if (idpersona !== null && idpersona.value !== '') {
+        mytable.setAttribute('findby1', idpersona.id);
+        mytable.setAttribute('findbyvalue1', idpersona.value);
+    }else{
+        mytable.removeAttribute('findby1');
+        mytable.removeAttribute('findbyvalue1');
+    }
+    if (nombre1 !== null && nombre1.value !== '') {
+        mytable.setAttribute('findby2', nombre1.id);
+        mytable.setAttribute('findbyvalue2', nombre1.value);
+    }else{
+        mytable.removeAttribute('findby2');
+        mytable.removeAttribute('findbyvalue2');
+    }
+    if (apellido1 !== null && apellido1.value !== '') {
+        mytable.setAttribute('findby3', apellido1.id);
+        mytable.setAttribute('findbyvalue3', apellido1.value);
+    }else{
+        mytable.removeAttribute('findby3');
+        mytable.removeAttribute('findbyvalue3');
+    }
+    if (sexo !== null && sexo.value !== '' && sexo.selected !== '') {
+        mytable.setAttribute('findby4', sexo.id);
+        mytable.setAttribute('findbyvalue4', sexo.value);
+    }else{
+        mytable.removeAttribute('findby4');
+        mytable.removeAttribute('findbyvalue4');
+    }
+    if (tipo !== null && tipo.value !== '' && tipo.selected !== '') {
+        mytable.setAttribute('findby5', tipo.id);
+        mytable.setAttribute('findbyvalue5', tipo.value);
+    }else{
+        mytable.removeAttribute('findby5');
+        mytable.removeAttribute('findbyvalue5');
+    }
+}
+
 function LoadTable() {
     var mytable = document.getElementById("dataTable0");
+    clearTableData(mytable);
+    setFindbyTable();
     loadTableData(mytable, true);
 }
 

@@ -2224,6 +2224,108 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="OVASApp">
+      <Cm>Objetos Virtuales de Aprendizaje</Cm>
+      <TblOpts/>
+      <Pk ClNs="id_ova" nm="pkOVASApp"/>
+      <Cl au="1" df="" nm="id_ova" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Llave Primaria OVA</Cm>
+      </Cl>
+      <Cl au="0" df="Titulo de OVA" nm="nombre_ova" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+        <Cm>Nombre o titulo de OVA</Cm>
+      </Cl>
+      <Cl au="0" df="Descargue PDF" nm="contenidotexto_ova" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="5000" sc="null" sg="1" un="0"/>
+        <Cm>Contenido (Texto)</Cm>
+      </Cl>
+      <Cl au="0" df="OVA.pdf" nm="pdf_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Documento Descargable PDF</Cm>
+      </Cl>
+      <Cl au="0" df="Imagen.jpg" nm="imagen1_ova" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="imagen2_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="imagen3_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="imagen4_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="Video.mp4" nm="video1_ova" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="video2_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="Audio.mp3" nm="audio1_ova" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="audio2_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="bibliolink1_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="bibliolink2_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="bibliolink3_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="bibliolink4_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="actividadlink_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Link para Actividad externa</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="evaluacionlink_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Link de la Evaluacion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="numgrado_ova" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Grado Escolar</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_escuela" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Escuela</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_autor" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="24" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Persona</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="id_asignatura" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Codigo de Asignatura</Cm>
+      </Cl>
+      <Cl au="0" df="1" nm="status_ova" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_OVASApp_AsignaturasApp" prLkCl="id_asignatura" upAc="3">
+        <PrTb mn="0" nm="AsignaturasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="OVASApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_asignatura" prCl="id_asignatura"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_OVASApp_EscuelasApp" prLkCl="id_escuela" upAc="3">
+        <PrTb mn="0" nm="EscuelasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="OVASApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_escuela" prCl="id_escuela"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_OVASApp_PersonasApp" prLkCl="id_persona" upAc="3">
+        <PrTb mn="0" nm="PersonasApp" oe="1" sch="EscuelaDB" zr="0"/>
+        <CdTb mn="1" nm="OVASApp" oe="0" sch="EscuelaDB" zr="1"/>
+        <ClPr cdCl="id_autor" prCl="id_persona"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="PagosRecibidosApp">
       <Cm>Pagos Recibidos por Diferentes Conceptos</Cm>
       <TblOpts/>
@@ -3176,6 +3278,7 @@
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="ActividadesVirtualesApp" x="1435" y="4486"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="SolucionesActividadesVirtualesApp" x="1924" y="4638"/>
     <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="EventosApp" x="2333" y="4592"/>
+    <TbGl bkCl="ff6666ff" sch="EscuelaDB" tbl="OVASApp" x="2749" y="88"/>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.ActividadesVirtualesApp.fk_ActividadesVirtualesApp_AsignaturasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="2327" x2="2327" y1="718" y2="4534"/>
@@ -3492,6 +3595,22 @@
         <positionableLine lineRole="SINGLE_LINE" x1="822" x2="925" y1="4531" y2="4531"/>
       </positionableLines>
     </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.OVASApp.fk_OVASApp_AsignaturasApp" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2327" x2="2327" y1="528" y2="260"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2726" x2="2331" y1="256" y2="256"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.OVASApp.fk_OVASApp_EscuelasApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1035" x2="2726" y1="119" y2="119"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="EscuelaDB.OVASApp.fk_OVASApp_PersonasApp" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="383" x2="2726" y1="211" y2="211"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="EscuelaDB.PagosRecibidosApp.fk_PagosRecibidosApp_EscuelasApp" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="PARENT_LINE" x1="879" x2="879" y1="175" y2="3469"/>
@@ -3628,7 +3747,7 @@
     <Notes/>
     <Zones/>
   </Dgm>
-  <RnmMgr NxRnmId="161">
+  <RnmMgr NxRnmId="165">
     <RnmCh ObjCls="Table" ParCls="Schema" ParNme="EscuelaDB" SupCls="" SupNme="">
       <Rnm id="1" nNm="EscuelasApp" oNm="EscuelaApp"/>
     </RnmCh>
@@ -4058,6 +4177,16 @@
     <RnmCh ObjCls="Column" ParCls="Table" ParNme="EventosApp" SupCls="Schema" SupNme="EscuelaDB">
       <Rnm id="160" nNm="id_evento" oNm="Id"/>
     </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="OVASApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="161" nNm="id_ova" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="OVASApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="162" nNm="id_autor" oNm="id_persona"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="OVASApp" SupCls="Schema" SupNme="EscuelaDB">
+      <Rnm id="164" nNm="numgrado_ova" oNm="grado_ova"/>
+      <Rnm id="163" nNm="grado_ova" oNm="grado_es"/>
+    </RnmCh>
   </RnmMgr>
   <DbDocOptionMgr>
     <BasicOptionMgr>
@@ -4075,17 +4204,17 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.EscuelaDB" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/EscuelaDB</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/AreasApp</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/AsistenciaApp</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/SedesApp</TreePath>
-    <TreePath>/Schemas (1)/EscuelaDB/Tables (46)/SedesApp/Columns (8)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (47)</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (47)/AreasApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (47)/AsistenciaApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (47)/SedesApp</TreePath>
+    <TreePath>/Schemas (1)/EscuelaDB/Tables (47)/SedesApp/Columns (8)</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>
