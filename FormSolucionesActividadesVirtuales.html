@@ -14,10 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -30,9 +34,9 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Actividad Virtual</div>
-            <div class="panel-body" >
+        <div class="card shadow card-primary" style="width: 90% !important;">
+            <div class="card-header">Actividad Virtual</div>
+            <div class="card-body" >
                 <form id="formActividades" method="POST" autocomplete="off" do="find" url="Base/Controllers/ActividadesVirtualesController.php" model="ActividadesVirtualesApp" findBy="id_actividad" >
                     <input type="hidden" id="id_actividad" name="id_actividad" required="required">
                     <div class="row">
@@ -56,9 +60,9 @@ and open the template in the editor.
                 </form>
             </div>
         </div>
-        <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Solucion</div>
-            <div class="panel-body" >
+        <div class="card shadow card-primary" style="width: 90% !important;">
+            <div class="card-header">Solucion</div>
+            <div class="card-body" >
                 <form id="formSoluciones" method="POST" autocomplete="off" url="Base/Controllers/SolucionesActividadesVirtualesController.php" model="SolucionesActividadesVirtualesApp" findBy="id_solucion"  enctype="multipart/form-data" >
                     <input type="hidden" id="id_solucion" name="id_solucion" value="">
                     <input type="hidden" id="id_actividad" name="id_actividad" required="required">
@@ -82,13 +86,13 @@ and open the template in the editor.
                             <center>
                                 <label>Documento</label>
                                 <a id="linkSolucion" href="" target="_blank" title="Archivo de Solucion Cargado." style="display: none !important;">Descargar</a>
-                                <button type="button" id="VerSolucion" onclick="viewFile();" class="btn btn-default btn-block">
-                                    <i class="glyphicon glyphicon-upload"></i> Cargar
+                                <button type="button" id="VerSolucion" onclick="viewFile();" class="btn btn-sm btn-secondary btn-block">
+                                    <i class="fa fa-xs fa-upload"></i> Cargar
                                 </button>
 
                                 <label>Accion</label>
-                                <button type="button" id="EliminarDocumento" onclick="deleteFile();" class="btn btn-danger btn-block" title="Eliminar Archivo Cargado.">
-                                    <i class="glyphicon glyphicon-erase"></i> Eliminar
+                                <button type="button" id="EliminarDocumento" onclick="deleteFile();" class="btn btn-sm btn-danger btn-block" title="Eliminar Archivo Cargado.">
+                                    <i class="fa fa-xs fa-erase"></i> Eliminar
                                 </button>
                             </center>
                         </div>

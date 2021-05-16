@@ -14,10 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+         <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -30,9 +34,9 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-default" style="width: 95% !important;">
-            <div class="panel-heading">Listado de Estudiantes</div>
-            <div class="panel-body">
+        <div class="card" style="width: 95% !important;">
+            <div class="card-header">Listado de Estudiantes</div>
+            <div class="card-body">
                 <form id="form0">
                     <div class="row">
                         <div class="col-sm-4">
@@ -76,7 +80,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-2">
                             <label>Filtrar</label>
-                            <button type="button" id="filtrar" class="btn btn-block btn-default" onclick="LoadTable();"><i class="glyphicon glyphicon-search"></i></button>
+                            <button type="button" id="filtrar" class="btn btn-xs btn-secondary" onclick="LoadTable();" style="width: 100%;"><i class="fa fa-xs fa-search"></i> </button>
                         </div>
                     </div>
                 </form>
@@ -94,7 +98,7 @@ and open the template in the editor.
                                 <th columntype="html" style="width: 4%;" title="Codigo Plan Estudios">P.E.</th>
                                 <th columntype="html-num" style="width: 4%;" title="Grado">Gra.</th>
                                 <th columntype="html" style="width: 4%;" title="Grupo">Gru.</th>
-                                <th columntype="html" style="width: 4%; min-width: 66px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 4%; min-width: 66px !important;">Opción</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -113,8 +117,8 @@ and open the template in the editor.
                                     <form id="Estudiante{{id_estudiante}}" name="Estudiante{{id_estudiante}}" method="POST" autocomplete="off" url="Base/Controllers/ObservadorEstudiantesController.php"  model="ObservadorEstudiantesApp" findBy="id_estudiante" statusfield="status_estudiante">
                                         <input type="hidden"  editable="false" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
                                         <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
-                                        <button type="button" name="VerEstud" id="VerEstud" class="btn btn-xs btn-default icon-button" onclick="VerEstudiante(this);" title="Ver Observador del Estudiante"><i class="glyphicon glyphicon-search"></i></button>
-                                        <button type="button" name="VerNot" id="VerNot" class="btn btn-xs btn-warning icon-button" onclick="VerNotas(this);" title="Ver Calificaciones"><i class="glyphicon glyphicon-search"></i></button>
+                                        <button type="button" name="VerEstud" id="VerEstud" class="icon-button btn btn-xs btn-secondary btn-circle" onclick="VerEstudiante(this);" title="Ver Observador del Estudiante"><i class="fa fa-xs fa-search"></i></button>
+                                        <button type="button" name="VerNot" id="VerNot" class="icon-button btn btn-xs btn-warning btn-circle" onclick="VerNotas(this);" title="Ver Calificaciones"><i class="fa fa-xs fa-search"></i></button>
                                     </form>
                                 </td>
                             </tr>

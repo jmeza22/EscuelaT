@@ -14,10 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -30,9 +34,9 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="">
-            <div class="panel-heading">Eventos</div>
-            <div class="panel-body table-responsive" >
+        <div class="card shadow card-primary" style="">
+            <div class="card-header">Eventos</div>
+            <div class="card-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/EventosController.php" model="EventosApp" findBy="id_evento" mainform="true" >
                     <div class="row">
                         <div class="col-sm-12">
@@ -88,9 +92,9 @@ and open the template in the editor.
                 </form>
             </div>
         </div>
-        <div class="panel panel-default" style="">
-            <div class="panel-heading">Listado de Eventos</div>
-            <div class="panel-body">
+        <div class="card" style="">
+            <div class="card-header">Listado de Eventos</div>
+            <div class="card-body">
 
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered" model="EventosApp" url="Base/Controllers/GetDataTableEventos.php" >
@@ -102,7 +106,7 @@ and open the template in the editor.
                                 <th style="width: 15%;">Fecha.Fin</th>
                                 <th style="width: 10%;">Programa</th>
                                 <th style="width: 10%;">Activo</th>
-                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th style="width: 8%; min-width: 70px !important;">Opción</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -117,8 +121,8 @@ and open the template in the editor.
                                     <form id="Evento{{id_evento}}" name="Evento{{id_evento}}" method="POST" autocomplete="off" url="Base/Controllers/EventosController.php"  model="EventosApp" findBy="id_evento" statusfield="status_evento">
                                         <input type="hidden"  editable="false" name="id_evento" id="id_evento" value="{{id_evento}}" >
                                         <input type="hidden"  editable="false" disabled="disabled" name="status_evento[]" id="status_evento" value="1" >
-                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="button" name="EditarFila" id="EditarFila" class="icon-button btn btn-xs btn-warning btn-circle" onclick="Edit(this);"><i class="fa fa-xs fa-edit" title="Editar"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="icon-button btn btn-xs btn-danger btn-circle" onclick="DeleteItem(this);"><i class="fa fa-xs fa-trash" title="Eliminar"></i></button>
                                     </form>
                                 </td>
                             </tr>

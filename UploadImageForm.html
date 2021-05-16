@@ -35,9 +35,9 @@ and open the template in the editor.
 
     </head>
     <body style="min-height: fit-content !important;">
-        <div class="panel panel-primary" style="">
-            <div class="panel-heading">Subir Foto o Imagen</div>
-            <div class="panel-body" >
+        <div class="card shadow card-primary" style="">
+            <div class="card-header">Subir Foto o Imagen</div>
+            <div class="card-body" >
                 <form id="formUpload" url="Base/Controllers/UploadImageController.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="prefix_image" id="prefix_image" value="NULL" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
                     <input type="hidden" name="name_image" id="name_image" value="NULL" readonly="readonly" maxlength="100" class="form-control" title="Nombre Imagen">

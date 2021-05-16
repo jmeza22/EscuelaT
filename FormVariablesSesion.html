@@ -15,10 +15,14 @@ and open the template in the editor.
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css-forms/default.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -31,9 +35,9 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="">
-            <div class="panel-heading">Variables de Sesion del Sistema</div>
-            <div class="panel-body table-responsive">
+        <div class="card shadow card-primary" style="">
+            <div class="card-header">Variables de Sesion del Sistema</div>
+            <div class="card-body table-responsive">
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/VariablesSesionController.php" model="VariablesSesion" findBy="id_escuela" mainform="true" >
                     <div class="row" id="seccionescuela">
                         <div class="col-sm-2">
@@ -89,7 +93,7 @@ and open the template in the editor.
                     </div>
                     <div>
                         <center>
-                            <button type="button" id="versesion" name="versesion" action="insertorupdate" class="btn btn-default" onclick="VerSesion(this);" > Sesion </button>
+                            <button type="button" id="versesion" name="versesion" action="insertorupdate" class="btn btn-secondary" onclick="VerSesion(this);" > Sesion </button>
                         </center>
                     </div>
                     <datalist id="lista_id_escuela" name="lista_id_escuela" model="EscuelasApp" colname="nombre_escuela" colvalue="id_escuela" url="Base/Controllers/GetComboboxEscuelas.php" onchange="setComboboxFindby('id_periodo', this.id, this.value);">

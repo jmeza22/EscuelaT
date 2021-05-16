@@ -86,11 +86,11 @@ label:before {
     content: "\f005";
 }
 
-.checkbox-level-down > input[type="checkbox"] + label:before {
+.checkbox-arrow-down > input[type="checkbox"] + label:before {
     color: lightgray;
     content: "\f149";
 }
-.checkbox-level-down > input[type="checkbox"]:checked + label:before {
+.checkbox-arrow-down > input[type="checkbox"]:checked + label:before {
     color: red !important;
     content: "\f149";
 }

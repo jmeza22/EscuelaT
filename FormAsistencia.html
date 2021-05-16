@@ -14,11 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+         <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
         <link href="css-forms/Asistencia.css" rel="stylesheet" type="text/css"/>
 
         <script type="text/javascript" src="js/jquery.js"></script>
@@ -32,9 +35,9 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Datos de Planilla</div>
-            <div class="panel-body table-responsive" >
+        <div class="card shadow card-primary" style="width: 90% !important;">
+            <div class="card-header">Datos de Planilla</div>
+            <div class="card-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" >
                     <input type="hidden" id="id_carga" name="id_carga" value="" required="required" maxlength="22" min="1"  /> 
                     <input type="hidden" id="id_asignatura" name="id_asignatura" value="" required="required" maxlength="22" min="1"  /> 
@@ -74,7 +77,7 @@ and open the template in the editor.
                         </div>
                         <div class="col-sm-2">
                             <label>Buscar</label>
-                            <button type="button" id="consulta" class="btn btn-default" onclick="LoadTable();" style="width: 100% !important;">Consultar</button>
+                            <button type="button" id="consulta" class="btn btn-secondary" onclick="LoadTable();" style="width: 100% !important;">Consultar</button>
                         </div>
                     </div>
                 </form>
@@ -85,9 +88,9 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Planilla de Asistencia</div>
-            <div class="panel-body table-responsive">
+        <div class="card shadow card-primary" style="width: 90% !important;">
+            <div class="card-header">Planilla de Asistencia</div>
+            <div class="card-body table-responsive">
                 <div class="table-responsive">
                     <form style="width: 100% !Important;" name="formTable" id="formTable"  method="POST" autocomplete="off" url="Base/Controllers/AsistenciaController.php" model="AsistenciaApp" findBy="id_asistencia" statusfield="status_asistencia" mainform="true" > 
                     </form>
@@ -106,7 +109,7 @@ and open the template in the editor.
                                 <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿Mal Comportamiento?"><i class="fa fa-thumbs-down"></i></th>
                                 <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿Irresponsabilidad?"><i class="fa fa-meh-o"></i></th>
                                 <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿No Trabaja en Equipo?"><i class="fa fa-user"></i></th>
-                                <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿Bajo Rendimiento?"><i class="fa fa-level-down"></i></th>
+                                <th style="width: 3%; text-align: center; color: red;" title="Sancion ¿Bajo Rendimiento?"><i class="fa fa-arrow-down"></i></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">

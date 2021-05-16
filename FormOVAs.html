@@ -14,10 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -33,14 +37,14 @@ and open the template in the editor.
         <script type="text/javascript" src="js-forms/OVAs.js"></script>
     </head>
     <body>
-        <div class="panel panel-primary" style="">
-            <div class="panel-heading">Objeto de Aprendizaje</div>
-            <div class="panel-body table-responsive" >
+        <div class="card shadow card-primary" style="">
+            <div class="card-header">Objeto de Aprendizaje</div>
+            <div class="card-body table-responsive" >
                 <form id="form0" method="POST" autocomplete="off" url="Base/Controllers/OVASController.php" model="OVASApp" findBy="id_ova" enctype="multipart/form-data" >
 
-                    <div class="panel panel-default" style="">
-                        <div class="panel-heading">Clasificacion</div>
-                        <div class="panel-body">
+                    <div class="card" style="">
+                        <div class="card-header">Clasificacion</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Codigo</label>
@@ -77,9 +81,9 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="">
-                        <div class="panel-heading">Contenido</div>
-                        <div class="panel-body">
+                    <div class="card" style="">
+                        <div class="card-header">Contenido</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-8">
                                     <label>Titulo Lectura</label>
@@ -92,14 +96,14 @@ and open the template in the editor.
                                         <div class="col-sm-6">
                                             <label>Documento PDF</label>
                                             <a id="linkTag" href="" target="_blank" title="Archivo de Documento Cargado." style="display: none !important;">Descargar</a>
-                                            <button type="button" id="buttonTag" onclick="viewFile(document.getElementById('linkTag')); selectFile('documentfile','pdf_ova');" class="btn btn-default btn-block">
-                                                <i class="glyphicon glyphicon-upload"></i> Cargar
+                                            <button type="button" id="buttonTag" onclick="viewFile(document.getElementById('linkTag')); selectFile('documentfile','pdf_ova');" class="btn btn-secondary btn-block">
+                                                <i class="fa fa-xs fa-upload"></i> Cargar
                                             </button>
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Accion</label>
                                             <button type="button" id="EliminarDocumento" onclick="deleteFile();" class="btn btn-danger btn-block" title="Eliminar Archivo Cargado.">
-                                                <i class="glyphicon glyphicon-erase"></i> Eliminar
+                                                <i class="fa fa-xs fa-erase"></i> Eliminar
                                             </button>
                                         </div>
                                     </div>
@@ -114,9 +118,9 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="">
-                        <div class="panel-heading">Fotos</div>
-                        <div class="panel-body">
+                    <div class="card" style="">
+                        <div class="card-header">Fotos</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <input type="hidden" required="required" name="imagen1_ova" id="imagen1_ova" value="Imagen1" maxlength="50"  title="Imagen del OVA" />
@@ -155,15 +159,15 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="">
-                        <div class="panel-heading">Audios</div>
-                        <div class="panel-body">
+                    <div class="card" style="">
+                        <div class="card-header">Audios</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <center>
                                         <input type="hidden" required="required" name="audio1_ova" id="audio1_ova" value="Audio1" maxlength="50"  title="Imagen del OVA" />
                                         <label>Audio 1</label>
-                                        <audio id="audiotag1" name='audiotag1' src="" controls preload="auto">
+                                        <audio id="audiotag1" name='audiotag1' src="" controls preload="auto" style="width: 230px !important;">
                                         </audio>
                                         <input type="file" name="audiofile1" id="audiofile1" class="" accept="audio/*" onchange="showMyAudio(this, 'audiotag1');" title="Click para Cambiar Audio." />
                                     </center>
@@ -172,7 +176,7 @@ and open the template in the editor.
                                     <center>
                                         <input type="hidden" name="audio2_ova" id="audio2_ova" value="" maxlength="50"  title="Imagen del OVA" />
                                         <label>Audio 2</label>
-                                        <audio id="audiotag2" name='audiotag2' src="" controls preload="auto">
+                                        <audio id="audiotag2" name='audiotag2' src="" controls preload="auto" style="width: 230px !important;">
                                         </audio>
                                         <input type="file" name="audiofile2" id="audiofile2" class="" accept="audio/*" onchange="showMyAudio(this, 'audiotag2');" title="Click para Cambiar Audio." />
                                     </center>
@@ -181,9 +185,9 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="">
-                        <div class="panel-heading">Videos Incrustados</div>
-                        <div class="panel-body">
+                    <div class="card" style="">
+                        <div class="card-header">Videos Incrustados</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Link Video 1</label>
@@ -203,9 +207,9 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="">
-                        <div class="panel-heading">Bibliografias</div>
-                        <div class="panel-body">
+                    <div class="card" style="">
+                        <div class="card-header">Bibliografias</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Link Bibliografia 1</label>
@@ -227,9 +231,9 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="">
-                        <div class="panel-heading">Actividad y Evaluacion</div>
-                        <div class="panel-body">
+                    <div class="card" style="">
+                        <div class="card-header">Actividad y Evaluacion</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Link Actividad</label>
@@ -258,9 +262,9 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-default" style="">
-            <div class="panel-heading">Listado de OVA's</div>
-            <div class="panel-body">
+        <div class="card" style="">
+            <div class="card-header">Listado de OVA's</div>
+            <div class="card-body">
 
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered table-form" model="OVASApp" url="Base/Controllers/GetDataTableOVAS.php" >
@@ -271,7 +275,7 @@ and open the template in the editor.
                                 <th style="width: 20%;">Asignatura</th>
                                 <th style="width: 14%;">Grado</th>
                                 <th style="width: 20%;">Autor</th>
-                                <th style="width: 8%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th style="width: 8%; min-width: 70px !important;">Opción</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -285,8 +289,8 @@ and open the template in the editor.
                                     <form id="OVA{{id_ova}}" name="OVA{{id_ova}}" method="POST" autocomplete="off" url="Base/Controllers/OVAsController.php"  model="OVAsApp" findBy="id_ova" statusfield="status_ova">
                                         <input type="hidden"  editable="false" name="id_ova" id="id_ova" value="{{id_ova}}" >
                                         <input type="hidden"  editable="false" disabled="disabled" name="status_ova" id="status_ova" value="1" >
-                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button type="button" name="EliminarFila" id="EliminarFila" class="btn btn-xs btn-danger icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="button" name="EditarFila" id="EditarFila" class="icon-button btn btn-xs btn-warning btn-circle" onclick="Edit(this);"><i class="fa fa-xs fa-edit" title="Editar"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" class="icon-button btn btn-xs btn-danger btn-circle" onclick="DeleteItem(this);"><i class="fa fa-xs fa-trash" title="Eliminar"></i></button>
                                     </form>
                                 </td>
                             </tr>

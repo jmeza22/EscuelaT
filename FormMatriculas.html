@@ -14,10 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -30,16 +34,16 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Matricula Manual</div>
-            <div class="panel-body">
+        <div class="card shadow card-primary" style="width: 90% !important;">
+            <div class="card-header">Matricula Manual</div>
+            <div class="card-body">
 
                 <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php" model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" mainform="true" > 
                     <input type="hidden" name="status_matricula" id="status_matricula" value="1" >
                     <div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Estudiante</div>
-                            <div class="panel-body" >
+                        <div class="card shadow">
+                            <div class="card-header">Estudiante</div>
+                            <div class="card-body" >
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label>Codigo</label>
@@ -53,9 +57,9 @@ and open the template in the editor.
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Datos de Matricula</div>
-                            <div class="panel-body" >
+                        <div class="card shadow">
+                            <div class="card-header">Datos de Matricula</div>
+                            <div class="card-body" >
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label>Sede</label>
@@ -145,7 +149,7 @@ and open the template in the editor.
                             </div>
                             <div class="col-sm-4">
                                 <center>
-                                    <button type="button" id="listing" name="listing" class="btn btn-default" onclick="LoadTable();" style="width: 100px;">Listar</button> 
+                                    <button type="button" id="listing" name="listing" class="btn btn-secondary" onclick="LoadTable();" style="width: 100px;">Listar</button> 
                                 </center>
                             </div>
                         </div>
@@ -159,9 +163,9 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-default" style="width: 90% !important;">
-            <div class="panel-heading">Listado de Matriculas</div>
-            <div class="panel-body">
+        <div class="card" style="width: 90% !important;">
+            <div class="card-header">Listado de Matriculas</div>
+            <div class="card-body">
                 <div class="table-responsive" >
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="MatriculasApp" url="Base/Controllers/GetDataTableMatriculas.php" ordertable="true" tableorderby="0" tableordering="desc" >
                         <thead id="thead_dataTable0">
@@ -175,7 +179,7 @@ and open the template in the editor.
                                 <th columntype="html-num" style="width: 5%;" title="Grado">Gra.</th>
                                 <th columntype="html" style="width: 5%;" title="Grupo">Gru.</th>
                                 <th columntype="html-num" style="width: 5%;" title="Año Academico">Año</th>
-                                <th columntype="html" style="width: 7%; min-width: 120px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th columntype="html" style="width: 7%; min-width: 120px !important;">Opción</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -197,10 +201,10 @@ and open the template in the editor.
                                         <input type="hidden" name="id_programa" id="id_programa" value="{{id_programa}}" >
                                         <input type="hidden" name="tipo_reporte" id="tipo_reporte" value="RecibosMatriculas" dusabled="disabled">
                                         <input type="hidden" name="status_matricula" id="status_matricula" value="1" >
-                                        <button type="button" name="EditarFila" id="EditarFila" class="btn btn-xs btn-warning  icon-button" onclick="Edit(this);"><i class="glyphicon glyphicon-edit"></i></button>
-                                        <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger  icon-button" onclick="DeleteItem(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button type="button" name="EditarFila" id="EditarFila" class="icon-button btn btn-xs btn-warning btn-circle" onclick="Edit(this);"><i class="fa fa-xs fa-edit" title="Editar"></i></button>
+                                        <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="icon-button btn btn-xs btn-danger btn-circle" onclick="DeleteItem(this);"><i class="fa fa-xs fa-trash" title="Eliminar"></i></button>
                                         <button type="button" name="MatriculasAsignaturas" id="MatriculasAsignaturas" class="btn btn-xs btn-info icon-button" onclick="FormMatriculaAsignaturas(this);"  title="Matricular Asignaturas"><i class="glyphicon glyphicon-check"></i></button>
-                                        <button type="button" name="ReporteMatricula" id="ReporteMatricula" class="btn btn-xs btn-default icon-button" onclick="GenerarReciboMatricula(this);"  title="Ver Recibo de Matricula"><i class="glyphicon glyphicon-file"></i></button>
+                                        <button type="button" name="ReporteMatricula" id="ReporteMatricula" class="icon-button btn btn-xs btn-secondary btn-circle" onclick="GenerarReciboMatricula(this);"  title="Ver Recibo de Matricula"><i class="glyphicon glyphicon-file"></i></button>
                                     </form>
                                 </td>
                             </tr>

@@ -14,10 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -30,9 +34,9 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="panel panel-primary" style="width: 90% !important;">
-            <div class="panel-heading">Parametros Actividades Virtuales</div>
-            <div class="panel-body table-responsive" >
+        <div class="card shadow card-primary" style="width: 90% !important;">
+            <div class="card-header">Parametros Actividades Virtuales</div>
+            <div class="card-body table-responsive" >
                 <form id="formActividades" method="POST" autocomplete="off" url="Base/Controllers/ActividadesVirtualesController.php" model="ActividadesVirtualesApp" findBy="id_actividad" mainform="true" enctype="multipart/form-data" >
                     <input type="hidden" id="action" name="action" value="find">
                     <div class="row">
@@ -53,9 +57,9 @@ and open the template in the editor.
             </div>
         </div>
 
-        <div class="panel panel-default" style="width: 90% !important;">
-            <div class="panel-heading">Listado de Actividades Solucionadas</div>
-            <div class="panel-body">
+        <div class="card" style="width: 90% !important;">
+            <div class="card-header">Listado de Actividades Solucionadas</div>
+            <div class="card-body">
 
                 <div class="table-responsive">
                     <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-bordered" model="SolucionesActividadesVirtualesApp" url="Base/Controllers/GetDataTableSolucionesActividadesVirtuales.php" >
@@ -65,7 +69,7 @@ and open the template in the editor.
                                 <th style="width: 45%;" title="Nombre de Estudiante">Estudiante</th>
                                 <th style="width: 10%;" title="Codigo de Asignatura">Asignatura</th>
                                 <th style="width: 35%;" title="Nombre de la Actividad">Actividad</th>
-                                <th style="width: 6%; min-width: 68px !important;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                <th style="width: 6%; min-width: 70px !important;">Opción</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_dataTable0">
@@ -80,7 +84,7 @@ and open the template in the editor.
                                         <input type="hidden" name="id_estudiante" id="id_estudiante" value="{{id_estudiante}}" >
                                         <input type="hidden" name="id_actividad" id="id_actividad" value="{{id_actividad}}" >
                                         <input type="hidden" name="id_solucion" id="id_solucion" value="{{id_solucion}}" >
-                                        <button type="submit" name="VerSolucion" id="VerSolucion" class="btn btn-xs btn-default" title="Solucion">Revisar</button>
+                                        <button type="submit" name="VerSolucion" id="VerSolucion" class="btn btn-sm btn-secondary" title="Solucion">Revisar</button>
                                     </form>
                                 </td>
                             </tr>

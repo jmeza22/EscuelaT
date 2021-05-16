@@ -20,15 +20,17 @@ function showMyImage(inputFile, imageTag = null) {
         var file = files[i];
         var imageType = /image.*/;
         if (!file.type.match(imageType)) {
-            continue;
+            console.log('File not like Image!.');
+            break;
         }
-        console.log('File Type: '+file.type);
+        console.log('File Type: ' + file.type);
         if (imageTag === null || imageTag === '') {
             imageTag = document.getElementById('image');
         }
+        console.log('Image Tag Target: ' + imageTag.id);
         if (imageTag !== null || imageTag !== '') {
             if (imageTag.tagName !== undefined) {
-                if (imageTag.tagName !== 'IMG' || imageTag.tagName !== 'IMAGE') {
+                if (imageTag.tagName !== 'IMG' && imageTag.tagName !== 'IMAGE') {
                     return null;
                 }
             } else {

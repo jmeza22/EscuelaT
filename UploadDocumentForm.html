@@ -35,9 +35,9 @@ and open the template in the editor.
 
     </head>
     <body style="min-height: fit-content !important;">
-        <div class="panel panel-primary" style="">
-            <div class="panel-heading">Subir Documento</div>
-            <div class="panel-body" >
+        <div class="card shadow card-primary" style="">
+            <div class="card-header">Subir Documento</div>
+            <div class="card-body" >
                 <form id="formUpload" url="Base/Controllers/UploadDocumentController.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" alphanumeric="true" name="prefix_document" id="prefix_document" value="" readonly="readonly" maxlength="100" class="form-control" title="Prefijo">
                     <input type="hidden" alphanumeric="true" name="name_document" id="name_document" value="" readonly="readonly" maxlength="100" class="form-control" title="Nombre Documento">

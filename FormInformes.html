@@ -14,10 +14,14 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -29,13 +33,13 @@ and open the template in the editor.
         <script type="text/javascript" src="js-forms/Informes.js"></script>
     </head>
     <body>
-        <div class="panel panel-primary" style="">
-            <div class="panel-heading">Generador de Informes</div>
-            <div class="panel-body table-responsive">
+        <div class="card shadow card-primary" style="">
+            <div class="card-header">Generador de Informes</div>
+            <div class="card-body table-responsive">
                 <form id="form0" method="POST" autocomplete="off" target="_blank" action="Base/Controllers/InformesController.php" url="Base/Controllers/InformesController.php" model="CalificacionesApp" findBy="id_calificacion" mainform="true" >
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Tipo de Informe</div>
-                        <div class="panel-body">
+                    <div class="card shadow">
+                        <div class="card-header">Tipo de Informe</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label>Seleccione uno:</label>
@@ -48,9 +52,9 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Filtrado</div>
-                        <div class="panel-body">
+                    <div class="card shadow">
+                        <div class="card-header">Filtrado</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label>Sede</label>
@@ -121,9 +125,9 @@ and open the template in the editor.
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Configurar Documento</div>
-                        <div class="panel-body">
+                    <div class="card shadow">
+                        <div class="card-header">Configurar Documento</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label>Tamaño Papel</label>

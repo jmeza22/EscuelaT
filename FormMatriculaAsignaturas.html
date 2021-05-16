@@ -14,13 +14,16 @@ and open the template in the editor.
         <meta name="ProjectName" content="EscuelaT"/>
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/Validator.js"></script>
         <script type="text/javascript" src="js/localStorageData.js"></script>
@@ -34,7 +37,7 @@ and open the template in the editor.
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" tyle="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Matricula de Asignaturas - Automatica</h4>
                     </div>
                     <div class="modal-body">
@@ -59,7 +62,7 @@ and open the template in the editor.
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" tyle="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" tyle="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Matricula de Asignatura - Manual</h4>
                     </div>
                     <div class="modal-body">
@@ -71,12 +74,12 @@ and open the template in the editor.
 
 
 
-        <div class="panel panel-primary" style="">
-            <div class="panel-heading">Matricula de Asignaturas</div>
-            <div class="panel-body table-responsive" >
-                <div class="panel panel-default">
-                    <div class="panel-heading">Datos de Matricula</div>
-                    <div class="panel-body" >
+        <div class="card shadow card-primary" style="">
+            <div class="card-header">Matricula de Asignaturas</div>
+            <div class="card-body table-responsive" >
+                <div class="card shadow">
+                    <div class="card-header">Datos de Matricula</div>
+                    <div class="card-body" >
                         <form style="width: 100% !Important;" name="form0" id="form0"  method="POST" autocomplete="off" url="Base/Controllers/MatriculasController.php"  model="MatriculasApp" findBy="id_matricula" statusfield="status_matricula" mainform="true" > 
                             <div class="row">
                                 <div class="col-sm-3">
@@ -137,27 +140,27 @@ and open the template in the editor.
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Matricula de Asignatuas</div>
-                    <div class="panel-body table-responsive" >
+                <div class="card shadow">
+                    <div class="card-header">Matricula de Asignatuas</div>
+                    <div class="card-body table-responsive" >
                         <div class="row">
                             <div class="col-sm-6">
                                 <center>
-                                    <a id="NewItem" href="#modal_manual" class="btn btn-default" data-toggle="modal" onclick="" style="min-width: 200px !important;">Matricula Manual</a>
+                                    <a id="NewItem" data-bs-target="#modal_manual" class="btn btn-secondary" data-bs-toggle="modal" onclick="" style="min-width: 200px !important;">Matricula Manual</a>
                                 </center>
                             </div>
                             <div class="col-sm-6">
                                 <center>
-                                    <a id="NewItem" href="#modal_automatica" class="btn btn-default" data-toggle="modal" onclick="" style="min-width: 200px !important;">Matricula Automatica</a>
+                                    <a id="NewItem" data-bs-target="#modal_automatica" class="btn btn-secondary" data-bs-toggle="modal" onclick="" style="min-width: 200px !important;">Matricula Automatica</a>
                                 </center>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Listado de Asigaturas Matriculadas</div>
-                    <div class="panel-body" >
+                <div class="card shadow">
+                    <div class="card-header">Listado de Asigaturas Matriculadas</div>
+                    <div class="card-body" >
                         <div class="table-responsive" >
                             <table style="width: 100% !Important;" name="dataTable0" id="dataTable0" border="1" class="table table-striped table-hover table-form" model="MatriculaAsignaturasApp" url="Base/Controllers/GetDataTableMatriculaAsignaturas.php" >
                                 <thead id="thead_dataTable0">
@@ -166,7 +169,7 @@ and open the template in the editor.
                                         <th style="width: 65%;" title="Nombre de Asignatura">Nombre de Asignatura</th>
                                         <th style="width: 10%;" title="Año Academico">Año</th>
                                         <th style="width: 10%;" title="Codigo de Matricula">Codigo</th>
-                                        <th style="width: 5%;"><i class="glyphicon glyphicon-asterisk"></i></th>
+                                        <th style="width: 5%;">Opción</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody_dataTable0">
@@ -179,7 +182,7 @@ and open the template in the editor.
                                             <form id="MatriculaAsignatura{{id_matricula}}" name="MatriculaAsignatura{{id_matricula}}" method="POST" autocomplete="off" url="Base/Controllers/MatriculaAsignaturasController.php"  model="MatriculaAsignaturasApp" findBy="id_matasig" >
                                                 <input type="hidden"  editable="false" name="id_matricula" id="id_matricula" value="{{id_matricula}}" >
                                                 <input type="hidden"  editable="false" name="id_matasig" id="id_matasig" value="{{id_matasig}}" >
-                                                <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="btn btn-xs btn-danger  icon-button" onclick="EliminarMatasig(this);"><i class="glyphicon glyphicon-remove"></i></button>
+                                                <button type="button" name="EliminarFila" id="EliminarFila" action="delete" class="icon-button btn btn-xs btn-danger btn-circle" onclick="EliminarMatasig(this);"><i class="fa fa-xs fa-trash" title="Eliminar"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -192,6 +195,7 @@ and open the template in the editor.
             </div>
         </div>
 
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="datatables/js/dataTables.bootstrap.js"></script>
         <script type="text/javascript" src="datatables/js/jquery.dataTables.min.js"></script>
     </body>

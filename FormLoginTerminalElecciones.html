@@ -15,10 +15,14 @@ and open the template in the editor.
         <link href="css/login.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        <link href="datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -29,9 +33,9 @@ and open the template in the editor.
         <script type="text/javascript" src="js-forms/LoginTerminalElecciones.js"></script>
     </head>
     <body>
-        <div class="panel panel-primary" style="width: 80% !important; max-width: 430px !important;">
-            <div class="panel-heading">Ingresar a Terminal</div>
-            <div class="panel-body" >
+        <div class="card shadow card-primary" style="width: 80% !important; max-width: 430px !important;">
+            <div class="card-header">Ingresar a Terminal</div>
+            <div class="card-body" >
                 <form id="FormLoginTerminal" method="POST" autocomplete="off" url="Base/Controllers/LoginTerminalEleccionesController.php" model="TerminalesApp" findBy="id_terminal" mainform="true" >
                     <input type="hidden" name="token" id="token" value="92a04b22c02d12e8" required="required" >
                     <div class="row">

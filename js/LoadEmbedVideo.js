@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-function showMyEmbedVideo(urlTag, videoTag, width = 480, height = 320) {
+function showMyEmbedVideo(urlTag, videoTag, width = '100%', height = '100%') {
     if (urlTag !== null || urlTag !== '') {
         if (urlTag.tagName !== undefined) {
             if (urlTag.tagName !== 'INPUT') {
@@ -41,7 +41,7 @@ function showMyEmbedVideo(urlTag, videoTag, width = 480, height = 320) {
         myiframe.setAttribute('allow', 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
         myiframe.setAttribute('allowfullscreen','allowfullscreen');
         myiframe.setAttribute('src', '' + urlTag.value);
-        myiframe.setAttribute('style','max-width: 640px !important; max-height: 480px !important;');
+        myiframe.setAttribute('style','min-width: 180px !important; min-height: 180px !important; max-width: 1080px !important; max-height: 1080px !important;');
         videoTag.innerHTML='';
         videoTag.appendChild(myiframe);
 }
